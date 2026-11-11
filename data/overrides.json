@@ -1,0 +1,7 @@
+{
+  "_comment": "Deterministic per-release overrides (release_id -> pressing_image_index or pressing_image_url)",
+  "17583742": { "pressing_image_index": 2, "note": "Rings Of Saturn - Embryonic Anomaly (Remake) Purple LP" },
+  "25089742": { "pressing_image_index": 2, "note": "Architects - Classic Symptoms Clear w/ Yellow & Purple Splatter" },
+  "27079776": { "pressing_image_index": 2, "note": "Greyhaven - This Bright And Beautiful World Red in Clear" },
+  "20697637": { "pressing_image_index": 2, "note": "Every Time I Die - Radical Neon Etched 2xLP" }
+}
