@@ -3,11 +3,11 @@
 
 Inspects every release in `data/collection.json` AND every release folder in
 `assets/releases/<release_id>/`, discovers all local `img_*.jpg` files even when
-`data/releases_cache.json` is incomplete, optionally enriches missing release
-galleries from the Discogs REST API, picks the physical vinyl pressing photo,
-writes `assets/releases/<release_id>/pressing.jpg` and `cover.jpg`, reconciles
-the Vinyl Flattening Queue and Collection Value, and injects the compiled
-payload into `index.html`.
+`data/releases_cache.json` is incomplete, re-evaluates all candidate images with
+the Multi-Scale Concentric Dual-Circle CV + Guideline 13.8 classifier (automatically
+upgrading any stale/wrong past auto-picks in `overrides.json` and `pressing.jpg`),
+reconciles the Vinyl Flattening Queue and Collection Value, and injects the
+compiled payload into `index.html`.
 
 Usage (from `C:\\DiscogsCollection\\discogs_collection` or `scripts/`):
     python pick_pressing_photo.py
@@ -108,7 +108,7 @@ def _fetch_release_detail_from_discogs(release_id: int, token: str = "") -> dict
                         return data
             except urllib.error.HTTPError as exc:
                 if exc.code == 401 and use_token:
-                    break  # Retry unauthenticated if token was rotated/expired
+                    break
                 if exc.code == 429:
                     time.sleep(10 * (attempt + 1))
                     continue
@@ -126,7 +126,6 @@ def _probe_image_dimensions(img_bytes: bytes) -> tuple[int, int]:
                 return im.size
         except Exception:
             pass
-    # Lightweight JPEG SOF marker parser fallback when PIL is unavailable
     try:
         data = io.BytesIO(img_bytes)
         if data.read(2) == b"\xff\xd8":
@@ -252,8 +251,11 @@ def _write_pressing_and_cover_files(
     rid_str: str,
     img_selection: dict[str, Any],
     local_files: list[tuple[int, pathlib.Path]],
-) -> None:
-    """Ensures `cover.jpg` and `pressing.jpg` are physically written in `assets/releases/<rid>/`."""
+) -> bool:
+    """Ensures `cover.jpg` and `pressing.jpg` are physically written in `assets/releases/<rid>/`.
+
+    Returns True if `pressing.jpg` was newly created or updated to a different image.
+    """
     if not (rel_dir / "cover.jpg").exists():
         if (rel_dir / "img_0.jpg").exists():
             shutil.copyfile(rel_dir / "img_0.jpg", rel_dir / "cover.jpg")
@@ -261,7 +263,7 @@ def _write_pressing_and_cover_files(
             shutil.copyfile(local_files[0][1], rel_dir / "cover.jpg")
 
     if not img_selection.get("has_pressing_photo"):
-        return
+        return False
 
     raw_sel = img_selection.get("selected_index")
     sel_idx = int(raw_sel) if raw_sel is not None else -1
@@ -270,7 +272,6 @@ def _write_pressing_and_cover_files(
     if sel_idx >= 0 and (rel_dir / f"img_{sel_idx}.jpg").exists():
         src_local = rel_dir / f"img_{sel_idx}.jpg"
     else:
-        # Fallback: try matching pressing_image_url to a local img_<idx>.jpg or first secondary image
         p_url = str(img_selection.get("pressing_image_url") or "")
         m = re.search(r"img_(\d+)\.jpg", p_url)
         if m and (rel_dir / f"img_{m.group(1)}.jpg").exists():
@@ -284,11 +285,15 @@ def _write_pressing_and_cover_files(
                 src_local = local_files[0]
 
     dest_pressing = rel_dir / "pressing.jpg"
+    updated = False
     if src_local and src_local.exists():
-        if not dest_pressing.exists() or src_local.stat().st_size != dest_pressing.stat().st_size:
-            shutil.copyfile(src_local, dest_pressing)
+        src_bytes = src_local.read_bytes()
+        if not dest_pressing.exists() or dest_pressing.read_bytes() != src_bytes:
+            dest_pressing.write_bytes(src_bytes)
+            updated = True
         img_selection["local_pressing_image_url"] = f"assets/releases/{rid_str}/pressing.jpg"
         img_selection["display_thumbnail_url"] = img_selection["local_pressing_image_url"]
+    return updated
 
 
 def run_pick_pressing_photos(
@@ -399,6 +404,7 @@ def run_pick_pressing_photos(
     pressing_photo_count = 0
     colored_count = 0
     newly_detected_overrides = 0
+    upgraded_pressing_files = 0
 
     for rec in records:
         rid = int(rec.get("release_id") or 0)
@@ -454,7 +460,7 @@ def run_pick_pressing_photos(
                     downloaded_bytes[uri] = raw_b
                     downloaded_bytes[f"idx:{idx}"] = raw_b
 
-        # Re-scan local files so any img_1.jpg, img_2.jpg, etc. on disk are ALWAYS included in raw_images
+        # Re-scan local files so any img_1.jpg, img_2.jpg, ..., img_5.jpg on disk are ALWAYS included
         local_files = _discover_local_release_images(rel_dir, rid_str)
         existing_indices = set(range(len(raw_images)))
         for disk_idx, disk_path in local_files:
@@ -501,25 +507,32 @@ def run_pick_pressing_photos(
         img_selection = select_release_images_deterministic(
             images=raw_images,
             formats=formats,
-            notes=f"{notes_str} {user_comments}",
+            notes=f"{notes_str}\n{user_comments}",
             release_id=rid,
             overrides=overrides,
             downloaded_bytes_by_uri=downloaded_bytes,
             local_release_dir=rel_dir,
         )
 
-        # Save newly detected pressing photos to overrides.json and physically write pressing.jpg + cover.jpg
+        # Update overrides.json and physically write pressing.jpg + cover.jpg
         if img_selection.get("has_pressing_photo") and img_selection.get("pressing_image_url"):
             p_url = img_selection["pressing_image_url"]
-            if rid_str not in overrides and len(raw_images) > 1:
-                overrides[rid_str] = p_url
-                newly_detected_overrides += 1
+            if len(raw_images) > 1:
+                prev_ov = overrides.get(rid_str)
+                # Update overrides if missing or if it was a stale auto-URL string that got upgraded by CV
+                if rid_str not in overrides or (isinstance(prev_ov, str) and prev_ov != p_url):
+                    overrides[rid_str] = p_url
+                    newly_detected_overrides += 1
 
-        _write_pressing_and_cover_files(rel_dir, rid_str, img_selection, local_files)
+        if _write_pressing_and_cover_files(rel_dir, rid_str, img_selection, local_files):
+            upgraded_pressing_files += 1
+            sel_i = img_selection.get("selected_index")
+            print(f"[updated] Release #{rid_str} ({rec.get('artist')} - {rec.get('title')}): pressing.jpg -> img_{sel_i}.jpg")
+
         rec["images"] = img_selection
 
         # Re-verify wax_spec
-        wax_spec = parse_wax_variant(fmt_str, comments=f"{notes_str} {user_comments}", release_id=rid)
+        wax_spec = parse_wax_variant(fmt_str, comments=f"{notes_str}\n{user_comments}", release_id=rid)
         rec["wax_spec"] = wax_spec
 
         # Re-verify estimated_value_usd
@@ -627,7 +640,7 @@ def run_pick_pressing_photos(
         f"[ok] Pressing Photo Picker complete!\n"
         f"       Records processed:         {len(records)}\n"
         f"       Verified pressing photos:  {pressing_photo_count} / {len(records)} "
-        f"(+{newly_detected_overrides} newly added to overrides.json)\n"
+        f"({upgraded_pressing_files} pressing.jpg files created/updated, {newly_detected_overrides} overrides updated)\n"
         f"       Colored / special wax:     {colored_count} / {len(records)} ({(colored_count/len(records)*100 if records else 0):.1f}%)\n"
         f"       Flattening queue:          {todo_count} Need to be done • {done_count} Done\n"
         f"       Collection value:          {collection_value['median']} Discogs Median "
