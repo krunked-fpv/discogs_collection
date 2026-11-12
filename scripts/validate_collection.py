@@ -7,6 +7,8 @@ import json
 import pathlib
 import sys
 
+SCRIPT_DIR = pathlib.Path(__file__).resolve().parent
+REPO_ROOT = SCRIPT_DIR.parent if SCRIPT_DIR.name == "scripts" else SCRIPT_DIR
 
 REQUIRED_RECORD_KEYS = {
     "release_id",
@@ -18,6 +20,8 @@ REQUIRED_RECORD_KEYS = {
     "media_condition",
     "sleeve_condition",
     "discogs_url",
+    "estimated_value_usd",
+    "flattening_status",
     "images",
     "wax_spec",
 }
@@ -32,6 +36,10 @@ def validate_collection(path: pathlib.Path) -> None:
     records = data.get("records")
     assert isinstance(records, list) and len(records) > 0, "Expected non-empty records list"
 
+    prof = data.get("profile") or {}
+    col_val = prof.get("collection_value") or {}
+    assert col_val.get("median"), "Missing profile.collection_value.median"
+
     for idx, rec in enumerate(records):
         missing = REQUIRED_RECORD_KEYS - set(rec.keys())
         if missing:
@@ -43,9 +51,17 @@ def validate_collection(path: pathlib.Path) -> None:
         if not wax.get("primary_color") or not wax.get("pattern"):
             raise ValueError(f"Record #{idx} has incomplete wax_spec: {wax}")
 
-    print(f"[valid] {path}: {len(records)} records verified against schema v{data.get('schema_version')}.")
+    pressing_count = sum(1 for r in records if r["images"].get("has_pressing_photo"))
+    todo_count = sum(1 for r in records if r.get("flattening_status") == "Need to be done")
+    done_count = sum(1 for r in records if r.get("flattening_status") == "Done")
+    print(
+        f"[valid] {path}: {len(records)} records verified against schema v{data.get('schema_version')} "
+        f"({pressing_count} pressing photos, {todo_count} flattening todo, {done_count} flattening done, "
+        f"median value {col_val.get('median')})."
+    )
 
 
 if __name__ == "__main__":
-    target = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else "data/collection.json")
+    default_target = REPO_ROOT / "data" / "collection.json"
+    target = pathlib.Path(sys.argv[1]) if len(sys.argv) > 1 else default_target
     validate_collection(target)

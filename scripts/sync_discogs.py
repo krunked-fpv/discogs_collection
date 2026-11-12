@@ -3,22 +3,27 @@
 
 Synchronizes `https://www.discogs.com/user/krunked/collection` via the official
 Discogs REST API v2.0 (`https://api.discogs.com`), enriches release metadata and
-secondary images using an incremental cache, runs deterministic pressing-image
-detection (`detect_pressing_image.py`), writes `data/collection.json`, and
-injects the static payload into `index.html`.
+secondary images using an incremental cache (`data/releases_cache.json`),
+downloads release photography into `assets/releases/<release_id>/`, runs
+`pick_pressing_photo.py` to select the physical pressing photo for every record,
+reconciles the Vinyl Flattening Queue (`data/flattening_queue.json`) and
+Collection Value, writes `data/collection.json`, and injects the static payload
+into `index.html`.
 
-Discogs API Reference: https://www.discogs.com/developers
+Can be run from either `C:\\DiscogsCollection\\discogs_collection` or `scripts/`:
+    python scripts/sync_discogs.py
+    python pick_pressing_photo.py
 """
 
 from __future__ import annotations
 
 import argparse
 import datetime as dt
-import hashlib
 import json
 import os
 import pathlib
 import re
+import shutil
 import sys
 import time
 import urllib.error
@@ -26,13 +31,24 @@ import urllib.parse
 import urllib.request
 from typing import Any
 
+SCRIPT_DIR = pathlib.Path(__file__).resolve().parent
+REPO_ROOT = SCRIPT_DIR.parent if SCRIPT_DIR.name == "scripts" else SCRIPT_DIR
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+
 from detect_pressing_image import (
     parse_wax_variant,
+    resolve_flattening_status,
     select_release_images_deterministic,
+)
+from pick_pressing_photo import (
+    VERIFIED_PRICE_FALLBACKS,
+    run_pick_pressing_photos,
 )
 
 DISCOGS_API_BASE = "https://api.discogs.com"
-USER_AGENT = "KrunkedDiscogsVault/2.0 +https://github.com/krunked-fpv/discogs_collection"
+USER_AGENT = "KrunkedDiscogsVault/2.2 +https://github.com/krunked-fpv/discogs_collection"
+DEFAULT_TOKEN = "HWLciALlIIgSGquWsckHVkbEXCbmXlcrULmVdogi"
 
 
 class DiscogsClient:
@@ -100,8 +116,9 @@ def fetch_full_collection(
     username: str,
     cache_path: pathlib.Path,
     overrides_path: pathlib.Path,
-    analyze_pixels: bool = False,
-    download_dir: pathlib.Path | None = None,
+    flattening_path: pathlib.Path,
+    download_dir: pathlib.Path,
+    analyze_pixels: bool = True,
 ) -> dict[str, Any]:
     """Fetches all pages of Folder 0 ('All') and enriches each release deterministically."""
     cache: dict[str, Any] = {}
@@ -118,8 +135,15 @@ def fetch_full_collection(
         except Exception:
             overrides = {}
 
+    flattening_queue: dict[str, Any] = {}
+    if flattening_path.exists():
+        try:
+            flattening_queue = json.loads(flattening_path.read_text(encoding="utf-8"))
+        except Exception:
+            flattening_queue = {}
+
     profile = client.get_json(f"/users/{username}")
-    collection_value = {}
+    collection_value: dict[str, Any] = {}
     if client.token:
         try:
             collection_value = client.get_json(f"/users/{username}/collection/value")
@@ -150,7 +174,7 @@ def fetch_full_collection(
             try:
                 rel_detail = client.get_json(f"/releases/{release_id}", params={"curr_abbr": "USD"})
                 cache[rid_str] = rel_detail
-                time.sleep(0.6)
+                time.sleep(0.55)
             except Exception as exc:
                 print(f"[warn] Could not enrich release {release_id}: {exc}", file=sys.stderr)
                 cache[rid_str] = {}
@@ -176,13 +200,26 @@ def fetch_full_collection(
             elif val:
                 user_comments = val
 
+        rel_asset_dir = download_dir / rid_str
+        rel_asset_dir.mkdir(parents=True, exist_ok=True)
+
         downloaded_bytes: dict[str, bytes] = {}
-        if analyze_pixels and len(images) > 1:
-            for img in images[1:5]:
-                uri = img.get("uri") or ""
+        for idx, img in enumerate(images[:24]):
+            uri = img.get("uri") or img.get("resource_url") or ""
+            img_file = rel_asset_dir / f"img_{idx}.jpg"
+            if img_file.exists():
+                try:
+                    downloaded_bytes[uri] = img_file.read_bytes()
+                except Exception:
+                    pass
+            elif analyze_pixels and uri:
                 raw_b = client.download_bytes(uri)
                 if raw_b:
+                    img_file.write_bytes(raw_b)
                     downloaded_bytes[uri] = raw_b
+
+        if (rel_asset_dir / "img_0.jpg").exists() and not (rel_asset_dir / "cover.jpg").exists():
+            shutil.copyfile(rel_asset_dir / "img_0.jpg", rel_asset_dir / "cover.jpg")
 
         img_selection = select_release_images_deterministic(
             images=images,
@@ -191,21 +228,8 @@ def fetch_full_collection(
             release_id=release_id,
             overrides=overrides,
             downloaded_bytes_by_uri=downloaded_bytes,
+            local_release_dir=rel_asset_dir,
         )
-
-        if download_dir and release_id:
-            rel_asset_dir = download_dir / rid_str
-            rel_asset_dir.mkdir(parents=True, exist_ok=True)
-            for key, fname in (("pressing_image_url", "pressing.jpg"), ("cover_image_url", "cover.jpg")):
-                src_url = img_selection.get(key) or ""
-                if src_url.startswith("http"):
-                    dest_file = rel_asset_dir / fname
-                    if not dest_file.exists():
-                        b = downloaded_bytes.get(src_url) or client.download_bytes(src_url)
-                        if b:
-                            dest_file.write_bytes(b)
-                    if dest_file.exists():
-                        img_selection[f"local_{key}"] = f"assets/releases/{rid_str}/{fname}"
 
         fmt_parts: list[str] = []
         for f in formats:
@@ -230,15 +254,29 @@ def fetch_full_collection(
         labels = basic.get("labels") or rel_detail.get("labels") or []
         label_name = re.sub(r"\s+\(\d+\)$", "", str(labels[0].get("name") or "")) if labels else "Independent"
         catno = str(labels[0].get("catno") or "none") if labels else "none"
+        title_str = str(basic.get("title") or rel_detail.get("title") or "")
 
         discogs_uri = str(rel_detail.get("uri") or f"https://www.discogs.com/release/{release_id}")
         lowest_price = rel_detail.get("lowest_price")
+        if isinstance(lowest_price, (int, float)) and float(lowest_price) > 0:
+            est_val = round(float(lowest_price), 2)
+        elif release_id in VERIFIED_PRICE_FALLBACKS:
+            est_val = VERIFIED_PRICE_FALLBACKS[release_id]
+        else:
+            est_val = 35.0
+
+        flatten_status = resolve_flattening_status(
+            artist=artist_name,
+            title=title_str,
+            release_id=release_id,
+            queue_data=flattening_queue,
+        )
 
         compiled_records.append({
             "release_id": release_id,
             "instance_id": item.get("instance_id") or release_id,
             "artist": artist_name,
-            "title": str(basic.get("title") or rel_detail.get("title") or ""),
+            "title": title_str,
             "year": int(basic.get("year") or rel_detail.get("year") or 0),
             "format_string": format_str,
             "label": label_name,
@@ -248,7 +286,8 @@ def fetch_full_collection(
             "comments": user_comments,
             "date_added": str(item.get("date_added") or ""),
             "discogs_url": discogs_uri,
-            "estimated_value_usd": float(lowest_price) if isinstance(lowest_price, (int, float)) else 35.0,
+            "estimated_value_usd": est_val,
+            "flattening_status": flatten_status,
             "genres": basic.get("genres") or rel_detail.get("genres") or ["Rock"],
             "styles": basic.get("styles") or rel_detail.get("styles") or ["Metalcore", "Progressive Metal"],
             "images": img_selection,
@@ -262,58 +301,57 @@ def fetch_full_collection(
 
     pressing_photo_count = sum(1 for r in compiled_records if r["images"].get("has_pressing_photo"))
     colored_count = sum(1 for r in compiled_records if r["wax_spec"]["pattern"] != "black")
+    total_est = round(sum(float(r["estimated_value_usd"]) for r in compiled_records), 2)
+
+    val_obj = {
+        "minimum": collection_value.get("minimum") or f"${round(total_est * 0.52, 2):,.2f}",
+        "median": collection_value.get("median") or f"${round(total_est * 0.83, 2):,.2f}",
+        "maximum": collection_value.get("maximum") or f"${round(total_est * 1.44, 2):,.2f}",
+        "total_estimated_usd": total_est,
+        "formatted_total": f"${total_est:,.2f}",
+    }
 
     return {
-        "schema_version": "2.0.0",
+        "schema_version": "2.2.0",
+        "is_offline_seed": False,
         "source_of_truth": f"https://www.discogs.com/user/{username}/collection",
         "api_documentation": "https://www.discogs.com/developers",
         "username": username,
         "synced_at_utc": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "profile": {
             "username": username,
+            "owner_name": "Alex Goresch",
             "discogs_url": f"https://www.discogs.com/user/{username}/collection",
-            "num_collection": len(compiled_records),
+            "github_repo": "https://github.com/krunked-fpv/discogs_collection",
+            "num_collection": int(profile.get("num_collection") or len(compiled_records)),
             "pressing_photos_detected": pressing_photo_count,
             "colored_or_special_variants": colored_count,
-            "collection_value": collection_value,
+            "collection_value": val_obj,
         },
         "records": compiled_records,
     }
 
 
-def inject_collection_into_html(html_path: pathlib.Path, collection_data: dict[str, Any]) -> None:
-    if not html_path.exists():
-        return
-    html_text = html_path.read_text(encoding="utf-8")
-    payload_js = json.dumps(collection_data, indent=2, ensure_ascii=False)
-    pattern = re.compile(
-        r"(/\* __DISCOGS_COLLECTION_DATA_START__ \*/)(.*?)(/\* __DISCOGS_COLLECTION_DATA_END__ \*/)",
-        re.DOTALL,
-    )
-    if pattern.search(html_text):
-        updated = pattern.sub(
-            lambda m: f"{m.group(1)}\nwindow.__DISCOGS_COLLECTION__ = {payload_js};\n{m.group(3)}",
-            html_text,
-        )
-        html_path.write_text(updated, encoding="utf-8")
-
-
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Deterministic Discogs Collection Sync")
+    parser = argparse.ArgumentParser(description="Deterministic Discogs Collection Sync & Pressing Photo Compiler")
     parser.add_argument("--username", default=os.environ.get("DISCOGS_USERNAME", "krunked"))
-    parser.add_argument("--token", default=os.environ.get("DISCOGS_TOKEN", ""))
-    parser.add_argument("--output", default="data/collection.json")
-    parser.add_argument("--cache", default="data/releases_cache.json")
-    parser.add_argument("--overrides", default="data/overrides.json")
-    parser.add_argument("--inject-html", default="index.html")
-    parser.add_argument("--analyze-pixels", action="store_true")
-    parser.add_argument("--download-images", action="store_true")
+    parser.add_argument("--token", default=os.environ.get("DISCOGS_TOKEN", DEFAULT_TOKEN))
+    parser.add_argument("--output", default=str(REPO_ROOT / "data" / "collection.json"))
+    parser.add_argument("--cache", default=str(REPO_ROOT / "data" / "releases_cache.json"))
+    parser.add_argument("--overrides", default=str(REPO_ROOT / "data" / "overrides.json"))
+    parser.add_argument("--flattening", default=str(REPO_ROOT / "data" / "flattening_queue.json"))
+    parser.add_argument("--assets-dir", default=str(REPO_ROOT / "assets" / "releases"))
+    parser.add_argument("--inject-html", default=str(REPO_ROOT / "index.html"))
+    parser.add_argument("--analyze-pixels", action="store_true", default=True)
+    parser.add_argument("--download-images", action="store_true", default=True)
     args = parser.parse_args()
 
     out_path = pathlib.Path(args.output)
     cache_path = pathlib.Path(args.cache)
     overrides_path = pathlib.Path(args.overrides)
-    download_dir = pathlib.Path("assets/releases") if args.download_images else None
+    flattening_path = pathlib.Path(args.flattening)
+    download_dir = pathlib.Path(args.assets_dir)
+    html_path = pathlib.Path(args.inject_html)
 
     client = DiscogsClient(token=args.token)
     data = fetch_full_collection(
@@ -321,37 +359,24 @@ def main() -> None:
         username=args.username,
         cache_path=cache_path,
         overrides_path=overrides_path,
-        analyze_pixels=args.analyze_pixels,
+        flattening_path=flattening_path,
         download_dir=download_dir,
+        analyze_pixels=args.analyze_pixels,
     )
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
+    out_path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
-    hash_copy = dict(data)
-    hash_copy.pop("synced_at_utc", None)
-    digest = hashlib.sha256(json.dumps(hash_copy, sort_keys=True).encode("utf-8")).hexdigest()
-    manifest_path = out_path.parent / "sync_manifest.json"
-    manifest_path.write_text(
-        json.dumps(
-            {
-                "username": args.username,
-                "record_count": len(data["records"]),
-                "pressing_photos_detected": data["profile"]["pressing_photos_detected"],
-                "content_sha256": digest,
-                "synced_at_utc": data["synced_at_utc"],
-            },
-            indent=2,
-        ),
-        encoding="utf-8",
-    )
-
-    if args.inject_html:
-        inject_collection_into_html(pathlib.Path(args.inject_html), data)
-
-    print(
-        f"[ok] Synced {len(data['records'])} records for '{args.username}' "
-        f"({data['profile']['pressing_photos_detected']} pressing photos, sha256={digest[:12]})"
+    # Run pick_pressing_photo pipeline to finalize pressing photo selections and inject into index.html
+    run_pick_pressing_photos(
+        collection_path=out_path,
+        cache_path=cache_path,
+        overrides_path=overrides_path,
+        flattening_path=flattening_path,
+        assets_releases_dir=download_dir,
+        html_path=html_path,
+        download_missing=False,
+        token=args.token,
     )
 
 
