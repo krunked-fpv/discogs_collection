@@ -28,7 +28,7 @@ PRESSING_PHOTO_MAP = {
 
 CV_CACHE = {}
 for key, rel_p in PRESSING_PHOTO_MAP.items():
-    abs_p = pathlib.Path("/working_dir/c_02d56cd8e1b36550") / rel_p
+    abs_p = REPO_ROOT / rel_p
     if abs_p.exists():
         CV_CACHE[key] = score_image_pixels_deterministic(abs_p.read_bytes())
 

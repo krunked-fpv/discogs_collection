@@ -183,7 +183,6 @@ def fetch_full_collection(
         release_id = int(basic.get("id") or item.get("id") or 0)
         rid_str = str(release_id)
 
-        # FIX 3A: Re-fetch if missing OR if a previous failed run stored an empty `{}` without images
         cached_entry = cache.get(rid_str)
         if not isinstance(cached_entry, dict) or not cached_entry.get("images"):
             try:
@@ -193,7 +192,6 @@ def fetch_full_collection(
                 time.sleep(0.55)
             except Exception as exc:
                 print(f"[warn] Could not enrich release {release_id}: {exc}", file=sys.stderr)
-                # Do NOT poison `cache[rid_str] = {}` so future runs will retry automatically
 
         rel_detail = cache.get(rid_str) or {}
         images = list(rel_detail.get("images") or [])
@@ -220,7 +218,7 @@ def fetch_full_collection(
         rel_asset_dir.mkdir(parents=True, exist_ok=True)
         downloaded_bytes: dict[str, bytes] = {}
 
-        for idx, img in enumerate(images[:24]):
+        for idx, img in enumerate(images[:40]):
             uri = img.get("uri") or img.get("resource_url") or ""
             img_file = rel_asset_dir / f"img_{idx}.jpg"
             if img_file.exists():
@@ -251,15 +249,16 @@ def fetch_full_collection(
             local_release_dir=rel_asset_dir,
         )
 
-        # Immediately write pressing.jpg during sync as well when a pressing photo is selected
+        # Immediately write pressing.jpg during sync when a pressing photo is selected
         if img_selection.get("has_pressing_photo"):
             raw_sel = img_selection.get("selected_index")
             sel_idx = int(raw_sel) if raw_sel is not None else -1
             if sel_idx >= 0 and (rel_asset_dir / f"img_{sel_idx}.jpg").exists():
                 src_local = rel_asset_dir / f"img_{sel_idx}.jpg"
                 dest_pressing = rel_asset_dir / "pressing.jpg"
-                if not dest_pressing.exists() or src_local.stat().st_size != dest_pressing.stat().st_size:
-                    shutil.copyfile(src_local, dest_pressing)
+                src_bytes = src_local.read_bytes()
+                if not dest_pressing.exists() or dest_pressing.read_bytes() != src_bytes:
+                    dest_pressing.write_bytes(src_bytes)
                 img_selection["local_pressing_image_url"] = f"assets/releases/{rid_str}/pressing.jpg"
                 img_selection["display_thumbnail_url"] = img_selection["local_pressing_image_url"]
 
@@ -398,7 +397,6 @@ def main() -> None:
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
-    # FIX 3B: Pass download_missing=args.download_images (instead of False) so any missing photos get downloaded
     run_pick_pressing_photos(
         collection_path=out_path,
         cache_path=cache_path,

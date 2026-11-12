@@ -4,8 +4,9 @@
 Uses 100% deterministic rules to:
 1. Identify which image in a Discogs Release `images[]` array depicts the
    physical 12" vinyl pressing itself (vs. front sleeve cover, back cover tracklist,
-   square inner sleeve / lyric insert, gatefold spread, or close-up 4" paper center
-   label), supporting both square (1:1) and 4:3 / 3:4 camera photos of vinyl pressings.
+   square inner sleeve / lyric insert, die-cut inner sleeve, sleeve+disc mockup,
+   gatefold spread, or close-up 4" paper center label), supporting both square (1:1)
+   and 4:3 / 3:4 camera photos of vinyl pressings.
 2. Parse Discogs `formats[].descriptions`, `formats[].text`, and release notes
    into a deterministic `wax_spec` object for procedural vinyl rendering and
    filtering when a release has no pressing photo on Discogs.
@@ -23,14 +24,30 @@ import hashlib
 import io
 import pathlib
 import re
+import subprocess
+import sys
 from typing import Any
 
+HAS_CV_DEPS = False
 try:
     import numpy as np
     from PIL import Image
     HAS_CV_DEPS = True
 except ImportError:
-    HAS_CV_DEPS = False
+    # Automatically bootstrap pillow + numpy if missing on local Windows/Linux Python environment
+    try:
+        subprocess.run(
+            [sys.executable, "-m", "pip", "install", "--quiet", "pillow", "numpy"],
+            check=False,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            timeout=90,
+        )
+        import numpy as np
+        from PIL import Image
+        HAS_CV_DEPS = True
+    except Exception:
+        HAS_CV_DEPS = False
 
 
 DISCOGS_COLOR_MAP: dict[str, tuple[str, str, bool]] = {
@@ -95,6 +112,7 @@ DISCOGS_COLOR_MAP: dict[str, tuple[str, str, bool]] = {
     "silver": ("#94a3b8", "Metallic Silver", False),
     "dus": ("#a8a29e", "Dusty Smoke", True),
     "dust": ("#a8a29e", "Dusty Smoke", True),
+    "dusk": ("#a8a29e", "Dusk Ripple", True),
     "hou": ("#3b82f6", "House Blue/Cyan Swirl", True),
     "gal": ("#4f46e5", "Galaxy Nebula", True),
     "galaxy": ("#4f46e5", "Galaxy Nebula", True),
@@ -206,17 +224,16 @@ def parse_wax_variant(
 
     etched = bool(re.search(r"\betch", lower))
 
-    # Determine pattern prioritizing format_str first, then filtered_comments
     pattern_source = fmt_lower if re.search(
-        r"splatter|starburst|in clear|color-in-color|gal|galaxy|nebula|dus|dust|gho|ghost|smoke|swirl|marb|marble|split|smash|twister|cle|ult|mil|cok|clear|translucent",
+        r"splatter|starburst|in clear|color-in-color|ripple|gal|galaxy|nebula|dus|dust|dusk|gho|ghost|smoke|swirl|marb|marble|split|smash|twister|cle|ult|mil|cok|clear|translucent",
         fmt_lower,
     ) else lower
 
     if re.search(r"splatter|starburst", pattern_source):
         pattern = "splatter"
-    elif re.search(r"in clear|color-in-color|milky in clear|bone in|pink in|black in|red in", pattern_source):
+    elif re.search(r"in clear|color-in-color|milky in clear|bone in|pink in|black in|red in|ripple", pattern_source):
         pattern = "color_in_color"
-    elif re.search(r"\b(gal|galaxy|nebula|dus|dust|gho|ghost|smoke|glitter|starlight)\b", pattern_source):
+    elif re.search(r"\b(gal|galaxy|nebula|dus|dust|dusk|gho|ghost|smoke|glitter|starlight)\b", pattern_source):
         pattern = "galaxy"
     elif re.search(r"\b(swirl|marb|marble|hou|aci|acid)\b", pattern_source):
         pattern = "marble"
@@ -286,47 +303,55 @@ def score_image_pixels_deterministic(
 ) -> dict[str, Any]:
     """Deterministically scores an image for whether it shows a physical 12" vinyl record pressing.
 
-    Uses Multi-Scale Concentric Dual-Circle Detection:
-    1. Scans candidate disc radii `R_disc in [0.68..0.98]` along the 4 diagonal quadrants
-       (`|cos(theta)| >= 0.36 & |sin(theta)| >= 0.36`) where circular discs curve inside the
-       square frame while square sleeves/lyric inserts extend into the corners.
-    2. Verifies the mandatory 1/3 center-label-to-disc ratio (`R_label ≈ R_disc / 3.0`)
+    Uses Calibrated Multi-Scale Concentric Dual-Circle Detection:
+    1. Normalizes coordinates by true half-frame (127.5) so full-bleed 12" vinyl discs
+       (`R_disc in [0.80..0.99]`) are accurately detected along all 4 diagonal quadrants.
+    2. Searches for the physical 1/3 center-label-to-disc boundary (`R_label in [0.26..0.36] * R_disc`)
        separating the 4" paper center label from the 12" vinyl wax annulus.
-    3. Explicitly detects and penalizes:
-       - Zoomed-in 4" paper center label scans (`img_2`, `img_3` in Guideline 13.8), where
-         the paper label fills `r < 0.75` and only the outer corners show vinyl runout.
-       - Square 12x12" lyric sheets, inner sleeves, and back covers (`img_1`, `img_2`, `img_3`),
-         where horizontal/vertical edges and dense text lines lack a 4-quadrant circular rim.
+    3. Explicitly detects and rejects:
+       - Die-cut inner sleeves with blank paper center holes (e.g., `38268432/img_4, img_5`),
+         where `label_grad_mag < 0.009` and `spindle_edge < 0.0065`.
+       - Off-center sleeve + half-disc promotional mockups (e.g., `27717681/img_2`),
+         where centered label/spindle energy is near zero and left-right wax asymmetry is high.
+       - Zoomed-in 4" paper center label close-ups on colored or black vinyl
+         (e.g., `27066432/img_4, img_5` and `38268432/img_6..9`), where the 4" paper label
+         extends out to `r ~ 0.85..0.98` so `label_wax_dist < 0.175` across the 1/3 boundary.
+       - Square 12x12" lyric sheets, illustrated inner sleeves, slipcovers, and hype stickers
+         (e.g., `14188877/img_4, img_5, img_6`, `28844782/img_4, img_5`, `38268432/img_2, img_3`).
     """
     if not HAS_CV_DEPS:
         return {"is_pressing": False, "score": 0.0, "reason": "cv_deps_unavailable"}
 
-    with Image.open(io.BytesIO(image_bytes)) as im:
-        w, h = im.size
-        aspect = w / float(h) if h else 0.0
-        if aspect < 0.65 or aspect > 1.52:
-            return {
-                "is_pressing": False,
-                "score": 0.05,
-                "aspect_ratio": round(aspect, 3),
-                "reason": "rejected_aspect_ratio_panoramic_or_strip",
-            }
-        rgb_full = im.convert("RGB")
-        if abs(aspect - 1.0) > 0.08:
-            side = min(w, h)
-            left = (w - side) // 2
-            top = (h - side) // 2
-            rgb_cropped = rgb_full.crop((left, top, left + side, top + side))
-        else:
-            rgb_cropped = rgb_full
-        rgb = np.asarray(rgb_cropped.resize((256, 256), Image.Resampling.BILINEAR), dtype=np.float32) / 255.0
+    try:
+        with Image.open(io.BytesIO(image_bytes)) as im:
+            w, h = im.size
+            aspect = w / float(h) if h else 0.0
+            if aspect < 0.72 or aspect > 1.38:
+                return {
+                    "is_pressing": False,
+                    "score": 0.05,
+                    "aspect_ratio": round(aspect, 3),
+                    "reason": "rejected_aspect_ratio_panoramic_or_strip",
+                }
+            rgb_full = im.convert("RGB")
+            if abs(aspect - 1.0) > 0.06:
+                side = min(w, h)
+                left = (w - side) // 2
+                top = (h - side) // 2
+                rgb_cropped = rgb_full.crop((left, top, left + side, top + side))
+            else:
+                rgb_cropped = rgb_full
+            rgb = np.asarray(rgb_cropped.resize((256, 256), Image.Resampling.BILINEAR), dtype=np.float32) / 255.0
+    except Exception:
+        return {"is_pressing": False, "score": 0.0, "reason": "image_decode_error"}
 
     gray = 0.299 * rgb[:, :, 0] + 0.587 * rgb[:, :, 1] + 0.114 * rgb[:, :, 2]
     sat = np.max(rgb, axis=2) - np.min(rgb, axis=2)
 
+    # Normalize by 127.5 so r=1.0 is the inscribed circle touching the square frame edges
     yy, xx = np.mgrid[0:256, 0:256]
-    dy = (yy - 127.5) / 120.0
-    dx = (xx - 127.5) / 120.0
+    dy = (yy - 127.5) / 127.5
+    dx = (xx - 127.5) / 127.5
     r = np.hypot(dx, dy)
     theta = np.arctan2(dy, dx)
 
@@ -334,21 +359,20 @@ def score_image_pixels_deterministic(
     grad_r = np.abs(gx * np.cos(theta) + gy * np.sin(theta))
     grad_t = np.abs(-gx * np.sin(theta) + gy * np.cos(theta))
     grad_mag = np.hypot(gx, gy)
+    pure_rad = np.maximum(0.0, grad_r - 0.55 * grad_t)
 
     # 4 Diagonal Quadrant Masks (avoiding 0/90/180/270 deg where square borders live)
     abs_cos = np.abs(np.cos(theta))
     abs_sin = np.abs(np.sin(theta))
-    diag_mask = (abs_cos >= 0.36) & (abs_sin >= 0.36)
+    diag_mask = (abs_cos >= 0.35) & (abs_sin >= 0.35)
     q_masks = [
         diag_mask & (dx > 0) & (dy > 0),
         diag_mask & (dx < 0) & (dy > 0),
         diag_mask & (dx < 0) & (dy < 0),
         diag_mask & (dx > 0) & (dy < 0),
     ]
-    cardinal_mask = (abs_cos >= 0.92) | (abs_sin >= 0.92)
 
-    # Multi-scale search for optimal outer 12" disc radius R_disc in [0.68..0.98]
-    best_r_disc = 0.92
+    best_r_disc = 0.96
     best_dual_circle_score = -1.0
     best_active_quads = 0
     best_rim_step = 0.0
@@ -356,181 +380,159 @@ def score_image_pixels_deterministic(
     best_label_wax_dist = 0.0
     best_corner_wax_dist = 0.0
     best_corner_std = 1.0
+    best_r_lbl = 0.32
 
-    for r_cand in (0.70, 0.74, 0.78, 0.82, 0.86, 0.90, 0.94, 0.98):
-        rim_diag_band = (r >= r_cand - 0.028) & (r <= r_cand + 0.028) & diag_mask
-        rim_card_band = (r >= r_cand - 0.028) & (r <= r_cand + 0.028) & cardinal_mask
+    for r_cand in np.linspace(0.80, 0.99, 20):
+        rim_diag_band = (r >= r_cand - 0.024) & (r <= r_cand + 0.024) & diag_mask
+        diag_rad_e = float(np.mean(pure_rad[rim_diag_band]))
 
-        # Pure radial edge energy along diagonal arcs
-        diag_rad_e = float(np.mean(np.maximum(0.0, grad_r[rim_diag_band] - 0.55 * grad_t[rim_diag_band])))
-        card_rad_e = float(np.mean(grad_r[rim_card_band])) + 1e-6
-
-        # Evaluate how many of the 4 diagonal quadrants show a genuine disc-to-background transition
         active_quads = 0
         q_dists: list[float] = []
         q_stds_out: list[float] = []
         for qm in q_masks:
-            in_q = (r >= r_cand - 0.15) & (r <= r_cand - 0.035) & qm
-            out_q = (r >= r_cand + 0.04) & (r <= min(1.32, r_cand + 0.22)) & qm
-            rim_q = (r >= r_cand - 0.028) & (r <= r_cand + 0.028) & qm
+            in_q = (r >= r_cand - 0.14) & (r <= r_cand - 0.03) & qm
+            out_q = (r >= r_cand + 0.035) & (r <= min(1.36, r_cand + 0.24)) & qm
+            rim_q = (r >= r_cand - 0.024) & (r <= r_cand + 0.024) & qm
             if not np.any(in_q) or not np.any(out_q):
                 continue
             mean_in = np.mean(rgb[in_q], axis=0)
             mean_out = np.mean(rgb[out_q], axis=0)
             dist_q = float(np.linalg.norm(mean_in - mean_out))
             std_out_q = float(np.mean(np.std(rgb[out_q], axis=0)))
-            rim_e_q = float(np.mean(grad_r[rim_q])) if np.any(rim_q) else 0.0
+            rim_e_q = float(np.mean(pure_rad[rim_q])) if np.any(rim_q) else 0.0
             q_dists.append(dist_q)
             q_stds_out.append(std_out_q)
-            # Quadrant is active if there is a color step OR a clear rim bevel edge (for clear/milky vinyl)
-            if dist_q >= 0.048 or rim_e_q >= 0.017:
+            if dist_q >= 0.065 or rim_e_q >= 0.014:
                 active_quads += 1
 
         median_q_dist = float(np.median(q_dists)) if q_dists else 0.0
+        min_q_dist = float(np.min(q_dists)) if q_dists else 0.0
         median_q_std = float(np.median(q_stds_out)) if q_stds_out else 0.25
 
-        # Concentric 4" center label at R_label ≈ r_cand / 3.0
-        r_lbl = r_cand / 3.0
-        lbl_band = (r >= r_lbl - 0.042) & (r <= r_lbl + 0.045)
-        lbl_in = (r >= 0.06) & (r <= max(0.14, r_lbl - 0.03))
-        wax_mid = (r >= r_lbl + 0.05) & (r <= r_cand - 0.06)
+        # Search for 4" center label boundary around r_cand / 3.0 ([0.26..0.36] * r_cand)
+        best_lbl_e_local = 0.0
+        best_rl_local = float(r_cand / 3.0)
+        for rl in np.linspace(0.26 * r_cand, 0.36 * r_cand, 9):
+            l_band = (r >= rl - 0.022) & (r <= rl + 0.022)
+            le = float(np.mean(pure_rad[l_band]))
+            if le > best_lbl_e_local:
+                best_lbl_e_local = le
+                best_rl_local = float(rl)
 
-        lbl_step_e = float(np.mean(np.maximum(0.0, grad_r[lbl_band] - 0.45 * grad_t[lbl_band])))
+        lbl_in = (r >= 0.045) & (r <= max(0.14, best_rl_local - 0.022))
+        wax_mid = (r >= best_rl_local + 0.035) & (r <= r_cand - 0.05)
         lbl_wax_d = float(np.linalg.norm(np.mean(rgb[lbl_in], axis=0) - np.mean(rgb[wax_mid], axis=0)))
 
-        # Color-in-Color ("Milky in Clear") inner-wax to outer-wax radial transition bonus
-        wax_inner_half = (r >= r_lbl + 0.04) & (r <= r_cand * 0.62)
-        wax_outer_half = (r > r_cand * 0.62) & (r <= r_cand - 0.05)
+        # Color-in-Color / Dusk Ripple inner-wax to outer-wax radial transition bonus
+        wax_inner_half = (r >= best_rl_local + 0.035) & (r <= r_cand * 0.60)
+        wax_outer_half = (r > r_cand * 0.60) & (r <= r_cand - 0.04)
         color_in_color_dist = float(
             np.linalg.norm(np.mean(rgb[wax_inner_half], axis=0) - np.mean(rgb[wax_outer_half], axis=0))
         )
 
-        # Combine into dual-circle score for candidate radius r_cand
-        quad_factor = 1.0 if active_quads >= 3 else (0.55 if active_quads == 2 else 0.15)
+        quad_factor = 1.0 if active_quads == 4 else (0.75 if active_quads == 3 else 0.20)
         cand_score = quad_factor * (
-            min(0.28, diag_rad_e * 8.5)
-            + min(0.24, median_q_dist * 0.55)
-            + max(0.0, min(0.18, (0.22 - median_q_std) * 1.1))
-            + min(0.22, lbl_step_e * 6.0 + lbl_wax_d * 0.38)
-            + min(0.08, color_in_color_dist * 0.35)
+            min(0.26, diag_rad_e * 3.8)
+            + min(0.24, median_q_dist * 0.26 + min_q_dist * 0.10)
+            + min(0.16, best_lbl_e_local * 2.2)
+            + min(0.10, lbl_wax_d * 0.38)
+            + min(0.06, color_in_color_dist * 0.18)
+            + max(0.0, min(0.08, (0.24 - median_q_std) * 0.45))
         )
 
         if cand_score > best_dual_circle_score:
             best_dual_circle_score = cand_score
-            best_r_disc = r_cand
+            best_r_disc = float(r_cand)
+            best_r_lbl = best_rl_local
             best_active_quads = active_quads
             best_rim_step = diag_rad_e
-            best_label_step = lbl_step_e
+            best_label_step = best_lbl_e_local
             best_label_wax_dist = lbl_wax_d
             best_corner_wax_dist = median_q_dist
             best_corner_std = median_q_std
 
-    # Evaluate canonical masks at the detected best_r_disc
-    r_lbl_best = best_r_disc / 3.0
-    spindle_mask = r <= 0.042
-    oversized_spindle_ring = (r > 0.052) & (r <= 0.115)
-    label_mask = (r > 0.06) & (r <= max(0.15, r_lbl_best - 0.02))
-    wax_annulus_mask = (r > r_lbl_best + 0.04) & (r <= best_r_disc - 0.05)
-    outer_rim_mask = (r > best_r_disc - 0.03) & (r <= best_r_disc + 0.03)
-    corner_bg_mask = r > max(1.04, best_r_disc + 0.06)
+    # Canonical masks at best_r_disc and best_r_lbl
+    spindle_ring = (r >= 0.020) & (r <= 0.052)
+    spindle_hole = r <= 0.035
+    spindle_surround = (r >= 0.045) & (r <= 0.095)
+    label_mask = (r >= 0.048) & (r <= best_r_lbl - 0.02)
+    wax_annulus_mask = (r >= best_r_lbl + 0.035) & (r <= best_r_disc - 0.045)
 
-    spindle_contrast = float(abs(np.mean(gray[spindle_mask]) - np.mean(gray[label_mask])))
-    oversized_spindle_step = float(np.mean(grad_r[oversized_spindle_ring]))
-
-    wax_radial_energy = float(np.mean(grad_r[wax_annulus_mask]))
-    wax_tangential_energy = float(np.mean(grad_t[wax_annulus_mask])) + 1e-6
-    rim_radial_energy = float(np.mean(grad_r[outer_rim_mask & diag_mask]))
-    circularity_ratio = (rim_radial_energy + 0.5 * best_label_step + 0.35 * wax_radial_energy) / (
-        wax_tangential_energy * 0.65 + 0.012
-    )
-
-    # Check for high-frequency text / graphic clutter inside the wax annulus (characteristic of
-    # zoomed 4" center labels AND square 12x12" lyric inserts / tracklist back covers)
-    wax_grad_mag = float(np.mean(grad_mag[wax_annulus_mask]))
+    spindle_edge = float(np.mean(grad_r[spindle_ring]))
+    spindle_contrast = float(np.linalg.norm(np.mean(rgb[spindle_hole], axis=0) - np.mean(rgb[spindle_surround], axis=0)))
     label_grad_mag = float(np.mean(grad_mag[label_mask]))
-    wax_luma = float(np.mean(gray[wax_annulus_mask]))
-    corner_luma = float(np.mean(gray[corner_bg_mask]))
+    wax_grad_mag = float(np.mean(grad_mag[wax_annulus_mask]))
+    wax_rad_e = float(np.mean(grad_r[wax_annulus_mask]))
+    wax_tan_e = float(np.mean(grad_t[wax_annulus_mask])) + 1e-6
 
-    # Check if a strong circle exists at r in [0.55..0.88] with dark smooth vinyl in corners
-    # (Classic signature of a zoomed-in 4" paper center label surrounded by black/dark vinyl)
-    outer_label_circle_e = float(np.mean(grad_r[(r >= 0.56) & (r <= 0.88) & diag_mask]))
-    is_zoomed_label_on_vinyl = bool(
-        best_corner_std < 0.095
-        and corner_luma < 0.28
-        and wax_luma > corner_luma + 0.14
-        and wax_grad_mag > 0.036
-        and outer_label_circle_e > best_label_step * 1.15
+    # Check left-right symmetry of the wax annulus (rejects off-center sleeve+disc mockups like 27717681/img_2)
+    left_wax = wax_annulus_mask & (dx < -0.15)
+    right_wax = wax_annulus_mask & (dx > 0.15)
+    lr_wax_diff = float(np.linalg.norm(np.mean(rgb[left_wax], axis=0) - np.mean(rgb[right_wax], axis=0)))
+
+    # 1. Die-cut inner sleeve with blank paper center hole (e.g., 38268432/img_4, img_5)
+    is_diecut_sleeve = bool(label_grad_mag < 0.009 and spindle_edge < 0.0065 and spindle_contrast < 0.04)
+
+    # 2. Off-center sleeve + half-disc promotional composite mockup (e.g., 27717681/img_2)
+    is_mockup_composite = bool(
+        best_label_step < 0.015
+        and spindle_edge < 0.010
+        and (lr_wax_diff > 0.22 or label_grad_mag < 0.022)
     )
 
-    # Also catch full-bleed zoomed label scans where text fills the annulus and spindle hole is large
-    is_full_bleed_label_scan = bool(
-        (best_label_wax_dist < 0.085 and best_label_step < 0.018 and wax_grad_mag > 0.038)
-        or (oversized_spindle_step > 0.042 and best_label_wax_dist < 0.11 and wax_grad_mag > label_grad_mag * 0.85)
-    )
-    is_zoomed_label_scan = is_zoomed_label_on_vinyl or is_full_bleed_label_scan
-
-    # Detect square lyric sheets / inner sleeves / back covers:
-    # 1. Fewer than 3 diagonal quadrants show a circular rim step, OR
-    # 2. High-frequency text/graphic edges in the wax annulus exceed the 4" label and lack a 1/3 label step
-    diag_continuation_dist = float(
-        np.linalg.norm(
-            np.mean(rgb[(r >= 0.72) & (r <= 0.88) & diag_mask], axis=0)
-            - np.mean(rgb[(r >= 1.04) & (r <= 1.24) & diag_mask], axis=0)
+    # 3. Zoomed-in 4" paper center label close-up on colored or black vinyl (e.g., 27066432/img_4,5 & 38268432/img_6..9)
+    is_zoomed_label_scan = bool(
+        (
+            best_label_wax_dist < 0.175
+            and best_label_step < 0.065
+            and (wax_grad_mag >= label_grad_mag * 0.68 or best_corner_std < 0.05)
         )
+        or (best_corner_std < 0.040 and best_label_wax_dist < 0.22)
     )
+
+    # 4. Square lyric sheet, inner sleeve, slipcover, back cover, or hype sticker
     is_square_insert_or_sleeve = bool(
-        best_active_quads < 3
-        or (
-            diag_continuation_dist < 0.042
-            and best_rim_step < 0.015
-            and best_label_wax_dist < 0.12
-        )
-        or (
-            wax_grad_mag > 0.052
-            and wax_grad_mag >= label_grad_mag * 0.92
-            and best_label_step < 0.022
-            and best_corner_wax_dist < 0.14
-        )
+        best_active_quads < 4
+        or (best_corner_wax_dist < 0.14 and best_rim_step < 0.032)
+        or (best_rim_step < 0.016 and best_corner_wax_dist < 0.32)
+        or (wax_grad_mag > 0.048 and wax_grad_mag > label_grad_mag * 0.70)
+        or (spindle_edge < 0.008 and best_label_wax_dist < 0.23)
     )
 
-    # Optional Variant Color Match Bonus when expected_wax_hex is a colored variant
+    # Variant Color Match Bonus when expected_wax_hex is a colored variant
     variant_color_bonus = 0.0
     wax_mean_rgb = np.mean(rgb[wax_annulus_mask], axis=0)
     wax_mean_sat = float(np.mean(sat[wax_annulus_mask]))
     if expected_wax_hex and expected_wax_hex not in ("#18181b", "#cbd5e1", "#e2e8f0", "#f1f5f9", "#f8fafc"):
         target_rgb = np.asarray(_hex_to_rgb01(expected_wax_hex), dtype=np.float32)
-        # Normalize chroma direction to compare hue regardless of lighting brightness
         wax_norm = wax_mean_rgb / (np.linalg.norm(wax_mean_rgb) + 1e-6)
         tgt_norm = target_rgb / (np.linalg.norm(target_rgb) + 1e-6)
         chroma_sim = float(np.dot(wax_norm, tgt_norm))
         if chroma_sim > 0.88 and wax_mean_sat > 0.12:
-            variant_color_bonus = min(0.12, (chroma_sim - 0.85) * 0.8 + wax_mean_sat * 0.15)
+            variant_color_bonus = min(0.05, (chroma_sim - 0.85) * 0.35 + wax_mean_sat * 0.05)
 
-    score = (
+    circularity_ratio = (best_rim_step + 0.6 * best_label_step + 0.25 * wax_rad_e) / (wax_tan_e * 0.65 + 0.012)
+
+    raw_annular_score = (
         best_dual_circle_score
-        + min(0.14, circularity_ratio * 0.12)
-        + min(0.08, spindle_contrast * 0.28)
+        + min(0.08, circularity_ratio * 0.03)
+        + min(0.06, (spindle_edge * 0.5 + spindle_contrast * 0.12))
         + variant_color_bonus
     )
 
-    if is_zoomed_label_scan:
-        score *= 0.38
-    elif is_square_insert_or_sleeve:
-        score *= 0.45
+    rejected = is_diecut_sleeve or is_mockup_composite or is_zoomed_label_scan or is_square_insert_or_sleeve
+    score = raw_annular_score * 0.35 if rejected else raw_annular_score
+    score = round(min(0.995, max(0.0, score)), 4)
 
-    score = round(min(1.0, max(0.0, score)), 4)
-
-    is_pressing = bool(
-        score >= 0.46
-        and best_active_quads >= 3
-        and not is_zoomed_label_scan
-        and not is_square_insert_or_sleeve
-        and (best_label_wax_dist > 0.055 or best_label_step > 0.015 or best_rim_step > 0.018)
-    )
+    is_pressing = bool(not rejected and score >= 0.48)
 
     reason = "deterministic_annular_cv_match"
     if not is_pressing:
-        if is_zoomed_label_scan:
+        if is_diecut_sleeve:
+            reason = "rejected_diecut_inner_sleeve"
+        elif is_mockup_composite:
+            reason = "rejected_sleeve_disc_mockup"
+        elif is_zoomed_label_scan:
             reason = "rejected_zoomed_center_label_scan"
         elif is_square_insert_or_sleeve:
             reason = "rejected_square_insert_or_sleeve"
@@ -540,10 +542,11 @@ def score_image_pixels_deterministic(
     return {
         "is_pressing": is_pressing,
         "is_zoomed_label_scan": is_zoomed_label_scan,
-        "is_square_insert_or_sleeve": is_square_insert_or_sleeve,
+        "is_square_insert_or_sleeve": is_square_insert_or_sleeve or is_diecut_sleeve or is_mockup_composite,
         "detected_disc_radius": round(best_r_disc, 3),
         "active_diagonal_quadrants": best_active_quads,
         "score": score,
+        "raw_annular_score": round(min(0.995, max(0.0, raw_annular_score)), 4),
         "aspect_ratio": round(aspect, 3),
         "corner_std": round(best_corner_std, 4),
         "corner_wax_dist": round(best_corner_wax_dist, 4),
@@ -612,6 +615,8 @@ def select_release_images_deterministic(
     best_pressing_score = -1.0
     best_method = "cover_fallback"
     num_imgs = len(images)
+    first_verified_pressing_seen = False
+    has_any_real_cv = False
 
     for idx, img in enumerate(images):
         uri = img.get("uri") or img.get("resource_url") or ""
@@ -619,7 +624,7 @@ def select_release_images_deterministic(
         w = int(img.get("width") or 600)
         h = int(img.get("height") or 600)
         aspect = w / float(h) if h else 1.0
-        is_square_or_43 = 0.68 <= aspect <= 1.48
+        is_square_or_43 = 0.72 <= aspect <= 1.38
         is_near_square = 0.85 <= aspect <= 1.18
 
         local_img_rel = ""
@@ -639,15 +644,13 @@ def select_release_images_deterministic(
         pos_score = 0.0
         cv_details: dict[str, Any] = {}
 
-        # Guideline 13.8 Positional Prior:
-        # In 5+ image releases (like 35668090 and 16610055), [0]=Front, [1]=Back,
-        # [2,3]=Center Labels or Lyric Sheet/Inner Sleeve, and [4,5]=Full 12" Vinyl Pressing!
+        # Positional prior used ONLY when image bytes/CV are unavailable
         if idx == primary_idx and not is_no_cover:
             role = "front_cover"
             pos_score = 0.05
-        elif not is_square_or_43 and aspect > 1.52:
+        elif not is_square_or_43:
             role = "gatefold_spread"
-            pos_score = 0.0
+            pos_score = 0.05
         else:
             if is_no_cover and idx == 0:
                 role = "pressing_or_label"
@@ -655,69 +658,58 @@ def select_release_images_deterministic(
             elif num_imgs >= 5:
                 if idx == 1:
                     role = "back_cover" if not is_gatefold else "gatefold_inner"
-                    pos_score = 0.20
+                    pos_score = 0.25
                 elif idx in (2, 3):
                     role = "label_or_insert_candidate" if (is_gatefold or has_insert_or_sheet or num_imgs >= 6) else "pressing_candidate"
-                    pos_score = 0.52 if idx == 2 else 0.56
+                    pos_score = 0.62 if idx == 2 else 0.64
                 elif idx in (4, 5):
                     role = "pressing_disc"
-                    pos_score = 0.88 if idx == 4 else 0.86
+                    pos_score = 0.78 if idx == 4 else 0.76
                 else:
                     role = "pressing_candidate"
-                    pos_score = 0.74
-            elif is_gatefold:
-                if idx == 1:
-                    role = "gatefold_inner"
-                    pos_score = 0.22
-                elif idx == 2 and num_imgs == 4:
-                    role = "back_cover"
-                    pos_score = 0.30
-                elif idx >= 3:
-                    role = "pressing_disc"
-                    pos_score = 0.86
-                else:
-                    role = "pressing_candidate"
-                    pos_score = 0.60
+                    pos_score = 0.75
             else:
-                if idx == 1 and num_imgs >= 3:
-                    role = "back_cover"
-                    pos_score = 0.30
-                elif idx == 1 and num_imgs == 2:
-                    has_color_code = wax_preview.get("pattern") != "black"
-                    role = "pressing_candidate" if (has_color_code or is_square_or_43) else "back_cover"
-                    pos_score = 0.72 if is_near_square else 0.58
-                elif idx == 2 and num_imgs == 4:
+                if idx == 1 and num_imgs == 2:
+                    role = "pressing_candidate"
+                    pos_score = 0.76 if is_near_square else 0.60
+                elif idx == 1 and num_imgs == 3:
+                    role = "pressing_candidate"
+                    pos_score = 0.78
+                elif idx == 2 and num_imgs == 3:
                     role = "pressing_candidate"
                     pos_score = 0.74
-                elif idx == 3 and num_imgs == 4:
-                    role = "pressing_disc"
-                    pos_score = 0.86
                 elif idx >= 2:
                     role = "pressing_disc"
-                    pos_score = 0.84
+                    pos_score = 0.80
+                else:
+                    role = "back_cover"
+                    pos_score = 0.30
 
         if img_bytes is not None and (idx != primary_idx or is_no_cover):
             cv_details = score_image_pixels_deterministic(img_bytes, expected_wax_hex=expected_wax_hex)
             if cv_details.get("reason") == "cv_deps_unavailable":
                 combined_score = pos_score
                 method = "guideline_13_8_positional"
-            elif cv_details.get("is_pressing"):
-                role = "pressing_disc"
-                # Pixel CV carries 78% weight when it positively verifies a 12" vinyl disc
-                combined_score = 0.78 * float(cv_details["score"]) + 0.22 * max(pos_score, 0.70)
-                method = "deterministic_annular_cv+guideline_13_8"
-            elif cv_details.get("is_zoomed_label_scan"):
-                role = "center_label_closeup"
-                combined_score = 0.30 * float(cv_details.get("score", 0.0)) + 0.15 * pos_score
-                method = "rejected_zoomed_center_label_scan"
-            elif cv_details.get("is_square_insert_or_sleeve"):
-                if role == "pressing_disc":
-                    role = "insert_or_sleeve"
-                combined_score = 0.35 * float(cv_details.get("score", 0.0)) + 0.20 * pos_score
-                method = "rejected_square_insert_or_sleeve"
             else:
-                combined_score = 0.65 * float(cv_details.get("score", 0.0)) + 0.35 * pos_score
-                method = "guideline_13_8_positional"
+                has_any_real_cv = True
+                if cv_details.get("is_pressing"):
+                    role = "pressing_disc"
+                    # First verified pressing disc (Side A) gets a small tie-breaker bonus (+0.018)
+                    side_a_bonus = 0.018 if not first_verified_pressing_seen else 0.0
+                    first_verified_pressing_seen = True
+                    combined_score = min(0.995, 0.92 * float(cv_details["score"]) + 0.08 * 0.85 + side_a_bonus)
+                    method = "deterministic_annular_cv+guideline_13_8"
+                elif cv_details.get("is_zoomed_label_scan"):
+                    role = "center_label_closeup"
+                    combined_score = 0.85 * float(cv_details.get("score", 0.0)) + 0.05 * pos_score
+                    method = "rejected_zoomed_center_label_scan"
+                elif cv_details.get("is_square_insert_or_sleeve"):
+                    role = "insert_or_sleeve"
+                    combined_score = 0.85 * float(cv_details.get("score", 0.0)) + 0.05 * pos_score
+                    method = "rejected_square_insert_or_sleeve"
+                else:
+                    combined_score = 0.85 * float(cv_details.get("score", 0.0)) + 0.15 * pos_score
+                    method = "guideline_13_8_positional"
         else:
             combined_score = pos_score
             method = "guideline_13_8_positional"
@@ -738,31 +730,30 @@ def select_release_images_deterministic(
             entry["cv_metrics"] = cv_details
         classified.append(entry)
 
-        if (idx != primary_idx or is_no_cover) and combined_score >= 0.45 and combined_score > best_pressing_score:
+        if (idx != primary_idx or is_no_cover) and combined_score >= 0.48 and combined_score > best_pressing_score:
             best_pressing_score = combined_score
             best_pressing_idx = idx
             best_method = method
 
-    # Fallback: select the highest-scoring non-cover candidate image when len(classified) > 1
+    # Fallback when no image cleared the primary threshold
     if best_pressing_idx < 0 and len(classified) > 1:
         candidates = [
             c for c in classified
             if c["index"] != primary_idx
             and c.get("role") != "gatefold_spread"
             and not (c.get("cv_metrics") or {}).get("is_zoomed_label_scan", False)
-            and float(c.get("deterministic_score") or 0.0) >= 0.20
+            and (c.get("cv_metrics") or {}).get("reason") not in ("rejected_diecut_inner_sleeve", "rejected_aspect_ratio_panoramic_or_strip")
         ]
         if not candidates:
-            candidates = [c for c in classified if c["index"] != primary_idx]
+            candidates = [c for c in classified if c["index"] != primary_idx and c.get("role") != "gatefold_spread"]
         if candidates:
             best_cand = max(
                 candidates,
                 key=lambda c: (
                     1 if (c.get("cv_metrics") or {}).get("is_pressing") else 0,
                     0 if (c.get("cv_metrics") or {}).get("is_square_insert_or_sleeve") else 1,
-                    1 if c.get("role") in ("pressing_disc", "pressing_candidate") else 0,
-                    float(c.get("deterministic_score") or 0.0),
-                    int(c.get("index") or 0),
+                    float((c.get("cv_metrics") or {}).get("raw_annular_score") or c.get("deterministic_score") or 0.0),
+                    -int(c.get("index") or 0),
                 ),
             )
             best_pressing_idx = int(best_cand["index"])
@@ -770,6 +761,8 @@ def select_release_images_deterministic(
             best_method = "auto_best_candidate_fallback"
 
     # Tier 1: Check explicit override in data/overrides.json
+    # Only honor explicit manual pins (int or dict with pressing_image_index) when real CV is active;
+    # stale auto-saved URL strings are always superseded by real CV pixel evaluation.
     if rid_key in overrides and len(images) > 1:
         ov = overrides[rid_key]
         ov_idx = -1
@@ -785,7 +778,7 @@ def select_release_images_deterministic(
             ov_idx = ov
             ov_url = images[ov_idx].get("uri") or images[ov_idx].get("resource_url") or ""
             is_manual_pin = True
-        elif isinstance(ov, str) and ov:
+        elif isinstance(ov, str) and ov and not has_any_real_cv:
             ov_url = ov
             ov_idx = next(
                 (i for i, im in enumerate(images) if (im.get("uri") or im.get("resource_url")) == ov),
@@ -796,43 +789,31 @@ def select_release_images_deterministic(
                 if m_idx and 0 <= int(m_idx.group(1)) < len(images):
                     ov_idx = int(m_idx.group(1))
 
-        # If ov was an auto-saved URL string (not an explicit manual index pin),
-        # allow a much higher-scoring CV-verified pressing image (like img_4/img_5) to supersede a bad old pick!
-        if ov_url and ov_idx >= 0:
-            ov_cv_score = float(classified[ov_idx].get("deterministic_score") or 0.0) if 0 <= ov_idx < len(classified) else 0.0
-            if (
-                not is_manual_pin
-                and best_pressing_idx >= 0
-                and best_pressing_idx != ov_idx
-                and best_pressing_score >= ov_cv_score + 0.08
-            ):
-                # Supersede stale auto-override with the superior CV-detected pressing image
-                pass
-            else:
-                if 0 <= ov_idx < len(classified):
-                    classified[ov_idx]["role"] = "pressing_disc"
-                    classified[ov_idx]["deterministic_score"] = 1.0
-                local_p_rel = ""
-                if local_release_dir and (local_release_dir / f"img_{ov_idx}.jpg").exists():
-                    local_p_rel = f"assets/releases/{rid_key}/img_{ov_idx}.jpg"
-                elif local_release_dir and (local_release_dir / "pressing.jpg").exists():
-                    local_p_rel = f"assets/releases/{rid_key}/pressing.jpg"
-                res = {
-                    "cover_image_url": cover_url,
-                    "pressing_image_url": ov_url,
-                    "center_label_image_url": center_label_url,
-                    "display_thumbnail_url": local_p_rel or ov_url or cover_url,
-                    "has_pressing_photo": True,
-                    "selected_index": ov_idx,
-                    "selected_score": 1.0,
-                    "detection_method": "override_index" if is_manual_pin else "override_verified_pressing",
-                    "classified_images": classified,
-                }
-                if local_cover_rel:
-                    res["local_cover_image_url"] = local_cover_rel
-                if local_p_rel:
-                    res["local_pressing_image_url"] = local_p_rel
-                return res
+        if ov_url and ov_idx >= 0 and (is_manual_pin or not has_any_real_cv):
+            if 0 <= ov_idx < len(classified):
+                classified[ov_idx]["role"] = "pressing_disc"
+                classified[ov_idx]["deterministic_score"] = 1.0
+            local_p_rel = ""
+            if local_release_dir and (local_release_dir / f"img_{ov_idx}.jpg").exists():
+                local_p_rel = f"assets/releases/{rid_key}/img_{ov_idx}.jpg"
+            elif local_release_dir and (local_release_dir / "pressing.jpg").exists():
+                local_p_rel = f"assets/releases/{rid_key}/pressing.jpg"
+            res = {
+                "cover_image_url": cover_url,
+                "pressing_image_url": ov_url,
+                "center_label_image_url": center_label_url,
+                "display_thumbnail_url": local_p_rel or ov_url or cover_url,
+                "has_pressing_photo": True,
+                "selected_index": ov_idx,
+                "selected_score": 1.0,
+                "detection_method": "override_index" if is_manual_pin else "override_verified_pressing",
+                "classified_images": classified,
+            }
+            if local_cover_rel:
+                res["local_cover_image_url"] = local_cover_rel
+            if local_p_rel:
+                res["local_pressing_image_url"] = local_p_rel
+            return res
 
     pressing_url = classified[best_pressing_idx]["uri"] if best_pressing_idx >= 0 else ""
     local_p_rel = ""

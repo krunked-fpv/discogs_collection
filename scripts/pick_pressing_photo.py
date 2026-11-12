@@ -4,10 +4,10 @@
 Inspects every release in `data/collection.json` AND every release folder in
 `assets/releases/<release_id>/`, discovers all local `img_*.jpg` files even when
 `data/releases_cache.json` is incomplete, re-evaluates all candidate images with
-the Multi-Scale Concentric Dual-Circle CV + Guideline 13.8 classifier (automatically
-upgrading any stale/wrong past auto-picks in `overrides.json` and `pressing.jpg`),
-reconciles the Vinyl Flattening Queue and Collection Value, and injects the
-compiled payload into `index.html`.
+the Calibrated Multi-Scale Concentric Dual-Circle CV + Guideline 13.8 classifier
+(automatically upgrading any stale/wrong past auto-picks in `overrides.json` and
+`pressing.jpg`), reconciles the Vinyl Flattening Queue and Collection Value, and
+injects the compiled payload into `index.html`.
 
 Usage (from `C:\\DiscogsCollection\\discogs_collection` or `scripts/`):
     python pick_pressing_photo.py
@@ -31,12 +31,6 @@ import urllib.error
 import urllib.request
 from typing import Any
 
-try:
-    from PIL import Image
-    HAS_PIL = True
-except ImportError:
-    HAS_PIL = False
-
 SCRIPT_DIR = pathlib.Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parent if SCRIPT_DIR.name == "scripts" else SCRIPT_DIR
 if str(SCRIPT_DIR) not in sys.path:
@@ -47,6 +41,12 @@ from detect_pressing_image import (
     resolve_flattening_status,
     select_release_images_deterministic,
 )
+
+try:
+    from PIL import Image
+    HAS_PIL = True
+except ImportError:
+    HAS_PIL = False
 
 DISCOGS_API_BASE = "https://api.discogs.com"
 USER_AGENT = "KrunkedDiscogsVault/2.2 +https://github.com/krunked-fpv/discogs_collection"
@@ -415,8 +415,8 @@ def run_pick_pressing_photos(
 
         local_files = _discover_local_release_images(rel_dir, rid_str)
 
-        # If cache has no images for this release and disk has <= 1 image, enrich from Discogs API
-        if not rel_detail.get("images") and len(local_files) <= 1 and download_missing and rid > 0:
+        # If cache has <= 1 image for this release and disk has <= 1 image, enrich from Discogs API
+        if len(rel_detail.get("images") or []) <= 1 and len(local_files) <= 1 and download_missing and rid > 0:
             fetched_detail = _fetch_release_detail_from_discogs(rid, token=token)
             if fetched_detail.get("images"):
                 rel_detail = fetched_detail
@@ -425,12 +425,12 @@ def run_pick_pressing_photos(
                 time.sleep(0.4)
 
         # Gather full images list from cache, record, and ALL local img_*.jpg files in assets/releases/<rid>/
-        raw_images: list[dict[str, Any]] = list(rel_detail.get("images") or [])
-        if not raw_images and rec.get("images", {}).get("classified_images"):
-            raw_images = [
-                img for img in rec["images"]["classified_images"]
-                if not str(img.get("uri") or "").startswith("procedural://")
-            ]
+        cached_imgs = list(rel_detail.get("images") or [])
+        rec_classified = [
+            img for img in (rec.get("images", {}).get("classified_images") or [])
+            if not str(img.get("uri") or "").startswith("procedural://")
+        ]
+        raw_images: list[dict[str, Any]] = cached_imgs if len(cached_imgs) >= len(rec_classified) else rec_classified
         if not raw_images and rec.get("images", {}).get("cover_image_url"):
             raw_images = [
                 {
@@ -443,7 +443,7 @@ def run_pick_pressing_photos(
 
         # Download any missing images from raw_images into assets/releases/<rid>/img_<idx>.jpg
         downloaded_bytes: dict[str, bytes] = {}
-        for idx, img in enumerate(raw_images[:24]):
+        for idx, img in enumerate(raw_images[:40]):
             uri = img.get("uri") or img.get("resource_url") or f"assets/releases/{rid_str}/img_{idx}.jpg"
             local_img_file = rel_dir / f"img_{idx}.jpg"
             if local_img_file.exists():
@@ -460,7 +460,7 @@ def run_pick_pressing_photos(
                     downloaded_bytes[uri] = raw_b
                     downloaded_bytes[f"idx:{idx}"] = raw_b
 
-        # Re-scan local files so any img_1.jpg, img_2.jpg, ..., img_5.jpg on disk are ALWAYS included
+        # Re-scan local files so any img_0.jpg .. img_N.jpg on disk are ALWAYS included with true dimensions
         local_files = _discover_local_release_images(rel_dir, rid_str)
         existing_indices = set(range(len(raw_images)))
         for disk_idx, disk_path in local_files:
@@ -479,7 +479,7 @@ def run_pick_pressing_photos(
                     raw_images[disk_idx]["uri"] = local_uri
                 else:
                     downloaded_bytes[entry_uri] = b
-                if not raw_images[disk_idx].get("width") or not raw_images[disk_idx].get("height"):
+                if w > 0 and h > 0:
                     raw_images[disk_idx]["width"] = w
                     raw_images[disk_idx]["height"] = h
             elif disk_idx not in existing_indices:
@@ -500,6 +500,8 @@ def run_pick_pressing_photos(
                 existing_indices.add(disk_idx)
 
         formats = rel_detail.get("formats") or []
+        if not formats and rec.get("format_string"):
+            formats = [{"descriptions": [str(rec["format_string"])]}]
         notes_str = str(rel_detail.get("notes") or "")
         user_comments = str(rec.get("comments") or "")
         fmt_str = str(rec.get("format_string") or "LP, Album")
@@ -514,12 +516,12 @@ def run_pick_pressing_photos(
             local_release_dir=rel_dir,
         )
 
-        # Update overrides.json and physically write pressing.jpg + cover.jpg
+        # Update overrides.json ONLY when CV verified a pressing photo (never lock in positional fallbacks)
         if img_selection.get("has_pressing_photo") and img_selection.get("pressing_image_url"):
             p_url = img_selection["pressing_image_url"]
-            if len(raw_images) > 1:
+            det_method = str(img_selection.get("detection_method") or "")
+            if len(raw_images) > 1 and det_method.startswith("deterministic_annular_cv"):
                 prev_ov = overrides.get(rid_str)
-                # Update overrides if missing or if it was a stale auto-URL string that got upgraded by CV
                 if rid_str not in overrides or (isinstance(prev_ov, str) and prev_ov != p_url):
                     overrides[rid_str] = p_url
                     newly_detected_overrides += 1
@@ -547,12 +549,13 @@ def run_pick_pressing_photos(
             rec["estimated_value_usd"] = round(float(rec["estimated_value_usd"]), 2)
 
         # Re-verify flattening_status from Google Keep flattening queue
-        rec["flattening_status"] = resolve_flattening_status(
-            artist=str(rec.get("artist") or ""),
-            title=str(rec.get("title") or ""),
-            release_id=rid,
-            queue_data=flattening_queue,
-        )
+        if flattening_queue:
+            rec["flattening_status"] = resolve_flattening_status(
+                artist=str(rec.get("artist") or ""),
+                title=str(rec.get("title") or ""),
+                release_id=rid,
+                queue_data=flattening_queue,
+            )
 
         if img_selection.get("has_pressing_photo"):
             pressing_photo_count += 1
