@@ -472,7 +472,27 @@ def select_release_images_deterministic(
             best_pressing_score = combined_score
             best_pressing_idx = idx
             best_method = method
-
+# --- PASTE START (Line 402, indented 4 spaces) ---
+    if best_pressing_idx < 0 and len(classified) > 1:
+        candidates = [
+            c for c in classified
+            if c["index"] != primary_idx
+            and c.get("role") != "gatefold_spread"
+            and not (c.get("cv_metrics") or {}).get("is_zoomed_label_scan", False)
+            and float(c.get("deterministic_score") or 0.0) >= 0.34
+        ]
+        if candidates:
+            best_cand = max(
+                candidates,
+                key=lambda c: (
+                    1 if c.get("role") in ("pressing_disc", "pressing_candidate") else 0,
+                    float(c.get("deterministic_score") or 0.0),
+                ),
+            )
+            best_pressing_idx = int(best_cand["index"])
+            best_pressing_score = float(best_cand["deterministic_score"])
+            best_method = "auto_best_candidate_fallback"
+    # --- PASTE END ---
     # Tier 1: Check explicit override in data/overrides.json
     if rid_key in overrides and len(images) > 1:
         ov = overrides[rid_key]
