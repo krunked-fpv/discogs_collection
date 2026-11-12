@@ -44421,6 +44421,227 @@
     ],
     "year": 2024
   },
+  "33201711": {
+    "artists": [
+      {
+        "anv": "",
+        "id": 746771,
+        "join": "",
+        "name": "A Day To Remember",
+        "resource_url": "https://api.discogs.com/artists/746771",
+        "role": "",
+        "thumbnail_url": "https://i.discogs.com/w4yuHk8j1vcqaetiVL4BsxknYRkdSLz3vIAPvqxQF7k/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9BLTc0Njc3/MS0xNzQwMTQzMzU4/LTgxNTQuanBlZw.jpeg",
+        "tracks": ""
+      }
+    ],
+    "artists_sort": "A Day To Remember",
+    "blocked_from_sale": false,
+    "community": {
+      "contributors": [
+        {
+          "resource_url": "https://api.discogs.com/users/JohnnyMcDoodles",
+          "username": "JohnnyMcDoodles"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/Adogg856",
+          "username": "Adogg856"
+        }
+      ],
+      "data_quality": "Needs Vote",
+      "have": 579,
+      "rating": {
+        "average": 4.84,
+        "count": 19
+      },
+      "status": "Accepted",
+      "submitter": {
+        "resource_url": "https://api.discogs.com/users/JohnnyMcDoodles",
+        "username": "JohnnyMcDoodles"
+      },
+      "want": 71
+    },
+    "companies": [],
+    "country": "US",
+    "data_quality": "Needs Vote",
+    "date_added": "2025-02-20T16:55:36-08:00",
+    "date_changed": "2025-02-21T19:32:07-08:00",
+    "estimated_weight": 230,
+    "format_quantity": 1,
+    "formats": [
+      {
+        "descriptions": [
+          "LP",
+          "Album",
+          "Limited Edition"
+        ],
+        "name": "Vinyl",
+        "qty": "1",
+        "text": "Neon Green In Clear w/ Orange Splatter [Outbreak]"
+      }
+    ],
+    "genres": [
+      "Rock"
+    ],
+    "id": 33201711,
+    "identifiers": [
+      {
+        "type": "Barcode",
+        "value": "0075678605734"
+      }
+    ],
+    "images": [
+      {
+        "height": 595,
+        "resource_url": "https://i.discogs.com/UUNwJFyClvBPUwqZo8clNn-JgE8Womuvouo5p0H7DOk/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMjAx/NzExLTE3NDAxNTc1/MjEtMzY4OS5wbmc.jpeg",
+        "type": "primary",
+        "uri": "https://i.discogs.com/UUNwJFyClvBPUwqZo8clNn-JgE8Womuvouo5p0H7DOk/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMjAx/NzExLTE3NDAxNTc1/MjEtMzY4OS5wbmc.jpeg",
+        "uri150": "https://i.discogs.com/0-TkUztHke2FrYhNnJ15C-giCSuJl4gZRPOuqPgbacE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMjAx/NzExLTE3NDAxNTc1/MjEtMzY4OS5wbmc.jpeg",
+        "width": 600
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/9Gs7wXSF5YtoUW7s1lR3ez95EeF8cjMjSXBlbQ4Bz5U/rs:fit/g:sm/q:90/h:600/w:594/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMjAx/NzExLTE3NDAxNTc1/MjEtMzgxMS5wbmc.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/9Gs7wXSF5YtoUW7s1lR3ez95EeF8cjMjSXBlbQ4Bz5U/rs:fit/g:sm/q:90/h:600/w:594/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMjAx/NzExLTE3NDAxNTc1/MjEtMzgxMS5wbmc.jpeg",
+        "uri150": "https://i.discogs.com/xzDYDzDuhXfpZ9kZEHhYejyvoFNmuKQix-SMc_aFtFw/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMjAx/NzExLTE3NDAxNTc1/MjEtMzgxMS5wbmc.jpeg",
+        "width": 594
+      },
+      {
+        "height": 597,
+        "resource_url": "https://i.discogs.com/Tre5Rz6XrZWK7XRsjPLJyLogi8AePsFRbJtiUFQ6awY/rs:fit/g:sm/q:90/h:597/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMjAx/NzExLTE3NDAxNTc1/MjEtNTQ5OS5wbmc.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/Tre5Rz6XrZWK7XRsjPLJyLogi8AePsFRbJtiUFQ6awY/rs:fit/g:sm/q:90/h:597/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMjAx/NzExLTE3NDAxNTc1/MjEtNTQ5OS5wbmc.jpeg",
+        "uri150": "https://i.discogs.com/EZ2HVkEz4nLmXBXrBr3S4eA12Gk2lL38QdFiGJFwcmU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMjAx/NzExLTE3NDAxNTc1/MjEtNTQ5OS5wbmc.jpeg",
+        "width": 600
+      }
+    ],
+    "is_offensive": false,
+    "labels": [
+      {
+        "catno": "075678606588",
+        "entity_type": "1",
+        "entity_type_name": "Label",
+        "id": 42701,
+        "name": "Fueled By Ramen",
+        "resource_url": "https://api.discogs.com/labels/42701",
+        "thumbnail_url": "https://i.discogs.com/V65Qv4MN88UdNk0THozwFiuCEBuicf2p8vcE9BOTUPE/rs:fit/g:sm/q:90/h:583/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTQyNzAx/LTE1MjExOTM0Nzct/MzI2MS5wbmc.jpeg"
+      }
+    ],
+    "lowest_price": 37.0,
+    "master_id": 3758658,
+    "master_url": "https://api.discogs.com/masters/3758658",
+    "notes": "ADTR webstore exclusive.\nLimited to 3,500 copies.\n\nGatefold sleeve. Includes printed inner sleeve.\n\nTracks are listed sequentially as they appear on the rear cover.\nMade in Canada.",
+    "num_for_sale": 5,
+    "released": "2025-02-18",
+    "released_formatted": "18 Feb 2025",
+    "resource_url": "https://api.discogs.com/releases/33201711",
+    "series": [],
+    "status": "Accepted",
+    "styles": [
+      "Alternative Rock"
+    ],
+    "thumb": "https://i.discogs.com/0-TkUztHke2FrYhNnJ15C-giCSuJl4gZRPOuqPgbacE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMjAx/NzExLTE3NDAxNTc1/MjEtMzY4OS5wbmc.jpeg",
+    "title": "Big Ole Album Vol. 1",
+    "tracklist": [
+      {
+        "duration": "",
+        "position": "A1",
+        "title": "Make It Make Sense",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "A2",
+        "title": "Feedback",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "A3",
+        "title": "Bad Blood",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "A4",
+        "title": "All My Friends",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "A5",
+        "title": "To The Death",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "A6",
+        "title": "Flowers",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "B7",
+        "title": "LeBron",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "B8",
+        "title": "Die For Me",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "B9",
+        "title": "Miracle",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "B10",
+        "title": "Same Team",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "B11",
+        "title": "Silence",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "B12",
+        "title": "Closer Than You Think",
+        "type_": "track"
+      }
+    ],
+    "uri": "https://www.discogs.com/release/33201711-A-Day-To-Remember-Big-Ole-Album-Vol-1",
+    "videos": [
+      {
+        "description": "A Day To Remember's music video for 'Feedback' - available now on Fueled By Ramen.\n\nWatch the Behind The Scenes video here: https://www.youtube.com/watch?v=qjP5bJtTins\n\nfind ADTR on\u2026\n\nYouTube: https://www.youtube.com/adaytoremember\nTik Tok: http://tiktok.",
+        "duration": 168,
+        "embed": true,
+        "title": "A Day To Remember: Feedback [OFFICIAL VIDEO]",
+        "uri": "https://www.youtube.com/watch?v=iXVnysmQ4e0"
+      },
+      {
+        "description": "\"Make It Make Sense\" from A Day To Remember's Big Ole Album Vol. 1 - OUT NOW exclusively on vinyl and CD. Ready to ship online and available in stores. https://adtr.lnk.to/bigolealbum\n\nFull album available on streaming services March 21st.\n\r\nSite: https:/",
+        "duration": 189,
+        "embed": true,
+        "title": "A Day To Remember - Make It Make Sense (Official Audio)",
+        "uri": "https://www.youtube.com/watch?v=TuGCBQoYOu0"
+      },
+      {
+        "description": "\"LeBron\" from A Day To Remember's Big Ole Album Vol. 1 - OUT NOW exclusively on vinyl and CD. Ready to ship online and available in stores. https://adtr.lnk.to/bigolealbum\n\nFull album available on streaming services March 21st.\n\r\nSite: https://adtr.com\r\nS",
+        "duration": 167,
+        "embed": true,
+        "title": "A Day To Remember - LeBron (Official Audio)",
+        "uri": "https://www.youtube.com/watch?v=nVmA9o4d3Kk"
+      }
+    ],
+    "year": 2025
+  },
   "33303678": {
     "artists": [
       {

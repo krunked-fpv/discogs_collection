@@ -4,26 +4,119 @@
   "source_of_truth": "https://www.discogs.com/user/krunked/collection",
   "api_documentation": "https://www.discogs.com/developers",
   "username": "krunked",
-  "synced_at_utc": "2026-11-12T03:30:33Z",
+  "synced_at_utc": "2026-11-12T04:00:48Z",
   "profile": {
     "username": "krunked",
     "owner_name": "Alex Goresch",
     "discogs_url": "https://www.discogs.com/user/krunked/collection",
     "github_repo": "https://github.com/krunked-fpv/discogs_collection",
-    "num_collection": 151,
+    "num_collection": 152,
     "pressing_photos_detected": 142,
-    "colored_or_special_variants": 139,
+    "colored_or_special_variants": 140,
     "flattening_need_to_be_done": 3,
     "flattening_done": 41,
     "collection_value": {
-      "minimum": "$3,766.74",
-      "median": "$6,062.43",
-      "maximum": "$10,510.53",
-      "total_estimated_usd": 7217.31,
-      "formatted_total": "$7,217.31"
+      "minimum": "$3,791.74",
+      "median": "$6,102.42",
+      "maximum": "$10,565.53",
+      "total_estimated_usd": 7254.31,
+      "formatted_total": "$7,254.31"
     }
   },
   "records": [
+    {
+      "release_id": 33201711,
+      "instance_id": 2203664990,
+      "artist": "A Day To Remember",
+      "title": "Big Ole Album Vol. 1",
+      "year": 2025,
+      "format_string": "Vinyl, LP, Album, Limited Edition, Neon Green In Clear w/ Orange Splatter [Outbreak]",
+      "label": "Fueled By Ramen",
+      "catno": "075678606588",
+      "media_condition": "Near Mint (NM or M-)",
+      "sleeve_condition": "Near Mint (NM or M-)",
+      "comments": "",
+      "date_added": "2026-11-11T19:40:55-08:00",
+      "discogs_url": "https://www.discogs.com/release/33201711-A-Day-To-Remember-Big-Ole-Album-Vol-1",
+      "estimated_value_usd": 37.0,
+      "flattening_status": "Not Listed",
+      "genres": [
+        "Rock"
+      ],
+      "styles": [
+        "Alternative Rock"
+      ],
+      "images": {
+        "cover_image_url": "https://i.discogs.com/UUNwJFyClvBPUwqZo8clNn-JgE8Womuvouo5p0H7DOk/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMjAx/NzExLTE3NDAxNTc1/MjEtMzY4OS5wbmc.jpeg",
+        "pressing_image_url": "",
+        "center_label_image_url": "https://i.discogs.com/0-TkUztHke2FrYhNnJ15C-giCSuJl4gZRPOuqPgbacE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMjAx/NzExLTE3NDAxNTc1/MjEtMzY4OS5wbmc.jpeg",
+        "display_thumbnail_url": "assets/releases/33201711/cover.jpg",
+        "has_pressing_photo": false,
+        "selected_index": -1,
+        "selected_score": 0.0,
+        "detection_method": "cover_fallback",
+        "classified_images": [
+          {
+            "index": 0,
+            "uri": "https://i.discogs.com/UUNwJFyClvBPUwqZo8clNn-JgE8Womuvouo5p0H7DOk/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMjAx/NzExLTE3NDAxNTc1/MjEtMzY4OS5wbmc.jpeg",
+            "uri150": "https://i.discogs.com/0-TkUztHke2FrYhNnJ15C-giCSuJl4gZRPOuqPgbacE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMjAx/NzExLTE3NDAxNTc1/MjEtMzY4OS5wbmc.jpeg",
+            "width": 600,
+            "height": 595,
+            "aspect_ratio": 1.008,
+            "role": "front_cover",
+            "deterministic_score": 0.05,
+            "local_uri": "assets/releases/33201711/img_0.jpg"
+          },
+          {
+            "index": 1,
+            "uri": "https://i.discogs.com/9Gs7wXSF5YtoUW7s1lR3ez95EeF8cjMjSXBlbQ4Bz5U/rs:fit/g:sm/q:90/h:600/w:594/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMjAx/NzExLTE3NDAxNTc1/MjEtMzgxMS5wbmc.jpeg",
+            "uri150": "https://i.discogs.com/xzDYDzDuhXfpZ9kZEHhYejyvoFNmuKQix-SMc_aFtFw/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMjAx/NzExLTE3NDAxNTc1/MjEtMzgxMS5wbmc.jpeg",
+            "width": 594,
+            "height": 600,
+            "aspect_ratio": 0.99,
+            "role": "gatefold_inner",
+            "deterministic_score": 0.0525,
+            "local_uri": "assets/releases/33201711/img_1.jpg",
+            "cv_metrics": {
+              "is_pressing": false,
+              "score": 0.0,
+              "reason": "cv_deps_unavailable"
+            }
+          },
+          {
+            "index": 2,
+            "uri": "https://i.discogs.com/Tre5Rz6XrZWK7XRsjPLJyLogi8AePsFRbJtiUFQ6awY/rs:fit/g:sm/q:90/h:597/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMjAx/NzExLTE3NDAxNTc1/MjEtNTQ5OS5wbmc.jpeg",
+            "uri150": "https://i.discogs.com/EZ2HVkEz4nLmXBXrBr3S4eA12Gk2lL38QdFiGJFwcmU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMjAx/NzExLTE3NDAxNTc1/MjEtNTQ5OS5wbmc.jpeg",
+            "width": 600,
+            "height": 597,
+            "aspect_ratio": 1.005,
+            "role": "secondary",
+            "deterministic_score": 0.0,
+            "local_uri": "assets/releases/33201711/img_2.jpg",
+            "cv_metrics": {
+              "is_pressing": false,
+              "score": 0.0,
+              "reason": "cv_deps_unavailable"
+            }
+          }
+        ],
+        "local_cover_image_url": "assets/releases/33201711/cover.jpg"
+      },
+      "wax_spec": {
+        "pattern": "splatter",
+        "primary_color": "#ccff00",
+        "secondary_color": "#10b981",
+        "accent_color": "#cbd5e1",
+        "color_name": "Neon Highlighter",
+        "translucent": true,
+        "etched": false,
+        "is_double_lp": false,
+        "is_limited": true,
+        "is_repress": true,
+        "variant_badge": "12\" LP • Neon Highlighter + Emerald Green • Splatter • Ltd Ed",
+        "deterministic_seed": 1749617195
+      }
+    },
     {
       "release_id": 26047147,
       "instance_id": 2203663552,

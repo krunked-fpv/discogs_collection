@@ -80,6 +80,13 @@ def inject_into_index_html(
         return False
 
     html_text = html_path.read_text(encoding="utf-8")
+    # --- PASTE START (Line 72) ---
+    if "â€¢" in html_text or "ðŸ" in html_text:
+        try:
+            html_text = html_text.encode("cp1252").decode("utf-8")
+        except Exception:
+            pass
+    # --- PASTE END ---
     payload_js = json.dumps(collection_data, indent=2, ensure_ascii=False)
     overrides_js = json.dumps(overrides_data, indent=2, ensure_ascii=False)
 
