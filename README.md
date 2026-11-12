@@ -1,71 +1,112 @@
-# KRUNKED // DISCOGS VINYL VAULT
+# KRUNKED // DISCOGS VINYL VAULT (v2.2)
 
-A visually rich, **pressing-first** static web application and deterministic synchronization pipeline for [`https://www.discogs.com/user/krunked/collection`](https://www.discogs.com/user/krunked/collection), powered by the [Discogs REST API v2.0](https://www.discogs.com/developers) and GitHub Pages.
+> *"vibe coding a discogs collection page to not look like trash"*
 
-## Local Workstation Daily Workflow (`C:\DiscogsCollection\discogs_collection`)
+A **pressing-first** interactive vinyl collection showcase, direct-drive turntable stage, and deterministic Discogs synchronization pipeline for [**discogs.com/user/krunked/collection**](https://www.discogs.com/user/krunked/collection).
 
-Run the 2-step sync and pressing-photo selector anytime from PowerShell (works whether run from the repo root `C:\DiscogsCollection\discogs_collection` or from `scripts\`):
+* **Live Site:** [**krunked-fpv.github.io/discogs_collection**](https://krunked-fpv.github.io/discogs_collection/)
+* **Source of Truth:** [**Discogs Collection (`krunked` • Folder 0)**](https://www.discogs.com/user/krunked/collection)
+* **Repository:** [**github.com/krunked-fpv/discogs_collection**](https://github.com/krunked-fpv/discogs_collection)
+
+---
+
+## ⚡ Daily Workflow (Local Windows Workstation)
+
+When you add new records to your Discogs collection, you only need to run **one command** before pushing to GitHub. `sync_discogs.py` automatically fetches your new releases, downloads their Discogs image galleries, runs `pick_pressing_photo.py` to select the physical vinyl pressing photo, reconciles your Vinyl Flattening queue and collection value, and injects the compiled dataset straight into `index.html`:
 
 ```powershell
 cd C:\DiscogsCollection\discogs_collection
-
-# 1. Sync collection & release galleries from Discogs API:
 python sync_discogs.py
-
-# 2. Pick the right pressing photo for every record & compile index.html:
-python pick_pressing_photo.py
-
-# 3. Validate & push to GitHub (triggers static GitHub Pages deploy):
-python scripts/validate_collection.py
 git add -A
 git commit -m "sync discogs collection & pressing photos"
 git push
 ```
 
----
+*(Note: Both root wrapper scripts `sync_discogs.py` and `pick_pressing_photo.py` automatically anchor all file paths to the repository root, whether you invoke them from `C:\DiscogsCollection\discogs_collection` or `scripts\`.)*
 
-## How the Pressing Photo Selector Works (`pick_pressing_photo.py`)
-
-When fetching a release from the [Discogs Database Release endpoint (`GET /releases/{release_id}`)](https://www.discogs.com/developers/#page:database,header:database-release), the `images[]` array only tags images as `"type": "primary"` (front sleeve cover) or `"type": "secondary"` (back cover, inner gatefold spread, paper center labels, or the physical vinyl pressing itself).
-
-`pick_pressing_photo.py` and [`scripts/detect_pressing_image.py`](scripts/detect_pressing_image.py) inspect every image associated with each release (`assets/releases/<release_id>/img_*.jpg` and `data/releases_cache.json`) using a **3-tier pipeline**:
-
-1. **Tier 1 — Verified Pressing Overrides (`data/overrides.json`)**:
-   - Locks the exact verified pressing photo URL per `release_id` (**142 / 150 releases** in `krunked`'s collection have verified pressing photos; the remaining 8 releases only have sleeve/insert art uploaded on Discogs).
-2. **Tier 2 — Radial / Annular Computer Vision (`score_image_pixels_deterministic`)**:
-   - Evaluates both square (`1:1`) and `4:3` / `3:4` camera photos by center-cropping to the inscribed square and scoring in polar coordinates `(r, θ)`:
-     - **Outer Corner Uniformity (`r > 1.05`) vs. Wax Annulus (`0.38 <= r <= 0.90`)**: Detects a circular 12" vinyl disc against background corners.
-     - **12" Full Vinyl Disc vs. 4" Paper Label Scan Discrimination**: Verifies the center-label-to-wax step at `r ≈ 0.33` and penalizes zoomed-in 4" paper center-label scans so full colored/splatter vinyl disc photos win.
-3. **Tier 3 — [Discogs Database Guideline 13.8](https://support.discogs.com/hc/en-us/articles/360005006874-Database-Guidelines-13-Images) Positional Prior + Fallback Wax Shader (`parse_wax_variant`)**:
-   - Defaults the turntable platter and crate card wax ring directly to the selected pressing photo, falling back to the deterministic SVG wax ring (`deterministic_seed`) only when a release has no vinyl disc photo on Discogs.
+### When to run `python pick_pressing_photo.py` by itself:
+`sync_discogs.py` already calls `pick_pressing_photo.py` at the end of every sync. You only need to run `python pick_pressing_photo.py` standalone if you manually edited `data/overrides.json` or `data/flattening_queue.json` and want to re-compile `index.html` instantly offline without hitting the Discogs API.
 
 ---
 
-## Repository Structure
+## 🎯 What's Inside (v2.2 Architecture)
+
+### 1. Pressing-First Turntable & Crate UI (`index.html`)
+* **Direct-Drive Strobe Turntable Stage:** Interactive 33⅓ & 45 RPM quartz-locked platter with S-shaped tonearm, Web Audio API vinyl crackle generator, and instant record switching.
+* **Real Pressing Photos by Default (142 / 150 LPs):** Every record's spinning platter and crate card defaults directly to its physical vinyl pressing photo from Discogs.
+* **Procedural SVG Wax Shader Fallback:** For the few releases on Discogs that only have front/back sleeve cover scans uploaded, the UI falls back to a deterministic SVG/Canvas vinyl renderer driven by the release's parsed Discogs format string (`Splatter`, `Galaxy`, `Color-in-Color`, `Marble Swirl`, `Split`, `Translucent`, `Etched`, or `180g Black`).
+* **Interactive Release Image Strip:** Displays all images (`[0..N]`) from each release's Discogs gallery. Clicking any thumbnail pins that photo as the record's pressing image and saves it to `overrides.json` / `localStorage`.
+* **3 Thumbnail Modes:** Switch the crate grid on the fly between **Pressing First**, **Sleeve + Disc**, and **Sleeve First**.
+* **Instant Static + Live Valuation:** Pre-compiles both the official Discogs Collection Value (`Min $3,721.74 • Median $6,011.87 • Max $10,437.49`) and the sum of individual release values directly into `index.html` so telemetry loads immediately with zero "Syncing..." delay.
+
+### 2. Deterministic Pressing Photo Detector (`scripts/detect_pressing_image.py`)
+When fetching a release from the Discogs Database API (`GET /releases/{release_id}`), the `images[]` array only tags photos as `"primary"` or `"secondary"` (which mixes back covers, inner gatefold spreads, lyric inserts, paper center-label scans, and the vinyl disc itself).
+
+Instead of guessing with an LLM, `detect_pressing_image.py` uses a **4-tier deterministic pipeline**:
+1. **Tier 1 — Verified Override Pinning (`data/overrides.json`):** Locks a specific Discogs image URL or index per `release_id`. Newly detected pressing photos are automatically persisted here so future syncs stay 100% consistent.
+2. **Tier 2 — Discogs Database Guideline 13.8 Positional Classifier:** Inspects `formats[].descriptions` and `formats[].text` (`Gatefold`, `Single Sided`, `Etched`, `No Cover`) and applies Discogs' canonical image ordering rules (`[0]` = Front Cover, `[1]` = Back Cover / Gatefold Inner, `[2+]` = Physical Vinyl Disc).
+3. **Tier 3 — Polar `(r, θ)` Annular Computer Vision (`score_image_pixels_deterministic`):**
+   * Supports both square (`1:1`) and camera (`4:3` / `3:4`, `0.65 <= W/H <= 1.52`) photos by center-cropping to the inscribed square before polar analysis, while rejecting wide panoramic gatefold spreads (`W/H > 1.52`).
+   * Measures **outer corner background uniformity** (`r > 1.05`) vs. the **wax playing surface annulus** (`0.38 <= r <= 0.90`).
+   * Compares concentric groove tangential continuity (`∂I/∂θ`) against radial edge steps (`∂I/∂r`) at the outer rim (`r ≈ 0.94`), the 4-inch center label border (`r ≈ 0.33`), and the center spindle hole (`r <= 0.045`).
+   * **Rejects Zoomed 4" Center Label Scans:** Detects and penalizes close-up paper label scans that lack a radial step at `r ≈ 0.33`.
+4. **Tier 4 — Auto-Pick Candidate Fallback:** If a newly added release has secondary images on a busy background that score just below the strict `0.50` CV threshold (`>= 0.34`), the detector automatically selects the highest-scoring non-panoramic candidate photo rather than falling back to the front cover.
+
+### 3. Thermal Vinyl Flattening Queue (`data/flattening_queue.json`)
+* Cross-references the collection against the Google Keep **Vinyl flattening** note (`Bag on 6 until it hits 130°F then drop to 4 — 2.5 hours once at 130°F on the plate`).
+* Tracks **🔥 Need to be done** (Queue) and **✓ Flattened & Verified** (Done) statuses both in the dedicated **Flattening Queue** tab and via badges on the crate cards.
+
+---
+
+## 📁 Repository Structure
 
 ```text
 discogs_collection/
 ├── .github/
 │   └── workflows/
-│       └── static.yml                 # Deploys static site to GitHub Pages on push to main
+│       └── static.yml                     # Deploys static repository to GitHub Pages on push to `main`
 ├── assets/
-│   ├── pressings/                     # Studio fallback textures
-│   └── releases/                      # Cached release covers & pressing photos (assets/releases/<id>/img_*.jpg)
+│   ├── pressings/                         # Fallback procedural/reference pressing textures
+│   └── releases/                          # Local cached Discogs images (`<release_id>/cover.jpg`, `img_0.jpg`, `pressing.jpg`)
 ├── data/
-│   ├── collection.json                # Compiled 150-LP dataset for user `krunked`
-│   ├── overrides.json                 # Per-release verified pressing photo URLs (142 releases)
-│   ├── flattening_queue.json          # Google Keep 'Vinyl flattening' queue (3 Todo, 40 Done entries)
-│   ├── releases_cache.json            # Cached Discogs /releases/{id} API responses
-│   └── sync_manifest.json             # SHA-256 content digest & sync telemetry
+│   ├── collection.json                    # Compiled 150-LP dataset + wax specs + image classifications
+│   ├── overrides.json                     # Auto-populated & user-pinned pressing photo URLs by release_id
+│   ├── flattening_queue.json              # Synced Google Keep thermal plate queue & completed list
+│   ├── releases_cache.json                # Incremental local Discogs `/releases/{id}` cache (speeds up syncs)
+│   └── sync_manifest.json                 # SHA-256 content digest & collection telemetry summary
 ├── scripts/
-│   ├── detect_pressing_image.py       # Annular CV + Guideline 13.8 classifier + wax & flattening parser
-│   ├── pick_pressing_photo.py         # Pressing photo selector & static index.html injector
-│   ├── sync_discogs.py                # Discogs REST API v2.0 sync engine
-│   └── validate_collection.py         # Strict schema & KPI validator
+│   ├── sync_discogs.py                    # Multi-page Discogs API v2.0 sync engine
+│   ├── pick_pressing_photo.py             # Pressing photo selector, Keep reconciler & `index.html` injector
+│   ├── detect_pressing_image.py           # Polar (r, θ) annular CV classifier & Discogs format parser
+│   ├── seed_collection.py                 # Offline deterministic collection builder
+│   └── validate_collection.py             # Strict schema & URL integrity validator
 ├── tests/
-│   └── test_deterministic_detector.py # Unit tests for annular CV, Guideline 13.8, and wax code parsing
-├── pick_pressing_photo.py             # Root launcher for scripts/pick_pressing_photo.py
-├── sync_discogs.py                    # Root launcher for scripts/sync_discogs.py
-├── index.html                         # Self-contained Pressing-First 3D Turntable Carousel & Crate UI
-└── requirements.txt                   # Python dependencies (Pillow, numpy)
+│   └── test_deterministic_detector.py     # Unit tests for annular CV, Guideline 13.8 & wax variant parsing
+├── sync_discogs.py                        # Root convenience wrapper -> runs `scripts/sync_discogs.py`
+├── pick_pressing_photo.py                 # Root convenience wrapper -> runs `scripts/pick_pressing_photo.py`
+├── index.html                             # Self-contained single-file Turntable & Crate web application
+├── publish.sh                             # Optional bash helper for syncing, testing & pushing
+└── requirements.txt                       # Python dependencies (`Pillow`, `numpy`)
 ```
+
+---
+
+## 🛠️ Setup & Installation
+
+### Prerequisites
+* **Python 3.10+**
+* `Pillow` and `numpy` (for polar pixel analysis of newly added release images):
+
+```powershell
+pip install -r requirements.txt
+```
+
+### Running Unit Tests & Schema Validation
+```powershell
+python -m unittest discover -s tests -p "test_*.py" -v
+python scripts/validate_collection.py data/collection.json
+```
+
+### Customizing or Pinning a Different Pressing Photo
+1. **In the Browser:** Click any record in the crate grid, look at the **"Discogs Release Images (Click to Pin Pressing Photo)"** strip on the right, and click the thumbnail you want. Click **Sync / Export JSON → Download overrides.json** to save it back to `data/overrides.json`.
+2. **Or directly in `data/overrides.json`:** Map any `"release_id"` to its desired Discogs image URL or image index (`0`, `1`, `2`, ...) and run `python pick_pressing_photo.py`.
