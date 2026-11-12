@@ -48,7 +48,7 @@ from pick_pressing_photo import (
 
 DISCOGS_API_BASE = "https://api.discogs.com"
 USER_AGENT = "KrunkedDiscogsVault/2.2 +https://github.com/krunked-fpv/discogs_collection"
-DEFAULT_TOKEN = "HWLciALlIIgSGquWsckHVkbEXCbmXlcrULmVdogi"
+DEFAULT_TOKEN = ""
 
 
 class DiscogsClient:

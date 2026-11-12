@@ -50,7 +50,7 @@ from detect_pressing_image import (
 
 DISCOGS_API_BASE = "https://api.discogs.com"
 USER_AGENT = "KrunkedDiscogsVault/2.2 +https://github.com/krunked-fpv/discogs_collection"
-DEFAULT_TOKEN = "HWLciALlIIgSGquWsckHVkbEXCbmXlcrULmVdogi"
+DEFAULT_TOKEN = ""
 
 # Verified marketplace purchase prices for releases with 0 active copies currently listed on Discogs
 VERIFIED_PRICE_FALLBACKS: dict[int, float] = {
