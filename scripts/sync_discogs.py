@@ -64,51 +64,63 @@ class DiscogsClient:
             url = path_or_url
         else:
             url = f"{DISCOGS_API_BASE}/{path_or_url.lstrip('/')}"
+
         if params:
             qs = urllib.parse.urlencode({k: v for k, v in params.items() if v is not None})
             sep = "&" if "?" in url else "?"
             url = f"{url}{sep}{qs}"
 
-        headers = {
-            "Accept": "application/vnd.discogs.v2.discogs+json",
-            "User-Agent": self.user_agent,
-        }
-        if self.token:
-            headers["Authorization"] = f"Discogs token={self.token}"
+        for use_token in ([self.token, ""] if self.token else [""]):
+            headers = {
+                "Accept": "application/vnd.discogs.v2.discogs+json",
+                "User-Agent": self.user_agent,
+            }
+            if use_token:
+                headers["Authorization"] = f"Discogs token={use_token}"
 
-        for attempt in range(4):
-            if self.ratelimit_remaining <= 3:
-                time.sleep(1.5)
-            req = urllib.request.Request(url, headers=headers, method="GET")
-            try:
-                with urllib.request.urlopen(req, timeout=30) as resp:
-                    rem = resp.headers.get("X-Discogs-Ratelimit-Remaining")
-                    if rem and rem.isdigit():
-                        self.ratelimit_remaining = int(rem)
-                    raw = resp.read().decode("utf-8")
-                    return json.loads(raw)
-            except urllib.error.HTTPError as exc:
-                if exc.code == 429:
-                    wait_s = 15 * (attempt + 1)
-                    print(f"[rate-limit] HTTP 429 on {url}; sleeping {wait_s}s...", file=sys.stderr)
-                    time.sleep(wait_s)
-                    continue
-                raise
+            for attempt in range(4):
+                if self.ratelimit_remaining <= 3:
+                    time.sleep(1.5)
+                req = urllib.request.Request(url, headers=headers, method="GET")
+                try:
+                    with urllib.request.urlopen(req, timeout=30) as resp:
+                        rem = resp.headers.get("X-Discogs-Ratelimit-Remaining")
+                        if rem and rem.isdigit():
+                            self.ratelimit_remaining = int(rem)
+                        raw = resp.read().decode("utf-8")
+                        return json.loads(raw)
+                except urllib.error.HTTPError as exc:
+                    if exc.code == 401 and use_token:
+                        print(f"[warn] Discogs token rejected (HTTP 401) on {url}; retrying unauthenticated...", file=sys.stderr)
+                        break
+                    if exc.code == 429:
+                        wait_s = 15 * (attempt + 1)
+                        print(f"[rate-limit] HTTP 429 on {url}; sleeping {wait_s}s...", file=sys.stderr)
+                        time.sleep(wait_s)
+                        continue
+                    raise
         raise RuntimeError(f"Exhausted retries fetching {url}")
 
     def download_bytes(self, url: str) -> bytes | None:
         if not url:
             return None
-        headers = {"User-Agent": self.user_agent}
-        if self.token:
-            headers["Authorization"] = f"Discogs token={self.token}"
-        try:
-            req = urllib.request.Request(url, headers=headers, method="GET")
-            with urllib.request.urlopen(req, timeout=25) as resp:
-                return resp.read()
-        except Exception as exc:
-            print(f"[warn] Could not download image {url}: {exc}", file=sys.stderr)
-            return None
+        for use_token in ([self.token, ""] if self.token else [""]):
+            headers = {"User-Agent": self.user_agent}
+            if use_token:
+                headers["Authorization"] = f"Discogs token={use_token}"
+            try:
+                req = urllib.request.Request(url, headers=headers, method="GET")
+                with urllib.request.urlopen(req, timeout=25) as resp:
+                    return resp.read()
+            except urllib.error.HTTPError as exc:
+                if exc.code == 401 and use_token:
+                    continue
+                print(f"[warn] Could not download image {url}: {exc}", file=sys.stderr)
+                return None
+            except Exception as exc:
+                print(f"[warn] Could not download image {url}: {exc}", file=sys.stderr)
+                return None
+        return None
 
 
 def fetch_full_collection(
@@ -165,22 +177,26 @@ def fetch_full_collection(
         page += 1
 
     compiled_records: list[dict[str, Any]] = []
+
     for item in raw_items:
         basic = item.get("basic_information") or {}
         release_id = int(basic.get("id") or item.get("id") or 0)
         rid_str = str(release_id)
 
-        if rid_str not in cache:
+        # FIX 3A: Re-fetch if missing OR if a previous failed run stored an empty `{}` without images
+        cached_entry = cache.get(rid_str)
+        if not isinstance(cached_entry, dict) or not cached_entry.get("images"):
             try:
                 rel_detail = client.get_json(f"/releases/{release_id}", params={"curr_abbr": "USD"})
-                cache[rid_str] = rel_detail
+                if isinstance(rel_detail, dict) and rel_detail.get("id"):
+                    cache[rid_str] = rel_detail
                 time.sleep(0.55)
             except Exception as exc:
                 print(f"[warn] Could not enrich release {release_id}: {exc}", file=sys.stderr)
-                cache[rid_str] = {}
+                # Do NOT poison `cache[rid_str] = {}` so future runs will retry automatically
 
         rel_detail = cache.get(rid_str) or {}
-        images = rel_detail.get("images") or []
+        images = list(rel_detail.get("images") or [])
         if not images and basic.get("cover_image"):
             images = [{"type": "primary", "uri": basic["cover_image"], "width": 600, "height": 600}]
 
@@ -202,14 +218,17 @@ def fetch_full_collection(
 
         rel_asset_dir = download_dir / rid_str
         rel_asset_dir.mkdir(parents=True, exist_ok=True)
-
         downloaded_bytes: dict[str, bytes] = {}
+
         for idx, img in enumerate(images[:24]):
             uri = img.get("uri") or img.get("resource_url") or ""
             img_file = rel_asset_dir / f"img_{idx}.jpg"
             if img_file.exists():
                 try:
-                    downloaded_bytes[uri] = img_file.read_bytes()
+                    b = img_file.read_bytes()
+                    if uri:
+                        downloaded_bytes[uri] = b
+                    downloaded_bytes[f"idx:{idx}"] = b
                 except Exception:
                     pass
             elif analyze_pixels and uri:
@@ -217,6 +236,7 @@ def fetch_full_collection(
                 if raw_b:
                     img_file.write_bytes(raw_b)
                     downloaded_bytes[uri] = raw_b
+                    downloaded_bytes[f"idx:{idx}"] = raw_b
 
         if (rel_asset_dir / "img_0.jpg").exists() and not (rel_asset_dir / "cover.jpg").exists():
             shutil.copyfile(rel_asset_dir / "img_0.jpg", rel_asset_dir / "cover.jpg")
@@ -230,6 +250,18 @@ def fetch_full_collection(
             downloaded_bytes_by_uri=downloaded_bytes,
             local_release_dir=rel_asset_dir,
         )
+
+        # Immediately write pressing.jpg during sync as well when a pressing photo is selected
+        if img_selection.get("has_pressing_photo"):
+            raw_sel = img_selection.get("selected_index")
+            sel_idx = int(raw_sel) if raw_sel is not None else -1
+            if sel_idx >= 0 and (rel_asset_dir / f"img_{sel_idx}.jpg").exists():
+                src_local = rel_asset_dir / f"img_{sel_idx}.jpg"
+                dest_pressing = rel_asset_dir / "pressing.jpg"
+                if not dest_pressing.exists() or src_local.stat().st_size != dest_pressing.stat().st_size:
+                    shutil.copyfile(src_local, dest_pressing)
+                img_selection["local_pressing_image_url"] = f"assets/releases/{rid_str}/pressing.jpg"
+                img_selection["display_thumbnail_url"] = img_selection["local_pressing_image_url"]
 
         fmt_parts: list[str] = []
         for f in formats:
@@ -255,8 +287,8 @@ def fetch_full_collection(
         label_name = re.sub(r"\s+\(\d+\)$", "", str(labels[0].get("name") or "")) if labels else "Independent"
         catno = str(labels[0].get("catno") or "none") if labels else "none"
         title_str = str(basic.get("title") or rel_detail.get("title") or "")
-
         discogs_uri = str(rel_detail.get("uri") or f"https://www.discogs.com/release/{release_id}")
+
         lowest_price = rel_detail.get("lowest_price")
         if isinstance(lowest_price, (int, float)) and float(lowest_price) > 0:
             est_val = round(float(lowest_price), 2)
@@ -298,7 +330,6 @@ def fetch_full_collection(
     cache_path.write_text(json.dumps(cache, indent=2, sort_keys=True), encoding="utf-8")
 
     compiled_records.sort(key=lambda r: (r.get("date_added") or "", r["artist"], r["title"]), reverse=True)
-
     pressing_photo_count = sum(1 for r in compiled_records if r["images"].get("has_pressing_photo"))
     colored_count = sum(1 for r in compiled_records if r["wax_spec"]["pattern"] != "black")
     total_est = round(sum(float(r["estimated_value_usd"]) for r in compiled_records), 2)
@@ -367,7 +398,7 @@ def main() -> None:
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
-    # Run pick_pressing_photo pipeline to finalize pressing photo selections and inject into index.html
+    # FIX 3B: Pass download_missing=args.download_images (instead of False) so any missing photos get downloaded
     run_pick_pressing_photos(
         collection_path=out_path,
         cache_path=cache_path,
@@ -375,7 +406,7 @@ def main() -> None:
         flattening_path=flattening_path,
         assets_releases_dir=download_dir,
         html_path=html_path,
-        download_missing=False,
+        download_missing=args.download_images,
         token=args.token,
     )
 

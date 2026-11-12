@@ -10955,6 +10955,263 @@
     ],
     "year": 2020
   },
+  "16610055": {
+    "artists": [
+      {
+        "anv": "",
+        "id": 3674162,
+        "join": "",
+        "name": "Silent Planet",
+        "resource_url": "https://api.discogs.com/artists/3674162",
+        "role": "",
+        "thumbnail_url": "https://i.discogs.com/ru9LgozapLXf2nTk2hWM1iBJ3C4a6kGkpMMjMtB7nb0/rs:fit/g:sm/q:90/h:400/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9BLTM2NzQx/NjItMTc2NTYxMjk5/NS0xNjQ5LnBuZw.jpeg",
+        "tracks": ""
+      }
+    ],
+    "artists_sort": "Silent Planet",
+    "blocked_from_sale": false,
+    "community": {
+      "contributors": [
+        {
+          "resource_url": "https://api.discogs.com/users/rustyfries",
+          "username": "rustyfries"
+        }
+      ],
+      "data_quality": "Needs Vote",
+      "have": 95,
+      "rating": {
+        "average": 4.8,
+        "count": 5
+      },
+      "status": "Accepted",
+      "submitter": {
+        "resource_url": "https://api.discogs.com/users/rustyfries",
+        "username": "rustyfries"
+      },
+      "want": 68
+    },
+    "companies": [],
+    "country": "USA & Canada",
+    "data_quality": "Needs Vote",
+    "date_added": "2020-12-23T21:07:18-08:00",
+    "date_changed": "2020-12-23T21:13:39-08:00",
+    "estimated_weight": 230,
+    "format_quantity": 1,
+    "formats": [
+      {
+        "descriptions": [
+          "LP",
+          "Album",
+          "Limited Edition",
+          "Repress",
+          "Stereo"
+        ],
+        "name": "Vinyl",
+        "qty": "1",
+        "text": "Reddish"
+      }
+    ],
+    "genres": [
+      "Rock"
+    ],
+    "id": 16610055,
+    "identifiers": [
+      {
+        "type": "Barcode",
+        "value": "810488022018"
+      }
+    ],
+    "images": [
+      {
+        "height": 539,
+        "resource_url": "https://i.discogs.com/gQwLX2VeswXmR370u9gSV_T8uLAKjGb9xrix4caoYzA/rs:fit/g:sm/q:90/h:539/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2NjEw/MDU1LTE2MDg3ODY2/ODQtNTM2OS5qcGVn.jpeg",
+        "type": "primary",
+        "uri": "https://i.discogs.com/gQwLX2VeswXmR370u9gSV_T8uLAKjGb9xrix4caoYzA/rs:fit/g:sm/q:90/h:539/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2NjEw/MDU1LTE2MDg3ODY2/ODQtNTM2OS5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/icEcF6Nbwqctd_ixoNBTZ4ec1GFDJvUuW2esF-ROSMs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2NjEw/MDU1LTE2MDg3ODY2/ODQtNTM2OS5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 573,
+        "resource_url": "https://i.discogs.com/R8evoE-V4r9oMizaVi5ta24OO5vjlKXo01GnxdT6pb8/rs:fit/g:sm/q:90/h:573/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2NjEw/MDU1LTE2MDg3ODY2/ODQtNjk4OS5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/R8evoE-V4r9oMizaVi5ta24OO5vjlKXo01GnxdT6pb8/rs:fit/g:sm/q:90/h:573/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2NjEw/MDU1LTE2MDg3ODY2/ODQtNjk4OS5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/WxVkY-t0IumfZVBnwf-ZDjReIS8QpaUpCUPHUerUdkE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2NjEw/MDU1LTE2MDg3ODY2/ODQtNjk4OS5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 550,
+        "resource_url": "https://i.discogs.com/w8kj6j1hNIoeuNKBsukCtYcFE29herfMMhuGzaJqwms/rs:fit/g:sm/q:90/h:550/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2NjEw/MDU1LTE2MDg3ODY2/ODQtOTE1My5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/w8kj6j1hNIoeuNKBsukCtYcFE29herfMMhuGzaJqwms/rs:fit/g:sm/q:90/h:550/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2NjEw/MDU1LTE2MDg3ODY2/ODQtOTE1My5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/mqLEakVAYRQpHU0sGn7HbNHkD5yYvnuGhoK_qxdFG7Q/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2NjEw/MDU1LTE2MDg3ODY2/ODQtOTE1My5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 583,
+        "resource_url": "https://i.discogs.com/Q6OtkHfZRpMTRDew8-HJOyP4P2FJFqtd2iskkg1j54o/rs:fit/g:sm/q:90/h:583/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2NjEw/MDU1LTE2MDg3ODY2/ODQtMjYwMi5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/Q6OtkHfZRpMTRDew8-HJOyP4P2FJFqtd2iskkg1j54o/rs:fit/g:sm/q:90/h:583/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2NjEw/MDU1LTE2MDg3ODY2/ODQtMjYwMi5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/3BC_4T1DYbKr5r2F7h6Fp34hqjPadkR69qm9kYgyqWQ/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2NjEw/MDU1LTE2MDg3ODY2/ODQtMjYwMi5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/BOD_ybOU9zFS_uCHwHtnmYUga1pUTTrP8DhbhCltDg8/rs:fit/g:sm/q:90/h:600/w:587/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2NjEw/MDU1LTE2MDg3ODY2/ODMtNjM3Mi5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/BOD_ybOU9zFS_uCHwHtnmYUga1pUTTrP8DhbhCltDg8/rs:fit/g:sm/q:90/h:600/w:587/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2NjEw/MDU1LTE2MDg3ODY2/ODMtNjM3Mi5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/s-K62iiqwBP4G0c-fFS_U3x4ISDS_uxn_RU7nvmYxxU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2NjEw/MDU1LTE2MDg3ODY2/ODMtNjM3Mi5qcGVn.jpeg",
+        "width": 587
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/LdCTRej_ihZLIv3CQj5echjmfOW1fwgZCy_poFNSERE/rs:fit/g:sm/q:90/h:600/w:577/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2NjEw/MDU1LTE2MDg3ODY2/ODMtOTQyOS5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/LdCTRej_ihZLIv3CQj5echjmfOW1fwgZCy_poFNSERE/rs:fit/g:sm/q:90/h:600/w:577/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2NjEw/MDU1LTE2MDg3ODY2/ODMtOTQyOS5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/l4uk-GPjuCzLx0MXmBPocAsi89XR2BZg8QqlMWMGuoE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2NjEw/MDU1LTE2MDg3ODY2/ODMtOTQyOS5qcGVn.jpeg",
+        "width": 577
+      }
+    ],
+    "is_offensive": false,
+    "labels": [
+      {
+        "catno": "TNV000059",
+        "entity_type": "1",
+        "entity_type_name": "Label",
+        "id": 19232,
+        "name": "Solid State",
+        "resource_url": "https://api.discogs.com/labels/19232",
+        "thumbnail_url": "https://i.discogs.com/8ikkcJbDBaG4V1Ca2ttJwuyq14RMbZc9cRYsAUnzPtM/rs:fit/g:sm/q:90/h:325/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTE5MjMy/LTE1OTgwMjk5MzEt/Nzc1MC5qcGVn.jpeg"
+      }
+    ],
+    "lowest_price": null,
+    "master_id": 1022569,
+    "master_url": "https://api.discogs.com/masters/1022569",
+    "notes": "FIRST PRESSING (2016)\n750 - Bone / Olive Green\n750 - White\n\nSECOND PRESSING (2020)\n300 - Clear w/ Splatter \n200 - Green\n200 - Yellow\n200 - Reddish (THIS)\n200 - Orange\n200 - Violet\n200 - Blue\n\nComes with a download code. ",
+    "num_for_sale": 0,
+    "released": "2020",
+    "released_formatted": "2020",
+    "resource_url": "https://api.discogs.com/releases/16610055",
+    "series": [],
+    "status": "Accepted",
+    "styles": [
+      "Metalcore"
+    ],
+    "thumb": "https://i.discogs.com/icEcF6Nbwqctd_ixoNBTZ4ec1GFDJvUuW2esF-ROSMs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2NjEw/MDU1LTE2MDg3ODY2/ODQtNTM2OS5qcGVn.jpeg",
+    "title": "Everything Was Sound",
+    "tracklist": [
+      {
+        "duration": "3:48",
+        "position": "1",
+        "title": "Inherit The Earth",
+        "type_": "track"
+      },
+      {
+        "duration": "3:07",
+        "extraartists": [
+          {
+            "anv": "",
+            "id": 5130465,
+            "join": "",
+            "name": "Spencer Chamberlin",
+            "resource_url": "https://api.discogs.com/artists/5130465",
+            "role": "Featuring, Vocals",
+            "tracks": ""
+          }
+        ],
+        "position": "2",
+        "title": "Psychescape ",
+        "type_": "track"
+      },
+      {
+        "duration": "2:58",
+        "position": "3",
+        "title": "Dying In Circles",
+        "type_": "track"
+      },
+      {
+        "duration": "3:27",
+        "position": "4",
+        "title": "Understanding Love As Loss",
+        "type_": "track"
+      },
+      {
+        "duration": "0:51",
+        "position": "5",
+        "title": "Tout Comprendre",
+        "type_": "track"
+      },
+      {
+        "duration": "4:00",
+        "position": "6",
+        "title": "Panic Room",
+        "type_": "track"
+      },
+      {
+        "duration": "3:11",
+        "position": "7",
+        "title": "Redivide\u044f",
+        "type_": "track"
+      },
+      {
+        "duration": "3:48",
+        "extraartists": [
+          {
+            "anv": "",
+            "id": 346703,
+            "join": "",
+            "name": "Cory Brandan",
+            "resource_url": "https://api.discogs.com/artists/346703",
+            "role": "Featuring, Vocals",
+            "tracks": ""
+          }
+        ],
+        "position": "8",
+        "title": "Nervosa",
+        "type_": "track"
+      },
+      {
+        "duration": "2:12",
+        "position": "9",
+        "title": "C'est Tout Pardonner",
+        "type_": "track"
+      },
+      {
+        "duration": "3:48",
+        "position": "10",
+        "title": "Orphan",
+        "type_": "track"
+      },
+      {
+        "duration": "2:38",
+        "position": "11",
+        "title": "No Place To Breathe",
+        "type_": "track"
+      },
+      {
+        "duration": "4:26",
+        "position": "12",
+        "title": "First Father",
+        "type_": "track"
+      },
+      {
+        "duration": "3:31",
+        "position": "13",
+        "title": "Inhabit The Wound",
+        "type_": "track"
+      }
+    ],
+    "uri": "https://www.discogs.com/release/16610055-Silent-Planet-Everything-Was-Sound",
+    "videos": [
+      {
+        "description": "Silent Planet - Everything Was Sound\n\n1. Inherit the Earth\n2. Psychescape (Feat. Spencer Chamberlain of Underoath)\n3. Dying in Circles\n4. Understanding Love as Loss\n5. Tout Comprendre\n6. Panic Room\n7. REDIVIDE\u042f\n8. Nervosa (Feat. Cory Brandan Putman of No",
+        "duration": 2507,
+        "embed": true,
+        "title": "Silent Planet - Everything Was Sound (Full Album 2016)",
+        "uri": "https://www.youtube.com/watch?v=YEXIv6gWzAE"
+      }
+    ],
+    "year": 2020
+  },
   "16839336": {
     "artists": [
       {

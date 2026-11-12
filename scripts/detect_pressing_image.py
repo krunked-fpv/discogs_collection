@@ -145,7 +145,6 @@ def parse_wax_variant(
         matched_colors.append(("#18181b", "180g Audiophile Black", False))
 
     primary_hex, primary_name, is_trans = matched_colors[0]
-
     if len(matched_colors) >= 2:
         secondary_hex = matched_colors[1][0]
     else:
@@ -162,6 +161,7 @@ def parse_wax_variant(
         accent_hex = "#f43f5e" if primary_hex not in ("#dc2626", "#e11d48", "#ec4899") else "#facc15"
 
     etched = bool(re.search(r"\betch", lower))
+
     if re.search(r"splatter|starburst", lower):
         pattern = "splatter"
     elif re.search(r"in clear|color-in-color|bone in|pink in|black in|red in", lower):
@@ -199,6 +199,7 @@ def parse_wax_variant(
         parts.append("Marble Swirl")
     elif pattern == "split":
         parts.append("Split Swirl")
+
     if etched:
         parts.append("Etched Side")
     if is_ltd:
@@ -223,11 +224,11 @@ def parse_wax_variant(
 
 
 def score_image_pixels_deterministic(image_bytes: bytes) -> dict[str, Any]:
-    """Deterministically scores an image for whether it shows a physical 12\" vinyl record pressing.
+    """Deterministically scores an image for whether it shows a physical 12" vinyl record pressing.
 
     Supports both square (1:1) and 4:3 / 3:4 camera photos (`0.68 <= aspect <= 1.48`) by
     center-cropping to the inscribed square before polar `(r, θ)` analysis, and penalizes
-    zoomed-in 4\" paper center-label scans that lack a 33% label-to-wax step.
+    zoomed-in 4" paper center-label scans that lack a 33% label-to-wax step.
     """
     if not HAS_CV_DEPS:
         return {"is_pressing": False, "score": 0.0, "reason": "cv_deps_unavailable"}
@@ -364,6 +365,7 @@ def select_release_images_deterministic(
         if f.get("text"):
             fmt_tokens.append(str(f["text"]))
     fmt_joined = " ".join(fmt_tokens + [notes]).lower()
+
     is_gatefold = "gatefold" in fmt_joined
     is_no_cover = "no cover" in fmt_joined or "generic" in fmt_joined
 
@@ -392,11 +394,15 @@ def select_release_images_deterministic(
         is_near_square = 0.85 <= aspect <= 1.18
 
         local_img_rel = ""
+        img_bytes: bytes | None = downloaded_bytes_by_uri.get(uri) or downloaded_bytes_by_uri.get(f"idx:{idx}")
         if local_release_dir and (local_release_dir / f"img_{idx}.jpg").exists():
             local_img_rel = f"assets/releases/{rid_key}/img_{idx}.jpg"
-            if uri not in downloaded_bytes_by_uri:
+            if img_bytes is None:
                 try:
-                    downloaded_bytes_by_uri[uri] = (local_release_dir / f"img_{idx}.jpg").read_bytes()
+                    img_bytes = (local_release_dir / f"img_{idx}.jpg").read_bytes()
+                    if uri:
+                        downloaded_bytes_by_uri[uri] = img_bytes
+                    downloaded_bytes_by_uri[f"idx:{idx}"] = img_bytes
                 except Exception:
                     pass
 
@@ -417,36 +423,47 @@ def select_release_images_deterministic(
             elif is_gatefold:
                 if idx == 1:
                     role = "gatefold_inner"
-                    pos_score = 0.15
+                    pos_score = 0.25
                 elif idx == 2 and len(images) >= 4:
                     role = "back_cover"
-                    pos_score = 0.20
+                    pos_score = 0.30
                 elif idx >= 3:
                     role = "pressing_disc"
                     pos_score = 0.84 if idx in (3, 4, 5) else 0.68
+                else:
+                    role = "pressing_candidate"
+                    pos_score = 0.62
             else:
                 if idx == 1 and len(images) >= 3:
                     role = "back_cover"
-                    pos_score = 0.20
+                    pos_score = 0.35
                 elif idx == 1 and len(images) == 2:
                     has_color_code = any(
                         tok.lower() in DISCOGS_COLOR_MAP
                         for tok in re.split(r"[,()+/:\s\[\]-]+", fmt_joined)
                         if tok.lower() not in ("bla", "black")
                     )
-                    role = "pressing_candidate" if (has_color_code or is_near_square) else "back_cover"
-                    pos_score = 0.65 if is_near_square else 0.45
+                    role = "pressing_candidate" if (has_color_code or is_square_or_43) else "back_cover"
+                    pos_score = 0.72 if is_near_square else 0.58
                 elif idx >= 2:
                     role = "pressing_disc"
                     pos_score = 0.86 if idx in (2, 3, 4) else (0.74 if idx == 5 else 0.62)
 
-        if uri in downloaded_bytes_by_uri and (idx != primary_idx or is_no_cover):
-            cv_details = score_image_pixels_deterministic(downloaded_bytes_by_uri[uri])
-            if cv_details.get("is_pressing"):
-                combined_score = 0.65 * float(cv_details["score"]) + 0.35 * pos_score
+        if img_bytes is not None and (idx != primary_idx or is_no_cover):
+            cv_details = score_image_pixels_deterministic(img_bytes)
+            if cv_details.get("reason") == "cv_deps_unavailable":
+                # Do not penalize positional score if numpy/PIL are not installed
+                combined_score = pos_score
+                method = "guideline_13_8_positional"
+            elif cv_details.get("is_pressing"):
+                role = "pressing_disc"
+                combined_score = 0.65 * float(cv_details["score"]) + 0.35 * max(pos_score, 0.65)
                 method = "deterministic_annular_cv+guideline_13_8"
+            elif cv_details.get("is_zoomed_label_scan"):
+                combined_score = 0.25 * float(cv_details.get("score", 0.0)) + 0.20 * pos_score
+                method = "rejected_zoomed_center_label_scan"
             else:
-                combined_score = 0.45 * float(cv_details.get("score", 0.0)) + 0.35 * pos_score
+                combined_score = 0.50 * float(cv_details.get("score", 0.0)) + 0.50 * pos_score
                 method = "guideline_13_8_positional"
         else:
             combined_score = pos_score
@@ -454,8 +471,8 @@ def select_release_images_deterministic(
 
         entry: dict[str, Any] = {
             "index": idx,
-            "uri": uri,
-            "uri150": uri150,
+            "uri": uri or local_img_rel,
+            "uri150": uri150 or local_img_rel,
             "width": w,
             "height": h,
             "aspect_ratio": round(aspect, 3),
@@ -468,23 +485,27 @@ def select_release_images_deterministic(
             entry["cv_metrics"] = cv_details
         classified.append(entry)
 
-        if idx != primary_idx and combined_score >= 0.50 and combined_score > best_pressing_score:
+        if (idx != primary_idx or is_no_cover) and combined_score >= 0.48 and combined_score > best_pressing_score:
             best_pressing_score = combined_score
             best_pressing_idx = idx
             best_method = method
-# --- PASTE START (Line 402, indented 4 spaces) ---
+
+    # Fallback: select the highest-scoring non-cover candidate image when len(classified) > 1
     if best_pressing_idx < 0 and len(classified) > 1:
         candidates = [
             c for c in classified
             if c["index"] != primary_idx
             and c.get("role") != "gatefold_spread"
             and not (c.get("cv_metrics") or {}).get("is_zoomed_label_scan", False)
-            and float(c.get("deterministic_score") or 0.0) >= 0.34
+            and float(c.get("deterministic_score") or 0.0) >= 0.22
         ]
+        if not candidates:
+            candidates = [c for c in classified if c["index"] != primary_idx]
         if candidates:
             best_cand = max(
                 candidates,
                 key=lambda c: (
+                    1 if (c.get("cv_metrics") or {}).get("is_pressing") else 0,
                     1 if c.get("role") in ("pressing_disc", "pressing_candidate") else 0,
                     float(c.get("deterministic_score") or 0.0),
                 ),
@@ -492,7 +513,7 @@ def select_release_images_deterministic(
             best_pressing_idx = int(best_cand["index"])
             best_pressing_score = float(best_cand["deterministic_score"])
             best_method = "auto_best_candidate_fallback"
-    # --- PASTE END ---
+
     # Tier 1: Check explicit override in data/overrides.json
     if rid_key in overrides and len(images) > 1:
         ov = overrides[rid_key]
@@ -508,18 +529,26 @@ def select_release_images_deterministic(
             ov_url = images[ov_idx].get("uri") or images[ov_idx].get("resource_url") or ""
         elif isinstance(ov, str) and ov:
             ov_url = ov
-            ov_idx = next((i for i, im in enumerate(images) if (im.get("uri") or im.get("resource_url")) == ov), -1)
+            ov_idx = next(
+                (i for i, im in enumerate(images) if (im.get("uri") or im.get("resource_url")) == ov),
+                -1,
+            )
+            if ov_idx < 0:
+                m_idx = re.search(r"img_(\d+)\.jpg", ov)
+                if m_idx and 0 <= int(m_idx.group(1)) < len(images):
+                    ov_idx = int(m_idx.group(1))
+                elif best_pressing_idx >= 0:
+                    ov_idx = best_pressing_idx
 
-        if ov_url:
+        if ov_url and ov_idx >= 0:
             if 0 <= ov_idx < len(classified):
                 classified[ov_idx]["role"] = "pressing_disc"
                 classified[ov_idx]["deterministic_score"] = 1.0
             local_p_rel = ""
-            if local_release_dir and ov_idx >= 0 and (local_release_dir / f"img_{ov_idx}.jpg").exists():
-                local_p_rel = f"assets/releases/{rid_key}/img_{ov_idx}.jpg"
-            elif local_release_dir and (local_release_dir / "pressing.jpg").exists():
+            if local_release_dir and (local_release_dir / "pressing.jpg").exists():
                 local_p_rel = f"assets/releases/{rid_key}/pressing.jpg"
-
+            elif local_release_dir and (local_release_dir / f"img_{ov_idx}.jpg").exists():
+                local_p_rel = f"assets/releases/{rid_key}/img_{ov_idx}.jpg"
             res = {
                 "cover_image_url": cover_url,
                 "pressing_image_url": ov_url,
@@ -541,7 +570,10 @@ def select_release_images_deterministic(
     local_p_rel = ""
     if best_pressing_idx >= 0:
         classified[best_pressing_idx]["role"] = "pressing_disc"
-        local_p_rel = classified[best_pressing_idx].get("local_uri") or ""
+        if local_release_dir and (local_release_dir / "pressing.jpg").exists():
+            local_p_rel = f"assets/releases/{rid_key}/pressing.jpg"
+        else:
+            local_p_rel = classified[best_pressing_idx].get("local_uri") or ""
 
     res = {
         "cover_image_url": cover_url,
