@@ -24066,6 +24066,311 @@
     ],
     "year": 2022
   },
+  "26047147": {
+    "artists": [
+      {
+        "anv": "",
+        "id": 572030,
+        "join": "",
+        "name": "Protest The Hero",
+        "resource_url": "https://api.discogs.com/artists/572030",
+        "role": "",
+        "thumbnail_url": "https://i.discogs.com/Ppf4IcdJgTuBC-znpMGIjte6sDbnuHEG2RAKfmkqGf0/rs:fit/g:sm/q:90/h:387/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9BLTU3MjAz/MC0xNDY3NzMxNzY2/LTM0NTguanBlZw.jpeg",
+        "tracks": ""
+      }
+    ],
+    "artists_sort": "Protest The Hero",
+    "blocked_from_sale": false,
+    "community": {
+      "contributors": [
+        {
+          "resource_url": "https://api.discogs.com/users/Mike.in.rexdale",
+          "username": "Mike.in.rexdale"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/iDealelan",
+          "username": "iDealelan"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/leeving",
+          "username": "leeving"
+        }
+      ],
+      "data_quality": "Needs Vote",
+      "have": 332,
+      "rating": {
+        "average": 4.36,
+        "count": 14
+      },
+      "status": "Accepted",
+      "submitter": {
+        "resource_url": "https://api.discogs.com/users/Mike.in.rexdale",
+        "username": "Mike.in.rexdale"
+      },
+      "want": 83
+    },
+    "companies": [
+      {
+        "catno": "180587M",
+        "entity_type": "29",
+        "entity_type_name": "Mastered At",
+        "id": 430654,
+        "name": "GZ Media",
+        "resource_url": "https://api.discogs.com/labels/430654",
+        "thumbnail_url": "https://i.discogs.com/tsQO8Fa5vPMtcFal_YMkjrAm8fO6g9lwwTSN64t0mo8/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTQzMDY1/NC0xNzUzMTExMDY1/LTM2ODcucG5n.jpeg"
+      },
+      {
+        "catno": "10-85346",
+        "entity_type": "17",
+        "entity_type_name": "Pressed By",
+        "id": 523699,
+        "name": "Precision Record Pressing",
+        "resource_url": "https://api.discogs.com/labels/523699",
+        "thumbnail_url": "https://i.discogs.com/DfWvGCw34Q127_Eqz8MBLNwe-7lZqvAuM3xxalopIBo/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTUyMzY5/OS0xNjk5MzgyMzgz/LTIwNDYucG5n.jpeg"
+      }
+    ],
+    "country": "Canada",
+    "data_quality": "Needs Vote",
+    "date_added": "2023-02-09T11:30:53-08:00",
+    "date_changed": "2023-07-27T11:36:47-07:00",
+    "estimated_weight": 460,
+    "format_quantity": 2,
+    "formats": [
+      {
+        "descriptions": [
+          "LP",
+          "45 RPM",
+          "Album",
+          "Limited Edition",
+          "Reissue",
+          "Repress",
+          "Stereo"
+        ],
+        "name": "Vinyl",
+        "qty": "2",
+        "text": "Red & Black Cornetto [Bleeding Heart Cornetto]"
+      }
+    ],
+    "genres": [
+      "Rock"
+    ],
+    "id": 26047147,
+    "identifiers": [
+      {
+        "description": "Side A runout",
+        "type": "Matrix / Runout",
+        "value": "10-85346 / SHV-007 - A 180587M1/A"
+      },
+      {
+        "description": "Side B runout",
+        "type": "Matrix / Runout",
+        "value": "10-85346 / SHV-007 - B 180587M2/A"
+      },
+      {
+        "description": "Side C runout",
+        "type": "Matrix / Runout",
+        "value": "10-85346 / SHV-007 - C 180587M3/A"
+      },
+      {
+        "description": "Side D runout",
+        "type": "Matrix / Runout",
+        "value": "10-85346 / SHV-007 - D 180587M4/A"
+      }
+    ],
+    "images": [
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/JLMQMJKAwz20QkjN_nw8gEv66EtD1t6yHzRWb3l60us/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzUtMjMwMC5qcGVn.jpeg",
+        "type": "primary",
+        "uri": "https://i.discogs.com/JLMQMJKAwz20QkjN_nw8gEv66EtD1t6yHzRWb3l60us/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzUtMjMwMC5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/WySxNc_f2nGwfYAHONHuEl2crSVAVa6-GujvaHaT22k/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzUtMjMwMC5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/LV1MgP8eL5fy2fSp9_D50TGx2T8dLOG5euzKK-w47FU/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzUtNDA5NC5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/LV1MgP8eL5fy2fSp9_D50TGx2T8dLOG5euzKK-w47FU/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzUtNDA5NC5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/nboUOqxWT81omj10ehPrR8LuUbB9r7yiruI8jLUO_8U/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzUtNDA5NC5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 337,
+        "resource_url": "https://i.discogs.com/datEoNGoGbwNpaxxwMbldwzij-3jsgkV2vA9yGIDXy8/rs:fit/g:sm/q:90/h:337/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzYtOTc3My5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/datEoNGoGbwNpaxxwMbldwzij-3jsgkV2vA9yGIDXy8/rs:fit/g:sm/q:90/h:337/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzYtOTc3My5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/HzuSY5vbr1ekWJK71n8gZZbYgvaTqD6gfNv4v7Yxn6U/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzYtOTc3My5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/ZoHsYYpMXiL-YEtVV3GODwCehfxq1evL-BAXFun6wTc/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzQtMjk5OC5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/ZoHsYYpMXiL-YEtVV3GODwCehfxq1evL-BAXFun6wTc/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzQtMjk5OC5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/cs_FY258QMHmwvRhUHXP8W9rdU9dVTC9zn02awO5FyI/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzQtMjk5OC5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/JxRDYPc6jJQbVBaHv8fyRNWDfaUqjVCndW7ia_krqHk/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzYtNDA4Ny5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/JxRDYPc6jJQbVBaHv8fyRNWDfaUqjVCndW7ia_krqHk/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzYtNDA4Ny5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/tPt5IvXMUkMd6TeQWHg-I1ZrMn5Bp5aUSwp6PGNKZDw/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzYtNDA4Ny5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/jvprvizI9MW5fBqUqpLOVosQO_Nfeg4hAiHT4Qb7Idk/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzQtNjM1Ni5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/jvprvizI9MW5fBqUqpLOVosQO_Nfeg4hAiHT4Qb7Idk/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzQtNjM1Ni5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/czyt5BRgjBnxJGnIDnxlgL6c7jtJJ9pvyACvrtxdhpg/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzQtNjM1Ni5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/SiJOxfVTZj39aT6C85FVQlo1xhnLJzhesyQ2lqiUDPw/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzUtOTc1OC5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/SiJOxfVTZj39aT6C85FVQlo1xhnLJzhesyQ2lqiUDPw/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzUtOTc1OC5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/FkLgsoa-pGg-nCMRB0G8nX-IX_QJI14sNvvS12C0nSo/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzUtOTc1OC5qcGVn.jpeg",
+        "width": 600
+      }
+    ],
+    "is_offensive": false,
+    "labels": [
+      {
+        "catno": "SHV-007",
+        "entity_type": "1",
+        "entity_type_name": "Label",
+        "id": 1479121,
+        "name": "Sheet Happens Publishing",
+        "resource_url": "https://api.discogs.com/labels/1479121",
+        "thumbnail_url": "https://i.discogs.com/i0qK5mZif8_MtH6EBP_W2xOOHt5mhMO9E1KHFZkkSkA/rs:fit/g:sm/q:90/h:400/w:400/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTE0Nzkx/MjEtMTUyOTE2NzM4/Ny00MzAyLmpwZWc.jpeg"
+      }
+    ],
+    "lowest_price": null,
+    "master_id": 109353,
+    "master_url": "https://api.discogs.com/masters/109353",
+    "notes": "Limited to 1000 copies\n\n2x 180 gram 12\" Records (45 rpm!)\n2xLP Red and Black Cornetto Vinyl\nFull Colour Gatefold 12\" Record Jacket (w/Matte Flood U/V)\n2x Black Inner Sleeve (matted)",
+    "num_for_sale": 0,
+    "released": "2023-02-00",
+    "released_formatted": "Feb 2023",
+    "resource_url": "https://api.discogs.com/releases/26047147",
+    "series": [],
+    "status": "Accepted",
+    "styles": [
+      "Progressive Metal"
+    ],
+    "thumb": "https://i.discogs.com/WySxNc_f2nGwfYAHONHuEl2crSVAVa6-GujvaHaT22k/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzUtMjMwMC5qcGVn.jpeg",
+    "title": "Kezia",
+    "tracklist": [
+      {
+        "duration": "",
+        "position": "A1",
+        "title": "No Stars Over Bethlehem",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "A2",
+        "title": "Heretic & Killers",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "A3",
+        "title": "Divinity Within",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "B1",
+        "title": "Bury The Hatchet",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "B2",
+        "title": "Nautical",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "B3",
+        "title": "Blindfold Aside",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "C1",
+        "title": "She Who Mars The Skin Of Gods",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "C2",
+        "title": "Turn Soonest To The Sea",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "D1",
+        "title": "The Divine Suicide Of K",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "D2",
+        "title": "A Plateful Of Our Dead",
+        "type_": "track"
+      }
+    ],
+    "uri": "https://www.discogs.com/release/26047147-Protest-The-Hero-Kezia",
+    "videos": [
+      {
+        "description": "hmmm... vampires before vampires were cool? lights was a vampire before she was a pop star? all of this is too much to digest. \n\nfrom their record 'kezia'.",
+        "duration": 288,
+        "embed": true,
+        "title": "Protest The Hero- The Divine Suicide Of K.",
+        "uri": "https://www.youtube.com/watch?v=DLUD8jicLsk"
+      },
+      {
+        "description": "The official video for Protest The Hero's Blindfolds Aside",
+        "duration": 234,
+        "embed": true,
+        "title": "Protest The Hero - Blindfolds Aside",
+        "uri": "https://www.youtube.com/watch?v=8x3sLH4G0qA"
+      },
+      {
+        "description": "Protest The Hero's official music video for \"Heretics and Killers\" from the album KEZIA.\r\n\r\nPurchase on iTunes: http://bit.ly/fXomA7\r\nPurchase on Amazon: http://amzn.to/fboHzE\r\n\r\nConnect with Protest The Hero:\r\nwww.protestthehero.com/\r\nwww.myspace.com/pro",
+        "duration": 268,
+        "embed": true,
+        "title": "Protest The Hero - \"Heretics and Killers\" [Official Video]",
+        "uri": "https://www.youtube.com/watch?v=AEn8HmgJxd4"
+      },
+      {
+        "description": "Kezia  is the debut full-length release by Protest the Hero released in Canada on August 30, 2005 (Underground Operations) and America on April 4, 2006 (Vagrant Records).\r\n\r\n\r\nPART I: PRISON PRIEST\r\n\r\n1. \"No Stars Over Bethlehem\" - 0:00\r\n\r\nhttp://www.plyr",
+        "duration": 2622,
+        "embed": true,
+        "title": "Protest The Hero - Kezia (Full Album)",
+        "uri": "https://www.youtube.com/watch?v=8l_V2a5ZTqQ"
+      },
+      {
+        "description": "lyrics are:                                                                                                                                 We woke up as men but tonight we'll sleep as killers\nAs we break the cryptic morning with a bullet and a prayer\nThe",
+        "duration": 364,
+        "embed": true,
+        "title": "Protest The Hero- Blindfolds Aside",
+        "uri": "https://www.youtube.com/watch?v=9NZqm1SGASg"
+      },
+      {
+        "description": "Song 8 off Kezia\r\n\r\nLyrics:\r\n\r\nDo you remember how it was when you bled?\r\nWhen you loved and burned in those flames that you've kept\r\nBecause Vesta's long been sleeping\r\nAnd now you've come to accept that\r\nYour anatomy defines more than a few of the gapin",
+        "duration": 384,
+        "embed": true,
+        "title": "Protest The Hero - Turn Soonest To The Sea",
+        "uri": "https://www.youtube.com/watch?v=ygUPP02XHwg"
+      }
+    ],
+    "year": 2023
+  },
   "26047519": {
     "artists": [
       {

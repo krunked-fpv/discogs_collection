@@ -4,26 +4,183 @@
   "source_of_truth": "https://www.discogs.com/user/krunked/collection",
   "api_documentation": "https://www.discogs.com/developers",
   "username": "krunked",
-  "synced_at_utc": "2026-11-12T02:10:55Z",
+  "synced_at_utc": "2026-11-12T03:30:33Z",
   "profile": {
     "username": "krunked",
     "owner_name": "Alex Goresch",
     "discogs_url": "https://www.discogs.com/user/krunked/collection",
     "github_repo": "https://github.com/krunked-fpv/discogs_collection",
-    "num_collection": 150,
+    "num_collection": 151,
     "pressing_photos_detected": 142,
-    "colored_or_special_variants": 138,
+    "colored_or_special_variants": 139,
     "flattening_need_to_be_done": 3,
     "flattening_done": 41,
     "collection_value": {
-      "minimum": "$3,721.74",
-      "median": "$6,011.87",
-      "maximum": "$10,437.49",
-      "total_estimated_usd": 7182.31,
-      "formatted_total": "$7,182.31"
+      "minimum": "$3,766.74",
+      "median": "$6,062.43",
+      "maximum": "$10,510.53",
+      "total_estimated_usd": 7217.31,
+      "formatted_total": "$7,217.31"
     }
   },
   "records": [
+    {
+      "release_id": 26047147,
+      "instance_id": 2203663552,
+      "artist": "Protest The Hero",
+      "title": "Kezia",
+      "year": 2023,
+      "format_string": "2xVinyl, LP, 45 RPM, Album, Limited Edition, Reissue, Repress, Stereo, Red & Black Cornetto [Bleeding Heart Cornetto]",
+      "label": "Sheet Happens Publishing",
+      "catno": "SHV-007",
+      "media_condition": "Near Mint (NM or M-)",
+      "sleeve_condition": "Near Mint (NM or M-)",
+      "comments": "",
+      "date_added": "2026-11-11T19:28:57-08:00",
+      "discogs_url": "https://www.discogs.com/release/26047147-Protest-The-Hero-Kezia",
+      "estimated_value_usd": 35.0,
+      "flattening_status": "Not Listed",
+      "genres": [
+        "Rock"
+      ],
+      "styles": [
+        "Progressive Metal"
+      ],
+      "images": {
+        "cover_image_url": "https://i.discogs.com/JLMQMJKAwz20QkjN_nw8gEv66EtD1t6yHzRWb3l60us/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzUtMjMwMC5qcGVn.jpeg",
+        "pressing_image_url": "",
+        "center_label_image_url": "https://i.discogs.com/WySxNc_f2nGwfYAHONHuEl2crSVAVa6-GujvaHaT22k/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzUtMjMwMC5qcGVn.jpeg",
+        "display_thumbnail_url": "assets/releases/26047147/cover.jpg",
+        "has_pressing_photo": false,
+        "selected_index": -1,
+        "selected_score": 0.0,
+        "detection_method": "cover_fallback",
+        "classified_images": [
+          {
+            "index": 0,
+            "uri": "https://i.discogs.com/JLMQMJKAwz20QkjN_nw8gEv66EtD1t6yHzRWb3l60us/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzUtMjMwMC5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/WySxNc_f2nGwfYAHONHuEl2crSVAVa6-GujvaHaT22k/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzUtMjMwMC5qcGVn.jpeg",
+            "width": 600,
+            "height": 600,
+            "aspect_ratio": 1.0,
+            "role": "front_cover",
+            "deterministic_score": 0.05,
+            "local_uri": "assets/releases/26047147/img_0.jpg"
+          },
+          {
+            "index": 1,
+            "uri": "https://i.discogs.com/LV1MgP8eL5fy2fSp9_D50TGx2T8dLOG5euzKK-w47FU/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzUtNDA5NC5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/nboUOqxWT81omj10ehPrR8LuUbB9r7yiruI8jLUO_8U/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzUtNDA5NC5qcGVn.jpeg",
+            "width": 600,
+            "height": 600,
+            "aspect_ratio": 1.0,
+            "role": "gatefold_inner",
+            "deterministic_score": 0.0525,
+            "local_uri": "assets/releases/26047147/img_1.jpg",
+            "cv_metrics": {
+              "is_pressing": false,
+              "score": 0.0,
+              "reason": "cv_deps_unavailable"
+            }
+          },
+          {
+            "index": 2,
+            "uri": "https://i.discogs.com/datEoNGoGbwNpaxxwMbldwzij-3jsgkV2vA9yGIDXy8/rs:fit/g:sm/q:90/h:337/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzYtOTc3My5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/HzuSY5vbr1ekWJK71n8gZZbYgvaTqD6gfNv4v7Yxn6U/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzYtOTc3My5qcGVn.jpeg",
+            "width": 600,
+            "height": 337,
+            "aspect_ratio": 1.78,
+            "role": "gatefold_spread",
+            "deterministic_score": 0.0,
+            "local_uri": "assets/releases/26047147/img_2.jpg",
+            "cv_metrics": {
+              "is_pressing": false,
+              "score": 0.0,
+              "reason": "cv_deps_unavailable"
+            }
+          },
+          {
+            "index": 3,
+            "uri": "https://i.discogs.com/ZoHsYYpMXiL-YEtVV3GODwCehfxq1evL-BAXFun6wTc/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzQtMjk5OC5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/cs_FY258QMHmwvRhUHXP8W9rdU9dVTC9zn02awO5FyI/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzQtMjk5OC5qcGVn.jpeg",
+            "width": 600,
+            "height": 600,
+            "aspect_ratio": 1.0,
+            "role": "pressing_disc",
+            "deterministic_score": 0.294,
+            "local_uri": "assets/releases/26047147/img_3.jpg",
+            "cv_metrics": {
+              "is_pressing": false,
+              "score": 0.0,
+              "reason": "cv_deps_unavailable"
+            }
+          },
+          {
+            "index": 4,
+            "uri": "https://i.discogs.com/JxRDYPc6jJQbVBaHv8fyRNWDfaUqjVCndW7ia_krqHk/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzYtNDA4Ny5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/tPt5IvXMUkMd6TeQWHg-I1ZrMn5Bp5aUSwp6PGNKZDw/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzYtNDA4Ny5qcGVn.jpeg",
+            "width": 600,
+            "height": 600,
+            "aspect_ratio": 1.0,
+            "role": "pressing_disc",
+            "deterministic_score": 0.294,
+            "local_uri": "assets/releases/26047147/img_4.jpg",
+            "cv_metrics": {
+              "is_pressing": false,
+              "score": 0.0,
+              "reason": "cv_deps_unavailable"
+            }
+          },
+          {
+            "index": 5,
+            "uri": "https://i.discogs.com/jvprvizI9MW5fBqUqpLOVosQO_Nfeg4hAiHT4Qb7Idk/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzQtNjM1Ni5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/czyt5BRgjBnxJGnIDnxlgL6c7jtJJ9pvyACvrtxdhpg/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzQtNjM1Ni5qcGVn.jpeg",
+            "width": 600,
+            "height": 600,
+            "aspect_ratio": 1.0,
+            "role": "pressing_disc",
+            "deterministic_score": 0.294,
+            "local_uri": "assets/releases/26047147/img_5.jpg",
+            "cv_metrics": {
+              "is_pressing": false,
+              "score": 0.0,
+              "reason": "cv_deps_unavailable"
+            }
+          },
+          {
+            "index": 6,
+            "uri": "https://i.discogs.com/SiJOxfVTZj39aT6C85FVQlo1xhnLJzhesyQ2lqiUDPw/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzUtOTc1OC5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/FkLgsoa-pGg-nCMRB0G8nX-IX_QJI14sNvvS12C0nSo/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzUtOTc1OC5qcGVn.jpeg",
+            "width": 600,
+            "height": 600,
+            "aspect_ratio": 1.0,
+            "role": "pressing_disc",
+            "deterministic_score": 0.238,
+            "local_uri": "assets/releases/26047147/img_6.jpg",
+            "cv_metrics": {
+              "is_pressing": false,
+              "score": 0.0,
+              "reason": "cv_deps_unavailable"
+            }
+          }
+        ],
+        "local_cover_image_url": "assets/releases/26047147/cover.jpg"
+      },
+      "wax_spec": {
+        "pattern": "color_in_color",
+        "primary_color": "#dc2626",
+        "secondary_color": "#18181b",
+        "accent_color": "#facc15",
+        "color_name": "Crimson Red",
+        "translucent": true,
+        "etched": false,
+        "is_double_lp": true,
+        "is_limited": true,
+        "is_repress": true,
+        "variant_badge": "2xLP • Crimson Red • Color-in-Color • Ltd Ed",
+        "deterministic_seed": 1998443234
+      }
+    },
     {
       "release_id": 17583742,
       "instance_id": 2203411197,
