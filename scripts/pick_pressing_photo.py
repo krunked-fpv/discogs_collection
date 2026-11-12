@@ -194,10 +194,18 @@ def inject_into_index_html(
     payload_js = json.dumps(collection_data, indent=2, ensure_ascii=False)
     overrides_js = json.dumps(overrides_data, indent=2, ensure_ascii=False)
 
+    sync_stamp = str(collection_data.get("synced_at_utc") or "")
     replacement_block = (
         "/* __DISCOGS_COLLECTION_DATA_START__ */\n"
         f"    window.__DISCOGS_OVERRIDES__ = {overrides_js};\n"
         f"    window.__DISCOGS_COLLECTION__ = {payload_js};\n"
+        "    try {\n"
+        f"      var __pySyncStamp = {json.dumps(sync_stamp)};\n"
+        "      if (typeof localStorage !== 'undefined' && localStorage.getItem('__discogs_py_sync_stamp__') !== __pySyncStamp) {\n"
+        "        ['discogs_overrides', 'discogs_pressing_overrides', 'discogs_pressing_overrides_v2', 'krunked_overrides'].forEach(function(k) { localStorage.removeItem(k); });\n"
+        "        localStorage.setItem('__discogs_py_sync_stamp__', __pySyncStamp);\n"
+        "      }\n"
+        "    } catch (e) {}\n"
         "    /* __DISCOGS_COLLECTION_DATA_END__ */"
     )
 
@@ -516,15 +524,20 @@ def run_pick_pressing_photos(
             local_release_dir=rel_dir,
         )
 
-        # Update overrides.json ONLY when CV verified a pressing photo (never lock in positional fallbacks)
-        if img_selection.get("has_pressing_photo") and img_selection.get("pressing_image_url"):
+        # Update overrides.json when CV verified a pressing photo, and always refresh any stale string override
+        prev_ov = overrides.get(rid_str)
+        if img_selection.get("has_pressing_photo") and img_selection.get("pressing_image_url") and len(raw_images) > 1:
             p_url = img_selection["pressing_image_url"]
             det_method = str(img_selection.get("detection_method") or "")
-            if len(raw_images) > 1 and det_method.startswith("deterministic_annular_cv"):
-                prev_ov = overrides.get(rid_str)
+            if det_method.startswith("deterministic_annular_cv"):
                 if rid_str not in overrides or (isinstance(prev_ov, str) and prev_ov != p_url):
                     overrides[rid_str] = p_url
                     newly_detected_overrides += 1
+            elif isinstance(prev_ov, str) and prev_ov != p_url:
+                overrides[rid_str] = p_url
+                newly_detected_overrides += 1
+        elif isinstance(prev_ov, str) and not img_selection.get("has_pressing_photo"):
+            overrides.pop(rid_str, None)
 
         if _write_pressing_and_cover_files(rel_dir, rid_str, img_selection, local_files):
             upgraded_pressing_files += 1

@@ -421,14 +421,20 @@ def score_image_pixels_deterministic(
 
         lbl_in = (r >= 0.045) & (r <= max(0.14, best_rl_local - 0.022))
         wax_mid = (r >= best_rl_local + 0.035) & (r <= r_cand - 0.05)
-        lbl_wax_d = float(np.linalg.norm(np.mean(rgb[lbl_in], axis=0) - np.mean(rgb[wax_mid], axis=0)))
+        wax_inner_half = (r >= best_rl_local + 0.025) & (r <= r_cand * 0.56)
+        wax_outer_half = (r > r_cand * 0.56) & (r <= r_cand - 0.04)
 
-        # Color-in-Color / Dusk Ripple inner-wax to outer-wax radial transition bonus
-        wax_inner_half = (r >= best_rl_local + 0.035) & (r <= r_cand * 0.60)
-        wax_outer_half = (r > r_cand * 0.60) & (r <= r_cand - 0.04)
         color_in_color_dist = float(
             np.linalg.norm(np.mean(rgb[wax_inner_half], axis=0) - np.mean(rgb[wax_outer_half], axis=0))
         )
+        lbl_wax_d_mid = float(np.linalg.norm(np.mean(rgb[lbl_in], axis=0) - np.mean(rgb[wax_mid], axis=0)))
+        lbl_wax_d_inner = float(np.linalg.norm(np.mean(rgb[lbl_in], axis=0) - np.mean(rgb[wax_inner_half], axis=0)))
+        corner_outer_m = (r >= 1.02) & (r <= 1.32) & diag_mask
+        corner_outer_grad = float(np.mean(grad_mag[corner_outer_m]))
+        if median_q_std < 0.175 and corner_outer_grad < 0.022 and color_in_color_dist >= 0.08:
+            lbl_wax_d = max(lbl_wax_d_mid, lbl_wax_d_inner)
+        else:
+            lbl_wax_d = lbl_wax_d_mid
 
         quad_factor = 1.0 if active_quads == 4 else (0.75 if active_quads == 3 else 0.20)
         cand_score = quad_factor * (
@@ -490,13 +496,38 @@ def score_image_pixels_deterministic(
         or (best_corner_std < 0.040 and best_label_wax_dist < 0.22)
     )
 
+    # Measure straight horizontal/vertical square sleeve border energy in [0.84..0.96]
+    best_sq_border = 0.0
+    for s in np.linspace(0.84, 0.96, 13):
+        v_m = (np.abs(np.abs(dx) - s) <= 0.015) & (np.abs(dy) <= s)
+        h_m = (np.abs(np.abs(dy) - s) <= 0.015) & (np.abs(dx) <= s)
+        sq_e = 0.5 * (
+            float(np.mean(np.maximum(0.0, np.abs(gx[v_m]) - 0.5 * np.abs(gy[v_m]))))
+            + float(np.mean(np.maximum(0.0, np.abs(gy[h_m]) - 0.5 * np.abs(gx[h_m]))))
+        )
+        if sq_e > best_sq_border:
+            best_sq_border = sq_e
+
+    # Verified splatter/starburst/split disc exemption for high-gradient radial wax streaks
+    is_verified_splatter_or_split_disc = bool(
+        (best_label_step >= 0.042 and best_rim_step >= 0.022 and best_label_wax_dist >= 0.20)
+        or (best_corner_std < 0.090 and best_corner_wax_dist >= 0.35 and best_rim_step >= 0.018 and best_label_wax_dist >= 0.18)
+    )
+
+    # Verified clear/translucent/starburst disc on sleeve exemption for soft outer rim
+    is_verified_clear_or_soft_rim_disc = bool(
+        (best_rim_step >= 0.024 and best_label_step >= 0.040 and best_label_wax_dist >= 0.25)
+        or (best_rim_step >= 0.014 and best_label_step >= 0.018 and best_label_wax_dist >= 0.22 and best_corner_wax_dist >= 0.18 and best_corner_std < 0.085)
+    )
+
     # 4. Square lyric sheet, inner sleeve, slipcover, back cover, or hype sticker
     is_square_insert_or_sleeve = bool(
         best_active_quads < 4
-        or (best_corner_wax_dist < 0.14 and best_rim_step < 0.032)
-        or (best_rim_step < 0.016 and best_corner_wax_dist < 0.32)
-        or (wax_grad_mag > 0.048 and wax_grad_mag > label_grad_mag * 0.70)
+        or (best_corner_wax_dist < 0.14 and best_rim_step < 0.032 and not is_verified_clear_or_soft_rim_disc)
+        or (best_rim_step < 0.016 and best_corner_wax_dist < 0.32 and not is_verified_clear_or_soft_rim_disc)
+        or (wax_grad_mag > 0.048 and wax_grad_mag > label_grad_mag * 0.70 and not is_verified_splatter_or_split_disc)
         or (spindle_edge < 0.008 and best_label_wax_dist < 0.23)
+        or (best_sq_border > 0.045 and best_rim_step < best_sq_border * 0.42 and best_label_step < 0.028)
     )
 
     # Variant Color Match Bonus when expected_wax_hex is a colored variant
@@ -512,19 +543,21 @@ def score_image_pixels_deterministic(
             variant_color_bonus = min(0.05, (chroma_sim - 0.85) * 0.35 + wax_mean_sat * 0.05)
 
     circularity_ratio = (best_rim_step + 0.6 * best_label_step + 0.25 * wax_rad_e) / (wax_tan_e * 0.65 + 0.012)
+    clean_disc_bonus = 0.025 if (circularity_ratio >= 1.55 and best_label_wax_dist >= 0.175 and best_corner_std < 0.090) else 0.0
 
     raw_annular_score = (
         best_dual_circle_score
         + min(0.08, circularity_ratio * 0.03)
         + min(0.06, (spindle_edge * 0.5 + spindle_contrast * 0.12))
         + variant_color_bonus
+        + clean_disc_bonus
     )
 
     rejected = is_diecut_sleeve or is_mockup_composite or is_zoomed_label_scan or is_square_insert_or_sleeve
     score = raw_annular_score * 0.35 if rejected else raw_annular_score
     score = round(min(0.995, max(0.0, score)), 4)
 
-    is_pressing = bool(not rejected and score >= 0.48)
+    is_pressing = bool(not rejected and score >= 0.475)
 
     reason = "deterministic_annular_cv_match"
     if not is_pressing:
@@ -694,8 +727,8 @@ def select_release_images_deterministic(
                 has_any_real_cv = True
                 if cv_details.get("is_pressing"):
                     role = "pressing_disc"
-                    # First verified pressing disc (Side A) gets a small tie-breaker bonus (+0.018)
-                    side_a_bonus = 0.018 if not first_verified_pressing_seen else 0.0
+                    # First verified pressing disc (Side A) gets a tie-breaker bonus (+0.028)
+                    side_a_bonus = 0.028 if not first_verified_pressing_seen else 0.0
                     first_verified_pressing_seen = True
                     combined_score = min(0.995, 0.92 * float(cv_details["score"]) + 0.08 * 0.85 + side_a_bonus)
                     method = "deterministic_annular_cv+guideline_13_8"
