@@ -49186,6 +49186,341 @@
     ],
     "year": 2025
   },
+  "35668090": {
+    "artists": [
+      {
+        "anv": "",
+        "id": 50655,
+        "join": "",
+        "name": "Chromeo",
+        "resource_url": "https://api.discogs.com/artists/50655",
+        "role": "",
+        "thumbnail_url": "https://i.discogs.com/3rpu-zOtzeNMTnxrZCSsp8LwNeUiS08n7HtRdEZ1LQo/rs:fit/g:sm/q:90/h:437/w:597/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9BLTUwNjU1/LTEzNDA3MDI0MzYt/MzU1NS5qcGVn.jpeg",
+        "tracks": ""
+      }
+    ],
+    "artists_sort": "Chromeo",
+    "blocked_from_sale": false,
+    "community": {
+      "contributors": [
+        {
+          "resource_url": "https://api.discogs.com/users/Vastly_remarkable",
+          "username": "Vastly_remarkable"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/DunkinDonuts",
+          "username": "DunkinDonuts"
+        }
+      ],
+      "data_quality": "Needs Vote",
+      "have": 224,
+      "rating": {
+        "average": 4.82,
+        "count": 28
+      },
+      "status": "Accepted",
+      "submitter": {
+        "resource_url": "https://api.discogs.com/users/Vastly_remarkable",
+        "username": "Vastly_remarkable"
+      },
+      "want": 62
+    },
+    "companies": [
+      {
+        "catno": "GET52782-LP",
+        "entity_type": "8",
+        "entity_type_name": "Marketed By",
+        "id": 208012,
+        "name": "Get On Down",
+        "resource_url": "https://api.discogs.com/labels/208012",
+        "thumbnail_url": "https://i.discogs.com/IPurZPYRrh-Hh-Qj3P_a3Venpri3woDMulTKmU_LxEA/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTIwODAx/Mi0xNTE4NzI3NTAw/LTQwMjMucG5n.jpeg"
+      }
+    ],
+    "country": "US",
+    "data_quality": "Needs Vote",
+    "date_added": "2025-11-14T23:36:53-08:00",
+    "date_changed": "2026-02-06T23:58:11-08:00",
+    "estimated_weight": 230,
+    "extraartists": [
+      {
+        "anv": "",
+        "id": 2395957,
+        "join": "",
+        "name": "Alfredo Rico-Dimas",
+        "resource_url": "https://api.discogs.com/artists/2395957",
+        "role": "Layout",
+        "tracks": ""
+      }
+    ],
+    "format_quantity": 1,
+    "formats": [
+      {
+        "descriptions": [
+          "LP",
+          "Reissue",
+          "Stereo"
+        ],
+        "name": "Vinyl",
+        "qty": "1",
+        "text": "Milky in Clear"
+      }
+    ],
+    "genres": [
+      "Electronic"
+    ],
+    "id": 35668090,
+    "identifiers": [
+      {
+        "type": "Barcode",
+        "value": "664425278217"
+      }
+    ],
+    "images": [
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/lw2ZTJp4nFY-e2DtOUCmvUFwIlMsCRpci6u1rBKDOoc/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjYtMjE5NC5qcGVn.jpeg",
+        "type": "primary",
+        "uri": "https://i.discogs.com/lw2ZTJp4nFY-e2DtOUCmvUFwIlMsCRpci6u1rBKDOoc/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjYtMjE5NC5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/nKpZwNFX9Ng6oHHsvVh1IBceo3I2QC3KJtERzgKI0Zs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjYtMjE5NC5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/q8bJKAjmFny0yJcxCX30EifDxQKgyZO3P_rcaPdXDKc/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjYtMjk2Mi5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/q8bJKAjmFny0yJcxCX30EifDxQKgyZO3P_rcaPdXDKc/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjYtMjk2Mi5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/SB_7s1rjVLTHEr31AWgjbbBv8Zc7Azos2h8GseIKOR4/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjYtMjk2Mi5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/Q7TOfhkHZ-d183K8u8TBLS3oJ_yS5cah3fodP61J97Q/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjYtODgwOC5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/Q7TOfhkHZ-d183K8u8TBLS3oJ_yS5cah3fodP61J97Q/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjYtODgwOC5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/hzHMXdEsM6fRGqGVr2-jJxIb2X3rKfuBS0bcnlmfRBw/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjYtODgwOC5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/E6UUJfdobunA2Wq1TcMACNqUaWc-BYECP9N49G_FILU/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjctOTkxNC5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/E6UUJfdobunA2Wq1TcMACNqUaWc-BYECP9N49G_FILU/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjctOTkxNC5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/d9Yg2-tpsEfAMdDYxT_mQzuZKdC44u51kJg_IOE2nEM/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjctOTkxNC5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/4YYKKvsP8AdeRUdK8dxPVA7JfiWdvaDmATPlKOl33TE/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjctODUzNi5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/4YYKKvsP8AdeRUdK8dxPVA7JfiWdvaDmATPlKOl33TE/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjctODUzNi5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/ECpa0--C19CZiQISf8CZKE7AHsAvrb8vCFF1IQHpCGk/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjctODUzNi5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/hZSxZ3VFRLhPHiheUWMRdezZmRpp8QGhhtl6TK14WHE/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjYtMjI3MC5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/hZSxZ3VFRLhPHiheUWMRdezZmRpp8QGhhtl6TK14WHE/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjYtMjI3MC5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/e5Wv8meMsa9T3aLhRZPwBviGyTpgaxvyEal7MFW9pxI/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjYtMjI3MC5qcGVn.jpeg",
+        "width": 600
+      }
+    ],
+    "is_offensive": false,
+    "labels": [
+      {
+        "catno": "GET52782-LP",
+        "entity_type": "1",
+        "entity_type_name": "Label",
+        "id": 333369,
+        "name": "VICE Music, Inc.",
+        "resource_url": "https://api.discogs.com/labels/333369",
+        "thumbnail_url": "https://i.discogs.com/fqVZeSvmlHhWKHGyYrSQvcoEOl5dmBxdHkOHZLRDXDE/rs:fit/g:sm/q:90/h:71/w:158/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTMzMzM2/OS0xMzYxMDkzMjI1/LTU4NzAucG5n.jpeg"
+      },
+      {
+        "catno": "GET52782-LP",
+        "entity_type": "1",
+        "entity_type_name": "Label",
+        "id": 681,
+        "name": "Atlantic",
+        "resource_url": "https://api.discogs.com/labels/681",
+        "thumbnail_url": "https://i.discogs.com/PvGehzQPvOW9qMVS-EDAeOmU6qODkqTEQ5bW03gpVyo/rs:fit/g:sm/q:90/h:426/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTY4MS0x/NTEwNjgyMTM0LTgz/NTAucG5n.jpeg"
+      }
+    ],
+    "lowest_price": 95.51,
+    "master_id": 97036,
+    "master_url": "https://api.discogs.com/masters/97036",
+    "notes": "Includes printed 12x12\" lyric sheet, copies sold on tour were signed.",
+    "num_for_sale": 4,
+    "released": "2025",
+    "released_formatted": "2025",
+    "resource_url": "https://api.discogs.com/releases/35668090",
+    "series": [],
+    "status": "Accepted",
+    "styles": [
+      "House",
+      "Electro",
+      "Synth-pop",
+      "Disco"
+    ],
+    "thumb": "https://i.discogs.com/nKpZwNFX9Ng6oHHsvVh1IBceo3I2QC3KJtERzgKI0Zs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjYtMjE5NC5qcGVn.jpeg",
+    "title": "Fancy Footwork",
+    "tracklist": [
+      {
+        "duration": "",
+        "position": "A1",
+        "title": "Intro",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "A2",
+        "title": "Tenderoni",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "A3",
+        "title": "Fancy Footwork",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "A4",
+        "title": "Bonafied Lovin (Tough Guys)",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "A5",
+        "title": "My Girl Is Calling Me (A Liar)",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "A6",
+        "title": "Outta Sight",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "B1",
+        "title": "Opening Up (Ce Soir On Danse)",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "B2",
+        "title": "Momma's Boy",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "B3",
+        "title": "Call Me Up",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "B4",
+        "title": "Waiting 4 U",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "B5",
+        "title": "100%",
+        "type_": "track"
+      }
+    ],
+    "uri": "https://www.discogs.com/release/35668090-Chromeo-Fancy-Footwork",
+    "videos": [
+      {
+        "description": "Download this track: http://atlr.ec/kHgBJG\nDirected by: Ben Levine\n\nChromeo Tour Dates: http://chromeo.net/tours",
+        "duration": 200,
+        "embed": true,
+        "title": "'Fancy Footwork' Chromeo [OFFICIAL VIDEO]",
+        "uri": "https://www.youtube.com/watch?v=3ZKq2ptu7qw"
+      },
+      {
+        "description": "\u00a9 2011 WMG\nDownload this track: http://atlr.ec/kkYawJ\nDirected by J\u00e9r\u00e9mie Rozan  ( Surface to Air )\n\nChromeo Tour Dates: http://chromeo.net/tours",
+        "duration": 214,
+        "embed": true,
+        "title": "'Tenderoni' Chromeo [OFFICIAL VIDEO]",
+        "uri": "https://www.youtube.com/watch?v=i2wPVO92_xc"
+      },
+      {
+        "description": "\u00a9 2011 WMG\nDownload this track: http://atlr.ec/kdt0Zv\nDirected by: Nina Nourizadeh\n\nChromeo Tour Dates: http://chromeo.net/tours",
+        "duration": 232,
+        "embed": true,
+        "title": "'Bonafied Lovin' Chromeo [OFFICIAL VIDEO]",
+        "uri": "https://www.youtube.com/watch?v=fGksDvKZ9ek"
+      },
+      {
+        "description": "From the Album: Fancy Footwork\nhttps://itunes.apple.com/us/album/fancy-footwork/id257209363\n\nhttp://chromeo.net\nhttps://www.facebook.com/chromeo\nhttps://twitter.com/chromeo",
+        "duration": 361,
+        "embed": true,
+        "title": "Chromeo - 100%",
+        "uri": "https://www.youtube.com/watch?v=Kh6_XYJXi_A"
+      },
+      {
+        "description": "From the Album: Fancy Footwork\nhttps://itunes.apple.com/us/album/fancy-footwork/id257209363\n\nhttp://chromeo.net\nhttps://www.facebook.com/chromeo\nhttps://twitter.com/chromeo",
+        "duration": 141,
+        "embed": true,
+        "title": "Chromeo - My Girl Is Calling Me (A Liar)",
+        "uri": "https://www.youtube.com/watch?v=qIQxIXtulpU"
+      },
+      {
+        "description": "From the Album: Fancy Footwork\nhttps://itunes.apple.com/us/album/fancy-footwork/id257209363\n\nhttp://chromeo.net\nhttps://www.facebook.com/chromeo\nhttps://twitter.com/chromeo",
+        "duration": 157,
+        "embed": true,
+        "title": "Chromeo - Outta Sight",
+        "uri": "https://www.youtube.com/watch?v=WXF2IUEMh-U"
+      },
+      {
+        "description": "Enjoy(^-')b",
+        "duration": 257,
+        "embed": true,
+        "title": "Chromeo - Call Me Up (original)",
+        "uri": "https://www.youtube.com/watch?v=pjOJn88ZfHc"
+      },
+      {
+        "description": "From the Album: Fancy Footwork\nhttps://itunes.apple.com/us/album/fancy-footwork/id257209363\n\nhttp://chromeo.net\nhttps://www.facebook.com/chromeo\nhttps://twitter.com/chromeo",
+        "duration": 228,
+        "embed": true,
+        "title": "Chromeo - Waiting 4 U",
+        "uri": "https://www.youtube.com/watch?v=0e8xwp6L3XY"
+      },
+      {
+        "description": "\u00a9 2007 WMG\nNeedy Girl (Video Version)",
+        "duration": 240,
+        "embed": true,
+        "title": "Chromeo - Needy Girl (Video Version)",
+        "uri": "https://www.youtube.com/watch?v=j5JoePzqwg4"
+      },
+      {
+        "description": " ",
+        "duration": 331,
+        "embed": true,
+        "title": "Chromeo    Fancy Footwork Crookers Remix",
+        "uri": "https://www.youtube.com/watch?v=Nfg0a5cvQPU"
+      },
+      {
+        "description": "No copyright infringement intended. \nhttp://darioless.blogspot.com",
+        "duration": 401,
+        "embed": true,
+        "title": "Chromeo - Fancy Footwork (Laidback Luke remix) VJ DARIOLESS",
+        "uri": "https://www.youtube.com/watch?v=-63nc1mAUK8"
+      },
+      {
+        "description": null,
+        "duration": 201,
+        "embed": true,
+        "title": "Chromeo - Fancy Footwork",
+        "uri": "https://www.youtube.com/watch?v=I25YWZWLLEU"
+      }
+    ],
+    "year": 2025
+  },
   "35720014": {
     "artists": [
       {

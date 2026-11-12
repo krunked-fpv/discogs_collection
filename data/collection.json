@@ -4,26 +4,170 @@
   "source_of_truth": "https://www.discogs.com/user/krunked/collection",
   "api_documentation": "https://www.discogs.com/developers",
   "username": "krunked",
-  "synced_at_utc": "2026-11-12T04:00:48Z",
+  "synced_at_utc": "2026-11-12T04:17:13Z",
   "profile": {
     "username": "krunked",
     "owner_name": "Alex Goresch",
     "discogs_url": "https://www.discogs.com/user/krunked/collection",
     "github_repo": "https://github.com/krunked-fpv/discogs_collection",
-    "num_collection": 152,
+    "num_collection": 153,
     "pressing_photos_detected": 142,
-    "colored_or_special_variants": 140,
+    "colored_or_special_variants": 141,
     "flattening_need_to_be_done": 3,
     "flattening_done": 41,
     "collection_value": {
-      "minimum": "$3,791.74",
-      "median": "$6,102.42",
-      "maximum": "$10,565.53",
-      "total_estimated_usd": 7254.31,
-      "formatted_total": "$7,254.31"
+      "minimum": "$3,831.74",
+      "median": "$6,175.41",
+      "maximum": "$10,740.53",
+      "total_estimated_usd": 7349.82,
+      "formatted_total": "$7,349.82"
     }
   },
   "records": [
+    {
+      "release_id": 35668090,
+      "instance_id": 2203669427,
+      "artist": "Chromeo",
+      "title": "Fancy Footwork",
+      "year": 2025,
+      "format_string": "Vinyl, LP, Reissue, Stereo, Milky in Clear",
+      "label": "VICE Music, Inc.",
+      "catno": "GET52782-LP",
+      "media_condition": "Near Mint (NM or M-)",
+      "sleeve_condition": "Near Mint (NM or M-)",
+      "comments": "",
+      "date_added": "2026-11-11T20:16:20-08:00",
+      "discogs_url": "https://www.discogs.com/release/35668090-Chromeo-Fancy-Footwork",
+      "estimated_value_usd": 95.51,
+      "flattening_status": "Not Listed",
+      "genres": [
+        "Electronic"
+      ],
+      "styles": [
+        "House",
+        "Electro",
+        "Synth-pop",
+        "Disco"
+      ],
+      "images": {
+        "cover_image_url": "https://i.discogs.com/lw2ZTJp4nFY-e2DtOUCmvUFwIlMsCRpci6u1rBKDOoc/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjYtMjE5NC5qcGVn.jpeg",
+        "pressing_image_url": "",
+        "center_label_image_url": "https://i.discogs.com/nKpZwNFX9Ng6oHHsvVh1IBceo3I2QC3KJtERzgKI0Zs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjYtMjE5NC5qcGVn.jpeg",
+        "display_thumbnail_url": "assets/releases/35668090/cover.jpg",
+        "has_pressing_photo": false,
+        "selected_index": -1,
+        "selected_score": 0.0,
+        "detection_method": "cover_fallback",
+        "classified_images": [
+          {
+            "index": 0,
+            "uri": "https://i.discogs.com/lw2ZTJp4nFY-e2DtOUCmvUFwIlMsCRpci6u1rBKDOoc/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjYtMjE5NC5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/nKpZwNFX9Ng6oHHsvVh1IBceo3I2QC3KJtERzgKI0Zs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjYtMjE5NC5qcGVn.jpeg",
+            "width": 600,
+            "height": 600,
+            "aspect_ratio": 1.0,
+            "role": "front_cover",
+            "deterministic_score": 0.05,
+            "local_uri": "assets/releases/35668090/img_0.jpg"
+          },
+          {
+            "index": 1,
+            "uri": "https://i.discogs.com/q8bJKAjmFny0yJcxCX30EifDxQKgyZO3P_rcaPdXDKc/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjYtMjk2Mi5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/SB_7s1rjVLTHEr31AWgjbbBv8Zc7Azos2h8GseIKOR4/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjYtMjk2Mi5qcGVn.jpeg",
+            "width": 600,
+            "height": 600,
+            "aspect_ratio": 1.0,
+            "role": "back_cover",
+            "deterministic_score": 0.07,
+            "local_uri": "assets/releases/35668090/img_1.jpg",
+            "cv_metrics": {
+              "is_pressing": false,
+              "score": 0.0,
+              "reason": "cv_deps_unavailable"
+            }
+          },
+          {
+            "index": 2,
+            "uri": "https://i.discogs.com/Q7TOfhkHZ-d183K8u8TBLS3oJ_yS5cah3fodP61J97Q/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjYtODgwOC5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/hzHMXdEsM6fRGqGVr2-jJxIb2X3rKfuBS0bcnlmfRBw/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjYtODgwOC5qcGVn.jpeg",
+            "width": 600,
+            "height": 600,
+            "aspect_ratio": 1.0,
+            "role": "pressing_disc",
+            "deterministic_score": 0.301,
+            "local_uri": "assets/releases/35668090/img_2.jpg",
+            "cv_metrics": {
+              "is_pressing": false,
+              "score": 0.0,
+              "reason": "cv_deps_unavailable"
+            }
+          },
+          {
+            "index": 3,
+            "uri": "https://i.discogs.com/E6UUJfdobunA2Wq1TcMACNqUaWc-BYECP9N49G_FILU/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjctOTkxNC5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/d9Yg2-tpsEfAMdDYxT_mQzuZKdC44u51kJg_IOE2nEM/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjctOTkxNC5qcGVn.jpeg",
+            "width": 600,
+            "height": 600,
+            "aspect_ratio": 1.0,
+            "role": "pressing_disc",
+            "deterministic_score": 0.301,
+            "local_uri": "assets/releases/35668090/img_3.jpg",
+            "cv_metrics": {
+              "is_pressing": false,
+              "score": 0.0,
+              "reason": "cv_deps_unavailable"
+            }
+          },
+          {
+            "index": 4,
+            "uri": "https://i.discogs.com/4YYKKvsP8AdeRUdK8dxPVA7JfiWdvaDmATPlKOl33TE/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjctODUzNi5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/ECpa0--C19CZiQISf8CZKE7AHsAvrb8vCFF1IQHpCGk/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjctODUzNi5qcGVn.jpeg",
+            "width": 600,
+            "height": 600,
+            "aspect_ratio": 1.0,
+            "role": "pressing_disc",
+            "deterministic_score": 0.301,
+            "local_uri": "assets/releases/35668090/img_4.jpg",
+            "cv_metrics": {
+              "is_pressing": false,
+              "score": 0.0,
+              "reason": "cv_deps_unavailable"
+            }
+          },
+          {
+            "index": 5,
+            "uri": "https://i.discogs.com/hZSxZ3VFRLhPHiheUWMRdezZmRpp8QGhhtl6TK14WHE/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjYtMjI3MC5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/e5Wv8meMsa9T3aLhRZPwBviGyTpgaxvyEal7MFW9pxI/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjYtMjI3MC5qcGVn.jpeg",
+            "width": 600,
+            "height": 600,
+            "aspect_ratio": 1.0,
+            "role": "pressing_disc",
+            "deterministic_score": 0.259,
+            "local_uri": "assets/releases/35668090/img_5.jpg",
+            "cv_metrics": {
+              "is_pressing": false,
+              "score": 0.0,
+              "reason": "cv_deps_unavailable"
+            }
+          }
+        ],
+        "local_cover_image_url": "assets/releases/35668090/cover.jpg"
+      },
+      "wax_spec": {
+        "pattern": "color_in_color",
+        "primary_color": "#cbd5e1",
+        "secondary_color": "#38bdf8",
+        "accent_color": "#f43f5e",
+        "color_name": "Crystal Clear",
+        "translucent": true,
+        "etched": false,
+        "is_double_lp": true,
+        "is_limited": false,
+        "is_repress": true,
+        "variant_badge": "2xLP • Crystal Clear • Color-in-Color",
+        "deterministic_seed": 656257588
+      }
+    },
     {
       "release_id": 33201711,
       "instance_id": 2203664990,
