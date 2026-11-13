@@ -1,12 +1,12 @@
 {
   "username": "krunked",
   "record_count": 155,
-  "pressing_photos_detected": 109,
+  "pressing_photos_detected": 128,
   "colored_or_special_variants": 146,
   "flattening_need_to_be_done": 3,
   "flattening_done": 41,
-  "collection_value_median": "$6,162.01",
+  "collection_value_median": "$6,159.65",
   "collection_value_total_usd": 7421.26,
-  "content_sha256": "f4d5ddf768314b2f4e45663348eb7dd7e0bb3360752121a458f2e57d1894d183",
-  "synced_at_utc": "2026-11-13T01:39:53Z"
+  "content_sha256": "62f1ecdb885825af6da4ad3212538fa7ce6c8a67c5ac7d99cd2ce94586697f5d",
+  "synced_at_utc": "2026-11-13T02:25:54Z"
 }

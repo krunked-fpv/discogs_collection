@@ -6,7 +6,13 @@ Uses 100% deterministic rules to:
    physical 12" vinyl pressing itself (vs. front sleeve cover, back cover tracklist,
    square inner sleeve / lyric insert, die-cut inner sleeve, sleeve+disc mockup,
    gatefold spread, square/circular hype stickers, or close-up 4" paper center label),
-   supporting both square (1:1) and 4:3 / 3:4 camera photos of vinyl pressings.
+   supporting:
+   - Standard centered 1:1 / near-square 12" disc photos (`R_disc in [0.80..0.99]`)
+   - Landscape 4:3 turntable platter photos with tonearm on the right (`20697637`, `2343816`)
+   - Padded studio disc photos with wider outer margins (`R_disc in [0.65..0.79]`, e.g. `26690690`)
+   - Off-center angled vinyl disc photos with a full 360-degree 4" center label and spindle hole (`13203006`)
+   - Full-bleed records resting on inner sleeves or printed album jackets (`12988109`, `26917130`)
+   - Dark-on-dark splatter/translucent pressings (`26047519`) and color-in-color/swirl pressings (`16595574`, `35907826`)
 2. Parse Discogs `formats[].descriptions`, `formats[].text`, and release notes
    into a deterministic `wax_spec` object for procedural vinyl rendering and
    seed-guided candidate scoring when a release has multiple or zero pressing photos.
@@ -316,60 +322,20 @@ def _hex_to_rgb01(hex_str: str) -> tuple[float, float, float]:
     return (int(h[0:2], 16) / 255.0, int(h[2:4], 16) / 255.0, int(h[4:6], 16) / 255.0)
 
 
-def score_image_pixels_deterministic(
-    image_bytes: bytes,
+def _eval_centered_concentric(
+    rgb: "np.ndarray",
+    aspect: float,
     expected_wax_hex: str | None = None,
     secondary_wax_hex: str | None = None,
     wax_spec: dict[str, Any] | None = None,
+    r_min: float = 0.80,
+    r_max: float = 0.99,
+    n_steps: int = 20,
 ) -> dict[str, Any]:
-    """Deterministically scores an image for whether it shows a physical 12" vinyl record pressing.
-
-    Uses Calibrated Multi-Scale Concentric Dual-Circle Detection + 8-Octant Label Continuity:
-    1. Normalizes coordinates by true half-frame (127.5) so full-bleed 12" vinyl discs
-       (`R_disc in [0.80..0.99]`) are accurately detected along all 4 diagonal quadrants.
-    2. Searches for the physical 1/3 center-label-to-disc boundary (`R_label in [0.26..0.36] * R_disc`)
-       separating the 4" paper center label from the 12" vinyl wax annulus, and verifies
-       8-octant continuity around the 360-degree label boundary (`q25_oct_lbl_wax`).
-    3. Explicitly detects and rejects:
-       - Die-cut inner sleeves with blank paper center holes (e.g., `38268432/img_4, img_5`, `28895677/img_1`).
-       - Off-center sleeve + half-disc promotional mockups (e.g., `27717681/img_2`).
-       - Zoomed-in 4" paper center label close-ups on colored or black vinyl
-         (e.g., `27066432/img_4, img_5`, `38268432/img_6..9`, `28895677/img_5, img_6`).
-       - Square AND circular hype stickers, barcode stickers, and text-heavy lyric inserts
-         (e.g., `14188877/img_4, img_5, img_6`, `28895677/img_9`, `37058814/img_2`, `28269505/img_3`).
-    4. Scores verified disc candidates against the deterministic `wax_spec` seed (primary/secondary
-       wax colors and ghostly/translucent/splatter texture profile).
-    """
-    if not HAS_CV_DEPS:
-        return {"is_pressing": False, "score": 0.0, "reason": "cv_deps_unavailable"}
-
-    try:
-        with Image.open(io.BytesIO(image_bytes)) as im:
-            w, h = im.size
-            aspect = w / float(h) if h else 0.0
-            if aspect < 0.72 or aspect > 1.38:
-                return {
-                    "is_pressing": False,
-                    "score": 0.05,
-                    "aspect_ratio": round(aspect, 3),
-                    "reason": "rejected_aspect_ratio_panoramic_or_strip",
-                }
-            rgb_full = im.convert("RGB")
-            if abs(aspect - 1.0) > 0.06:
-                side = min(w, h)
-                left = (w - side) // 2
-                top = (h - side) // 2
-                rgb_cropped = rgb_full.crop((left, top, left + side, top + side))
-            else:
-                rgb_cropped = rgb_full
-            rgb = np.asarray(rgb_cropped.resize((256, 256), Image.Resampling.BILINEAR), dtype=np.float32) / 255.0
-    except Exception:
-        return {"is_pressing": False, "score": 0.0, "reason": "image_decode_error"}
-
+    """Evaluates concentric dual-circle (outer 12" rim + inner 4" 1/3 center label + spindle hole) on a 256x256 grid."""
     gray = 0.299 * rgb[:, :, 0] + 0.587 * rgb[:, :, 1] + 0.114 * rgb[:, :, 2]
     sat = np.max(rgb, axis=2) - np.min(rgb, axis=2)
 
-    # Normalize by 127.5 so r=1.0 is the inscribed circle touching the square frame edges
     yy, xx = np.mgrid[0:256, 0:256]
     dy = (yy - 127.5) / 127.5
     dx = (xx - 127.5) / 127.5
@@ -404,7 +370,7 @@ def score_image_pixels_deterministic(
     best_r_lbl = 0.32
     best_color_in_color_dist = 0.0
 
-    for r_cand in np.linspace(0.80, 0.99, 20):
+    for r_cand in np.linspace(r_min, r_max, n_steps):
         rim_diag_band = (r >= r_cand - 0.024) & (r <= r_cand + 0.024) & diag_mask
         diag_rad_e = float(np.mean(pure_rad[rim_diag_band]))
 
@@ -494,10 +460,6 @@ def score_image_pixels_deterministic(
     wax_rad_e = float(np.mean(grad_r[wax_annulus_mask]))
     wax_tan_e = float(np.mean(grad_t[wax_annulus_mask])) + 1e-6
 
-    # 8-Octant Label-to-Wax Continuity & Horizontal/Vertical Text Anisotropy
-    # A real 12" vinyl record has a 360-degree circular 4" center label (`q25_oct_lbl_wax` high),
-    # whereas square/circular hype stickers (e.g. 14188877/img_6, 28895677/img_9, 37058814/img_2)
-    # have horizontal lines of text/barcodes running across the frame (`hv_wax_aniso` high, `q25_oct_lbl_wax` low).
     oct_lbl_wax_dists: list[float] = []
     for k in range(8):
         a0 = -np.pi + k * (np.pi / 4.0)
@@ -518,41 +480,10 @@ def score_image_pixels_deterministic(
     hi_grad_wax_frac = float(np.mean(grad_mag[wax_annulus_mask] > 0.12))
     hi_grad_lbl_frac = float(np.mean(grad_mag[label_mask] > 0.15))
 
-    # Check left-right symmetry of the wax annulus (rejects off-center sleeve+disc mockups like 27717681/img_2)
     left_wax = wax_annulus_mask & (dx < -0.15)
     right_wax = wax_annulus_mask & (dx > 0.15)
     lr_wax_diff = float(np.linalg.norm(np.mean(rgb[left_wax], axis=0) - np.mean(rgb[right_wax], axis=0)))
 
-    # 1. Die-cut inner sleeve with blank paper center hole (e.g., 38268432/img_4, img_5, 28895677/img_1)
-    is_diecut_sleeve = bool(label_grad_mag < 0.009 and spindle_edge < 0.0065 and spindle_contrast < 0.04)
-
-    # 2. Off-center sleeve + half-disc promotional composite mockup (e.g., 27717681/img_2)
-    is_mockup_composite = bool(
-        best_label_step < 0.015
-        and spindle_edge < 0.010
-        and (lr_wax_diff > 0.22 or label_grad_mag < 0.022)
-    )
-
-    # 3. Zoomed-in 4" paper center label close-up on colored or black vinyl (e.g., 27066432/img_4,5 & 28895677/img_5,6)
-    is_zoomed_label_scan = bool(
-        (
-            best_label_wax_dist < 0.175
-            and best_label_step < 0.065
-            and (wax_grad_mag >= label_grad_mag * 0.68 or best_corner_std < 0.05)
-        )
-        or (best_corner_std < 0.040 and best_label_wax_dist < 0.22)
-    )
-
-    # 4. Square or Circular Hype Stickers, Barcode Stickers, & Text Inserts (e.g., 14188877/img_6, 28895677/img_9, 37058814/img_2)
-    is_hype_sticker_or_text_insert = bool(
-        best_corner_std > 0.22
-        or wax_grad_mag > 0.095
-        or (hv_wax_aniso > 0.35 and (wax_grad_mag > 0.022 or hi_grad_wax_frac > 0.05) and q25_oct_lbl_wax < 0.25)
-        or (hi_grad_wax_frac > 0.16 and hi_grad_lbl_frac > 0.25 and q25_oct_lbl_wax < 0.22)
-        or (label_grad_mag > 0.125 and wax_grad_mag > 0.045 and q25_oct_lbl_wax < 0.25)
-    )
-
-    # Measure straight horizontal/vertical square sleeve border energy in [0.84..0.96]
     best_sq_border = 0.0
     for s in np.linspace(0.84, 0.96, 13):
         v_m = (np.abs(np.abs(dx) - s) <= 0.015) & (np.abs(dy) <= s)
@@ -564,27 +495,78 @@ def score_image_pixels_deterministic(
         if sq_e > best_sq_border:
             best_sq_border = sq_e
 
-    # Verified splatter/starburst/split disc exemption for radial wax streaks (guarded against stickers/inserts)
+    # True concentric 360-degree center label + outer disc rim signature
+    # Protects real 12" vinyl discs sitting on inner sleeves or album covers (e.g., 12988109/img_4,5 & 26917130/img_4,5)
+    has_strong_concentric_disc = bool(
+        best_active_quads >= 4
+        and best_rim_step >= 0.025
+        and best_r_disc >= 0.84
+        and (best_label_step >= 0.028 or best_color_in_color_dist >= 0.16 or spindle_contrast >= 0.22)
+        and best_label_wax_dist >= 0.15
+        and (q25_oct_lbl_wax >= 0.165 or best_color_in_color_dist >= 0.18 or best_corner_wax_dist >= 0.30)
+        and hv_wax_aniso < 0.18
+        and label_grad_mag < 0.085
+    )
+
+    # 1. Die-cut inner sleeve with blank paper center hole (e.g., 38268432/img_4, img_5, 28895677/img_1)
+    is_diecut_sleeve = bool(label_grad_mag < 0.009 and spindle_edge < 0.0065 and spindle_contrast < 0.04)
+
+    # 2. Off-center sleeve + half-disc promotional composite mockup (e.g., 27717681/img_2)
+    is_mockup_composite = bool(
+        best_label_step < 0.015
+        and spindle_edge < 0.010
+        and (lr_wax_diff > 0.22 or label_grad_mag < 0.022)
+    )
+
+    # 3. Zoomed-in 4" paper center label close-up on colored or black vinyl (e.g., 27066432/img_4,5 & 35907826/img_4,5)
+    # Guards full 12" swirl/splatter discs on clean backdrops (e.g., 35907826/img_6,7 & 26047519/img_4)
+    is_zoomed_label_scan = bool(
+        not (best_rim_step >= 0.030 and best_corner_wax_dist >= 0.30 and best_label_step >= 0.030 and hv_wax_aniso < 0.12)
+        and not (best_color_in_color_dist >= 0.12 and spindle_contrast >= 0.18 and best_label_step >= 0.020 and hv_wax_aniso < 0.08)
+        and (
+            (
+                best_label_wax_dist < 0.175
+                and best_label_step < 0.065
+                and (wax_grad_mag >= label_grad_mag * 0.68 or best_corner_std < 0.05)
+            )
+            or (best_corner_std < 0.040 and best_label_wax_dist < 0.22 and best_corner_wax_dist < 0.28)
+        )
+    )
+
+    # 4. Square or Circular Hype Stickers, Barcode Stickers, & Text Inserts (e.g., 14188877/img_6, 28895677/img_9, 16595574/img_2, 26690690/img_2)
+    is_hype_sticker_or_text_insert = bool(
+        (best_corner_std > 0.22 and not has_strong_concentric_disc)
+        or wax_grad_mag > 0.095
+        or (hv_wax_aniso > 0.32 and (wax_grad_mag > 0.022 or hi_grad_wax_frac > 0.05) and q25_oct_lbl_wax < 0.25)
+        or (hi_grad_wax_frac > 0.16 and hi_grad_lbl_frac > 0.25 and q25_oct_lbl_wax < 0.22)
+        or (label_grad_mag > 0.125 and wax_grad_mag > 0.045 and q25_oct_lbl_wax < 0.25)
+    )
+
+    # Verified splatter/starburst/split/color-in-color disc exemption for radial wax streaks (e.g., 12988109/img_4,5 & 16595574/img_4)
     is_verified_splatter_or_split_disc = bool(
         not is_hype_sticker_or_text_insert
-        and best_corner_std < 0.18
+        and best_corner_std < 0.245
         and wax_grad_mag < 0.095
-        and (q25_oct_lbl_wax >= 0.15 or best_color_in_color_dist >= 0.12)
+        and hv_wax_aniso < 0.18
+        and (q25_oct_lbl_wax >= 0.14 or best_color_in_color_dist >= 0.12)
         and (
-            (best_label_step >= 0.042 and best_rim_step >= 0.022 and best_label_wax_dist >= 0.20)
+            (best_label_step >= 0.028 and best_rim_step >= 0.022 and best_label_wax_dist >= 0.175)
+            or (best_color_in_color_dist >= 0.165 and best_rim_step >= 0.022 and best_label_wax_dist >= 0.175)
             or (best_corner_std < 0.090 and best_corner_wax_dist >= 0.35 and best_rim_step >= 0.018 and best_label_wax_dist >= 0.18)
         )
     )
 
-    # Verified clear/translucent/starburst disc on sleeve exemption for soft outer rim (guarded against stickers/inserts)
+    # Verified clear/translucent or dark-on-dark splatter disc exemption for soft outer rim (e.g., 26047519/img_3..6)
     is_verified_clear_or_soft_rim_disc = bool(
         not is_hype_sticker_or_text_insert
-        and best_corner_std < 0.18
+        and best_corner_std < 0.245
         and wax_grad_mag < 0.095
-        and (q25_oct_lbl_wax >= 0.15 or best_color_in_color_dist >= 0.12)
+        and hv_wax_aniso < 0.18
+        and (q25_oct_lbl_wax >= 0.105 or best_color_in_color_dist >= 0.11)
         and (
-            (best_rim_step >= 0.024 and best_label_step >= 0.040 and best_label_wax_dist >= 0.25)
+            (best_rim_step >= 0.024 and best_label_step >= 0.030 and best_label_wax_dist >= 0.20)
             or (best_rim_step >= 0.014 and best_label_step >= 0.018 and best_label_wax_dist >= 0.22 and best_corner_wax_dist >= 0.18 and best_corner_std < 0.085)
+            or (best_color_in_color_dist >= 0.11 and best_label_step >= 0.017 and best_label_wax_dist >= 0.15 and best_corner_wax_dist >= 0.10 and best_corner_std < 0.16 and hv_wax_aniso < 0.08 and lr_wax_diff < 0.12)
         )
     )
 
@@ -592,10 +574,10 @@ def score_image_pixels_deterministic(
     is_square_insert_or_sleeve = bool(
         is_hype_sticker_or_text_insert
         or best_active_quads < 4
-        or (best_corner_wax_dist < 0.14 and best_rim_step < 0.032 and not is_verified_clear_or_soft_rim_disc)
+        or (best_corner_wax_dist < 0.14 and best_rim_step < 0.027 and not is_verified_clear_or_soft_rim_disc and not is_verified_splatter_or_split_disc)
         or (best_rim_step < 0.016 and best_corner_wax_dist < 0.32 and not is_verified_clear_or_soft_rim_disc)
         or (wax_grad_mag > 0.048 and wax_grad_mag > label_grad_mag * 0.70 and not is_verified_splatter_or_split_disc)
-        or (spindle_edge < 0.008 and best_label_wax_dist < 0.23)
+        or (spindle_edge < 0.008 and best_label_wax_dist < 0.23 and not is_verified_clear_or_soft_rim_disc)
         or (best_sq_border > 0.045 and best_rim_step < best_sq_border * 0.42 and best_label_step < 0.028)
     )
 
@@ -611,13 +593,11 @@ def score_image_pixels_deterministic(
 
     achromatic_hexes = {"#18181b", "#3f3f46", "#64748b", "#94a3b8", "#a8a29e", "#cbd5e1", "#e2e8f0", "#f1f5f9", "#f8fafc"}
 
-    best_chroma_sim = 0.0
     if primary_hex and primary_hex not in achromatic_hexes:
         target_rgb = np.asarray(_hex_to_rgb01(primary_hex), dtype=np.float32)
         wax_norm = wax_mean_rgb / (np.linalg.norm(wax_mean_rgb) + 1e-6)
         tgt_norm = target_rgb / (np.linalg.norm(target_rgb) + 1e-6)
         sim_p = float(np.dot(wax_norm, tgt_norm))
-        best_chroma_sim = max(best_chroma_sim, sim_p)
         if sim_p > 0.86 and wax_mean_sat > 0.12:
             variant_color_bonus = max(variant_color_bonus, min(0.065, (sim_p - 0.84) * 0.38 + wax_mean_sat * 0.05))
 
@@ -626,17 +606,17 @@ def score_image_pixels_deterministic(
         wax_norm = wax_mean_rgb / (np.linalg.norm(wax_mean_rgb) + 1e-6)
         tgt_norm2 = target_rgb2 / (np.linalg.norm(target_rgb2) + 1e-6)
         sim_s = float(np.dot(wax_norm, tgt_norm2))
-        best_chroma_sim = max(best_chroma_sim, sim_s)
         if sim_s > 0.86 and wax_mean_sat > 0.12:
             variant_color_bonus = max(variant_color_bonus, min(0.045, (sim_s - 0.84) * 0.28 + wax_mean_sat * 0.04))
 
-    # Ghostly / Smoke / Cloudy / Translucent Splatter seed alignment (e.g., 33303678 Ghostly Black, 28895677 Blood Pool)
     if (seed_trans or seed_pattern in ("galaxy", "splatter", "color_in_color", "translucent")) and q25_oct_lbl_wax >= 0.22 and best_corner_std < 0.06:
         if 0.004 <= wax_grad_mag <= 0.065 and hv_wax_aniso < 0.18:
             variant_color_bonus += 0.025
 
     circularity_ratio = (best_rim_step + 0.6 * best_label_step + 0.25 * wax_rad_e) / (wax_tan_e * 0.65 + 0.012)
     clean_disc_bonus = 0.025 if (circularity_ratio >= 1.55 and best_label_wax_dist >= 0.175 and best_corner_std < 0.090) else 0.0
+    if has_strong_concentric_disc or is_verified_splatter_or_split_disc or is_verified_clear_or_soft_rim_disc:
+        clean_disc_bonus = max(clean_disc_bonus, 0.050)
 
     raw_annular_score = (
         best_dual_circle_score
@@ -656,7 +636,7 @@ def score_image_pixels_deterministic(
     score = raw_annular_score * 0.25 if rejected else raw_annular_score
     score = round(min(0.995, max(0.0, score)), 4)
 
-    is_pressing = bool(not rejected and score >= 0.475)
+    is_pressing = bool(not rejected and score >= 0.438)
 
     reason = "deterministic_annular_cv_match"
     if not is_pressing:
@@ -690,8 +670,170 @@ def score_image_pixels_deterministic(
         "octant_label_wax_q25": round(q25_oct_lbl_wax, 4),
         "hv_wax_anisotropy": round(hv_wax_aniso, 4),
         "spindle_contrast": round(spindle_contrast, 4),
+        "rim_step": round(best_rim_step, 4),
+        "label_step": round(best_label_step, 4),
         "reason": reason,
     }
+
+
+def _eval_offcenter_disc(rgb: "np.ndarray", aspect: float) -> dict[str, Any] | None:
+    """Detects off-center angled vinyl disc photos where the full 360-degree 4-inch center label and spindle hole are visible in-frame (e.g. 13203006/img_1.jpg)."""
+    gray = 0.299 * rgb[:, :, 0] + 0.587 * rgb[:, :, 1] + 0.114 * rgb[:, :, 2]
+    gy, gx = np.gradient(gray)
+    yy, xx = np.mgrid[0:256, 0:256]
+    in_frame = (yy >= 3) & (yy < 253) & (xx >= 3) & (xx < 253)
+
+    best_cand: dict[str, Any] | None = None
+    for (cx, cy) in [(-0.39, -0.49), (0.39, -0.49), (-0.39, 0.49), (0.39, 0.49)]:
+        dy = (yy - 127.5) / 127.5 - cy
+        dx = (xx - 127.5) / 127.5 - cx
+        rad = np.hypot(dx, dy)
+        theta = np.arctan2(dy, dx)
+        grad_r = np.abs(gx * np.cos(theta) + gy * np.sin(theta))
+        grad_t = np.abs(-gx * np.sin(theta) + gy * np.cos(theta))
+        pure_rad = np.maximum(0.0, grad_r - 0.55 * grad_t)
+
+        sp_hole = (rad <= 0.036) & in_frame
+        sp_surr = (rad >= 0.050) & (rad <= 0.110) & in_frame
+        sp_ring = (rad >= 0.020) & (rad <= 0.055) & in_frame
+        if np.sum(sp_hole) < 10 or np.sum(sp_surr) < 30:
+            continue
+        sp_c = float(np.linalg.norm(np.mean(rgb[sp_hole], axis=0) - np.mean(rgb[sp_surr], axis=0)))
+        sp_e = float(np.mean(grad_r[sp_ring]))
+
+        lbl_b = (rad >= 0.30) & (rad <= 0.35) & in_frame
+        lbl_e = float(np.mean(pure_rad[lbl_b])) if np.any(lbl_b) else 0.0
+        lbl_in = (rad >= 0.05) & (rad <= 0.29) & in_frame
+        wax_m = (rad >= 0.36) & (rad <= 0.90) & in_frame
+        if np.sum(lbl_in) < 100 or np.sum(wax_m) < 400:
+            continue
+        lwd = float(np.linalg.norm(np.mean(rgb[lbl_in], axis=0) - np.mean(rgb[wax_m], axis=0)))
+        octs: list[float] = []
+        for k in range(8):
+            a0 = -np.pi + k * (np.pi / 4.0)
+            ang = (theta >= a0) & (theta < a0 + np.pi / 4.0)
+            io_m = lbl_in & ang
+            oo_m = wax_m & ang
+            if np.sum(io_m) >= 15 and np.sum(oo_m) >= 25:
+                octs.append(float(np.linalg.norm(np.mean(rgb[io_m], axis=0) - np.mean(rgb[oo_m], axis=0))))
+        if len(octs) < 8:
+            continue
+        q25 = sorted(octs)[1]
+        aniso = abs(float(np.log((np.mean(np.abs(gy[wax_m])) + 1e-5) / (np.mean(np.abs(gx[wax_m])) + 1e-5))))
+
+        if sp_c >= 0.25 and sp_e >= 0.030 and lbl_e >= 0.025 and lwd >= 0.35 and q25 >= 0.24 and aniso < 0.15:
+            sc = round(min(0.95, 0.45 + 0.25 * lwd + 0.20 * q25 + 0.15 * sp_c), 4)
+            cand = {
+                "is_pressing": True,
+                "is_zoomed_label_scan": False,
+                "is_hype_sticker_or_text_insert": False,
+                "is_square_insert_or_sleeve": False,
+                "detected_disc_radius": 0.98,
+                "active_diagonal_quadrants": 4,
+                "score": sc,
+                "raw_annular_score": sc,
+                "aspect_ratio": round(aspect, 3),
+                "corner_std": 0.05,
+                "corner_wax_dist": round(lwd, 4),
+                "circularity_ratio": 2.1,
+                "label_wax_dist": round(lwd, 4),
+                "octant_label_wax_q25": round(q25, 4),
+                "hv_wax_anisotropy": round(aniso, 4),
+                "spindle_contrast": round(sp_c, 4),
+                "rim_step": 0.025,
+                "label_step": round(lbl_e, 4),
+                "reason": "deterministic_annular_cv_match",
+            }
+            if best_cand is None or cand["score"] > best_cand["score"]:
+                best_cand = cand
+    return best_cand
+
+
+def score_image_pixels_deterministic(
+    image_bytes: bytes,
+    expected_wax_hex: str | None = None,
+    secondary_wax_hex: str | None = None,
+    wax_spec: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Deterministically scores an image for whether it shows a physical 12" vinyl record pressing.
+
+    Uses Multi-Pass Calibrated Concentric Dual-Circle Detection + 8-Octant Label Continuity:
+    - Pass 1: Standard centered disc search (`R_disc in [0.80..0.99]`), preserving full-bleed
+      near-square frames (`|aspect - 1.0| <= 0.06`) and protecting verified concentric discs on
+      inner sleeves or album jackets (`has_strong_concentric_disc`).
+    - Pass 2: Landscape 4:3 turntable platter alignment (`aspect > 1.08`), evaluating left-shifted
+      platter crops so right-hand tonearms do not obscure the outer rim (`20697637/img_1`, `2343816/img_1`).
+    - Pass 3: Padded studio pressing search (`R_disc in [0.65..0.79]`) on clean backdrops (`26690690/img_1`).
+    - Pass 4: Off-center angled vinyl disc detection where the full 360-degree 4-inch center label
+      and spindle hole are visible in-frame (`13203006/img_1`).
+    """
+    if not HAS_CV_DEPS:
+        return {"is_pressing": False, "score": 0.0, "reason": "cv_deps_unavailable"}
+
+    try:
+        with Image.open(io.BytesIO(image_bytes)) as im:
+            w, h = im.size
+            aspect = w / float(h) if h else 0.0
+            if aspect < 0.72 or aspect > 1.38:
+                return {
+                    "is_pressing": False,
+                    "score": 0.05,
+                    "raw_annular_score": 0.05,
+                    "aspect_ratio": round(aspect, 3),
+                    "reason": "rejected_aspect_ratio_panoramic_or_strip",
+                }
+            rgb_full = im.convert("RGB")
+            side = min(w, h)
+            if abs(aspect - 1.0) > 0.06:
+                left_c = (w - side) // 2
+                top_c = (h - side) // 2
+                cropped_c = rgb_full.crop((left_c, top_c, left_c + side, top_c + side))
+            else:
+                cropped_c = rgb_full
+            rgb_c = np.asarray(cropped_c.resize((256, 256), Image.Resampling.BILINEAR), dtype=np.float32) / 255.0
+
+            # Pass 1: Standard centered disc search (r in [0.80..0.99])
+            best_res = _eval_centered_concentric(
+                rgb_c, aspect, expected_wax_hex, secondary_wax_hex, wax_spec, r_min=0.80, r_max=0.99, n_steps=20
+            )
+
+            # Pass 2: Landscape turntable platter photo (w > h * 1.08, platter shifted left with tonearm on right)
+            if not best_res["is_pressing"] and aspect > 1.08:
+                top_c = (h - side) // 2
+                for lf in (0.12, 0.06):
+                    left = int((w - side) * lf)
+                    cropped_l = rgb_full.crop((left, top_c, left + side, top_c + side))
+                    rgb_l = np.asarray(cropped_l.resize((256, 256), Image.Resampling.BILINEAR), dtype=np.float32) / 255.0
+                    res_l = _eval_centered_concentric(
+                        rgb_l, aspect, expected_wax_hex, secondary_wax_hex, wax_spec, r_min=0.80, r_max=0.99, n_steps=20
+                    )
+                    if res_l["is_pressing"] and res_l["label_wax_dist"] >= 0.25 and res_l["rim_step"] >= 0.022:
+                        if not best_res["is_pressing"] or res_l["score"] > best_res["score"]:
+                            best_res = res_l
+
+            # Pass 3: Padded studio pressing photo where disc has wider margin (r in [0.65..0.79], e.g. 26690690/img_1.jpg)
+            if not best_res["is_pressing"]:
+                res_pad = _eval_centered_concentric(
+                    rgb_c, aspect, expected_wax_hex, secondary_wax_hex, wax_spec, r_min=0.65, r_max=0.79, n_steps=10
+                )
+                if (
+                    res_pad["is_pressing"]
+                    and res_pad["corner_std"] < 0.05
+                    and res_pad["corner_wax_dist"] >= 0.40
+                    and res_pad["rim_step"] >= 0.035
+                    and res_pad["label_step"] >= 0.035
+                ):
+                    best_res = res_pad
+
+            # Pass 4: Off-center angled vinyl disc with full 8-octant 4" center label and spindle hole (e.g. 13203006/img_1.jpg)
+            if not best_res["is_pressing"]:
+                res_off = _eval_offcenter_disc(rgb_c, aspect)
+                if res_off is not None:
+                    best_res = res_off
+
+            return best_res
+    except Exception:
+        return {"is_pressing": False, "score": 0.0, "reason": "image_decode_error"}
 
 
 def select_release_images_deterministic(
@@ -837,8 +979,8 @@ def select_release_images_deterministic(
                 has_any_real_cv = True
                 if cv_details.get("is_pressing"):
                     role = "pressing_disc"
-                    # First verified pressing disc (Side A) gets a tie-breaker bonus (+0.028)
-                    side_a_bonus = 0.028 if not first_verified_pressing_seen else 0.0
+                    # First verified pressing disc (Side A) gets a tie-breaker bonus (+0.038)
+                    side_a_bonus = 0.038 if not first_verified_pressing_seen else 0.0
                     first_verified_pressing_seen = True
                     combined_score = min(0.995, 0.92 * float(cv_details["score"]) + 0.08 * 0.85 + side_a_bonus)
                     method = "deterministic_annular_cv+guideline_13_8"
