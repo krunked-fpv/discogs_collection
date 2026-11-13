@@ -32,7 +32,7 @@ for key, rel_p in PRESSING_PHOTO_MAP.items():
     if abs_p.exists():
         CV_CACHE[key] = score_image_pixels_deterministic(abs_p.read_bytes())
 
-# 56 Grounded Releases in krunked's collection (42 verified Discogs Marketplace orders + 14 from Keep 'Vinyl flattening' note)
+# 56 Grounded Releases in krunked's collection (42 verified Discogs Marketplace orders + 14 from portable Vinyl Flattening Queue)
 RAW_RELEASES = [
     (17583742, "Rings Of Saturn", "Embryonic Anomaly (Remake)", 2021, "LP, Album, Ltd, RM, RP, Pur", "Not On Label (Rings Of Saturn Self-released)", "none", "Near Mint (NM or M-)", "Near Mint (NM or M-)", "never played", "2026-11-11", 50.00, "https://www.discogs.com/release/17583742-Rings-Of-Saturn-Embryonic-Anomaly-Remake", "purple_galaxy", "Not Listed"),
     (14947161, "Veil Of Maya", "[Id]", 2020, "LP, Yel", "Sumerian Records", "SUM-026", "Good Plus (G+)", "Very Good (VG)", "USED copy. Yellow pressing.", "2026-11-10", 59.99, "https://www.discogs.com/release/14947161-Veil-Of-Maya-Id", "neon_split", "Not Listed"),
@@ -96,7 +96,7 @@ RAW_RELEASES = [
     (29410354, "Periphery", "Juggernaut • Omega", 2023, "LP, Album, Ltd, Bla", "3 Dot Recordings", "3DOT-010", "Very Good (VG)", "Very Good Plus (VG+)", "Includes the printed inner sleeve.", "2026-10-13", 40.00, "https://www.discogs.com/release/29410354-Periphery-Juggernaut-Omega", None, "Done"),
     (37163709, "Sleep Token", "Take Me Back To Eden", 2025, "2xLP, RE, RP, Mil", "Spinefarm Records", "SPINE801099P", "Mint (M)", "Mint (M)", "Milky Clear 2xLP, only played once.", "2026-10-12", 45.00, "https://www.discogs.com/release/37163709-Sleep-Token-Take-Me-Back-To-Eden", "crimson_nebula", "Done"),
     (37838730, "Bring Me The Horizon", "Count Your Blessings Repented.", 2025, "LP, Album, Dlx, Cok", "RCA", "19958442051", "Mint (M)", "Mint (M)", "Coke Bottle Clear Deluxe LP, sounds crystal clear.", "2026-10-12", 85.00, "https://www.discogs.com/release/37838730-Bring-Me-The-Horizon-Count-Your-Blessings-Repented", "neon_split", "Not Listed"),
-    # Additional collection records verified from Alex's Google Keep 'Vinyl flattening' note
+    # Additional collection records verified from Alex's portable Vinyl Flattening Queue
     (14224286, "A Day To Remember", "For Those Who Have Heart", 2019, "LP, Album, Ltd, RE, Yellow, White, and Blue Starburst", "Victory Records", "VR337", "Near Mint (NM or M-)", "Near Mint (NM or M-)", "Yellow, White & Blue Starburst pressing (in Vinyl Flattening queue).", "2026-10-11", 45.00, "https://www.discogs.com/release/14224286-A-Day-To-Remember-For-Those-Who-Have-Heart", "neon_split", "Need to be done"),
     (31909216, "Allt", "From The New World", 2024, "LP, Album, 140g, Bla", "Century Media", "19802815871", "Mint (M)", "Mint (M)", "Flattened and verified on plate.", "2026-10-10", 30.21, "https://www.discogs.com/release/31909216-Allt-From-The-New-World", None, "Done"),
     (16251744, "Coheed And Cambria", "Good Apollo, I'm Burning Star IV, Volume Two: No World For Tomorrow", 2020, "2xLP, Album, Ltd, RE, Etch, Red & Cream Mix with Black Splatter", "Columbia", "194397274516", "Near Mint (NM or M-)", "Near Mint (NM or M-)", "Red & Cream Mix w/ Black Splatter + Etched D-Side.", "2026-10-09", 48.00, "https://www.discogs.com/release/16251744-Coheed-And-Cambria-Good-Apollo-Im-Burning-Star-IV-Volume-Two-No-World-for-Tomorrow", "crimson_nebula", "Done"),
@@ -199,7 +199,7 @@ pressing_count = sum(1 for r in records if r["images"]["has_pressing_photo"])
 colored_count = sum(1 for r in records if r["wax_spec"]["pattern"] != "black")
 
 payload = {
-    "schema_version": "2.0.0",
+    "schema_version": "4.0.0",
     "source_of_truth": "https://www.discogs.com/user/krunked/collection",
     "api_documentation": "https://www.discogs.com/developers",
     "image_guidelines": "https://support.discogs.com/hc/en-us/articles/360005006874-Database-Guidelines-13-Images",

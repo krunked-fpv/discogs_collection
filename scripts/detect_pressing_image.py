@@ -1285,6 +1285,11 @@ def _norm_text(s: str) -> str:
     return re.sub(r"[^a-z0-9]+", " ", (s or "").lower()).strip()
 
 
+DEFAULT_FLATTENING_PROTOCOL = (
+    "Bag on 6 until 130°F then drop to 4 — 2.5 hours once at 130°F on the plate"
+)
+
+
 def resolve_flattening_status(
     artist: str,
     title: str,
@@ -1294,6 +1299,244 @@ def resolve_flattening_status(
     """Deterministically resolves a release's Vinyl Flattening status ('Need to be done', 'Done', or 'Not Listed')."""
     if not queue_data:
         return "Not Listed"
+
+    rid_int = int(release_id or 0)
+    unlisted_ids = {int(x) for x in (queue_data.get("unlisted_release_ids") or []) if str(x).isdigit()}
+    if rid_int > 0 and rid_int in unlisted_ids:
+        return "Not Listed"
+
+    todo_ids = {int(x) for x in (queue_data.get("need_to_be_done_release_ids") or []) if str(x).isdigit()}
+    done_ids = {int(x) for x in (queue_data.get("done_release_ids") or []) if str(x).isdigit()}
+
+    for entry in queue_data.get("need_to_be_done_entries") or []:
+        for r_x in entry.get("release_ids") or []:
+            if str(r_x).isdigit():
+                todo_ids.add(int(r_x))
+
+    for entry in queue_data.get("done_entries") or []:
+        for r_x in entry.get("release_ids") or []:
+            if str(r_x).isdigit():
+                done_ids.add(int(r_x))
+
+    if rid_int in todo_ids:
+        return "Need to be done"
+    if rid_int in done_ids:
+        return "Done"
+
+    a_norm = _norm_text(artist)
+    t_norm = _norm_text(title)
+
+    for entry in queue_data.get("need_to_be_done_entries") or []:
+        if entry.get("release_ids"):
+            continue
+        ea = _norm_text(entry.get("artist", ""))
+        et = _norm_text(entry.get("album", ""))
+        if ea and et and len(t_norm) >= 4 and (ea in a_norm or a_norm in ea) and (et == t_norm or (len(et) >= 5 and et in t_norm)):
+            return "Need to be done"
+
+    for entry in queue_data.get("done_entries") or []:
+        if entry.get("release_ids"):
+            continue
+        ea = _norm_text(entry.get("artist", ""))
+        et = _norm_text(entry.get("album", ""))
+        if ea and et and len(t_norm) >= 4 and (ea in a_norm or a_norm in ea) and (et == t_norm or (len(et) >= 5 and et in t_norm)):
+            return "Done"
+
+    return "Not Listed"
+
+
+def _parse_csv_int_ids(raw: str | None) -> list[int]:
+    if not raw:
+        return []
+    out: list[int] = []
+    for tok in re.split(r"[,;\s]+", str(raw).strip()):
+        if tok.isdigit() and int(tok) > 0:
+            val = int(tok)
+            if val not in out:
+                out.append(val)
+    return out
+
+
+def extract_inline_flattening_from_html(html_path: pathlib.Path | None) -> dict[str, Any]:
+    """Extracts the inline HTML flattening queue stored inside `#flattening-inline-form` or `window.__DISCOGS_COLLECTION__`."""
+    if not html_path or not html_path.exists():
+        return {}
+    try:
+        html_text = html_path.read_text(encoding="utf-8", errors="ignore")
+    except Exception:
+        return {}
+
+    result: dict[str, Any] = {}
+
+    # 1. Check hidden textarea `#flatten-hidden-json` first
+    m_json = re.search(
+        r'<textarea[^>]*id="flatten-hidden-json"[^>]*>(.*?)</textarea>',
+        html_text,
+        flags=re.DOTALL | re.IGNORECASE,
+    )
+    if m_json:
+        raw_json = m_json.group(1).strip()
+        if raw_json:
+            try:
+                import html as _html_mod
+                parsed = json.loads(_html_mod.unescape(raw_json))
+                if isinstance(parsed, dict):
+                    result.update(parsed)
+            except Exception:
+                pass
+
+    # 2. Check hidden `<input type="hidden">` fields (which override or supplement the textarea)
+    def _extract_input_val(elem_id: str) -> tuple[bool, str]:
+        m_tag = re.search(
+            rf'<input[^>]*id="{re.escape(elem_id)}"[^>]*>',
+            html_text,
+            flags=re.IGNORECASE,
+        )
+        if not m_tag:
+            return (False, "")
+        m_val = re.search(r'value="([^"]*)"', m_tag.group(0), flags=re.IGNORECASE)
+        return (True, m_val.group(1).strip() if m_val else "")
+
+    has_todo, todo_csv = _extract_input_val("flatten-hidden-todo-ids")
+    has_done, done_csv = _extract_input_val("flatten-hidden-done-ids")
+    has_unlisted, unlisted_csv = _extract_input_val("flatten-hidden-unlisted-ids")
+    has_ts, updated_at = _extract_input_val("flatten-hidden-updated-at")
+    has_proto, protocol_str = _extract_input_val("flatten-hidden-protocol")
+
+    if has_todo or has_done or has_ts:
+        if has_todo:
+            result["need_to_be_done_release_ids"] = _parse_csv_int_ids(todo_csv)
+        if has_done:
+            result["done_release_ids"] = _parse_csv_int_ids(done_csv)
+        if has_unlisted:
+            result["unlisted_release_ids"] = _parse_csv_int_ids(unlisted_csv)
+        if has_ts and updated_at:
+            result["updated_at_utc"] = updated_at
+        if has_proto and protocol_str:
+            result["protocol"] = protocol_str
+
+    # 3. Fallback: if no hidden form yet, extract from embedded window.__DISCOGS_COLLECTION__
+    if not result.get("need_to_be_done_release_ids") and not result.get("done_release_ids") and not has_todo:
+        m_col = re.search(
+            r"window\.__DISCOGS_COLLECTION__\s*=\s*(\{.*?\});\s*(?:try\s*\{|/\*\s*__DISCOGS_COLLECTION_DATA_END__)",
+            html_text,
+            flags=re.DOTALL,
+        )
+        if m_col:
+            try:
+                col_obj = json.loads(m_col.group(1))
+                recs = col_obj.get("records") or []
+                todo_rids = sorted({int(r["release_id"]) for r in recs if r.get("flattening_status") == "Need to be done" and r.get("release_id")})
+                done_rids = sorted({int(r["release_id"]) for r in recs if r.get("flattening_status") == "Done" and r.get("release_id")})
+                fq = col_obj.get("flattening_queue") or {}
+                result = {
+                    "protocol": fq.get("protocol") or DEFAULT_FLATTENING_PROTOCOL,
+                    "updated_at_utc": fq.get("updated_at_utc") or col_obj.get("synced_at_utc") or "",
+                    "need_to_be_done_release_ids": todo_rids,
+                    "done_release_ids": done_rids,
+                    "need_to_be_done_entries": fq.get("need_to_be_done_entries") or [],
+                    "done_entries": fq.get("done_entries") or [],
+                }
+            except Exception:
+                pass
+
+    return result
+
+
+def build_flattening_queue_payload(
+    records: list[dict[str, Any]],
+    base_queue: dict[str, Any] | None = None,
+    updated_at_utc: str | None = None,
+) -> dict[str, Any]:
+    """Builds a clean, portable flattening_queue payload from `records` and `base_queue`."""
+    base_queue = base_queue or {}
+    protocol = str(base_queue.get("protocol") or DEFAULT_FLATTENING_PROTOCOL).replace(
+        "it hits 130 then drop to 4 — 2.5 hours once it hits 130",
+        "130°F then drop to 4 — 2.5 hours once at 130°F",
+    )
+    todo_recs = sorted(
+        [r for r in records if r.get("flattening_status") == "Need to be done"],
+        key=lambda x: (str(x.get("artist") or "").lower(), str(x.get("title") or "").lower()),
+    )
+    done_recs = sorted(
+        [r for r in records if r.get("flattening_status") == "Done"],
+        key=lambda x: (str(x.get("artist") or "").lower(), str(x.get("title") or "").lower()),
+    )
+    todo_ids = sorted({int(r["release_id"]) for r in todo_recs if int(r.get("release_id") or 0) > 0})
+    done_ids = sorted({int(r["release_id"]) for r in done_recs if int(r.get("release_id") or 0) > 0})
+    unlisted_ids = sorted(
+        {
+            int(x)
+            for x in (base_queue.get("unlisted_release_ids") or [])
+            if str(x).isdigit() and int(x) not in todo_ids and int(x) not in done_ids
+        }
+    )
+
+    todo_entries = [
+        {
+            "artist": str(r.get("artist") or ""),
+            "album": str(r.get("title") or ""),
+            "release_ids": [int(r["release_id"])],
+        }
+        for r in todo_recs
+        if int(r.get("release_id") or 0) > 0
+    ]
+    done_entries = [
+        {
+            "artist": str(r.get("artist") or ""),
+            "album": str(r.get("title") or ""),
+            "release_ids": [int(r["release_id"])],
+        }
+        for r in done_recs
+        if int(r.get("release_id") or 0) > 0
+    ]
+
+    ts = updated_at_utc or str(base_queue.get("updated_at_utc") or "") or _dt.datetime.now(_dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    return {
+        "schema_version": "4.0.0",
+        "storage_mode": "portable_inline_html+json",
+        "updated_at_utc": ts,
+        "protocol": protocol,
+        "need_to_be_done_release_ids": todo_ids,
+        "done_release_ids": done_ids,
+        "unlisted_release_ids": unlisted_ids,
+        "need_to_be_done_entries": todo_entries,
+        "done_entries": done_entries,
+    }
+
+
+def reconcile_flattening_state(
+    flattening_path: pathlib.Path,
+    html_path: pathlib.Path | None = None,
+) -> dict[str, Any]:
+    """Loads and reconciles the flattening queue from both `data/flattening_queue.json` and inline `index.html`."""
+    file_queue: dict[str, Any] = {}
+    if flattening_path and flattening_path.exists():
+        try:
+            file_queue = json.loads(flattening_path.read_text(encoding="utf-8"))
+        except Exception:
+            file_queue = {}
+
+    html_queue = extract_inline_flattening_from_html(html_path)
+
+    file_ts = str(file_queue.get("updated_at_utc") or "")
+    html_ts = str(html_queue.get("updated_at_utc") or "")
+
+    # Prefer inline HTML queue if it has a newer timestamp or if file_queue is missing/empty
+    if html_queue and (not file_queue or (html_ts and html_ts > file_ts)):
+        chosen = dict(file_queue)
+        chosen.update(html_queue)
+    elif file_queue:
+        chosen = dict(html_queue)
+        chosen.update(file_queue)
+        if not chosen.get("need_to_be_done_release_ids") and html_queue.get("need_to_be_done_release_ids"):
+            chosen["need_to_be_done_release_ids"] = html_queue["need_to_be_done_release_ids"]
+        if not chosen.get("done_release_ids") and html_queue.get("done_release_ids"):
+            chosen["done_release_ids"] = html_queue["done_release_ids"]
+    else:
+        chosen = {}
+
+    return chosen
 
     rid_int = int(release_id or 0)
     todo_ids = {int(x) for x in (queue_data.get("need_to_be_done_release_ids") or [])}
@@ -1327,7 +1570,7 @@ def resolve_flattening_status(
 
 
 # ==============================================================================
-# DELTA SYNC ENGINE & LIVE TERMINAL UI / TURNTABLE THROBBER (v2.4.0)
+# DELTA SYNC ENGINE & LIVE TERMINAL UI / TURNTABLE THROBBER (v4.0.0)
 # ==============================================================================
 
 import datetime as _dt
@@ -1525,7 +1768,7 @@ class VaultTerminalUI:
         "▂▄▆█▇▅▃",
     )
 
-    def __init__(self, title: str = "KRUNKED // VINYL VAULT", subtitle: str = "DELTA SYNC ENGINE v2.4") -> None:
+    def __init__(self, title: str = "KRUNKED // VINYL VAULT", subtitle: str = "DELTA SYNC ENGINE v4.0") -> None:
         self.title = title
         self.subtitle = subtitle
         self.start_time = _time.perf_counter()

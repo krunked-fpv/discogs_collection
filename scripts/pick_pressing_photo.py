@@ -2,7 +2,7 @@
 """Pick The Right Pressing Photo & Static Index Compiler (`pick_pressing_photo.py`).
 
 Inspects releases in `data/collection.json` AND release folders in
-`assets/releases/<release_id>/` using the v2.4 Incremental Delta Engine:
+`assets/releases/<release_id>/` using the v4.0 Incremental Delta Engine:
 - Fast-paths `UNCHANGED` releases in sub-millisecond time without re-decoding
   images or re-running the 4-pass NumPy CV suite.
 - Runs the full Calibrated Multi-Scale Concentric Dual-Circle CV + Guideline 13.8
@@ -46,9 +46,11 @@ if str(SCRIPT_DIR) not in sys.path:
 
 from detect_pressing_image import (
     VaultTerminalUI,
+    build_flattening_queue_payload,
     compute_release_delta_signature,
     evaluate_release_delta_status,
     parse_wax_variant,
+    reconcile_flattening_state,
     resolve_flattening_status,
     select_release_images_deterministic,
 )
@@ -60,7 +62,7 @@ except ImportError:
     HAS_PIL = False
 
 DISCOGS_API_BASE = "https://api.discogs.com"
-USER_AGENT = "KrunkedDiscogsVault/2.4 +https://github.com/krunked-fpv/discogs_collection"
+USER_AGENT = "KrunkedDiscogsVault/4.0 +https://github.com/krunked-fpv/discogs_collection"
 DEFAULT_TOKEN = ""
 
 # Verified marketplace purchase prices for releases with 0 active copies currently listed on Discogs
@@ -230,7 +232,7 @@ def inject_into_index_html(
     collection_data: dict[str, Any],
     overrides_data: dict[str, Any],
 ) -> bool:
-    """Injects window.__DISCOGS_COLLECTION__, window.__DISCOGS_OVERRIDES__, and static KPI values into index.html."""
+    """Injects window.__DISCOGS_COLLECTION__, window.__DISCOGS_OVERRIDES__, inline flattening hidden inputs, and KPI values into index.html."""
     if not html_path.exists():
         print(f"[warn] HTML file not found at {html_path}", file=sys.stderr)
         return False
@@ -254,7 +256,7 @@ def inject_into_index_html(
         f"      var __pySyncStamp = {json.dumps(sync_stamp)};\n"
         "      if (typeof localStorage !== 'undefined' && localStorage.getItem('__discogs_py_sync_stamp__') !== __pySyncStamp) {\n"
         "        Object.keys(localStorage).forEach(function(k) {\n"
-        "          if (k.toLowerCase().indexOf('token') === -1) {\n"
+        "          if (k.toLowerCase().indexOf('token') === -1 && k.indexOf('flattening_timer') === -1) {\n"
         "            localStorage.removeItem(k);\n"
         "          }\n"
         "        });\n"
@@ -269,7 +271,7 @@ def inject_into_index_html(
         re.DOTALL,
     )
     if pattern.search(html_text):
-        html_text = pattern.sub(lambda _: replacement_block, html_text)
+        html_text = pattern.sub(lambda _: replacement_block, html_text, count=1)
     else:
         print("[warn] Could not find __DISCOGS_COLLECTION_DATA_START__ marker in index.html", file=sys.stderr)
         return False
@@ -280,30 +282,61 @@ def inject_into_index_html(
     pressing_count = int(prof.get("pressing_photos_detected") or 0)
     colored_count = int(prof.get("colored_or_special_variants") or 0)
     colored_pct = f"{(colored_count / total_lps * 100.0):.1f}%" if total_lps else "0.0%"
+    pressing_pct = f"{(pressing_count / total_lps * 100.0):.1f}%" if total_lps else "0.0%"
 
     col_val = prof.get("collection_value") or {}
-    median_str = str(col_val.get("median") or col_val.get("formatted_total") or "$6,011.87")
-    range_str = f"Min {col_val.get('minimum', '$3,721.74')} • Max {col_val.get('maximum', '$10,437.49')}"
+    median_str = str(col_val.get("median") or col_val.get("formatted_total") or "$6,203.01")
+    formatted_total = str(col_val.get("formatted_total") or median_str)
+    range_str = f"Min {col_val.get('minimum', '$3,886.22')} • Max {col_val.get('maximum', '$10,761.84')}"
 
     todo_count = sum(1 for r in records if r.get("flattening_status") == "Need to be done")
     done_count = sum(1 for r in records if r.get("flattening_status") == "Done")
+    unlisted_count = max(0, total_lps - todo_count - done_count)
+
+    fq_payload = build_flattening_queue_payload(
+        records=records,
+        base_queue=collection_data.get("flattening_queue"),
+        updated_at_utc=sync_stamp,
+    )
+    todo_csv = ",".join(str(x) for x in fq_payload.get("need_to_be_done_release_ids", []))
+    done_csv = ",".join(str(x) for x in fq_payload.get("done_release_ids", []))
+    unlisted_csv = ",".join(str(x) for x in fq_payload.get("unlisted_release_ids", []))
+    fq_updated_at = str(fq_payload.get("updated_at_utc") or sync_stamp)
+    import html as _html_mod
+    fq_json_escaped = _html_mod.escape(json.dumps(fq_payload, ensure_ascii=False))
 
     kpi_replacements = [
+        (r'(<span id="bg-enrich-progress"[^>]*>)(.*?)(</span>)', f"\\g<1>• {total_lps} LPs &amp; {pressing_count} Pressing Photos Compiled\\g<3>"),
         (r'(<div id="kpi-total-records"[^>]*>)(.*?)(</div>)', f"\\g<1>{total_lps} LPs\\g<3>"),
         (r'(<div id="kpi-pressing-photos"[^>]*>)(.*?)(</div>)', f"\\g<1>{pressing_count} / {total_lps}\\g<3>"),
         (r'(<div id="kpi-colored-wax"[^>]*>)(.*?)(</div>)', f"\\g<1>{colored_pct}\\g<3>"),
         (r'(<div id="kpi-vault-value"[^>]*>)(.*?)(</div>)', f"\\g<1>{median_str}\\g<3>"),
         (r'(<div id="kpi-vault-range"[^>]*>)(.*?)(</div>)', f"\\g<1>{range_str}\\g<3>"),
+        (r'(<div id="kpi-nm-ratio"[^>]*>)(.*?)(</div>)', f"\\g<1>{formatted_total}\\g<3>"),
+        (r'(<div id="kpi-gallery-sub"[^>]*>)(.*?)(</div>)', f"\\g<1>{total_lps} LPs Individual Est.\\g<3>"),
         (r'(<div id="kpi-flattening"[^>]*>)(.*?)(</div>)', f"\\g<1>{todo_count} Queued / {done_count} Done\\g<3>"),
+        (r'(<span id="hero-pressing-ratio"[^>]*>)(.*?)(</span>)', f"\\g<1>{pressing_count}/{total_lps}\\g<3>"),
+        (r'(<span id="carousel-counter"[^>]*>)(.*?)(</span>)', f"\\g<1>1 / {total_lps}\\g<3>"),
+        (r'(<button[^>]*id="chip-flatten-todo"[^>]*>)(.*?)(</button>)', f"\\g<1>🔥 Flattening Queue ({todo_count})\\g<3>"),
+        (r'(<button[^>]*id="chip-flatten-done"[^>]*>)(.*?)(</button>)', f"\\g<1>✓ Flattened &amp; Verified ({done_count})\\g<3>"),
+        (r'(<div id="pipe-kpi-cv"[^>]*>)(.*?)(</div>)', f"\\g<1>{pressing_count} / {total_lps} Physical Discs Verified ({pressing_pct})\\g<3>"),
+        (r'(<div id="pipe-kpi-flatten"[^>]*>)(.*?)(</div>)', f"\\g<1>{todo_count} Queued • {done_count} Flattened • {unlisted_count} Uninspected\\g<3>"),
+        (r'(<div id="pipe-kpi-val"[^>]*>)(.*?)(</div>)', f"\\g<1>{median_str} Median • {formatted_total} Release Sum\\g<3>"),
         (r'(<span id="flatten-todo-count"[^>]*>)(.*?)(</span>)', f"\\g<1>{todo_count} Records\\g<3>"),
         (r'(<span id="flatten-done-count"[^>]*>)(.*?)(</span>)', f"\\g<1>{done_count} Records\\g<3>"),
+        (r'(<span id="flatten-unlisted-count"[^>]*>)(.*?)(</span>)', f"\\g<1>{unlisted_count} Records\\g<3>"),
         (
             r'(<div id="grid-status-label"[^>]*>\s*)(.*?)(\s*</div>)',
             f"\\g<1>Showing {total_lps} of {total_lps} releases in krunked's collection\\g<3>",
         ),
+        (r'(<input[^>]*id="flatten-hidden-updated-at"[^>]*value=")([^"]*)(")', f"\\g<1>{fq_updated_at}\\g<3>"),
+        (r'(<input[^>]*id="flatten-hidden-todo-ids"[^>]*value=")([^"]*)(")', f"\\g<1>{todo_csv}\\g<3>"),
+        (r'(<input[^>]*id="flatten-hidden-done-ids"[^>]*value=")([^"]*)(")', f"\\g<1>{done_csv}\\g<3>"),
+        (r'(<input[^>]*id="flatten-hidden-unlisted-ids"[^>]*value=")([^"]*)(")', f"\\g<1>{unlisted_csv}\\g<3>"),
+        (r'(<textarea[^>]*id="flatten-hidden-json"[^>]*>)(.*?)(</textarea>)', lambda m: f"{m.group(1)}{fq_json_escaped}{m.group(3)}"),
     ]
-    for pat_str, rep_str in kpi_replacements:
-        html_text = re.sub(pat_str, rep_str, html_text, flags=re.DOTALL)
+    for pat_str, rep_val in kpi_replacements:
+        html_text = re.sub(pat_str, rep_val, html_text, flags=re.DOTALL)
 
     html_path.write_text(html_text, encoding="utf-8")
     return True
@@ -410,7 +443,7 @@ def run_pick_pressing_photos(
     if ui is None:
         ui = VaultTerminalUI(
             title="KRUNKED // VINYL VAULT",
-            subtitle="PRESSING PICKER & DELTA ENGINE v2.4",
+            subtitle="PRESSING PICKER & DELTA ENGINE v4.0",
         )
         mode_str = "FULL CV REBUILD (--full)" if force_full else (
             f"TARGETED RESYNC ({sorted(force_rids)})" if force_rids else "INCREMENTAL DELTA PICKER"
@@ -437,12 +470,7 @@ def run_pick_pressing_photos(
         except Exception:
             overrides = {}
 
-    flattening_queue: dict[str, Any] = {}
-    if flattening_path.exists():
-        try:
-            flattening_queue = json.loads(flattening_path.read_text(encoding="utf-8"))
-        except Exception:
-            flattening_queue = {}
+    flattening_queue: dict[str, Any] = reconcile_flattening_state(flattening_path, html_path)
 
     assets_releases_dir.mkdir(parents=True, exist_ok=True)
 
@@ -851,7 +879,7 @@ def run_pick_pressing_photos(
     todo_count = sum(1 for r in records if r.get("flattening_status") == "Need to be done")
     done_count = sum(1 for r in records if r.get("flattening_status") == "Done")
 
-    collection_data["schema_version"] = "2.4.0"
+    collection_data["schema_version"] = "4.0.0"
     collection_data["is_offline_seed"] = False
     collection_data["synced_at_utc"] = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     collection_data["records"] = records
@@ -867,12 +895,17 @@ def run_pick_pressing_photos(
         "flattening_done": done_count,
         "collection_value": collection_value,
     }
-    if flattening_queue:
-        collection_data["flattening_queue"] = {
-            "protocol": flattening_queue.get("protocol", ""),
-            "need_to_be_done_entries": flattening_queue.get("need_to_be_done_entries", []),
-            "done_entries": flattening_queue.get("done_entries", []),
-        }
+    compiled_fq = build_flattening_queue_payload(
+        records=records,
+        base_queue=flattening_queue,
+        updated_at_utc=collection_data["synced_at_utc"],
+    )
+    collection_data["flattening_queue"] = compiled_fq
+    try:
+        flattening_path.parent.mkdir(parents=True, exist_ok=True)
+        flattening_path.write_text(json.dumps(compiled_fq, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    except Exception:
+        pass
 
     collection_path.write_text(json.dumps(collection_data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 

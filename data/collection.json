@@ -1,10 +1,10 @@
 {
-  "schema_version": "2.4.0",
+  "schema_version": "4.0.0",
   "is_offline_seed": false,
   "source_of_truth": "https://www.discogs.com/user/krunked/collection",
   "api_documentation": "https://www.discogs.com/developers",
   "username": "krunked",
-  "synced_at_utc": "2026-11-13T20:13:19Z",
+  "synced_at_utc": "2026-11-13T21:42:51Z",
   "profile": {
     "username": "krunked",
     "owner_name": "Alex Goresch",
@@ -41200,12 +41200,63 @@
     }
   ],
   "flattening_queue": {
-    "protocol": "Bag on 6 until it hits 130 then drop to 4 — 2.5 hours once it hits 130 on the plate",
+    "schema_version": "4.0.0",
+    "storage_mode": "portable_inline_html+json",
+    "updated_at_utc": "2026-11-13T21:42:51Z",
+    "protocol": "Bag on 6 until 130°F then drop to 4 — 2.5 hours once at 130°F on the plate",
+    "need_to_be_done_release_ids": [
+      28844782,
+      34756244,
+      35907826
+    ],
+    "done_release_ids": [
+      3873517,
+      9346527,
+      11368406,
+      12131049,
+      13113361,
+      14043330,
+      14188877,
+      14458307,
+      16251744,
+      20546863,
+      21390094,
+      22544762,
+      23343893,
+      23657633,
+      23674760,
+      23775551,
+      26421509,
+      26690690,
+      27079776,
+      27927123,
+      28269505,
+      29075062,
+      29237467,
+      29410045,
+      29410354,
+      29592373,
+      30245600,
+      30637357,
+      31909216,
+      33303678,
+      34691910,
+      35426350,
+      35720014,
+      35844376,
+      36897417,
+      37058814,
+      37163709,
+      37848120,
+      38268432,
+      38600733,
+      38854575
+    ],
+    "unlisted_release_ids": [],
     "need_to_be_done_entries": [
       {
         "artist": "A Day To Remember",
         "album": "For Those Who Have Heart",
-        "note_text": "A day to remember.  For those who have heart",
         "release_ids": [
           28844782
         ]
@@ -41213,15 +41264,13 @@
       {
         "artist": "Bring Me The Horizon",
         "album": "That's The Spirit",
-        "note_text": "Bring me the horizon.  That's the spirit",
         "release_ids": [
           35907826
         ]
       },
       {
         "artist": "Imminence",
-        "album": "The Return Of The Black",
-        "note_text": "Imminence. The return of the black",
+        "album": "The Return Of The Black ",
         "release_ids": [
           34756244
         ]
@@ -41231,7 +41280,6 @@
       {
         "artist": "Allt",
         "album": "From The New World",
-        "note_text": "Allt.  From the new world",
         "release_ids": [
           31909216
         ]
@@ -41239,7 +41287,6 @@
       {
         "artist": "Born Of Osiris",
         "album": "Angel Or Alien",
-        "note_text": "Born of Osiris.  Angel or Alien",
         "release_ids": [
           20546863
         ]
@@ -41247,7 +41294,6 @@
       {
         "artist": "Bring Me The Horizon",
         "album": "Amo",
-        "note_text": "Bring me the horizon.  Amo",
         "release_ids": [
           13113361
         ]
@@ -41255,7 +41301,6 @@
       {
         "artist": "Coheed And Cambria",
         "album": "Good Apollo, I'm Burning Star IV, Volume Two: No World for Tomorrow",
-        "note_text": "Coheed and Cambria.  No word for tomorrow",
         "release_ids": [
           16251744
         ]
@@ -41263,7 +41308,6 @@
       {
         "artist": "Coheed And Cambria",
         "album": "The Second Stage Turbine Blade",
-        "note_text": "Coheed and Cambria.  Second stage",
         "release_ids": [
           26690690
         ]
@@ -41271,7 +41315,6 @@
       {
         "artist": "Coheed And Cambria",
         "album": "Vaxis II: A Window Of The Waking Mind",
-        "note_text": "Coheed and Cambria.  Vaxis 2",
         "release_ids": [
           23674760
         ]
@@ -41279,7 +41322,6 @@
       {
         "artist": "Don Broco",
         "album": "Amazing Things",
-        "note_text": "Don broco.  Amazing things",
         "release_ids": [
           23775551
         ]
@@ -41287,7 +41329,6 @@
       {
         "artist": "Don Broco",
         "album": "Automatic",
-        "note_text": "Don broco.  Automatic",
         "release_ids": [
           14188877
         ]
@@ -41295,7 +41336,6 @@
       {
         "artist": "Don Broco",
         "album": "Nightmare Tripping",
-        "note_text": "Don broco. Nightmare tripping",
         "release_ids": [
           36897417
         ]
@@ -41303,7 +41343,6 @@
       {
         "artist": "Don Broco",
         "album": "Technology",
-        "note_text": "Don broco. Technology",
         "release_ids": [
           12131049
         ]
@@ -41311,15 +41350,13 @@
       {
         "artist": "Every Time I Die",
         "album": "Gutter Phenomenon",
-        "note_text": "Every time I die.  Gutter phenomenon",
         "release_ids": [
           29075062
         ]
       },
       {
         "artist": "Every Time I Die",
-        "album": "Last Night In Town",
-        "note_text": "Every time I die.  Last night in town",
+        "album": "Last Night ln Town",
         "release_ids": [
           30245600
         ]
@@ -41327,7 +41364,6 @@
       {
         "artist": "Greyhaven",
         "album": "This Bright And Beautiful World",
-        "note_text": "Greyhaven.  This bright and beautiful world",
         "release_ids": [
           27079776
         ]
@@ -41335,7 +41371,6 @@
       {
         "artist": "Imminence",
         "album": "Axis Mundi",
-        "note_text": "Imminence.  Axis Mundi",
         "release_ids": [
           38600733
         ]
@@ -41343,7 +41378,6 @@
       {
         "artist": "Imminence",
         "album": "Heaven In Hiding",
-        "note_text": "Imminence.  Heaven in hiding",
         "release_ids": [
           22544762
         ]
@@ -41351,7 +41385,6 @@
       {
         "artist": "Invent, Animate",
         "album": "Heavener",
-        "note_text": "Invent animate.  Heavener",
         "release_ids": [
           35720014
         ]
@@ -41359,79 +41392,76 @@
       {
         "artist": "Knocked Loose",
         "album": "You Won’t Go Before You’re Supposed To",
-        "note_text": "Knocked loose.  You won't go",
         "release_ids": [
           30637357
         ]
       },
       {
-        "artist": "Loathe",
-        "album": "A Stranger To You / I Let It In And It Took Everything",
-        "note_text": "Loathe.  A stranger to you",
-        "release_ids": []
-      },
-      {
         "artist": "Nothing More",
         "album": "Spirits",
-        "note_text": "Nothing more.  Spirits",
         "release_ids": [
           27927123
         ]
       },
       {
         "artist": "Periphery",
-        "album": "Periphery V: Djent Is Not A Genre",
-        "note_text": "Periphery. Djent is not a genre",
+        "album": "A Pale White Dot",
         "release_ids": [
-          26421509
+          38854575
         ]
       },
       {
         "artist": "Periphery",
-        "album": "Periphery IV: Hail Stan",
-        "note_text": "Periphery.  Hail Satan",
+        "album": "A Pale White Dot",
         "release_ids": [
-          14043330
+          37848120
         ]
       },
       {
         "artist": "Periphery",
         "album": "Juggernaut • Omega",
-        "note_text": "Periphery.  Omega",
         "release_ids": [
           29410354
         ]
       },
       {
         "artist": "Periphery",
-        "album": "Periphery (P1)",
-        "note_text": "Periphery. P1.",
+        "album": "Periphery",
         "release_ids": [
           29410045
         ]
       },
       {
         "artist": "Periphery",
-        "album": "A Pale White Dot",
-        "note_text": "Periphery.  Pale white dot",
+        "album": "Periphery III: Select Difficulty",
         "release_ids": [
-          38854575,
-          37848120
+          9346527
         ]
       },
       {
         "artist": "Periphery",
         "album": "Periphery III: Select Difficulty",
-        "note_text": "Periphery.  Select difficulty",
         "release_ids": [
-          9346527,
           29237467
+        ]
+      },
+      {
+        "artist": "Periphery",
+        "album": "Periphery IV: Hail Stan",
+        "release_ids": [
+          14043330
+        ]
+      },
+      {
+        "artist": "Periphery",
+        "album": "Periphery V: Djent Is Not A Genre",
+        "release_ids": [
+          26421509
         ]
       },
       {
         "artist": "Polaris",
         "album": "The Death Of Me",
-        "note_text": "Polaris.  The death of me",
         "release_ids": [
           34691910
         ]
@@ -41439,7 +41469,6 @@
       {
         "artist": "Silent Planet",
         "album": "Superbloom",
-        "note_text": "Silent Planet.  Superbloom",
         "release_ids": [
           29592373
         ]
@@ -41447,7 +41476,6 @@
       {
         "artist": "Sleep Token",
         "album": "Sundowning",
-        "note_text": "Sleep token.  Sundowning",
         "release_ids": [
           14458307
         ]
@@ -41455,7 +41483,6 @@
       {
         "artist": "Sleep Token",
         "album": "Take Me Back To Eden",
-        "note_text": "Sleep token.  Take me back to Eden",
         "release_ids": [
           37163709
         ]
@@ -41463,7 +41490,6 @@
       {
         "artist": "Spiritbox",
         "album": "Tsunami Sea",
-        "note_text": "Spirtbox.  Tsunami sea",
         "release_ids": [
           33303678
         ]
@@ -41471,7 +41497,6 @@
       {
         "artist": "Tesseract",
         "album": "One",
-        "note_text": "Tesseract.  One",
         "release_ids": [
           37058814
         ]
@@ -41479,7 +41504,6 @@
       {
         "artist": "Tesseract",
         "album": "Polaris",
-        "note_text": "Tesseract.  Polaris",
         "release_ids": [
           35426350
         ]
@@ -41487,7 +41511,6 @@
       {
         "artist": "Tesseract",
         "album": "Portals",
-        "note_text": "Tesseract.  Portals",
         "release_ids": [
           21390094
         ]
@@ -41495,7 +41518,6 @@
       {
         "artist": "Tesseract",
         "album": "War of Being",
-        "note_text": "Tesseract.  War of being",
         "release_ids": [
           28269505
         ]
@@ -41503,7 +41525,6 @@
       {
         "artist": "Thornhill",
         "album": "Heroine",
-        "note_text": "Thornhill.  Heroine",
         "release_ids": [
           23657633
         ]
@@ -41511,7 +41532,6 @@
       {
         "artist": "Thrice",
         "album": "Identity Crisis",
-        "note_text": "Thrice.  Identity crisis",
         "release_ids": [
           35844376
         ]
@@ -41519,7 +41539,6 @@
       {
         "artist": "Thursday",
         "album": "War All The Time",
-        "note_text": "Thursday.  War all the time",
         "release_ids": [
           3873517
         ]
@@ -41527,7 +41546,6 @@
       {
         "artist": "Underoath",
         "album": "Define The Great Line",
-        "note_text": "Underoath.  Define the great line",
         "release_ids": [
           38268432
         ]
@@ -41535,7 +41553,6 @@
       {
         "artist": "Unearth",
         "album": "The Stings Of Conscience",
-        "note_text": "Unearth.  The strings of conscience",
         "release_ids": [
           23343893
         ]
@@ -41543,7 +41560,6 @@
       {
         "artist": "Veil of Maya",
         "album": "False Idol",
-        "note_text": "Veil of maya.  False Idol",
         "release_ids": [
           11368406
         ]

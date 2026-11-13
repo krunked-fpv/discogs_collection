@@ -2,7 +2,7 @@
 """Deterministic Discogs Collection Sync & Static Site Builder (`sync_discogs.py`).
 
 Synchronizes `https://www.discogs.com/user/krunked/collection` via the official
-Discogs REST API v2.0 (`https://api.discogs.com`) using the v2.4 Incremental
+Discogs REST API v2.0 (`https://api.discogs.com`) using the v4.0 Incremental
 Delta Engine:
 - Compares incoming Discogs collection items against the local baseline in
   `data/collection.json`, `data/releases_cache.json`, `data/overrides.json`,
@@ -47,9 +47,11 @@ if str(SCRIPT_DIR) not in sys.path:
 
 from detect_pressing_image import (
     VaultTerminalUI,
+    build_flattening_queue_payload,
     compute_release_delta_signature,
     evaluate_release_delta_status,
     parse_wax_variant,
+    reconcile_flattening_state,
     resolve_flattening_status,
     select_release_images_deterministic,
 )
@@ -59,7 +61,7 @@ from pick_pressing_photo import (
 )
 
 DISCOGS_API_BASE = "https://api.discogs.com"
-USER_AGENT = "KrunkedDiscogsVault/2.4 +https://github.com/krunked-fpv/discogs_collection"
+USER_AGENT = "KrunkedDiscogsVault/4.0 +https://github.com/krunked-fpv/discogs_collection"
 DEFAULT_TOKEN = ""
 
 
@@ -281,7 +283,7 @@ def fetch_full_collection(
     force_rids: set[int] | None = None,
     ui: VaultTerminalUI | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
-    """Fetches Folder 0 ('All') and enriches releases using the v2.4 Delta Fast-Path Engine."""
+    """Fetches Folder 0 ('All') and enriches releases using the v4.0 Delta Fast-Path Engine."""
     force_rids = force_rids or set()
 
     # Load previous collection baseline for delta detection
@@ -310,12 +312,8 @@ def fetch_full_collection(
         except Exception:
             overrides = {}
 
-    flattening_queue: dict[str, Any] = {}
-    if flattening_path.exists():
-        try:
-            flattening_queue = json.loads(flattening_path.read_text(encoding="utf-8"))
-        except Exception:
-            flattening_queue = {}
+    html_candidate = existing_collection_path.parent.parent / "index.html" if existing_collection_path else None
+    flattening_queue: dict[str, Any] = reconcile_flattening_state(flattening_path, html_candidate)
 
     if ui:
         ui.log(
@@ -688,7 +686,7 @@ def fetch_full_collection(
     }
 
     collection_payload = {
-        "schema_version": "2.4.0",
+        "schema_version": "4.0.0",
         "is_offline_seed": False,
         "source_of_truth": f"https://www.discogs.com/user/{username}/collection",
         "api_documentation": "https://www.discogs.com/developers",
@@ -750,7 +748,7 @@ def main() -> None:
     )
     ui = VaultTerminalUI(
         title="KRUNKED // VINYL VAULT",
-        subtitle="DISCOGS DELTA SYNC ENGINE v2.4",
+        subtitle="DISCOGS DELTA SYNC ENGINE v4.0",
     )
     ui.print_banner(mode_label=mode_str)
     ui.start_throbber(phase="Resolving credentials...")

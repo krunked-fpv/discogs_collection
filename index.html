@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="referrer" content="no-referrer" />
-  <title>KRUNKED // DISCOGS VINYL VAULT — 150-LP Live Collection &amp; Pressing Showcase</title>
+  <title id="page-title">KRUNKED // DISCOGS VINYL VAULT v4.0 — Live Collection &amp; Pressing Showcase</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -78,6 +78,17 @@
 </head>
 <body class="min-h-screen selection:bg-cyan-500 selection:text-slate-950">
 
+  <!-- PORTABLE INLINE FLATTENING STATE FORM (Read & Written by Browser UI + Python sync_discogs.py) -->
+  <form id="flattening-inline-form" class="hidden" aria-hidden="true" onsubmit="return false;">
+    <input type="hidden" id="flatten-hidden-version" name="schema_version" value="4.0.0" />
+    <input type="hidden" id="flatten-hidden-updated-at" name="updated_at_utc" value="2026-11-13T21:42:51Z" />
+    <input type="hidden" id="flatten-hidden-protocol" name="protocol" value="Bag on 6 until 130°F then drop to 4 — 2.5 hours once at 130°F on the plate" />
+    <input type="hidden" id="flatten-hidden-todo-ids" name="need_to_be_done_release_ids" value="28844782,34756244,35907826" />
+    <input type="hidden" id="flatten-hidden-done-ids" name="done_release_ids" value="3873517,9346527,11368406,12131049,13113361,14043330,14188877,14458307,16251744,20546863,21390094,22544762,23343893,23657633,23674760,23775551,26421509,26690690,27079776,27927123,28269505,29075062,29237467,29410045,29410354,29592373,30245600,30637357,31909216,33303678,34691910,35426350,35720014,35844376,36897417,37058814,37163709,37848120,38268432,38600733,38854575" />
+    <input type="hidden" id="flatten-hidden-unlisted-ids" name="unlisted_release_ids" value="" />
+    <textarea id="flatten-hidden-json" name="flattening_queue_json" class="hidden" readonly>{&quot;schema_version&quot;: &quot;4.0.0&quot;, &quot;storage_mode&quot;: &quot;portable_inline_html+json&quot;, &quot;updated_at_utc&quot;: &quot;2026-11-13T21:42:51Z&quot;, &quot;protocol&quot;: &quot;Bag on 6 until 130°F then drop to 4 — 2.5 hours once at 130°F on the plate&quot;, &quot;need_to_be_done_release_ids&quot;: [28844782, 34756244, 35907826], &quot;done_release_ids&quot;: [3873517, 9346527, 11368406, 12131049, 13113361, 14043330, 14188877, 14458307, 16251744, 20546863, 21390094, 22544762, 23343893, 23657633, 23674760, 23775551, 26421509, 26690690, 27079776, 27927123, 28269505, 29075062, 29237467, 29410045, 29410354, 29592373, 30245600, 30637357, 31909216, 33303678, 34691910, 35426350, 35720014, 35844376, 36897417, 37058814, 37163709, 37848120, 38268432, 38600733, 38854575], &quot;unlisted_release_ids&quot;: [], &quot;need_to_be_done_entries&quot;: [{&quot;artist&quot;: &quot;A Day To Remember&quot;, &quot;album&quot;: &quot;For Those Who Have Heart&quot;, &quot;release_ids&quot;: [28844782]}, {&quot;artist&quot;: &quot;Bring Me The Horizon&quot;, &quot;album&quot;: &quot;That&#x27;s The Spirit&quot;, &quot;release_ids&quot;: [35907826]}, {&quot;artist&quot;: &quot;Imminence&quot;, &quot;album&quot;: &quot;The Return Of The Black &quot;, &quot;release_ids&quot;: [34756244]}], &quot;done_entries&quot;: [{&quot;artist&quot;: &quot;Allt&quot;, &quot;album&quot;: &quot;From The New World&quot;, &quot;release_ids&quot;: [31909216]}, {&quot;artist&quot;: &quot;Born Of Osiris&quot;, &quot;album&quot;: &quot;Angel Or Alien&quot;, &quot;release_ids&quot;: [20546863]}, {&quot;artist&quot;: &quot;Bring Me The Horizon&quot;, &quot;album&quot;: &quot;Amo&quot;, &quot;release_ids&quot;: [13113361]}, {&quot;artist&quot;: &quot;Coheed And Cambria&quot;, &quot;album&quot;: &quot;Good Apollo, I&#x27;m Burning Star IV, Volume Two: No World for Tomorrow&quot;, &quot;release_ids&quot;: [16251744]}, {&quot;artist&quot;: &quot;Coheed And Cambria&quot;, &quot;album&quot;: &quot;The Second Stage Turbine Blade&quot;, &quot;release_ids&quot;: [26690690]}, {&quot;artist&quot;: &quot;Coheed And Cambria&quot;, &quot;album&quot;: &quot;Vaxis II: A Window Of The Waking Mind&quot;, &quot;release_ids&quot;: [23674760]}, {&quot;artist&quot;: &quot;Don Broco&quot;, &quot;album&quot;: &quot;Amazing Things&quot;, &quot;release_ids&quot;: [23775551]}, {&quot;artist&quot;: &quot;Don Broco&quot;, &quot;album&quot;: &quot;Automatic&quot;, &quot;release_ids&quot;: [14188877]}, {&quot;artist&quot;: &quot;Don Broco&quot;, &quot;album&quot;: &quot;Nightmare Tripping&quot;, &quot;release_ids&quot;: [36897417]}, {&quot;artist&quot;: &quot;Don Broco&quot;, &quot;album&quot;: &quot;Technology&quot;, &quot;release_ids&quot;: [12131049]}, {&quot;artist&quot;: &quot;Every Time I Die&quot;, &quot;album&quot;: &quot;Gutter Phenomenon&quot;, &quot;release_ids&quot;: [29075062]}, {&quot;artist&quot;: &quot;Every Time I Die&quot;, &quot;album&quot;: &quot;Last Night ln Town&quot;, &quot;release_ids&quot;: [30245600]}, {&quot;artist&quot;: &quot;Greyhaven&quot;, &quot;album&quot;: &quot;This Bright And Beautiful World&quot;, &quot;release_ids&quot;: [27079776]}, {&quot;artist&quot;: &quot;Imminence&quot;, &quot;album&quot;: &quot;Axis Mundi&quot;, &quot;release_ids&quot;: [38600733]}, {&quot;artist&quot;: &quot;Imminence&quot;, &quot;album&quot;: &quot;Heaven In Hiding&quot;, &quot;release_ids&quot;: [22544762]}, {&quot;artist&quot;: &quot;Invent, Animate&quot;, &quot;album&quot;: &quot;Heavener&quot;, &quot;release_ids&quot;: [35720014]}, {&quot;artist&quot;: &quot;Knocked Loose&quot;, &quot;album&quot;: &quot;You Won’t Go Before You’re Supposed To&quot;, &quot;release_ids&quot;: [30637357]}, {&quot;artist&quot;: &quot;Nothing More&quot;, &quot;album&quot;: &quot;Spirits&quot;, &quot;release_ids&quot;: [27927123]}, {&quot;artist&quot;: &quot;Periphery&quot;, &quot;album&quot;: &quot;A Pale White Dot&quot;, &quot;release_ids&quot;: [38854575]}, {&quot;artist&quot;: &quot;Periphery&quot;, &quot;album&quot;: &quot;A Pale White Dot&quot;, &quot;release_ids&quot;: [37848120]}, {&quot;artist&quot;: &quot;Periphery&quot;, &quot;album&quot;: &quot;Juggernaut • Omega&quot;, &quot;release_ids&quot;: [29410354]}, {&quot;artist&quot;: &quot;Periphery&quot;, &quot;album&quot;: &quot;Periphery&quot;, &quot;release_ids&quot;: [29410045]}, {&quot;artist&quot;: &quot;Periphery&quot;, &quot;album&quot;: &quot;Periphery III: Select Difficulty&quot;, &quot;release_ids&quot;: [9346527]}, {&quot;artist&quot;: &quot;Periphery&quot;, &quot;album&quot;: &quot;Periphery III: Select Difficulty&quot;, &quot;release_ids&quot;: [29237467]}, {&quot;artist&quot;: &quot;Periphery&quot;, &quot;album&quot;: &quot;Periphery IV: Hail Stan&quot;, &quot;release_ids&quot;: [14043330]}, {&quot;artist&quot;: &quot;Periphery&quot;, &quot;album&quot;: &quot;Periphery V: Djent Is Not A Genre&quot;, &quot;release_ids&quot;: [26421509]}, {&quot;artist&quot;: &quot;Polaris&quot;, &quot;album&quot;: &quot;The Death Of Me&quot;, &quot;release_ids&quot;: [34691910]}, {&quot;artist&quot;: &quot;Silent Planet&quot;, &quot;album&quot;: &quot;Superbloom&quot;, &quot;release_ids&quot;: [29592373]}, {&quot;artist&quot;: &quot;Sleep Token&quot;, &quot;album&quot;: &quot;Sundowning&quot;, &quot;release_ids&quot;: [14458307]}, {&quot;artist&quot;: &quot;Sleep Token&quot;, &quot;album&quot;: &quot;Take Me Back To Eden&quot;, &quot;release_ids&quot;: [37163709]}, {&quot;artist&quot;: &quot;Spiritbox&quot;, &quot;album&quot;: &quot;Tsunami Sea&quot;, &quot;release_ids&quot;: [33303678]}, {&quot;artist&quot;: &quot;Tesseract&quot;, &quot;album&quot;: &quot;One&quot;, &quot;release_ids&quot;: [37058814]}, {&quot;artist&quot;: &quot;Tesseract&quot;, &quot;album&quot;: &quot;Polaris&quot;, &quot;release_ids&quot;: [35426350]}, {&quot;artist&quot;: &quot;Tesseract&quot;, &quot;album&quot;: &quot;Portals&quot;, &quot;release_ids&quot;: [21390094]}, {&quot;artist&quot;: &quot;Tesseract&quot;, &quot;album&quot;: &quot;War of Being&quot;, &quot;release_ids&quot;: [28269505]}, {&quot;artist&quot;: &quot;Thornhill&quot;, &quot;album&quot;: &quot;Heroine&quot;, &quot;release_ids&quot;: [23657633]}, {&quot;artist&quot;: &quot;Thrice&quot;, &quot;album&quot;: &quot;Identity Crisis&quot;, &quot;release_ids&quot;: [35844376]}, {&quot;artist&quot;: &quot;Thursday&quot;, &quot;album&quot;: &quot;War All The Time&quot;, &quot;release_ids&quot;: [3873517]}, {&quot;artist&quot;: &quot;Underoath&quot;, &quot;album&quot;: &quot;Define The Great Line&quot;, &quot;release_ids&quot;: [38268432]}, {&quot;artist&quot;: &quot;Unearth&quot;, &quot;album&quot;: &quot;The Stings Of Conscience&quot;, &quot;release_ids&quot;: [23343893]}, {&quot;artist&quot;: &quot;Veil of Maya&quot;, &quot;album&quot;: &quot;False Idol&quot;, &quot;release_ids&quot;: [11368406]}]}</textarea>
+  </form>
+
   <!-- Top Navigation & Live Sync Telemetry Header -->
   <header class="sticky top-0 z-40 backdrop-blur-xl bg-[#07080c]/90 border-b border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
@@ -90,12 +101,12 @@
         <div>
           <div class="flex items-center gap-2">
             <span class="font-black tracking-tight text-base sm:text-lg text-white">KRUNKED // VINYL VAULT</span>
-            <span id="sync-badge-pill" class="px-2 py-0.5 text-[10px] font-mono-tech uppercase tracking-wider bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 rounded-full">v3.0 Static + Live Sync</span>
+            <span id="sync-badge-pill" class="px-2 py-0.5 text-[10px] font-mono-tech uppercase tracking-wider bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 rounded-full">v4.0 Delta Engine</span>
           </div>
           <div class="text-xs text-slate-400 flex items-center gap-2 flex-wrap">
             <span>Source of Truth:</span>
             <a href="https://www.discogs.com/user/krunked/collection" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 underline decoration-cyan-500/40 font-mono-tech">discogs.com/user/krunked/collection ↗</a>
-            <span id="bg-enrich-progress" class="text-[11px] font-mono-tech text-emerald-400">• 150 LPs &amp; 142 Pressing Photos Compiled</span>
+            <span id="bg-enrich-progress" class="text-[11px] font-mono-tech text-emerald-400">• 156 LPs &amp; 132 Pressing Photos Compiled</span>
           </div>
         </div>
       </div>
@@ -113,22 +124,22 @@
         </button>
       </nav>
 
-      <!-- Live Sync & Thumbnail Mode Quick Controls -->
+      <!-- Thumbnail Mode & Vault Tools Quick Controls -->
       <div class="flex items-center gap-2">
         <div class="hidden md:flex items-center bg-slate-900/90 rounded-xl p-1 border border-white/10 text-xs">
-          <button type="button" id="mode-btn-pressing" class="px-2.5 py-1 rounded-lg font-medium bg-cyan-500/20 text-cyan-300 border border-cyan-500/40" title="Show verified pressing photo when available, or split sleeve + release wax disc">
+          <button type="button" id="mode-btn-pressing" class="px-2.5 py-1 rounded-lg font-medium text-slate-400 hover:text-white" title="Show verified pressing photo when available, or split sleeve + release wax disc">
             Pressing First
           </button>
-          <button type="button" id="mode-btn-split" class="px-2.5 py-1 rounded-lg font-medium text-slate-400 hover:text-white" title="Show real Discogs jacket sleeve + vinyl disc side-by-side">
+          <button type="button" id="mode-btn-split" class="px-2.5 py-1 rounded-lg font-medium bg-cyan-500/20 text-cyan-300 border border-cyan-500/40" title="Show real Discogs jacket sleeve + vinyl disc side-by-side">
             Sleeve + Disc
           </button>
           <button type="button" id="mode-btn-sleeve" class="px-2.5 py-1 rounded-lg font-medium text-slate-400 hover:text-white" title="Show real Discogs album cover with corner pressing badge">
             Sleeve First
           </button>
         </div>
-        <button type="button" id="btn-live-sync-modal" class="px-3 py-1.5 rounded-xl text-xs font-mono-tech font-semibold bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 flex items-center gap-1.5 transition-all">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-          <span>Sync All 150 LPs</span>
+        <button type="button" id="btn-live-sync-modal" class="px-3 py-1.5 rounded-xl text-xs font-mono-tech font-semibold bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 flex items-center gap-1.5 transition-all" title="Open Local Sync CLI Builder, Inline HTML Baker &amp; JSON Exporter">
+          <span id="sync-btn-dot" class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          <span id="sync-btn-label">Sync &amp; Export LP's</span>
         </button>
       </div>
     </div>
@@ -145,7 +156,7 @@
       <div class="bg-[#111420]/90 border border-white/10 rounded-xl p-3">
         <div class="text-[11px] font-mono-tech uppercase text-slate-400">Verified Pressing Photos</div>
         <div id="kpi-pressing-photos" class="text-xl sm:text-2xl font-extrabold text-purple-300 mt-0.5">132 / 156</div>
-        <div class="text-[11px] text-slate-400 mt-0.5">Defaulting Wax Ring to Photo</div>
+        <div class="text-[11px] text-slate-400 mt-0.5">4-Pass CV + Overrides</div>
       </div>
       <div class="bg-[#111420]/90 border border-white/10 rounded-xl p-3">
         <div class="text-[11px] font-mono-tech uppercase text-slate-400">Colored / Special Wax</div>
@@ -159,13 +170,13 @@
       </div>
       <div class="bg-[#111420]/90 border border-white/10 rounded-xl p-3">
         <div class="text-[11px] font-mono-tech uppercase text-slate-400">Sum of Release Values</div>
-        <div id="kpi-nm-ratio" class="text-xl sm:text-2xl font-extrabold text-amber-300 mt-0.5">$7,178.00</div>
-        <div id="kpi-gallery-sub" class="text-[11px] text-slate-400 mt-0.5">150 LPs Individual Est.</div>
+        <div id="kpi-nm-ratio" class="text-xl sm:text-2xl font-extrabold text-amber-300 mt-0.5">$7,473.50</div>
+        <div id="kpi-gallery-sub" class="text-[11px] text-slate-400 mt-0.5">156 LPs Individual Est.</div>
       </div>
       <div class="bg-[#111420]/90 border border-white/10 rounded-xl p-3 cursor-pointer hover:border-cyan-500/40 transition" id="kpi-flattening-card" title="Click to open Vinyl Flattening Queue">
         <div class="text-[11px] font-mono-tech uppercase text-slate-400">Flattening Plate</div>
         <div id="kpi-flattening" class="text-xl sm:text-2xl font-extrabold text-cyan-300 mt-0.5">3 Queued / 41 Done</div>
-        <div class="text-[11px] text-slate-400 mt-0.5">130°F • 2.5h Keep Synced</div>
+        <div id="kpi-flattening-sub" class="text-[11px] text-slate-400 mt-0.5">130°F • 2.5h Inline State</div>
       </div>
     </div>
   </section>
@@ -184,7 +195,7 @@
             </h1>
           </div>
           <p class="text-xs text-slate-400 mt-0.5">
-            Defaults every record's spinning platter &amp; wax ring directly to its detected Discogs pressing photo (142/150 releases), falling back to the deterministic wax shader only when no vinyl photo exists on Discogs.
+            Defaults every record's spinning platter &amp; wax ring directly to its detected Discogs pressing photo (<span id="hero-pressing-ratio" class="text-cyan-300 font-mono-tech">132/156</span> releases), falling back to the deterministic wax shader only when no vinyl photo exists on Discogs.
           </p>
         </div>
 
@@ -193,7 +204,7 @@
           <button type="button" id="btn-carousel-prev" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-white/10 transition">
             ← Prev Record
           </button>
-          <span id="carousel-counter" class="text-xs font-mono-tech text-cyan-300 px-2">1 / 150</span>
+          <span id="carousel-counter" class="text-xs font-mono-tech text-cyan-300 px-2">1 / 156</span>
           <button type="button" id="btn-carousel-next" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-white/10 transition">
             Next Record →
           </button>
@@ -311,7 +322,12 @@
             </div>
             <div>
               <span class="text-slate-400 block text-[10px] font-mono-tech uppercase">Release &amp; Flattening</span>
-              <span id="hero-flattening" class="font-mono-tech font-semibold text-cyan-300">#17583742</span>
+              <div class="flex items-center justify-between gap-1.5 mt-0.5">
+                <span id="hero-flattening" class="font-mono-tech font-semibold text-cyan-300 truncate">#17583742</span>
+                <button type="button" id="btn-hero-flatten-cycle" class="shrink-0 px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-[10px] font-mono-tech text-slate-300 border border-white/10 transition" title="Cycle flattening status for this record (Unlisted → In Queue → Flattened)">
+                  + 🔥 Queue
+                </button>
+              </div>
             </div>
           </div>
 
@@ -335,7 +351,7 @@
               Open Release on Discogs ↗
             </a>
             <button type="button" id="btn-open-inspector" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs sm:text-sm border border-white/10 transition">
-              Sync / Export JSON
+              ⚙ Sync &amp; Export
             </button>
           </div>
         </div>
@@ -350,7 +366,7 @@
           <input
             type="text"
             id="search-input"
-            placeholder="Search all 150 LPs by artist, album, label, catalog #, or pressing color..."
+            placeholder="Search LP collection by artist, album, label, catalog #, or pressing color..."
             class="w-full bg-slate-950 border border-white/15 focus:border-cyan-400 rounded-xl pl-9 pr-20 py-2 text-xs sm:text-sm text-white placeholder-slate-500 outline-none transition"
           />
           <span class="absolute left-3 top-2.5 text-slate-400 text-xs">🔎</span>
@@ -385,12 +401,8 @@
         <button type="button" data-filter="pressing_photo" class="filter-chip shrink-0 px-3 py-1 rounded-full text-xs font-semibold bg-slate-900 text-slate-300 hover:text-white border border-white/10">
           📸 Verified Pressing Photo
         </button>
-        <button type="button" data-filter="flattening_todo" class="filter-chip shrink-0 px-3 py-1 rounded-full text-xs font-semibold bg-slate-900 text-amber-300 hover:text-white border border-amber-500/30">
-          🔥 Flattening Queue (3)
-        </button>
-        <button type="button" data-filter="flattening_done" class="filter-chip shrink-0 px-3 py-1 rounded-full text-xs font-semibold bg-slate-900 text-emerald-300 hover:text-white border border-emerald-500/30">
-          ✓ Flattened &amp; Verified (41)
-        </button>
+        <button type="button" id="chip-flatten-todo" data-filter="flattening_todo" class="filter-chip shrink-0 px-3 py-1 rounded-full text-xs font-semibold bg-slate-900 text-amber-300 hover:text-white border border-amber-500/30">🔥 Flattening Queue (3)</button>
+        <button type="button" id="chip-flatten-done" data-filter="flattening_done" class="filter-chip shrink-0 px-3 py-1 rounded-full text-xs font-semibold bg-slate-900 text-emerald-300 hover:text-white border border-emerald-500/30">✓ Flattened &amp; Verified (41)</button>
         <button type="button" data-filter="splatter" class="filter-chip shrink-0 px-3 py-1 rounded-full text-xs font-semibold bg-slate-900 text-slate-300 hover:text-white border border-white/10">
           🎨 Splatter &amp; Color-in-Color
         </button>
@@ -425,50 +437,125 @@
 
   </main>
 
-  <!-- MAIN VIEW 2: DETERMINISTIC PIPELINE & LOCAL SYNC INSTRUCTIONS -->
+  <!-- MAIN VIEW 2: DETERMINISTIC PIPELINE & LOCAL SYNC INSTRUCTIONS (v4.0) -->
   <section id="view-pipeline" class="hidden max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-6">
-    <div class="bg-[#111420] border border-white/10 rounded-2xl p-5 sm:p-6 space-y-4">
+    <div class="bg-[#111420] border border-white/10 rounded-2xl p-5 sm:p-6 space-y-5">
       <div class="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4">
         <div>
-          <span class="text-xs font-mono-tech uppercase text-cyan-400">Local Workstation Workflow (`C:\DiscogsCollection\discogs_collection`) — v3.0</span>
+          <span class="text-xs font-mono-tech uppercase text-cyan-400">Local Workstation Workflow (`C:\DiscogsCollection\discogs_collection`) — v4.0 Delta Engine</span>
           <h2 class="text-xl sm:text-2xl font-black text-white mt-0.5">
-            2-Step Daily Sync &amp; Pressing Photo Picker (`sync_discogs.py` → `pick_pressing_photo.py`)
+            Single-Command Delta Sync &amp; 4-Pass Concentric CV Pipeline (`sync_discogs.py`)
           </h2>
+          <p class="text-xs text-slate-400 mt-1">
+            Pressing photo detection, SHA-256 delta caching, inline HTML flattening queue reconciliation, and static HTML compilation are all baked directly into <code class="text-cyan-300">scripts/sync_discogs.py</code>.
+          </p>
+        </div>
+        <span class="px-3 py-1 rounded-full text-xs font-mono-tech bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+          ⚡ Sub-Millisecond Delta Fast-Path Active
+        </span>
+      </div>
+
+      <!-- Command Cards: Daily Sync vs Targeted Resync -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div class="bg-slate-950 border border-emerald-500/30 rounded-xl p-4 space-y-2.5 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-xs font-mono-tech text-emerald-400 font-bold uppercase">1 // Standard Daily Sync &amp; Deploy (PowerShell)</span>
+              <button type="button" data-copy-cmd="cd C:\DiscogsCollection\discogs_collection&#10;python scripts/sync_discogs.py&#10;git add -A; git commit -m &quot;chore(vault): sync discogs collection (v4.0)&quot;; git push" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/30 text-[11px] font-mono-tech font-semibold transition">
+                📋 Copy Commands
+              </button>
+            </div>
+            <pre class="bg-[#07080c] border border-white/10 rounded-lg p-3 text-xs font-mono-tech text-cyan-300 overflow-x-auto">cd C:\DiscogsCollection\discogs_collection
+python scripts/sync_discogs.py
+git add -A; git commit -m "chore(vault): sync discogs collection (v4.0)"; git push</pre>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Paginates Folder 0 (`per_page=100`), fast-paths unchanged releases via <code class="text-slate-200">delta_sig</code>, downloads gallery images and runs the 4-pass CV pressing picker only on new/updated LPs, reconciles the inline HTML flattening state, and compiles <code class="text-slate-200">index.html</code> in one pass.
+          </p>
+        </div>
+
+        <div class="bg-slate-950 border border-purple-500/30 rounded-xl p-4 space-y-2.5 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-xs font-mono-tech text-purple-300 font-bold uppercase">2 // Targeted Release Resync &amp; Full Rebuild Flags</span>
+              <button type="button" data-copy-cmd="python scripts/sync_discogs.py --resync 35668090,16610055" class="px-2.5 py-1 rounded-lg bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 border border-purple-500/30 text-[11px] font-mono-tech font-semibold transition">
+                📋 Copy --resync
+              </button>
+            </div>
+            <pre class="bg-[#07080c] border border-white/10 rounded-lg p-3 text-xs font-mono-tech text-purple-200 overflow-x-auto"># Force re-download &amp; re-evaluate specific release ID(s):
+python scripts/sync_discogs.py --resync 35668090,16610055
+
+# Bypass SHA-256 delta cache and re-scan every release in the vault:
+python scripts/sync_discogs.py --full</pre>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Deleting <code class="text-slate-200">assets/releases/&lt;release_id&gt;/pressing.jpg</code> on disk or pinning an image in <code class="text-slate-200">data/overrides.json</code> also triggers an automatic delta resync for that release on the next run.
+          </p>
         </div>
       </div>
 
-      <div class="bg-slate-950 border border-emerald-500/30 rounded-xl p-4 space-y-2">
-        <div class="text-xs font-mono-tech text-emerald-400 font-bold uppercase">Run Anytime from PowerShell (`C:\DiscogsCollection\discogs_collection`)</div>
-        <pre class="bg-[#07080c] border border-white/10 rounded-lg p-3 text-xs font-mono-tech text-cyan-300 overflow-x-auto">cd C:\DiscogsCollection\discogs_collection
-python scripts/sync_discogs.py
-python pick_pressing_photo.py
-git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing photos" &amp;&amp; git push</pre>
-        <p class="text-xs text-slate-400">
-          Both scripts anchor paths automatically to <code class="text-slate-200">C:\DiscogsCollection\discogs_collection</code> (even if run from inside <code class="text-slate-200">scripts\</code>), evaluate all release photos to default each record's wax ring to its pressing photo, sync the Keep flattening queue &amp; collection value, and inject the compiled payload directly into <code class="text-slate-200">index.html</code>.
-        </p>
-      </div>
-
+      <!-- 3 Dynamic Architecture Telemetry Cards -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div class="bg-slate-950/90 border border-white/10 rounded-xl p-4">
-          <div class="text-xs font-mono-tech text-cyan-400 font-bold">1 // PRESSING PHOTO DETECTOR</div>
-          <div class="text-sm font-bold text-white mt-1">142 / 150 Releases Matched</div>
+          <div class="text-xs font-mono-tech text-cyan-400 font-bold">1 // 4-PASS CV &amp; SHA-256 DELTA ENGINE</div>
+          <div id="pipe-kpi-cv" class="text-sm font-bold text-white mt-1">132 / 156 Physical Discs Verified (84.6%)</div>
           <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">
-            <code class="text-slate-200">pick_pressing_photo.py</code> inspects every image in each release's gallery, handles both 1:1 and 4:3 camera photos, rejects 4" paper label closeups when a full 12" vinyl photo exists, and defaults the platter/wax ring to that photo.
+            Evaluates candidate gallery images in polar coordinates <code class="text-slate-200">(r, θ)</code> across 4 framing passes (centered 12" disc, 4:3 turntable/side-by-side crop, padded studio frame, and 360° center-label+spindle), rejecting 4" label scans and hype stickers.
           </p>
         </div>
         <div class="bg-slate-950/90 border border-white/10 rounded-xl p-4">
-          <div class="text-xs font-mono-tech text-purple-400 font-bold">2 // KEEP FLATTENING QUEUE</div>
-          <div class="text-sm font-bold text-white mt-1">3 Queued • 40 Keep Entries Done</div>
+          <div class="text-xs font-mono-tech text-purple-400 font-bold">2 // PORTABLE INLINE FLATTENING STATE</div>
+          <div id="pipe-kpi-flatten" class="text-sm font-bold text-white mt-1">3 Queued • 41 Flattened • 112 Uninspected</div>
           <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">
-            Synced with Google Keep's <code class="text-slate-200">Vinyl flattening</code> note via <code class="text-slate-200">data/flattening_queue.json</code> so every sync preserves your exact thermal plate queue and completed records.
+            Stores your owner inspection &amp; thermal pouch queue directly inside <code class="text-slate-200">index.html</code> (<code class="text-slate-200">#flattening-inline-form</code> hidden inputs + <code class="text-slate-200">data/flattening_queue.json</code>)—100% self-contained and portable with zero external cloud dependencies.
           </p>
         </div>
         <div class="bg-slate-950/90 border border-white/10 rounded-xl p-4">
-          <div class="text-xs font-mono-tech text-emerald-400 font-bold">3 // COLLECTION VALUE</div>
-          <div class="text-sm font-bold text-white mt-1">Instant Static + Live Display</div>
+          <div class="text-xs font-mono-tech text-emerald-400 font-bold">3 // LIVE VALUATION &amp; OVERRIDE PINNING</div>
+          <div id="pipe-kpi-val" class="text-sm font-bold text-white mt-1">$6,203.01 Median • $7,473.50 Release Sum</div>
           <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">
-            Pre-compiles both Discogs collection value (<code class="text-slate-200">$6,011.87</code> Median / <code class="text-slate-200">$10,437.49</code> Max) and the sum of all 150 release values directly into <code class="text-slate-200">index.html</code> so it never hangs on "Syncing...".
+            Pre-compiles Discogs collection valuation (<code class="text-slate-200">Min / Median / Max</code>), individual release marketplace pricing, and gallery override pins (<code class="text-slate-200">data/overrides.json</code>) directly into <code class="text-slate-200">index.html</code> for instant zero-spinner loads.
           </p>
+        </div>
+      </div>
+
+      <!-- 4-Tier Deterministic CV Architecture Breakdown -->
+      <div class="bg-slate-950/90 border border-white/10 rounded-2xl p-4 sm:p-5 space-y-3">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <h3 class="text-sm font-bold text-white font-mono-tech uppercase">
+            4-Tier Deterministic Pressing Selection Hierarchy (`detect_pressing_image.py`)
+          </h3>
+          <span class="text-[11px] font-mono-tech text-slate-400">Zero Probabilistic LLM Calls • 100% Reproducible</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+          <div class="bg-[#0b0d16] border border-white/10 rounded-xl p-3 space-y-1">
+            <div class="text-[11px] font-mono-tech text-emerald-400 font-bold">TIER 1 // OVERRIDE LOCK</div>
+            <div class="font-semibold text-white">Manual &amp; Verified Pins</div>
+            <p class="text-slate-400 text-[11px] leading-relaxed">
+              Honors <code class="text-slate-200">user_locked</code> gallery pins from the Turntable strip and cache-busted <code class="text-slate-200">pressing.jpg?v=idx_sha256</code> paths in <code class="text-slate-200">data/overrides.json</code>.
+            </p>
+          </div>
+          <div class="bg-[#0b0d16] border border-white/10 rounded-xl p-3 space-y-1">
+            <div class="text-[11px] font-mono-tech text-cyan-400 font-bold">TIER 2 // 4-PASS POLAR CV</div>
+            <div class="font-semibold text-white">Concentric Dual-Circle Math</div>
+            <p class="text-slate-400 text-[11px] leading-relaxed">
+              Verifies outer 12" rim step, 4 corner background quadrants, 8-octant label-to-wax continuity, radial splatter spokes, and center spindle hole contrast.
+            </p>
+          </div>
+          <div class="bg-[#0b0d16] border border-white/10 rounded-xl p-3 space-y-1">
+            <div class="text-[11px] font-mono-tech text-purple-400 font-bold">TIER 3 // GUIDELINE 13.8</div>
+            <div class="font-semibold text-white">Side-A Positional Prior</div>
+            <p class="text-slate-400 text-[11px] leading-relaxed">
+              Applies Discogs Database Guideline 13.8 image ordering (<code class="text-slate-200">[0]</code> cover, <code class="text-slate-200">[1]</code> back/gatefold, <code class="text-slate-200">[4..5]</code> physical disc) and a <code class="text-slate-200">+0.038</code> Side-A tie-breaker.
+            </p>
+          </div>
+          <div class="bg-[#0b0d16] border border-white/10 rounded-xl p-3 space-y-1">
+            <div class="text-[11px] font-mono-tech text-pink-400 font-bold">TIER 4 // WAX VARIANT PARSER</div>
+            <div class="font-semibold text-white">Deterministic SVG Shader</div>
+            <p class="text-slate-400 text-[11px] leading-relaxed">
+              Parses Discogs format codes &amp; notes into a deterministic <code class="text-slate-200">wax_spec</code> shader whenever a release has only sleeve photos uploaded on Discogs.
+            </p>
+          </div>
         </div>
       </div>
 
@@ -508,75 +595,229 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
     </div>
   </section>
 
-  <!-- MAIN VIEW 3: VINYL FLATTENING PLATE TRACKER -->
+  <!-- MAIN VIEW 3: PORTABLE INLINE VINYL FLATTENING PLATE TRACKER & OWNER INSPECTION BENCH (v4.0) -->
   <section id="view-flattening" class="hidden max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-6">
-    <div class="bg-[#111420] border border-white/10 rounded-2xl p-5 sm:p-6 space-y-4">
-      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4">
+    <div class="bg-[#111420] border border-white/10 rounded-2xl p-5 sm:p-6 space-y-5">
+      <!-- Header & Inline Persistence Controls -->
+      <div class="flex flex-wrap items-start justify-between gap-4 border-b border-white/10 pb-4">
         <div>
-          <span class="text-xs font-mono-tech uppercase text-amber-400">Thermal Plate Protocol • Bag on 6 until 130°F then drop to 4 (2.5 Hours once at 130°F)</span>
+          <span class="text-xs font-mono-tech uppercase text-amber-400">Thermal Pouch Protocol • Bag on 6 until 130°F → Drop to 4 for 2.5 Hours (150 Min) → Cool Completely</span>
           <h2 class="text-xl sm:text-2xl font-black text-white mt-0.5">
-            Vinyl Flattening Queue &amp; Completed Records (Synced with Google Keep)
+            Vinyl Flattening Queue &amp; Owner Inspection Regimen
           </h2>
+          <p class="text-xs text-slate-400 mt-1">
+            100% portable inline state stored inside hidden HTML form fields (<code class="text-cyan-300">#flattening-inline-form</code>) + <code class="text-cyan-300">data/flattening_queue.json</code>. Inspect any record on arrival, queue warped LPs, track completed bakes, and save directly in-line.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2">
+          <span id="flatten-inline-status" class="px-2.5 py-1 rounded-lg text-[11px] font-mono-tech bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+            ✓ Inline HTML Form Synced
+          </span>
+          <button type="button" id="btn-flatten-save-html" class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs font-mono-tech transition shadow-lg shadow-cyan-500/20" title="Download updated index.html with your current flattening queue baked directly into the inline HTML form &amp; payload">
+            💾 Save Updated index.html
+          </button>
+          <button type="button" id="btn-flatten-export-json" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs font-mono-tech border border-white/10 transition" title="Download data/flattening_queue.json">
+            ⬇ Export flattening_queue.json
+          </button>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="bg-slate-950/90 border border-amber-500/30 rounded-xl p-4 space-y-3">
-          <div class="flex items-center justify-between">
-            <h3 class="text-sm font-bold text-amber-300 font-mono-tech uppercase">🔥 Need To Be Done (Queue)</h3>
-            <span id="flatten-todo-count" class="px-2 py-0.5 rounded-full text-xs font-mono-tech bg-amber-500/20 text-amber-300">3 Records</span>
+      <!-- Interactive 2.5-Hour (150:00) Thermal Plate Session Timer -->
+      <div class="bg-slate-950/95 border border-amber-500/30 rounded-xl p-4 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-lg shrink-0">
+            🔥
           </div>
-          <div id="flatten-todo-list" class="space-y-2"></div>
+          <div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-xs font-mono-tech font-bold uppercase text-amber-300">Thermal Pouch Session Timer</span>
+              <span id="timer-phase-badge" class="px-2 py-0.5 rounded-full text-[10px] font-mono-tech bg-slate-800 text-slate-300 border border-white/10">
+                Plate Idle • Ready
+              </span>
+            </div>
+            <p class="text-xs text-slate-400 mt-0.5">
+              Step 1: Ramp on <strong class="text-slate-200">Setting 6</strong> until thermometer hits <strong class="text-amber-300">130°F</strong> • Step 2: Drop to <strong class="text-slate-200">Setting 4</strong> and run the <strong class="text-cyan-300">2h 30m (150:00)</strong> hold timer.
+            </p>
+          </div>
         </div>
 
-        <div class="bg-slate-950/90 border border-emerald-500/30 rounded-xl p-4 space-y-3">
-          <div class="flex items-center justify-between">
-            <h3 class="text-sm font-bold text-emerald-300 font-mono-tech uppercase">✓ Flattened &amp; Verified (Done)</h3>
-            <span id="flatten-done-count" class="px-2 py-0.5 rounded-full text-xs font-mono-tech bg-emerald-500/20 text-emerald-300">41 Records</span>
+        <div class="flex flex-wrap items-center gap-2.5">
+          <select id="timer-record-select" class="bg-slate-900 border border-white/15 rounded-xl px-3 py-1.5 text-xs font-mono-tech text-slate-200 outline-none focus:border-amber-400 max-w-[230px]" aria-label="Select record in thermal pouch">
+            <option value="">Select LP in Pouch...</option>
+          </select>
+          <div id="timer-readout" class="px-3.5 py-1.5 rounded-xl bg-[#07080c] border border-white/15 text-base sm:text-lg font-mono-tech font-extrabold text-cyan-300 min-w-[108px] text-center">
+            02:30:00
           </div>
-          <div id="flatten-done-list" class="space-y-2 max-h-[540px] overflow-y-auto custom-scrollbar pr-1"></div>
+          <button type="button" id="btn-timer-ramp" class="px-3 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 text-xs font-mono-tech font-semibold transition">
+            🔥 Ramp (Set 6 → 130°F)
+          </button>
+          <button type="button" id="btn-timer-start" class="px-3 py-1.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/30 text-xs font-mono-tech font-semibold transition">
+            ▶ Start 2.5h Hold (Set 4)
+          </button>
+          <button type="button" id="btn-timer-reset" class="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-white/10 text-xs font-mono-tech transition">
+            ↺ Reset
+          </button>
         </div>
+      </div>
+
+      <!-- Queue & Completed Columns -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-slate-950/90 border border-amber-500/30 rounded-xl p-4 space-y-3 flex flex-col">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-sm font-bold text-amber-300 font-mono-tech uppercase">🔥 Need To Be Done (Warped Queue)</h3>
+              <p class="text-[11px] text-slate-400">Examined &amp; queued for the 130°F thermal pouch</p>
+            </div>
+            <span id="flatten-todo-count" class="px-2.5 py-0.5 rounded-full text-xs font-mono-tech bg-amber-500/20 text-amber-300">3 Records</span>
+          </div>
+          <div id="flatten-todo-list" class="space-y-2 max-h-[520px] overflow-y-auto custom-scrollbar pr-1"></div>
+        </div>
+
+        <div class="bg-slate-950/90 border border-emerald-500/30 rounded-xl p-4 space-y-3 flex flex-col">
+          <div class="flex items-center justify-between gap-2">
+            <div>
+              <h3 class="text-sm font-bold text-emerald-300 font-mono-tech uppercase">✓ Flattened &amp; Verified (Done)</h3>
+              <p class="text-[11px] text-slate-400">Completed 2.5-hour thermal plate cycle &amp; play-tested</p>
+            </div>
+            <span id="flatten-done-count" class="px-2.5 py-0.5 rounded-full text-xs font-mono-tech bg-emerald-500/20 text-emerald-300">41 Records</span>
+          </div>
+          <div>
+            <input
+              type="text"
+              id="flatten-done-search"
+              placeholder="Filter flattened records by artist or album..."
+              class="w-full bg-slate-900 border border-white/10 focus:border-emerald-400 rounded-lg px-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 outline-none"
+            />
+          </div>
+          <div id="flatten-done-list" class="space-y-2 max-h-[475px] overflow-y-auto custom-scrollbar pr-1"></div>
+        </div>
+      </div>
+
+      <!-- Owner Inspection Bench: Search & Add Any Collection LP to Queue or Done -->
+      <div class="bg-slate-950/90 border border-cyan-500/25 rounded-xl p-4 space-y-3">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="text-sm font-bold text-cyan-300 font-mono-tech uppercase">🔎 Owner Inspection Bench — Add Collection LPs to Queue or Done</h3>
+              <span id="flatten-unlisted-count" class="px-2 py-0.5 rounded-full text-[11px] font-mono-tech bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">112 Records</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-0.5">
+              Inspecting a newly arrived LP on your turntable? Search your uninspected collection below to queue warped pressings or log completed bakes.
+            </p>
+          </div>
+        </div>
+
+        <div class="relative">
+          <input
+            type="text"
+            id="flatten-bench-search"
+            placeholder="Search uninspected collection LPs by artist, album, variant, or release # to queue or mark flattened..."
+            class="w-full bg-slate-900 border border-white/15 focus:border-cyan-400 rounded-xl pl-9 pr-4 py-2 text-xs text-white placeholder-slate-500 outline-none"
+          />
+          <span class="absolute left-3 top-2.5 text-slate-400 text-xs">🔎</span>
+        </div>
+
+        <div id="flatten-bench-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2.5 max-h-[340px] overflow-y-auto custom-scrollbar pr-1"></div>
       </div>
     </div>
   </section>
 
-  <!-- MODAL: LIVE DISCOGS API 150-LP SYNC & OVERRIDES EXPORT -->
+  <!-- MODAL: VAULT STATE MANAGER, LOCAL SYNC CLI & PORTABLE EXPORTER (v4.0) -->
   <div id="modal-backdrop" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-[#111420] border border-white/15 rounded-2xl max-w-2xl w-full p-5 sm:p-6 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto custom-scrollbar">
       <div class="flex items-center justify-between border-b border-white/10 pb-3">
-        <h3 id="modal-title" class="text-base sm:text-lg font-bold text-white font-mono-tech">
-          Live Discogs REST API v2.0 Full Collection Sync &amp; JSON Exporter
-        </h3>
+        <div>
+          <span class="text-[10px] font-mono-tech uppercase text-cyan-400">v4.0 Portable State &amp; Local Sync Hub</span>
+          <h3 id="modal-title" class="text-base sm:text-lg font-bold text-white font-mono-tech">
+            Vault State Manager, CLI Builder &amp; Self-Contained Exporter
+          </h3>
+        </div>
         <button type="button" id="btn-close-modal" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-slate-300">
           ✕ Close
         </button>
       </div>
+
       <div id="modal-body" class="space-y-4 text-xs sm:text-sm text-slate-300">
-        <p class="text-xs text-slate-400 leading-relaxed">
-          Syncs all pages from <code class="text-cyan-300">https://api.discogs.com/users/krunked/collection/folders/0/releases?per_page=100</code> while preserving verified pressing photos, individual release values, and your Google Keep Vinyl Flattening queue.
-        </p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div>
-            <label for="sync-username-input" class="block text-[11px] font-mono-tech uppercase text-slate-400 mb-1">Discogs Username</label>
-            <input type="text" id="sync-username-input" value="krunked" class="w-full bg-slate-950 border border-white/15 rounded-xl px-3 py-2 text-xs font-mono-tech text-white" />
+        <!-- Why Local Sync vs Browser Export -->
+        <div class="bg-slate-950/90 border border-white/10 rounded-xl p-3.5 space-y-1.5">
+          <div class="text-xs font-mono-tech font-bold text-emerald-400 uppercase">How Syncing &amp; In-Browser Edits Work Together (v4.0)</div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Because browser sandboxing cannot execute local Python scripts or write JPEGs to <code class="text-slate-200">assets/releases/</code>, <strong class="text-slate-200">Discogs API syncing + 4-Pass CV photo picking</strong> runs in PowerShell via <code class="text-cyan-300">python scripts/sync_discogs.py</code>. Meanwhile, any <strong class="text-slate-200">Pressing Photo Pins</strong> or <strong class="text-slate-200">Flattening Queue changes</strong> you make right here in the browser can be baked straight back into <code class="text-cyan-300">index.html</code> (or exported as JSON) with one click below!
+          </p>
+        </div>
+
+        <!-- Session Telemetry Grid -->
+        <div class="grid grid-cols-3 gap-2.5 text-center">
+          <div class="bg-slate-950 border border-white/10 rounded-xl p-2.5">
+            <div class="text-[10px] font-mono-tech uppercase text-slate-400">Compiled Vault</div>
+            <div id="modal-stat-lps" class="text-sm sm:text-base font-extrabold text-white mt-0.5">156 LPs</div>
+            <div id="modal-stat-photos" class="text-[10px] font-mono-tech text-cyan-400">132 Pressing Photos</div>
           </div>
-          <div>
-            <label for="sync-token-input" class="block text-[11px] font-mono-tech uppercase text-slate-400 mb-1">Personal Access Token</label>
-            <input type="password" id="sync-token-input" value="" class="w-full bg-slate-950 border border-white/15 rounded-xl px-3 py-2 text-xs font-mono-tech text-white" />
+          <div class="bg-slate-950 border border-white/10 rounded-xl p-2.5">
+            <div class="text-[10px] font-mono-tech uppercase text-slate-400">Flattening State</div>
+            <div id="modal-stat-flatten" class="text-sm sm:text-base font-extrabold text-amber-300 mt-0.5">3 Queued / 41 Done</div>
+            <div class="text-[10px] font-mono-tech text-slate-400">Inline Form + JSON</div>
+          </div>
+          <div class="bg-slate-950 border border-white/10 rounded-xl p-2.5">
+            <div class="text-[10px] font-mono-tech uppercase text-slate-400">Browser Session Edits</div>
+            <div id="modal-stat-edits" class="text-sm sm:text-base font-extrabold text-emerald-400 mt-0.5">0 Unsaved</div>
+            <div id="modal-stat-edits-sub" class="text-[10px] font-mono-tech text-slate-400">In Sync with HTML</div>
           </div>
         </div>
-        <div class="flex flex-wrap items-center gap-2">
-          <button type="button" id="btn-run-browser-sync" class="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-slate-950 font-bold text-xs transition">
-            ⚡ Sync Collection from Discogs API
-          </button>
-          <button type="button" id="btn-export-json" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs border border-white/10 transition">
-            ⬇ Download collection.json
-          </button>
-          <button type="button" id="btn-export-overrides" class="px-3.5 py-2 rounded-xl bg-purple-500/20 hover:bg-purple-500/30 text-purple-200 font-semibold text-xs border border-purple-500/30 transition">
-            ⬇ Download overrides.json
-          </button>
+
+        <!-- Primary Action: Bake Everything into Self-Contained index.html -->
+        <div class="bg-slate-950 border border-cyan-500/30 rounded-xl p-4 space-y-2.5">
+          <div class="flex items-center justify-between gap-2 flex-wrap">
+            <div>
+              <div class="text-xs font-mono-tech font-bold text-cyan-300 uppercase">Option A // Portable Single-File HTML Bake (Recommended)</div>
+              <p class="text-[11px] text-slate-400 mt-0.5">
+                Downloads a complete <code class="text-slate-200">index.html</code> with your pinned pressing photos, hidden flattening form inputs (<code class="text-slate-200">#flattening-inline-form</code>), and KPI counters baked in. Drop it into <code class="text-slate-200">C:\DiscogsCollection\discogs_collection\index.html</code>—<code class="text-slate-200">sync_discogs.py</code> automatically reads your inline form state on its next run!
+              </p>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center gap-2 pt-1">
+            <button type="button" id="btn-bake-full-html" class="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs font-mono-tech transition shadow-lg shadow-cyan-500/20">
+              💾 Download Updated index.html (Bake All Edits In-Line)
+            </button>
+            <button type="button" id="btn-reset-browser-cache" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-mono-tech border border-white/10 transition" title="Discard temporary browser localStorage edits and reload compiled HTML baseline">
+              ↺ Reset Browser Cache
+            </button>
+          </div>
         </div>
-        <pre id="sync-log-output" class="bg-[#07080c] border border-white/10 rounded-xl p-3 text-[11px] font-mono-tech text-cyan-300 overflow-x-auto max-h-60 custom-scrollbar">Pre-compiled 150 releases and 142 pressing photos loaded. Ready for live sync or export.</pre>
+
+        <!-- Secondary Action: Export Individual JSON Data Files -->
+        <div class="bg-slate-950 border border-white/10 rounded-xl p-4 space-y-2.5">
+          <div class="text-xs font-mono-tech font-bold text-purple-300 uppercase">Option B // Export Individual JSON Files for `data/`</div>
+          <div class="flex flex-wrap items-center gap-2">
+            <button type="button" id="btn-export-overrides" class="px-3.5 py-2 rounded-xl bg-purple-500/20 hover:bg-purple-500/30 text-purple-200 font-semibold text-xs font-mono-tech border border-purple-500/30 transition">
+              ⬇ Download overrides.json
+            </button>
+            <button type="button" id="btn-export-flattening" class="px-3.5 py-2 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-200 font-semibold text-xs font-mono-tech border border-amber-500/30 transition">
+              ⬇ Download flattening_queue.json
+            </button>
+            <button type="button" id="btn-export-json" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs font-mono-tech border border-white/10 transition">
+              ⬇ Download collection.json
+            </button>
+          </div>
+        </div>
+
+        <!-- PowerShell CLI Command Helper -->
+        <div class="bg-slate-950 border border-white/10 rounded-xl p-4 space-y-2">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs font-mono-tech font-bold text-emerald-400 uppercase">Local PowerShell Sync Commands</span>
+            <div class="flex items-center gap-1.5">
+              <button type="button" id="btn-copy-sync-cmd" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/30 text-[11px] font-mono-tech font-semibold transition">
+                📋 Copy Daily Sync
+              </button>
+              <button type="button" id="btn-copy-resync-active" class="px-2.5 py-1 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/30 text-[11px] font-mono-tech font-semibold transition">
+                📋 Copy --resync Active LP
+              </button>
+            </div>
+          </div>
+          <pre id="sync-log-output" class="bg-[#07080c] border border-white/10 rounded-xl p-3 text-[11px] font-mono-tech text-cyan-300 overflow-x-auto max-h-48 custom-scrollbar">cd C:\DiscogsCollection\discogs_collection
+python scripts/sync_discogs.py</pre>
+        </div>
       </div>
     </div>
   </div>
@@ -721,12 +962,12 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
   "38854575": "assets/releases/38854575/pressing.jpg?v=4_bfc7da28"
 };
     window.__DISCOGS_COLLECTION__ = {
-  "schema_version": "2.4.0",
+  "schema_version": "4.0.0",
   "is_offline_seed": false,
   "source_of_truth": "https://www.discogs.com/user/krunked/collection",
   "api_documentation": "https://www.discogs.com/developers",
   "username": "krunked",
-  "synced_at_utc": "2026-11-13T20:13:19Z",
+  "synced_at_utc": "2026-11-13T21:42:51Z",
   "profile": {
     "username": "krunked",
     "owner_name": "Alex Goresch",
@@ -41922,12 +42163,63 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
     }
   ],
   "flattening_queue": {
-    "protocol": "Bag on 6 until it hits 130 then drop to 4 — 2.5 hours once it hits 130 on the plate",
+    "schema_version": "4.0.0",
+    "storage_mode": "portable_inline_html+json",
+    "updated_at_utc": "2026-11-13T21:42:51Z",
+    "protocol": "Bag on 6 until 130°F then drop to 4 — 2.5 hours once at 130°F on the plate",
+    "need_to_be_done_release_ids": [
+      28844782,
+      34756244,
+      35907826
+    ],
+    "done_release_ids": [
+      3873517,
+      9346527,
+      11368406,
+      12131049,
+      13113361,
+      14043330,
+      14188877,
+      14458307,
+      16251744,
+      20546863,
+      21390094,
+      22544762,
+      23343893,
+      23657633,
+      23674760,
+      23775551,
+      26421509,
+      26690690,
+      27079776,
+      27927123,
+      28269505,
+      29075062,
+      29237467,
+      29410045,
+      29410354,
+      29592373,
+      30245600,
+      30637357,
+      31909216,
+      33303678,
+      34691910,
+      35426350,
+      35720014,
+      35844376,
+      36897417,
+      37058814,
+      37163709,
+      37848120,
+      38268432,
+      38600733,
+      38854575
+    ],
+    "unlisted_release_ids": [],
     "need_to_be_done_entries": [
       {
         "artist": "A Day To Remember",
         "album": "For Those Who Have Heart",
-        "note_text": "A day to remember.  For those who have heart",
         "release_ids": [
           28844782
         ]
@@ -41935,15 +42227,13 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       {
         "artist": "Bring Me The Horizon",
         "album": "That's The Spirit",
-        "note_text": "Bring me the horizon.  That's the spirit",
         "release_ids": [
           35907826
         ]
       },
       {
         "artist": "Imminence",
-        "album": "The Return Of The Black",
-        "note_text": "Imminence. The return of the black",
+        "album": "The Return Of The Black ",
         "release_ids": [
           34756244
         ]
@@ -41953,7 +42243,6 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       {
         "artist": "Allt",
         "album": "From The New World",
-        "note_text": "Allt.  From the new world",
         "release_ids": [
           31909216
         ]
@@ -41961,7 +42250,6 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       {
         "artist": "Born Of Osiris",
         "album": "Angel Or Alien",
-        "note_text": "Born of Osiris.  Angel or Alien",
         "release_ids": [
           20546863
         ]
@@ -41969,7 +42257,6 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       {
         "artist": "Bring Me The Horizon",
         "album": "Amo",
-        "note_text": "Bring me the horizon.  Amo",
         "release_ids": [
           13113361
         ]
@@ -41977,7 +42264,6 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       {
         "artist": "Coheed And Cambria",
         "album": "Good Apollo, I'm Burning Star IV, Volume Two: No World for Tomorrow",
-        "note_text": "Coheed and Cambria.  No word for tomorrow",
         "release_ids": [
           16251744
         ]
@@ -41985,7 +42271,6 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       {
         "artist": "Coheed And Cambria",
         "album": "The Second Stage Turbine Blade",
-        "note_text": "Coheed and Cambria.  Second stage",
         "release_ids": [
           26690690
         ]
@@ -41993,7 +42278,6 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       {
         "artist": "Coheed And Cambria",
         "album": "Vaxis II: A Window Of The Waking Mind",
-        "note_text": "Coheed and Cambria.  Vaxis 2",
         "release_ids": [
           23674760
         ]
@@ -42001,7 +42285,6 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       {
         "artist": "Don Broco",
         "album": "Amazing Things",
-        "note_text": "Don broco.  Amazing things",
         "release_ids": [
           23775551
         ]
@@ -42009,7 +42292,6 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       {
         "artist": "Don Broco",
         "album": "Automatic",
-        "note_text": "Don broco.  Automatic",
         "release_ids": [
           14188877
         ]
@@ -42017,7 +42299,6 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       {
         "artist": "Don Broco",
         "album": "Nightmare Tripping",
-        "note_text": "Don broco. Nightmare tripping",
         "release_ids": [
           36897417
         ]
@@ -42025,7 +42306,6 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       {
         "artist": "Don Broco",
         "album": "Technology",
-        "note_text": "Don broco. Technology",
         "release_ids": [
           12131049
         ]
@@ -42033,15 +42313,13 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       {
         "artist": "Every Time I Die",
         "album": "Gutter Phenomenon",
-        "note_text": "Every time I die.  Gutter phenomenon",
         "release_ids": [
           29075062
         ]
       },
       {
         "artist": "Every Time I Die",
-        "album": "Last Night In Town",
-        "note_text": "Every time I die.  Last night in town",
+        "album": "Last Night ln Town",
         "release_ids": [
           30245600
         ]
@@ -42049,7 +42327,6 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       {
         "artist": "Greyhaven",
         "album": "This Bright And Beautiful World",
-        "note_text": "Greyhaven.  This bright and beautiful world",
         "release_ids": [
           27079776
         ]
@@ -42057,7 +42334,6 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       {
         "artist": "Imminence",
         "album": "Axis Mundi",
-        "note_text": "Imminence.  Axis Mundi",
         "release_ids": [
           38600733
         ]
@@ -42065,7 +42341,6 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       {
         "artist": "Imminence",
         "album": "Heaven In Hiding",
-        "note_text": "Imminence.  Heaven in hiding",
         "release_ids": [
           22544762
         ]
@@ -42073,7 +42348,6 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       {
         "artist": "Invent, Animate",
         "album": "Heavener",
-        "note_text": "Invent animate.  Heavener",
         "release_ids": [
           35720014
         ]
@@ -42081,79 +42355,76 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       {
         "artist": "Knocked Loose",
         "album": "You Won’t Go Before You’re Supposed To",
-        "note_text": "Knocked loose.  You won't go",
         "release_ids": [
           30637357
         ]
       },
       {
-        "artist": "Loathe",
-        "album": "A Stranger To You / I Let It In And It Took Everything",
-        "note_text": "Loathe.  A stranger to you",
-        "release_ids": []
-      },
-      {
         "artist": "Nothing More",
         "album": "Spirits",
-        "note_text": "Nothing more.  Spirits",
         "release_ids": [
           27927123
         ]
       },
       {
         "artist": "Periphery",
-        "album": "Periphery V: Djent Is Not A Genre",
-        "note_text": "Periphery. Djent is not a genre",
+        "album": "A Pale White Dot",
         "release_ids": [
-          26421509
+          38854575
         ]
       },
       {
         "artist": "Periphery",
-        "album": "Periphery IV: Hail Stan",
-        "note_text": "Periphery.  Hail Satan",
+        "album": "A Pale White Dot",
         "release_ids": [
-          14043330
+          37848120
         ]
       },
       {
         "artist": "Periphery",
         "album": "Juggernaut • Omega",
-        "note_text": "Periphery.  Omega",
         "release_ids": [
           29410354
         ]
       },
       {
         "artist": "Periphery",
-        "album": "Periphery (P1)",
-        "note_text": "Periphery. P1.",
+        "album": "Periphery",
         "release_ids": [
           29410045
         ]
       },
       {
         "artist": "Periphery",
-        "album": "A Pale White Dot",
-        "note_text": "Periphery.  Pale white dot",
+        "album": "Periphery III: Select Difficulty",
         "release_ids": [
-          38854575,
-          37848120
+          9346527
         ]
       },
       {
         "artist": "Periphery",
         "album": "Periphery III: Select Difficulty",
-        "note_text": "Periphery.  Select difficulty",
         "release_ids": [
-          9346527,
           29237467
+        ]
+      },
+      {
+        "artist": "Periphery",
+        "album": "Periphery IV: Hail Stan",
+        "release_ids": [
+          14043330
+        ]
+      },
+      {
+        "artist": "Periphery",
+        "album": "Periphery V: Djent Is Not A Genre",
+        "release_ids": [
+          26421509
         ]
       },
       {
         "artist": "Polaris",
         "album": "The Death Of Me",
-        "note_text": "Polaris.  The death of me",
         "release_ids": [
           34691910
         ]
@@ -42161,7 +42432,6 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       {
         "artist": "Silent Planet",
         "album": "Superbloom",
-        "note_text": "Silent Planet.  Superbloom",
         "release_ids": [
           29592373
         ]
@@ -42169,7 +42439,6 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       {
         "artist": "Sleep Token",
         "album": "Sundowning",
-        "note_text": "Sleep token.  Sundowning",
         "release_ids": [
           14458307
         ]
@@ -42177,7 +42446,6 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       {
         "artist": "Sleep Token",
         "album": "Take Me Back To Eden",
-        "note_text": "Sleep token.  Take me back to Eden",
         "release_ids": [
           37163709
         ]
@@ -42185,7 +42453,6 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       {
         "artist": "Spiritbox",
         "album": "Tsunami Sea",
-        "note_text": "Spirtbox.  Tsunami sea",
         "release_ids": [
           33303678
         ]
@@ -42193,7 +42460,6 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       {
         "artist": "Tesseract",
         "album": "One",
-        "note_text": "Tesseract.  One",
         "release_ids": [
           37058814
         ]
@@ -42201,7 +42467,6 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       {
         "artist": "Tesseract",
         "album": "Polaris",
-        "note_text": "Tesseract.  Polaris",
         "release_ids": [
           35426350
         ]
@@ -42209,7 +42474,6 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       {
         "artist": "Tesseract",
         "album": "Portals",
-        "note_text": "Tesseract.  Portals",
         "release_ids": [
           21390094
         ]
@@ -42217,7 +42481,6 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       {
         "artist": "Tesseract",
         "album": "War of Being",
-        "note_text": "Tesseract.  War of being",
         "release_ids": [
           28269505
         ]
@@ -42225,7 +42488,6 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       {
         "artist": "Thornhill",
         "album": "Heroine",
-        "note_text": "Thornhill.  Heroine",
         "release_ids": [
           23657633
         ]
@@ -42233,7 +42495,6 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       {
         "artist": "Thrice",
         "album": "Identity Crisis",
-        "note_text": "Thrice.  Identity crisis",
         "release_ids": [
           35844376
         ]
@@ -42241,7 +42502,6 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       {
         "artist": "Thursday",
         "album": "War All The Time",
-        "note_text": "Thursday.  War all the time",
         "release_ids": [
           3873517
         ]
@@ -42249,7 +42509,6 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       {
         "artist": "Underoath",
         "album": "Define The Great Line",
-        "note_text": "Underoath.  Define the great line",
         "release_ids": [
           38268432
         ]
@@ -42257,7 +42516,6 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       {
         "artist": "Unearth",
         "album": "The Stings Of Conscience",
-        "note_text": "Unearth.  The strings of conscience",
         "release_ids": [
           23343893
         ]
@@ -42265,7 +42523,6 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       {
         "artist": "Veil of Maya",
         "album": "False Idol",
-        "note_text": "Veil of maya.  False Idol",
         "release_ids": [
           11368406
         ]
@@ -42274,10 +42531,10 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
   }
 };
     try {
-      var __pySyncStamp = "2026-11-13T20:13:19Z";
+      var __pySyncStamp = "2026-11-13T21:42:51Z";
       if (typeof localStorage !== 'undefined' && localStorage.getItem('__discogs_py_sync_stamp__') !== __pySyncStamp) {
         Object.keys(localStorage).forEach(function(k) {
-          if (k.toLowerCase().indexOf('token') === -1) {
+          if (k.toLowerCase().indexOf('token') === -1 && k.indexOf('flattening_timer') === -1) {
             localStorage.removeItem(k);
           }
         });
@@ -42291,17 +42548,22 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       filteredRecords: [],
       activeIndex: 0,
       thumbMode: 'split', // 'pressing' | 'split' | 'sleeve'
-      stageMode: 'auto',     // 'auto' | 'sleeve'
+      stageMode: 'auto',  // 'auto' | 'sleeve'
       activeTab: 'showcase',
       filter: 'all',
       sortBy: 'added_desc',
       searchQuery: '',
+      doneSearchQuery: '',
+      benchSearchQuery: '',
       isSpinning: true,
       rpm: 33,
       audioPlaying: false,
       audioCtx: null,
       userOverrides: {},       // release_id -> pinned pressing image URL
       releaseGalleryCache: {}, // release_id -> array of Discogs image objects
+      unsavedPinCount: 0,
+      unsavedFlattenCount: 0,
+      timerInterval: null,
     };
 
     function safeGetStorage(key) {
@@ -42320,7 +42582,7 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       el.textContent = msg;
       el.classList.remove('hidden');
       clearTimeout(window.__toastTimer);
-      window.__toastTimer = setTimeout(() => el.classList.add('hidden'), 3400);
+      window.__toastTimer = setTimeout(() => el.classList.add('hidden'), 3600);
     }
 
     // Deterministic Discogs Format & Variant Parser (matches detect_pressing_image.py)
@@ -42436,9 +42698,9 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       const classified = Array.isArray(imgs.classified_images) ? imgs.classified_images : [];
 
       if (state.userOverrides[rid]) {
-        const ovUrl = state.userOverrides[rid];
-        // Check if this override matches a classified image that has a local_uri
-        const matchedImg = classified.find(im => im.uri === ovUrl || im.local_uri === ovUrl);
+        const ovEntry = state.userOverrides[rid];
+        const ovUrl = typeof ovEntry === 'object' ? (ovEntry.uri || ovEntry.local_uri || '') : String(ovEntry);
+        const matchedImg = classified.find(im => im.uri === ovUrl || im.local_uri === ovUrl || (typeof ovEntry === 'object' && im.index === ovEntry.pressing_image_index));
         if (matchedImg && matchedImg.local_uri) {
           return { primary: matchedImg.local_uri, fallback: matchedImg.uri || ovUrl };
         }
@@ -42480,8 +42742,269 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       return rec.images.local_cover_image_url || rec.images.center_label_image_url || rec.images.cover_image_url || '';
     }
 
+    // Build and sync the portable inline HTML form (#flattening-inline-form) + window.__DISCOGS_COLLECTION__
+    function buildFlatteningQueueObject(customTimestamp) {
+      const ts = customTimestamp || new Date().toISOString().replace(/\.\d{3}Z$/, 'Z');
+      const protoEl = document.getElementById('flatten-hidden-protocol');
+      const protocol = (protoEl && protoEl.value)
+        ? protoEl.value
+        : 'Bag on 6 until 130°F then drop to 4 — 2.5 hours once at 130°F on the plate';
+
+      const todoRecs = state.records
+        .filter(r => r.flattening_status === 'Need to be done')
+        .sort((a, b) => a.artist.localeCompare(b.artist) || a.title.localeCompare(b.title));
+      const doneRecs = state.records
+        .filter(r => r.flattening_status === 'Done')
+        .sort((a, b) => a.artist.localeCompare(b.artist) || a.title.localeCompare(b.title));
+
+      const todoIds = todoRecs.map(r => Number(r.release_id)).filter(Boolean).sort((a, b) => a - b);
+      const doneIds = doneRecs.map(r => Number(r.release_id)).filter(Boolean).sort((a, b) => a - b);
+
+      const unlistedEl = document.getElementById('flatten-hidden-unlisted-ids');
+      const prevUnlisted = (unlistedEl && unlistedEl.value)
+        ? unlistedEl.value.split(',').map(x => Number(x.trim())).filter(Boolean)
+        : [];
+      const unlistedIds = Array.from(new Set(prevUnlisted)).filter(id => !todoIds.includes(id) && !doneIds.includes(id)).sort((a, b) => a - b);
+
+      return {
+        schema_version: '4.0.0',
+        storage_mode: 'portable_inline_html+json',
+        updated_at_utc: ts,
+        protocol,
+        need_to_be_done_release_ids: todoIds,
+        done_release_ids: doneIds,
+        unlisted_release_ids: unlistedIds,
+        need_to_be_done_entries: todoRecs.map(r => ({
+          artist: r.artist,
+          album: r.title,
+          release_ids: [Number(r.release_id)],
+        })),
+        done_entries: doneRecs.map(r => ({
+          artist: r.artist,
+          album: r.title,
+          release_ids: [Number(r.release_id)],
+        })),
+      };
+    }
+
+    function syncInlineFlatteningFormState(markEdited = false) {
+      const fqObj = buildFlatteningQueueObject();
+      const todoCsv = fqObj.need_to_be_done_release_ids.join(',');
+      const doneCsv = fqObj.done_release_ids.join(',');
+      const unlistedCsv = (fqObj.unlisted_release_ids || []).join(',');
+
+      const setHiddenVal = (id, val) => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.value = val;
+          el.setAttribute('value', val);
+        }
+      };
+
+      setHiddenVal('flatten-hidden-updated-at', fqObj.updated_at_utc);
+      setHiddenVal('flatten-hidden-todo-ids', todoCsv);
+      setHiddenVal('flatten-hidden-done-ids', doneCsv);
+      setHiddenVal('flatten-hidden-unlisted-ids', unlistedCsv);
+
+      const jsonArea = document.getElementById('flatten-hidden-json');
+      if (jsonArea) {
+        jsonArea.textContent = JSON.stringify(fqObj);
+      }
+
+      if (window.__DISCOGS_COLLECTION__) {
+        window.__DISCOGS_COLLECTION__.flattening_queue = fqObj;
+        if (window.__DISCOGS_COLLECTION__.profile) {
+          window.__DISCOGS_COLLECTION__.profile.flattening_need_to_be_done = fqObj.need_to_be_done_release_ids.length;
+          window.__DISCOGS_COLLECTION__.profile.flattening_done = fqObj.done_release_ids.length;
+        }
+      }
+
+      if (markEdited) {
+        state.unsavedFlattenCount++;
+        safeSetStorage('krunked_flattening_state_v4', JSON.stringify(fqObj));
+      }
+      updateSessionEditIndicators();
+      return fqObj;
+    }
+
+    function applyFlatteningQueueObjectToRecords(fqObj) {
+      if (!fqObj || typeof fqObj !== 'object') return;
+      const todoSet = new Set((fqObj.need_to_be_done_release_ids || []).map(Number));
+      const doneSet = new Set((fqObj.done_release_ids || []).map(Number));
+      const unlistedSet = new Set((fqObj.unlisted_release_ids || []).map(Number));
+
+      if (!todoSet.size && !doneSet.size) return;
+
+      for (const rec of state.records) {
+        const rid = Number(rec.release_id);
+        if (unlistedSet.has(rid)) {
+          rec.flattening_status = 'Not Listed';
+        } else if (todoSet.has(rid)) {
+          rec.flattening_status = 'Need to be done';
+        } else if (doneSet.has(rid)) {
+          rec.flattening_status = 'Done';
+        } else {
+          rec.flattening_status = 'Not Listed';
+        }
+      }
+    }
+
+    function setRecordFlatteningStatus(releaseId, newStatus) {
+      const rid = Number(releaseId);
+      const rec = state.records.find(r => Number(r.release_id) === rid);
+      if (!rec) return;
+
+      rec.flattening_status = newStatus;
+
+      // Track explicit unlisted removals so Python sync knows the user removed it
+      const unlistedEl = document.getElementById('flatten-hidden-unlisted-ids');
+      if (unlistedEl) {
+        const cur = unlistedEl.value ? unlistedEl.value.split(',').map(x => Number(x.trim())).filter(Boolean) : [];
+        if (newStatus === 'Not Listed') {
+          if (!cur.includes(rid)) cur.push(rid);
+        } else {
+          const idx = cur.indexOf(rid);
+          if (idx !== -1) cur.splice(idx, 1);
+        }
+        const nextVal = cur.join(',');
+        unlistedEl.value = nextVal;
+        unlistedEl.setAttribute('value', nextVal);
+      }
+
+      syncInlineFlatteningFormState(true);
+      updateKpiStrip();
+      renderFlatteningView();
+      renderHeroStage();
+      renderCrateGrid();
+
+      const labelMap = {
+        'Need to be done': '🔥 Added to Flattening Queue',
+        'Done': '✓ Marked Flattened & Verified',
+        'Not Listed': 'Removed from Flattening Queue',
+      };
+      showToast(`${rec.artist} — "${rec.title}": ${labelMap[newStatus] || newStatus}`);
+    }
+
+    function updateSessionEditIndicators() {
+      const totalEdits = state.unsavedPinCount + state.unsavedFlattenCount;
+      const syncBtnLabel = document.getElementById('sync-btn-label');
+      const syncBtnDot = document.getElementById('sync-btn-dot');
+      if (syncBtnLabel) {
+        syncBtnLabel.textContent = totalEdits > 0 ? `Sync & Export LP's (${totalEdits})` : `Sync & Export LP's`;
+      }
+      if (syncBtnDot) {
+        syncBtnDot.className = totalEdits > 0
+          ? 'w-2 h-2 rounded-full bg-amber-400 animate-ping'
+          : 'w-2 h-2 rounded-full bg-emerald-400';
+      }
+
+      const inlineBadge = document.getElementById('flatten-inline-status');
+      if (inlineBadge) {
+        if (state.unsavedFlattenCount > 0) {
+          inlineBadge.textContent = `● ${state.unsavedFlattenCount} Queue Edit${state.unsavedFlattenCount === 1 ? '' : 's'} — Click "Save Updated index.html" to Persist`;
+          inlineBadge.className = 'px-2.5 py-1 rounded-lg text-[11px] font-mono-tech bg-amber-500/20 text-amber-300 border border-amber-500/30';
+        } else {
+          inlineBadge.textContent = '✓ Inline HTML Form Synced';
+          inlineBadge.className = 'px-2.5 py-1 rounded-lg text-[11px] font-mono-tech bg-emerald-500/15 text-emerald-300 border border-emerald-500/30';
+        }
+      }
+
+      const modalEdits = document.getElementById('modal-stat-edits');
+      const modalEditsSub = document.getElementById('modal-stat-edits-sub');
+      if (modalEdits && modalEditsSub) {
+        if (totalEdits > 0) {
+          modalEdits.textContent = `${totalEdits} Pending Edit${totalEdits === 1 ? '' : 's'}`;
+          modalEdits.className = 'text-sm sm:text-base font-extrabold text-amber-300 mt-0.5';
+          modalEditsSub.textContent = `${state.unsavedPinCount} Pin(s) • ${state.unsavedFlattenCount} Queue`;
+        } else {
+          modalEdits.textContent = '0 Unsaved';
+          modalEdits.className = 'text-sm sm:text-base font-extrabold text-emerald-400 mt-0.5';
+          modalEditsSub.textContent = 'In Sync with HTML';
+        }
+      }
+    }
+
+    // Generate a complete, self-contained index.html file with all current overrides, flattening state, and KPIs baked in
+    function downloadSelfContainedIndexHtml() {
+      const fqObj = syncInlineFlatteningFormState(false);
+      const nowStamp = new Date().toISOString().replace(/\.\d{3}Z$/, 'Z');
+      fqObj.updated_at_utc = nowStamp;
+
+      if (window.__DISCOGS_COLLECTION__) {
+        window.__DISCOGS_COLLECTION__.synced_at_utc = nowStamp;
+        window.__DISCOGS_COLLECTION__.schema_version = '4.0.0';
+        window.__DISCOGS_COLLECTION__.records = state.records;
+        window.__DISCOGS_COLLECTION__.flattening_queue = fqObj;
+        if (window.__DISCOGS_COLLECTION__.profile) {
+          window.__DISCOGS_COLLECTION__.profile.num_collection = state.records.length;
+          window.__DISCOGS_COLLECTION__.profile.pressing_photos_detected = state.records.filter(r => Boolean(getVerifiedPressingPhotoUrl(r))).length;
+          window.__DISCOGS_COLLECTION__.profile.flattening_need_to_be_done = fqObj.need_to_be_done_release_ids.length;
+          window.__DISCOGS_COLLECTION__.profile.flattening_done = fqObj.done_release_ids.length;
+        }
+      }
+
+      // Sync hidden inputs before serializing DOM
+      const setHiddenVal = (id, val) => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.value = val;
+          el.setAttribute('value', val);
+        }
+      };
+      setHiddenVal('flatten-hidden-updated-at', nowStamp);
+      setHiddenVal('flatten-hidden-todo-ids', fqObj.need_to_be_done_release_ids.join(','));
+      setHiddenVal('flatten-hidden-done-ids', fqObj.done_release_ids.join(','));
+      setHiddenVal('flatten-hidden-unlisted-ids', (fqObj.unlisted_release_ids || []).join(','));
+      const jsonArea = document.getElementById('flatten-hidden-json');
+      if (jsonArea) jsonArea.textContent = JSON.stringify(fqObj);
+
+      let rawDoc = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+
+      const overridesJs = JSON.stringify(state.userOverrides, null, 2);
+      const collectionJs = JSON.stringify(window.__DISCOGS_COLLECTION__, null, 2);
+      const replacementBlock = [
+        '/* __DISCOGS_COLLECTION_DATA_' + 'START__ */',
+        `    window.__DISCOGS_OVERRIDES__ = ${overridesJs};`,
+        `    window.__DISCOGS_COLLECTION__ = ${collectionJs};`,
+        '    try {',
+        `      var __pySyncStamp = ${JSON.stringify(nowStamp)};`,
+        "      if (typeof localStorage !== 'undefined' && localStorage.getItem('__discogs_py_sync_stamp__') !== __pySyncStamp) {",
+        '        Object.keys(localStorage).forEach(function(k) {',
+        "          if (k.toLowerCase().indexOf('token') === -1 && k.indexOf('flattening_timer') === -1) {",
+        '            localStorage.removeItem(k);',
+        '          }',
+        '        });',
+        "        localStorage.setItem('__discogs_py_sync_stamp__', __pySyncStamp);",
+        '      }',
+        '    } catch (e) {}',
+        '    /* __DISCOGS_COLLECTION_DATA_' + 'END__ */',
+      ].join('\n');
+
+      rawDoc = rawDoc.replace(
+        new RegExp('\\/\\*\\s*__DISCOGS_COLLECTION_DATA_' + 'START__\\s*\\*\\/[\\s\\S]*?\\/\\*\\s*__DISCOGS_COLLECTION_DATA_' + 'END__\\s*\\*\\/'),
+        () => replacementBlock
+      );
+
+      // Keep localStorage stamp aligned with newly baked HTML
+      safeSetStorage('__discogs_py_sync_stamp__', nowStamp);
+      state.unsavedPinCount = 0;
+      state.unsavedFlattenCount = 0;
+      updateSessionEditIndicators();
+
+      const blob = new Blob([rawDoc], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'index.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('Downloaded self-contained index.html with inline flattening state & pins baked in!');
+    }
+
     // Render Vinyl Disc:
-    // Defaults the 'wax ring' to the release's actual pressing photo whenever available (142/150 releases),
+    // Defaults the 'wax ring' to the release's actual pressing photo whenever available,
     // falling back to the deterministic SVG wax shader ONLY when no pressing photo exists on Discogs.
     function renderDeterministicWaxSVG(rec, sizePx = 240, allowVerifiedPressingPhoto = true) {
       const wax = rec.wax_spec || {};
@@ -42674,7 +43197,28 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
         ? ` • 🔥 Queue`
         : (flatStatus === 'Done' ? ` • ✓ Flattened` : '');
       document.getElementById('hero-flattening').textContent = `#${rec.release_id}${flatBadge}`;
+
+      const cycleBtn = document.getElementById('btn-hero-flatten-cycle');
+      if (cycleBtn) {
+        if (flatStatus === 'Not Listed') {
+          cycleBtn.textContent = '+ 🔥 Queue';
+          cycleBtn.className = 'shrink-0 px-2 py-0.5 rounded bg-amber-500/15 hover:bg-amber-500/25 text-[10px] font-mono-tech text-amber-300 border border-amber-500/30 transition';
+        } else if (flatStatus === 'Need to be done') {
+          cycleBtn.textContent = '✓ Mark Done';
+          cycleBtn.className = 'shrink-0 px-2 py-0.5 rounded bg-emerald-500/20 hover:bg-emerald-500/30 text-[10px] font-mono-tech text-emerald-300 border border-emerald-500/30 transition';
+        } else {
+          cycleBtn.textContent = '↺ Unlist';
+          cycleBtn.className = 'shrink-0 px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-[10px] font-mono-tech text-slate-300 border border-white/10 transition';
+        }
+      }
+
       document.getElementById('hero-discogs-link').href = rec.discogs_url || `https://www.discogs.com/release/${rec.release_id}`;
+
+      // Update modal CLI preview with active record ID
+      const syncLogEl = document.getElementById('sync-log-output');
+      if (syncLogEl) {
+        syncLogEl.textContent = `# Daily Incremental Delta Sync (Fast-Paths Unchanged LPs):\ncd C:\\DiscogsCollection\\discogs_collection\npython scripts/sync_discogs.py\n\n# Force Resync Active Turntable Record (#${rec.release_id} — ${rec.artist}):\npython scripts/sync_discogs.py --resync ${rec.release_id}`;
+      }
 
       renderHeroGalleryStrip(rec);
     }
@@ -42712,7 +43256,7 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       stripEl.innerHTML = classified.map((img, i) => {
         const remoteUri = img.uri || img.uri150 || '';
         const thumbSrc = img.local_uri || img.uri150 || remoteUri;
-        const pinTarget = remoteUri || img.local_uri || '';
+        const pinTarget = img.local_uri || remoteUri || '';
         const isPinned = Boolean(
           activePressingUrl && (
             activePressingUrl === remoteUri ||
@@ -42728,6 +43272,7 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
           <button
             type="button"
             data-pin-image-url="${pinTarget}"
+            data-pin-image-index="${i}"
             data-pin-release-id="${rec.release_id}"
             class="shrink-0 group relative rounded-lg overflow-hidden border-2 ${isPinned ? 'border-emerald-400 ring-2 ring-emerald-400/30' : 'border-white/15 hover:border-cyan-400'} transition"
             title="Click to pin image [${i}] as the vinyl pressing photo for ${rec.title}"
@@ -42788,10 +43333,22 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       const verifiedCount = state.records.filter(r => Boolean(getVerifiedPressingPhotoUrl(r))).length;
       const coloredCount = state.records.filter(r => r.wax_spec && r.wax_spec.pattern !== 'black').length;
       const pct = total ? ((coloredCount / total) * 100).toFixed(1) : '0.0';
+      const pressPct = total ? ((verifiedCount / total) * 100).toFixed(1) : '0.0';
 
       document.getElementById('kpi-total-records').textContent = `${total} LPs`;
       document.getElementById('kpi-pressing-photos').textContent = `${verifiedCount} / ${total}`;
       document.getElementById('kpi-colored-wax').textContent = `${pct}%`;
+
+      const progEl = document.getElementById('bg-enrich-progress');
+      if (progEl) progEl.textContent = `• ${total} LPs & ${verifiedCount} Pressing Photos Compiled`;
+
+      const heroRatioEl = document.getElementById('hero-pressing-ratio');
+      if (heroRatioEl) heroRatioEl.textContent = `${verifiedCount}/${total}`;
+
+      const searchInput = document.getElementById('search-input');
+      if (searchInput) {
+        searchInput.placeholder = `Search all ${total} LPs by artist, album, label, catalog #, or pressing color...`;
+      }
 
       // Always compute and display Collection Value so it never gets stuck on 'Syncing...'
       const sumValues = state.records.reduce((acc, r) => acc + Number(r.estimated_value_usd || 0), 0);
@@ -42804,9 +43361,10 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       const sumEl = document.getElementById('kpi-nm-ratio');
       const sumSubEl = document.getElementById('kpi-gallery-sub');
 
+      const medianStr = colVal.median || formattedSum;
       if (colVal.median) {
         vaultValEl.textContent = colVal.median;
-        vaultRangeEl.textContent = `Min ${colVal.minimum || '$3,721.74'} • Max ${colVal.maximum || '$10,437.49'}`;
+        vaultRangeEl.textContent = `Min ${colVal.minimum || '$3,886.22'} • Max ${colVal.maximum || '$10,761.84'}`;
       } else if (sumValues > 0) {
         vaultValEl.textContent = formattedSum;
         vaultRangeEl.textContent = `Est. Across ${total} LPs`;
@@ -42821,10 +43379,33 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
 
       const todoCount = state.records.filter(r => r.flattening_status === 'Need to be done').length;
       const doneCount = state.records.filter(r => r.flattening_status === 'Done').length;
+      const unlistedCount = Math.max(0, total - todoCount - doneCount);
+
       const flatKpiEl = document.getElementById('kpi-flattening');
       if (flatKpiEl) {
         flatKpiEl.textContent = `${todoCount} Queued / ${doneCount} Done`;
       }
+
+      const chipTodo = document.getElementById('chip-flatten-todo');
+      if (chipTodo) chipTodo.textContent = `🔥 Flattening Queue (${todoCount})`;
+      const chipDone = document.getElementById('chip-flatten-done');
+      if (chipDone) chipDone.textContent = `✓ Flattened & Verified (${doneCount})`;
+
+      // Update Pipeline Tab dynamic telemetry cards
+      const pipeCv = document.getElementById('pipe-kpi-cv');
+      if (pipeCv) pipeCv.textContent = `${verifiedCount} / ${total} Physical Discs Verified (${pressPct}%)`;
+      const pipeFlat = document.getElementById('pipe-kpi-flatten');
+      if (pipeFlat) pipeFlat.textContent = `${todoCount} Queued • ${doneCount} Flattened • ${unlistedCount} Uninspected`;
+      const pipeVal = document.getElementById('pipe-kpi-val');
+      if (pipeVal) pipeVal.textContent = `${medianStr} Median • ${formattedSum} Release Sum`;
+
+      // Update Modal stats
+      const mLps = document.getElementById('modal-stat-lps');
+      if (mLps) mLps.textContent = `${total} LPs`;
+      const mPhotos = document.getElementById('modal-stat-photos');
+      if (mPhotos) mPhotos.textContent = `${verifiedCount} Pressing Photos`;
+      const mFlat = document.getElementById('modal-stat-flatten');
+      if (mFlat) mFlat.textContent = `${todoCount} Queued / ${doneCount} Done`;
     }
 
     // Render Crate Grid Cards
@@ -42857,7 +43438,6 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
         let visualHtml = '';
 
         if (state.thumbMode === 'pressing' && verifiedPressingUrl) {
-          // Verified Pressing Photo is Hero Thumbnail, with real Discogs cover in bottom-left
           visualHtml = `
             <div class="relative w-full h-52 bg-gradient-to-b from-slate-900/90 to-[#090b12] flex items-center justify-center p-4 overflow-hidden">
               ${flatPill}
@@ -42885,7 +43465,6 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
             </div>
           `;
         } else {
-          // Split mode or fallback for the 8 sleeve-only releases:
           visualHtml = `
             <div class="relative w-full h-52 bg-gradient-to-b from-slate-900/90 to-[#090b12] flex items-center justify-center px-4 overflow-hidden">
               ${flatPill}
@@ -42944,10 +43523,9 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
     }
 
     // Fetch a single release's full details & image gallery from Discogs API
-    async function fetchSingleReleaseGallery(rec, token) {
+    async function fetchSingleReleaseGallery(rec) {
       const rid = String(rec.release_id);
       const headers = { 'Accept': 'application/vnd.discogs.v2.discogs+json' };
-      if (token) headers['Authorization'] = `Discogs token=${token}`;
       const resp = await fetch(`https://api.discogs.com/releases/${rid}?curr_abbr=USD`, { headers });
       if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
       const detail = await resp.json();
@@ -42976,203 +43554,169 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       return imgs;
     }
 
-    // Full Multi-Page Browser Sync (preserves existing pressing photos, prices, and flattening statuses!)
-    async function syncAllPagesFromDiscogs(username, token, silent = false) {
-      const logEl = document.getElementById('sync-log-output');
-      const progEl = document.getElementById('bg-enrich-progress');
-      const headers = { 'Accept': 'application/vnd.discogs.v2.discogs+json' };
-      if (token) headers['Authorization'] = `Discogs token=${token}`;
-
-      const existingById = {};
-      for (const r of state.records) {
-        existingById[String(r.release_id)] = r;
-      }
-
-      try {
-        if (progEl) progEl.textContent = '• Syncing collection from api.discogs.com...';
-        if (logEl) logEl.textContent = `[1/3] Fetching Discogs profile & collection value for '${username}'...\n`;
-
-        const [profResp, valResp] = await Promise.all([
-          fetch(`https://api.discogs.com/users/${encodeURIComponent(username)}`, { headers }),
-          token ? fetch(`https://api.discogs.com/users/${encodeURIComponent(username)}/collection/value`, { headers }) : Promise.resolve(null),
-        ]);
-
-        let fetchedValue = null;
-        if (valResp && valResp.ok) {
-          fetchedValue = await valResp.json();
-        }
-
-        let page = 1;
-        let totalPages = 1;
-        const allRawItems = [];
-
-        while (page <= totalPages) {
-          if (logEl) logEl.textContent += `[2/3] Fetching Folder 0 page ${page} (per_page=100)...\n`;
-          const url = `https://api.discogs.com/users/${encodeURIComponent(username)}/collection/folders/0/releases?per_page=100&page=${page}&sort=added&sort_order=desc`;
-          const resp = await fetch(url, { headers });
-          if (!resp.ok) throw new Error(`HTTP ${resp.status} on page ${page}`);
-          const data = await resp.json();
-          const pageReleases = data.releases || [];
-          allRawItems.push(...pageReleases);
-          totalPages = (data.pagination && data.pagination.pages) ? Number(data.pagination.pages) : 1;
-          page++;
-        }
-
-        if (!allRawItems.length) throw new Error('No releases returned');
-
-        const compiled = allRawItems.map((item, idx) => {
-          const b = item.basic_information || {};
-          const rid = Number(b.id || item.id || idx);
-          const ridStr = String(rid);
-          const prev = existingById[ridStr] || null;
-
-          const formats = b.formats || [];
-          const fmtParts = formats.map(f => {
-            const qty = String(f.qty || '1');
-            const name = f.name || 'Vinyl';
-            const descs = [...(f.descriptions || [])];
-            if (f.text) descs.push(f.text);
-            const pref = qty !== '1' ? `${qty}x${name}` : name;
-            return descs.length ? `${pref}, ${descs.join(', ')}` : pref;
-          });
-          const fmtStr = fmtParts.join(' + ') || (prev ? prev.format_string : 'LP, Album');
-
-          let mediaCond = prev ? prev.media_condition : 'Near Mint (NM or M-)';
-          let sleeveCond = prev ? prev.sleeve_condition : 'Near Mint (NM or M-)';
-          let comments = prev ? prev.comments : '';
-          for (const n of (item.notes || [])) {
-            if (n.field_id === 1 && n.value) mediaCond = n.value;
-            else if (n.field_id === 2 && n.value) sleeveCond = n.value;
-            else if (n.value) comments = n.value;
-          }
-
-          const artists = (b.artists || []).map(a => (a.name || '').replace(/\s+\(\d+\)$/, '')).filter(Boolean).join(', ') || 'Unknown Artist';
-          const labelObj = (b.labels && b.labels[0]) ? b.labels[0] : {};
-          const labelName = (labelObj.name || 'Independent').replace(/\s+\(\d+\)$/, '');
-          const catno = labelObj.catno || 'none';
-          const coverImg = b.cover_image || b.thumb || '';
-
-          const waxSpec = (prev && prev.wax_spec) ? prev.wax_spec : parseWaxVariantJS(fmtStr, comments, rid);
-          const ovUrl = state.userOverrides[ridStr] || '';
-
-          const imagesObj = (prev && prev.images)
-            ? {
-                ...prev.images,
-                cover_image_url: prev.images.cover_image_url || coverImg,
-                pressing_image_url: ovUrl || prev.images.pressing_image_url || '',
-                has_pressing_photo: Boolean(ovUrl || prev.images.has_pressing_photo || prev.images.pressing_image_url),
-              }
-            : {
-                cover_image_url: coverImg,
-                pressing_image_url: ovUrl,
-                center_label_image_url: b.thumb || coverImg,
-                display_thumbnail_url: ovUrl || coverImg,
-                has_pressing_photo: Boolean(ovUrl),
-                selected_index: ovUrl ? 1 : 0,
-                selected_score: ovUrl ? 1.0 : 0.0,
-                detection_method: ovUrl ? 'override_verified_pressing' : 'live_discogs_api_sync',
-                classified_images: coverImg ? [{ index: 0, uri: coverImg, uri150: b.thumb || coverImg, role: 'front_cover' }] : [],
-              };
-
-          return {
-            release_id: rid,
-            instance_id: item.instance_id || rid,
-            artist: artists,
-            title: b.title || '',
-            year: Number(b.year || 0),
-            format_string: fmtStr,
-            label: labelName,
-            catno,
-            media_condition: mediaCond,
-            sleeve_condition: sleeveCond,
-            comments,
-            date_added: item.date_added || '',
-            discogs_url: `https://www.discogs.com/release/${rid}`,
-            estimated_value_usd: prev && prev.estimated_value_usd ? prev.estimated_value_usd : 35.0,
-            flattening_status: prev && prev.flattening_status ? prev.flattening_status : 'Not Listed',
-            images: imagesObj,
-            wax_spec: waxSpec,
-          };
-        });
-
-        const totalEst = compiled.reduce((acc, r) => acc + Number(r.estimated_value_usd || 0), 0);
-        const prevColVal = (window.__DISCOGS_COLLECTION__ && window.__DISCOGS_COLLECTION__.profile && window.__DISCOGS_COLLECTION__.profile.collection_value)
-          ? window.__DISCOGS_COLLECTION__.profile.collection_value
-          : {};
-
-        state.records = compiled;
-        window.__DISCOGS_COLLECTION__ = {
-          ...(window.__DISCOGS_COLLECTION__ || {}),
-          schema_version: '2.2.0',
-          is_offline_seed: false,
-          source_of_truth: `https://www.discogs.com/user/${username}/collection`,
-          username,
-          synced_at_utc: new Date().toISOString(),
-          profile: {
-            username,
-            num_collection: compiled.length,
-            pressing_photos_detected: compiled.filter(r => Boolean(getVerifiedPressingPhotoUrl(r))).length,
-            colored_or_special_variants: compiled.filter(r => r.wax_spec && r.wax_spec.pattern !== 'black').length,
-            collection_value: {
-              minimum: (fetchedValue && fetchedValue.minimum) || prevColVal.minimum || '$3,721.74',
-              median: (fetchedValue && fetchedValue.median) || prevColVal.median || '$6,011.87',
-              maximum: (fetchedValue && fetchedValue.maximum) || prevColVal.maximum || '$10,437.49',
-              total_estimated_usd: Number(totalEst.toFixed(2)),
-              formatted_total: `$${totalEst.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`,
-            },
-          },
-          records: compiled,
-        };
-        safeSetStorage('krunked_discogs_collection_v2_2', JSON.stringify(window.__DISCOGS_COLLECTION__));
-
-        applyFiltersAndSort();
-        renderFlatteningView();
-        if (progEl) progEl.textContent = `• Synced ${compiled.length} LPs from Discogs!`;
-        if (logEl) logEl.textContent += `[ok] Loaded all ${compiled.length} releases across ${totalPages} pages!\n`;
-        if (!silent) showToast(`Synced all ${compiled.length} LPs from Discogs for ${username}!`);
-      } catch (err) {
-        if (logEl) logEl.textContent += `[note] Live API fetch message: ${err.message}\n`;
-        if (!silent) showToast(`Sync note: ${err.message}`);
-      }
-    }
-
-    // Render Flattening Queue View
+    // Render Flattening Queue View + Owner Inspection Bench
     function renderFlatteningView() {
       const todo = state.records
         .filter(r => r.flattening_status === 'Need to be done')
         .sort((a, b) => a.artist.localeCompare(b.artist) || a.title.localeCompare(b.title));
-      const done = state.records
+      const allDone = state.records
         .filter(r => r.flattening_status === 'Done')
+        .sort((a, b) => a.artist.localeCompare(b.artist) || a.title.localeCompare(b.title));
+      const allUnlisted = state.records
+        .filter(r => r.flattening_status !== 'Need to be done' && r.flattening_status !== 'Done')
         .sort((a, b) => a.artist.localeCompare(b.artist) || a.title.localeCompare(b.title));
 
       document.getElementById('flatten-todo-count').textContent = `${todo.length} Records`;
-      document.getElementById('flatten-done-count').textContent = `${done.length} Records`;
+      document.getElementById('flatten-done-count').textContent = `${allDone.length} Records`;
+      const unlistedCountEl = document.getElementById('flatten-unlisted-count');
+      if (unlistedCountEl) unlistedCountEl.textContent = `${allUnlisted.length} Uninspected`;
+
+      // Populate thermal timer record dropdown
+      const timerSelect = document.getElementById('timer-record-select');
+      if (timerSelect) {
+        const prevVal = timerSelect.value;
+        timerSelect.innerHTML = `<option value="">Select LP in Pouch (${todo.length} Queued)...</option>` +
+          todo.map(r => `<option value="${r.release_id}">${r.artist} — ${r.title}</option>`).join('');
+        if (prevVal && todo.some(r => String(r.release_id) === String(prevVal))) {
+          timerSelect.value = prevVal;
+        }
+      }
+
+      const doneQ = state.doneSearchQuery.trim().toLowerCase();
+      const filteredDone = doneQ
+        ? allDone.filter(r => `${r.artist} ${r.title} ${r.wax_spec.variant_badge}`.toLowerCase().includes(doneQ))
+        : allDone;
 
       const renderRow = (r, isTodo) => `
         <div class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-900/90 border border-white/10 hover:border-cyan-500/30 transition">
-          <div class="flex items-center gap-3 min-w-0">
+          <div class="flex items-center gap-3 min-w-0 cursor-pointer" data-load-turntable="${r.release_id}" title="Click to load onto Turntable Stage">
             <div class="w-11 h-11 rounded-full shrink-0 overflow-hidden shadow">
               ${renderDeterministicWaxSVG(r, 44, true)}
             </div>
             <div class="min-w-0">
-              <div class="text-xs font-bold text-white truncate">${r.artist} — ${r.title}</div>
+              <div class="text-xs font-bold text-white hover:text-cyan-300 truncate">${r.artist} — ${r.title}</div>
               <div class="text-[11px] font-mono-tech text-slate-400 truncate">${r.wax_spec.variant_badge} • <span class="text-emerald-400">$${Number(r.estimated_value_usd || 35).toFixed(2)}</span></div>
             </div>
           </div>
-          <div class="flex items-center gap-2 shrink-0">
-            <button type="button" data-toggle-flatten="${r.release_id}" class="px-2.5 py-1 rounded-lg text-[11px] font-mono-tech font-semibold ${isTodo ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500/30' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'}">
-              ${isTodo ? 'Mark Done ✓' : 'Move to Queue'}
+          <div class="flex items-center gap-1.5 shrink-0">
+            <button type="button" data-set-flatten="${r.release_id}" data-target-status="${isTodo ? 'Done' : 'Need to be done'}" class="px-2.5 py-1 rounded-lg text-[11px] font-mono-tech font-semibold ${isTodo ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500/30' : 'bg-amber-500/15 text-amber-300 border border-amber-500/30 hover:bg-amber-500/25'}">
+              ${isTodo ? '✓ Mark Done' : '🔥 Re-Queue'}
             </button>
-            <a href="${r.discogs_url || ('https://www.discogs.com/release/' + r.release_id)}" target="_blank" rel="noopener noreferrer" class="text-xs font-mono-tech text-cyan-400 hover:underline">↗</a>
+            <button type="button" data-set-flatten="${r.release_id}" data-target-status="Not Listed" class="px-2 py-1 rounded-lg text-[11px] font-mono-tech bg-slate-800 hover:bg-rose-500/20 text-slate-400 hover:text-rose-300 border border-white/10" title="Remove from Flattening Queue (set to Not Listed)">
+              ✕
+            </button>
+            <a href="${r.discogs_url || ('https://www.discogs.com/release/' + r.release_id)}" target="_blank" rel="noopener noreferrer" class="text-xs font-mono-tech text-cyan-400 hover:underline px-1">↗</a>
           </div>
         </div>
       `;
 
-      document.getElementById('flatten-todo-list').innerHTML = todo.map(r => renderRow(r, true)).join('') || '<p class="text-xs text-slate-400">Queue is clear!</p>';
-      document.getElementById('flatten-done-list').innerHTML = done.map(r => renderRow(r, false)).join('');
-      const flatKpiEl = document.getElementById('kpi-flattening');
-      if (flatKpiEl) {
-        flatKpiEl.textContent = `${todo.length} Queued / ${done.length} Done`;
+      document.getElementById('flatten-todo-list').innerHTML = todo.map(r => renderRow(r, true)).join('') ||
+        '<div class="p-4 rounded-xl bg-slate-900/50 border border-white/5 text-xs text-slate-400 text-center">Queue is clear! Use the Owner Inspection Bench below to add any warped LP.</div>';
+      document.getElementById('flatten-done-list').innerHTML = filteredDone.map(r => renderRow(r, false)).join('') ||
+        '<div class="p-4 rounded-xl bg-slate-900/50 border border-white/5 text-xs text-slate-400 text-center">No matching flattened records.</div>';
+
+      // Render Owner Inspection Bench (unlisted records matching benchSearchQuery)
+      const benchEl = document.getElementById('flatten-bench-list');
+      if (benchEl) {
+        const bq = state.benchSearchQuery.trim().toLowerCase();
+        const benchPool = bq
+          ? allUnlisted.filter(r => `${r.artist} ${r.title} ${r.label} ${r.catno} ${r.wax_spec.variant_badge} ${r.release_id}`.toLowerCase().includes(bq))
+          : allUnlisted.slice(0, 18);
+
+        benchEl.innerHTML = benchPool.map(r => `
+          <div class="flex items-center justify-between gap-2 p-2.5 rounded-xl bg-slate-900/80 border border-white/10 hover:border-cyan-500/30 transition">
+            <div class="flex items-center gap-2.5 min-w-0 cursor-pointer" data-load-turntable="${r.release_id}" title="Click to inspect on Turntable Stage">
+              <div class="w-9 h-9 rounded-full shrink-0 overflow-hidden shadow">
+                ${renderDeterministicWaxSVG(r, 36, true)}
+              </div>
+              <div class="min-w-0">
+                <div class="text-xs font-bold text-white truncate">${r.artist} — ${r.title}</div>
+                <div class="text-[10px] font-mono-tech text-slate-400 truncate">#${r.release_id} • ${r.wax_spec.variant_badge}</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-1 shrink-0">
+              <button type="button" data-set-flatten="${r.release_id}" data-target-status="Need to be done" class="px-2 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 text-[10px] font-mono-tech font-semibold" title="Add warped LP to Flattening Queue">
+                + 🔥 Queue
+              </button>
+              <button type="button" data-set-flatten="${r.release_id}" data-target-status="Done" class="px-2 py-1 rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 text-[10px] font-mono-tech font-semibold" title="Mark LP as Flattened &amp; Verified">
+                + ✓ Done
+              </button>
+            </div>
+          </div>
+        `).join('') || '<div class="col-span-full text-xs text-slate-400 py-3 text-center">No matching uninspected records found.</div>';
+      }
+    }
+
+    // 2.5-Hour (150-Minute) Thermal Plate Session Timer
+    const HOLD_DURATION_MS = 150 * 60 * 1000; // 2.5 hours
+
+    function formatDurationMs(ms) {
+      const totalSec = Math.max(0, Math.ceil(ms / 1000));
+      const hrs = Math.floor(totalSec / 3600);
+      const mins = Math.floor((totalSec % 3600) / 60);
+      const secs = totalSec % 60;
+      return `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }
+
+    function playTimerChime() {
+      try {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextClass) return;
+        const ctx = new AudioContextClass();
+        [523.25, 659.25, 783.99, 1046.5].forEach((freq, i) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.value = freq;
+          gain.gain.setValueAtTime(0.15, ctx.currentTime + i * 0.18);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.18 + 0.45);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(ctx.currentTime + i * 0.18);
+          osc.stop(ctx.currentTime + i * 0.18 + 0.46);
+        });
+      } catch (e) {}
+    }
+
+    function updateThermalTimerUI() {
+      const readoutEl = document.getElementById('timer-readout');
+      const badgeEl = document.getElementById('timer-phase-badge');
+      if (!readoutEl || !badgeEl) return;
+
+      const rawState = safeGetStorage('krunked_flattening_timer_v4');
+      if (!rawState) {
+        readoutEl.textContent = '02:30:00';
+        badgeEl.textContent = 'Plate Idle • Ready';
+        badgeEl.className = 'px-2 py-0.5 rounded-full text-[10px] font-mono-tech bg-slate-800 text-slate-300 border border-white/10';
+        return;
+      }
+
+      let tState = null;
+      try { tState = JSON.parse(rawState); } catch (e) {}
+      if (!tState) return;
+
+      if (tState.mode === 'ramp') {
+        const elapsedMs = Date.now() - (tState.startedAt || Date.now());
+        readoutEl.textContent = formatDurationMs(elapsedMs);
+        badgeEl.textContent = '🔥 Stage 1: Ramping on 6 → 130°F';
+        badgeEl.className = 'px-2 py-0.5 rounded-full text-[10px] font-mono-tech bg-amber-500/20 text-amber-300 border border-amber-500/40 animate-pulse';
+      } else if (tState.mode === 'hold') {
+        const remainingMs = (tState.endsAt || 0) - Date.now();
+        if (remainingMs <= 0) {
+          readoutEl.textContent = '00:00:00';
+          badgeEl.textContent = '✓ 2.5h Hold Complete — Cool Before Unbagging!';
+          badgeEl.className = 'px-2 py-0.5 rounded-full text-[10px] font-mono-tech bg-emerald-500/25 text-emerald-300 border border-emerald-400/50';
+          if (!tState.notified) {
+            tState.notified = true;
+            safeSetStorage('krunked_flattening_timer_v4', JSON.stringify(tState));
+            playTimerChime();
+            showToast('🔥 2.5-Hour Thermal Hold Complete! Turn plate off and let pouch cool completely.');
+          }
+        } else {
+          readoutEl.textContent = formatDurationMs(remainingMs);
+          badgeEl.textContent = '⏱ Stage 2: Holding on 4 (130°F • 2.5h)';
+          badgeEl.className = 'px-2 py-0.5 rounded-full text-[10px] font-mono-tech bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 animate-pulse';
+        }
       }
     }
 
@@ -43238,9 +43782,10 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
 
     async function loadExternalJsonIfNewer() {
       try {
-        const [ovResp, colResp] = await Promise.all([
+        const [ovResp, colResp, fqResp] = await Promise.all([
           fetch('./data/overrides.json', { cache: 'no-store' }).catch(() => null),
           fetch('./data/collection.json', { cache: 'no-store' }).catch(() => null),
+          fetch('./data/flattening_queue.json', { cache: 'no-store' }).catch(() => null),
         ]);
         let changed = false;
         if (ovResp && ovResp.ok) {
@@ -43262,6 +43807,15 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
             }
           }
         }
+        if (fqResp && fqResp.ok && !state.unsavedFlattenCount) {
+          const extFq = await fqResp.json();
+          const inlineTs = (document.getElementById('flatten-hidden-updated-at') || {}).value || '';
+          if (extFq && extFq.updated_at_utc && (!inlineTs || extFq.updated_at_utc > inlineTs)) {
+            applyFlatteningQueueObjectToRecords(extFq);
+            syncInlineFlatteningFormState(false);
+            changed = true;
+          }
+        }
         if (changed) {
           applyFiltersAndSort();
           renderFlatteningView();
@@ -43270,10 +43824,9 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
     }
 
     function initApp() {
-      // Clear legacy v2.1 cache that had 0 pressing photos and 0 flattening queue items
       safeRemoveStorage('krunked_discogs_collection_v2_1');
 
-      // Initialize overrides from injected window.__DISCOGS_OVERRIDES__ + any user browser overrides
+      // 1. Initialize overrides from injected window.__DISCOGS_OVERRIDES__ + any user browser overrides
       const baseOverrides = (window.__DISCOGS_OVERRIDES__ && typeof window.__DISCOGS_OVERRIDES__ === 'object')
         ? window.__DISCOGS_OVERRIDES__
         : {};
@@ -43289,11 +43842,41 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
         state.records = data.records;
       }
 
+      // 2. Reconcile Flattening Queue from inline HTML form (#flattening-inline-form) + localStorage
+      const todoInput = document.getElementById('flatten-hidden-todo-ids');
+      const doneInput = document.getElementById('flatten-hidden-done-ids');
+      const unlistedInput = document.getElementById('flatten-hidden-unlisted-ids');
+      const htmlTsInput = document.getElementById('flatten-hidden-updated-at');
+
+      if (todoInput && doneInput && (todoInput.value || doneInput.value)) {
+        applyFlatteningQueueObjectToRecords({
+          need_to_be_done_release_ids: todoInput.value.split(',').map(x => Number(x.trim())).filter(Boolean),
+          done_release_ids: doneInput.value.split(',').map(x => Number(x.trim())).filter(Boolean),
+          unlisted_release_ids: (unlistedInput && unlistedInput.value)
+            ? unlistedInput.value.split(',').map(x => Number(x.trim())).filter(Boolean)
+            : [],
+        });
+      }
+
+      const savedFlatten = safeGetStorage('krunked_flattening_state_v4');
+      if (savedFlatten) {
+        try {
+          const parsedFq = JSON.parse(savedFlatten);
+          const htmlTs = (htmlTsInput && htmlTsInput.value) ? htmlTsInput.value : '';
+          if (parsedFq && (!htmlTs || (parsedFq.updated_at_utc && parsedFq.updated_at_utc > htmlTs))) {
+            applyFlatteningQueueObjectToRecords(parsedFq);
+            state.unsavedFlattenCount = 1;
+          }
+        } catch (e) {}
+      }
+
+      syncInlineFlatteningFormState(false);
       applyFiltersAndSort();
       renderFlatteningView();
       updateSandboxPreview();
+      updateThermalTimerUI();
+      state.timerInterval = setInterval(updateThermalTimerUI, 1000);
 
-      // Also check ./data/overrides.json and ./data/collection.json in case they were updated on disk
       loadExternalJsonIfNewer();
 
       // View Tabs
@@ -43322,7 +43905,7 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
       const flatCard = document.getElementById('kpi-flattening-card');
       if (flatCard) flatCard.addEventListener('click', () => setTab('flattening'));
 
-      // Thumbnail Mode Buttons
+      // Thumbnail Mode Buttons (defaulting natively to 'split' — Sleeve + Disc)
       const setThumbMode = (mode) => {
         state.thumbMode = mode;
         const modes = [
@@ -43374,14 +43957,24 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
         renderCrateGrid();
       });
 
+      // Quick Flattening Status Cycle on Hero Turntable Stage
+      document.getElementById('btn-hero-flatten-cycle').addEventListener('click', () => {
+        const list = state.filteredRecords.length ? state.filteredRecords : state.records;
+        const rec = list[state.activeIndex];
+        if (!rec) return;
+        const cur = rec.flattening_status || 'Not Listed';
+        const nextStatus = cur === 'Not Listed' ? 'Need to be done' : (cur === 'Need to be done' ? 'Done' : 'Not Listed');
+        setRecordFlatteningStatus(rec.release_id, nextStatus);
+      });
+
       // Fetch full gallery button for active release
       document.getElementById('btn-fetch-this-release').addEventListener('click', async () => {
-        const rec = state.filteredRecords[state.activeIndex];
+        const list = state.filteredRecords.length ? state.filteredRecords : state.records;
+        const rec = list[state.activeIndex];
         if (!rec) return;
-        const token = document.getElementById('sync-token-input').value.trim();
         showToast(`Refreshing Discogs image gallery for "${rec.title}"...`);
         try {
-          const imgs = await fetchSingleReleaseGallery(rec, token);
+          const imgs = await fetchSingleReleaseGallery(rec);
           renderHeroStage();
           renderCrateGrid();
           showToast(`Loaded ${imgs.length} Discogs images for "${rec.title}". Click any image to pin it!`);
@@ -43395,23 +43988,30 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
         const pinBtn = e.target.closest('[data-pin-image-url]');
         if (pinBtn) {
           const url = pinBtn.getAttribute('data-pin-image-url');
+          const idxAttr = Number(pinBtn.getAttribute('data-pin-image-index') || 0);
           const rid = String(pinBtn.getAttribute('data-pin-release-id'));
-          state.userOverrides[rid] = url;
+          state.userOverrides[rid] = {
+            pressing_image_index: idxAttr,
+            user_locked: true,
+            uri: url,
+          };
           const rec = state.records.find(r => String(r.release_id) === rid);
           if (rec && rec.images) {
             rec.images.pressing_image_url = url;
             rec.images.has_pressing_photo = true;
-            const matched = (rec.images.classified_images || []).find(im => im.uri === url || im.local_uri === url);
+            rec.images.selected_index = idxAttr;
+            const matched = (rec.images.classified_images || []).find(im => im.index === idxAttr || im.uri === url || im.local_uri === url);
             if (matched) {
-              rec.images.selected_index = matched.index;
-              rec.images.local_pressing_image_url = matched.local_uri || '';
+              rec.images.local_pressing_image_url = matched.local_uri || url;
             }
           }
+          state.unsavedPinCount++;
           safeSetStorage('krunked_pressing_overrides_v2_2', JSON.stringify(state.userOverrides));
+          updateSessionEditIndicators();
           updateKpiStrip();
           renderHeroStage();
           renderCrateGrid();
-          showToast(`Pinned pressing photo for release #${rid}!`);
+          showToast(`Pinned image [${idxAttr}] for release #${rid}! Click "Sync & Export LP's" to save inline.`);
           return;
         }
         const clearBtn = e.target.closest('[data-clear-pin]');
@@ -43424,7 +44024,9 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
             rec.images.local_pressing_image_url = '';
             rec.images.has_pressing_photo = false;
           }
+          state.unsavedPinCount++;
           safeSetStorage('krunked_pressing_overrides_v2_2', JSON.stringify(state.userOverrides));
+          updateSessionEditIndicators();
           updateKpiStrip();
           renderHeroStage();
           renderCrateGrid();
@@ -43512,19 +44114,100 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
 
-      // Flattening Queue Toggle Delegation
+      // Pipeline Tab Copy Command Buttons
+      document.getElementById('view-pipeline').addEventListener('click', (e) => {
+        const copyBtn = e.target.closest('[data-copy-cmd]');
+        if (!copyBtn) return;
+        const cmd = copyBtn.getAttribute('data-copy-cmd');
+        if (navigator.clipboard && cmd) {
+          navigator.clipboard.writeText(cmd).then(() => showToast('Copied PowerShell command to clipboard!'));
+        }
+      });
+
+      // Flattening Queue Tab Delegation (Status Toggle, Turntable Jump, Search, Timer)
       document.getElementById('view-flattening').addEventListener('click', (e) => {
-        const btn = e.target.closest('[data-toggle-flatten]');
-        if (!btn) return;
-        const rid = Number(btn.getAttribute('data-toggle-flatten'));
-        const rec = state.records.find(r => r.release_id === rid);
-        if (rec) {
-          rec.flattening_status = rec.flattening_status === 'Need to be done' ? 'Done' : 'Need to be done';
-          renderFlatteningView();
-          updateKpiStrip();
+        const setBtn = e.target.closest('[data-set-flatten]');
+        if (setBtn) {
+          const rid = Number(setBtn.getAttribute('data-set-flatten'));
+          const targetStatus = setBtn.getAttribute('data-target-status') || 'Done';
+          setRecordFlatteningStatus(rid, targetStatus);
+          return;
+        }
+        const jumpEl = e.target.closest('[data-load-turntable]');
+        if (jumpEl) {
+          const rid = Number(jumpEl.getAttribute('data-load-turntable'));
+          const idxInFiltered = state.filteredRecords.findIndex(r => Number(r.release_id) === rid);
+          if (idxInFiltered !== -1) {
+            state.activeIndex = idxInFiltered;
+          } else {
+            state.filter = 'all';
+            state.searchQuery = '';
+            document.getElementById('search-input').value = '';
+            applyFiltersAndSort();
+            const newIdx = state.filteredRecords.findIndex(r => Number(r.release_id) === rid);
+            if (newIdx !== -1) state.activeIndex = newIdx;
+          }
+          setTab('showcase');
           renderHeroStage();
           renderCrateGrid();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+      });
+
+      document.getElementById('flatten-done-search').addEventListener('input', (e) => {
+        state.doneSearchQuery = e.target.value;
+        renderFlatteningView();
+      });
+
+      document.getElementById('flatten-bench-search').addEventListener('input', (e) => {
+        state.benchSearchQuery = e.target.value;
+        renderFlatteningView();
+      });
+
+      document.getElementById('btn-flatten-save-html').addEventListener('click', downloadSelfContainedIndexHtml);
+
+      const exportFlatteningJson = () => {
+        const fqObj = syncInlineFlatteningFormState(false);
+        const blob = new Blob([JSON.stringify(fqObj, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'flattening_queue.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast('Downloaded flattening_queue.json (drop into data/flattening_queue.json)');
+      };
+      document.getElementById('btn-flatten-export-json').addEventListener('click', exportFlatteningJson);
+
+      // Thermal Timer Controls
+      document.getElementById('btn-timer-ramp').addEventListener('click', () => {
+        safeSetStorage('krunked_flattening_timer_v4', JSON.stringify({
+          mode: 'ramp',
+          startedAt: Date.now(),
+          recordId: document.getElementById('timer-record-select').value || '',
+        }));
+        updateThermalTimerUI();
+        showToast('🔥 Stage 1 Ramp started (Bag on Setting 6 until 130°F).');
+      });
+
+      document.getElementById('btn-timer-start').addEventListener('click', () => {
+        safeSetStorage('krunked_flattening_timer_v4', JSON.stringify({
+          mode: 'hold',
+          startedAt: Date.now(),
+          endsAt: Date.now() + HOLD_DURATION_MS,
+          notified: false,
+          recordId: document.getElementById('timer-record-select').value || '',
+        }));
+        updateThermalTimerUI();
+        showToast('⏱ Started 2.5-Hour (150:00) Hold Timer on Setting 4!');
+      });
+
+      document.getElementById('btn-timer-reset').addEventListener('click', () => {
+        safeRemoveStorage('krunked_flattening_timer_v4');
+        updateThermalTimerUI();
+        showToast('Reset thermal plate timer.');
       });
 
       // Sandbox Inputs
@@ -43543,19 +44226,31 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
         updateSandboxPreview();
       });
 
-      // Modal Open / Close / Live Sync
+      // Modal Open / Close / Exports
       const modal = document.getElementById('modal-backdrop');
-      document.getElementById('btn-live-sync-modal').addEventListener('click', () => modal.classList.remove('hidden'));
-      document.getElementById('btn-open-inspector').addEventListener('click', () => modal.classList.remove('hidden'));
+      document.getElementById('btn-live-sync-modal').addEventListener('click', () => {
+        updateSessionEditIndicators();
+        modal.classList.remove('hidden');
+      });
+      document.getElementById('btn-open-inspector').addEventListener('click', () => {
+        updateSessionEditIndicators();
+        modal.classList.remove('hidden');
+      });
       document.getElementById('btn-close-modal').addEventListener('click', () => modal.classList.add('hidden'));
 
-      document.getElementById('btn-run-browser-sync').addEventListener('click', () => {
-        const user = document.getElementById('sync-username-input').value.trim() || 'krunked';
-        const token = document.getElementById('sync-token-input').value.trim();
-        syncAllPagesFromDiscogs(user, token, false);
+      document.getElementById('btn-bake-full-html').addEventListener('click', downloadSelfContainedIndexHtml);
+      document.getElementById('btn-export-flattening').addEventListener('click', exportFlatteningJson);
+
+      document.getElementById('btn-reset-browser-cache').addEventListener('click', () => {
+        safeRemoveStorage('krunked_pressing_overrides_v2_2');
+        safeRemoveStorage('krunked_flattening_state_v4');
+        state.unsavedPinCount = 0;
+        state.unsavedFlattenCount = 0;
+        window.location.reload();
       });
 
       document.getElementById('btn-export-json').addEventListener('click', () => {
+        syncInlineFlatteningFormState(false);
         const blob = new Blob([JSON.stringify(window.__DISCOGS_COLLECTION__, null, 2)], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -43580,20 +44275,26 @@ git add -A &amp;&amp; git commit -m "sync discogs collection &amp; pressing phot
         URL.revokeObjectURL(url);
         showToast('Downloaded overrides.json');
       });
+
+      document.getElementById('btn-copy-sync-cmd').addEventListener('click', () => {
+        const cmd = 'cd C:\\DiscogsCollection\\discogs_collection\npython scripts/sync_discogs.py';
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(cmd).then(() => showToast('Copied daily sync command to clipboard!'));
+        }
+      });
+
+      document.getElementById('btn-copy-resync-active').addEventListener('click', () => {
+        const list = state.filteredRecords.length ? state.filteredRecords : state.records;
+        const rec = list[state.activeIndex];
+        const rid = rec ? rec.release_id : '';
+        const cmd = `cd C:\\DiscogsCollection\\discogs_collection\npython scripts/sync_discogs.py --resync ${rid}`;
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(cmd).then(() => showToast(`Copied --resync ${rid} command to clipboard!`));
+        }
+      });
     }
 
     window.addEventListener('DOMContentLoaded', initApp);
-  </script>
-  <script>
-    window.addEventListener("load", function () {
-      setTimeout(function () {
-        document.querySelectorAll("button").forEach(function (btn) {
-          if (btn.textContent && btn.textContent.trim() === "Sleeve + Disc") {
-            btn.click();
-          }
-        });
-      }, 50);
-    });
   </script>
 </body>
 </html>
