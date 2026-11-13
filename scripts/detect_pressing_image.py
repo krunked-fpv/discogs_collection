@@ -1324,3 +1324,571 @@ def resolve_flattening_status(
             return "Done"
 
     return "Not Listed"
+
+
+# ==============================================================================
+# DELTA SYNC ENGINE & LIVE TERMINAL UI / TURNTABLE THROBBER (v2.4.0)
+# ==============================================================================
+
+import datetime as _dt
+import os as _os
+import threading as _threading
+import time as _time
+import unicodedata as _unicodedata
+
+CV_DELTA_VERSION = "2.4.0"
+
+
+def _term_display_width(s: str) -> int:
+    """Computes exact terminal column width of a string (accounting for wide symbols/emojis)."""
+    w = 0
+    for ch in s:
+        if ch in ("\ufe0f", "\u200d"):
+            continue
+        eaw = _unicodedata.east_asian_width(ch)
+        if eaw in ("W", "F"):
+            w += 2
+        else:
+            w += 1
+    return w
+
+
+def _pad_to_width(s: str, target_w: int) -> str:
+    """Truncates or pads `s` with spaces so its terminal column width equals `target_w`."""
+    out_chars: list[str] = []
+    cur_w = 0
+    for ch in s:
+        if ch in ("\ufe0f", "\u200d"):
+            out_chars.append(ch)
+            continue
+        cw = 2 if _unicodedata.east_asian_width(ch) in ("W", "F") else 1
+        if cur_w + cw > target_w:
+            break
+        out_chars.append(ch)
+        cur_w += cw
+    return "".join(out_chars) + (" " * max(0, target_w - cur_w))
+
+
+def compute_release_delta_signature(
+    release_id: int | str,
+    rel_dir: pathlib.Path | None,
+    format_str: str = "",
+    notes: str = "",
+    override_val: Any = None,
+) -> str:
+    """Computes a fast deterministic SHA-256 fingerprint of a release's local files, metadata, and override state."""
+    rid_str = str(release_id)
+    file_parts: list[str] = []
+    if rel_dir and rel_dir.exists():
+        try:
+            entries = []
+            for p in rel_dir.iterdir():
+                if not p.is_file():
+                    continue
+                m = re.match(r"^img_(\d+)\.(?:jpg|jpeg|png|webp)$", p.name, flags=re.IGNORECASE)
+                if m:
+                    st = p.stat()
+                    entries.append((int(m.group(1)), p.name.lower(), st.st_size, int(st.st_mtime)))
+            entries.sort(key=lambda x: x[0])
+            file_parts = [f"{idx}:{name}:{sz}:{mt}" for idx, name, sz, mt in entries]
+        except Exception:
+            pass
+
+    ov_repr = repr(override_val) if override_val is not None else ""
+    payload = "|".join([
+        f"v={CV_DELTA_VERSION}",
+        f"rid={rid_str}",
+        f"files={','.join(file_parts)}",
+        f"fmt={format_str.strip()}",
+        f"notes={notes.strip()}",
+        f"ov={ov_repr}",
+    ])
+    return hashlib.sha256(payload.encode("utf-8", errors="replace")).hexdigest()[:16]
+
+
+def evaluate_release_delta_status(
+    release_id: int,
+    existing_record: dict[str, Any] | None,
+    rel_dir: pathlib.Path,
+    cached_images: list[dict[str, Any]],
+    overrides: dict[str, Any],
+    format_str: str = "",
+    notes: str = "",
+    force_full: bool = False,
+    force_rids: set[int] | None = None,
+) -> tuple[str, str, str]:
+    """Determines whether a release is 'new', 'resynced', or 'unchanged'.
+
+    Returns `(status, reason, delta_sig)` where `status` is one of:
+      - `'new'`: Release was not in previous `collection.json`
+      - `'resynced'`: Release needs full image download + CV classification suite
+      - `'unchanged'`: Release can fast-path reuse existing `images` classification
+    """
+    rid_str = str(release_id)
+    ov_val = overrides.get(rid_str)
+    current_sig = compute_release_delta_signature(
+        release_id=release_id,
+        rel_dir=rel_dir,
+        format_str=format_str,
+        notes=notes,
+        override_val=ov_val,
+    )
+
+    if existing_record is None:
+        return ("new", "newly added release", current_sig)
+
+    if force_full:
+        return ("resynced", "forced full rebuild (--full)", current_sig)
+
+    if force_rids and release_id in force_rids:
+        return ("resynced", f"forced release resync (--resync {release_id})", current_sig)
+
+    existing_images = existing_record.get("images")
+    if not isinstance(existing_images, dict) or not existing_images:
+        return ("resynced", "missing images metadata in collection.json", current_sig)
+
+    classified = existing_images.get("classified_images")
+    if not isinstance(classified, list):
+        return ("resynced", "missing classified_images array", current_sig)
+
+    # Check if record was seeded from offline procedural seed
+    for c_img in classified:
+        uri_c = str(c_img.get("uri") or "")
+        if uri_c.startswith("procedural://") or uri_c.startswith("assets/pressings/"):
+            return ("resynced", "upgrading procedural seed to real Discogs images", current_sig)
+
+    # Discover local img_*.jpg files
+    local_img_count = 0
+    if rel_dir.exists():
+        for p in rel_dir.iterdir():
+            if p.is_file() and re.match(r"^img_(\d+)\.(?:jpg|jpeg|png|webp)$", p.name, flags=re.IGNORECASE):
+                local_img_count += 1
+
+    expected_cached_count = min(40, len(cached_images))
+    if expected_cached_count > 0 and local_img_count == 0:
+        return ("resynced", f"no local images downloaded yet (0/{expected_cached_count})", current_sig)
+
+    if expected_cached_count > 0 and local_img_count < expected_cached_count:
+        return ("resynced", f"incomplete local images ({local_img_count}/{expected_cached_count})", current_sig)
+
+    if local_img_count > 0 and not (rel_dir / "cover.jpg").exists():
+        return ("resynced", "missing cover.jpg in release folder", current_sig)
+
+    if local_img_count > 0 and len(classified) != local_img_count:
+        return ("resynced", f"local image count changed ({len(classified)} -> {local_img_count})", current_sig)
+
+    # Check pressing.jpg consistency on disk (supports deleting pressing.jpg to force re-pick!)
+    has_pressing = bool(existing_images.get("has_pressing_photo"))
+    pressing_file_exists = (rel_dir / "pressing.jpg").exists()
+    if has_pressing and not pressing_file_exists:
+        return ("resynced", "pressing.jpg missing/deleted -> regenerating", current_sig)
+    if not has_pressing and pressing_file_exists:
+        return ("resynced", "stale pressing.jpg found -> cleaning/re-evaluating", current_sig)
+
+    # Check explicit manual override changes
+    if isinstance(ov_val, int) and existing_images.get("selected_index") != ov_val:
+        return ("resynced", f"manual override pin -> img_{ov_val}.jpg", current_sig)
+    if isinstance(ov_val, dict) and "pressing_image_index" in ov_val:
+        pin_idx = int(ov_val["pressing_image_index"])
+        if existing_images.get("selected_index") != pin_idx:
+            return ("resynced", f"manual override pin -> img_{pin_idx}.jpg", current_sig)
+
+    # Check stored delta signature if present from a prior v2.4+ run
+    prev_sig = existing_images.get("delta_sig")
+    if prev_sig and prev_sig != current_sig:
+        return ("resynced", "local files, notes, or override modified", current_sig)
+
+    return ("unchanged", "verified in delta cache", current_sig)
+
+
+class VaultTerminalUI:
+    """Fancy Cyber-Audiophile CLI UI, Live Spinning Turntable Throbber, and Delta Summary Reporter."""
+
+    PLATTER_FRAMES = (
+        "╭◉╮",
+        "◝◉◞",
+        "╰◉╯",
+        "◟◉◝",
+        "╭◎╮",
+        "◝◎◞",
+        "╰◎╯",
+        "◟◎◝",
+    )
+    EQ_FRAMES = (
+        "▂▄▆█▆▄▂",
+        "▄▆█▇▅▃▂",
+        "▆█▇▅▃▂▄",
+        "█▇▅▃▂▄▆",
+        "▇▅▃▂▄▆█",
+        "▅▃▂▄▆█▇",
+        "▃▂▄▆█▇▅",
+        "▂▄▆█▇▅▃",
+    )
+
+    def __init__(self, title: str = "KRUNKED // VINYL VAULT", subtitle: str = "DELTA SYNC ENGINE v2.4") -> None:
+        self.title = title
+        self.subtitle = subtitle
+        self.start_time = _time.perf_counter()
+        self.lock = _threading.Lock()
+        self.is_tty = self._init_terminal()
+        self.color_enabled = self.is_tty and not bool(_os.environ.get("NO_COLOR"))
+
+        # Throbber state
+        self._running = False
+        self._thread: _threading.Thread | None = None
+        self._frame_idx = 0
+        self._phase = "Initializing..."
+        self._current_item = ""
+        self._done = 0
+        self._total = 0
+        self._new_count = 0
+        self._resync_count = 0
+        self._cached_count = 0
+        self._api_remaining = 60
+
+    @staticmethod
+    def _init_terminal() -> bool:
+        """Enables UTF-8 and Windows VT100 ANSI escape codes in PowerShell / CMD / Windows Terminal."""
+        try:
+            if hasattr(sys.stdout, "reconfigure"):
+                sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+            if hasattr(sys.stderr, "reconfigure"):
+                sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+        except Exception:
+            pass
+
+        is_tty = False
+        try:
+            is_tty = bool(sys.stdout.isatty())
+        except Exception:
+            is_tty = False
+
+        if _os.name == "nt":
+            try:
+                import ctypes
+                kernel32 = ctypes.windll.kernel32
+                # STD_OUTPUT_HANDLE = -11, ENABLE_VIRTUAL_TERMINAL_PROCESSING = 0x0004
+                handle = kernel32.GetStdHandle(-11)
+                mode = ctypes.c_ulong()
+                if kernel32.GetConsoleMode(handle, ctypes.byref(mode)):
+                    kernel32.SetConsoleMode(handle, mode.value | 0x0004)
+                    is_tty = True
+            except Exception:
+                pass
+        return is_tty
+
+    def c(self, text: str, ansi_code: str) -> str:
+        if not self.color_enabled:
+            return text
+        return f"\033[{ansi_code}m{text}\033[0m"
+
+    def elapsed_str(self) -> str:
+        el = max(0.0, _time.perf_counter() - self.start_time)
+        if el < 60.0:
+            return f"{el:05.2f}s"
+        mins = int(el // 60)
+        secs = el - (mins * 60)
+        return f"{mins:02d}m{secs:04.1f}s"
+
+    def print_banner(self, mode_label: str = "INCREMENTAL DELTA", extra_info: str = "") -> None:
+        with self.lock:
+            self._clear_line_unlocked()
+            w = 114
+            top = "╭" + ("─" * (w - 2)) + "╮"
+            bot = "╰" + ("─" * (w - 2)) + "╯"
+            print(self.c(top, "38;5;45"))
+            line1 = _pad_to_width(f"  ◉━━━  {self.title}  •  {self.subtitle}", w - 2)
+            print(
+                self.c("│", "38;5;45")
+                + self.c(line1, "1;38;5;213")
+                + self.c("│", "38;5;45")
+            )
+            line2 = _pad_to_width(f"  ╭──╮  Mode: {mode_label}  •  CV: 4-Pass Concentric Dual-Circle", w - 2)
+            print(
+                self.c("│", "38;5;45")
+                + self.c(line2, "38;5;117")
+                + self.c("│", "38;5;45")
+            )
+            tip_text = extra_info or "Tip: Pass --full to force-rescan all records or --resync <release_id>"
+            line3 = _pad_to_width(f"  ╰──╯  {tip_text}", w - 2)
+            print(
+                self.c("│", "38;5;45")
+                + self.c(line3, "38;5;246")
+                + self.c("│", "38;5;45")
+            )
+            print(self.c(bot, "38;5;45"), flush=True)
+
+    def _clear_line_unlocked(self) -> None:
+        if self.is_tty:
+            sys.stdout.write("\r\033[K")
+            sys.stdout.flush()
+
+    def _render_throbber_unlocked(self) -> None:
+        if not self.is_tty or not self._running:
+            return
+        platter = self.PLATTER_FRAMES[self._frame_idx % len(self.PLATTER_FRAMES)]
+        eq = self.EQ_FRAMES[self._frame_idx % len(self.EQ_FRAMES)]
+
+        if self._total > 0:
+            pct = min(100, int((self._done / float(self._total)) * 100))
+            bar_w = 14
+            filled = int(round((pct / 100.0) * bar_w))
+            bar = ("█" * filled) + ("░" * max(0, bar_w - filled))
+            prog_str = f"[{bar}] {pct:3d}% ({self._done}/{self._total})"
+        else:
+            spin_bar_pos = self._frame_idx % 10
+            bar_chars = ["░"] * 10
+            bar_chars[spin_bar_pos] = "█"
+            if spin_bar_pos > 0:
+                bar_chars[spin_bar_pos - 1] = "▓"
+            prog_str = f"[{''.join(bar_chars)}] {self._phase}"
+
+        delta_str = f"+{self._new_count} new • ~{self._resync_count} sync • {self._cached_count} cached"
+        item_str = f" │ {_pad_to_width(self._current_item, 34).rstrip()}" if self._current_item else ""
+
+        colored_line = (
+            f" {self.c(platter, '1;38;5;213')} "
+            f"{self.c(eq, '38;5;45')} "
+            f"{self.c(prog_str, '1;38;5;159')} "
+            f"│ {self.c(delta_str, '38;5;221')} "
+            f"│ {self.c(self.elapsed_str(), '38;5;248')}"
+            f"{self.c(item_str, '38;5;114') if item_str else ''}"
+        )
+        sys.stdout.write("\r\033[K" + colored_line)
+        sys.stdout.flush()
+
+    def _throbber_loop(self) -> None:
+        while self._running:
+            with self.lock:
+                self._frame_idx += 1
+                self._render_throbber_unlocked()
+            _time.sleep(0.09)
+
+    def start_throbber(self, phase: str = "Syncing Vault...", total: int = 0) -> None:
+        with self.lock:
+            self._phase = phase
+            self._total = total
+            self._done = 0
+            if not self.is_tty or self._running:
+                return
+            self._running = True
+            self._thread = _threading.Thread(target=self._throbber_loop, daemon=True)
+            self._thread.start()
+
+    def update_throbber(
+        self,
+        *,
+        phase: str | None = None,
+        current_item: str | None = None,
+        done: int | None = None,
+        total: int | None = None,
+        new_count: int | None = None,
+        resync_count: int | None = None,
+        cached_count: int | None = None,
+        api_remaining: int | None = None,
+    ) -> None:
+        with self.lock:
+            if phase is not None:
+                self._phase = phase
+            if current_item is not None:
+                self._current_item = current_item
+            if done is not None:
+                self._done = done
+            if total is not None:
+                self._total = total
+            if new_count is not None:
+                self._new_count = new_count
+            if resync_count is not None:
+                self._resync_count = resync_count
+            if cached_count is not None:
+                self._cached_count = cached_count
+            if api_remaining is not None:
+                self._api_remaining = api_remaining
+            self._render_throbber_unlocked()
+
+    def stop_throbber(self) -> None:
+        self._running = False
+        if self._thread is not None:
+            try:
+                self._thread.join(timeout=0.3)
+            except Exception:
+                pass
+            self._thread = None
+        with self.lock:
+            self._clear_line_unlocked()
+
+    def log(self, tag: str, message: str, *, stream: Any = None) -> None:
+        """Prints a clean, timestamped `[tag]` line above the live throbber."""
+        out = stream or sys.stdout
+        tag_clean = tag.strip("[]").lower()
+        palette = {
+            "info": "1;38;5;81",       # Sky Cyan
+            "auth": "1;38;5;117",      # Light Blue
+            "api": "1;38;5;177",       # Orchid Purple
+            "delta": "1;38;5;220",     # Gold/Amber
+            "fast-path": "38;5;245",   # Dim Grey
+            "new": "1;38;5;48",        # Neon Emerald Green
+            "resync": "1;38;5;214",    # Warm Amber
+            "updated": "1;38;5;48",    # Emerald
+            "cleaned": "1;38;5;209",   # Coral Orange
+            "cv-pick": "1;38;5;213",   # Hot Pink/Magenta
+            "wax-seed": "1;38;5;51",   # Aqua Cyan
+            "ok": "1;38;5;46",         # Bright Green
+            "warn": "1;38;5;226",      # Yellow
+            "error": "1;38;5;196",     # Red
+            "rate-limit": "1;38;5;208",# Orange
+        }
+        ansi = palette.get(tag_clean, "1;38;5;117")
+        ts = self.c(f"[{self.elapsed_str()}]", "38;5;242")
+        tag_fmt = self.c(f"[{tag_clean}]".ljust(11), ansi)
+
+        with self.lock:
+            self._clear_line_unlocked()
+            print(f"{ts} {tag_fmt} {message}", file=out, flush=True)
+            self._render_throbber_unlocked()
+
+    def print_summary_report(
+        self,
+        *,
+        mode_title: str,
+        total_records: int,
+        pressing_photo_count: int,
+        colored_count: int,
+        todo_count: int,
+        done_count: int,
+        collection_value: dict[str, Any],
+        injected_html: bool,
+        html_path: pathlib.Path,
+        new_records: list[dict[str, Any]],
+        resynced_records: list[dict[str, Any]],
+        removed_records: list[dict[str, Any]],
+        unchanged_count: int,
+        all_records: list[dict[str, Any]],
+        upgraded_pressing_files: int = 0,
+        removed_false_pressing_files: int = 0,
+        newly_detected_overrides: int = 0,
+    ) -> None:
+        """Prints the comprehensive box-drawn end-of-run summary & changelog."""
+        self.stop_throbber()
+        w = 114
+        inner_w = w - 4
+        hr_top = "╭" + ("─" * (w - 2)) + "╮"
+        hr_mid = "├" + ("─" * (w - 2)) + "┤"
+        hr_bot = "╰" + ("─" * (w - 2)) + "╯"
+
+        def row(text: str, ansi: str = "") -> None:
+            padded = _pad_to_width(text, inner_w)
+            body = self.c(padded, ansi) if ansi else padded
+            print(self.c("│ ", "38;5;45") + body + self.c(" │", "38;5;45"))
+
+        skip_pct = (unchanged_count / float(total_records) * 100.0) if total_records > 0 else 0.0
+        colored_pct = (colored_count / float(total_records) * 100.0) if total_records > 0 else 0.0
+        pressing_pct = (pressing_photo_count / float(total_records) * 100.0) if total_records > 0 else 0.0
+
+        self.log(
+            "delta",
+            f"Run Summary: +{len(new_records)} NEW • ~{len(resynced_records)} RESYNCED • "
+            f"{unchanged_count} FAST-PATH CACHED ({skip_pct:.1f}% skipped)",
+        )
+
+        print()
+        print(self.c(hr_top, "38;5;45"))
+        row(f"◉  {mode_title} — COMPLETE IN {self.elapsed_str()}", "1;38;5;48")
+        print(self.c(hr_mid, "38;5;45"))
+
+        # Section 1: Delta Engine Performance
+        row("▸ DELTA ENGINE TELEMETRY", "1;38;5;220")
+        row(
+            f"  • Delta Breakdown:   +{len(new_records)} NEW  │  ~{len(resynced_records)} RESYNCED  │  "
+            f"{unchanged_count} CACHED ({skip_pct:.1f}% skipped)"
+        )
+        if removed_records:
+            row(f"  • Removed Records:   -{len(removed_records)} removed from collection", "38;5;209")
+        row(
+            f"  • Pressing Updates:  {upgraded_pressing_files} pressing.jpg written  │  "
+            f"{removed_false_pressing_files} false-positives cleaned  │  {newly_detected_overrides} overrides"
+        )
+
+        print(self.c(hr_mid, "38;5;45"))
+
+        # Section 2: Vault Health & Valuation
+        row("▸ VAULT HEALTH & VALUATION", "1;38;5;81")
+        row(f"  • Total Collection:  {total_records} LPs in Vault")
+        row(f"  • Pressing Photos:   {pressing_photo_count} / {total_records} ({pressing_pct:.1f}%) verified physical disc photos")
+        row(f"  • Colored / Special: {colored_count} / {total_records} ({colored_pct:.1f}%) non-black wax variants")
+        row(f"  • Flattening Queue:  {todo_count} Need to be done  •  {done_count} Done")
+        row(
+            f"  • Vault Valuation:   Median {collection_value.get('median', '$0.00')}  "
+            f"(Min {collection_value.get('minimum', '$0.00')} • Max {collection_value.get('maximum', '$0.00')})"
+        )
+        row(
+            f"  • Static HTML Build: {'YES — index.html injected' if injected_html else 'NO'} "
+            f"(Sum Est: {collection_value.get('formatted_total', '$0.00')})"
+        )
+
+        print(self.c(hr_mid, "38;5;45"))
+
+        # Section 3: What Was Added (Always shown clearly!)
+        if new_records:
+            row(f"▸ NEWLY ADDED RECORDS (+{len(new_records)} ADDED THIS RUN)", "1;38;5;48")
+            for idx, r in enumerate(new_records, start=1):
+                rid = r.get("release_id")
+                art = str(r.get("artist") or "Unknown Artist")
+                tit = str(r.get("title") or "Untitled")
+                yr = r.get("year") or ""
+                yr_s = f" ({yr})" if yr else ""
+                badge = str((r.get("wax_spec") or {}).get("variant_badge") or r.get("format_string") or "LP")
+                val_f = float(r.get("estimated_value_usd") or 0.0)
+                imgs = r.get("images") or {}
+                if imgs.get("has_pressing_photo"):
+                    sel_i = imgs.get("selected_index", 0)
+                    sc = float(imgs.get("selected_score") or 0.0)
+                    photo_tag = f"Photo: img_{sel_i}.jpg (CV {sc:.2f})"
+                else:
+                    photo_tag = "Photo: Procedural Wax Seed"
+                row(f"  {idx}. + [#{rid}] {art} — {tit}{yr_s}", "1;38;5;120")
+                row(f"       ↳ {badge} │ ${val_f:,.2f} │ {photo_tag}", "38;5;250")
+        else:
+            row("▸ NEWLY ADDED RECORDS (0 ADDED THIS RUN)", "1;38;5;81")
+            row("  • No brand-new releases detected on this run (Vault is 100% synced).", "38;5;246")
+            if all_records:
+                recent = sorted(
+                    all_records,
+                    key=lambda x: (str(x.get("date_added") or ""), int(x.get("release_id") or 0)),
+                    reverse=True,
+                )[:3]
+                row("  • Latest Pickups in Vault:", "38;5;117")
+                for r in recent:
+                    rid = r.get("release_id")
+                    art = str(r.get("artist") or "")
+                    tit = str(r.get("title") or "")
+                    d_add = str(r.get("date_added") or "")[:10]
+                    imgs = r.get("images") or {}
+                    p_str = f"img_{imgs.get('selected_index')}.jpg" if imgs.get("has_pressing_photo") else "seed"
+                    row(f"    ↳ [{d_add}] #{rid} {art} — {tit} ({p_str})", "38;5;248")
+
+        # Section 4: Resynced / Updated Records (if any)
+        if resynced_records:
+            print(self.c(hr_mid, "38;5;45"))
+            row(f"▸ RESYNCED / RE-EVALUATED RECORDS (~{len(resynced_records)} THIS RUN)", "1;38;5;214")
+            for idx, item in enumerate(resynced_records[:12], start=1):
+                rec = item["record"]
+                reason = item.get("reason", "resynced")
+                action = item.get("action", "")
+                rid = rec.get("release_id")
+                art = str(rec.get("artist") or "")
+                tit = str(rec.get("title") or "")
+                row(f"  {idx}. ~ [#{rid}] {art} — {tit}", "38;5;222")
+                detail_line = f"       ↳ {reason}" + (f" │ {action}" if action else "")
+                row(detail_line, "38;5;246")
+            if len(resynced_records) > 12:
+                row(f"  ... and {len(resynced_records) - 12} more resynced records.", "38;5;246")
+
+        # Section 5: Removed Records (if any)
+        if removed_records:
+            print(self.c(hr_mid, "38;5;45"))
+            row(f"▸ REMOVED FROM COLLECTION (-{len(removed_records)})", "1;38;5;209")
+            for r in removed_records[:5]:
+                row(f"  - [#{r.get('release_id')}] {r.get('artist')} — {r.get('title')}", "38;5;209")
+
+        print(self.c(hr_bot, "38;5;45"), flush=True)

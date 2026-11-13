@@ -9,6 +9,13 @@ import sys
 
 SCRIPT_DIR = pathlib.Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parent if SCRIPT_DIR.name == "scripts" else SCRIPT_DIR
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+
+try:
+    from detect_pressing_image import VaultTerminalUI
+except Exception:
+    VaultTerminalUI = None  # type: ignore
 
 REQUIRED_RECORD_KEYS = {
     "release_id",
@@ -40,6 +47,7 @@ def validate_collection(path: pathlib.Path) -> None:
     col_val = prof.get("collection_value") or {}
     assert col_val.get("median"), "Missing profile.collection_value.median"
 
+    delta_sig_count = 0
     for idx, rec in enumerate(records):
         missing = REQUIRED_RECORD_KEYS - set(rec.keys())
         if missing:
@@ -50,15 +58,23 @@ def validate_collection(path: pathlib.Path) -> None:
         wax = rec.get("wax_spec") or {}
         if not wax.get("primary_color") or not wax.get("pattern"):
             raise ValueError(f"Record #{idx} has incomplete wax_spec: {wax}")
+        if (rec.get("images") or {}).get("delta_sig"):
+            delta_sig_count += 1
 
     pressing_count = sum(1 for r in records if r["images"].get("has_pressing_photo"))
     todo_count = sum(1 for r in records if r.get("flattening_status") == "Need to be done")
     done_count = sum(1 for r in records if r.get("flattening_status") == "Done")
-    print(
-        f"[valid] {path}: {len(records)} records verified against schema v{data.get('schema_version')} "
-        f"({pressing_count} pressing photos, {todo_count} flattening todo, {done_count} flattening done, "
+    msg = (
+        f"{path}: {len(records)} records verified against schema v{data.get('schema_version')} "
+        f"({pressing_count} pressing photos, {delta_sig_count}/{len(records)} delta-cached, "
+        f"{todo_count} flattening todo, {done_count} flattening done, "
         f"median value {col_val.get('median')})."
     )
+    if VaultTerminalUI is not None:
+        ui = VaultTerminalUI()
+        ui.log("ok", f"[valid] {msg}")
+    else:
+        print(f"[valid] {msg}")
 
 
 if __name__ == "__main__":
