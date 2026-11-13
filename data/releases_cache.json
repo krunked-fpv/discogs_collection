@@ -22060,6 +22060,736 @@
     ],
     "year": 2022
   },
+  "2486041": {
+    "artists": [
+      {
+        "anv": "",
+        "id": 50655,
+        "join": "",
+        "name": "Chromeo",
+        "resource_url": "https://api.discogs.com/artists/50655",
+        "role": "",
+        "thumbnail_url": "https://i.discogs.com/3rpu-zOtzeNMTnxrZCSsp8LwNeUiS08n7HtRdEZ1LQo/rs:fit/g:sm/q:90/h:437/w:597/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9BLTUwNjU1/LTEzNDA3MDI0MzYt/MzU1NS5qcGVn.jpeg",
+        "tracks": ""
+      }
+    ],
+    "artists_sort": "Chromeo",
+    "blocked_from_sale": false,
+    "community": {
+      "contributors": [
+        {
+          "resource_url": "https://api.discogs.com/users/astampa",
+          "username": "astampa"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/Aftering_at_my_way",
+          "username": "Aftering_at_my_way"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/quityourband",
+          "username": "quityourband"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/suppasoul",
+          "username": "suppasoul"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/Kater_Murr",
+          "username": "Kater_Murr"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/eiki",
+          "username": "eiki"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/gaga789",
+          "username": "gaga789"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/Jxyohx",
+          "username": "Jxyohx"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/jp_fal",
+          "username": "jp_fal"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/gemini80s",
+          "username": "gemini80s"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/Showbiz_Kid",
+          "username": "Showbiz_Kid"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/jape",
+          "username": "jape"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/AndyWhelan",
+          "username": "AndyWhelan"
+        }
+      ],
+      "data_quality": "Needs Vote",
+      "have": 842,
+      "rating": {
+        "average": 4.4,
+        "count": 82
+      },
+      "status": "Accepted",
+      "submitter": {
+        "resource_url": "https://api.discogs.com/users/astampa",
+        "username": "astampa"
+      },
+      "want": 629
+    },
+    "companies": [
+      {
+        "catno": "",
+        "entity_type": "6",
+        "entity_type_name": "Licensed From",
+        "id": 88074,
+        "name": "Music World Music (2)",
+        "resource_url": "https://api.discogs.com/labels/88074",
+        "thumbnail_url": "https://i.discogs.com/kyQudzomYzpZdJuNYxqqozmHTSTAjRUTiWo0hWXxNLs/rs:fit/g:sm/q:90/h:115/w:177/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTg4MDc0/LTE3MjM0NTYwMjEt/Nzg5NS5wbmc.jpeg"
+      },
+      {
+        "catno": "",
+        "entity_type": "23",
+        "entity_type_name": "Recorded At",
+        "id": 287602,
+        "name": "Metrosonic Studios",
+        "resource_url": "https://api.discogs.com/labels/287602",
+        "thumbnail_url": "https://i.discogs.com/cIe6CEHgstmgzD7SqmBy6BylnQQIH6HbidR66fwtiFs/rs:fit/g:sm/q:90/h:74/w:502/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTI4NzYw/Mi0xMzQ4Mzk1OTg1/LTMxNjYucG5n.jpeg"
+      },
+      {
+        "catno": "",
+        "entity_type": "23",
+        "entity_type_name": "Recorded At",
+        "id": 268051,
+        "name": "Clinton Recording Studio",
+        "resource_url": "https://api.discogs.com/labels/268051",
+        "thumbnail_url": "https://i.discogs.com/pA8z1N5tsW_05hhAHe4ms9V7o_yUj8es9cD0lqGpPCE/rs:fit/g:sm/q:90/h:110/w:229/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTI2ODA1/MS0xMzE0OTA0MjEx/LmpwZWc.jpeg"
+      },
+      {
+        "catno": "",
+        "entity_type": "23",
+        "entity_type_name": "Recorded At",
+        "id": 276997,
+        "name": "The Studio",
+        "resource_url": "https://api.discogs.com/labels/276997",
+        "thumbnail_url": "https://i.discogs.com/50FGlLr5P-3OTqXh3Xw3RWutdq1-qaJhBfQjlmBcxuw/rs:fit/g:sm/q:90/h:72/w:151/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTI3Njk5/Ny0xMzE5MjkwMjA1/LnBuZw.jpeg"
+      },
+      {
+        "catno": "",
+        "entity_type": "23",
+        "entity_type_name": "Recorded At",
+        "id": 287606,
+        "name": "Masterkut",
+        "resource_url": "https://api.discogs.com/labels/287606",
+        "thumbnail_url": "https://i.discogs.com/GztInaWO0Db-r4tZUaQoBv8tTaHmLfkMhrEPJB8y5i8/rs:fit/g:sm/q:90/h:201/w:402/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTI4NzYw/Ni0xMzI1NTA5NTYz/LmpwZWc.jpeg"
+      },
+      {
+        "catno": "",
+        "entity_type": "27",
+        "entity_type_name": "Mixed At",
+        "id": 296839,
+        "name": "Motorbass Studio",
+        "resource_url": "https://api.discogs.com/labels/296839",
+        "thumbnail_url": "https://i.discogs.com/LV7baX4LazYhkmm2orA1WyZ8I57FnIP590Zxn54on74/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTI5Njgz/OS0xMzY0MTY1NDQ5/LTMzODAuanBlZw.jpeg"
+      },
+      {
+        "catno": "",
+        "entity_type": "29",
+        "entity_type_name": "Mastered At",
+        "id": 158759,
+        "name": "The Exchange",
+        "resource_url": "https://api.discogs.com/labels/158759",
+        "thumbnail_url": "https://i.discogs.com/FRs_id2oczuOJRhH2gfwymzkpVYWrNO8vGb2m2uQhCk/rs:fit/g:sm/q:90/h:600/w:590/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTE1ODc1/OS0xMzE0NzgzNzMx/LmpwZWc.jpeg"
+      },
+      {
+        "catno": "",
+        "entity_type": "29",
+        "entity_type_name": "Mastered At",
+        "id": 437410,
+        "name": "The Lodge, New York",
+        "resource_url": "https://api.discogs.com/labels/437410",
+        "thumbnail_url": "https://i.discogs.com/V2tFBNmcKxKK_5AX9DiOccpIOUB4CbS7YrFK7DbUtq0/rs:fit/g:sm/q:90/h:96/w:227/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTQzNzQx/MC0xMzQ2NTQ3Njk1/LTIzMzguanBlZw.jpeg"
+      },
+      {
+        "catno": "",
+        "entity_type": "14",
+        "entity_type_name": "Copyright (c)",
+        "id": 23937,
+        "name": "Atlantic Recording Corporation",
+        "resource_url": "https://api.discogs.com/labels/23937",
+        "thumbnail_url": "https://i.discogs.com/jZjSYAVRpExbW53RcsYGsNM2qn9G7zXCv1S5e7iLyzQ/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTIzOTM3/LTE3ODE1MDQxMDAt/ODMxNC5qcGVn.jpeg"
+      },
+      {
+        "catno": "",
+        "entity_type": "14",
+        "entity_type_name": "Copyright (c)",
+        "id": 1255,
+        "name": "WEA International Inc.",
+        "resource_url": "https://api.discogs.com/labels/1255",
+        "thumbnail_url": "https://i.discogs.com/FTp7bOLG35tc9gGFDNjFIyYDXCcHjkQQMJzGNh6p6nc/rs:fit/g:sm/q:90/h:91/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTEyNTUt/MTQ5MDQxMDQzMC00/MjI4LmpwZWc.jpeg"
+      },
+      {
+        "catno": "88394E",
+        "entity_type": "17",
+        "entity_type_name": "Pressed By",
+        "id": 264517,
+        "name": "GZ Digital Media",
+        "resource_url": "https://api.discogs.com/labels/264517",
+        "thumbnail_url": "https://i.discogs.com/aEwTSyNrsYoMB8Ch6dp8hQQCfzLB06Yf0DWhVWf8tTI/rs:fit/g:sm/q:90/h:207/w:413/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTI2NDUx/Ny0xMzIwNjUzODA2/LmdpZg.jpeg"
+      }
+    ],
+    "country": "US",
+    "data_quality": "Needs Vote",
+    "date_added": "2010-10-09T12:13:56-07:00",
+    "date_changed": "2023-07-18T18:24:05-07:00",
+    "estimated_weight": 230,
+    "extraartists": [
+      {
+        "anv": "",
+        "id": 1836791,
+        "join": "",
+        "name": "Charlotte Delarue",
+        "resource_url": "https://api.discogs.com/artists/1836791",
+        "role": "Art Direction [For Surface To Air, Paris]",
+        "tracks": ""
+      },
+      {
+        "anv": "",
+        "id": 1836790,
+        "join": "",
+        "name": "J\u00e9r\u00e9mie Rozan",
+        "resource_url": "https://api.discogs.com/artists/1836790",
+        "role": "Art Direction [For Surface To Air, Paris]",
+        "tracks": ""
+      },
+      {
+        "anv": "",
+        "id": 2339098,
+        "join": "",
+        "name": "Adrien Blanchat",
+        "resource_url": "https://api.discogs.com/artists/2339098",
+        "role": "Artwork [Image Manipulation]",
+        "tracks": ""
+      },
+      {
+        "anv": "",
+        "id": 1997326,
+        "join": "",
+        "name": "Kevin Kocher",
+        "resource_url": "https://api.discogs.com/artists/1997326",
+        "role": "Coordinator [Project Coordinators]",
+        "tracks": ""
+      },
+      {
+        "anv": "",
+        "id": 5465697,
+        "join": "",
+        "name": "Oliver Sasse (2)",
+        "resource_url": "https://api.discogs.com/artists/5465697",
+        "role": "Coordinator [Project Coordinators]",
+        "tracks": ""
+      },
+      {
+        "anv": "",
+        "id": 50655,
+        "join": "",
+        "name": "Chromeo",
+        "resource_url": "https://api.discogs.com/artists/50655",
+        "role": "Executive-Producer",
+        "tracks": ""
+      },
+      {
+        "anv": "",
+        "id": 1543,
+        "join": "",
+        "name": "Tiga",
+        "resource_url": "https://api.discogs.com/artists/1543",
+        "role": "Executive-Producer",
+        "tracks": ""
+      },
+      {
+        "anv": "",
+        "id": 1997326,
+        "join": "",
+        "name": "Kevin Kocher",
+        "resource_url": "https://api.discogs.com/artists/1997326",
+        "role": "Management",
+        "tracks": ""
+      },
+      {
+        "anv": "",
+        "id": 213186,
+        "join": "",
+        "name": "Emily Lazar",
+        "resource_url": "https://api.discogs.com/artists/213186",
+        "role": "Mastered By",
+        "tracks": "A4"
+      },
+      {
+        "anv": "",
+        "id": 600237,
+        "join": "",
+        "name": "Joe LaPorta",
+        "resource_url": "https://api.discogs.com/artists/600237",
+        "role": "Mastered By",
+        "tracks": "A4"
+      },
+      {
+        "anv": "",
+        "id": 325174,
+        "join": "",
+        "name": "Mike Marsh",
+        "resource_url": "https://api.discogs.com/artists/325174",
+        "role": "Mastered By",
+        "tracks": "A3"
+      },
+      {
+        "anv": "",
+        "id": 92821,
+        "join": "",
+        "name": "Simon Davey",
+        "resource_url": "https://api.discogs.com/artists/92821",
+        "role": "Mastered By",
+        "tracks": "A1, A2, A5-B5"
+      },
+      {
+        "anv": "Zdar",
+        "id": 12646,
+        "join": "",
+        "name": "Philippe Zdar",
+        "resource_url": "https://api.discogs.com/artists/12646",
+        "role": "Mixed By",
+        "tracks": ""
+      },
+      {
+        "anv": "",
+        "id": 1405252,
+        "join": "",
+        "name": "Julien Naudin",
+        "resource_url": "https://api.discogs.com/artists/1405252",
+        "role": "Mixed By [Assisted By]",
+        "tracks": ""
+      },
+      {
+        "anv": "",
+        "id": 13272396,
+        "join": "",
+        "name": "Marjorie Van Hoegaerden",
+        "resource_url": "https://api.discogs.com/artists/13272396",
+        "role": "Model",
+        "tracks": ""
+      },
+      {
+        "anv": "",
+        "id": 0,
+        "join": "",
+        "name": "A-Trak",
+        "resource_url": "",
+        "role": "Other [Consigliere]",
+        "tracks": ""
+      },
+      {
+        "anv": "",
+        "id": 2339097,
+        "join": "",
+        "name": "Harri Peccinotti",
+        "resource_url": "https://api.discogs.com/artists/2339097",
+        "role": "Photography By",
+        "tracks": ""
+      },
+      {
+        "anv": "",
+        "id": 50655,
+        "join": "",
+        "name": "Chromeo",
+        "resource_url": "https://api.discogs.com/artists/50655",
+        "role": "Recorded By",
+        "tracks": ""
+      },
+      {
+        "anv": "",
+        "id": 992960,
+        "join": "",
+        "name": "Lawson White",
+        "resource_url": "https://api.discogs.com/artists/992960",
+        "role": "Recorded By",
+        "tracks": "A3, B1, B4"
+      },
+      {
+        "anv": "",
+        "id": 2792630,
+        "join": "",
+        "name": "Greg Smith (21)",
+        "resource_url": "https://api.discogs.com/artists/2792630",
+        "role": "Recorded By [Additional Recording Assisted By]",
+        "tracks": "B4"
+      },
+      {
+        "anv": "",
+        "id": 1653896,
+        "join": "",
+        "name": "Rick Friedrich",
+        "resource_url": "https://api.discogs.com/artists/1653896",
+        "role": "Recorded By [Additional Recording Assisted By]",
+        "tracks": ""
+      },
+      {
+        "anv": "",
+        "id": 32143,
+        "join": "",
+        "name": "A-Trak",
+        "resource_url": "https://api.discogs.com/artists/32143",
+        "role": "Recorded By [Additional Recording]",
+        "tracks": "A2"
+      },
+      {
+        "anv": "",
+        "id": 50655,
+        "join": "",
+        "name": "Chromeo",
+        "resource_url": "https://api.discogs.com/artists/50655",
+        "role": "Recorded By [Additional Recording]",
+        "tracks": "B4"
+      },
+      {
+        "anv": "",
+        "id": 359111,
+        "join": "",
+        "name": "Jeff Chestek",
+        "resource_url": "https://api.discogs.com/artists/359111",
+        "role": "Recorded By [Additional Recording]",
+        "tracks": "B2, B3"
+      },
+      {
+        "anv": "",
+        "id": 992960,
+        "join": "",
+        "name": "Lawson White",
+        "resource_url": "https://api.discogs.com/artists/992960",
+        "role": "Recorded By [Additional Recording]",
+        "tracks": "A2"
+      },
+      {
+        "anv": "",
+        "id": 2792630,
+        "join": "",
+        "name": "Greg Smith (21)",
+        "resource_url": "https://api.discogs.com/artists/2792630",
+        "role": "Recorded By [Assisted By]",
+        "tracks": "A3, B1, B4"
+      },
+      {
+        "anv": "",
+        "id": 1922031,
+        "join": "",
+        "name": "Jon Martinez",
+        "resource_url": "https://api.discogs.com/artists/1922031",
+        "role": "Recorded By [Assisted By]",
+        "tracks": ""
+      },
+      {
+        "anv": "",
+        "id": 2066842,
+        "join": "",
+        "name": "Teruhisa Uchiyama",
+        "resource_url": "https://api.discogs.com/artists/2066842",
+        "role": "Recorded By [Assisted By]",
+        "tracks": ""
+      },
+      {
+        "anv": "",
+        "id": 50655,
+        "join": "",
+        "name": "Chromeo",
+        "resource_url": "https://api.discogs.com/artists/50655",
+        "role": "Written-By, Producer, Vocals, Instruments",
+        "tracks": ""
+      }
+    ],
+    "format_quantity": 1,
+    "formats": [
+      {
+        "descriptions": [
+          "LP",
+          "Album"
+        ],
+        "name": "Vinyl",
+        "qty": "1",
+        "text": "White"
+      }
+    ],
+    "genres": [
+      "Electronic",
+      "Funk / Soul",
+      "Pop"
+    ],
+    "id": 2486041,
+    "identifiers": [
+      {
+        "type": "Barcode",
+        "value": "075678924538"
+      },
+      {
+        "description": "Side A - stamped",
+        "type": "Matrix / Runout",
+        "value": "ATLANTIC RECORDS - 524647-1A 88394E1/A"
+      },
+      {
+        "description": "Side B - stamped",
+        "type": "Matrix / Runout",
+        "value": "ATLANTIC RECORDS - 524647-1B 88394E2/A"
+      }
+    ],
+    "images": [
+      {
+        "height": 599,
+        "resource_url": "https://i.discogs.com/w1VR-6QGD7P23nkxO6llxviqzpwlyeNJHJUNBxaKvmA/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0ODYw/NDEtMTI5NDgwODQz/NS5qcGVn.jpeg",
+        "type": "primary",
+        "uri": "https://i.discogs.com/w1VR-6QGD7P23nkxO6llxviqzpwlyeNJHJUNBxaKvmA/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0ODYw/NDEtMTI5NDgwODQz/NS5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/NzYx7Hj_XQ5NOqFjNWLpQ1Yhm83wyd-J-7s_-xwiTX4/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0ODYw/NDEtMTI5NDgwODQz/NS5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/OHHHn6nxXb11vrM_MqcTkeWQBTaXKjb17NjF5k3U65o/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0ODYw/NDEtMTI5NTExNTk4/My5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/OHHHn6nxXb11vrM_MqcTkeWQBTaXKjb17NjF5k3U65o/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0ODYw/NDEtMTI5NTExNTk4/My5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/chvODJ9qlT1tYz1nnpoRcgQktlsjUpNZvg8dLyIpkWk/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0ODYw/NDEtMTI5NTExNTk4/My5qcGVn.jpeg",
+        "width": 600
+      }
+    ],
+    "is_offensive": false,
+    "labels": [
+      {
+        "catno": "524647-1",
+        "entity_type": "1",
+        "entity_type_name": "Label",
+        "id": 681,
+        "name": "Atlantic",
+        "resource_url": "https://api.discogs.com/labels/681",
+        "thumbnail_url": "https://i.discogs.com/PvGehzQPvOW9qMVS-EDAeOmU6qODkqTEQ5bW03gpVyo/rs:fit/g:sm/q:90/h:426/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTY4MS0x/NTEwNjgyMTM0LTgz/NTAucG5n.jpeg"
+      }
+    ],
+    "lowest_price": 40.0,
+    "master_id": 279048,
+    "master_url": "https://api.discogs.com/masters/279048",
+    "notes": "Solange Knowles appears courtesy of Music World Music, a division of Music World Entertainment.\n\nRecorded at Metrosonic Studios, Brooklyn, except tracks A3, B1, B4 recorded at Clinton Recording, New York. Additional recording on A2 at Clinton Recording, New York; On tracks B2 and B3 at The Studio, Philadelphia; On track B4 at Masterkut, Montreal.\nMixed at Motorbass Recording Studio, Paris.\nMastered at The Exchange, London, except A4 at The Lodge, New York.\n\n\u00a9 2010 Atlantic Recording Corporation for the United States and WEA International Inc. for China, India, Russia, and all of South America. All Rights Reserved.",
+    "num_for_sale": 9,
+    "released": "2010-09-14",
+    "released_formatted": "14 Sep 2010",
+    "resource_url": "https://api.discogs.com/releases/2486041",
+    "series": [],
+    "status": "Accepted",
+    "styles": [
+      "Electro",
+      "Disco"
+    ],
+    "thumb": "https://i.discogs.com/NzYx7Hj_XQ5NOqFjNWLpQ1Yhm83wyd-J-7s_-xwiTX4/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0ODYw/NDEtMTI5NDgwODQz/NS5qcGVn.jpeg",
+    "title": "Business Casual",
+    "tracklist": [
+      {
+        "duration": "",
+        "extraartists": [
+          {
+            "anv": "",
+            "id": 297030,
+            "join": "",
+            "name": "Adrian Harpham",
+            "resource_url": "https://api.discogs.com/artists/297030",
+            "role": "Electronic Drums [Tom Solos]",
+            "tracks": ""
+          },
+          {
+            "anv": "",
+            "id": 1997325,
+            "join": "",
+            "name": "Kesh",
+            "resource_url": "https://api.discogs.com/artists/1997325",
+            "role": "Vocals [Additional]",
+            "tracks": ""
+          }
+        ],
+        "position": "A1",
+        "title": "Hot Mess",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "A2",
+        "title": "I'm Not Contagious",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "A3",
+        "title": "Night By Night",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "A4",
+        "title": "Don't Turn The Lights On",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "extraartists": [
+          {
+            "anv": "",
+            "id": 297030,
+            "join": "",
+            "name": "Adrian Harpham",
+            "resource_url": "https://api.discogs.com/artists/297030",
+            "role": "Electronic Drums [Tom Solos]",
+            "tracks": ""
+          },
+          {
+            "anv": "",
+            "id": 116191,
+            "join": "",
+            "name": "Tom Smith",
+            "resource_url": "https://api.discogs.com/artists/116191",
+            "role": "Saxophone",
+            "tracks": ""
+          }
+        ],
+        "position": "A5",
+        "title": "You Make It Rough",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "extraartists": [
+          {
+            "anv": "",
+            "id": 587458,
+            "join": "",
+            "name": "Solange Knowles",
+            "resource_url": "https://api.discogs.com/artists/587458",
+            "role": "Vocals [Additional]",
+            "tracks": ""
+          }
+        ],
+        "position": "B1",
+        "title": "When The Night Falls",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "extraartists": [
+          {
+            "anv": "",
+            "id": 213280,
+            "join": "",
+            "name": "Larry Gold",
+            "resource_url": "https://api.discogs.com/artists/213280",
+            "role": "Arranged By [Strings], Conductor [Strings Conducted By]",
+            "tracks": ""
+          }
+        ],
+        "position": "B2",
+        "title": "Don't Walk Away",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "extraartists": [
+          {
+            "anv": "",
+            "id": 213280,
+            "join": "",
+            "name": "Larry Gold",
+            "resource_url": "https://api.discogs.com/artists/213280",
+            "role": "Arranged By [Strings], Conductor [Strings Conducted By]",
+            "tracks": ""
+          },
+          {
+            "anv": "",
+            "id": 1997324,
+            "join": "",
+            "name": "Ezekiel Wexley",
+            "resource_url": "https://api.discogs.com/artists/1997324",
+            "role": "Guitar",
+            "tracks": ""
+          }
+        ],
+        "position": "B3",
+        "title": "J'ai Claqu\u00e9 La Porte",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "B4",
+        "title": "The Right Type",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "B5",
+        "title": "Grow Up",
+        "type_": "track"
+      }
+    ],
+    "uri": "https://www.discogs.com/release/2486041-Chromeo-Business-Casual",
+    "videos": [
+      {
+        "description": "Business Casual is the third studio album by Canadian electro-funk duo Chromeo, released on September 14, 2010 by Last Gang Records and Turbo Recordings.\n\nTracks:\n1. \"Hot Mess\" \n2.\"I'm Not Contagious\"  \n3. \"Night by Night\" \n4. \"Don't Turn the Lights On\"  ",
+        "duration": 0,
+        "embed": true,
+        "title": "CHROMEO - Business Casual [FULL ALBUM]",
+        "uri": "https://www.youtube.com/watch?v=0_5puNhIKMg"
+      },
+      {
+        "description": "'Hot Mess' is taken from the album Business Casual, available to download from iTunes now: http://tinyurl.com/chromeoalbum. Video directed by J\u00e9r\u00e9mie Rozan.\n\nChromeo Tour Dates: http://chromeo.net/tours",
+        "duration": 230,
+        "embed": true,
+        "title": "'Hot Mess' Chromeo [OFFICIAL VIDEO]",
+        "uri": "https://www.youtube.com/watch?v=Zm4JVkH0T-E"
+      },
+      {
+        "description": "\u00a9 2011 WMG\nDownload this track: http://atlr.ec/juqWAC\nTaken from the new album Business Casual\nDirected by: J\u00e9r\u00e9mie Rozan  ( Surface to Air )\n\nChromeo Tour Dates: http://chromeo.net/tours",
+        "duration": 231,
+        "embed": true,
+        "title": "'Night By Night' Chromeo [OFFICIAL VIDEO]",
+        "uri": "https://www.youtube.com/watch?v=6XCcWlgVqHA"
+      },
+      {
+        "description": "\u00a9 2011 WMG\nFrom the album: Business Casual, download it here http://atlr.ec/qfcmIO\n \nDirector: DANIELS\n\nAtlantic Records\n\nChromeo Tour Dates: http://chromeo.net/tours",
+        "duration": 266,
+        "embed": true,
+        "title": "'When The Night Falls' Chromeo [OFFICIAL VIDEO]",
+        "uri": "https://www.youtube.com/watch?v=kkyYxAv6kB4"
+      },
+      {
+        "description": "From the Album: Business Casual\nhttps://itunes.apple.com/ca/album/business-casual/id390807802\n\nhttp://chromeo.net\nhttps://www.facebook.com/chromeo\nhttps://twitter.com/chromeo",
+        "duration": 441,
+        "embed": true,
+        "title": "Chromeo - You Make It Rough",
+        "uri": "https://www.youtube.com/watch?v=Yn9mopkpYS4"
+      },
+      {
+        "description": "From the Album: Business Casual\nhttps://itunes.apple.com/ca/album/business-casual/id390807802\n\nhttp://chromeo.net\nhttps://www.facebook.com/chromeo\nhttps://twitter.com/chromeo",
+        "duration": 237,
+        "embed": true,
+        "title": "Chromeo - The Right Type",
+        "uri": "https://www.youtube.com/watch?v=bW9pZGD4vaU"
+      },
+      {
+        "description": "Official music video for \"Don't Turn The Lights\" by Chromeo from the album 'Business Casual'.\n\nDownload it from http://chromeo.net/businesscasual!\n\nSubscribe for more official content from Atlantic Records:\nhttps://Atlantic.lnk.to/subscribe\n\nFollow Chrome",
+        "duration": 276,
+        "embed": true,
+        "title": "Chromeo - Don't Turn The Lights On (Official Video)",
+        "uri": "https://www.youtube.com/watch?v=TuM5pB4dE-A"
+      }
+    ],
+    "year": 2010
+  },
   "25089742": {
     "artists": [
       {
@@ -35887,7 +36617,7 @@
     "master_id": 1025013,
     "master_url": "https://api.discogs.com/masters/1025013",
     "notes": "Limited to 1000 worldwide",
-    "num_for_sale": 9,
+    "num_for_sale": 11,
     "released": "2024",
     "released_formatted": "2024",
     "resource_url": "https://api.discogs.com/releases/29425159",

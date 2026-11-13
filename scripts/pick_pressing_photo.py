@@ -66,10 +66,48 @@ VERIFIED_PRICE_FALLBACKS: dict[int, float] = {
 }
 
 
+def sanitize_token(raw_token: str | None) -> str:
+    """Strips control chars (e.g. \\x16 from Ctrl+V in Windows getpass), quotes, and prefixes."""
+    if not raw_token:
+        return ""
+    cleaned = re.sub(r"[\x00-\x1f\x7f-\x9f]+", "", str(raw_token)).strip().strip("\"'` ")
+    for prefix in ("DISCOGS_TOKEN=", "Discogs token=", "token=", "Bearer "):
+        if cleaned.lower().startswith(prefix.lower()):
+            cleaned = cleaned[len(prefix):].strip().strip("\"'` ")
+    return re.sub(r"[^A-Za-z0-9._\-]", "", cleaned)
+
+
+def resolve_discogs_token(cli_token: str | None = None, repo_root: pathlib.Path = REPO_ROOT) -> str:
+    """Resolves a clean Discogs token from CLI, environment, .env, or Windows HKCU Registry."""
+    raw_token = cli_token if cli_token is not None else os.environ.get("DISCOGS_TOKEN", "")
+    dotenv_path = repo_root / ".env"
+    if not sanitize_token(raw_token) and dotenv_path.exists():
+        try:
+            for line in dotenv_path.read_text(encoding="utf-8", errors="ignore").splitlines():
+                line_s = line.strip()
+                if line_s.startswith("DISCOGS_TOKEN="):
+                    raw_token = line_s.split("=", 1)[1].strip()
+                    break
+        except Exception:
+            pass
+    if os.name == "nt" and not sanitize_token(raw_token):
+        try:
+            import winreg
+
+            with winreg.OpenKey(winreg.HKEY_CURRENT_USER, "Environment", 0, winreg.KEY_READ) as key:
+                reg_val, _ = winreg.QueryValueEx(key, "DISCOGS_TOKEN")
+                if reg_val:
+                    raw_token = str(reg_val)
+        except Exception:
+            pass
+    return sanitize_token(raw_token) or sanitize_token(DEFAULT_TOKEN)
+
+
 def _download_image_bytes(url: str, token: str = "") -> bytes | None:
     if not url or not url.startswith("http"):
         return None
-    for use_token in ([token, ""] if token else [""]):
+    clean_tok = sanitize_token(token)
+    for use_token in ([clean_tok, ""] if clean_tok else [""]):
         headers = {"User-Agent": USER_AGENT}
         if use_token:
             headers["Authorization"] = f"Discogs token={use_token}"
@@ -78,7 +116,7 @@ def _download_image_bytes(url: str, token: str = "") -> bytes | None:
             with urllib.request.urlopen(req, timeout=20) as resp:
                 return resp.read()
         except urllib.error.HTTPError as exc:
-            if exc.code == 401 and use_token:
+            if exc.code in (400, 401, 403) and use_token:
                 continue
             return None
         except Exception:
@@ -87,11 +125,12 @@ def _download_image_bytes(url: str, token: str = "") -> bytes | None:
 
 
 def _fetch_release_detail_from_discogs(release_id: int, token: str = "") -> dict[str, Any]:
-    """Fetches /releases/{release_id} from Discogs API with automatic 401 token fallback."""
+    """Fetches /releases/{release_id} from Discogs API with automatic 400/401/403 token fallback."""
     if release_id <= 0:
         return {}
     url = f"{DISCOGS_API_BASE}/releases/{release_id}?curr_abbr=USD"
-    for use_token in ([token, ""] if token else [""]):
+    clean_tok = sanitize_token(token)
+    for use_token in ([clean_tok, ""] if clean_tok else [""]):
         headers = {
             "Accept": "application/vnd.discogs.v2.discogs+json",
             "User-Agent": USER_AGENT,
@@ -102,12 +141,12 @@ def _fetch_release_detail_from_discogs(release_id: int, token: str = "") -> dict
             try:
                 req = urllib.request.Request(url, headers=headers, method="GET")
                 with urllib.request.urlopen(req, timeout=25) as resp:
-                    raw = resp.read().decode("utf-8")
+                    raw = resp.read().decode("utf-8", errors="replace")
                     data = json.loads(raw)
                     if isinstance(data, dict) and data.get("id"):
                         return data
             except urllib.error.HTTPError as exc:
-                if exc.code == 401 and use_token:
+                if exc.code in (400, 401, 403) and use_token:
                     break
                 if exc.code == 429:
                     time.sleep(10 * (attempt + 1))
@@ -260,10 +299,7 @@ def _write_pressing_and_cover_files(
     img_selection: dict[str, Any],
     local_files: list[tuple[int, pathlib.Path]],
 ) -> bool:
-    """Ensures `cover.jpg` and `pressing.jpg` are physically written in `assets/releases/<rid>/`.
-
-    Returns True if `pressing.jpg` was newly created or updated to a different image.
-    """
+    """Ensures `cover.jpg` and `pressing.jpg` are physically written in `assets/releases/<rid>/`."""
     if not (rel_dir / "cover.jpg").exists():
         if (rel_dir / "img_0.jpg").exists():
             shutil.copyfile(rel_dir / "img_0.jpg", rel_dir / "cover.jpg")
@@ -318,6 +354,8 @@ def run_pick_pressing_photos(
     if not collection_path.exists():
         raise FileNotFoundError(f"Collection file not found: {collection_path}")
 
+    clean_token = resolve_discogs_token(cli_token=token, repo_root=REPO_ROOT)
+
     collection_data = json.loads(collection_path.read_text(encoding="utf-8"))
     records: list[dict[str, Any]] = collection_data.get("records") or []
 
@@ -358,7 +396,7 @@ def run_pick_pressing_photos(
 
         rel_detail = cache.get(folder_rid_str) or {}
         if not rel_detail.get("id") and download_missing:
-            rel_detail = _fetch_release_detail_from_discogs(folder_rid, token=token)
+            rel_detail = _fetch_release_detail_from_discogs(folder_rid, token=clean_token)
             if rel_detail:
                 cache[folder_rid_str] = rel_detail
                 cache_dirty = True
@@ -425,7 +463,7 @@ def run_pick_pressing_photos(
 
         # If cache has <= 1 image for this release and disk has <= 1 image, enrich from Discogs API
         if len(rel_detail.get("images") or []) <= 1 and len(local_files) <= 1 and download_missing and rid > 0:
-            fetched_detail = _fetch_release_detail_from_discogs(rid, token=token)
+            fetched_detail = _fetch_release_detail_from_discogs(rid, token=clean_token)
             if fetched_detail.get("images"):
                 rel_detail = fetched_detail
                 cache[rid_str] = rel_detail
@@ -462,7 +500,7 @@ def run_pick_pressing_photos(
                 except Exception:
                     pass
             elif download_missing and uri.startswith("http"):
-                raw_b = _download_image_bytes(uri, token=token)
+                raw_b = _download_image_bytes(uri, token=clean_token)
                 if raw_b:
                     local_img_file.write_bytes(raw_b)
                     downloaded_bytes[uri] = raw_b
@@ -687,8 +725,10 @@ def main() -> None:
         action="store_true",
         help="Run strictly offline using only existing local files in assets/releases/",
     )
-    parser.add_argument("--token", default=os.environ.get("DISCOGS_TOKEN", DEFAULT_TOKEN))
+    parser.add_argument("--token", default=None)
     args = parser.parse_args()
+
+    clean_token = resolve_discogs_token(cli_token=args.token, repo_root=REPO_ROOT)
 
     run_pick_pressing_photos(
         collection_path=pathlib.Path(args.collection),
@@ -698,7 +738,7 @@ def main() -> None:
         assets_releases_dir=pathlib.Path(args.assets_dir),
         html_path=pathlib.Path(args.inject_html),
         download_missing=False if args.offline else args.download_missing,
-        token=args.token,
+        token=clean_token,
     )
 
 

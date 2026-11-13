@@ -51,11 +51,84 @@ USER_AGENT = "KrunkedDiscogsVault/2.2 +https://github.com/krunked-fpv/discogs_co
 DEFAULT_TOKEN = ""
 
 
+def sanitize_token(raw_token: str | None) -> str:
+    """Strips control chars (e.g. \\x16 from Ctrl+V in Windows getpass), quotes, and prefixes."""
+    if not raw_token:
+        return ""
+    cleaned = str(raw_token)
+    # Remove ASCII & Unicode control characters (such as \x16 SYN from Ctrl+V in msvcrt.getwch)
+    cleaned = re.sub(r"[\x00-\x1f\x7f-\x9f]+", "", cleaned).strip().strip("\"'` ")
+    # Strip accidental key=value or header prefixes
+    for prefix in ("DISCOGS_TOKEN=", "Discogs token=", "token=", "Bearer "):
+        if cleaned.lower().startswith(prefix.lower()):
+            cleaned = cleaned[len(prefix):].strip().strip("\"'` ")
+    # Keep only valid ASCII token characters
+    cleaned = re.sub(r"[^A-Za-z0-9._\-]", "", cleaned)
+    return cleaned
+
+
+def sanitize_username(raw_username: str | None, default: str = "krunked") -> str:
+    """Ensures username has no control characters, quotes, or whitespace."""
+    if not raw_username:
+        return default
+    cleaned = re.sub(r"[\x00-\x1f\x7f-\x9f]+", "", str(raw_username)).strip().strip("\"'` ")
+    return cleaned or default
+
+
+def load_discogs_credentials(
+    cli_token: str | None = None,
+    cli_username: str | None = None,
+    repo_root: pathlib.Path = REPO_ROOT,
+) -> tuple[str, str]:
+    """Resolves (username, token) from CLI, environment, local .env, or Windows HKCU Registry."""
+    raw_user = cli_username or os.environ.get("DISCOGS_USERNAME") or ""
+    raw_token = cli_token if cli_token is not None else os.environ.get("DISCOGS_TOKEN", "")
+
+    # Check local .env file if token or username not yet populated
+    dotenv_path = repo_root / ".env"
+    if dotenv_path.exists():
+        try:
+            for line in dotenv_path.read_text(encoding="utf-8", errors="ignore").splitlines():
+                line_s = line.strip()
+                if not line_s or line_s.startswith("#") or "=" not in line_s:
+                    continue
+                k, v = line_s.split("=", 1)
+                k = k.strip()
+                v = v.strip()
+                if k == "DISCOGS_TOKEN" and not sanitize_token(raw_token):
+                    raw_token = v
+                elif k == "DISCOGS_USERNAME" and not sanitize_username(raw_user, ""):
+                    raw_user = v
+        except Exception:
+            pass
+
+    # Fallback to Windows User Registry (HKCU\Environment) if current PowerShell session is stale
+    if os.name == "nt" and not sanitize_token(raw_token):
+        try:
+            import winreg
+
+            with winreg.OpenKey(winreg.HKEY_CURRENT_USER, "Environment", 0, winreg.KEY_READ) as key:
+                reg_val, _ = winreg.QueryValueEx(key, "DISCOGS_TOKEN")
+                if reg_val:
+                    raw_token = str(reg_val)
+        except Exception:
+            pass
+
+    token = sanitize_token(raw_token) or sanitize_token(DEFAULT_TOKEN)
+    if raw_token and token != str(raw_token).strip():
+        print(
+            "[info] Stripped hidden control/formatting characters from DISCOGS_TOKEN.",
+            file=sys.stderr,
+        )
+    username = sanitize_username(raw_user, default="krunked")
+    return username, token
+
+
 class DiscogsClient:
-    """Deterministic, rate-limit-aware Discogs REST API v2.0 client."""
+    """Deterministic, rate-limit-aware Discogs REST API v2.0 client with full HTTP error recovery."""
 
     def __init__(self, token: str | None = None, user_agent: str = USER_AGENT) -> None:
-        self.token = (token or "").strip()
+        self.token = sanitize_token(token)
         self.user_agent = user_agent
         self.ratelimit_remaining = 60
 
@@ -70,7 +143,10 @@ class DiscogsClient:
             sep = "&" if "?" in url else "?"
             url = f"{url}{sep}{qs}"
 
-        for use_token in ([self.token, ""] if self.token else [""]):
+        token_candidates = [self.token, ""] if self.token else [""]
+        last_error: Exception | None = None
+
+        for use_token in token_candidates:
             headers = {
                 "Accept": "application/vnd.discogs.v2.discogs+json",
                 "User-Agent": self.user_agent,
@@ -87,19 +163,57 @@ class DiscogsClient:
                         rem = resp.headers.get("X-Discogs-Ratelimit-Remaining")
                         if rem and rem.isdigit():
                             self.ratelimit_remaining = int(rem)
-                        raw = resp.read().decode("utf-8")
+                        raw = resp.read().decode("utf-8", errors="replace")
                         return json.loads(raw)
                 except urllib.error.HTTPError as exc:
-                    if exc.code == 401 and use_token:
-                        print(f"[warn] Discogs token rejected (HTTP 401) on {url}; retrying unauthenticated...", file=sys.stderr)
+                    last_error = exc
+                    err_body = ""
+                    try:
+                        err_body = exc.read().decode("utf-8", errors="replace").strip()
+                    except Exception:
+                        pass
+
+                    # If token caused HTTP 400 (Bad Request), 401 (Unauthorized), or 403 (Forbidden),
+                    # disable the rejected token and immediately retry unauthenticated.
+                    if exc.code in (400, 401, 403) and use_token:
+                        detail = f" ({err_body[:140]})" if err_body else ""
+                        print(
+                            f"[warn] Discogs rejected authenticated request (HTTP {exc.code}) on {url}{detail}; "
+                            "disabling bad token and retrying unauthenticated...",
+                            file=sys.stderr,
+                        )
+                        self.token = ""
                         break
+
                     if exc.code == 429:
                         wait_s = 15 * (attempt + 1)
                         print(f"[rate-limit] HTTP 429 on {url}; sleeping {wait_s}s...", file=sys.stderr)
                         time.sleep(wait_s)
                         continue
-                    raise
-        raise RuntimeError(f"Exhausted retries fetching {url}")
+
+                    if exc.code in (500, 502, 503, 504):
+                        wait_s = 5 * (attempt + 1)
+                        print(
+                            f"[warn] Transient Discogs server error (HTTP {exc.code}) on {url}; "
+                            f"retrying in {wait_s}s...",
+                            file=sys.stderr,
+                        )
+                        time.sleep(wait_s)
+                        continue
+
+                    detail = f" — {err_body[:200]}" if err_body else ""
+                    raise RuntimeError(f"HTTP Error {exc.code}: {exc.reason} on {url}{detail}") from exc
+                except (urllib.error.URLError, TimeoutError, ConnectionError) as exc:
+                    last_error = exc
+                    wait_s = 4 * (attempt + 1)
+                    print(
+                        f"[warn] Network error on {url} ({exc}); retrying in {wait_s}s ({attempt + 1}/4)...",
+                        file=sys.stderr,
+                    )
+                    time.sleep(wait_s)
+                    continue
+
+        raise RuntimeError(f"Exhausted retries fetching {url} (last error: {last_error})")
 
     def download_bytes(self, url: str) -> bytes | None:
         if not url:
@@ -113,7 +227,8 @@ class DiscogsClient:
                 with urllib.request.urlopen(req, timeout=25) as resp:
                     return resp.read()
             except urllib.error.HTTPError as exc:
-                if exc.code == 401 and use_token:
+                if exc.code in (400, 401, 403) and use_token:
+                    self.token = ""
                     continue
                 print(f"[warn] Could not download image {url}: {exc}", file=sys.stderr)
                 return None
@@ -154,21 +269,33 @@ def fetch_full_collection(
         except Exception:
             flattening_queue = {}
 
-    profile = client.get_json(f"/users/{username}")
+    safe_user = urllib.parse.quote(username.strip(), safe="")
+    profile: dict[str, Any] = {}
+    try:
+        profile = client.get_json(f"/users/{safe_user}")
+    except Exception as exc:
+        print(f"[warn] Could not fetch user profile for '{username}' ({exc}); continuing with collection sync...", file=sys.stderr)
+        profile = {}
+
     collection_value: dict[str, Any] = {}
     if client.token:
         try:
-            collection_value = client.get_json(f"/users/{username}/collection/value")
-        except Exception:
+            collection_value = client.get_json(f"/users/{safe_user}/collection/value")
+        except Exception as exc:
+            print(f"[warn] Could not fetch collection value endpoint ({exc}); using calculated fallback.", file=sys.stderr)
             collection_value = {}
 
     raw_items: list[dict[str, Any]] = []
     page = 1
     while True:
-        payload = client.get_json(
-            f"/users/{username}/collection/folders/0/releases",
-            params={"per_page": 100, "page": page, "sort": "added", "sort_order": "desc"},
-        )
+        try:
+            payload = client.get_json(
+                f"/users/{safe_user}/collection/folders/0/releases",
+                params={"per_page": 100, "page": page, "sort": "added", "sort_order": "desc"},
+            )
+        except Exception as exc:
+            print(f"[error] Failed fetching collection page {page} for '{username}': {exc}", file=sys.stderr)
+            break
         releases_page = payload.get("releases") or []
         raw_items.extend(releases_page)
         pagination = payload.get("pagination") or {}
@@ -364,8 +491,8 @@ def fetch_full_collection(
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Deterministic Discogs Collection Sync & Pressing Photo Compiler")
-    parser.add_argument("--username", default=os.environ.get("DISCOGS_USERNAME", "krunked"))
-    parser.add_argument("--token", default=os.environ.get("DISCOGS_TOKEN", DEFAULT_TOKEN))
+    parser.add_argument("--username", default=None)
+    parser.add_argument("--token", default=None)
     parser.add_argument("--output", default=str(REPO_ROOT / "data" / "collection.json"))
     parser.add_argument("--cache", default=str(REPO_ROOT / "data" / "releases_cache.json"))
     parser.add_argument("--overrides", default=str(REPO_ROOT / "data" / "overrides.json"))
@@ -376,6 +503,12 @@ def main() -> None:
     parser.add_argument("--download-images", action="store_true", default=True)
     args = parser.parse_args()
 
+    username, token = load_discogs_credentials(
+        cli_token=args.token,
+        cli_username=args.username,
+        repo_root=REPO_ROOT,
+    )
+
     out_path = pathlib.Path(args.output)
     cache_path = pathlib.Path(args.cache)
     overrides_path = pathlib.Path(args.overrides)
@@ -383,10 +516,10 @@ def main() -> None:
     download_dir = pathlib.Path(args.assets_dir)
     html_path = pathlib.Path(args.inject_html)
 
-    client = DiscogsClient(token=args.token)
+    client = DiscogsClient(token=token)
     data = fetch_full_collection(
         client=client,
-        username=args.username,
+        username=username,
         cache_path=cache_path,
         overrides_path=overrides_path,
         flattening_path=flattening_path,
@@ -394,8 +527,18 @@ def main() -> None:
         analyze_pixels=args.analyze_pixels,
     )
 
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    if data.get("records"):
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        out_path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    elif not out_path.exists():
+        raise RuntimeError(
+            "Discogs API returned 0 records and no local data/collection.json exists to fall back on."
+        )
+    else:
+        print(
+            f"[warn] Discogs API returned 0 records; preserving existing {out_path} and running local photo picker...",
+            file=sys.stderr,
+        )
 
     run_pick_pressing_photos(
         collection_path=out_path,
@@ -405,7 +548,7 @@ def main() -> None:
         assets_releases_dir=download_dir,
         html_path=html_path,
         download_missing=args.download_images,
-        token=args.token,
+        token=client.token,
     )
 
 

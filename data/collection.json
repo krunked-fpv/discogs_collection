@@ -4,26 +4,118 @@
   "source_of_truth": "https://www.discogs.com/user/krunked/collection",
   "api_documentation": "https://www.discogs.com/developers",
   "username": "krunked",
-  "synced_at_utc": "2026-11-12T19:50:03Z",
+  "synced_at_utc": "2026-11-13T00:14:10Z",
   "profile": {
     "username": "krunked",
     "owner_name": "Alex Goresch",
     "discogs_url": "https://www.discogs.com/user/krunked/collection",
     "github_repo": "https://github.com/krunked-fpv/discogs_collection",
-    "num_collection": 154,
-    "pressing_photos_detected": 149,
-    "colored_or_special_variants": 143,
+    "num_collection": 155,
+    "pressing_photos_detected": 150,
+    "colored_or_special_variants": 144,
     "flattening_need_to_be_done": 3,
     "flattening_done": 41,
     "collection_value": {
-      "minimum": "$3,839.74",
-      "median": "$6,128.81",
-      "maximum": "$10,633.12",
-      "total_estimated_usd": 7384.11,
-      "formatted_total": "$7,384.11"
+      "minimum": "$3,860.54",
+      "median": "$6,162.01",
+      "maximum": "$10,690.72",
+      "total_estimated_usd": 7424.11,
+      "formatted_total": "$7,424.11"
     }
   },
   "records": [
+    {
+      "release_id": 2486041,
+      "instance_id": 2203923624,
+      "artist": "Chromeo",
+      "title": "Business Casual",
+      "year": 2010,
+      "format_string": "Vinyl, LP, Album, White",
+      "label": "Atlantic",
+      "catno": "524647-1",
+      "media_condition": "Near Mint (NM or M-)",
+      "sleeve_condition": "Near Mint (NM or M-)",
+      "comments": "",
+      "date_added": "2026-11-12T15:44:33-08:00",
+      "discogs_url": "https://www.discogs.com/release/2486041-Chromeo-Business-Casual",
+      "estimated_value_usd": 40.0,
+      "flattening_status": "Not Listed",
+      "genres": [
+        "Electronic",
+        "Funk / Soul",
+        "Pop"
+      ],
+      "styles": [
+        "Electro",
+        "Disco"
+      ],
+      "images": {
+        "cover_image_url": "https://i.discogs.com/w1VR-6QGD7P23nkxO6llxviqzpwlyeNJHJUNBxaKvmA/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0ODYw/NDEtMTI5NDgwODQz/NS5qcGVn.jpeg",
+        "pressing_image_url": "https://i.discogs.com/OHHHn6nxXb11vrM_MqcTkeWQBTaXKjb17NjF5k3U65o/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0ODYw/NDEtMTI5NTExNTk4/My5qcGVn.jpeg",
+        "center_label_image_url": "https://i.discogs.com/NzYx7Hj_XQ5NOqFjNWLpQ1Yhm83wyd-J-7s_-xwiTX4/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0ODYw/NDEtMTI5NDgwODQz/NS5qcGVn.jpeg",
+        "display_thumbnail_url": "assets/releases/2486041/pressing.jpg",
+        "has_pressing_photo": true,
+        "selected_index": 1,
+        "selected_score": 0.1272,
+        "detection_method": "auto_best_candidate_fallback",
+        "classified_images": [
+          {
+            "index": 0,
+            "uri": "https://i.discogs.com/w1VR-6QGD7P23nkxO6llxviqzpwlyeNJHJUNBxaKvmA/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0ODYw/NDEtMTI5NDgwODQz/NS5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/NzYx7Hj_XQ5NOqFjNWLpQ1Yhm83wyd-J-7s_-xwiTX4/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0ODYw/NDEtMTI5NDgwODQz/NS5qcGVn.jpeg",
+            "width": 600,
+            "height": 599,
+            "aspect_ratio": 1.002,
+            "role": "front_cover",
+            "deterministic_score": 0.05,
+            "local_uri": "assets/releases/2486041/img_0.jpg"
+          },
+          {
+            "index": 1,
+            "uri": "https://i.discogs.com/OHHHn6nxXb11vrM_MqcTkeWQBTaXKjb17NjF5k3U65o/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0ODYw/NDEtMTI5NTExNTk4/My5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/chvODJ9qlT1tYz1nnpoRcgQktlsjUpNZvg8dLyIpkWk/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI0ODYw/NDEtMTI5NTExNTk4/My5qcGVn.jpeg",
+            "width": 600,
+            "height": 600,
+            "aspect_ratio": 1.0,
+            "role": "pressing_disc",
+            "deterministic_score": 0.1272,
+            "local_uri": "assets/releases/2486041/img_1.jpg",
+            "cv_metrics": {
+              "is_pressing": false,
+              "is_zoomed_label_scan": true,
+              "is_square_insert_or_sleeve": false,
+              "detected_disc_radius": 0.98,
+              "active_diagonal_quadrants": 4,
+              "score": 0.1049,
+              "raw_annular_score": 0.2998,
+              "aspect_ratio": 1.0,
+              "corner_std": 0.2397,
+              "corner_wax_dist": 0.2819,
+              "circularity_ratio": 0.9948,
+              "label_wax_dist": 0.1488,
+              "spindle_contrast": 0.0217,
+              "reason": "rejected_zoomed_center_label_scan"
+            }
+          }
+        ],
+        "local_cover_image_url": "assets/releases/2486041/cover.jpg",
+        "local_pressing_image_url": "assets/releases/2486041/pressing.jpg"
+      },
+      "wax_spec": {
+        "pattern": "solid_color",
+        "primary_color": "#f8fafc",
+        "secondary_color": "#38bdf8",
+        "accent_color": "#f43f5e",
+        "color_name": "Opaque White",
+        "translucent": false,
+        "etched": false,
+        "is_double_lp": false,
+        "is_limited": false,
+        "is_repress": true,
+        "variant_badge": "12\" LP • Opaque White",
+        "deterministic_seed": 2052685158
+      }
+    },
     {
       "release_id": 16610055,
       "instance_id": 2203680809,

@@ -5,21 +5,23 @@ Run this script once on your Windows machine:
     python scripts/setup_discogs_token.py
 
 What it does:
-1. Prompts you for your new Discogs Personal Access Token (hidden input).
+1. Prompts you for your new Discogs Personal Access Token (using standard paste-friendly
+   input and stripping any accidental control bytes such as Ctrl+V `\\x16`).
 2. Saves `DISCOGS_TOKEN` permanently to your Windows User Environment Variables
    (in `HKCU\\Environment`) so Python can read `os.environ.get("DISCOGS_TOKEN")`
    without ever hardcoding it in your repository.
-3. Also creates/updates a git-ignored `.env` file in your repo root as a backup
-   and ensures `.env` is listed in `.gitignore`.
+3. Also creates/updates a git-ignored `.env` file in your repo root so `sync_discogs.py`
+   and `pick_pressing_photo.py` work immediately in your current terminal without
+   restarting PowerShell.
 4. Scans `index.html` and `scripts/*.py` and scrubs the old exposed token if
    present so you never accidentally push it to GitHub again.
 """
 
 from __future__ import annotations
 
-import getpass
 import os
 import pathlib
+import re
 import subprocess
 import sys
 
@@ -28,6 +30,17 @@ REPO_ROOT = SCRIPT_DIR.parent if SCRIPT_DIR.name == "scripts" else SCRIPT_DIR
 
 # The previously exposed token prefix/string to scrub from tracked files
 OLD_EXPOSED_TOKEN = "HWLciALlIIgSGquWsckHVkbEXCbmXlcrULmVdogi"
+
+
+def sanitize_token(raw_token: str | None) -> str:
+    """Strips control chars (e.g. \\x16 from Ctrl+V in Windows getpass), quotes, and prefixes."""
+    if not raw_token:
+        return ""
+    cleaned = re.sub(r"[\x00-\x1f\x7f-\x9f]+", "", str(raw_token)).strip().strip("\"'` ")
+    for prefix in ("DISCOGS_TOKEN=", "Discogs token=", "token=", "Bearer "):
+        if cleaned.lower().startswith(prefix.lower()):
+            cleaned = cleaned[len(prefix):].strip().strip("\"'` ")
+    return re.sub(r"[^A-Za-z0-9._\-]", "", cleaned)
 
 
 def set_windows_user_env_var(var_name: str, value: str) -> bool:
@@ -63,7 +76,6 @@ def set_windows_user_env_var(var_name: str, value: str) -> bool:
         )
         return True
     except Exception:
-        # Fallback to setx command
         try:
             subprocess.run(["setx", var_name, value], check=True, capture_output=True, text=True)
             return True
@@ -136,15 +148,10 @@ def main() -> None:
     print("=" * 68)
     print("1. First, go to https://www.discogs.com/settings/developers")
     print("   and click 'Generate new token' to invalidate the old exposed token.")
-    print("2. Paste your NEW token below (or press Enter to just scrub old files).\n")
+    print("2. Paste your NEW token below (Ctrl+V works directly here).\n")
 
-    try:
-        token = getpass.getpass("Enter your NEW Discogs Personal Access Token (hidden): ").strip()
-    except Exception:
-        token = input("Enter your NEW Discogs Personal Access Token: ").strip()
-
-    if not token:
-        token = input("If hidden paste didn't work, paste token here (or leave blank): ").strip()
+    raw_input_token = input("Paste your NEW Discogs Personal Access Token: ")
+    token = sanitize_token(raw_input_token)
 
     scrubbed = scrub_exposed_token_from_repo(REPO_ROOT)
     if scrubbed:
@@ -166,13 +173,16 @@ def main() -> None:
         if os.name == "nt":
             ok = set_windows_user_env_var("DISCOGS_TOKEN", token)
             if ok:
-                print("[ok] Saved DISCOGS_TOKEN to your Windows User Environment Variables (HKCU\\Environment).")
+                print("[ok] Saved clean DISCOGS_TOKEN to your Windows User Environment Variables (HKCU\\Environment).")
         write_local_dotenv(REPO_ROOT, token)
         os.environ["DISCOGS_TOKEN"] = token
-        print("\n[success] Your token is now stored safely outside of your code!")
-        print("          Both local Windows runs and GitHub Actions will read `DISCOGS_TOKEN` automatically.")
+        print(f"\n[success] Clean token ({len(token)} chars) stored safely outside of your code!")
+        print("          You can now run `python .\\sync_discogs.py` immediately without restarting PowerShell.")
     else:
-        print("\n[info] No new token entered. Run `python scripts/setup_discogs_token.py` again once you generate one.")
+        print("\n[info] No valid token entered. Clearing any corrupted DISCOGS_TOKEN from .env / Registry...")
+        if os.name == "nt":
+            set_windows_user_env_var("DISCOGS_TOKEN", "")
+        write_local_dotenv(REPO_ROOT, "")
 
 
 if __name__ == "__main__":
