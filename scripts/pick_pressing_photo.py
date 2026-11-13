@@ -358,10 +358,12 @@ def _write_pressing_and_cover_files(
             dest_pressing.write_bytes(src_bytes)
             updated = True
         cache_busted_url = f"assets/releases/{rid_str}/pressing.jpg?v={sel_idx}_{img_hash}"
+        prev_p_url = str(img_selection.get("pressing_image_url") or "")
+        if prev_p_url.startswith("http"):
+            img_selection["remote_pressing_image_url"] = prev_p_url
         img_selection["local_pressing_image_url"] = cache_busted_url
         img_selection["display_thumbnail_url"] = cache_busted_url
-        if not str(img_selection.get("pressing_image_url") or "").startswith("http"):
-            img_selection["pressing_image_url"] = cache_busted_url
+        img_selection["pressing_image_url"] = cache_busted_url
     return (updated, False)
 
 
@@ -507,6 +509,7 @@ def run_pick_pressing_photos(
         rec_classified = [
             img for img in (rec.get("images", {}).get("classified_images") or [])
             if not str(img.get("uri") or "").startswith("procedural://")
+            and not str(img.get("uri") or "").startswith("assets/pressings/")
         ]
         raw_images: list[dict[str, Any]] = cached_imgs if len(cached_imgs) >= len(rec_classified) else rec_classified
         if not raw_images and rec.get("images", {}).get("cover_image_url"):
@@ -608,22 +611,18 @@ def run_pick_pressing_photos(
         # Update overrides.json with cache-busted local path when CV verified a pressing photo,
         # and purge any stale override when no pressing photo exists
         prev_ov = overrides.get(rid_str)
+        is_user_locked = isinstance(prev_ov, dict) and prev_ov.get("user_locked") is True
         if img_selection.get("has_pressing_photo") and len(raw_images) > 1:
             preferred_url = (
                 img_selection.get("local_pressing_image_url")
                 or img_selection.get("pressing_image_url")
                 or ""
             )
-            det_method = str(img_selection.get("detection_method") or "")
-            if preferred_url and det_method.startswith("deterministic_annular_cv"):
-                if rid_str not in overrides or (isinstance(prev_ov, str) and prev_ov != preferred_url):
-                    overrides[rid_str] = preferred_url
-                    newly_detected_overrides += 1
-            elif preferred_url and isinstance(prev_ov, str) and prev_ov != preferred_url:
+            if preferred_url and not is_user_locked and prev_ov != preferred_url:
                 overrides[rid_str] = preferred_url
                 newly_detected_overrides += 1
         elif not img_selection.get("has_pressing_photo"):
-            if rid_str in overrides and isinstance(prev_ov, str):
+            if rid_str in overrides and not is_user_locked:
                 overrides.pop(rid_str, None)
                 newly_detected_overrides += 1
 

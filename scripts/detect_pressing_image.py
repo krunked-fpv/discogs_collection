@@ -424,6 +424,26 @@ def _eval_centered_concentric(
         else:
             lbl_wax_d = lbl_wax_d_mid
 
+        # Support slight perspective tilt on hand-held portrait disc photos (e.g., 27927123/img_4)
+        if active_quads == 4 and r_cand <= 0.86 and aspect < 0.88:
+            dy_t = dy - (-0.09)
+            dx_t = dx - (-0.05)
+            r_t = np.hypot(dx_t, dy_t)
+            th_t = np.arctan2(dy_t, dx_t)
+            gr_t = np.abs(gx * np.cos(th_t) + gy * np.sin(th_t))
+            gt_t = np.abs(-gx * np.sin(th_t) + gy * np.cos(th_t))
+            pr_t = np.maximum(0.0, gr_t - 0.55 * gt_t)
+            for rl_t in np.linspace(0.24, 0.33, 6):
+                le_t = float(np.mean(pr_t[(r_t >= rl_t - 0.022) & (r_t <= rl_t + 0.022)]))
+                if le_t > best_lbl_e_local:
+                    lbl_in_t = (r_t >= 0.045) & (r_t <= rl_t - 0.02)
+                    wax_m_t = (r_t >= rl_t + 0.035) & (r_t <= r_cand - 0.05)
+                    if np.any(lbl_in_t) and np.any(wax_m_t):
+                        lwd_t = float(np.linalg.norm(np.mean(rgb[lbl_in_t], axis=0) - np.mean(rgb[wax_m_t], axis=0)))
+                        if lwd_t >= 0.22:
+                            best_lbl_e_local = le_t
+                            lbl_wax_d = max(lbl_wax_d, lwd_t)
+
         quad_factor = 1.0 if active_quads == 4 else (0.75 if active_quads == 3 else 0.20)
         cand_score = quad_factor * (
             min(0.26, diag_rad_e * 3.8)
@@ -495,15 +515,37 @@ def _eval_centered_concentric(
         if sq_e > best_sq_border:
             best_sq_border = sq_e
 
+    wax_mean_rgb = np.mean(rgb[wax_annulus_mask], axis=0)
+    wax_mean_sat = float(np.mean(sat[wax_annulus_mask]))
+    wax_rgb_std = float(np.mean(np.std(rgb[wax_annulus_mask], axis=0)))
+    corner_outer_m_all = (r >= 1.02) & (r <= 1.32) & diag_mask
+    corner_outer_sat = float(np.mean(sat[corner_outer_m_all])) if np.any(corner_outer_m_all) else 0.0
+    inner_65_mask = r <= 0.65
+    hv_inner_aniso = abs(
+        float(np.log((np.mean(np.abs(gy[inner_65_mask])) + 1e-5) / (np.mean(np.abs(gx[inner_65_mask])) + 1e-5)))
+    )
+    wax_tan_rad_ratio = float(wax_tan_e / (wax_rad_e + 1e-5))
+
+    # Radial splatter / starburst spoke signature: radial rays have tangential gradient >> radial gradient
+    # (e.g., 37023150/img_2,3 has ratio ~3.5 and 23343893/img_3 has ratio ~2.53)
+    is_radial_splatter_spokes = bool(
+        wax_tan_rad_ratio >= 1.35
+        and best_rim_step >= 0.026
+        and best_label_wax_dist >= 0.20
+        and q25_oct_lbl_wax >= 0.16
+        and hv_wax_aniso < 0.22
+    )
+
     # True concentric 360-degree center label + outer disc rim signature
     # Protects real 12" vinyl discs sitting on inner sleeves or album covers (e.g., 12988109/img_4,5 & 26917130/img_4,5)
     has_strong_concentric_disc = bool(
         best_active_quads >= 4
         and best_rim_step >= 0.025
         and best_r_disc >= 0.84
-        and (best_label_step >= 0.028 or best_color_in_color_dist >= 0.16 or spindle_contrast >= 0.22)
+        and (best_label_step >= 0.028 or best_color_in_color_dist >= 0.16 or spindle_contrast >= 0.22 or is_radial_splatter_spokes)
         and best_label_wax_dist >= 0.15
         and (q25_oct_lbl_wax >= 0.165 or best_color_in_color_dist >= 0.18 or best_corner_wax_dist >= 0.30)
+        and (wax_grad_mag <= 0.055 or is_radial_splatter_spokes or best_color_in_color_dist >= 0.16 or best_corner_std < 0.095)
         and hv_wax_aniso < 0.18
         and label_grad_mag < 0.085
     )
@@ -518,39 +560,51 @@ def _eval_centered_concentric(
         and (lr_wax_diff > 0.22 or label_grad_mag < 0.022)
     )
 
-    # 3. Zoomed-in 4" paper center label close-up on colored or black vinyl (e.g., 27066432/img_4,5 & 35907826/img_4,5)
+    # 3. Zoomed-in 4" paper center label close-up on colored or black vinyl (e.g., 27066432/img_4,5, 35907826/img_4,5 & 20518822/img_2,3)
     # Guards full 12" swirl/splatter discs on clean backdrops (e.g., 35907826/img_6,7 & 26047519/img_4)
     is_zoomed_label_scan = bool(
-        not (best_rim_step >= 0.030 and best_corner_wax_dist >= 0.30 and best_label_step >= 0.030 and hv_wax_aniso < 0.12)
-        and not (best_color_in_color_dist >= 0.12 and spindle_contrast >= 0.18 and best_label_step >= 0.020 and hv_wax_aniso < 0.08)
-        and (
-            (
-                best_label_wax_dist < 0.175
-                and best_label_step < 0.065
-                and (wax_grad_mag >= label_grad_mag * 0.68 or best_corner_std < 0.05)
+        (
+            corner_outer_sat >= 0.45
+            and best_corner_std < 0.045
+            and wax_mean_sat < corner_outer_sat * 0.42
+            and wax_rgb_std > 0.17
+            and q25_oct_lbl_wax < 0.20
+        )
+        or (
+            not (best_rim_step >= 0.030 and best_corner_wax_dist >= 0.30 and best_label_step >= 0.030 and hv_wax_aniso < 0.12)
+            and not (best_color_in_color_dist >= 0.12 and spindle_contrast >= 0.18 and best_label_step >= 0.020 and hv_wax_aniso < 0.08)
+            and (
+                (
+                    best_label_wax_dist < 0.175
+                    and best_label_step < 0.065
+                    and (wax_grad_mag >= label_grad_mag * 0.68 or best_corner_std < 0.05)
+                )
+                or (best_corner_std < 0.040 and best_label_wax_dist < 0.22 and best_corner_wax_dist < 0.28)
             )
-            or (best_corner_std < 0.040 and best_label_wax_dist < 0.22 and best_corner_wax_dist < 0.28)
         )
     )
 
-    # 4. Square or Circular Hype Stickers, Barcode Stickers, & Text Inserts (e.g., 14188877/img_6, 28895677/img_9, 16595574/img_2, 26690690/img_2)
+    # 4. Square or Circular Hype Stickers, Barcode Stickers, & Text Inserts (e.g., 14188877/img_6, 28895677/img_9, 16595574/img_2, 26690690/img_2, 16251744/img_2)
     is_hype_sticker_or_text_insert = bool(
         (best_corner_std > 0.22 and not has_strong_concentric_disc)
         or wax_grad_mag > 0.095
         or (hv_wax_aniso > 0.32 and (wax_grad_mag > 0.022 or hi_grad_wax_frac > 0.05) and q25_oct_lbl_wax < 0.25)
         or (hi_grad_wax_frac > 0.16 and hi_grad_lbl_frac > 0.25 and q25_oct_lbl_wax < 0.22)
         or (label_grad_mag > 0.125 and wax_grad_mag > 0.045 and q25_oct_lbl_wax < 0.25)
+        or (q25_oct_lbl_wax < 0.055 and best_rim_step < 0.022 and spindle_contrast < 0.06 and (hv_inner_aniso > 0.12 or best_corner_std > 0.10))
     )
 
-    # Verified splatter/starburst/split/color-in-color disc exemption for radial wax streaks (e.g., 12988109/img_4,5 & 16595574/img_4)
+    # Verified splatter/starburst/split/color-in-color disc exemption for radial wax streaks (e.g., 12988109/img_4,5, 16595574/img_4, 37023150/img_2,3, 23343893/img_3)
     is_verified_splatter_or_split_disc = bool(
         not is_hype_sticker_or_text_insert
         and best_corner_std < 0.245
         and wax_grad_mag < 0.095
-        and hv_wax_aniso < 0.18
+        and hv_wax_aniso < 0.20
+        and (wax_grad_mag <= 0.055 or is_radial_splatter_spokes or best_color_in_color_dist >= 0.16 or lr_wax_diff >= 0.18 or best_corner_std < 0.095)
         and (q25_oct_lbl_wax >= 0.14 or best_color_in_color_dist >= 0.12)
         and (
-            (best_label_step >= 0.028 and best_rim_step >= 0.022 and best_label_wax_dist >= 0.175)
+            is_radial_splatter_spokes
+            or (best_label_step >= 0.028 and best_rim_step >= 0.022 and best_label_wax_dist >= 0.175)
             or (best_color_in_color_dist >= 0.165 and best_rim_step >= 0.022 and best_label_wax_dist >= 0.175)
             or (best_corner_std < 0.090 and best_corner_wax_dist >= 0.35 and best_rim_step >= 0.018 and best_label_wax_dist >= 0.18)
         )
@@ -562,6 +616,7 @@ def _eval_centered_concentric(
         and best_corner_std < 0.245
         and wax_grad_mag < 0.095
         and hv_wax_aniso < 0.18
+        and (wax_grad_mag <= 0.055 or is_radial_splatter_spokes or best_color_in_color_dist >= 0.16)
         and (q25_oct_lbl_wax >= 0.105 or best_color_in_color_dist >= 0.11)
         and (
             (best_rim_step >= 0.024 and best_label_step >= 0.030 and best_label_wax_dist >= 0.20)
@@ -577,14 +632,12 @@ def _eval_centered_concentric(
         or (best_corner_wax_dist < 0.14 and best_rim_step < 0.027 and not is_verified_clear_or_soft_rim_disc and not is_verified_splatter_or_split_disc)
         or (best_rim_step < 0.016 and best_corner_wax_dist < 0.32 and not is_verified_clear_or_soft_rim_disc)
         or (wax_grad_mag > 0.048 and wax_grad_mag > label_grad_mag * 0.70 and not is_verified_splatter_or_split_disc)
-        or (spindle_edge < 0.008 and best_label_wax_dist < 0.23 and not is_verified_clear_or_soft_rim_disc)
+        or (spindle_edge < 0.008 and best_label_wax_dist < 0.23 and not is_verified_clear_or_soft_rim_disc and not is_verified_splatter_or_split_disc)
         or (best_sq_border > 0.045 and best_rim_step < best_sq_border * 0.42 and best_label_step < 0.028)
     )
 
     # Deterministic Seed (`wax_spec`) Color & Texture Alignment Bonus
     variant_color_bonus = 0.0
-    wax_mean_rgb = np.mean(rgb[wax_annulus_mask], axis=0)
-    wax_mean_sat = float(np.mean(sat[wax_annulus_mask]))
 
     primary_hex = expected_wax_hex or (wax_spec or {}).get("primary_color")
     secondary_hex = secondary_wax_hex or (wax_spec or {}).get("secondary_color")
@@ -613,7 +666,8 @@ def _eval_centered_concentric(
         if 0.004 <= wax_grad_mag <= 0.065 and hv_wax_aniso < 0.18:
             variant_color_bonus += 0.025
 
-    circularity_ratio = (best_rim_step + 0.6 * best_label_step + 0.25 * wax_rad_e) / (wax_tan_e * 0.65 + 0.012)
+    eff_wax_tan = min(wax_tan_e, wax_rad_e * 1.10) if is_radial_splatter_spokes else wax_tan_e
+    circularity_ratio = (best_rim_step + 0.6 * best_label_step + 0.25 * wax_rad_e) / (eff_wax_tan * 0.65 + 0.012)
     clean_disc_bonus = 0.025 if (circularity_ratio >= 1.55 and best_label_wax_dist >= 0.175 and best_corner_std < 0.090) else 0.0
     if has_strong_concentric_disc or is_verified_splatter_or_split_disc or is_verified_clear_or_soft_rim_disc:
         clean_disc_bonus = max(clean_disc_bonus, 0.050)
@@ -746,6 +800,70 @@ def _eval_offcenter_disc(rgb: "np.ndarray", aspect: float) -> dict[str, Any] | N
             }
             if best_cand is None or cand["score"] > best_cand["score"]:
                 best_cand = cand
+
+    # Close-cropped pressing photo where the 360-degree 4" center label and spindle hole sit surrounded by all 8 octants of colored/splatter wax (e.g. 16251744/img_1.jpg)
+    if best_cand is None:
+        sat = np.max(rgb, axis=2) - np.min(rgb, axis=2)
+        grad_mag = np.hypot(gx, gy)
+        dy_o = (yy - 127.5) / 127.5
+        dx_o = (xx - 127.5) / 127.5
+        r_o = np.hypot(dx_o, dy_o)
+        sp_c_origin = float(np.linalg.norm(np.mean(rgb[r_o <= 0.038], axis=0) - np.mean(rgb[(r_o >= 0.050) & (r_o <= 0.115)], axis=0)))
+        for (dx0, dy0) in [(0.0, 0.0), (-0.03, -0.09), (0.0, -0.08), (-0.04, 0.0)]:
+            dy = (yy - 127.5) / 127.5 - dy0
+            dx = (xx - 127.5) / 127.5 - dx0
+            r = np.hypot(dx, dy)
+            theta = np.arctan2(dy, dx)
+            grad_r = np.abs(gx * np.cos(theta) + gy * np.sin(theta))
+            grad_t = np.abs(-gx * np.sin(theta) + gy * np.cos(theta))
+            pure_rad = np.maximum(0.0, grad_r - 0.55 * grad_t)
+            sp_c_local = float(np.linalg.norm(np.mean(rgb[r <= 0.038], axis=0) - np.mean(rgb[(r >= 0.050) & (r <= 0.115)], axis=0)))
+            sp_c = max(sp_c_origin, sp_c_local)
+            if sp_c < 0.16:
+                continue
+            for rl in (0.34, 0.38, 0.41, 0.44):
+                l_band = (r >= rl - 0.024) & (r <= rl + 0.024)
+                le = float(np.mean(pure_rad[l_band]))
+                lbl_in = (r >= 0.048) & (r <= rl - 0.025)
+                wax_m = (r >= rl + 0.035) & (r <= 0.94)
+                if not np.any(lbl_in) or not np.any(wax_m):
+                    continue
+                lwd = float(np.linalg.norm(np.mean(rgb[lbl_in], axis=0) - np.mean(rgb[wax_m], axis=0)))
+                octs = []
+                for k in range(8):
+                    a0 = -np.pi + k * (np.pi / 4.0)
+                    ang = (theta >= a0) & (theta < a0 + np.pi / 4.0)
+                    octs.append(float(np.linalg.norm(np.mean(rgb[lbl_in & ang], axis=0) - np.mean(rgb[wax_m & ang], axis=0))))
+                q25 = sorted(octs)[1]
+                wax_gm = float(np.mean(grad_mag[wax_m]))
+                aniso = abs(float(np.log((np.mean(np.abs(gy[wax_m])) + 1e-5) / (np.mean(np.abs(gx[wax_m])) + 1e-5))))
+                wax_sat = float(np.mean(sat[wax_m]))
+                lbl_sat = float(np.mean(sat[lbl_in]))
+                if le >= 0.018 and lwd >= 0.42 and q25 >= 0.34 and wax_gm < 0.035 and aniso < 0.185 and (wax_sat - lbl_sat) >= 0.22:
+                    sc = round(min(0.92, 0.46 + 0.25 * lwd + 0.20 * q25 + 0.10 * sp_c), 4)
+                    cand = {
+                        "is_pressing": True,
+                        "is_zoomed_label_scan": False,
+                        "is_hype_sticker_or_text_insert": False,
+                        "is_square_insert_or_sleeve": False,
+                        "detected_disc_radius": 0.98,
+                        "active_diagonal_quadrants": 4,
+                        "score": sc,
+                        "raw_annular_score": sc,
+                        "aspect_ratio": round(aspect, 3),
+                        "corner_std": 0.06,
+                        "corner_wax_dist": round(lwd, 4),
+                        "circularity_ratio": 1.85,
+                        "label_wax_dist": round(lwd, 4),
+                        "octant_label_wax_q25": round(q25, 4),
+                        "hv_wax_anisotropy": round(aniso, 4),
+                        "spindle_contrast": round(sp_c, 4),
+                        "rim_step": 0.022,
+                        "label_step": round(le, 4),
+                        "reason": "deterministic_annular_cv_match",
+                    }
+                    if best_cand is None or cand["score"] > best_cand["score"]:
+                        best_cand = cand
     return best_cand
 
 
@@ -797,7 +915,7 @@ def score_image_pixels_deterministic(
                 rgb_c, aspect, expected_wax_hex, secondary_wax_hex, wax_spec, r_min=0.80, r_max=0.99, n_steps=20
             )
 
-            # Pass 2: Landscape turntable platter photo (w > h * 1.08, platter shifted left with tonearm on right)
+            # Pass 2: Landscape turntable platter or side-by-side sleeve + 12" disc photo (w > h * 1.08)
             if not best_res["is_pressing"] and aspect > 1.08:
                 top_c = (h - side) // 2
                 for lf in (0.12, 0.06):
@@ -810,6 +928,48 @@ def score_image_pixels_deterministic(
                     if res_l["is_pressing"] and res_l["label_wax_dist"] >= 0.25 and res_l["rim_step"] >= 0.022:
                         if not best_res["is_pressing"] or res_l["score"] > best_res["score"]:
                             best_res = res_l
+
+                # Side-by-side sleeve + full 12" vinyl disc in 4:3 landscape frame (e.g. 17583742/img_2.jpg & img_3.jpg)
+                if not best_res["is_pressing"] and aspect > 1.18:
+                    box_s = int(min(h, w * 0.54))
+                    for xf in (0.98, 0.96, 1.0, 0.02, 0.04):
+                        left_s = max(0, min(w - box_s, int(w * xf) - box_s if xf > 0.5 else int(w * xf)))
+                        top_s = max(0, min(h - box_s, int(h * 0.54) - box_s // 2))
+                        cropped_s = rgb_full.crop((left_s, top_s, left_s + box_s, top_s + box_s))
+                        rgb_s = np.asarray(cropped_s.resize((256, 256), Image.Resampling.BILINEAR), dtype=np.float32) / 255.0
+                        res_s = _eval_centered_concentric(
+                            rgb_s, aspect, expected_wax_hex, secondary_wax_hex, wax_spec, r_min=0.80, r_max=0.99, n_steps=20
+                        )
+                        if (
+                            res_s["is_pressing"]
+                            and res_s["rim_step"] >= 0.032
+                            and res_s["label_step"] >= 0.025
+                            and res_s["label_wax_dist"] >= 0.45
+                            and res_s["octant_label_wax_q25"] >= 0.35
+                            and res_s["corner_wax_dist"] >= 0.38
+                        ):
+                            if not best_res["is_pressing"] or res_s["score"] > best_res["score"]:
+                                best_res = res_s
+
+            # Pass 2B: Portrait vertical window alignment where disc sits slightly below/above dead center (e.g. 27927123/img_4.jpg)
+            if not best_res["is_pressing"] and aspect < 0.88:
+                left_c = (w - side) // 2
+                for yf in (0.56, 0.55, 0.44):
+                    top_v = max(0, min(h - side, int(h * yf) - side // 2))
+                    cropped_v = rgb_full.crop((left_c, top_v, left_c + side, top_v + side))
+                    rgb_v = np.asarray(cropped_v.resize((256, 256), Image.Resampling.BILINEAR), dtype=np.float32) / 255.0
+                    res_v = _eval_centered_concentric(
+                        rgb_v, aspect, expected_wax_hex, secondary_wax_hex, wax_spec, r_min=0.80, r_max=0.99, n_steps=20
+                    )
+                    if (
+                        res_v["is_pressing"]
+                        and res_v["rim_step"] >= 0.019
+                        and res_v["label_wax_dist"] >= 0.20
+                        and res_v["corner_wax_dist"] >= 0.14
+                        and res_v["hv_wax_anisotropy"] < 0.06
+                    ):
+                        if not best_res["is_pressing"] or res_v["score"] > best_res["score"]:
+                            best_res = res_v
 
             # Pass 3: Padded studio pressing photo where disc has wider margin (r in [0.65..0.79], e.g. 26690690/img_1.jpg)
             if not best_res["is_pressing"]:
@@ -825,7 +985,7 @@ def score_image_pixels_deterministic(
                 ):
                     best_res = res_pad
 
-            # Pass 4: Off-center angled vinyl disc with full 8-octant 4" center label and spindle hole (e.g. 13203006/img_1.jpg)
+            # Pass 4: Off-center angled or close-cropped vinyl disc with full 8-octant 4" center label and spindle hole (e.g. 13203006/img_1.jpg, 16251744/img_1.jpg)
             if not best_res["is_pressing"]:
                 res_off = _eval_offcenter_disc(rgb_c, aspect)
                 if res_off is not None:
@@ -1061,7 +1221,13 @@ def select_release_images_deterministic(
                 if m_idx and 0 <= int(m_idx.group(1)) < len(images):
                     ov_idx = int(m_idx.group(1))
 
-        if ov_url and ov_idx >= 0 and (is_manual_pin or not has_any_real_cv):
+        ov_is_rejected = (
+            0 <= ov_idx < len(classified)
+            and has_any_real_cv
+            and classified[ov_idx].get("role") != "pressing_disc"
+            and not (isinstance(ov, dict) and ov.get("user_locked") is True)
+        )
+        if ov_url and ov_idx >= 0 and (is_manual_pin or not has_any_real_cv) and not ov_is_rejected:
             if 0 <= ov_idx < len(classified):
                 classified[ov_idx]["role"] = "pressing_disc"
                 classified[ov_idx]["deterministic_score"] = 1.0

@@ -393,8 +393,12 @@ def fetch_full_collection(
                         pass
                     dest_pressing.write_bytes(src_bytes)
                 cache_busted_url = f"assets/releases/{rid_str}/pressing.jpg?v={sel_idx}_{img_hash}"
+                prev_p_url = str(img_selection.get("pressing_image_url") or "")
+                if prev_p_url.startswith("http"):
+                    img_selection["remote_pressing_image_url"] = prev_p_url
                 img_selection["local_pressing_image_url"] = cache_busted_url
                 img_selection["display_thumbnail_url"] = cache_busted_url
+                img_selection["pressing_image_url"] = cache_busted_url
         else:
             if dest_pressing.exists():
                 try:
