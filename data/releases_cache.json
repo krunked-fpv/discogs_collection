@@ -763,7 +763,7 @@
         }
       ],
       "data_quality": "Needs Vote",
-      "have": 472,
+      "have": 471,
       "rating": {
         "average": 4.76,
         "count": 33
@@ -20699,7 +20699,7 @@
         "resource_url": "https://api.discogs.com/labels/2823524"
       }
     ],
-    "lowest_price": 73.03,
+    "lowest_price": 72.22,
     "master_id": 2687831,
     "master_url": "https://api.discogs.com/masters/2687831",
     "notes": "Red, Black, and Beer Splatter on Clear - 500\n",
@@ -23659,7 +23659,7 @@
         "resource_url": "https://api.discogs.com/users/amanda.fowler",
         "username": "amanda.fowler"
       },
-      "want": 189
+      "want": 188
     },
     "companies": [
       {
@@ -23791,7 +23791,7 @@
     "lowest_price": 19.99,
     "master_id": 2819228,
     "master_url": "https://api.discogs.com/masters/2819228",
-    "num_for_sale": 13,
+    "num_for_sale": 12,
     "released": "2022",
     "released_formatted": "2022",
     "resource_url": "https://api.discogs.com/releases/25418758",
@@ -24776,7 +24776,7 @@
         }
       ],
       "data_quality": "Correct",
-      "have": 309,
+      "have": 310,
       "rating": {
         "average": 4.77,
         "count": 13
@@ -24786,7 +24786,7 @@
         "resource_url": "https://api.discogs.com/users/Aidooley15",
         "username": "Aidooley15"
       },
-      "want": 142
+      "want": 141
     },
     "companies": [
       {
@@ -37026,7 +37026,7 @@
         "resource_url": "https://api.discogs.com/users/VinylReckoningYT",
         "username": "VinylReckoningYT"
       },
-      "want": 55
+      "want": 56
     },
     "companies": [
       {
@@ -49487,7 +49487,7 @@
         }
       ],
       "data_quality": "Needs Vote",
-      "have": 132,
+      "have": 133,
       "rating": {
         "average": 4.64,
         "count": 14
@@ -50333,7 +50333,7 @@
         "thumbnail_url": "https://i.discogs.com/PvGehzQPvOW9qMVS-EDAeOmU6qODkqTEQ5bW03gpVyo/rs:fit/g:sm/q:90/h:426/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTY4MS0x/NTEwNjgyMTM0LTgz/NTAucG5n.jpeg"
       }
     ],
-    "lowest_price": 95.51,
+    "lowest_price": 94.44,
     "master_id": 97036,
     "master_url": "https://api.discogs.com/masters/97036",
     "notes": "Includes printed 12x12\" lyric sheet, copies sold on tour were signed.",
@@ -61657,7 +61657,7 @@
         "thumbnail_url": "https://i.discogs.com/PvGehzQPvOW9qMVS-EDAeOmU6qODkqTEQ5bW03gpVyo/rs:fit/g:sm/q:90/h:426/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTY4MS0x/NTEwNjgyMTM0LTgz/NTAucG5n.jpeg"
       }
     ],
-    "lowest_price": 87.63,
+    "lowest_price": 86.66,
     "master_id": 4334865,
     "master_url": "https://api.discogs.com/masters/4334865",
     "notes": "Issued in a clear PVC sleeve with a hype sticker on the front.",
@@ -61857,7 +61857,7 @@
         "resource_url": "https://api.discogs.com/users/adammoonmusic",
         "username": "adammoonmusic"
       },
-      "want": 10
+      "want": 11
     },
     "companies": [
       {

@@ -5,9 +5,10 @@ Synchronizes `https://www.discogs.com/user/krunked/collection` via the official
 Discogs REST API v2.0 (`https://api.discogs.com`), enriches release metadata and
 secondary images using an incremental cache (`data/releases_cache.json`),
 downloads release photography into `assets/releases/<release_id>/`, runs
-`pick_pressing_photo.py` to select the physical pressing photo for every record,
-reconciles the Vinyl Flattening Queue (`data/flattening_queue.json`) and
-Collection Value, writes `data/collection.json`, and injects the static payload
+`pick_pressing_photo.py` to select the physical pressing photo for every record
+(and remove any false-positive `pressing.jpg` files where the deterministic wax
+seed should be shown), reconciles the Vinyl Flattening Queue (`data/flattening_queue.json`)
+and Collection Value, writes `data/collection.json`, and injects the static payload
 into `index.html`.
 
 Can be run from either `C:\\DiscogsCollection\\discogs_collection` or `scripts/`:
@@ -19,6 +20,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import hashlib
 import json
 import os
 import pathlib
@@ -47,7 +49,7 @@ from pick_pressing_photo import (
 )
 
 DISCOGS_API_BASE = "https://api.discogs.com"
-USER_AGENT = "KrunkedDiscogsVault/2.2 +https://github.com/krunked-fpv/discogs_collection"
+USER_AGENT = "KrunkedDiscogsVault/2.3 +https://github.com/krunked-fpv/discogs_collection"
 DEFAULT_TOKEN = ""
 
 
@@ -56,13 +58,10 @@ def sanitize_token(raw_token: str | None) -> str:
     if not raw_token:
         return ""
     cleaned = str(raw_token)
-    # Remove ASCII & Unicode control characters (such as \x16 SYN from Ctrl+V in msvcrt.getwch)
     cleaned = re.sub(r"[\x00-\x1f\x7f-\x9f]+", "", cleaned).strip().strip("\"'` ")
-    # Strip accidental key=value or header prefixes
     for prefix in ("DISCOGS_TOKEN=", "Discogs token=", "token=", "Bearer "):
         if cleaned.lower().startswith(prefix.lower()):
             cleaned = cleaned[len(prefix):].strip().strip("\"'` ")
-    # Keep only valid ASCII token characters
     cleaned = re.sub(r"[^A-Za-z0-9._\-]", "", cleaned)
     return cleaned
 
@@ -84,7 +83,6 @@ def load_discogs_credentials(
     raw_user = cli_username or os.environ.get("DISCOGS_USERNAME") or ""
     raw_token = cli_token if cli_token is not None else os.environ.get("DISCOGS_TOKEN", "")
 
-    # Check local .env file if token or username not yet populated
     dotenv_path = repo_root / ".env"
     if dotenv_path.exists():
         try:
@@ -102,7 +100,6 @@ def load_discogs_credentials(
         except Exception:
             pass
 
-    # Fallback to Windows User Registry (HKCU\Environment) if current PowerShell session is stale
     if os.name == "nt" and not sanitize_token(raw_token):
         try:
             import winreg
@@ -173,8 +170,6 @@ class DiscogsClient:
                     except Exception:
                         pass
 
-                    # If token caused HTTP 400 (Bad Request), 401 (Unauthorized), or 403 (Forbidden),
-                    # disable the rejected token and immediately retry unauthenticated.
                     if exc.code in (400, 401, 403) and use_token:
                         detail = f" ({err_body[:140]})" if err_body else ""
                         print(
@@ -311,7 +306,13 @@ def fetch_full_collection(
         rid_str = str(release_id)
 
         cached_entry = cache.get(rid_str)
-        if not isinstance(cached_entry, dict) or not cached_entry.get("images"):
+        cached_imgs = (cached_entry.get("images") or []) if isinstance(cached_entry, dict) else []
+        needs_enrich = (
+            not isinstance(cached_entry, dict)
+            or not cached_imgs
+            or any(not (im.get("uri") or im.get("resource_url")) for im in cached_imgs)
+        )
+        if needs_enrich:
             try:
                 rel_detail = client.get_json(f"/releases/{release_id}", params={"curr_abbr": "USD"})
                 if isinstance(rel_detail, dict) and rel_detail.get("id"):
@@ -376,18 +377,32 @@ def fetch_full_collection(
             local_release_dir=rel_asset_dir,
         )
 
-        # Immediately write pressing.jpg during sync when a pressing photo is selected
+        dest_pressing = rel_asset_dir / "pressing.jpg"
         if img_selection.get("has_pressing_photo"):
             raw_sel = img_selection.get("selected_index")
             sel_idx = int(raw_sel) if raw_sel is not None else -1
             if sel_idx >= 0 and (rel_asset_dir / f"img_{sel_idx}.jpg").exists():
                 src_local = rel_asset_dir / f"img_{sel_idx}.jpg"
-                dest_pressing = rel_asset_dir / "pressing.jpg"
                 src_bytes = src_local.read_bytes()
+                img_hash = hashlib.sha256(src_bytes).hexdigest()[:8]
                 if not dest_pressing.exists() or dest_pressing.read_bytes() != src_bytes:
+                    try:
+                        if dest_pressing.exists():
+                            dest_pressing.unlink()
+                    except Exception:
+                        pass
                     dest_pressing.write_bytes(src_bytes)
-                img_selection["local_pressing_image_url"] = f"assets/releases/{rid_str}/pressing.jpg"
-                img_selection["display_thumbnail_url"] = img_selection["local_pressing_image_url"]
+                cache_busted_url = f"assets/releases/{rid_str}/pressing.jpg?v={sel_idx}_{img_hash}"
+                img_selection["local_pressing_image_url"] = cache_busted_url
+                img_selection["display_thumbnail_url"] = cache_busted_url
+        else:
+            if dest_pressing.exists():
+                try:
+                    dest_pressing.unlink()
+                except Exception:
+                    pass
+            img_selection["pressing_image_url"] = ""
+            img_selection.pop("local_pressing_image_url", None)
 
         fmt_parts: list[str] = []
         for f in formats:
@@ -469,7 +484,7 @@ def fetch_full_collection(
     }
 
     return {
-        "schema_version": "2.2.0",
+        "schema_version": "2.3.0",
         "is_offline_seed": False,
         "source_of_truth": f"https://www.discogs.com/user/{username}/collection",
         "api_documentation": "https://www.discogs.com/developers",

@@ -6,8 +6,9 @@ Inspects every release in `data/collection.json` AND every release folder in
 `data/releases_cache.json` is incomplete, re-evaluates all candidate images with
 the Calibrated Multi-Scale Concentric Dual-Circle CV + Guideline 13.8 classifier
 (automatically upgrading any stale/wrong past auto-picks in `overrides.json` and
-`pressing.jpg`), reconciles the Vinyl Flattening Queue and Collection Value, and
-injects the compiled payload into `index.html`.
+`pressing.jpg`, and deleting false-positive `pressing.jpg` files when a release
+should display its deterministic wax seed), reconciles the Vinyl Flattening Queue
+and Collection Value, and injects the compiled payload into `index.html`.
 
 Usage (from `C:\\DiscogsCollection\\discogs_collection` or `scripts/`):
     python pick_pressing_photo.py
@@ -49,7 +50,7 @@ except ImportError:
     HAS_PIL = False
 
 DISCOGS_API_BASE = "https://api.discogs.com"
-USER_AGENT = "KrunkedDiscogsVault/2.2 +https://github.com/krunked-fpv/discogs_collection"
+USER_AGENT = "KrunkedDiscogsVault/2.3 +https://github.com/krunked-fpv/discogs_collection"
 DEFAULT_TOKEN = ""
 
 # Verified marketplace purchase prices for releases with 0 active copies currently listed on Discogs
@@ -241,7 +242,11 @@ def inject_into_index_html(
         "    try {\n"
         f"      var __pySyncStamp = {json.dumps(sync_stamp)};\n"
         "      if (typeof localStorage !== 'undefined' && localStorage.getItem('__discogs_py_sync_stamp__') !== __pySyncStamp) {\n"
-        "        ['discogs_overrides', 'discogs_pressing_overrides', 'discogs_pressing_overrides_v2', 'krunked_overrides'].forEach(function(k) { localStorage.removeItem(k); });\n"
+        "        Object.keys(localStorage).forEach(function(k) {\n"
+        "          if (k.toLowerCase().indexOf('token') === -1) {\n"
+        "            localStorage.removeItem(k);\n"
+        "          }\n"
+        "        });\n"
         "        localStorage.setItem('__discogs_py_sync_stamp__', __pySyncStamp);\n"
         "      }\n"
         "    } catch (e) {}\n"
@@ -298,16 +303,34 @@ def _write_pressing_and_cover_files(
     rid_str: str,
     img_selection: dict[str, Any],
     local_files: list[tuple[int, pathlib.Path]],
-) -> bool:
-    """Ensures `cover.jpg` and `pressing.jpg` are physically written in `assets/releases/<rid>/`."""
+) -> tuple[bool, bool]:
+    """Ensures `cover.jpg` and `pressing.jpg` are physically synced in `assets/releases/<rid>/`.
+
+    Returns `(updated_pressing, removed_stale_pressing)`.
+    When `has_pressing_photo` is False, any stale `pressing.jpg` in `rel_dir` is deleted so
+    the release cleanly displays its deterministic procedural wax seed.
+    """
     if not (rel_dir / "cover.jpg").exists():
         if (rel_dir / "img_0.jpg").exists():
             shutil.copyfile(rel_dir / "img_0.jpg", rel_dir / "cover.jpg")
         elif local_files:
             shutil.copyfile(local_files[0][1], rel_dir / "cover.jpg")
 
+    dest_pressing = rel_dir / "pressing.jpg"
+
     if not img_selection.get("has_pressing_photo"):
-        return False
+        removed_stale = False
+        if dest_pressing.exists():
+            try:
+                dest_pressing.unlink()
+                removed_stale = True
+            except Exception:
+                pass
+        img_selection["pressing_image_url"] = ""
+        img_selection.pop("local_pressing_image_url", None)
+        if (rel_dir / "cover.jpg").exists():
+            img_selection["display_thumbnail_url"] = f"assets/releases/{rid_str}/cover.jpg"
+        return (False, removed_stale)
 
     raw_sel = img_selection.get("selected_index")
     sel_idx = int(raw_sel) if raw_sel is not None else -1
@@ -321,23 +344,25 @@ def _write_pressing_and_cover_files(
         if m and (rel_dir / f"img_{m.group(1)}.jpg").exists():
             sel_idx = int(m.group(1))
             src_local = rel_dir / f"img_{sel_idx}.jpg"
-        else:
-            secondary_files = [path for idx, path in local_files if idx >= 1]
-            if secondary_files:
-                src_local = secondary_files[0]
-            elif local_files:
-                src_local = local_files[0]
 
-    dest_pressing = rel_dir / "pressing.jpg"
     updated = False
     if src_local and src_local.exists():
         src_bytes = src_local.read_bytes()
+        img_hash = hashlib.sha256(src_bytes).hexdigest()[:8]
         if not dest_pressing.exists() or dest_pressing.read_bytes() != src_bytes:
+            try:
+                if dest_pressing.exists():
+                    dest_pressing.unlink()
+            except Exception:
+                pass
             dest_pressing.write_bytes(src_bytes)
             updated = True
-        img_selection["local_pressing_image_url"] = f"assets/releases/{rid_str}/pressing.jpg"
-        img_selection["display_thumbnail_url"] = img_selection["local_pressing_image_url"]
-    return updated
+        cache_busted_url = f"assets/releases/{rid_str}/pressing.jpg?v={sel_idx}_{img_hash}"
+        img_selection["local_pressing_image_url"] = cache_busted_url
+        img_selection["display_thumbnail_url"] = cache_busted_url
+        if not str(img_selection.get("pressing_image_url") or "").startswith("http"):
+            img_selection["pressing_image_url"] = cache_busted_url
+    return (updated, False)
 
 
 def run_pick_pressing_photos(
@@ -451,6 +476,7 @@ def run_pick_pressing_photos(
     colored_count = 0
     newly_detected_overrides = 0
     upgraded_pressing_files = 0
+    removed_false_pressing_files = 0
 
     for rec in records:
         rid = int(rec.get("release_id") or 0)
@@ -460,9 +486,15 @@ def run_pick_pressing_photos(
         rel_dir.mkdir(parents=True, exist_ok=True)
 
         local_files = _discover_local_release_images(rel_dir, rid_str)
+        cached_imgs_initial = list(rel_detail.get("images") or [])
+        has_empty_cached_uris = any(not (im.get("uri") or im.get("resource_url")) for im in cached_imgs_initial)
 
-        # If cache has <= 1 image for this release and disk has <= 1 image, enrich from Discogs API
-        if len(rel_detail.get("images") or []) <= 1 and len(local_files) <= 1 and download_missing and rid > 0:
+        # If cache has <= 1 image, or was truncated at 6 images in an older build, or has empty URIs, enrich from Discogs API
+        if (
+            (len(cached_imgs_initial) <= 1 and len(local_files) <= 1)
+            or (len(cached_imgs_initial) == 6 and len(local_files) <= 6)
+            or has_empty_cached_uris
+        ) and download_missing and rid > 0:
             fetched_detail = _fetch_release_detail_from_discogs(rid, token=clean_token)
             if fetched_detail.get("images"):
                 rel_detail = fetched_detail
@@ -562,25 +594,38 @@ def run_pick_pressing_photos(
             local_release_dir=rel_dir,
         )
 
-        # Update overrides.json when CV verified a pressing photo, and always refresh any stale string override
-        prev_ov = overrides.get(rid_str)
-        if img_selection.get("has_pressing_photo") and img_selection.get("pressing_image_url") and len(raw_images) > 1:
-            p_url = img_selection["pressing_image_url"]
-            det_method = str(img_selection.get("detection_method") or "")
-            if det_method.startswith("deterministic_annular_cv"):
-                if rid_str not in overrides or (isinstance(prev_ov, str) and prev_ov != p_url):
-                    overrides[rid_str] = p_url
-                    newly_detected_overrides += 1
-            elif isinstance(prev_ov, str) and prev_ov != p_url:
-                overrides[rid_str] = p_url
-                newly_detected_overrides += 1
-        elif isinstance(prev_ov, str) and not img_selection.get("has_pressing_photo"):
-            overrides.pop(rid_str, None)
-
-        if _write_pressing_and_cover_files(rel_dir, rid_str, img_selection, local_files):
+        updated_file, removed_stale_file = _write_pressing_and_cover_files(
+            rel_dir, rid_str, img_selection, local_files
+        )
+        if updated_file:
             upgraded_pressing_files += 1
             sel_i = img_selection.get("selected_index")
             print(f"[updated] Release #{rid_str} ({rec.get('artist')} - {rec.get('title')}): pressing.jpg -> img_{sel_i}.jpg")
+        elif removed_stale_file:
+            removed_false_pressing_files += 1
+            print(f"[cleaned] Release #{rid_str} ({rec.get('artist')} - {rec.get('title')}): removed non-pressing pressing.jpg -> using deterministic seed")
+
+        # Update overrides.json with cache-busted local path when CV verified a pressing photo,
+        # and purge any stale override when no pressing photo exists
+        prev_ov = overrides.get(rid_str)
+        if img_selection.get("has_pressing_photo") and len(raw_images) > 1:
+            preferred_url = (
+                img_selection.get("local_pressing_image_url")
+                or img_selection.get("pressing_image_url")
+                or ""
+            )
+            det_method = str(img_selection.get("detection_method") or "")
+            if preferred_url and det_method.startswith("deterministic_annular_cv"):
+                if rid_str not in overrides or (isinstance(prev_ov, str) and prev_ov != preferred_url):
+                    overrides[rid_str] = preferred_url
+                    newly_detected_overrides += 1
+            elif preferred_url and isinstance(prev_ov, str) and prev_ov != preferred_url:
+                overrides[rid_str] = preferred_url
+                newly_detected_overrides += 1
+        elif not img_selection.get("has_pressing_photo"):
+            if rid_str in overrides and isinstance(prev_ov, str):
+                overrides.pop(rid_str, None)
+                newly_detected_overrides += 1
 
         rec["images"] = img_selection
 
@@ -639,7 +684,7 @@ def run_pick_pressing_photos(
     todo_count = sum(1 for r in records if r.get("flattening_status") == "Need to be done")
     done_count = sum(1 for r in records if r.get("flattening_status") == "Done")
 
-    collection_data["schema_version"] = "2.2.0"
+    collection_data["schema_version"] = "2.3.0"
     collection_data["is_offline_seed"] = False
     collection_data["synced_at_utc"] = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     collection_data["records"] = records
@@ -694,7 +739,7 @@ def run_pick_pressing_photos(
         f"[ok] Pressing Photo Picker complete!\n"
         f"       Records processed:         {len(records)}\n"
         f"       Verified pressing photos:  {pressing_photo_count} / {len(records)} "
-        f"({upgraded_pressing_files} pressing.jpg files created/updated, {newly_detected_overrides} overrides updated)\n"
+        f"({upgraded_pressing_files} pressing.jpg created/updated, {removed_false_pressing_files} false-positive pressing.jpg removed, {newly_detected_overrides} overrides updated)\n"
         f"       Colored / special wax:     {colored_count} / {len(records)} ({(colored_count/len(records)*100 if records else 0):.1f}%)\n"
         f"       Flattening queue:          {todo_count} Need to be done • {done_count} Done\n"
         f"       Collection value:          {collection_value['median']} Discogs Median "
