@@ -50,6 +50,8 @@ from detect_pressing_image import (
     build_flattening_queue_payload,
     compute_release_delta_signature,
     evaluate_release_delta_status,
+    enrich_record_youtube_music,
+    extract_release_tracklist_and_videos,
     parse_wax_variant,
     reconcile_flattening_state,
     resolve_flattening_status,
@@ -86,15 +88,38 @@ def sanitize_username(raw_username: str | None, default: str = "krunked") -> str
     return cleaned or default
 
 
+def _discover_username_from_token(token: str, user_agent: str = USER_AGENT) -> str:
+    """Queries Discogs GET /oauth/identity to auto-discover the token owner's username when DISCOGS_USERNAME is unset."""
+    if not token:
+        return ""
+    try:
+        req = urllib.request.Request(
+            f"{DISCOGS_API_BASE}/oauth/identity",
+            headers={
+                "Accept": "application/vnd.discogs.v2.discogs+json",
+                "User-Agent": user_agent,
+                "Authorization": f"Discogs token={token}",
+            },
+            method="GET",
+        )
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            data = json.loads(resp.read().decode("utf-8", errors="replace"))
+            if isinstance(data, dict) and data.get("username"):
+                return sanitize_username(str(data["username"]), default="")
+    except Exception:
+        pass
+    return ""
+
+
 def load_discogs_credentials(
     cli_token: str | None = None,
     cli_username: str | None = None,
     repo_root: pathlib.Path = REPO_ROOT,
     ui: VaultTerminalUI | None = None,
 ) -> tuple[str, str]:
-    """Resolves (username, token) from CLI, environment, local .env, or Windows HKCU Registry."""
-    raw_user = cli_username or os.environ.get("DISCOGS_USERNAME") or ""
-    raw_token = cli_token if cli_token is not None else os.environ.get("DISCOGS_TOKEN", "")
+    """Resolves (username, token) from CLI, environment, local .env, Windows HKCU Registry, or Discogs /oauth/identity."""
+    raw_user = cli_username or os.environ.get("DISCOGS_USERNAME") or os.environ.get("DISCOGS_USER") or ""
+    raw_token = cli_token if cli_token is not None else (os.environ.get("DISCOGS_TOKEN") or os.environ.get("DISCOGS_API_TOKEN") or "")
 
     dotenv_path = repo_root / ".env"
     if dotenv_path.exists():
@@ -106,32 +131,61 @@ def load_discogs_credentials(
                 k, v = line_s.split("=", 1)
                 k = k.strip()
                 v = v.strip()
-                if k == "DISCOGS_TOKEN" and not sanitize_token(raw_token):
+                if k in ("DISCOGS_TOKEN", "DISCOGS_API_TOKEN") and not sanitize_token(raw_token):
                     raw_token = v
-                elif k == "DISCOGS_USERNAME" and not sanitize_username(raw_user, ""):
+                elif k in ("DISCOGS_USERNAME", "DISCOGS_USER") and not sanitize_username(raw_user, ""):
                     raw_user = v
         except Exception:
             pass
 
-    if os.name == "nt" and not sanitize_token(raw_token):
+    if os.name == "nt":
         try:
             import winreg
 
             with winreg.OpenKey(winreg.HKEY_CURRENT_USER, "Environment", 0, winreg.KEY_READ) as key:
-                reg_val, _ = winreg.QueryValueEx(key, "DISCOGS_TOKEN")
-                if reg_val:
-                    raw_token = str(reg_val)
+                if not sanitize_token(raw_token):
+                    try:
+                        reg_val, _ = winreg.QueryValueEx(key, "DISCOGS_TOKEN")
+                        if reg_val:
+                            raw_token = str(reg_val)
+                    except Exception:
+                        pass
+                if not sanitize_username(raw_user, ""):
+                    try:
+                        reg_user, _ = winreg.QueryValueEx(key, "DISCOGS_USERNAME")
+                        if reg_user:
+                            raw_user = str(reg_user)
+                    except Exception:
+                        pass
         except Exception:
             pass
 
     token = sanitize_token(raw_token) or sanitize_token(DEFAULT_TOKEN)
-    if raw_token and token != str(raw_token).strip():
+    if token and raw_token and token != str(raw_token).strip():
         msg = "Stripped hidden control/formatting characters from DISCOGS_TOKEN."
         if ui:
             ui.log("info", msg, stream=sys.stderr)
         else:
             print(f"[info] {msg}", file=sys.stderr)
-    username = sanitize_username(raw_user, default="krunked")
+
+    explicit_user = sanitize_username(raw_user, default="")
+    if not explicit_user and token:
+        discovered = _discover_username_from_token(token)
+        if discovered:
+            explicit_user = discovered
+            if ui:
+                ui.log("auth", f"Auto-detected Discogs username @{explicit_user} from DISCOGS_TOKEN (/oauth/identity).")
+
+    if not explicit_user:
+        col_file = repo_root / "data" / "collection.json"
+        if col_file.exists():
+            try:
+                c_obj = json.loads(col_file.read_text(encoding="utf-8"))
+                explicit_user = sanitize_username(c_obj.get("username"), default="")
+            except Exception:
+                pass
+
+    username = explicit_user or "krunked"
     return username, token
 
 
@@ -288,15 +342,27 @@ def fetch_full_collection(
 
     # Load previous collection baseline for delta detection
     pre_sync_records_by_id: dict[int, dict[str, Any]] = {}
+    prev_username = ""
+    prev_owner_name = ""
     if existing_collection_path and existing_collection_path.exists():
         try:
             prev_col = json.loads(existing_collection_path.read_text(encoding="utf-8"))
-            for r in prev_col.get("records") or []:
-                rid_val = int(r.get("release_id") or 0)
-                if rid_val > 0:
-                    pre_sync_records_by_id[rid_val] = r
+            prev_username = str(prev_col.get("username") or "").strip()
+            prev_owner_name = str((prev_col.get("profile") or {}).get("owner_name") or "").strip()
+            if not prev_username or prev_username.lower() == username.strip().lower():
+                for r in prev_col.get("records") or []:
+                    rid_val = int(r.get("release_id") or 0)
+                    if rid_val > 0:
+                        pre_sync_records_by_id[rid_val] = r
+            elif ui:
+                ui.log(
+                    "info",
+                    f"Switching Vault owner from @{prev_username} to @{username} — initializing clean collection baseline.",
+                )
         except Exception:
             pre_sync_records_by_id = {}
+
+    same_user = (not prev_username) or (prev_username.lower() == username.strip().lower())
 
     cache: dict[str, Any] = {}
     if cache_path.exists():
@@ -306,14 +372,16 @@ def fetch_full_collection(
             cache = {}
 
     overrides: dict[str, Any] = {}
-    if overrides_path.exists():
+    if same_user and overrides_path.exists():
         try:
             overrides = json.loads(overrides_path.read_text(encoding="utf-8"))
         except Exception:
             overrides = {}
 
     html_candidate = existing_collection_path.parent.parent / "index.html" if existing_collection_path else None
-    flattening_queue: dict[str, Any] = reconcile_flattening_state(flattening_path, html_candidate)
+    flattening_queue: dict[str, Any] = (
+        reconcile_flattening_state(flattening_path, html_candidate) if same_user else {}
+    )
 
     if ui:
         ui.log(
@@ -433,18 +501,23 @@ def fetch_full_collection(
         formats = basic.get("formats") or rel_detail.get("formats") or []
         notes_str = str(rel_detail.get("notes") or "")
 
-        media_cond = "Near Mint (NM or M-)"
-        sleeve_cond = "Near Mint (NM or M-)"
-        user_comments = ""
-        for note_obj in item.get("notes") or []:
-            fid = int(note_obj.get("field_id") or 0)
-            val = str(note_obj.get("value") or "").strip()
-            if fid == 1 and val:
-                media_cond = val
-            elif fid == 2 and val:
-                sleeve_cond = val
-            elif val:
-                user_comments = val
+        if "notes" in item and isinstance(item.get("notes"), list):
+            media_cond = "Near Mint (NM or M-)"
+            sleeve_cond = "Near Mint (NM or M-)"
+            user_comments = ""
+            for note_obj in item["notes"]:
+                fid = int(note_obj.get("field_id") or 0)
+                val = str(note_obj.get("value") or "").strip()
+                if fid == 1 and val:
+                    media_cond = val
+                elif fid == 2 and val:
+                    sleeve_cond = val
+                elif val:
+                    user_comments = val
+        else:
+            media_cond = str((existing_rec or {}).get("media_condition") or "Near Mint (NM or M-)")
+            sleeve_cond = str((existing_rec or {}).get("sleeve_condition") or "Near Mint (NM or M-)")
+            user_comments = str((existing_rec or {}).get("comments") or "")
 
         fmt_parts: list[str] = []
         for f in formats:
@@ -610,6 +683,20 @@ def fetch_full_collection(
                 img_selection["pressing_image_url"] = ""
                 img_selection.pop("local_pressing_image_url", None)
 
+            prev_ov = overrides.get(rid_str)
+            is_user_locked = isinstance(prev_ov, dict) and prev_ov.get("user_locked") is True
+            if img_selection.get("has_pressing_photo") and len(images) > 1:
+                preferred_url = (
+                    img_selection.get("local_pressing_image_url")
+                    or img_selection.get("pressing_image_url")
+                    or ""
+                )
+                if preferred_url and not is_user_locked and prev_ov != preferred_url:
+                    overrides[rid_str] = preferred_url
+            elif not img_selection.get("has_pressing_photo"):
+                if rid_str in overrides and not is_user_locked:
+                    overrides.pop(rid_str, None)
+
             img_selection["delta_sig"] = compute_release_delta_signature(
                 release_id=release_id,
                 rel_dir=rel_asset_dir,
@@ -628,12 +715,15 @@ def fetch_full_collection(
         else:
             est_val = 35.0
 
-        flatten_status = resolve_flattening_status(
-            artist=artist_name,
-            title=title_str,
-            release_id=release_id,
-            queue_data=flattening_queue,
-        )
+        if flattening_queue:
+            flatten_status = resolve_flattening_status(
+                artist=artist_name,
+                title=title_str,
+                release_id=release_id,
+                queue_data=flattening_queue,
+            )
+        else:
+            flatten_status = str((existing_rec or {}).get("flattening_status") or "Not Listed")
 
         record_obj = {
             "release_id": release_id,
@@ -656,6 +746,15 @@ def fetch_full_collection(
             "images": img_selection,
             "wax_spec": wax_spec,
         }
+        if enrich_record_youtube_music(
+            record_obj,
+            rel_detail=rel_detail,
+            existing_rec=existing_rec,
+            allow_network_search=(delta_status != "unchanged"),
+            ui=ui,
+        ):
+            cache[rid_str] = rel_detail
+            cache_dirty = True
         compiled_records.append(record_obj)
         evaluated_rids.add(release_id)
 
@@ -694,12 +793,18 @@ def fetch_full_collection(
         "synced_at_utc": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "profile": {
             "username": username,
-            "owner_name": "Alex Goresch",
+            "owner_name": str(
+                profile.get("name")
+                or (prev_owner_name if same_user and prev_owner_name else "")
+                or ("Alex Goresch" if username.lower() == "krunked" else username)
+            ),
             "discogs_url": f"https://www.discogs.com/user/{username}/collection",
-            "github_repo": "https://github.com/krunked-fpv/discogs_collection",
+            "github_repo": os.environ.get("GITHUB_REPO_URL") or "https://github.com/krunked-fpv/discogs_collection",
             "num_collection": int(profile.get("num_collection") or len(compiled_records)),
             "pressing_photos_detected": pressing_photo_count,
             "colored_or_special_variants": colored_count,
+            "flattening_need_to_be_done": sum(1 for r in compiled_records if r.get("flattening_status") == "Need to be done"),
+            "flattening_done": sum(1 for r in compiled_records if r.get("flattening_status") == "Done"),
             "collection_value": val_obj,
         },
         "records": compiled_records,

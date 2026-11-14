@@ -49,6 +49,8 @@ from detect_pressing_image import (
     build_flattening_queue_payload,
     compute_release_delta_signature,
     evaluate_release_delta_status,
+    enrich_record_youtube_music,
+    extract_release_tracklist_and_videos,
     parse_wax_variant,
     reconcile_flattening_state,
     resolve_flattening_status,
@@ -238,6 +240,12 @@ def inject_into_index_html(
         return False
 
     html_text = html_path.read_text(encoding="utf-8")
+    html_text = re.sub(
+        r'<meta\s+name=["\']referrer["\']\s+content=["\']no-referrer["\']\s*/?>',
+        '<meta name="referrer" content="strict-origin-when-cross-origin" />',
+        html_text,
+        flags=re.IGNORECASE,
+    )
     if "â" in html_text or "Ã" in html_text:
         try:
             html_text = html_text.encode("cp1252").decode("utf-8")
@@ -308,6 +316,10 @@ def inject_into_index_html(
     kpi_replacements = [
         (r'(<span id="bg-enrich-progress"[^>]*>)(.*?)(</span>)', f"\\g<1>• {total_lps} LPs &amp; {pressing_count} Pressing Photos Compiled\\g<3>"),
         (r'(<div id="kpi-total-records"[^>]*>)(.*?)(</div>)', f"\\g<1>{total_lps} LPs\\g<3>"),
+        (r'(<div id="kpi-sync-sub"[^>]*>)(.*?)(</div>)', f"\\g<1>Folder 0 • {prof.get('username') or collection_data.get('username') or 'krunked'}\\g<3>"),
+        (r'(<span class="font-black tracking-tight text-base sm:text-lg text-white">)(.*?)( // VINYL VAULT</span>)', f"\\g<1>{(prof.get('username') or collection_data.get('username') or 'krunked').upper()}\\g<3>"),
+        (r'https://www\.discogs\.com/user/[^/"\']+/collection', f"https://www.discogs.com/user/{prof.get('username') or collection_data.get('username') or 'krunked'}/collection"),
+        (r'Source: discogs\.com/user/[^<]+/collection', f"Source: discogs.com/user/{prof.get('username') or collection_data.get('username') or 'krunked'}/collection"),
         (r'(<div id="kpi-pressing-photos"[^>]*>)(.*?)(</div>)', f"\\g<1>{pressing_count} / {total_lps}\\g<3>"),
         (r'(<div id="kpi-colored-wax"[^>]*>)(.*?)(</div>)', f"\\g<1>{colored_pct}\\g<3>"),
         (r'(<div id="kpi-vault-value"[^>]*>)(.*?)(</div>)', f"\\g<1>{median_str}\\g<3>"),
@@ -327,7 +339,7 @@ def inject_into_index_html(
         (r'(<span id="flatten-unlisted-count"[^>]*>)(.*?)(</span>)', f"\\g<1>{unlisted_count} Records\\g<3>"),
         (
             r'(<div id="grid-status-label"[^>]*>\s*)(.*?)(\s*</div>)',
-            f"\\g<1>Showing {total_lps} of {total_lps} releases in krunked's collection\\g<3>",
+            f"\\g<1>Showing {total_lps} of {total_lps} releases in {prof.get('username') or collection_data.get('username') or 'krunked'}'s collection\\g<3>",
         ),
         (r'(<input[^>]*id="flatten-hidden-updated-at"[^>]*value=")([^"]*)(")', f"\\g<1>{fq_updated_at}\\g<3>"),
         (r'(<input[^>]*id="flatten-hidden-todo-ids"[^>]*value=")([^"]*)(")', f"\\g<1>{todo_csv}\\g<3>"),
@@ -497,7 +509,7 @@ def run_pick_pressing_photos(
     known_rids: set[int] = {int(r.get("release_id") or 0) for r in records if int(r.get("release_id") or 0) > 0}
     cache_dirty = False
 
-    for child_dir in sorted(assets_releases_dir.iterdir()):
+    for child_dir in (sorted(assets_releases_dir.iterdir()) if pre_sync_delta is None else []):
         if not child_dir.is_dir() or not child_dir.name.isdigit():
             continue
         folder_rid = int(child_dir.name)
@@ -825,6 +837,14 @@ def run_pick_pressing_photos(
                 if rid_str in overrides and not is_user_locked:
                     overrides.pop(rid_str, None)
                     newly_detected_overrides += 1
+            img_selection["delta_sig"] = compute_release_delta_signature(
+                release_id=rid,
+                rel_dir=rel_dir,
+                format_str=fmt_str,
+                notes=combined_notes,
+                override_val=overrides.get(rid_str),
+            )
+            rec["images"] = img_selection
 
         # Re-verify lightweight metadata (fast, <0.02ms per record)
         wax_spec = parse_wax_variant(fmt_str, comments=combined_notes, release_id=rid)
@@ -847,6 +867,16 @@ def run_pick_pressing_photos(
                 release_id=rid,
                 queue_data=flattening_queue,
             )
+
+        if enrich_record_youtube_music(
+            rec,
+            rel_detail=rel_detail,
+            existing_rec=rec,
+            allow_network_search=download_missing,
+            ui=ui,
+        ):
+            cache[rid_str] = rel_detail
+            cache_dirty = True
 
         if img_selection.get("has_pressing_photo"):
             pressing_photo_count += 1
@@ -883,11 +913,15 @@ def run_pick_pressing_photos(
     collection_data["is_offline_seed"] = False
     collection_data["synced_at_utc"] = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     collection_data["records"] = records
+    active_username = str(collection_data.get("username") or (collection_data.get("profile") or {}).get("username") or "krunked")
+    existing_owner = str((collection_data.get("profile") or {}).get("owner_name") or "")
+    collection_data["username"] = active_username
+    collection_data["source_of_truth"] = f"https://www.discogs.com/user/{active_username}/collection"
     collection_data["profile"] = {
-        "username": collection_data.get("username") or "krunked",
-        "owner_name": "Alex Goresch",
-        "discogs_url": "https://www.discogs.com/user/krunked/collection",
-        "github_repo": "https://github.com/krunked-fpv/discogs_collection",
+        "username": active_username,
+        "owner_name": existing_owner or ("Alex Goresch" if active_username.lower() == "krunked" else active_username),
+        "discogs_url": f"https://www.discogs.com/user/{active_username}/collection",
+        "github_repo": str((collection_data.get("profile") or {}).get("github_repo") or os.environ.get("GITHUB_REPO_URL") or "https://github.com/krunked-fpv/discogs_collection"),
         "num_collection": len(records),
         "pressing_photos_detected": pressing_photo_count,
         "colored_or_special_variants": colored_count,

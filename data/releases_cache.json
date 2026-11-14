@@ -37711,6 +37711,348 @@
     ],
     "year": 2023
   },
+  "29631781": {
+    "_full_images_fetched": true,
+    "_ytm_resolved": {
+      "fullAlbumYtDuration": 2400,
+      "fullAlbumYtVideoId": "TYrB2HustCs",
+      "trackIds": {
+        "0": "3mKkMlcn0Go",
+        "1": "wDCwLQnmedU",
+        "10": "Medi7crnbik",
+        "2": "SK2VqHAys_0",
+        "5": "aCxRFARDXf8",
+        "6": "jqlFwi0fqhs",
+        "9": "wDCwLQnmedU"
+      },
+      "ytPlaylistId": "PL-XbTEkQt3TaP-bdGSGscA4Ci5XGIANhn"
+    },
+    "artists": [
+      {
+        "anv": "",
+        "id": 866508,
+        "join": "",
+        "name": "Circa Survive",
+        "resource_url": "https://api.discogs.com/artists/866508",
+        "role": "",
+        "thumbnail_url": "https://i.discogs.com/CtZtTq_aSBJMG5QS1zIi3t0-06NBl1QePUoO2TCJ93g/rs:fit/g:sm/q:90/h:400/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9BLTg2NjUw/OC0xNjQyMTgxOTEz/LTgxNTYuanBlZw.jpeg",
+        "tracks": ""
+      }
+    ],
+    "artists_sort": "Circa Survive",
+    "blocked_from_sale": false,
+    "community": {
+      "contributors": [
+        {
+          "resource_url": "https://api.discogs.com/users/Halapenovinyl",
+          "username": "Halapenovinyl"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/almagentry",
+          "username": "almagentry"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/Skotbrooks",
+          "username": "Skotbrooks"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/JamesDittemore",
+          "username": "JamesDittemore"
+        }
+      ],
+      "data_quality": "Needs Vote",
+      "have": 577,
+      "rating": {
+        "average": 4.71,
+        "count": 34
+      },
+      "status": "Accepted",
+      "submitter": {
+        "resource_url": "https://api.discogs.com/users/Halapenovinyl",
+        "username": "Halapenovinyl"
+      },
+      "want": 126
+    },
+    "companies": [],
+    "country": "US",
+    "data_quality": "Needs Vote",
+    "date_added": "2024-01-28T21:37:19-08:00",
+    "date_changed": "2024-03-04T20:33:03-08:00",
+    "estimated_weight": 230,
+    "format_quantity": 1,
+    "formats": [
+      {
+        "descriptions": [
+          "LP",
+          "Album",
+          "Limited Edition",
+          "Reissue",
+          "Stereo"
+        ],
+        "name": "Vinyl",
+        "qty": "1",
+        "text": "White w/Blue, Orange, & Black Splatter"
+      }
+    ],
+    "genres": [
+      "Rock"
+    ],
+    "id": 29631781,
+    "identifiers": [
+      {
+        "description": "On Jacket",
+        "type": "Barcode",
+        "value": "7 94558 01391 8"
+      },
+      {
+        "type": "Matrix / Runout",
+        "value": "EVR-139-1-A"
+      },
+      {
+        "type": "Matrix / Runout",
+        "value": "EVR-139-1-B"
+      }
+    ],
+    "images": [
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/z4_HZ3Vo9a766o3TuMAAogxYpmtcdW33BhqHQGIRIGo/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3Mjg0/NDQtOTc2MC5qcGVn.jpeg",
+        "type": "primary",
+        "uri": "https://i.discogs.com/z4_HZ3Vo9a766o3TuMAAogxYpmtcdW33BhqHQGIRIGo/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3Mjg0/NDQtOTc2MC5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/4TqHvJytw2BBf-SskATE9l0vogA_kuhS70_-4671U90/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3Mjg0/NDQtOTc2MC5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/mXGNlHC0rZ9zgDIGwq2EESEbLxqWV5AzWeR80HVrDLg/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3Mjg0/NDQtODM5NS5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/mXGNlHC0rZ9zgDIGwq2EESEbLxqWV5AzWeR80HVrDLg/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3Mjg0/NDQtODM5NS5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/FoW4isVE3vsMMLTu8GI8GQUckKJ8oJKQRZ43iEhgnPo/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3Mjg0/NDQtODM5NS5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/Akv8riqt_-fxk36cPSnscaAxKpgjy0OaAytRL1Y9MkA/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3Mjg0/NDQtNjQ5MS5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/Akv8riqt_-fxk36cPSnscaAxKpgjy0OaAytRL1Y9MkA/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3Mjg0/NDQtNjQ5MS5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/D1QLIjkjRZzEszPRkIsyVRhTtGOexS8eTmNg3nQyk3o/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3Mjg0/NDQtNjQ5MS5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/n6Cf3fAKkzMvVQnt1eBkkVvSh2Snk1D60oG2IrX9xRY/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3Mjg0/NDQtNDk1My5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/n6Cf3fAKkzMvVQnt1eBkkVvSh2Snk1D60oG2IrX9xRY/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3Mjg0/NDQtNDk1My5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/TL_MIw6v3CRjM1Al1RDrjgcof0kx3z73h6JVsfxTH34/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3Mjg0/NDQtNDk1My5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/WujM0HYVYfhYWP1r6WXnqLkGkI5qKnlKjIatlCh_6Dg/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3Mjg0/NDQtNjUyMi5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/WujM0HYVYfhYWP1r6WXnqLkGkI5qKnlKjIatlCh_6Dg/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3Mjg0/NDQtNjUyMi5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/5xptXRJfoW4noPmlUqB8VBANKJtP_nkHdREu5ucW6K4/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3Mjg0/NDQtNjUyMi5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/jHuXby8TXhFK0iqAAhcO8Iod3Wp_z85NC6GX41YWNQk/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3Mjg0/NDQtMTAxMC5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/jHuXby8TXhFK0iqAAhcO8Iod3Wp_z85NC6GX41YWNQk/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3Mjg0/NDQtMTAxMC5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/Tx6jMl-jVjh01aKb3hMdZ9xDBp0XpvQIsVtSJ66lziY/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3Mjg0/NDQtMTAxMC5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/aSIAH5hd-z47bAokCWJhb7EGSfEyv6LMf2LmHdZIjjw/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3Mjg0/NDMtNzk2Ni5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/aSIAH5hd-z47bAokCWJhb7EGSfEyv6LMf2LmHdZIjjw/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3Mjg0/NDMtNzk2Ni5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/ysSKZ6OzMeB2Mr9Ri5D88jAop_KWHdZ6teAFadv-Ns8/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3Mjg0/NDMtNzk2Ni5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/7l-KBLnRq-vtCxYSt8uKgKKJSzUMkGjlBHUOeFhAh9Y/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3Mjg0/NDItNTc5MC5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/7l-KBLnRq-vtCxYSt8uKgKKJSzUMkGjlBHUOeFhAh9Y/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3Mjg0/NDItNTc5MC5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/B6it-ewdGK0Ak1OMsbZDTglkiDInUTadwKUzc-xXeio/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3Mjg0/NDItNTc5MC5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 591,
+        "resource_url": "https://i.discogs.com/XMnVMlubvia8CzmyMQiLYLWOAcFWJtYacpLBsgMtJSw/rs:fit/g:sm/q:90/h:591/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3MjU3/ODAtOTE5Ni5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/XMnVMlubvia8CzmyMQiLYLWOAcFWJtYacpLBsgMtJSw/rs:fit/g:sm/q:90/h:591/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3MjU3/ODAtOTE5Ni5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/d713daP-PeJxHctTg9btxFeZ7M0h8b6E_Dr4V4fNG1w/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3MjU3/ODAtOTE5Ni5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/WPc0KaF5dem6g3F7jW-Ewflo0qqogZzSDj2EbiNGC6A/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3Mjg0/NDQtOTA2NS5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/WPc0KaF5dem6g3F7jW-Ewflo0qqogZzSDj2EbiNGC6A/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3Mjg0/NDQtOTA2NS5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/p1VUOwZuckymzLvnl_ISyYePoGb-p9efqLh018G2mUs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3Mjg0/NDQtOTA2NS5qcGVn.jpeg",
+        "width": 600
+      }
+    ],
+    "is_offensive": false,
+    "labels": [
+      {
+        "catno": "EVR139",
+        "entity_type": "1",
+        "entity_type_name": "Label",
+        "id": 33333,
+        "name": "Equal Vision Records",
+        "resource_url": "https://api.discogs.com/labels/33333",
+        "thumbnail_url": "https://i.discogs.com/IhEVXfFTzCsX5V7UeGYXMBR-QOLv-ASAibjEc34LzTg/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTMzMzMz/LTE0OTg0MDA1OTkt/MjkzNS5wbmc.jpeg"
+      }
+    ],
+    "lowest_price": 59.99,
+    "master_id": 289042,
+    "master_url": "https://api.discogs.com/masters/289042",
+    "notes": "2024 Reissue by [l=Equal Vision Records] on White w/Blue, Orange, & Black Splatter Limited to 2000.\n\nRecord comes in a Single LP Jacket, inside a White Paper Inner Sleeve, with an included double-sided Insert with Lyrics, Credits, and Artwork. ",
+    "num_for_sale": 7,
+    "released": "2024-01-24",
+    "released_formatted": "24 Jan 2024",
+    "resource_url": "https://api.discogs.com/releases/29631781",
+    "series": [],
+    "status": "Accepted",
+    "styles": [
+      "Emo",
+      "Prog Rock",
+      "Post-Hardcore",
+      "Alternative Rock"
+    ],
+    "thumb": "https://i.discogs.com/4TqHvJytw2BBf-SskATE9l0vogA_kuhS70_-4671U90/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3Mjg0/NDQtOTc2MC5qcGVn.jpeg",
+    "title": "On Letting Go",
+    "tracklist": [
+      {
+        "duration": "3:30",
+        "position": "A1",
+        "title": "Living Together",
+        "type_": "track"
+      },
+      {
+        "duration": "4:03",
+        "position": "A2",
+        "title": "In the Morning and Amazing...",
+        "type_": "track"
+      },
+      {
+        "duration": "3:42",
+        "position": "A3",
+        "title": "The Greatest Lie",
+        "type_": "track"
+      },
+      {
+        "duration": "4:17",
+        "position": "A4",
+        "title": "The Difference Between Medicine And Poison Is In The Dose",
+        "type_": "track"
+      },
+      {
+        "duration": "3:23",
+        "position": "A5",
+        "title": "Mandala",
+        "type_": "track"
+      },
+      {
+        "duration": "3:12",
+        "position": "A6",
+        "title": "Travel Hymn",
+        "type_": "track"
+      },
+      {
+        "duration": "3:22",
+        "position": "B1",
+        "title": "Semi Constructive Criticism",
+        "type_": "track"
+      },
+      {
+        "duration": "3:37",
+        "position": "B2",
+        "title": "Kicking Your Crosses Down",
+        "type_": "track"
+      },
+      {
+        "duration": "4:03",
+        "position": "B3",
+        "title": "On Letting Go",
+        "type_": "track"
+      },
+      {
+        "duration": "3:20",
+        "position": "B4",
+        "title": "Carry Us Away",
+        "type_": "track"
+      },
+      {
+        "duration": "3:34",
+        "position": "B5",
+        "title": "Close Your Eyes to See",
+        "type_": "track"
+      },
+      {
+        "duration": "5:26",
+        "position": "B6",
+        "title": "Your Friends Are Gone",
+        "type_": "track"
+      }
+    ],
+    "uri": "https://www.discogs.com/release/29631781-Circa-Survive-On-Letting-Go",
+    "videos": [
+      {
+        "description": "",
+        "duration": 255,
+        "embed": true,
+        "title": "Circa Survive - The Difference Between Medicine and Poison is in the Dose (Official Music Video) HD",
+        "uri": "https://www.youtube.com/watch?v=Uuw1FvlGOgg"
+      },
+      {
+        "description": "Provided to YouTube by The Orchard Enterprises\n\nThe Most Dangerous Commercials \u00b7 Circa Survive\n\nB-Sides\n\n\u2117 2017 Equal Vision Records, Inc.\n\nReleased on: 2017-01-18\n\nAuto-generated by YouTube.",
+        "duration": 234,
+        "embed": true,
+        "title": "The Most Dangerous Commercials",
+        "uri": "https://www.youtube.com/watch?v=S93g7YRcpf0"
+      },
+      {
+        "description": "Provided to YouTube by The Orchard Enterprises\n\n1,000 Witnesses \u00b7 Circa Survive\n\nB-Sides\n\n\u2117 2017 Equal Vision Records, Inc.\n\nReleased on: 2017-01-18\n\nAuto-generated by YouTube.",
+        "duration": 174,
+        "embed": true,
+        "title": "1,000 Witnesses",
+        "uri": "https://www.youtube.com/watch?v=fzPsTCJX29s"
+      },
+      {
+        "description": "\"Mandala\" is from the album \"On Letting Go,\" available now. Get the album here: http://bit.ly/circa-olg\n\nLyrics:\nDance with me for I'll be leaving soon\nAfterbirth on the keypads overwhelm\nDid he who make the lamb make thee?\nHelp me find its origin\n\nIn a c",
+        "duration": 204,
+        "embed": true,
+        "title": "Circa Survive \"Mandala\"",
+        "uri": "https://www.youtube.com/watch?v=P1G5nbPHhUU"
+      },
+      {
+        "description": "\"Kicking Your Crosses Down\" is from the album \"On Letting Go,\" available now. Get the album here: http://bit.ly/circa-olg\n\nLyrics:\nIn case it gets away from us\nDon't pull it closer\nThe damage revealed the cost\nAnd it wasn't worth it, oh but they'll never ",
+        "duration": 218,
+        "embed": true,
+        "title": "Circa Survive \"Kicking Your Crosses Down\"",
+        "uri": "https://www.youtube.com/watch?v=aossqmZEbto"
+      },
+      {
+        "description": "\"Your Friends Are Gone\" is from the album \"On Letting Go,\" available now. Get the album here: http://bit.ly/circa-olg\n\nLyrics:\nAll your friends are gone\n\nIt climbs in slowly behind\nYou trust your neighbor\nThey'd never suspect what you're like\nWelcome them",
+        "duration": 327,
+        "embed": true,
+        "title": "Circa Survive \"Your Friends Are Gone\"",
+        "uri": "https://www.youtube.com/watch?v=wNDGtQBLGOc"
+      },
+      {
+        "description": "Provided to YouTube by The Orchard Enterprises\n\nOn Letting Go (Demo Version) \u00b7 Circa Survive\n\nOn Letting Go: Deluxe Ten Year Edition\n\n\u2117 2016 Equal Vision Records, Inc.\n\nReleased on: 2017-01-13\n\nMusic Publisher: Circa Survive Publishing (BMI)\n\nAuto-gene",
+        "duration": 217,
+        "embed": true,
+        "title": "On Letting Go (Demo Version)",
+        "uri": "https://www.youtube.com/watch?v=QWEoPWgAtkE"
+      }
+    ],
+    "year": 2024
+  },
   "30245600": {
     "artists": [
       {

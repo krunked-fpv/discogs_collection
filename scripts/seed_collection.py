@@ -11,6 +11,7 @@ import sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 from detect_pressing_image import (
+    enrich_record_youtube_music,
     parse_wax_variant,
     score_image_pixels_deterministic,
     select_release_images_deterministic,
@@ -193,6 +194,7 @@ for idx, row in enumerate(RAW_RELEASES, start=1):
         },
         "wax_spec": wax_spec,
     })
+    enrich_record_youtube_music(records[-1], rel_detail=None, existing_rec=records[-1], allow_network_search=False)
 
 total_val = round(sum(r["estimated_value_usd"] for r in records), 2)
 pressing_count = sum(1 for r in records if r["images"]["has_pressing_photo"])

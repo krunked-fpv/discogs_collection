@@ -150,6 +150,10 @@ def main() -> None:
     print("   and click 'Generate new token' to invalidate the old exposed token.")
     print("2. Paste your NEW token below (Ctrl+V works directly here).\n")
 
+    default_user = os.environ.get("DISCOGS_USERNAME") or "krunked"
+    raw_input_user = input(f"Enter your Discogs Username (press Enter for '{default_user}'): ").strip()
+    username = re.sub(r"[\x00-\x1f\x7f-\x9f]+", "", raw_input_user).strip().strip("\"'` ") or default_user
+
     raw_input_token = input("Paste your NEW Discogs Personal Access Token: ")
     token = sanitize_token(raw_input_token)
 
@@ -172,10 +176,12 @@ def main() -> None:
 
         if os.name == "nt":
             ok = set_windows_user_env_var("DISCOGS_TOKEN", token)
+            set_windows_user_env_var("DISCOGS_USERNAME", username)
             if ok:
                 print("[ok] Saved clean DISCOGS_TOKEN to your Windows User Environment Variables (HKCU\\Environment).")
-        write_local_dotenv(REPO_ROOT, token)
+        write_local_dotenv(REPO_ROOT, token, username=username)
         os.environ["DISCOGS_TOKEN"] = token
+        os.environ["DISCOGS_USERNAME"] = username
         print(f"\n[success] Clean token ({len(token)} chars) stored safely outside of your code!")
         print("          You can now run `python .\\sync_discogs.py` immediately without restarting PowerShell.")
     else:
