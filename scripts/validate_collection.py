@@ -71,6 +71,7 @@ def validate_collection(path: pathlib.Path) -> None:
             if tr.get("ytVideoId") or tr.get("albumYtVideoId") or pl_id or fa_id:
                 ytm_covered_tracks += 1
 
+    olak_count = sum(1 for r in records if str(r.get("ytPlaylistId") or "").startswith("OLAK5uy_"))
     pressing_count = sum(1 for r in records if r["images"].get("has_pressing_photo"))
     todo_count = sum(1 for r in records if r.get("flattening_status") == "Need to be done")
     done_count = sum(1 for r in records if r.get("flattening_status") == "Done")
@@ -78,7 +79,7 @@ def validate_collection(path: pathlib.Path) -> None:
         f"{path}: {len(records)} records verified against schema v{data.get('schema_version')} "
         f"({pressing_count} pressing photos, {delta_sig_count}/{len(records)} delta-cached, "
         f"{todo_count} flattening todo, {done_count} flattening done, "
-        f"median value {col_val.get('median')}, {ytm_covered_tracks}/{total_tracks} YTM tracks mapped)."
+        f"median value {col_val.get('median')}, {ytm_covered_tracks}/{total_tracks} YTM tracks mapped, {olak_count}/{len(records)} OLAK5uy_ albums linked)."
     )
     if VaultTerminalUI is not None:
         ui = VaultTerminalUI()

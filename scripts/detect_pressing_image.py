@@ -1759,7 +1759,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                'position': 'B6',
                                'title': 'Imitation Is The Sincerest Form Of Battery'}],
            'trackDurations': {'0': '3:26', '1': '2:41', '8': '4:09'},
-           'trackIds': {'0': 'XsvLfL3Qh1A', '1': 'A6OXX2vcaZU', '8': 'uPBdlDMX5Ws'}},
+           'trackIds': {'0': 'XsvLfL3Qh1A', '1': 'A6OXX2vcaZU', '8': 'uPBdlDMX5Ws'},
+           'ytPlaylistId': 'OLAK5uy_lNdSrKW6ETaBRt2HRC3aJGYh84QpmiJkY'},
  2486041: {'defaultYtVideoId': 'Zm4JVkH0T-E',
            'fallbackTracks': [{'duration': '3:50', 'position': 'A1', 'title': 'Hot Mess'},
                               {'duration': '', 'position': 'A2', 'title': "I'm Not Contagious"},
@@ -1786,7 +1787,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                         '3': 'TuM5pB4dE-A',
                         '4': 'Yn9mopkpYS4',
                         '5': 'kkyYxAv6kB4',
-                        '8': 'bW9pZGD4vaU'}},
+                        '8': 'bW9pZGD4vaU'},
+           'ytPlaylistId': 'OLAK5uy_k_DgO5RDvSyOGsJiBgwa5q9Bk7V8afdvI'},
  3093365: {'defaultYtVideoId': 'Tfv4PqEOZCU',
            'fallbackTracks': [{'duration': '3:58', 'position': 'A1', 'title': 'Yellow Belly'},
                               {'duration': '4:09', 'position': 'A2', 'title': 'Promises'},
@@ -1810,7 +1812,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                               '7': '6:18',
                               '8': '4:33',
                               '9': '4:28'},
-           'trackIds': {'0': 'Tfv4PqEOZCU', '1': '3GCLb-PQzfc'}},
+           'trackIds': {'0': 'Tfv4PqEOZCU', '1': '3GCLb-PQzfc'},
+           'ytPlaylistId': 'OLAK5uy_mSoZbmB-icrmzSIM5_ExVKQso-Afvbc8c'},
  3780990: {'defaultYtVideoId': 'tUltTV3t4OM',
            'fallbackTracks': [{'duration': '', 'position': 'A1', 'title': 'Muramasa'},
                               {'duration': '', 'position': 'A2', 'title': 'Have A Blast'},
@@ -1831,7 +1834,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
            'fullAlbumYtDuration': 4585,
            'fullAlbumYtVideoId': 'hz16Wty7Gho',
            'trackDurations': {'4': '4:29', '6': '4:38', '8': '4:26'},
-           'trackIds': {'4': 'tUltTV3t4OM', '6': 'Rm3OpBpwzBs', '8': 'spCmStMOiHE'}},
+           'trackIds': {'4': 'tUltTV3t4OM', '6': 'Rm3OpBpwzBs', '8': 'spCmStMOiHE'},
+           'ytPlaylistId': 'OLAK5uy_m-mG4UYF02ZBaRxu7r4lPXocMwG7uWGzY'},
  3873517: {'defaultYtVideoId': '9QQQetnmxcw',
            'fallbackTracks': [{'duration': '3:15',
                                'position': 'A1',
@@ -1925,7 +1929,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                         '6': 'HCml8Th66mM',
                         '7': 'bbj73tV5qNM',
                         '8': 'U80VQpqWojU',
-                        '9': 'NPnvjhO66OI'}},
+                        '9': 'NPnvjhO66OI'},
+           'ytPlaylistId': 'OLAK5uy_kpJg7QHKWnRG-D5qixHxOoUVcAljZJaRA'},
  5632601: {'defaultYtVideoId': '8-cepZ6K7mY',
            'fallbackTracks': [{'duration': '0:36', 'position': 'A1', 'title': 'A0001'},
                               {'duration': '4:25',
@@ -1961,7 +1966,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                               '7': '3:35',
                               '8': '3:42',
                               '9': '4:23'},
-           'trackIds': {'1': '8-cepZ6K7mY', '5': '6zlnil-v3dg'}},
+           'trackIds': {'1': '8-cepZ6K7mY', '5': '6zlnil-v3dg'},
+           'ytPlaylistId': 'OLAK5uy_nlP6aBHJnesRgtGuqA3cEruRUROE8K7jk'},
  7685817: {'defaultYtVideoId': '5bvTqD37ALI',
            'fallbackTracks': [{'duration': '5:02', 'position': 'A1', 'title': 'Island'},
                               {'duration': '3:53', 'position': 'A2', 'title': 'Eraser'},
@@ -1989,7 +1995,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                               '7': '4:11',
                               '8': '6:11',
                               '9': '6:34'},
-           'trackIds': {'2': '5bvTqD37ALI'}},
+           'trackIds': {'2': '5bvTqD37ALI'},
+           'ytPlaylistId': 'OLAK5uy_lTpyBYgqxUXmYFlBEXfQ6u2rdnYIIs9uY'},
  8781739: {'defaultYtVideoId': 'ikUrxI7g6BM',
            'fallbackTracks': [{'duration': '2:52',
                                'position': 'A1',
@@ -2040,7 +2047,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                         '6': 'zt7IBHcG3iY',
                         '7': 'ffvRU4V65E4',
                         '8': 'gAEGUVT8W2s',
-                        '9': 'dqy1jA8-WCQ'}},
+                        '9': 'dqy1jA8-WCQ'},
+           'ytPlaylistId': 'OLAK5uy_kjFQ4unH3aHr3NJLPCvG3wdE7VvdvKGEM'},
  9346527: {'defaultYtVideoId': 'rmtU2WJfPgU',
            'fallbackTracks': [{'duration': '3:57', 'position': '1', 'title': 'The Price Is Wrong'},
                               {'duration': '4:50', 'position': '2', 'title': 'Motormouth'},
@@ -2070,7 +2078,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                               '7': '7:44',
                               '8': '3:54',
                               '9': '4:37'},
-           'trackIds': {'2': 'rmtU2WJfPgU', '6': 'L7cH6o_sblg'}},
+           'trackIds': {'2': 'rmtU2WJfPgU', '6': 'L7cH6o_sblg'},
+           'ytPlaylistId': 'OLAK5uy_nO1MNY2y0cD6vS5TnjQp8Z7vhLRRlSf1w'},
  9545877: {'defaultYtVideoId': 'MIajmLP46b4',
            'fallbackTracks': [{'duration': '1:35', 'position': 'A1', 'title': 'Genesis'},
                               {'duration': '3:06', 'position': 'A2', 'title': 'Scarab'},
@@ -2097,7 +2106,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
            'trackIds': {'4': 'MIajmLP46b4',
                         '5': '24C2Fz15DZI',
                         '7': 'mbqu3EKBJuo',
-                        '8': '-yfQUVfGZt8'}},
+                        '8': '-yfQUVfGZt8'},
+           'ytPlaylistId': 'OLAK5uy_lPFS6e8WV0brzJrTBUm_gtyWGedF8_eGU'},
  10024143: {'defaultYtVideoId': 'anQ836BXbYw',
             'fallbackTracks': [{'duration': '4:24', 'position': 'A1', 'title': 'Citizen'},
                                {'duration': '3:41', 'position': 'A2', 'title': 'Colourwave'},
@@ -2131,7 +2141,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': 'ajjQqtVKR_4',
                          '7': 'TtliPomEfK4',
                          '8': 'wBYcRdIdvok',
-                         '9': 'HiSZKHxQW50'}},
+                         '9': 'HiSZKHxQW50'},
+            'ytPlaylistId': 'OLAK5uy_lsMgKy05IjepC67Kw5XNgguB7hdLMbcak'},
  10142402: {'defaultYtVideoId': 'n0H3RlaQVrM',
             'fallbackTracks': [{'duration': '', 'position': '1', 'title': 'Keeping the Blade'},
                                {'duration': '', 'position': '2', 'title': 'Always & Never'},
@@ -2204,7 +2215,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': 'S-5YU6kFZso',
                          '7': 'TRPaMrIjtj8',
                          '8': 'vS1tA0u7VR8',
-                         '9': 'eWEOXd8U58o'}},
+                         '9': 'eWEOXd8U58o'},
+            'ytPlaylistId': 'OLAK5uy_kEfc6HeEoj9ECPNaOXeWv_jf5b9gAC8Jg'},
  11368406: {'defaultYtVideoId': 'dDMuVL3sdU0',
             'fallbackTracks': [{'duration': '', 'position': 'A1', 'title': 'Lull'},
                                {'duration': '3:15', 'position': 'A2', 'title': 'Fracture'},
@@ -2236,7 +2248,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '5': '7G566cXl1wE',
                          '6': 'Y5Kf5qbZoW0',
                          '7': 'Ohux9_gN5hc',
-                         '9': '48fHECyl2zg'}},
+                         '9': '48fHECyl2zg'},
+            'ytPlaylistId': 'OLAK5uy_mUU8ogBuzXDV5QWRFzM_EMVcp3ET-Aesk'},
  11625165: {'defaultYtVideoId': 'OMxTBPvRoH8',
             'fallbackTracks': [{'duration': '4:21', 'position': 'A1', 'title': 'Rigged'},
                                {'duration': '3:54',
@@ -2271,7 +2284,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': 'mZ8cmw9wBOo',
                          '7': 'sDtnFEjSq_c',
                          '8': '3232vvnE9NU',
-                         '9': 'uYRv4tC8928'}},
+                         '9': 'uYRv4tC8928'},
+            'ytPlaylistId': 'OLAK5uy_mIKPMLL6t-qLGxY1aQ3yS6wIJ4UwjEUyI'},
  11771142: {'defaultYtVideoId': 'VcApGdcRZN4',
             'fallbackTracks': [{'duration': '1:16', 'position': 'A1', 'title': 'Two Years'},
                                {'duration': '2:57', 'position': 'A2', 'title': 'Southbound'},
@@ -2312,7 +2326,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': '4Z6rHzry3mE',
                          '7': 'RzcVDvZ2rO8',
                          '8': 'iQckxe1kGbU',
-                         '9': 'DCZWCBpQ8EI'}},
+                         '9': 'DCZWCBpQ8EI'},
+            'ytPlaylistId': 'OLAK5uy_kIIlg4piNhRgiDM_62JRfWdL3XdL1aboo'},
  11812427: {'defaultYtVideoId': 'LswEN0icdj0',
             'fallbackTracks': [{'duration': '3:11',
                                 'position': 'A1',
@@ -2348,7 +2363,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': 'XKJ6cm1yOy0',
                          '7': 'ueJqHYyuB9w',
                          '8': '-lLEwTjAouk',
-                         '9': 'HL590q6OGhY'}},
+                         '9': 'HL590q6OGhY'},
+            'ytPlaylistId': 'OLAK5uy_kg9zacZDTraoE_963IL3g9oxeLRyllHu8'},
  12131049: {'defaultYtVideoId': 'GzuSruxHL2g',
             'fallbackTracks': [{'duration': '3:52', 'position': 'A1', 'title': 'Technology'},
                                {'duration': '3:18', 'position': 'A2', 'title': 'Stay Ignorant'},
@@ -2377,7 +2393,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '2': 'eXjCcC7e1fk',
                          '3': 'Yc8VGHTlKts',
                          '4': 'XcYTkySdAwQ',
-                         '8': 'rpnzmvp-VTg'}},
+                         '8': 'rpnzmvp-VTg'},
+            'ytPlaylistId': 'OLAK5uy_mCTrn6Byt4LrQG8aaAhWBYSANK6wey__Y'},
  12852715: {'defaultYtVideoId': 'eibN9wI77ME',
             'fallbackTracks': [{'duration': '4:02', 'position': 'A1', 'title': 'Incinerate'},
                                {'duration': '', 'position': 'A2', 'title': 'Dust'},
@@ -2401,7 +2418,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': '7JvyhCTLaiQ',
                          '7': 'TrCde8m0Ulc',
                          '8': 'lPA0lTw3jog',
-                         '9': 'cz8IbywzOCw'}},
+                         '9': 'cz8IbywzOCw'},
+            'ytPlaylistId': 'OLAK5uy_nW0dqCJCsSwpmQgKLNueczWBhBrpnsWUc'},
  12988109: {'defaultYtVideoId': 'CO_4rGjK7UU',
             'fallbackTracks': [{'duration': '5:23', 'position': 'A1', 'title': 'Tempting Time'},
                                {'duration': '4:27', 'position': 'A2', 'title': 'Soraya'},
@@ -2450,7 +2468,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '5': 'uHU1ryKhSHc',
                          '7': 'NmfzWpp0hMc',
                          '8': 'aAiyTCrAChE',
-                         '9': 'v1h9ilhxRP0'}},
+                         '9': 'v1h9ilhxRP0'},
+            'ytPlaylistId': 'OLAK5uy_k4uSZOM5OcQWqjt446JaOY8QcMxILq8fQ'},
  13113361: {'defaultYtVideoId': 'N0eOaXc9H4s',
             'fallbackTracks': [{'duration': '2:20',
                                 'position': 'A1',
@@ -2513,7 +2532,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                {'duration': '', 'position': 'B4', 'title': 'Iw2dwy'},
                                {'duration': '', 'position': 'B5', 'title': 'Wait, Stay'}],
             'trackDurations': {'0': '3:26', '3': '3:13'},
-            'trackIds': {'0': 'Shmt5YnF40A', '3': 'mNlp4WklZ6k'}},
+            'trackIds': {'0': 'Shmt5YnF40A', '3': 'mNlp4WklZ6k'},
+            'ytPlaylistId': 'OLAK5uy_lOUvtM-MykSjce2eQS0l0ancNXZa7Uu_8'},
  13990219: {'defaultYtVideoId': 'K0-CW1DbVIg',
             'fallbackTracks': [{'duration': '4:05', 'position': 'A1', 'title': 'Details Matter'},
                                {'duration': '3:26', 'position': 'A2', 'title': 'Bloodline'},
@@ -2547,7 +2567,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': 'ni8qtNKujmo',
                          '7': 'TM7NZFIdJ5w',
                          '8': 'iOQtil5JFI4',
-                         '9': 'l8Ms6atpNRA'}},
+                         '9': 'l8Ms6atpNRA'},
+            'ytPlaylistId': 'OLAK5uy_k9q5_11oHF-okjERQF_UnugGQYIro3Kuk'},
  14043330: {'defaultYtVideoId': 'LQ8KvLQIdMc',
             'fallbackTracks': [{'duration': '', 'position': 'A1', 'title': 'Reptile'},
                                {'duration': '', 'position': 'B1', 'title': 'Blood Eagle'},
@@ -2559,7 +2580,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                {'duration': '4:28', 'position': 'D1', 'title': 'Sentient Glow'},
                                {'duration': '', 'position': 'D2', 'title': 'Satellites'}],
             'trackDurations': {'4': '5:34', '6': '6:50', '7': '4:28'},
-            'trackIds': {'4': 'LQ8KvLQIdMc', '6': '9za7ZV4n7mo', '7': 'gpVMGvZbGPc'}},
+            'trackIds': {'4': 'LQ8KvLQIdMc', '6': '9za7ZV4n7mo', '7': 'gpVMGvZbGPc'},
+            'ytPlaylistId': 'OLAK5uy_n-MZXGCBQFSjUur11sd58Mm_BXttjt1dA'},
  14188877: {'defaultYtVideoId': 'km0Byzc4UfM',
             'fallbackTracks': [{'duration': '3:21', 'position': 'A1', 'title': 'You Wanna Know'},
                                {'duration': '3:29', 'position': 'A2', 'title': 'Superlove'},
@@ -2623,7 +2645,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '5': 'pNLJrWuIvl0',
                          '6': '8jXjK7kfRmY',
                          '7': 'wFodog4zZlY',
-                         '8': '-sogivGtsVM'}},
+                         '8': '-sogivGtsVM'},
+            'ytPlaylistId': 'OLAK5uy_n8ubWLgABCf2-u3NwE3h1xRsONhEPgsN4'},
  14816287: {'defaultYtVideoId': '0bmXGkwNs-k',
             'fallbackTracks': [{'duration': '',
                                 'position': 'A1',
@@ -2642,7 +2665,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                {'duration': '', 'position': 'B5', 'title': 'Weightless'},
                                {'duration': '', 'position': 'B6', 'title': 'David'}],
             'trackDurations': {'1': '4:40'},
-            'trackIds': {'1': '0bmXGkwNs-k'}},
+            'trackIds': {'1': '0bmXGkwNs-k'},
+            'ytPlaylistId': 'OLAK5uy_k6nYq8dSdpso5zZDpHIs-HCpKXWka1xgM'},
  14947161: {'defaultYtVideoId': 'b4dHvbgYZhM',
             'fallbackTracks': [{'duration': '0:43', 'position': 'A1', 'title': '[Id]'},
                                {'duration': '3:44', 'position': 'A2', 'title': 'Unbreakable'},
@@ -2676,7 +2700,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': 'fF12NgKZGXk',
                          '7': 'p-1W8AL1BYo',
                          '8': 'eeRS1YIfk2o',
-                         '9': '6fUldx_n0no'}},
+                         '9': '6fUldx_n0no'},
+            'ytPlaylistId': 'OLAK5uy_kVEVE9vEjdnFhVzwC4GlNJrEleTL-GL6c'},
  15043916: {'defaultYtVideoId': 'kF32LWxokRo',
             'fallbackTracks': [{'duration': '4:09', 'position': 'A1', 'title': 'The Narrative'},
                                {'duration': '4:15', 'position': 'A2', 'title': 'Bones'},
@@ -2714,7 +2739,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': 'TVZAAyBFuFc',
                          '7': 'uSfrUu1KZkk',
                          '8': 'Mb1gt8XMUTc',
-                         '9': 'jY5wBdtgNY4'}},
+                         '9': 'jY5wBdtgNY4'},
+            'ytPlaylistId': 'OLAK5uy_nlHHEUr63PxvAuqVHAUjO-WrP6X8u4phA'},
  15594164: {'defaultYtVideoId': 'tUltTV3t4OM',
             'fallbackTracks': [{'duration': '', 'position': 'A1', 'title': 'Muramasa'},
                                {'duration': '', 'position': 'A2', 'title': 'Have A Blast'},
@@ -2737,7 +2763,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
             'fullAlbumYtDuration': 4585,
             'fullAlbumYtVideoId': 'hz16Wty7Gho',
             'trackDurations': {'4': '4:29', '6': '4:38', '8': '4:26'},
-            'trackIds': {'4': 'tUltTV3t4OM', '6': 'Rm3OpBpwzBs', '8': 'spCmStMOiHE'}},
+            'trackIds': {'4': 'tUltTV3t4OM', '6': 'Rm3OpBpwzBs', '8': 'spCmStMOiHE'},
+            'ytPlaylistId': 'OLAK5uy_m-mG4UYF02ZBaRxu7r4lPXocMwG7uWGzY'},
  15847991: {'defaultYtVideoId': 'PIPPQbsWlgA',
             'fallbackTracks': [{'duration': '0:49', 'position': 'A1', 'title': 'Prelude'},
                                {'duration': '4:06',
@@ -2795,7 +2822,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': '49HPutLFVds',
                          '7': 'sLzSjZ7KhLY',
                          '8': 'aECKbe-PYWg',
-                         '9': 'dVV3y-CPohA'}},
+                         '9': 'dVV3y-CPohA'},
+            'ytPlaylistId': 'OLAK5uy_lhUM49AQWi7kztmNUAuag8IkU7GF8RrOo'},
  15962864: {'defaultYtVideoId': '18mvj0kawGs',
             'fallbackTracks': [{'duration': '3:41', 'position': '1', 'title': 'The Face Of Hate'},
                                {'duration': '3:34',
@@ -2821,7 +2849,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                '7': '2:30',
                                '8': '4:31',
                                '9': '3:07'},
-            'trackIds': {'3': '18mvj0kawGs', '5': 'TRJF6GLVFzU'}},
+            'trackIds': {'3': '18mvj0kawGs', '5': 'TRJF6GLVFzU'},
+            'ytPlaylistId': 'OLAK5uy_ljoPWB-2aSHetsOjSgmzSw3cyqZIE3KD4'},
  15985409: {'defaultYtVideoId': 'ou0TdTwLhbQ',
             'fallbackTracks': [{'duration': '3:18', 'position': 'A1', 'title': 'Belleville'},
                                {'duration': '',
@@ -2850,7 +2879,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '3': 'dgWQm6wv7qk',
                          '5': 'dgWQm6wv7qk',
                          '6': 'jOB3IYBcJEE',
-                         '9': 'WYbJC9-h5Z4'}},
+                         '9': 'WYbJC9-h5Z4'},
+            'ytPlaylistId': 'OLAK5uy_kruA60wPnEW1L0n5mTdHJsa18JbWho-wU'},
  15985411: {'fallbackTracks': [{'duration': '5:05', 'position': 'A1', 'title': 'Dark'},
                                {'duration': '4:09', 'position': 'A2', 'title': 'Cloud Cascade'},
                                {'duration': '3:51', 'position': 'A3', 'title': 'Reflection Room'},
@@ -2876,7 +2906,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                '6': '3:42',
                                '7': '4:26',
                                '8': '3:22',
-                               '9': '4:08'}},
+                               '9': '4:08'},
+            'ytPlaylistId': 'OLAK5uy_nMVvTMFQhioR6mLvhF-dKfpOTUl5_3y-w'},
  16251744: {'defaultYtVideoId': 'caZACpJN3ss',
             'fallbackTracks': [{'duration': '1:14', 'position': 'A1', 'title': 'The Reaping'},
                                {'duration': '5:06',
@@ -3013,7 +3044,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': 'IYXjuY_-cOQ',
                          '7': 'QJCzMqwuJW0',
                          '8': 'gi0IOjSW95U',
-                         '9': 'a3TpBg1T9_k'}},
+                         '9': 'a3TpBg1T9_k'},
+            'ytPlaylistId': 'OLAK5uy_lT-lhrMolxOXnDWqVuY61eWyltCm7guZ0'},
  16839336: {'defaultYtVideoId': 'Pn-6eOxnEMI',
             'fallbackTracks': [{'duration': '3:16', 'position': 'A1', 'title': 'Sticks & Bricks'},
                                {'duration': '3:22', 'position': 'A2', 'title': 'All I Want'},
@@ -3043,7 +3075,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                '7': '3:47',
                                '8': '3:26',
                                '9': '3:24'},
-            'trackIds': {'1': 'Pn-6eOxnEMI', '4': 'n6T9olarH-U', '6': '08PszRp2cBg'}},
+            'trackIds': {'1': 'Pn-6eOxnEMI', '4': 'n6T9olarH-U', '6': '08PszRp2cBg'},
+            'ytPlaylistId': 'OLAK5uy_n0ZRkqJr8BEjnsuOQ6LW0xtJFjIjCAX0s'},
  17583742: {'defaultYtVideoId': 'b6vhOPTdmeI',
             'fallbackTracks': [{'duration': '4:03',
                                 'position': 'A1',
@@ -3075,7 +3108,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                '6': '4:53',
                                '7': '4:28',
                                '8': '0:57'},
-            'trackIds': {'2': 'b6vhOPTdmeI', '5': 'b6vhOPTdmeI'}},
+            'trackIds': {'2': 'b6vhOPTdmeI', '5': 'b6vhOPTdmeI'},
+            'ytPlaylistId': 'OLAK5uy_lp-404qlkpvdAFogKD3D30yuZggBxUEpY'},
  17743813: {'defaultYtVideoId': 'W69ow97hqbI',
             'fallbackTracks': [{'duration': '',
                                 'position': 'A1',
@@ -3106,7 +3140,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
             'trackIds': {'1': 'W69ow97hqbI',
                          '13': 'lm7ejB08cbQ',
                          '4': '2ZmjG3wuUes',
-                         '9': 'jdWhJcrrjQs'}},
+                         '9': 'jdWhJcrrjQs'},
+            'ytPlaylistId': 'OLAK5uy_k9KIGR1Zw2LV1OjODWcXrThqn8pau6eHo'},
  18670618: {'fallbackTracks': [{'duration': '', 'position': '1', 'title': 'Sol'},
                                {'duration': '', 'position': '2', 'title': 'Naturehold'},
                                {'duration': '', 'position': '3', 'title': 'Nocturne: Lost Faith'},
@@ -3118,7 +3153,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                 'title': 'The Desperate Are The Calm'},
                                {'duration': '', 'position': '8', 'title': 'Native Intellect'},
                                {'duration': '', 'position': '9', 'title': 'Half-Life'},
-                               {'duration': '', 'position': '10', 'title': 'Luna'}]},
+                               {'duration': '', 'position': '10', 'title': 'Luna'}],
+            'ytPlaylistId': 'OLAK5uy_l4_1fTd2KbJwi0Bmt7nSt0GUlAo4Kx59g'},
  18801928: {'defaultYtVideoId': 'dV3KY_jdW1g',
             'fallbackTracks': [{'duration': '', 'position': 'A1', 'title': 'Hole In The Wall'},
                                {'duration': '', 'position': 'A2', 'title': 'Dear Old Friend'},
@@ -3158,7 +3194,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': 'hft2dt2uFs4',
                          '7': '0trFFiIxemg',
                          '8': 'GDt3dA8fN6k',
-                         '9': 'NGQwL4_x3MA'}},
+                         '9': 'NGQwL4_x3MA'},
+            'ytPlaylistId': 'OLAK5uy_mSZaESiQpXz6fB0hLKvN8lyOYpUwws3D0'},
  19084276: {'defaultYtVideoId': 'SecJsEelf3c',
             'fallbackTracks': [{'duration': '', 'position': 'A1', 'title': 'Hurricane'},
                                {'duration': '2:51', 'position': 'A2', 'title': 'Blood On The Sand'},
@@ -3175,7 +3212,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
             'trackIds': {'0': 'XRv-Eio7WZM',
                          '1': 'SecJsEelf3c',
                          '6': 'C9GTEsNf_GU',
-                         '8': '2TiDTE1UyM0'}},
+                         '8': '2TiDTE1UyM0'},
+            'ytPlaylistId': 'OLAK5uy_mU2TTqnxcqPIfJY-Fy2Jo4cvufURXspl0'},
  19249243: {'defaultYtVideoId': '2MSCGPZ-ghw',
             'fallbackTracks': [{'duration': '0:43', 'position': 'A1', 'title': 'Intro'},
                                {'duration': '3:24', 'position': 'A2', 'title': 'The Swarm'},
@@ -3213,7 +3251,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '1': '_ebl2Qph6PE',
                          '10': 'RD3dw52f2Nk',
                          '2': '81PElASs5B0',
-                         '5': '-UUBShPhuLA'}},
+                         '5': '-UUBShPhuLA'},
+            'ytPlaylistId': 'OLAK5uy_n4LH-bP7pNrCbNs56Z1crXA4evkq-UWso'},
  20154643: {'defaultYtVideoId': 'TikYbkbRC8A',
             'fallbackTracks': [{'duration': '4:06', 'position': 'A1', 'title': 'My Time'},
                                {'duration': '4:45', 'position': 'A2', 'title': 'Summer Angel'},
@@ -3246,7 +3285,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': 'hDttonV_LZI',
                          '7': 'hBQeFSpA9xQ',
                          '8': 'sB-RW4Goeiw',
-                         '9': 'PU_-YyaJ2dI'}},
+                         '9': 'PU_-YyaJ2dI'},
+            'ytPlaylistId': 'OLAK5uy_kgdHYy3-JA7OKOPQK4g-MEN1mQE7kFjR4'},
  20247346: {'defaultYtVideoId': 'iXY93aMLG7s',
             'fallbackTracks': [{'duration': '3:47', 'position': '1', 'title': 'Sun Killer'},
                                {'duration': '3:46', 'position': '2', 'title': 'Hurt You'},
@@ -3287,7 +3327,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': 'cWE0sSZ9yLc',
                          '7': 'EAiksF4bHpg',
                          '8': 'l2Q_xR-BGWA',
-                         '9': 'fK6OFEaA3Cs'}},
+                         '9': 'fK6OFEaA3Cs'},
+            'ytPlaylistId': 'OLAK5uy_kx-S5QCkV4Po13hehdQr6Zu2dVSZhKU18'},
  20518822: {'defaultYtVideoId': 'DOyyGlWoxeU',
             'fallbackTracks': [{'duration': '3:49', 'position': 'A1', 'title': 'Steel And Blood'},
                                {'duration': '4:01', 'position': 'A2', 'title': 'Lies And Eyes'},
@@ -3320,7 +3361,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': '8-v0oRQ2W0s',
                          '7': 'bVdJ7NKM8Dk',
                          '8': 'TMEy25sYRi8',
-                         '9': 'YS7E4FAIURQ'}},
+                         '9': 'YS7E4FAIURQ'},
+            'ytPlaylistId': 'OLAK5uy_ndodE3IhgnTwHRIPB8zBkeUfEO4x9aTvg'},
  20546863: {'defaultYtVideoId': '8rvZSm2dXMg',
             'fallbackTracks': [{'duration': '', 'position': 'A1', 'title': 'Poster Child'},
                                {'duration': '', 'position': 'A2', 'title': 'White Nile'},
@@ -3341,7 +3383,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
             'fullAlbumYtDuration': 3305,
             'fullAlbumYtVideoId': 'EGwtcx8QwFY',
             'trackDurations': {'2': '4:33'},
-            'trackIds': {'2': '8rvZSm2dXMg'}},
+            'trackIds': {'2': '8rvZSm2dXMg'},
+            'ytPlaylistId': 'OLAK5uy_kObqb1EHEXU915LJtHvMSJs64otOYRqxI'},
  20697637: {'defaultYtVideoId': '_1O1CuUuRWw',
             'fallbackTracks': [{'duration': '2:52', 'position': 'A1', 'title': 'Dark Distance'},
                                {'duration': '2:31', 'position': 'A2', 'title': 'Sly'},
@@ -3383,7 +3426,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                '7': '3:37',
                                '8': '2:36',
                                '9': '2:10'},
-            'trackIds': {'3': '_1O1CuUuRWw', '7': '06mgL0GK--Y'}},
+            'trackIds': {'3': '_1O1CuUuRWw', '7': '06mgL0GK--Y'},
+            'ytPlaylistId': 'OLAK5uy_nesjILKIcJfG4xDn-wJWV-ORvwYu1iDEQ'},
  21047380: {'defaultYtVideoId': 'T3E6AKDbI2Y',
             'fallbackTracks': [{'duration': '0:18',
                                 'position': 'A1',
@@ -3437,7 +3481,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '14': 'VJA_8EBQiNU',
                          '17': 'wBC3Tl0dg4M',
                          '3': 'mPb2_glC8kA',
-                         '5': 'SfgUtVDdn0Q'}},
+                         '5': 'SfgUtVDdn0Q'},
+            'ytPlaylistId': 'OLAK5uy_kbEMwxM73fs0HoLrbecWn8q5yhV06cItU'},
  21315247: {'defaultYtVideoId': 'MMI5bmlSrRg',
             'fallbackTracks': [{'duration': '4:21',
                                 'position': 'A1',
@@ -3473,7 +3518,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                '7': '5:02',
                                '8': '3:23',
                                '9': '3:55'},
-            'trackIds': {'0': 'MMI5bmlSrRg', '1': '2BoKYJzAtHM'}},
+            'trackIds': {'0': 'MMI5bmlSrRg', '1': '2BoKYJzAtHM'},
+            'ytPlaylistId': 'OLAK5uy_n0sbgq4IwDY2QqSPirhKa6x8JKd4x67uI'},
  21390094: {'defaultYtVideoId': 'nVCgCF5A4Cs',
             'fallbackTracks': [{'duration': '14:54', 'position': 'A1', 'title': 'Of Matter'},
                                {'duration': '18:24',
@@ -3512,7 +3558,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
             'trackIds': {'0': 'nVCgCF5A4Cs',
                          '1': 'AmyqmTO_L1M',
                          '11': 'Pg504Z3mGqE',
-                         '9': 'veqQXYhJNeg'}},
+                         '9': 'veqQXYhJNeg'},
+            'ytPlaylistId': 'OLAK5uy_lTIRKgQaVTVa89_5xY91xGuikDoPmObGI'},
  21929479: {'defaultYtVideoId': 'lzAYXn2-1_E',
             'fallbackTracks': [{'duration': '',
                                 'position': 'A1',
@@ -3536,7 +3583,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': '_-Qc7fkmxLM',
                          '7': 'DRp1GT4r8cQ',
                          '8': 'a48CG2kg44g',
-                         '9': '4nAy8VpZ1n4'}},
+                         '9': '4nAy8VpZ1n4'},
+            'ytPlaylistId': 'OLAK5uy_m8mggphlK1-MW8ronlU8UJwYEi-W5zjMA'},
  21958303: {'defaultYtVideoId': 'ViFPVC3Jo24',
             'fallbackTracks': [{'duration': '2:59', 'position': 'A1', 'title': 'Relapse'},
                                {'duration': '3:08', 'position': 'A2', 'title': 'Teeth'},
@@ -3573,7 +3621,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': 'kUylqZM4biA',
                          '7': 'Xt-6LDpzgOw',
                          '8': 'kuyRjHhXMyg',
-                         '9': 'V6E1c1xxsaM'}},
+                         '9': 'V6E1c1xxsaM'},
+            'ytPlaylistId': 'OLAK5uy_mOxiHpCnBOIgwBxHOtScTqHRCTew7Y_ko'},
  22031968: {'defaultYtVideoId': 'hZnZ-CpX57Y',
             'fallbackTracks': [{'duration': '', 'position': 'A1', 'title': 'Never There'},
                                {'duration': '3:45', 'position': 'A2', 'title': 'A Flag To Wave'},
@@ -3589,7 +3638,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
             'fullAlbumYtDuration': 2332,
             'fullAlbumYtVideoId': 'dy8IMkekW4U',
             'trackDurations': {'1': '3:45', '4': '3:54'},
-            'trackIds': {'1': 'hZnZ-CpX57Y', '4': 'upTN4u7SjTM'}},
+            'trackIds': {'1': 'hZnZ-CpX57Y', '4': 'upTN4u7SjTM'},
+            'ytPlaylistId': 'OLAK5uy_k3Th2h0ZKHLzklqgNz-Mar1zmFu762WXE'},
  22153450: {'defaultYtVideoId': 'sIPdH7vLmgQ',
             'fallbackTracks': [{'duration': '3:43', 'position': 'A1', 'title': 'Dispossession'},
                                {'duration': '4:04', 'position': 'A2', 'title': 'Abrasumente'},
@@ -3617,7 +3667,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                '7': '4:39',
                                '8': '3:23',
                                '9': '4:56'},
-            'trackIds': {'0': 'sIPdH7vLmgQ', '4': '6-CdrxX-JOg'}},
+            'trackIds': {'0': 'sIPdH7vLmgQ', '4': '6-CdrxX-JOg'},
+            'ytPlaylistId': 'OLAK5uy_moOe_sV-6lh13pw9fXvoKu1rqBrWcqThs'},
  22544762: {'fallbackTracks': [{'duration': '', 'position': 'A1', 'title': 'I Am Become A Name...'},
                                {'duration': '', 'position': 'A2', 'title': 'Ghost'},
                                {'duration': '', 'position': 'A3', 'title': 'Temptation'},
@@ -3630,7 +3681,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                {'duration': '', 'position': 'C1', 'title': 'Lost And Left Behind'},
                                {'duration': '', 'position': 'C2', 'title': 'این نیز بگذرد'},
                                {'duration': '', 'position': 'C3', 'title': '∞'},
-                               {'duration': '', 'position': 'C4', 'title': 'Heaven In Hiding'}]},
+                               {'duration': '', 'position': 'C4', 'title': 'Heaven In Hiding'}],
+            'ytPlaylistId': 'OLAK5uy_nmboIb3-gFCFMkqhl6S9abMIGjybsDIhI'},
  22568519: {'defaultYtVideoId': 'UgPujyXPM84',
             'fallbackTracks': [{'duration': '', 'position': 'A1', 'title': 'Erase'},
                                {'duration': '', 'position': 'A2', 'title': 'Paralyzed'},
@@ -3670,7 +3722,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
             'trackIds': {'12': 'mh4GQq3cL7Y',
                          '16': 'UgPujyXPM84',
                          '21': 'UgPujyXPM84',
-                         '4': 'UgPujyXPM84'}},
+                         '4': 'UgPujyXPM84'},
+            'ytPlaylistId': 'OLAK5uy_n1E-c8zi3HsGGjbe_gOOlwlILiPeI8GRI'},
  22879535: {'defaultYtVideoId': '2Lf6K-WhDRM',
             'fallbackTracks': [{'duration': '5:00',
                                 'position': 'A1',
@@ -3729,7 +3782,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '4': 'a2qo2c3axcA',
                          '5': 'H1Lfj4oA9P8',
                          '7': '7i6nvi5wh5s',
-                         '8': 'VEViBL1LN-0'}},
+                         '8': 'VEViBL1LN-0'},
+            'ytPlaylistId': 'OLAK5uy_lRWGlYllOj5jsV6SI_0Ag8WgaaSJyT4EU'},
  22968539: {'defaultYtVideoId': 'qiRno1CVOSU',
             'fallbackTracks': [{'duration': '5:53', 'position': 'A1', 'title': 'Clarity'},
                                {'duration': '3:59', 'position': 'A2', 'title': 'Clockwork'},
@@ -3769,7 +3823,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': 'KgQuYpi6Mgw',
                          '7': 'WAtr_vxBWXE',
                          '8': 'N0RxKEkyX5w',
-                         '9': 'LyILjY1OS9U'}},
+                         '9': 'LyILjY1OS9U'},
+            'ytPlaylistId': 'OLAK5uy_mY43Br5z_zEPVpcibVdWcrf5xqc-OAKXY'},
  23343893: {'defaultYtVideoId': '86i3YTruoGo',
             'fallbackTracks': [{'duration': '',
                                 'position': 'A1',
@@ -3783,7 +3838,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                {'duration': '', 'position': 'B3', 'title': 'Shattered By The Sun'},
                                {'duration': '', 'position': 'B4', 'title': 'Monition'},
                                {'duration': '', 'position': 'B5', 'title': 'Stronghold'}],
-            'trackIds': {'0': '86i3YTruoGo', '4': '86i3YTruoGo'}},
+            'trackIds': {'0': '86i3YTruoGo', '4': '86i3YTruoGo'},
+            'ytPlaylistId': 'OLAK5uy_n9njCIwlUTX4YqEXw3u5tSpza25XQcPmQ'},
  23605157: {'fallbackTracks': [{'duration': '',
                                 'position': 'A1',
                                 'title': 'So Cold I Could See My Breath'},
@@ -3809,7 +3865,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                 'title': 'In A Lose, Lose Situation'},
                                {'duration': '',
                                 'position': 'B6',
-                                'title': 'In A Win, Win Situation'}]},
+                                'title': 'In A Win, Win Situation'}],
+            'ytPlaylistId': 'OLAK5uy_myFpP_a3ylgyVFvauTQ9FesE8z6jcQ8F4'},
  23657633: {'defaultYtVideoId': 'cEfhtQFaLqU',
             'fallbackTracks': [{'duration': '5:07', 'position': 'A1', 'title': 'The Hellfire Club'},
                                {'duration': '3:22', 'position': 'A2', 'title': 'Leather Wings'},
@@ -3894,7 +3951,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': 'nP7X8M-ngqU',
                          '7': 'ltKTHtMmDJQ',
                          '8': 'cOUCJUgVzIw',
-                         '9': '7Ka43I-cN7g'}},
+                         '9': '7Ka43I-cN7g'},
+            'ytPlaylistId': 'OLAK5uy_lBL6L6Inkx3niyxRfvlFYh-ckr70bR1iY'},
  23753615: {'defaultYtVideoId': 'lCPwR7R4hlA',
             'fallbackTracks': [{'duration': '1:55', 'position': 'A1', 'title': 'Nyu'},
                                {'duration': '2:51', 'position': 'A2', 'title': 'Leeloo'},
@@ -3923,7 +3981,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
             'trackIds': {'10': 'uq6UnpsmEZI',
                          '4': 'lCPwR7R4hlA',
                          '5': 'XuqSC7x_M18',
-                         '8': '6ljL1D0J3Y8'}},
+                         '8': '6ljL1D0J3Y8'},
+            'ytPlaylistId': 'OLAK5uy_l3aPoJqBXE01CaqFSK37kjeq90HTCDEsQ'},
  23775551: {'defaultYtVideoId': 'OI6BWndxkcs',
             'fallbackTracks': [{'duration': '3:37', 'position': '1', 'title': 'Gumshield'},
                                {'duration': '3:37',
@@ -3964,7 +4023,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': '4Dz7evHfvRw',
                          '7': 'UCGhXXlkWPw',
                          '8': 'TXoYJu6_JRo',
-                         '9': 'YLpHSXbz13U'}},
+                         '9': 'YLpHSXbz13U'},
+            'ytPlaylistId': 'OLAK5uy_nJQT2OjKkG-Uxqu09jPgmV3-l9U-i76rw'},
  25089742: {'defaultYtVideoId': 'TnCUJVPQH3I',
             'fallbackTracks': [{'duration': '3:33', 'position': 'A1', 'title': 'Deep Fake'},
                                {'duration': '4:14', 'position': 'A2', 'title': 'Tear Gas'},
@@ -4012,7 +4072,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': 'cOqpShm4PIQ',
                          '7': 'GmHCDoWK_H4',
                          '8': 't9mA1iLE-UY',
-                         '9': 'aRmgCFE7lrg'}},
+                         '9': 'aRmgCFE7lrg'},
+            'ytPlaylistId': 'OLAK5uy_nXy0obhpd_k0TwHlJJFg2RfG4DNbRJBSs'},
  25367083: {'defaultYtVideoId': 'xbOF5U2h_xg',
             'fallbackTracks': [{'duration': '1:46', 'position': 'A1', 'title': 'Samsara'},
                                {'duration': '2:27', 'position': 'A2', 'title': 'Unrest'},
@@ -4056,7 +4117,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': 'qTXwoP7PdkM',
                          '7': 'ei5hEyBnRF4',
                          '8': 'CeetS4vERoo',
-                         '9': '-VF4ObZEM8w'}},
+                         '9': '-VF4ObZEM8w'},
+            'ytPlaylistId': 'OLAK5uy_n1e95E3pv7nDmpUFy7TFcE3oG-wW1SoI4'},
  25418758: {'defaultYtVideoId': 'XCKAkWkuuWU',
             'fallbackTracks': [{'duration': '0:42', 'position': 'A1', 'title': '0:00'},
                                {'duration': '3:57',
@@ -4143,7 +4205,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': 'RKRlEhVu2LU',
                          '7': 'EY-145Tnmjw',
                          '8': 'T_0HOrNg-W0',
-                         '9': 'PLOpQHH1St0'}},
+                         '9': 'PLOpQHH1St0'},
+            'ytPlaylistId': 'OLAK5uy_mBBR8KQqSX4XsEW8OR9oAjn1qdm_hn1GM'},
  25541158: {'defaultYtVideoId': 'HI25fVw7PIE',
             'fallbackTracks': [{'duration': '3:32',
                                 'position': 'A1',
@@ -4181,7 +4244,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                '7': '3:23',
                                '8': '3:27',
                                '9': '4:09'},
-            'trackIds': {'0': 'HI25fVw7PIE', '3': 'XjxtBrId4Q4'}},
+            'trackIds': {'0': 'HI25fVw7PIE', '3': 'XjxtBrId4Q4'},
+            'ytPlaylistId': 'OLAK5uy_n6irySlEQ7hBN4hLVsEdhhggxhEvyxrv4'},
  25599913: {'defaultYtVideoId': 'tptChkpxMoQ',
             'fallbackTracks': [{'duration': '', 'position': 'A1', 'title': 'Begin'},
                                {'duration': '', 'position': 'A2', 'title': 'The Siren’s Song'},
@@ -4196,7 +4260,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                {'duration': '', 'position': 'B5', 'title': 'Frostbite'},
                                {'duration': '', 'position': 'B6', 'title': 'Horizons'}],
             'trackDurations': {'5': '3:17'},
-            'trackIds': {'5': 'tptChkpxMoQ'}},
+            'trackIds': {'5': 'tptChkpxMoQ'},
+            'ytPlaylistId': 'OLAK5uy_kl_qW0L1vbuh1ko5Nu6D9M4K_W8GA8lls'},
  26047147: {'defaultYtVideoId': 'AEn8HmgJxd4',
             'fallbackTracks': [{'duration': '',
                                 'position': 'A1',
@@ -4224,7 +4289,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
             'trackIds': {'1': 'AEn8HmgJxd4',
                          '5': '8x3sLH4G0qA',
                          '7': 'ygUPP02XHwg',
-                         '8': 'DLUD8jicLsk'}},
+                         '8': 'DLUD8jicLsk'},
+            'ytPlaylistId': 'OLAK5uy_neHf6skEXBKS0sa6ssu6kiSk-u_JizD10'},
  26047519: {'defaultYtVideoId': 'rhMfz4HrcEA',
             'fallbackTracks': [{'duration': '', 'position': 'A1', 'title': 'Piano Prelude'},
                                {'duration': '3:55', 'position': 'A2', 'title': 'Bloodmeat'},
@@ -4252,7 +4318,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '5': 'YaGSX_KQwnc',
                          '6': '32Q4x112dAU',
                          '7': 'WqL_JnnOo9k',
-                         '8': 'pneeCPirlyw'}},
+                         '8': 'pneeCPirlyw'},
+            'ytPlaylistId': 'OLAK5uy_lfR-gneZtTU9HT7MsBTgj4xWJ5QNbJ7n4'},
  26411060: {'defaultYtVideoId': 'ei2wA2Ndm6M',
             'fallbackTracks': [{'duration': '2:47', 'position': 'A1', 'title': 'Kill Me Quickly'},
                                {'duration': '1:49', 'position': 'A2', 'title': 'A Subtle Dagger'},
@@ -4307,7 +4374,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '5': '5iSq_nG8Qaw',
                          '6': 'XXWymj3yQ7Y',
                          '8': 'aIV-vsOtkqY',
-                         '9': 'jOmK6Mhn7ko'}},
+                         '9': 'jOmK6Mhn7ko'},
+            'ytPlaylistId': 'OLAK5uy_nF4oihNUjyHJqsiIiTVpNkvrNbbybVx_g'},
  26421509: {'defaultYtVideoId': 'pFKSiOkRzb4',
             'fallbackTracks': [{'duration': '7:05', 'position': 'A1', 'title': 'Wildfire'},
                                {'duration': '8:23', 'position': 'A2', 'title': 'Atropos'},
@@ -4337,7 +4405,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '5': 'pYe1uNaP0aM',
                          '6': 'kDgNhyz-z5s',
                          '7': 'd5968yqaplA',
-                         '8': 'z7HL2J_GHGU'}},
+                         '8': 'z7HL2J_GHGU'},
+            'ytPlaylistId': 'OLAK5uy_mUnBw5wwMQIRYIaKeg8T_-YfzH9M6d26M'},
  26690690: {'defaultYtVideoId': 'etbjaSf6Sqo',
             'fallbackTracks': [{'duration': '0:53',
                                 'position': 'A1',
@@ -4399,7 +4468,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
             'fullAlbumYtDuration': 2539,
             'fullAlbumYtVideoId': 'Q3ZvbcbskYA',
             'trackDurations': {'1': '3:59', '8': '4:09'},
-            'trackIds': {'1': 'j9Mh6ea67hk', '3': 'Q3ZvbcbskYA', '8': 'CmOrHwWbQ0c'}},
+            'trackIds': {'1': 'j9Mh6ea67hk', '3': 'Q3ZvbcbskYA', '8': 'CmOrHwWbQ0c'},
+            'ytPlaylistId': 'OLAK5uy_n3M4MFDDSmFbFMwI08V3banBAptO_nk88'},
  26847641: {'defaultYtVideoId': 'n5JQnbI5aMM',
             'fallbackTracks': [{'duration': '4:53', 'position': 'A1', 'title': 'Sweet Machine'},
                                {'duration': '3:20', 'position': 'A2', 'title': 'Blemish'},
@@ -4429,7 +4499,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                '7': '4:18',
                                '8': '2:43',
                                '9': '5:27'},
-            'trackIds': {'0': 'n5JQnbI5aMM'}},
+            'trackIds': {'0': 'n5JQnbI5aMM'},
+            'ytPlaylistId': 'OLAK5uy_l_dGXXw7fY14_69904D7x3PixAi4Q2m-Q'},
  26917130: {'defaultYtVideoId': 'yR-WREcnzu4',
             'fallbackTracks': [{'duration': '1:02', 'position': 'A1', 'title': 'Wounds'},
                                {'duration': '4:02', 'position': 'A2', 'title': 'Crawl Back'},
@@ -4459,7 +4530,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                '7': '2:30',
                                '8': '5:04',
                                '9': '5:01'},
-            'trackIds': {'1': 'yR-WREcnzu4', '3': '4YMFgzNW8yE', '6': 'lJMjCDb9_zg'}},
+            'trackIds': {'1': 'yR-WREcnzu4', '3': '4YMFgzNW8yE', '6': 'lJMjCDb9_zg'},
+            'ytPlaylistId': 'OLAK5uy_lyLiQgJuukdlcjX3HhjEa2XWrFeuIpE3k'},
  26986229: {'defaultYtVideoId': 'c3ftYYCi49o',
             'fallbackTracks': [{'duration': '4:20',
                                 'position': 'A1',
@@ -4492,7 +4564,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
             'trackIds': {'0': 'c3ftYYCi49o',
                          '3': 'TiV1RDfUe2Q',
                          '6': 'AwN96GwlfkY',
-                         '8': 'BcMArGz2_TU'}},
+                         '8': 'BcMArGz2_TU'},
+            'ytPlaylistId': 'OLAK5uy_m56JCuvfEHEiyB_FZI7gLmgjFoUIacxg4'},
  27066432: {'defaultYtVideoId': 'pOHvJuGwZJo',
             'fallbackTracks': [{'duration': '2:57', 'position': 'A1', 'title': 'Tokyo Chainsaw'},
                                {'duration': '3:25', 'position': 'A2', 'title': 'Artificial Dose'},
@@ -4514,7 +4587,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                '7': '2:45',
                                '8': '3:24',
                                '9': '3:36'},
-            'trackIds': {'2': 'pOHvJuGwZJo', '4': '_KEdxh2FdwI', '6': 'JEI8nnlb0O8'}},
+            'trackIds': {'2': 'pOHvJuGwZJo', '4': '_KEdxh2FdwI', '6': 'JEI8nnlb0O8'},
+            'ytPlaylistId': 'OLAK5uy_lF0p5h_HhiIwhHPlNqXeuhxK2pEm83Vww'},
  27079776: {'defaultYtVideoId': 'xRLhcp_daow',
             'fallbackTracks': [{'duration': '3:03',
                                 'position': 'A1',
@@ -4551,7 +4625,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                '6': '3:44',
                                '7': '3:48',
                                '8': '3:26',
-                               '9': '4:09'}},
+                               '9': '4:09'},
+            'ytPlaylistId': 'OLAK5uy_n_502--oFhnzMN4LO3gNPUPFPHLuz4o1c'},
  27137034: {'defaultYtVideoId': 'c3ftYYCi49o',
             'fallbackTracks': [{'duration': '4:20',
                                 'position': 'A1',
@@ -4584,7 +4659,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
             'trackIds': {'0': 'c3ftYYCi49o',
                          '3': 'TiV1RDfUe2Q',
                          '6': 'AwN96GwlfkY',
-                         '8': 'BcMArGz2_TU'}},
+                         '8': 'BcMArGz2_TU'},
+            'ytPlaylistId': 'OLAK5uy_m56JCuvfEHEiyB_FZI7gLmgjFoUIacxg4'},
  27611781: {'defaultYtVideoId': 'M89t4Wge_b4',
             'fallbackTracks': [{'duration': '3:29', 'position': 'A1', 'title': 'Luminesce'},
                                {'duration': '', 'position': 'A2', 'title': 'Irreversible'},
@@ -4602,7 +4678,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
             'trackIds': {'0': 'M89t4Wge_b4',
                          '2': 'KEa2JU3sySQ',
                          '5': 'naEFwVvEx1M',
-                         '6': 'Mdqtx1NwXtw'}},
+                         '6': 'Mdqtx1NwXtw'},
+            'ytPlaylistId': 'OLAK5uy_nVLTKxj1YGqdbeFmxejmpmCK3Zu_4e2xA'},
  27717681: {'defaultYtVideoId': 'hK8cjJ8kv8I',
             'fallbackTracks': [{'duration': '4:43', 'position': 'A1', 'title': 'Breach'},
                                {'duration': '4:05', 'position': 'A2', 'title': 'Monolith'},
@@ -4640,7 +4717,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                 'title': 'Valhalla (Too Young To See)'},
                                {'duration': '5:55', 'position': 'C13', 'title': 'Spirits'}],
             'trackDurations': {'12': '5:55'},
-            'trackIds': {'12': 'YwvAgY3_Ju8'}},
+            'trackIds': {'12': 'YwvAgY3_Ju8'},
+            'ytPlaylistId': 'OLAK5uy_mAj5cOEMGw1sXigzAiy-ScpVRDBCiaLAE'},
  27938112: {'fallbackTracks': [{'duration': '4:15', 'position': 'A1', 'title': 'Indigo'},
                                {'duration': '3:51', 'position': 'A2', 'title': 'Agora'},
                                {'duration': '3:29', 'position': 'A3', 'title': 'White Wolf'},
@@ -4662,7 +4740,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                '6': '3:36',
                                '7': '3:17',
                                '8': '4:00',
-                               '9': '4:17'}},
+                               '9': '4:17'},
+            'ytPlaylistId': 'OLAK5uy_nH8ngOOvsI_Pze-6ZXbMMk7IimdAHRlSA'},
  27945363: {'defaultYtVideoId': 'W4ocPPhtglU',
             'fallbackTracks': [{'duration': '3:24',
                                 'position': 'A1',
@@ -4723,7 +4802,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
             'fullAlbumYtDuration': 2771,
             'fullAlbumYtVideoId': 'hQ8p09u3umU',
             'trackDurations': {'3': '4:14'},
-            'trackIds': {'3': 'AvECsj3mIF8'}},
+            'trackIds': {'3': 'AvECsj3mIF8'},
+            'ytPlaylistId': 'OLAK5uy_l_r54bht81OxZc7HEGwo-VYjMyXF0B23c'},
  28269505: {'defaultYtVideoId': 'LvLMaL0THhw',
             'fallbackTracks': [{'duration': '6:06', 'position': 'A1', 'title': 'Natural Disaster'},
                                {'duration': '5:46', 'position': 'A2', 'title': 'Echoes'},
@@ -4743,7 +4823,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                '6': '4:57',
                                '7': '6:34',
                                '8': '9:34'},
-            'trackIds': {'2': 'LvLMaL0THhw', '3': 'pHZXTmPnMso', '5': 'UnkpPIupQxM'}},
+            'trackIds': {'2': 'LvLMaL0THhw', '3': 'pHZXTmPnMso', '5': 'UnkpPIupQxM'},
+            'ytPlaylistId': 'OLAK5uy_lQOktvWAETx83nPmZDvRlf2GXhEgXDo_c'},
  28518913: {'defaultYtVideoId': 'V8N6aKcdh54',
             'fallbackTracks': [{'duration': '', 'position': 'A1', 'title': 'The Ring In Return'},
                                {'duration': '',
@@ -4817,7 +4898,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
             'trackIds': {'0': 'WvD5aMsD1HA',
                          '2': 'jHjtiJ33qME',
                          '3': 'TXXrDlgoBaM',
-                         '4': 'ei7NnTF24-k'}},
+                         '4': 'ei7NnTF24-k'},
+            'ytPlaylistId': 'OLAK5uy_kyX9a4-O_fGMRC_-RshqXKdqT31ZWwxWg'},
  28844782: {'defaultYtVideoId': '4RtpvN42zM8',
             'fallbackTracks': [{'duration': '', 'position': 'A1', 'title': 'Fast Forward To 2012'},
                                {'duration': '', 'position': 'A2', 'title': 'Speak Of The Devil'},
@@ -4840,7 +4922,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                 'title': "I Heard It's The Softest Thing Ever"},
                                {'duration': '', 'position': 'B12', 'title': 'Start The Shooting'}],
             'trackDurations': {'2': '3:02', '3': '4:09'},
-            'trackIds': {'2': '4RtpvN42zM8', '3': 'N1MujfQqLIg'}},
+            'trackIds': {'2': '4RtpvN42zM8', '3': 'N1MujfQqLIg'},
+            'ytPlaylistId': 'OLAK5uy_kVU1cAg0d6I8qkMYXSspjIxoLXrml8JNk'},
  28895677: {'defaultYtVideoId': 'JV3lFDVisaI',
             'fallbackTracks': [{'duration': '4:05',
                                 'position': 'A1',
@@ -4895,7 +4978,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': 'BYkNL_9Bwnw',
                          '7': 'ZqGilQMDFSA',
                          '8': 'uMLGj3zxKiQ',
-                         '9': '0mdjlRd5F2M'}},
+                         '9': '0mdjlRd5F2M'},
+            'ytPlaylistId': 'OLAK5uy_kNeny3Vsr4fkAfq4pEwmhb6b6FylDLrXY'},
  29075062: {'defaultYtVideoId': 'fl0Z72PoDdY',
             'fallbackTracks': [{'duration': '',
                                 'position': 'A1',
@@ -4917,7 +5001,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
             'fullAlbumYtDuration': 2062,
             'fullAlbumYtVideoId': 'OYHf4PNvOJk',
             'trackDurations': {'1': '3:19', '2': '2:19'},
-            'trackIds': {'1': 'fl0Z72PoDdY', '2': 'cg0rYWJ3xlc'}},
+            'trackIds': {'1': 'fl0Z72PoDdY', '2': 'cg0rYWJ3xlc'},
+            'ytPlaylistId': 'OLAK5uy_mMWsx4iA37EP_9-VTXsRA5iqJOV-rZRYY'},
  29237467: {'defaultYtVideoId': 'rmtU2WJfPgU',
             'fallbackTracks': [{'duration': '3:57',
                                 'position': 'A1',
@@ -4949,7 +5034,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                '7': '7:44',
                                '8': '3:54',
                                '9': '4:37'},
-            'trackIds': {'2': 'rmtU2WJfPgU', '6': 'L7cH6o_sblg'}},
+            'trackIds': {'2': 'rmtU2WJfPgU', '6': 'L7cH6o_sblg'},
+            'ytPlaylistId': 'OLAK5uy_nO1MNY2y0cD6vS5TnjQp8Z7vhLRRlSf1w'},
  29410045: {'defaultYtVideoId': 'Ip9xWCO8rdo',
             'fallbackTracks': [{'duration': '4:51', 'position': 'A1', 'title': 'Insomnia'},
                                {'duration': '5:06', 'position': 'A2', 'title': 'The Walk'},
@@ -4985,7 +5071,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': '4ZjEwB-fx3Q',
                          '7': 'MfOnq-zXXBw',
                          '8': 'bETk3KhNxvY',
-                         '9': 'CC6sLtqO4C8'}},
+                         '9': 'CC6sLtqO4C8'},
+            'ytPlaylistId': 'OLAK5uy_lrGG8NasaVgZNiq16r35i0Yb1i_IXwHwc'},
  29410354: {'defaultYtVideoId': 'M_B-uWfHFiY',
             'fallbackTracks': [{'duration': '1:25', 'position': 'A1', 'title': 'Reprise'},
                                {'duration': '5:53', 'position': 'A2', 'title': 'The Bad Thing'},
@@ -5002,7 +5089,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                '3': '3:55',
                                '4': '3:43',
                                '5': '11:44',
-                               '6': '7:35'}},
+                               '6': '7:35'},
+            'ytPlaylistId': 'OLAK5uy_lw6Oht1su02wNjx4lgLwrIdxL5wth-9Og'},
  29410450: {'defaultYtVideoId': 'U1hHsTYdXxY',
             'fallbackTracks': [{'duration': '4:16', 'position': 'A1', 'title': 'A Black Minute'},
                                {'duration': '2:50', 'position': 'A2', 'title': 'MK Ultra'},
@@ -5026,7 +5114,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                '7': '4:39',
                                '8': '2:17',
                                '9': '6:16'},
-            'trackIds': {'5': 'U1hHsTYdXxY'}},
+            'trackIds': {'5': 'U1hHsTYdXxY'},
+            'ytPlaylistId': 'OLAK5uy_l52lt9IONBpWa8hyZcAIWi-HHNnOgBKLE'},
  29410576: {'fallbackTracks': [{'duration': '', 'position': 'A1', 'title': 'New Groove'},
                                {'duration': '', 'position': 'A2', 'title': 'Frak The Gods'},
                                {'duration': '',
@@ -5043,7 +5132,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                 'position': 'B2',
                                 'title': 'Icarus Lives! (Peteyg Remix)'},
                                {'duration': '', 'position': 'B3', 'title': 'Captain On'},
-                               {'duration': '', 'position': 'B4', 'title': 'Eureka'}]},
+                               {'duration': '', 'position': 'B4', 'title': 'Eureka'}],
+            'ytPlaylistId': 'OLAK5uy_ndh5rndKq5Jou0G6JokLvYszjwVQhv9U0'},
  29425159: {'defaultYtVideoId': 'cjU88QrCoDk',
             'fallbackTracks': [{'duration': '2:53', 'position': 'A1', 'title': 'Hurt'},
                                {'duration': '3:24', 'position': 'A2', 'title': 'One Car Garage'},
@@ -5071,7 +5161,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '3': 'Go4k8gXbKW8',
                          '4': 'aaH3ud1utB0',
                          '5': 'Ro6Zo4BhMW4',
-                         '9': 'tBtenlHt2sA'}},
+                         '9': 'tBtenlHt2sA'},
+            'ytPlaylistId': 'OLAK5uy_nQaXefGC4soVxQTvPAYBiKmFmk9jbmvNE'},
  29592373: {'defaultYtVideoId': 'Pi81RThE7NU',
             'fallbackTracks': [{'duration': '',
                                 'position': 'A1',
@@ -5093,7 +5184,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '11': 'mGGcXba3bDM',
                          '2': 'H6IWR0UHNbA',
                          '3': 'NAnPPArDKrs',
-                         '5': 'wiEno0KE5uU'}},
+                         '5': 'wiEno0KE5uU'},
+            'ytPlaylistId': 'OLAK5uy_kSEJxA44Mdz12lQs2Gkaq8a-dy63U-424'},
  29631781: {'defaultYtVideoId': 'TYrB2HustCs',
             'fallbackTracks': [{'duration': '3:30', 'position': 'A1', 'title': 'Living Together'},
                                {'duration': '4:03',
@@ -5148,7 +5240,6 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '7': 'aossqmZEbto',
                          '8': 'MAp3uAk-poo',
                          '9': 'zS9iiXm97aQ'},
-            'ytEmbedPlaylistId': 'PL-XbTEkQt3TaP-bdGSGscA4Ci5XGIANhn',
             'ytPlaylistId': 'OLAK5uy_m80Evo-9vz_8XceYZ5xiRnlvifZRSAfCA'},
  30245600: {'defaultYtVideoId': 'QwhwskB_eWo',
             'fallbackTracks': [{'duration': '',
@@ -5178,7 +5269,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                 'position': 'B10',
                                 'title': 'Shallow Water Blackout'}],
             'trackDurations': {'2': '3:43', '3': '4:36', '5': '3:50'},
-            'trackIds': {'2': 'QwhwskB_eWo', '3': '3Ag1xxjNY8Y', '5': 'me1N0Z_JPNA'}},
+            'trackIds': {'2': 'QwhwskB_eWo', '3': '3Ag1xxjNY8Y', '5': 'me1N0Z_JPNA'},
+            'ytPlaylistId': 'OLAK5uy_nTxQhMjPawdDRWhRUa3UM82zc8raIlzKU'},
  30637357: {'defaultYtVideoId': 'RAuuVY__KQ0',
             'fallbackTracks': [{'duration': '', 'position': 'A1', 'title': 'Thirst'},
                                {'duration': '', 'position': 'A2', 'title': 'Piece By Piece'},
@@ -5224,7 +5316,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                 'position': 'B4',
                                 'title': 'Some Will Seek Forgiveness, Others Escape'}],
             'trackDurations': {'3': '4:33', '5': '4:08'},
-            'trackIds': {'0': 'MXHikpA5COo', '3': 'ENLw_1TK6Ms', '5': 'SCwNG1YqhEU'}},
+            'trackIds': {'0': 'MXHikpA5COo', '3': 'ENLw_1TK6Ms', '5': 'SCwNG1YqhEU'},
+            'ytPlaylistId': 'OLAK5uy_mPdQEalWg_GLt27Npc8zD1VcNTLf5Tndk'},
  31699214: {'fallbackTracks': [{'duration': '4:18', 'position': 'A1', 'title': 'The A Team'},
                                {'duration': '3:05', 'position': 'A2', 'title': 'Lego House'},
                                {'duration': '8:46', 'position': 'A3', 'title': 'Give Me Love'},
@@ -5270,7 +5363,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                '6': '5:00',
                                '7': '4:19',
                                '8': '4:01',
-                               '9': '4:59'}},
+                               '9': '4:59'},
+            'ytPlaylistId': 'OLAK5uy_mjKk-VPFexO23IJs5-Ka0yl86vAEMQyiU'},
  31909216: {'defaultYtVideoId': 'ews1N1ICK2o',
             'fallbackTracks': [{'duration': '', 'position': 'A1', 'title': 'A Flash Of Light'},
                                {'duration': '', 'position': 'A2', 'title': 'Remnant'},
@@ -5363,7 +5457,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '19': 'Yo5fE-Zl-V4',
                          '2': '-cxsTDnRN7M',
                          '3': 'BXUb0WqkJbQ',
-                         '8': 'TbUAtnWwADI'}},
+                         '8': 'TbUAtnWwADI'},
+            'ytPlaylistId': 'OLAK5uy_k1TY3T2806F86ZcEcjtA73Iij5bR21pDY'},
  32367897: {'defaultYtVideoId': 'PnWP7cAf-bk',
             'fallbackTracks': [{'duration': '', 'position': 'A1', 'title': 'The Warning'},
                                {'duration': '', 'position': 'A2', 'title': 'Weaponized'},
@@ -5391,7 +5486,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '3': 'vSW5gBfdR_8',
                          '4': 'V7GGewgpzac',
                          '5': '8Of9aA2pFrE',
-                         '8': 'bAp3BPUfj2o'}},
+                         '8': 'bAp3BPUfj2o'},
+            'ytPlaylistId': 'OLAK5uy_nq9Q9Qzb2F0jPNoY1hntGotrVjAxpm930'},
  33201711: {'defaultYtVideoId': 'TuGCBQoYOu0',
             'fallbackTracks': [{'duration': '3:09',
                                 'position': 'A1',
@@ -5410,7 +5506,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                 'position': 'B12',
                                 'title': 'Closer Than You Think'}],
             'trackDurations': {'0': '3:09', '1': '2:48', '6': '2:47'},
-            'trackIds': {'0': 'TuGCBQoYOu0', '1': 'iXVnysmQ4e0', '6': 'nVmA9o4d3Kk'}},
+            'trackIds': {'0': 'TuGCBQoYOu0', '1': 'iXVnysmQ4e0', '6': 'nVmA9o4d3Kk'},
+            'ytPlaylistId': 'OLAK5uy_lIkaYY04_idWM6JdlC7OniiC6AgKBR0L8'},
  33303678: {'defaultYtVideoId': 'eoVExOdCpjs',
             'fallbackTracks': [{'duration': '4:22', 'position': 'A1', 'title': 'Fata Morgana'},
                                {'duration': '3:25', 'position': 'A2', 'title': 'Black Rainbow'},
@@ -5446,7 +5543,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': '5iAxY26Kkqk',
                          '7': 'YfKlcLKDkz0',
                          '8': '7-0tw8EaUas',
-                         '9': 'ProbP9H_fb4'}},
+                         '9': 'ProbP9H_fb4'},
+            'ytPlaylistId': 'OLAK5uy_mfdx_C0pR6XdVKoGGoXHVRdQlvEVtjw0c'},
  33399134: {'defaultYtVideoId': 'EPPFiG1rrs4',
             'fallbackTracks': [{'duration': '3:25', 'position': 'A1', 'title': "Yesterday's Lost"},
                                {'duration': '4:28', 'position': 'A2', 'title': 'Goodbye, Sunshine'},
@@ -5558,7 +5656,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                '6': '1:09',
                                '7': '4:04',
                                '8': '3:45',
-                               '9': '3:06'}},
+                               '9': '3:06'},
+            'ytPlaylistId': 'OLAK5uy_lCqfGIDbB07X9aB5flGvRRzkNOqIpS-kk'},
  34691910: {'defaultYtVideoId': 'k2Wi7zw1gbI',
             'fallbackTracks': [{'duration': '4:45', 'position': 'A1', 'title': 'Pray For Rain'},
                                {'duration': '2:46', 'position': 'A2', 'title': 'Hypermania'},
@@ -5587,7 +5686,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '4': 'dcHVeRifwyE',
                          '6': 'nDbCp0h4DA4',
                          '7': 'PwsXyPmOos4',
-                         '8': 'ZoyhIZhTKEc'}},
+                         '8': 'ZoyhIZhTKEc'},
+            'ytPlaylistId': 'OLAK5uy_kUMQd_oA9-98o1QObED5Sdk1DVrv8dz4Y'},
  34756244: {'defaultYtVideoId': 'DzeqwQ79BWg',
             'fallbackTracks': [{'duration': '', 'position': 'A1', 'title': 'God Fearing Man'},
                                {'duration': '3:48',
@@ -5650,7 +5750,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '5': 'dnJUQLvWBFg',
                          '6': '-CpdcR8NoOA',
                          '7': '2dHXIZd-4c4',
-                         '9': '8wuC6cRbrBo'}},
+                         '9': '8wuC6cRbrBo'},
+            'ytPlaylistId': 'OLAK5uy_keZWRyTFJmt32EBBMTrJOx-wswzPKxtzM'},
  34889219: {'defaultYtVideoId': 'BlopBb_b35w',
             'fallbackTracks': [{'duration': '3:15',
                                 'position': 'A1',
@@ -5710,7 +5811,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': 'Qo6qhaZ119E',
                          '7': 'HBcy-8zzpaw',
                          '8': 'KLUdsIO_o7M',
-                         '9': 'ZQFFPR5Nkno'}},
+                         '9': 'ZQFFPR5Nkno'},
+            'ytPlaylistId': 'OLAK5uy_loOCEyqN60cloZEjkXELlwStJlmrp2RJk'},
  35331742: {'defaultYtVideoId': 'Y5uLleCmm6k',
             'fallbackTracks': [{'duration': '', 'position': 'A1', 'title': 'The Ugly Organist'},
                                {'duration': '1:49',
@@ -5733,7 +5835,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '1': 'F8klp9ro19Q',
                          '2': 'HgndBKP7nIE',
                          '3': '9JcFgL2qO9Y',
-                         '9': '-lLiYdcN2YE'}},
+                         '9': '-lLiYdcN2YE'},
+            'ytPlaylistId': 'OLAK5uy_mKxnfH8ow6LSdNUA41GJRKc6Y9e5bArfA'},
  35336893: {'defaultYtVideoId': 'dgJFyar1yqY',
             'fallbackTracks': [{'duration': '4:36', 'position': 'A1', 'title': 'Escape'},
                                {'duration': '3:42', 'position': 'A2', 'title': 'Anatomy'},
@@ -5745,7 +5848,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '1': 'xcl4jJnucOo',
                          '2': 'cLA86Bjmnmg',
                          '3': 'Eou5nuDVbQY',
-                         '4': '6wuNgaq0MpE'}},
+                         '4': '6wuNgaq0MpE'},
+            'ytPlaylistId': 'OLAK5uy_m7Y8tMiJQACbFB4fIVPxwUijUP215LpRk'},
  35426350: {'defaultYtVideoId': 'hkofx4TkHXc',
             'fallbackTracks': [{'duration': '6:51', 'position': 'A1', 'title': 'Dystopia'},
                                {'duration': '5:18', 'position': 'A2', 'title': 'Hexes'},
@@ -5767,7 +5871,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                '6': '3:35',
                                '7': '5:29',
                                '8': '5:40'},
-            'trackIds': {'1': 'hkofx4TkHXc', '2': 'jO_Cp-Qlg5E'}},
+            'trackIds': {'1': 'hkofx4TkHXc', '2': 'jO_Cp-Qlg5E'},
+            'ytPlaylistId': 'OLAK5uy_nl9ox5WjQcz-DV7V6l5G5YhJXZHT0CFyA'},
  35485618: {'defaultYtVideoId': 'JOBvn6ZLNxg',
             'fallbackTracks': [{'duration': '3:31', 'position': 'A1', 'title': 'The Casualty'},
                                {'duration': '3:58', 'position': 'A2', 'title': 'The Martyr'},
@@ -5805,7 +5910,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '5': 'mDMumuVOh90',
                          '6': 'fFSMY7vqSQg',
                          '7': 'Dc54n4l-ZlQ',
-                         '8': 'VvSJRSJ3mZc'}},
+                         '8': 'VvSJRSJ3mZc'},
+            'ytPlaylistId': 'OLAK5uy_nvkH8-lFcqoODuOABSNg4Ad84R4gu3eYE'},
  35668090: {'defaultYtVideoId': 'i2wPVO92_xc',
             'fallbackTracks': [{'duration': '', 'position': 'A1', 'title': 'Intro'},
                                {'duration': '3:34', 'position': 'A2', 'title': 'Tenderoni'},
@@ -5839,7 +5945,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '4': 'qIQxIXtulpU',
                          '5': 'WXF2IUEMh-U',
                          '8': 'pjOJn88ZfHc',
-                         '9': '0e8xwp6L3XY'}},
+                         '9': '0e8xwp6L3XY'},
+            'ytPlaylistId': 'OLAK5uy_m4g3UrtA59YWqjN3MnAm5nVm7om4p7TMc'},
  35720014: {'defaultYtVideoId': '7xeFcjtnAQ0',
             'fallbackTracks': [{'duration': '', 'position': 'A1', 'title': 'Absence Persistent'},
                                {'duration': '', 'position': 'A2', 'title': 'Shade Astray'},
@@ -5867,7 +5974,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '4': 'tZ8mdAHBbwI',
                          '6': '1iwNEukbK48',
                          '7': '1RV7ipCoJiE',
-                         '8': 'm6VI_Iw_TeY'}},
+                         '8': 'm6VI_Iw_TeY'},
+            'ytPlaylistId': 'OLAK5uy_myxml01PaIU5ELofrBaYDGT3XBa_uWVfg'},
  35844325: {'defaultYtVideoId': 'BtqfFZQfSq4',
             'fallbackTracks': [{'duration': '', 'position': 'A1', 'title': 'Firebreather'},
                                {'duration': '', 'position': 'A2', 'title': 'The Messenger'},
@@ -5881,7 +5989,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                {'duration': '', 'position': 'D4', 'title': 'Night Diving'},
                                {'duration': '', 'position': 'D5', 'title': 'The Whaler'},
                                {'duration': '', 'position': 'D6', 'title': 'Kings Upon The Main'}],
-            'trackIds': {'0': 'BtqfFZQfSq4'}},
+            'trackIds': {'0': 'BtqfFZQfSq4'},
+            'ytPlaylistId': 'OLAK5uy_mC6g2YkEri9_EYxV5eLRTTgeqZlKbVoxg'},
  35844376: {'defaultYtVideoId': 'CI0xoI6WwOY',
             'fallbackTracks': [{'duration': '2:59', 'position': 'A1', 'title': 'Identity Crisis'},
                                {'duration': '', 'position': 'A2', 'title': 'Phoenix Ignition'},
@@ -5897,7 +6006,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                {'duration': '', 'position': 'B10', 'title': 'Under Par'},
                                {'duration': '', 'position': 'B11', 'title': 'T & C'}],
             'trackDurations': {'0': '2:59'},
-            'trackIds': {'0': 'CI0xoI6WwOY'}},
+            'trackIds': {'0': 'CI0xoI6WwOY'},
+            'ytPlaylistId': 'OLAK5uy_mf2flzAAdEJpDM2Px6HKywVYhNtRtsQlg'},
  35852386: {'defaultYtVideoId': '-S2MvjRyhK8',
             'fallbackTracks': [{'duration': '', 'position': 'A1', 'title': 'Broken Lungs'},
                                {'duration': '', 'position': 'A2', 'title': 'The Sky Is Falling'},
@@ -5914,7 +6024,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                 'title': 'The Earth Isn’t Humming'},
                                {'duration': '', 'position': 'D4', 'title': 'The Lion And The Wolf'},
                                {'duration': '', 'position': 'D5', 'title': 'Come All You Weary'},
-                               {'duration': '', 'position': 'D6', 'title': 'Child Of Dust'}]},
+                               {'duration': '', 'position': 'D6', 'title': 'Child Of Dust'}],
+            'ytPlaylistId': 'OLAK5uy_mcL1hGiCbh0_ugF2nwwZMR8blnxIAHQgo'},
  35907826: {'defaultYtVideoId': '5Oc0ja19_GU',
             'fallbackTracks': [{'duration': '4:35', 'position': 'A1', 'title': 'Doomed'},
                                {'duration': '3:57', 'position': 'A2', 'title': 'Happy Song'},
@@ -5944,7 +6055,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '5': 'k48k3BUdcXQ',
                          '7': '57F_JVBkyks',
                          '8': 'TkV5709EG5M',
-                         '9': 'HYd9B6YvIHM'}},
+                         '9': 'HYd9B6YvIHM'},
+            'ytPlaylistId': 'OLAK5uy_kNn5zFAuN_kPSGiMTxIjQaPAzjg5uRs2A'},
  36085903: {'defaultYtVideoId': 'PagSv406kvk',
             'fallbackTracks': [{'duration': '3:13',
                                 'position': 'A1',
@@ -5965,7 +6077,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
             'fullAlbumYtDuration': 2612,
             'fullAlbumYtVideoId': 'EnKllQmSIoE',
             'trackDurations': {'0': '3:13', '1': '5:31', '7': '4:04'},
-            'trackIds': {'0': 'PagSv406kvk', '1': 'zb-bnOJ_L-k', '7': '8RXgpfZE17w'}},
+            'trackIds': {'0': 'PagSv406kvk', '1': 'zb-bnOJ_L-k', '7': '8RXgpfZE17w'},
+            'ytPlaylistId': 'OLAK5uy_m9E7xa5p-78BfK-ace3bPyZvP8_WBBwrI'},
  36224473: {'defaultYtVideoId': 'nVEZlujnPR8',
             'fallbackTracks': [{'duration': '2:42', 'position': 'A1', 'title': 'The End'},
                                {'duration': '3:25', 'position': 'A2', 'title': 'Too Late'},
@@ -6018,7 +6131,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '4': 'i6xNOW3dWy8',
                          '7': '9eTUjbiuheY',
                          '8': '7NCtXJPcxOk',
-                         '9': '1SYYjaVyqd4'}},
+                         '9': '1SYYjaVyqd4'},
+            'ytPlaylistId': 'OLAK5uy_kh3lq60Rr_CSZbJjiQkQsbeXLw21gRjdI'},
  36282118: {'defaultYtVideoId': 'JnSGdUorfBs',
             'fallbackTracks': [{'duration': '3:11', 'position': 'A1', 'title': '94 Hours'},
                                {'duration': '2:33',
@@ -6063,7 +6177,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': 'omZTfLkLyfw',
                          '7': 'mjhBdKn2hIg',
                          '8': 'JbSrblmYBYw',
-                         '9': 'FY6lGrESA6M'}},
+                         '9': 'FY6lGrESA6M'},
+            'ytPlaylistId': 'OLAK5uy_mqNK-E-FzOMzC1DXCQr_l6NHcIXPqF7zI'},
  36342703: {'defaultYtVideoId': '4tGapndn0K8',
             'fallbackTracks': [{'duration': '', 'position': 'A1', 'title': 'It Only Gets Darker'},
                                {'duration': '', 'position': 'A2', 'title': 'My Severance'},
@@ -6086,7 +6201,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                 'position': 'B5',
                                 'title': 'Rise & Fall (Instrumental)'}],
             'fullAlbumYtDuration': 1202,
-            'fullAlbumYtVideoId': '4tGapndn0K8'},
+            'fullAlbumYtVideoId': '4tGapndn0K8',
+            'ytPlaylistId': 'OLAK5uy_mAw2qQ1eqOrJkTYM9ti-0m1B3fR-Ln2dw'},
  36666961: {'fallbackTracks': [{'duration': '3:54', 'position': 'A1', 'title': 'Stelliform'},
                                {'duration': '3:31', 'position': 'A2', 'title': 'Further Eden'},
                                {'duration': '3:51', 'position': 'A3', 'title': 'Gore Of Being'},
@@ -6116,7 +6232,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                '6': '3:40',
                                '7': '4:17',
                                '8': '3:06',
-                               '9': '3:30'}},
+                               '9': '3:30'},
+            'ytPlaylistId': 'OLAK5uy_mqq7vqGNHf9guXDZ0X6PXPBEI60LtrY5M'},
  36763201: {'defaultYtVideoId': 'O_IIAYZL1R4',
             'fallbackTracks': [{'duration': '3:09', 'position': 'A1', 'title': 'Feiticeria'},
                                {'duration': '4:15', 'position': 'A2', 'title': 'Digital Bath'},
@@ -6145,7 +6262,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
             'trackIds': {'0': 'YKY3jpl99XM',
                          '1': 'O_IIAYZL1R4',
                          '4': 'hbknq6azohw',
-                         '9': 'WPpDyIJdasg'}},
+                         '9': 'WPpDyIJdasg'},
+            'ytPlaylistId': 'OLAK5uy_nNY4jMVsAwHmoQMPBtVJizcKzfGeVOUyQ'},
  36897417: {'defaultYtVideoId': 'L8CEs2tvKy0',
             'fallbackTracks': [{'duration': '3:17', 'position': 'A1', 'title': 'Cellophane'},
                                {'duration': '3:51', 'position': 'A2', 'title': 'Disappear'},
@@ -6234,7 +6352,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': '8Zoq-H4oV0E',
                          '7': 'H2Fkt3JkJbk',
                          '8': 'pmn8hU_B4l8',
-                         '9': 'd-Kh4wOoNKY'}},
+                         '9': 'd-Kh4wOoNKY'},
+            'ytPlaylistId': 'OLAK5uy_lW0d-1b1Vn3DQhmQIiTDgcPEj2ztoz8Cw'},
  37023150: {'defaultYtVideoId': 'Ft1p8USWKHs',
             'fallbackTracks': [{'duration': '4:02', 'position': 'A1', 'title': 'soma.exe'},
                                {'duration': '4:14', 'position': 'A2', 'title': 'obelisk.exe'},
@@ -6268,7 +6387,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '5': 'azPPevjRDAA',
                          '6': 'z3F8h1FrMTg',
                          '7': 'hQdZvNeka0A',
-                         '9': '4jLSP45kpnY'}},
+                         '9': '4jLSP45kpnY'},
+            'ytPlaylistId': 'OLAK5uy_n3bgQc3UixEaGNm49V_8euewYtYKAKl1g'},
  37058814: {'defaultYtVideoId': 'laIcNXtFLdM',
             'fallbackTracks': [{'duration': '4:53', 'position': 'A1', 'title': 'Lament'},
                                {'duration': '4:09', 'position': 'A2', 'title': 'Nascent'},
@@ -6294,7 +6414,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                '7': '4:51',
                                '8': '2:38',
                                '9': '1:29'},
-            'trackIds': {'0': 'laIcNXtFLdM', '1': 'grwmUTrO180'}},
+            'trackIds': {'0': 'laIcNXtFLdM', '1': 'grwmUTrO180'},
+            'ytPlaylistId': 'OLAK5uy_nRdhmCYcV613lAW5mBcaZkUksZaRzG0j4'},
  37084122: {'defaultYtVideoId': 'FncfMa-Umcs',
             'fallbackTracks': [{'duration': '1:21', 'position': 'A1', 'title': 'Kinda Hard'},
                                {'duration': '', 'position': 'A2', 'title': 'Twice'},
@@ -6392,7 +6513,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '1': 'jFxwz-ZaUog',
                          '2': 'L11p2rJzSwc',
                          '3': 'T2MiAJClD10',
-                         '4': 'tOnST5GuW80'}},
+                         '4': 'tOnST5GuW80'},
+            'ytPlaylistId': 'OLAK5uy_nzdALeNPK53gWHHU-MalutHv_EufDwUZ0'},
  37450368: {'defaultYtVideoId': 'LpMxRApFkkI',
             'fallbackTracks': [{'duration': '2:52', 'position': 'A1', 'title': 'Nihilist'},
                                {'duration': '3:53', 'position': 'A2', 'title': 'Deathwish'},
@@ -6416,7 +6538,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '1': 'NMojaaLxyjI',
                          '10': 'CoFfOv8HIEg',
                          '8': '4nXF99fI6cg',
-                         '9': 'qVuWoYi3iLw'}},
+                         '9': 'qVuWoYi3iLw'},
+            'ytPlaylistId': 'OLAK5uy_ncfV6gsBjXyer3e3SOaDSdb1_QGvSBbN4'},
  37838730: {'defaultYtVideoId': '2V9Q_ExBHHs',
             'fallbackTracks': [{'duration': '4:27', 'position': 'A1', 'title': 'Pray For Plagues'},
                                {'duration': '3:49',
@@ -6459,7 +6582,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': 'ZxARi4t1IhQ',
                          '7': '6bPvCRDPED4',
                          '8': 'vqUuRl4iHMQ',
-                         '9': 'orUreATnopI'}},
+                         '9': 'orUreATnopI'},
+            'ytPlaylistId': 'OLAK5uy_l8wBLTgm_A2SRAdbeyfcbBiqE5zKWpx6Q'},
  37848120: {'defaultYtVideoId': 'WMmA0iWI5zI',
             'fallbackTracks': [{'duration': '', 'position': 'A1', 'title': 'Obsession'},
                                {'duration': '', 'position': 'A2', 'title': 'Talk'},
@@ -6474,7 +6598,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                {'duration': '', 'position': 'D2', 'title': 'Everyone Dies Alone'},
                                {'duration': '', 'position': 'D3', 'title': 'A Pale White Dot'}],
             'fullAlbumYtDuration': 3038,
-            'fullAlbumYtVideoId': 'WMmA0iWI5zI'},
+            'fullAlbumYtVideoId': 'WMmA0iWI5zI',
+            'ytPlaylistId': 'OLAK5uy_mA0CpXx2ZLtxSlgQYKbwA6geYcArMoYzA'},
  38020071: {'defaultYtVideoId': 'GKcv_3T9-uc',
             'fallbackTracks': [{'duration': '3:33', 'position': 'A1', 'title': 'New Day'},
                                {'duration': '3:01', 'position': 'A2', 'title': 'Omertà'},
@@ -6508,7 +6633,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                {'duration': '', 'position': 'B3', 'title': 'Crush'},
                                {'duration': '', 'position': 'B4', 'title': 'Under The Knife'},
                                {'duration': '', 'position': 'B5', 'title': 'For Now'},
-                               {'duration': '', 'position': 'B6', 'title': 'Mercia'}]},
+                               {'duration': '', 'position': 'B6', 'title': 'Mercia'}],
+            'ytPlaylistId': 'OLAK5uy_lZmmFEyZyV02qsKxrCNTlJ1fjyHa0VPYk'},
  38199639: {'defaultYtVideoId': 'cBu89Oo01RI',
             'fallbackTracks': [{'duration': '5:08', 'position': 'A1', 'title': 'Squier Talk'},
                                {'duration': '4:13', 'position': 'A2', 'title': 'Más Rápido'},
@@ -6542,7 +6668,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': 'o-SURLJL-Tg',
                          '7': 'YL8Ibs5RToY',
                          '8': 'JTgpqMZpKDU',
-                         '9': 'cIYj984iNf4'}},
+                         '9': 'cIYj984iNf4'},
+            'ytPlaylistId': 'OLAK5uy_ntLtED-_t1pn-tAWxYD8S5AKgaCQucX3g'},
  38267097: {'defaultYtVideoId': 'cAkoQB6rb08',
             'fallbackTracks': [{'duration': '3:23',
                                 'position': 'A1',
@@ -6591,7 +6718,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': 'otLHxvUdUTM',
                          '7': '7xlLyxRGXNk',
                          '8': '9zwhZBRrWVc',
-                         '9': 'OLhZk5Z8Mg4'}},
+                         '9': 'OLhZk5Z8Mg4'},
+            'ytPlaylistId': 'OLAK5uy_mrQQwA3l_PWRhrugxLFr5h-RXGu8KYBhs'},
  38268432: {'defaultYtVideoId': 'aAVp8qAh9eg',
             'fallbackTracks': [{'duration': '3:24',
                                 'position': 'A1',
@@ -6646,7 +6774,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': 'hfWA3zSBnsk',
                          '7': 'iq596Y2Fa1E',
                          '8': 'RaFZXbnLjoA',
-                         '9': 'qqnGpJ0WYBE'}},
+                         '9': 'qqnGpJ0WYBE'},
+            'ytPlaylistId': 'OLAK5uy_lqG2FIU1Izi-6UrUg9nVmbVWlWqnbfjpE'},
  38337288: {'defaultYtVideoId': '2qlV4zDosvg',
             'fallbackTracks': [{'duration': '3:09', 'position': 'A1', 'title': 'Control Burns'},
                                {'duration': '3:43', 'position': 'A2', 'title': 'No Arms'},
@@ -6715,7 +6844,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': '0H-uNcxUYgI',
                          '7': 'QDESAAAltJc',
                          '8': 'rr4AFLXGBe0',
-                         '9': 'yykLfu3es8s'}},
+                         '9': 'yykLfu3es8s'},
+            'ytPlaylistId': 'OLAK5uy_md9xFDt8arSquZJoy6RYDCNg5iREaa5HM'},
  38464542: {'defaultYtVideoId': 'lUmOCaQD47k',
             'fallbackTracks': [{'duration': '3:10',
                                 'position': 'A1',
@@ -6739,7 +6869,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '1': 'uhT01Riu1V4',
                          '2': '7jlPy9qeO-o',
                          '5': '5cdglVNk18E',
-                         '6': 'LRzofo8_V4o'}},
+                         '6': 'LRzofo8_V4o'},
+            'ytPlaylistId': 'OLAK5uy_lWrrgs5vSsVkAFwol4fzYnpg4Dhqe0rZk'},
  38600733: {'defaultYtVideoId': 'k5HKMSVsUhU',
             'fallbackTracks': [{'duration': '4:13',
                                 'position': 'A1',
@@ -6779,7 +6910,8 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                          '6': 'nmEwUtHpqcU',
                          '7': 'fUlepgP0IiU',
                          '8': 'TuZEhDLiXts',
-                         '9': 'Mb1Dt50nirk'}},
+                         '9': 'Mb1Dt50nirk'},
+            'ytPlaylistId': 'OLAK5uy_mJyojXlZ8rugQG0uEnQanZygt_o2txVYU'},
  38854575: {'defaultYtVideoId': 'WMmA0iWI5zI',
             'fallbackTracks': [{'duration': '', 'position': 'A1', 'title': 'Obsession'},
                                {'duration': '', 'position': 'A2', 'title': 'Talk'},
@@ -6794,8 +6926,162 @@ VERIFIED_YTM_RELEASE_MAP: dict[int, dict[str, Any]] = {2343816: {'defaultYtVideo
                                {'duration': '', 'position': 'D2', 'title': 'Everyone Dies Alone'},
                                {'duration': '', 'position': 'D3', 'title': 'A Pale White Dot'}],
             'fullAlbumYtDuration': 3038,
-            'fullAlbumYtVideoId': 'WMmA0iWI5zI'}}
+            'fullAlbumYtVideoId': 'WMmA0iWI5zI',
+            'ytPlaylistId': 'OLAK5uy_mA0CpXx2ZLtxSlgQYKbwA6geYcArMoYzA'}}
 
+VERIFIED_YTM_ALBUM_STEM_MAP: dict[str, str] = {'156silence::fromadistance': 'OLAK5uy_nqed_ed_LDoXrCfDOMpGAsGJ6rRcfdHWI',
+ 'adaytoremember::bigolealbumvol1': 'OLAK5uy_lIkaYY04_idWM6JdlC7OniiC6AgKBR0L8',
+ 'adaytoremember::forthosewhohaveheart': 'OLAK5uy_kVU1cAg0d6I8qkMYXSspjIxoLXrml8JNk',
+ 'adaytoremember::whatseparatemefromyou': 'OLAK5uy_n0ZRkqJr8BEjnsuOQ6LW0xtJFjIjCAX0s',
+ 'allt::ataraxia': 'OLAK5uy_kh6iOuU11CT4IZ_eGOASxtc6r2sKxUrjw',
+ 'allt::fromthenewworld': 'OLAK5uy_l72qS6IlCzefr7ijRsFWijw8EFntwGhxY',
+ 'animalasleader::animalasleader': 'OLAK5uy_k4uSZOM5OcQWqjt446JaOY8QcMxILq8fQ',
+ 'animalasleader::weightles': 'OLAK5uy_k6nYq8dSdpso5zZDpHIs-HCpKXWka1xgM',
+ 'architect::allourgodhaveabandonedus': 'OLAK5uy_ncfV6gsBjXyer3e3SOaDSdb1_QGvSBbN4',
+ 'architect::daybreaker': 'OLAK5uy_n3M4MFDDSmFbFMwI08V3banBAptO_nk88',
+ 'architect::forthosethatwishtoexist': 'OLAK5uy_k9KIGR1Zw2LV1OjODWcXrThqn8pau6eHo',
+ 'architect::theclassicsymptomofabrokenspirit': 'OLAK5uy_nXy0obhpd_k0TwHlJJFg2RfG4DNbRJBSs',
+ 'asilaydying::frailwordcollapse': 'OLAK5uy_mqNK-E-FzOMzC1DXCQr_l6NHcIXPqF7zI',
+ 'asilaydying::shadowaresecurity': 'OLAK5uy_m9E7xa5p-78BfK-ace3bPyZvP8_WBBwrI',
+ 'augustburnred::guardian': 'OLAK5uy_nlHHEUr63PxvAuqVHAUjO-WrP6X8u4phA',
+ 'beartooth::thesurface': 'OLAK5uy_kybwT-y0VR8buWBdeAr73EcUVU8iPxZi0',
+ 'bilmuri::americanmotorsport': 'OLAK5uy_kh3lq60Rr_CSZbJjiQkQsbeXLw21gRjdI',
+ 'bilmuri::eggypocket': 'OLAK5uy_lWrrgs5vSsVkAFwol4fzYnpg4Dhqe0rZk',
+ 'bilmuri::kindahard': 'OLAK5uy_nVNiXv8mydkzfsuG18YOskVoG5caFRfI4',
+ 'bornofosiri::angeloralien': 'OLAK5uy_kObqb1EHEXU915LJtHvMSJs64otOYRqxI',
+ 'bornofosiri::soulsphere': 'OLAK5uy_n6irySlEQ7hBN4hLVsEdhhggxhEvyxrv4',
+ 'bornofosiri::thediscovery': 'OLAK5uy_lW0d-1b1Vn3DQhmQIiTDgcPEj2ztoz8Cw',
+ 'bornofosiri::tomorrowwediealive': 'OLAK5uy_mBBR8KQqSX4XsEW8OR9oAjn1qdm_hn1GM',
+ 'bringmethehorizon::amo': 'OLAK5uy_mF9FtSn7fe7R9LgeDpAOrGYqcT2MHH0po',
+ 'bringmethehorizon::countyourblessingrepented': 'OLAK5uy_l8wBLTgm_A2SRAdbeyfcbBiqE5zKWpx6Q',
+ 'bringmethehorizon::thatsthespirit': 'OLAK5uy_kNn5zFAuN_kPSGiMTxIjQaPAzjg5uRs2A',
+ 'chiodo::allswellthatendwell': 'OLAK5uy_lhUM49AQWi7kztmNUAuag8IkU7GF8RrOo',
+ 'chromeo::businescasual': 'OLAK5uy_k_DgO5RDvSyOGsJiBgwa5q9Bk7V8afdvI',
+ 'chromeo::fancyfootwork': 'OLAK5uy_m4g3UrtA59YWqjN3MnAm5nVm7om4p7TMc',
+ 'circasurvive::juturna': 'OLAK5uy_mrQQwA3l_PWRhrugxLFr5h-RXGu8KYBhs',
+ 'circasurvive::onlettinggo': 'OLAK5uy_m80Evo-9vz_8XceYZ5xiRnlvifZRSAfCA',
+ 'coheedandcambria::goodapolloimburningstarivvolumeonefromfearthroughtheeyeofmadnes': 'OLAK5uy_kOM4PsSMruzQrK_uIM5-iFfhCiId44-4E',
+ 'coheedandcambria::goodapolloimburningstarivvolumetwonoworldfortomorrow': 'OLAK5uy_llgJ7B3izoiZrEaEUlh73LkGM3949b71I',
+ 'coheedandcambria::inkeepingsecretofsilentearth3': 'OLAK5uy_mJBkjY9Fuc293-VQc5gBO0rycP7tS1kLg',
+ 'coheedandcambria::thecolorbeforethesun': 'OLAK5uy_lTpyBYgqxUXmYFlBEXfQ6u2rdnYIIs9uY',
+ 'coheedandcambria::thesecondstageturbineblade': 'OLAK5uy_kHtQe5MJBW8p3vFRDSf_KRbwnTHzSDos0',
+ 'coheedandcambria::vaxiiiawindowofthewakingmind': 'OLAK5uy_lBL6L6Inkx3niyxRfvlFYh-ckr70bR1iY',
+ 'coheedandcambria::vaxiiiithefatherofmakebelieve': 'OLAK5uy_kqYY6Y7uhh4hAZr23qQiUsgANfiWMeCYo',
+ 'current::allthatfollow': 'OLAK5uy_mAw2qQ1eqOrJkTYM9ti-0m1B3fR-Ln2dw',
+ 'current::theplaceifeelsafest': 'OLAK5uy_kyX9a4-O_fGMRC_-RshqXKdqT31ZWwxWg',
+ 'current::thewayitend': 'OLAK5uy_k3Th2h0ZKHLzklqgNz-Mar1zmFu762WXE',
+ 'cursive::domestica': 'OLAK5uy_nvkH8-lFcqoODuOABSNg4Ad84R4gu3eYE',
+ 'cursive::theuglyorgan': 'OLAK5uy_mKxnfH8ow6LSdNUA41GJRKc6Y9e5bArfA',
+ 'deftone::whitepony': 'OLAK5uy_nNY4jMVsAwHmoQMPBtVJizcKzfGeVOUyQ',
+ 'donbroco::amazingthing': 'OLAK5uy_nJQT2OjKkG-Uxqu09jPgmV3-l9U-i76rw',
+ 'donbroco::automatic': 'OLAK5uy_k3n2ijq66W8FD0xR0bcguKcRSi2sqgE7A',
+ 'donbroco::nightmaretripping': 'OLAK5uy_nFCSSl9okFaIiO5fAxLUx0Lh5HbNZdwgQ',
+ 'donbroco::technology': 'OLAK5uy_mCTrn6Byt4LrQG8aaAhWBYSANK6wey__Y',
+ 'edsheeran::tourcollection': 'OLAK5uy_mjKk-VPFexO23IJs5-Ka0yl86vAEMQyiU',
+ 'emarosa::131': 'OLAK5uy_nQaXefGC4soVxQTvPAYBiKmFmk9jbmvNE',
+ 'emarosa::highhorseheaven': 'OLAK5uy_nzdALeNPK53gWHHU-MalutHv_EufDwUZ0',
+ 'emarosa::peachclub': 'OLAK5uy_lOUvtM-MykSjce2eQS0l0ancNXZa7Uu_8',
+ 'emery::thequestionlive': 'OLAK5uy_myFpP_a3ylgyVFvauTQ9FesE8z6jcQ8F4',
+ 'erra::drift': 'OLAK5uy_nVLTKxj1YGqdbeFmxejmpmCK3Zu_4e2xA',
+ 'erra::neon': 'OLAK5uy_m3668wFvzraREQccAbDwX4nDAbqLv958g',
+ 'erra::silenceoutlivetheearth': 'OLAK5uy_mqq7vqGNHf9guXDZ0X6PXPBEI60LtrY5M',
+ 'everytimeidie::gutterphenomenon': 'OLAK5uy_mMWsx4iA37EP_9-VTXsRA5iqJOV-rZRYY',
+ 'everytimeidie::lastnightintown': 'OLAK5uy_nTxQhMjPawdDRWhRUa3UM82zc8raIlzKU',
+ 'everytimeidie::radical': 'OLAK5uy_nesjILKIcJfG4xDn-wJWV-ORvwYu1iDEQ',
+ 'everytimeidie::thebigdirty': 'OLAK5uy_lNdSrKW6ETaBRt2HRC3aJGYh84QpmiJkY',
+ 'fitforaking::thepath': 'OLAK5uy_ljoPWB-2aSHetsOjSgmzSw3cyqZIE3KD4',
+ 'greyhaven::emptyblack': 'OLAK5uy_l_dGXXw7fY14_69904D7x3PixAi4Q2m-Q',
+ 'greyhaven::thibrightandbeautifulworld': 'OLAK5uy_n_502--oFhnzMN4LO3gNPUPFPHLuz4o1c',
+ 'imminence::aximundi': 'OLAK5uy_mJyojXlZ8rugQG0uEnQanZygt_o2txVYU',
+ 'imminence::heaveninhiding': 'OLAK5uy_nmboIb3-gFCFMkqhl6S9abMIGjybsDIhI',
+ 'imminence::thereturnoftheblack': 'OLAK5uy_keZWRyTFJmt32EBBMTrJOx-wswzPKxtzM',
+ 'imminence::turnthelighton': 'OLAK5uy_n1E-c8zi3HsGGjbe_gOOlwlILiPeI8GRI',
+ 'incubu::science': 'OLAK5uy_kpJg7QHKWnRG-D5qixHxOoUVcAljZJaRA',
+ 'inventanimate::everchanger': 'OLAK5uy_l4_1fTd2KbJwi0Bmt7nSt0GUlAo4Kx59g',
+ 'inventanimate::greyview': 'OLAK5uy_nMVvTMFQhioR6mLvhF-dKfpOTUl5_3y-w',
+ 'inventanimate::heavener': 'OLAK5uy_myxml01PaIU5ELofrBaYDGT3XBa_uWVfg',
+ 'inventanimate::stillworld': 'OLAK5uy_nH8ngOOvsI_Pze-6ZXbMMk7IimdAHRlSA',
+ 'iprevail::truepower': 'OLAK5uy_lQrfpJq3e7CNZfbrK45tu46td3sjOKNIc',
+ 'knockedloose::adifferentshadeofblue': 'OLAK5uy_kruA60wPnEW1L0n5mTdHJsa18JbWho-wU',
+ 'knockedloose::laughtrack': 'OLAK5uy_monA5m177p6DxVZh8aFKhu0bOUaBuoD2E',
+ 'knockedloose::youwontgobeforeyouresupposedto': 'OLAK5uy_kIKIGNHqZjl6KvbVuKXthqyVxIrSNPuLQ',
+ 'macmiller::swimming': 'OLAK5uy_m4OxKJ2yP_WXvaCsS29oby4It_AG7hm34',
+ 'makethemsuffer::makethemsuffer': 'OLAK5uy_nq9Q9Qzb2F0jPNoY1hntGotrVjAxpm930',
+ 'minuthebear::infinityoverhead': 'OLAK5uy_ndodE3IhgnTwHRIPB8zBkeUfEO4x9aTvg',
+ 'minuthebear::menoeloso': 'OLAK5uy_loOCEyqN60cloZEjkXELlwStJlmrp2RJk',
+ 'minuthebear::omni': 'OLAK5uy_kgdHYy3-JA7OKOPQK4g-MEN1mQE7kFjR4',
+ 'minuthebear::planetofice': 'OLAK5uy_k19l5bxvVigN1pq3xdHHN1it6Yd38fqxs',
+ 'monument::instasi': 'OLAK5uy_lRWGlYllOj5jsV6SI_0Ag8WgaaSJyT4EU',
+ 'northlane::alien': 'OLAK5uy_k9q5_11oHF-okjERQF_UnugGQYIro3Kuk',
+ 'northlane::discoverie': 'OLAK5uy_moOe_sV-6lh13pw9fXvoKu1rqBrWcqThs',
+ 'northlane::mesmer': 'OLAK5uy_lsMgKy05IjepC67Kw5XNgguB7hdLMbcak',
+ 'northlane::nodereloaded': 'OLAK5uy_n3bgQc3UixEaGNm49V_8euewYtYKAKl1g',
+ 'northlane::obsidian': 'OLAK5uy_mY43Br5z_zEPVpcibVdWcrf5xqc-OAKXY',
+ 'northlane::singularity': 'OLAK5uy_lPFS6e8WV0brzJrTBUm_gtyWGedF8_eGU',
+ 'nothingmore::carnaldeluxe': 'OLAK5uy_lCqfGIDbB07X9aB5flGvRRzkNOqIpS-kk',
+ 'nothingmore::nothingmore': 'OLAK5uy_k1TY3T2806F86ZcEcjtA73Iij5bR21pDY',
+ 'nothingmore::spirit': 'OLAK5uy_mAj5cOEMGw1sXigzAiy-ScpVRDBCiaLAE',
+ 'nothingmore::thestoriewetellourselve': 'OLAK5uy_kbEMwxM73fs0HoLrbecWn8q5yhV06cItU',
+ 'parkwaydrive::deepblue': 'OLAK5uy_n1e95E3pv7nDmpUFy7TFcE3oG-wW1SoI4',
+ 'parkwaydrive::horizon': 'OLAK5uy_kl_qW0L1vbuh1ko5Nu6D9M4K_W8GA8lls',
+ 'periphery::apalewhitedot': 'OLAK5uy_mA0CpXx2ZLtxSlgQYKbwA6geYcArMoYzA',
+ 'periphery::icaruep': 'OLAK5uy_ndh5rndKq5Jou0G6JokLvYszjwVQhv9U0',
+ 'periphery::juggernautalpha': 'OLAK5uy_l52lt9IONBpWa8hyZcAIWi-HHNnOgBKLE',
+ 'periphery::juggernautomega': 'OLAK5uy_lw6Oht1su02wNjx4lgLwrIdxL5wth-9Og',
+ 'periphery::periphery': 'OLAK5uy_lrGG8NasaVgZNiq16r35i0Yb1i_IXwHwc',
+ 'periphery::peripheryiiiselectdifficulty': 'OLAK5uy_nO1MNY2y0cD6vS5TnjQp8Z7vhLRRlSf1w',
+ 'periphery::peripheryiithitimeitspersonal': 'OLAK5uy_m-mG4UYF02ZBaRxu7r4lPXocMwG7uWGzY',
+ 'periphery::peripheryivhailstan': 'OLAK5uy_n-MZXGCBQFSjUur11sd58Mm_BXttjt1dA',
+ 'periphery::peripheryvdjentisnotagenre': 'OLAK5uy_mUnBw5wwMQIRYIaKeg8T_-YfzH9M6d26M',
+ 'polari::fatalism': 'OLAK5uy_l_r54bht81OxZc7HEGwo-VYjMyXF0B23c',
+ 'polari::thedeathofme': 'OLAK5uy_kUMQd_oA9-98o1QObED5Sdk1DVrv8dz4Y',
+ 'polari::themortalcoil': 'OLAK5uy_kEfc6HeEoj9ECPNaOXeWv_jf5b9gAC8Jg',
+ 'president::bloodofyourempire': 'OLAK5uy_md9xFDt8arSquZJoy6RYDCNg5iREaa5HM',
+ 'protestthehero::fortres': 'OLAK5uy_lfR-gneZtTU9HT7MsBTgj4xWJ5QNbJ7n4',
+ 'protestthehero::kezia': 'OLAK5uy_neHf6skEXBKS0sa6ssu6kiSk-u_JizD10',
+ 'ringofsaturn::embryonicanomalyremake': 'OLAK5uy_lp-404qlkpvdAFogKD3D30yuZggBxUEpY',
+ 'silentplanet::everythingwassound': 'OLAK5uy_lT-lhrMolxOXnDWqVuY61eWyltCm7guZ0',
+ 'silentplanet::superbloom': 'OLAK5uy_kSEJxA44Mdz12lQs2Gkaq8a-dy63U-424',
+ 'sleeptoken::sundowning': 'OLAK5uy_n8ubWLgABCf2-u3NwE3h1xRsONhEPgsN4',
+ 'sleeptoken::takemebacktoeden': 'OLAK5uy_nfeZcBZ_whZMPXn8oF7unN3763k_SxzSo',
+ 'spiritbox::eternalblue': 'OLAK5uy_kx-S5QCkV4Po13hehdQr6Zu2dVSZhKU18',
+ 'spiritbox::tsunamisea': 'OLAK5uy_mfdx_C0pR6XdVKoGGoXHVRdQlvEVtjw0c',
+ 'tesseract::one': 'OLAK5uy_nRdhmCYcV613lAW5mBcaZkUksZaRzG0j4',
+ 'tesseract::polari': 'OLAK5uy_nl9ox5WjQcz-DV7V6l5G5YhJXZHT0CFyA',
+ 'tesseract::portal': 'OLAK5uy_lTIRKgQaVTVa89_5xY91xGuikDoPmObGI',
+ 'tesseract::warofbeing': 'OLAK5uy_lQOktvWAETx83nPmZDvRlf2GXhEgXDo_c',
+ 'thedevilwearprada::zombieep': 'OLAK5uy_m7Y8tMiJQACbFB4fIVPxwUijUP215LpRk',
+ 'theplotinyou::dispose': 'OLAK5uy_mIKPMLL6t-qLGxY1aQ3yS6wIJ4UwjEUyI',
+ 'theplotinyou::happinesinselfdestruction': 'OLAK5uy_mSZaESiQpXz6fB0hLKvN8lyOYpUwws3D0',
+ 'theplotinyou::swansong': 'OLAK5uy_m8mggphlK1-MW8ronlU8UJwYEi-W5zjMA',
+ 'theprizefighterinferno::mybrothersbloodmachine': 'OLAK5uy_kNeny3Vsr4fkAfq4pEwmhb6b6FylDLrXY',
+ 'thornhill::bodiedefinitive': 'OLAK5uy_lZmmFEyZyV02qsKxrCNTlJ1fjyHa0VPYk',
+ 'thornhill::heroine': 'OLAK5uy_md5n68zYjGf_MiXGIvxE4P0cJ6kakvba8',
+ 'thrice::identitycrisi': 'OLAK5uy_mf2flzAAdEJpDM2Px6HKywVYhNtRtsQlg',
+ 'thrice::majorminor': 'OLAK5uy_mSoZbmB-icrmzSIM5_ExVKQso-Afvbc8c',
+ 'thrice::thealchemyindexvoliiifirewater': 'OLAK5uy_mC6g2YkEri9_EYxV5eLRTTgeqZlKbVoxg',
+ 'thrice::thealchemyindexvoliiiivairearth': 'OLAK5uy_mcL1hGiCbh0_ugF2nwwZMR8blnxIAHQgo',
+ 'thrice::theartistintheambulance': 'OLAK5uy_kjFQ4unH3aHr3NJLPCvG3wdE7VvdvKGEM',
+ 'thrice::theillusionofsafety': 'OLAK5uy_nF4oihNUjyHJqsiIiTVpNkvrNbbybVx_g',
+ 'thrice::tobeeverywhereistobenowhere': 'OLAK5uy_mU2TTqnxcqPIfJY-Fy2Jo4cvufURXspl0',
+ 'thursday::fullcollapse': 'OLAK5uy_nlP6aBHJnesRgtGuqA3cEruRUROE8K7jk',
+ 'thursday::warallthetime': 'OLAK5uy_nLyxICgfkVQGgPWJ-Yz24rp92OdpNyN3s',
+ 'underoath::definethegreatline': 'OLAK5uy_lqG2FIU1Izi-6UrUg9nVmbVWlWqnbfjpE',
+ 'underoath::eraseme': 'OLAK5uy_kg9zacZDTraoE_963IL3g9oxeLRyllHu8',
+ 'underoath::theyreonlychasingsafety': 'OLAK5uy_mPdQEalWg_GLt27Npc8zD1VcNTLf5Tndk',
+ 'unearth::extinction': 'OLAK5uy_nW0dqCJCsSwpmQgKLNueczWBhBrpnsWUc',
+ 'unearth::iiiintheeyeoffire': 'OLAK5uy_n0sbgq4IwDY2QqSPirhKa6x8JKd4x67uI',
+ 'unearth::thestingofconscience': 'OLAK5uy_n9njCIwlUTX4YqEXw3u5tSpza25XQcPmQ',
+ 'unearth::thewretchedtheruinou': 'OLAK5uy_m56JCuvfEHEiyB_FZI7gLmgjFoUIacxg4',
+ 'unearth::watcherofrule': 'OLAK5uy_n4LH-bP7pNrCbNs56Z1crXA4evkq-UWso',
+ 'veilofmaya::falseidol': 'OLAK5uy_mUU8ogBuzXDV5QWRFzM_EMVcp3ET-Aesk',
+ 'veilofmaya::id': 'OLAK5uy_kVEVE9vEjdnFhVzwC4GlNJrEleTL-GL6c',
+ 'veilofmaya::matriarch': 'OLAK5uy_l3aPoJqBXE01CaqFSK37kjeq90HTCDEsQ',
+ 'veilofmaya::mother': 'OLAK5uy_lF0p5h_HhiIwhHPlNqXeuhxK2pEm83Vww',
+ 'veilofmaya::thecommonmanscollapse': 'OLAK5uy_lyLiQgJuukdlcjX3HhjEa2XWrFeuIpE3k',
+ 'vianova::hitit': 'OLAK5uy_ntLtED-_t1pn-tAWxYD8S5AKgaCQucX3g',
+ 'wagewar::deadweight': 'OLAK5uy_kIIlg4piNhRgiDM_62JRfWdL3XdL1aboo',
+ 'wagewar::manic': 'OLAK5uy_mOxiHpCnBOIgwBxHOtScTqHRCTew7Y_ko'}
 
 def _is_full_album_video(title: str, duration_sec: int) -> bool:
     """Returns True if a YouTube video entry represents a full-album or full-EP stream rather than a single track."""
@@ -6817,13 +7103,187 @@ def _is_full_album_video(title: str, duration_sec: int) -> bool:
     )
 
 
+def _normalize_album_fuzzy_tokens(text: str, keep_modifiers: bool = True) -> list[str]:
+    """Normalizes artist/album title text into canonical tokens for wildcard/fuzzy matching."""
+    s = str(text or "").lower()
+    s = s.replace("∆", "a").replace("•", " ").replace("●", " ").replace("|", " ")
+    s = re.sub(r"\s+\(\d+\)$", "", s)
+    s = re.sub(r"\bln\b", "in", s)
+    s = re.sub(r"\[([^\]]{1,2})\]", r"\1", s)
+    s = re.sub(r"\bvols?\.?\s+i\b", "vol 1", s)
+    s = re.sub(r"\bvols?\.?\s+ii\b", "vol 2", s)
+    s = re.sub(r"\bvols?\.?\s+iii\b", "vol 3", s)
+    s = re.sub(r"\bvols?\.?\s+iv\b", "vol 4", s)
+    s = re.sub(r"\bii\b", "2", s)
+    s = re.sub(r"\biii\b", "3", s)
+    s = re.sub(r"\biv\b", "4", s)
+    if not keep_modifiers:
+        s = re.sub(
+            r"\b(?:deluxe|reissue|repress|remastered|remaster|remake|live|edition|version|anniversary|definitive|reloaded|repented|tour|collection|special|expanded|encore|bonus|explicit|album|ep)\b",
+            " ",
+            s,
+        )
+    words = re.findall(r"[a-z0-9]+", s)
+    stop = {"the", "a", "an", "of", "and", "in", "to", "for", "on", "at", "by", "with"}
+    cleaned = [w[:-1] if len(w) > 3 and w.endswith("s") else w for w in words]
+    non_stop = [w for w in cleaned if w not in stop]
+    return non_stop or cleaned
+
+
+def _score_album_candidate_fuzzy(
+    target_artist: str,
+    target_title: str,
+    cand_artist: str,
+    cand_title: str,
+) -> float:
+    """Scores a candidate (artist, album_title) against target using exact, parenthetical, and wildcard token matching."""
+    t_art_toks = _normalize_album_fuzzy_tokens(target_artist, keep_modifiers=True)
+    c_art_toks = _normalize_album_fuzzy_tokens(cand_artist, keep_modifiers=True)
+    if not c_art_toks and cand_title:
+        c_art_toks = t_art_toks
+
+    t_art_join = "".join(t_art_toks)
+    c_art_join = "".join(c_art_toks)
+    art_score = 0.0
+    if t_art_join and c_art_join:
+        if t_art_join == c_art_join:
+            art_score = 45.0
+        elif t_art_join in c_art_join or c_art_join in t_art_join:
+            art_score = 35.0
+        else:
+            overlap = len(set(t_art_toks) & set(c_art_toks)) / max(1, len(set(t_art_toks)))
+            if overlap >= 0.5:
+                art_score = 28.0 * overlap
+            else:
+                return -1.0
+
+    # Check modifier alignment (e.g. "The Question Live" vs "The Question (Live)")
+    t_low = str(target_title or "").lower()
+    c_low = str(cand_title or "").lower()
+    if "instrumental" in c_low and "instrumental" not in t_low:
+        return -1.0
+    if ("karaoke" in c_low or "8-bit" in c_low or "lullaby" in c_low) and "karaoke" not in t_low:
+        return -1.0
+
+    t_full = _normalize_album_fuzzy_tokens(target_title, keep_modifiers=True)
+    c_full = _normalize_album_fuzzy_tokens(cand_title, keep_modifiers=True)
+    t_core = _normalize_album_fuzzy_tokens(target_title, keep_modifiers=False)
+    c_core = _normalize_album_fuzzy_tokens(cand_title, keep_modifiers=False)
+
+    # Strip artist prefix if embedded in album title (e.g. "Cursive's Domestica" -> "Domestica")
+    if t_art_toks and len(c_core) > len(t_art_toks) and c_core[: len(t_art_toks)] == t_art_toks:
+        c_core = c_core[len(t_art_toks) :]
+    if t_art_toks and len(c_full) > len(t_art_toks) and c_full[: len(t_art_toks)] == t_art_toks:
+        c_full = c_full[len(t_art_toks) :]
+
+    t_full_str = "".join(t_full)
+    c_full_str = "".join(c_full)
+    t_core_str = "".join(t_core)
+    c_core_str = "".join(c_core)
+
+    tit_score = 0.0
+    if t_full_str and t_full_str == c_full_str:
+        # Exact token match (handles "The Question Live" == "The Question (Live)" and "[Id]" == "(id)")
+        tit_score = 90.0
+    elif t_core_str and t_core_str == c_core_str:
+        tit_score = 78.0
+    elif t_core_str and c_core_str and (t_core_str.startswith(c_core_str) or c_core_str.startswith(t_core_str)):
+        tit_score = 62.0
+    elif t_core and c_core:
+        common = set(t_core) & set(c_core)
+        recall = len(common) / max(1, len(set(t_core)))
+        precision = len(common) / max(1, len(set(c_core)))
+        if recall >= 0.6 and precision >= 0.4:
+            tit_score = 55.0 * ((recall + precision) / 2.0)
+        elif t_core_str and c_core_str and (t_core_str in c_core_str or c_core_str in t_core_str):
+            tit_score = 45.0
+        else:
+            return -1.0
+    else:
+        return -1.0
+
+    # Bonus when edition/live modifiers match (e.g., both have "live" or both have "remake" or "definitive")
+    for mod in ("live", "remake", "definitive", "reloaded", "repented", "deluxe", "tour"):
+        if mod in t_low and mod in c_low:
+            tit_score += 12.0
+        elif mod in c_low and mod not in t_low and mod == "live":
+            tit_score -= 18.0
+
+    return art_score + tit_score
+
+
+def _build_album_search_queries(artist: str, title: str, tracks: list[dict[str, Any]] | None = None) -> list[str]:
+    """Builds literal, parenthetical ('The Question (Live)'), and wildcard/core-stem search queries."""
+    clean_art = re.sub(r"\s+\(\d+\)$", "", str(artist or "")).strip()
+    raw_tit = str(title or "").strip()
+    fixed_tit = (
+        raw_tit.replace("∆", "A")
+        .replace("•", " ")
+        .replace("●", " ")
+        .replace("|", " ")
+    )
+    fixed_tit = re.sub(r"\bln\b", "In", fixed_tit)
+    fixed_tit = re.sub(r"\[([^\]]{1,2})\]", r"\1", fixed_tit)
+    fixed_tit = re.sub(r"\s+", " ", fixed_tit).strip()
+
+    queries: list[str] = []
+
+    def _add(q: str) -> None:
+        q_clean = re.sub(r"\s+", " ", q).strip()
+        if q_clean and q_clean not in queries:
+            queries.append(q_clean)
+
+    # 1. Literal cleaned query
+    _add(f"{clean_art} {fixed_tit}")
+
+    # 2. If title ends with Live / Remake / Deluxe / Definitive / Reloaded / Repented without parens, add parenthetical form (e.g. "The Question (Live)")
+    m_suffix = re.match(
+        r"^(.*?)\s*[:\-]?\s+\b(Live|Remake|Deluxe(?:\s+Edition)?|Definitive|Reloaded|Repented)\.?$",
+        fixed_tit,
+        flags=re.I,
+    )
+    if m_suffix:
+        base_part, suf_part = m_suffix.group(1).strip(), m_suffix.group(2).strip()
+        _add(f"{clean_art} {base_part} ({suf_part})")
+        _add(f"{clean_art} {base_part}")
+
+    # 3. Strip parenthetical / edition suffixes for wildcard base-album search
+    stripped_tit = re.sub(
+        r"\s*\((?:deluxe|reissue|repress|remake|live|tour|anniversary|special|edition)[^)]*\)",
+        "",
+        fixed_tit,
+        flags=re.I,
+    )
+    stripped_tit = re.sub(r"\s*:\s*(?:reloaded|definitive)\b", "", stripped_tit, flags=re.I)
+    stripped_tit = re.sub(r"\bRepented\.?$", "", stripped_tit, flags=re.I).strip()
+    if stripped_tit and stripped_tit != fixed_tit:
+        _add(f"{clean_art} {stripped_tit}")
+
+    # 4. Roman-to-Arabic & punctuation-free wildcard query
+    wildcard_words = _normalize_album_fuzzy_tokens(fixed_tit, keep_modifiers=False)
+    if wildcard_words:
+        _add(f"{clean_art} {' '.join(wildcard_words)}")
+
+    # 5. Track-assisted fallback query for short/symbolic titles (e.g. [Id], +-=÷×, 131)
+    if tracks and isinstance(tracks, list):
+        first_trk = ""
+        for tr in tracks:
+            if isinstance(tr, dict) and tr.get("title"):
+                first_trk = str(tr["title"]).strip()
+                break
+        if first_trk:
+            _add(f"{clean_art} {stripped_tit or fixed_tit} {first_trk}")
+
+    return queries
+
+
 def resolve_youtube_music_live_py(
     artist: str,
     title: str,
     tracks: list[dict[str, Any]],
     ui: Any = None,
 ) -> dict[str, Any]:
-    """Automatically queries YouTube / YouTube Music for any newly added album during sync_discogs.py."""
+    """Automatically queries YouTube Music (OLAK5uy_...), iTunes+Odesli, and YouTube for any newly added album during sync_discogs.py."""
     import urllib.parse
     import urllib.request
     from concurrent.futures import ThreadPoolExecutor
@@ -6838,55 +7298,154 @@ def resolve_youtube_music_live_py(
 
     result: dict[str, Any] = {
         "ytPlaylistId": "",
+        "spotifyAlbumId": "",
         "fullAlbumYtVideoId": "",
         "fullAlbumYtDuration": 0,
         "trackIds": {},
     }
 
-    def _fetch_yt_html(url: str) -> str:
+    # Check stem map first
+    stem_key = f"{''.join(_normalize_album_fuzzy_tokens(clean_art, True))}::{''.join(_normalize_album_fuzzy_tokens(title, True))}"
+    if stem_key in VERIFIED_YTM_ALBUM_STEM_MAP:
+        result["ytPlaylistId"] = VERIFIED_YTM_ALBUM_STEM_MAP[stem_key]
+
+    def _fetch_yt_html(url: str, timeout_s: float = 8.0) -> str:
         try:
             req = urllib.request.Request(url, headers=headers, method="GET")
-            with urllib.request.urlopen(req, timeout=6) as resp:
+            with urllib.request.urlopen(req, timeout=timeout_s) as resp:
                 return resp.read().decode("utf-8", errors="ignore")
         except Exception:
             return ""
 
-    # 1. Resolve Official Album Links (YouTube Music OLAK5uy_... & Spotify /album/<id>) via iTunes + Odesli (api.song.link)
-    try:
-        it_q = urllib.parse.quote(f"{clean_art} {clean_tit}")
-        it_raw = _fetch_yt_html(f"https://itunes.apple.com/search?term={it_q}&media=music&entity=album&limit=8")
-        if it_raw:
-            it_json = json.loads(it_raw)
-            it_results = it_json.get("results") or []
-            if it_results and isinstance(it_results[0], dict):
-                col_id = it_results[0].get("collectionId")
-                if col_id:
-                    sl_raw = _fetch_yt_html(f"https://api.song.link/v1-alpha.1/links?platform=itunes&type=album&id={col_id}&userCountry=US")
-                    if sl_raw:
-                        sl_json = json.loads(sl_raw)
-                        platforms = sl_json.get("linksByPlatform") or {}
-                        ytm_u = (platforms.get("youtubeMusic") or {}).get("url") or (platforms.get("youtube") or {}).get("url") or ""
-                        m_ol = re.search(r"(OLAK5uy_[A-Za-z0-9_-]{10,})", str(ytm_u))
-                        if m_ol:
-                            result["ytPlaylistId"] = m_ol.group(1)
-                        sp_u = (platforms.get("spotify") or {}).get("url") or ""
-                        m_sp = re.search(r"open\.spotify\.com/(?:intl-[a-z-]+/)?album/([A-Za-z0-9]{15,30})", str(sp_u))
-                        if m_sp:
-                            result["spotifyAlbumId"] = m_sp.group(1)
-    except Exception:
-        pass
+    def _post_ytm_json(endpoint: str, payload: dict[str, Any], timeout_s: float = 8.0) -> str:
+        try:
+            body = json.dumps(payload).encode("utf-8")
+            req_headers = {
+                **headers,
+                "Content-Type": "application/json",
+                "Origin": "https://music.youtube.com",
+                "Referer": "https://music.youtube.com/",
+            }
+            req = urllib.request.Request(endpoint, data=body, headers=req_headers, method="POST")
+            with urllib.request.urlopen(req, timeout=timeout_s) as resp:
+                return resp.read().decode("utf-8", errors="ignore")
+        except Exception:
+            return ""
 
-    # 1B. Fallback: Search YouTube strictly for OLAK5uy_ Album Playlist (NEVER accept PL... user playlists!)
-    pl_q = urllib.parse.quote(f"{clean_art} {clean_tit} album")
+    search_queries = _build_album_search_queries(artist, title, tracks)
+
+    # 1A. Direct YouTube Music Internal API Search (WEB_REMIX) + Fuzzy/Wildcard Scoring for OLAK5uy_...
     if not result.get("ytPlaylistId"):
-        pl_html = _fetch_yt_html(f"https://www.youtube.com/results?search_query={pl_q}&sp=EgIQAw%3D%3D")
-        if pl_html:
-            olak_matches = re.findall(r'"playlistId":"(OLAK5uy_[A-Za-z0-9_-]{10,})"', pl_html)
-            if olak_matches:
-                result["ytPlaylistId"] = olak_matches[0]
+        ytm_ctx = {
+            "client": {
+                "clientName": "WEB_REMIX",
+                "clientVersion": "1.20241113.01.00",
+                "hl": "en",
+                "gl": "US",
+            }
+        }
+        for q_str in search_queries[:4]:
+            if result.get("ytPlaylistId"):
+                break
+            # Query YouTube Music with Albums filter (EgWKAQIYAWoKEAkQChAFEAMQBA==) and unfiltered top result
+            for params_val in ("EgWKAQIYAWoKEAkQChAFEAMQBA==", None):
+                pl_body: dict[str, Any] = {"context": ytm_ctx, "query": q_str}
+                if params_val:
+                    pl_body["params"] = params_val
+                raw_ytm = _post_ytm_json("https://music.youtube.com/youtubei/v1/search?prettyPrint=false", pl_body)
+                if not raw_ytm:
+                    continue
+                # Extract all OLAK5uy_ IDs and MPREb_ album browseIds from the response
+                olak_hits = re.findall(r'"playlistId":"(OLAK5uy_[A-Za-z0-9_-]{10,})"', raw_ytm)
+                if olak_hits:
+                    result["ytPlaylistId"] = olak_hits[0]
+                    break
+                mpre_hits = re.findall(r'"browseId":"(MPREb_[A-Za-z0-9_-]+)"', raw_ytm)
+                for b_id in mpre_hits[:3]:
+                    b_raw = _post_ytm_json(
+                        "https://music.youtube.com/youtubei/v1/browse?prettyPrint=false",
+                        {"context": ytm_ctx, "browseId": b_id},
+                    )
+                    if b_raw:
+                        b_olaks = re.findall(r'"(?:audioPlaylistId|playlistId)":"(OLAK5uy_[A-Za-z0-9_-]{10,})"', b_raw)
+                        if b_olaks:
+                            result["ytPlaylistId"] = b_olaks[0]
+                            break
+                if result.get("ytPlaylistId"):
+                    break
+
+    # 1B. Multi-Query iTunes Search (entity=album & entity=song) with Fuzzy/Wildcard Scoring -> Odesli (api.song.link)
+    if not result.get("ytPlaylistId") or not result.get("spotifyAlbumId"):
+        best_col_id = None
+        best_score = -1.0
+        for q_str in search_queries[:4]:
+            it_q = urllib.parse.quote(q_str)
+            for entity_type in ("album", "song"):
+                it_raw = _fetch_yt_html(
+                    f"https://itunes.apple.com/search?term={it_q}&media=music&entity={entity_type}&limit=15",
+                    timeout_s=7.0,
+                )
+                if not it_raw:
+                    continue
+                try:
+                    it_items = (json.loads(it_raw).get("results") or [])
+                except Exception:
+                    it_items = []
+                for item in it_items:
+                    if not isinstance(item, dict) or not item.get("collectionId"):
+                        continue
+                    c_art = str(item.get("artistName") or "")
+                    c_alb = str(item.get("collectionName") or "")
+                    sc = _score_album_candidate_fuzzy(clean_art, title, c_art, c_alb)
+                    if int(item.get("trackCount") or 0) >= 4:
+                        sc += 8.0
+                    if sc > best_score and sc >= 45.0:
+                        best_score = sc
+                        best_col_id = item.get("collectionId")
+                if best_col_id and best_score >= 95.0:
+                    break
+            if best_col_id and best_score >= 95.0:
+                break
+
+        if best_col_id:
+            sl_raw = _fetch_yt_html(
+                f"https://api.song.link/v1-alpha.1/links?platform=itunes&type=album&id={best_col_id}&userCountry=US",
+                timeout_s=12.0,
+            )
+            if sl_raw:
+                try:
+                    sl_json = json.loads(sl_raw)
+                    platforms = sl_json.get("linksByPlatform") or {}
+                    ytm_u = (platforms.get("youtubeMusic") or {}).get("url") or (platforms.get("youtube") or {}).get("url") or ""
+                    m_ol = re.search(r"(OLAK5uy_[A-Za-z0-9_-]{10,})", str(ytm_u))
+                    if m_ol and not result.get("ytPlaylistId"):
+                        result["ytPlaylistId"] = m_ol.group(1)
+                    if not result.get("ytPlaylistId"):
+                        for ent in (sl_json.get("entitiesByUniqueId") or {}).values():
+                            if isinstance(ent, dict) and str(ent.get("id") or "").startswith("OLAK5uy_"):
+                                result["ytPlaylistId"] = str(ent["id"])
+                                break
+                    sp_u = (platforms.get("spotify") or {}).get("url") or ""
+                    m_sp = re.search(r"open\.spotify\.com/(?:intl-[a-z-]+/)?album/([A-Za-z0-9]{15,30})", str(sp_u))
+                    if m_sp:
+                        result["spotifyAlbumId"] = m_sp.group(1)
+                except Exception:
+                    pass
+
+    # 1C. Fallback: Search YouTube across all literal & wildcard query variants strictly for OLAK5uy_ Album Playlists
+    if not result.get("ytPlaylistId"):
+        for q_str in search_queries[:4]:
+            pl_q = urllib.parse.quote(f"{q_str} album")
+            pl_html = _fetch_yt_html(f"https://www.youtube.com/results?search_query={pl_q}&sp=EgIQAw%3D%3D", timeout_s=7.0)
+            if pl_html:
+                olak_matches = re.findall(r'"playlistId":"(OLAK5uy_[A-Za-z0-9_-]{10,})"', pl_html)
+                if olak_matches:
+                    result["ytPlaylistId"] = olak_matches[0]
+                    break
 
     # 2. Search YouTube for Full Album Video stream (verifying full-album title or >=18m duration)
-    fa_html = _fetch_yt_html(f"https://www.youtube.com/results?search_query={pl_q}")
+    pl_q_main = urllib.parse.quote(f"{clean_art} {clean_tit} album")
+    fa_html = _fetch_yt_html(f"https://www.youtube.com/results?search_query={pl_q_main}")
     if fa_html:
         for m_v in re.finditer(
             r'"videoId":"([A-Za-z0-9_-]{11})".{0,600}?"title":\{"runs":\[\{"text":"([^"]+)"\}\]',
@@ -7166,6 +7725,11 @@ def enrich_record_youtube_music(
 
     raw_pl_id = str(enr.get("ytPlaylistId") or "").strip()
     yt_playlist_id = raw_pl_id if raw_pl_id.startswith("OLAK5uy_") else ""
+    if not yt_playlist_id:
+        stem_k = f"{''.join(_normalize_album_fuzzy_tokens(str(rec.get('artist') or ''), True))}::{''.join(_normalize_album_fuzzy_tokens(str(rec.get('title') or ''), True))}"
+        if stem_k in VERIFIED_YTM_ALBUM_STEM_MAP:
+            yt_playlist_id = VERIFIED_YTM_ALBUM_STEM_MAP[stem_k]
+
     spotify_album_id = str(enr.get("spotifyAlbumId") or rec.get("spotifyAlbumId") or "").strip()
     full_album_vid_id = str(enr.get("fullAlbumYtVideoId") or "").strip()
     full_album_dur = int(enr.get("fullAlbumYtDuration") or 0)
@@ -7173,31 +7737,32 @@ def enrich_record_youtube_music(
     track_alt_ids_map = enr.get("trackAltIds") if isinstance(enr.get("trackAltIds"), dict) else {}
     track_durs_map = enr.get("trackDurations") if isinstance(enr.get("trackDurations"), dict) else {}
 
-    # Only query YouTube over the network for genuinely unmapped brand-new releases
+    # Always resolve over the network when allow_network_search is True and OLAK5uy_ is still missing (or brand-new release lacks track coverage)
     already_resolved = bool(
-        rid in VERIFIED_YTM_RELEASE_MAP
-        or (isinstance(rel_detail, dict) and rel_detail.get("_ytm_resolved"))
+        (rid in VERIFIED_YTM_RELEASE_MAP and yt_playlist_id.startswith("OLAK5uy_"))
+        or (isinstance(rel_detail, dict) and isinstance(rel_detail.get("_ytm_resolved"), dict) and str(rel_detail["_ytm_resolved"].get("ytPlaylistId") or "").startswith("OLAK5uy_"))
     )
-    if tracks and allow_network_search and not already_resolved:
+    if allow_network_search and (not yt_playlist_id.startswith("OLAK5uy_") or (tracks and not already_resolved)):
         covered = sum(
             1
             for idx, t in enumerate(tracks)
             if t.get("ytVideoId")
             or track_ids_map.get(str(idx))
             or track_ids_map.get(idx)
-            or yt_playlist_id
             or full_album_vid_id
             or t.get("albumYtVideoId")
         )
-        if covered < len(tracks):
+        if not yt_playlist_id.startswith("OLAK5uy_") or covered < len(tracks):
             live_res = resolve_youtube_music_live_py(
                 artist=str(rec.get("artist") or ""),
                 title=str(rec.get("title") or ""),
                 tracks=tracks,
                 ui=ui,
             )
-            if live_res.get("ytPlaylistId") and not yt_playlist_id:
+            if str(live_res.get("ytPlaylistId") or "").startswith("OLAK5uy_") and not yt_playlist_id.startswith("OLAK5uy_"):
                 yt_playlist_id = str(live_res["ytPlaylistId"])
+            if live_res.get("spotifyAlbumId") and not spotify_album_id:
+                spotify_album_id = str(live_res["spotifyAlbumId"])
             if live_res.get("fullAlbumYtVideoId") and not full_album_vid_id:
                 full_album_vid_id = str(live_res["fullAlbumYtVideoId"])
                 full_album_dur = int(live_res.get("fullAlbumYtDuration") or 2400)
@@ -7208,6 +7773,7 @@ def enrich_record_youtube_music(
             if isinstance(rel_detail, dict):
                 rel_detail["_ytm_resolved"] = {
                     "ytPlaylistId": yt_playlist_id,
+                    "spotifyAlbumId": spotify_album_id,
                     "fullAlbumYtVideoId": full_album_vid_id,
                     "fullAlbumYtDuration": full_album_dur,
                     "trackIds": track_ids_map,

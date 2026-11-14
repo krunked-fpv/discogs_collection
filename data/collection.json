@@ -4,7 +4,7 @@
   "source_of_truth": "https://www.discogs.com/user/krunked/collection",
   "api_documentation": "https://www.discogs.com/developers",
   "username": "krunked",
-  "synced_at_utc": "2026-11-14T15:01:56Z",
+  "synced_at_utc": "2026-11-14T18:43:46Z",
   "profile": {
     "username": "krunked",
     "owner_name": "krunked",
@@ -876,6 +876,7 @@
           "duration": 0
         }
       ],
+      "ytPlaylistId": "OLAK5uy_k9KIGR1Zw2LV1OjODWcXrThqn8pau6eHo",
       "fullAlbumYtVideoId": "cDdvMnu5RoQ",
       "fullAlbumYtDuration": 3480,
       "defaultYtVideoId": "W69ow97hqbI"
@@ -1107,6 +1108,7 @@
           "duration": 276
         }
       ],
+      "ytPlaylistId": "OLAK5uy_k_DgO5RDvSyOGsJiBgwa5q9Bk7V8afdvI",
       "fullAlbumYtVideoId": "0_5puNhIKMg",
       "fullAlbumYtDuration": 2400,
       "defaultYtVideoId": "Zm4JVkH0T-E"
@@ -1473,6 +1475,7 @@
           "duration": 2507
         }
       ],
+      "ytPlaylistId": "OLAK5uy_lT-lhrMolxOXnDWqVuY61eWyltCm7guZ0",
       "fullAlbumYtVideoId": "YEXIv6gWzAE",
       "fullAlbumYtDuration": 2507,
       "defaultYtVideoId": "eCB6p39_IP4"
@@ -1838,6 +1841,7 @@
           "duration": 228
         }
       ],
+      "ytPlaylistId": "OLAK5uy_m4g3UrtA59YWqjN3MnAm5nVm7om4p7TMc",
       "defaultYtVideoId": "i2wPVO92_xc"
     },
     {
@@ -2052,6 +2056,7 @@
           "duration": 167
         }
       ],
+      "ytPlaylistId": "OLAK5uy_lIkaYY04_idWM6JdlC7OniiC6AgKBR0L8",
       "defaultYtVideoId": "TuGCBQoYOu0"
     },
     {
@@ -2417,6 +2422,7 @@
           "duration": 384
         }
       ],
+      "ytPlaylistId": "OLAK5uy_neHf6skEXBKS0sa6ssu6kiSk-u_JizD10",
       "fullAlbumYtVideoId": "8l_V2a5ZTqQ",
       "fullAlbumYtDuration": 2880,
       "defaultYtVideoId": "AEn8HmgJxd4"
@@ -2714,6 +2720,7 @@
           "duration": 250
         }
       ],
+      "ytPlaylistId": "OLAK5uy_lp-404qlkpvdAFogKD3D30yuZggBxUEpY",
       "fullAlbumYtVideoId": "kBSb6UVAetw",
       "fullAlbumYtDuration": 2040,
       "defaultYtVideoId": "b6vhOPTdmeI"
@@ -3601,6 +3608,7 @@
           "duration": 182
         }
       ],
+      "ytPlaylistId": "OLAK5uy_kVU1cAg0d6I8qkMYXSspjIxoLXrml8JNk",
       "defaultYtVideoId": "4RtpvN42zM8"
     },
     {
@@ -4382,6 +4390,7 @@
           "duration": 197
         }
       ],
+      "ytPlaylistId": "OLAK5uy_n0ZRkqJr8BEjnsuOQ6LW0xtJFjIjCAX0s",
       "defaultYtVideoId": "Pn-6eOxnEMI"
     },
     {
@@ -4578,6 +4587,7 @@
           "ytTitle": "Vianova - Obsolete"
         }
       ],
+      "ytPlaylistId": "OLAK5uy_ntLtED-_t1pn-tAWxYD8S5AKgaCQucX3g",
       "defaultYtVideoId": "cBu89Oo01RI"
     },
     {
@@ -4890,6 +4900,7 @@
           "duration": 212
         }
       ],
+      "ytPlaylistId": "OLAK5uy_m56JCuvfEHEiyB_FZI7gLmgjFoUIacxg4",
       "defaultYtVideoId": "c3ftYYCi49o"
     },
     {
@@ -5075,6 +5086,7 @@
           "duration": 280
         }
       ],
+      "ytPlaylistId": "OLAK5uy_k6nYq8dSdpso5zZDpHIs-HCpKXWka1xgM",
       "defaultYtVideoId": "0bmXGkwNs-k"
     },
     {
@@ -5432,6 +5444,7 @@
           "duration": 193
         }
       ],
+      "ytPlaylistId": "OLAK5uy_ljoPWB-2aSHetsOjSgmzSw3cyqZIE3KD4",
       "defaultYtVideoId": "18mvj0kawGs"
     },
     {
@@ -5794,6 +5807,7 @@
           "duration": 181
         }
       ],
+      "ytPlaylistId": "OLAK5uy_kVEVE9vEjdnFhVzwC4GlNJrEleTL-GL6c",
       "defaultYtVideoId": "b4dHvbgYZhM"
     },
     {
@@ -6094,6 +6108,7 @@
           "duration": 228
         }
       ],
+      "ytPlaylistId": "OLAK5uy_lyLiQgJuukdlcjX3HhjEa2XWrFeuIpE3k",
       "defaultYtVideoId": "yR-WREcnzu4"
     },
     {
@@ -6369,6 +6384,7 @@
           "albumYtDuration": 2420
         }
       ],
+      "ytPlaylistId": "OLAK5uy_nH8ngOOvsI_Pze-6ZXbMMk7IimdAHRlSA",
       "fullAlbumYtVideoId": "Jo1PlMrSMrI",
       "fullAlbumYtDuration": 2420,
       "defaultYtVideoId": "Jo1PlMrSMrI"
@@ -7160,6 +7176,7 @@
           "duration": 0
         }
       ],
+      "ytPlaylistId": "OLAK5uy_lWrrgs5vSsVkAFwol4fzYnpg4Dhqe0rZk",
       "fullAlbumYtVideoId": "isPQms_9Ndo",
       "fullAlbumYtDuration": 2400,
       "defaultYtVideoId": "lUmOCaQD47k"
@@ -7611,6 +7628,7 @@
           "duration": 329
         }
       ],
+      "ytPlaylistId": "OLAK5uy_mSZaESiQpXz6fB0hLKvN8lyOYpUwws3D0",
       "fullAlbumYtVideoId": "5X5vJeYsn2w",
       "fullAlbumYtDuration": 3420,
       "defaultYtVideoId": "dV3KY_jdW1g"
@@ -8095,6 +8113,7 @@
           "duration": 227
         }
       ],
+      "ytPlaylistId": "OLAK5uy_kyX9a4-O_fGMRC_-RshqXKdqT31ZWwxWg",
       "defaultYtVideoId": "WvD5aMsD1HA"
     },
     {
@@ -8375,6 +8394,7 @@
           "duration": 212
         }
       ],
+      "ytPlaylistId": "OLAK5uy_m56JCuvfEHEiyB_FZI7gLmgjFoUIacxg4",
       "defaultYtVideoId": "c3ftYYCi49o"
     },
     {
@@ -9126,6 +9146,7 @@
           "duration": 0
         }
       ],
+      "ytPlaylistId": "OLAK5uy_mC6g2YkEri9_EYxV5eLRTTgeqZlKbVoxg",
       "fullAlbumYtVideoId": "BtqfFZQfSq4",
       "fullAlbumYtDuration": 2400,
       "defaultYtVideoId": "BtqfFZQfSq4"
@@ -9840,6 +9861,7 @@
           "duration": 340
         }
       ],
+      "ytPlaylistId": "OLAK5uy_mcL1hGiCbh0_ugF2nwwZMR8blnxIAHQgo",
       "defaultYtVideoId": "-S2MvjRyhK8"
     },
     {
@@ -10021,6 +10043,7 @@
           "duration": 262
         }
       ],
+      "ytPlaylistId": "OLAK5uy_n0sbgq4IwDY2QqSPirhKa6x8JKd4x67uI",
       "fullAlbumYtVideoId": "0CFAOtUmJiI",
       "fullAlbumYtDuration": 2400,
       "defaultYtVideoId": "MMI5bmlSrRg"
@@ -11041,6 +11064,7 @@
           "duration": 344
         }
       ],
+      "ytPlaylistId": "OLAK5uy_mrQQwA3l_PWRhrugxLFr5h-RXGu8KYBhs",
       "defaultYtVideoId": "cAkoQB6rb08"
     },
     {
@@ -11244,6 +11268,7 @@
           "duration": 234
         }
       ],
+      "ytPlaylistId": "OLAK5uy_k3Th2h0ZKHLzklqgNz-Mar1zmFu762WXE",
       "fullAlbumYtVideoId": "dy8IMkekW4U",
       "fullAlbumYtDuration": 2332,
       "defaultYtVideoId": "hZnZ-CpX57Y"
@@ -11710,6 +11735,7 @@
           "duration": 257
         }
       ],
+      "ytPlaylistId": "OLAK5uy_k4uSZOM5OcQWqjt446JaOY8QcMxILq8fQ",
       "fullAlbumYtVideoId": "MA2YTm7qjnE",
       "fullAlbumYtDuration": 3126,
       "defaultYtVideoId": "CO_4rGjK7UU"
@@ -11883,6 +11909,7 @@
           "duration": 193
         }
       ],
+      "ytPlaylistId": "OLAK5uy_lOUvtM-MykSjce2eQS0l0ancNXZa7Uu_8",
       "defaultYtVideoId": "Shmt5YnF40A"
     },
     {
@@ -12394,6 +12421,7 @@
           "duration": 244
         }
       ],
+      "ytPlaylistId": "OLAK5uy_m9E7xa5p-78BfK-ace3bPyZvP8_WBBwrI",
       "fullAlbumYtVideoId": "EnKllQmSIoE",
       "fullAlbumYtDuration": 2612,
       "defaultYtVideoId": "PagSv406kvk"
@@ -12646,7 +12674,8 @@
           "title": "III. Twilight In The Reflection Of Dreams",
           "duration": "4:40"
         }
-      ]
+      ],
+      "ytPlaylistId": "OLAK5uy_mqq7vqGNHf9guXDZ0X6PXPBEI60LtrY5M"
     },
     {
       "release_id": 36282118,
@@ -13190,6 +13219,7 @@
           "duration": 0
         }
       ],
+      "ytPlaylistId": "OLAK5uy_mqNK-E-FzOMzC1DXCQr_l6NHcIXPqF7zI",
       "fullAlbumYtVideoId": "E9f9vA6ghE4",
       "fullAlbumYtDuration": 2400,
       "defaultYtVideoId": "JnSGdUorfBs"
@@ -13449,6 +13479,7 @@
           "duration": 271
         }
       ],
+      "ytPlaylistId": "OLAK5uy_m7Y8tMiJQACbFB4fIVPxwUijUP215LpRk",
       "defaultYtVideoId": "dgJFyar1yqY"
     },
     {
@@ -13861,6 +13892,7 @@
           "duration": 251
         }
       ],
+      "ytPlaylistId": "OLAK5uy_mBBR8KQqSX4XsEW8OR9oAjn1qdm_hn1GM",
       "defaultYtVideoId": "5yqWtYD8qSI"
     },
     {
@@ -14085,6 +14117,7 @@
           "duration": "4:06"
         }
       ],
+      "ytPlaylistId": "OLAK5uy_nzdALeNPK53gWHHU-MalutHv_EufDwUZ0",
       "defaultYtVideoId": "IPIQhCbIYIQ"
     },
     {
@@ -14334,6 +14367,7 @@
           "duration": 229
         }
       ],
+      "ytPlaylistId": "OLAK5uy_nq9Q9Qzb2F0jPNoY1hntGotrVjAxpm930",
       "fullAlbumYtVideoId": "hYpY0n_amao",
       "fullAlbumYtDuration": 2320,
       "defaultYtVideoId": "PnWP7cAf-bk"
@@ -15196,6 +15230,7 @@
           "duration": 201
         }
       ],
+      "ytPlaylistId": "OLAK5uy_m8mggphlK1-MW8ronlU8UJwYEi-W5zjMA",
       "defaultYtVideoId": "lzAYXn2-1_E"
     },
     {
@@ -15535,6 +15570,7 @@
           "duration": 2089
         }
       ],
+      "ytPlaylistId": "OLAK5uy_lPFS6e8WV0brzJrTBUm_gtyWGedF8_eGU",
       "fullAlbumYtVideoId": "-yfQUVfGZt8",
       "fullAlbumYtDuration": 2089,
       "defaultYtVideoId": "MIajmLP46b4"
@@ -15797,6 +15833,7 @@
           "duration": 2477
         }
       ],
+      "ytPlaylistId": "OLAK5uy_moOe_sV-6lh13pw9fXvoKu1rqBrWcqThs",
       "fullAlbumYtVideoId": "6-CdrxX-JOg",
       "fullAlbumYtDuration": 2477,
       "defaultYtVideoId": "sIPdH7vLmgQ"
@@ -16086,7 +16123,8 @@
           "title": "In A Win, Win Situation",
           "duration": ""
         }
-      ]
+      ],
+      "ytPlaylistId": "OLAK5uy_myFpP_a3ylgyVFvauTQ9FesE8z6jcQ8F4"
     },
     {
       "release_id": 28575079,
@@ -17083,6 +17121,7 @@
           "duration": 383
         }
       ],
+      "ytPlaylistId": "OLAK5uy_nlHHEUr63PxvAuqVHAUjO-WrP6X8u4phA",
       "defaultYtVideoId": "kF32LWxokRo"
     },
     {
@@ -17291,6 +17330,7 @@
           "duration": 290
         }
       ],
+      "ytPlaylistId": "OLAK5uy_nVLTKxj1YGqdbeFmxejmpmCK3Zu_4e2xA",
       "fullAlbumYtVideoId": "m8lS5qfJFC0",
       "fullAlbumYtDuration": 2715,
       "defaultYtVideoId": "M89t4Wge_b4"
@@ -17704,6 +17744,7 @@
           "ytTitle": "The Plot In You - Disposable Fix"
         }
       ],
+      "ytPlaylistId": "OLAK5uy_mIKPMLL6t-qLGxY1aQ3yS6wIJ4UwjEUyI",
       "defaultYtVideoId": "OMxTBPvRoH8"
     },
     {
@@ -18218,6 +18259,7 @@
           "duration": 276
         }
       ],
+      "ytPlaylistId": "OLAK5uy_mOxiHpCnBOIgwBxHOtScTqHRCTew7Y_ko",
       "defaultYtVideoId": "ViFPVC3Jo24"
     },
     {
@@ -18563,6 +18605,7 @@
           "duration": 0
         }
       ],
+      "ytPlaylistId": "OLAK5uy_nlP6aBHJnesRgtGuqA3cEruRUROE8K7jk",
       "defaultYtVideoId": "8-cepZ6K7mY"
     },
     {
@@ -18965,6 +19008,7 @@
           "duration": 240
         }
       ],
+      "ytPlaylistId": "OLAK5uy_kEfc6HeEoj9ECPNaOXeWv_jf5b9gAC8Jg",
       "defaultYtVideoId": "Pj1m7TuSGBs"
     },
     {
@@ -19210,7 +19254,8 @@
           "title": "Luna",
           "duration": ""
         }
-      ]
+      ],
+      "ytPlaylistId": "OLAK5uy_l4_1fTd2KbJwi0Bmt7nSt0GUlAo4Kx59g"
     },
     {
       "release_id": 15985411,
@@ -19339,7 +19384,8 @@
           "title": "Nova",
           "duration": "4:19"
         }
-      ]
+      ],
+      "ytPlaylistId": "OLAK5uy_nMVvTMFQhioR6mLvhF-dKfpOTUl5_3y-w"
     },
     {
       "release_id": 11771142,
@@ -19715,6 +19761,7 @@
           "duration": 350
         }
       ],
+      "ytPlaylistId": "OLAK5uy_kIIlg4piNhRgiDM_62JRfWdL3XdL1aboo",
       "defaultYtVideoId": "VcApGdcRZN4"
     },
     {
@@ -19870,6 +19917,7 @@
           "duration": 2840
         }
       ],
+      "ytPlaylistId": "OLAK5uy_lTpyBYgqxUXmYFlBEXfQ6u2rdnYIIs9uY",
       "fullAlbumYtVideoId": "5bvTqD37ALI",
       "fullAlbumYtDuration": 2840,
       "defaultYtVideoId": "5bvTqD37ALI"
@@ -20365,6 +20413,7 @@
           "duration": 236
         }
       ],
+      "ytPlaylistId": "OLAK5uy_kg9zacZDTraoE_963IL3g9oxeLRyllHu8",
       "defaultYtVideoId": "LswEN0icdj0"
     },
     {
@@ -20929,6 +20978,7 @@
           "duration": 219
         }
       ],
+      "ytPlaylistId": "OLAK5uy_n6irySlEQ7hBN4hLVsEdhhggxhEvyxrv4",
       "fullAlbumYtVideoId": "5Tj8xEZTD5o",
       "fullAlbumYtDuration": 2810,
       "defaultYtVideoId": "HI25fVw7PIE"
@@ -21201,6 +21251,7 @@
           "duration": 273
         }
       ],
+      "ytPlaylistId": "OLAK5uy_kObqb1EHEXU915LJtHvMSJs64otOYRqxI",
       "fullAlbumYtVideoId": "EGwtcx8QwFY",
       "fullAlbumYtDuration": 3305,
       "defaultYtVideoId": "8rvZSm2dXMg"
@@ -22715,6 +22766,7 @@
           "duration": 259
         }
       ],
+      "ytPlaylistId": "OLAK5uy_mU2TTqnxcqPIfJY-Fy2Jo4cvufURXspl0",
       "fullAlbumYtVideoId": "XRv-Eio7WZM",
       "fullAlbumYtDuration": 2400,
       "defaultYtVideoId": "SecJsEelf3c"
@@ -23197,6 +23249,7 @@
           "duration": 301
         }
       ],
+      "ytPlaylistId": "OLAK5uy_lW0d-1b1Vn3DQhmQIiTDgcPEj2ztoz8Cw",
       "defaultYtVideoId": "jy2MLw_JMJk"
     },
     {
@@ -23823,6 +23876,7 @@
           "duration": 242
         }
       ],
+      "ytPlaylistId": "OLAK5uy_nW0dqCJCsSwpmQgKLNueczWBhBrpnsWUc",
       "defaultYtVideoId": "eibN9wI77ME"
     },
     {
@@ -24469,7 +24523,8 @@
           "title": "Eyes Closed",
           "duration": "3:14"
         }
-      ]
+      ],
+      "ytPlaylistId": "OLAK5uy_mjKk-VPFexO23IJs5-Ka0yl86vAEMQyiU"
     },
     {
       "release_id": 19249243,
@@ -24842,6 +24897,7 @@
           "duration": 0
         }
       ],
+      "ytPlaylistId": "OLAK5uy_n4LH-bP7pNrCbNs56Z1crXA4evkq-UWso",
       "fullAlbumYtVideoId": "eQVGQztaHZg",
       "fullAlbumYtDuration": 2400,
       "defaultYtVideoId": "2MSCGPZ-ghw"
@@ -25080,6 +25136,7 @@
           "duration": 250
         }
       ],
+      "ytPlaylistId": "OLAK5uy_nRdhmCYcV613lAW5mBcaZkUksZaRzG0j4",
       "fullAlbumYtVideoId": "WxQwFV4kRlQ",
       "fullAlbumYtDuration": 3271,
       "defaultYtVideoId": "laIcNXtFLdM"
@@ -25312,6 +25369,7 @@
           "duration": 298
         }
       ],
+      "ytPlaylistId": "OLAK5uy_lQOktvWAETx83nPmZDvRlf2GXhEgXDo_c",
       "defaultYtVideoId": "LvLMaL0THhw"
     },
     {
@@ -25633,6 +25691,7 @@
           "duration": 318
         }
       ],
+      "ytPlaylistId": "OLAK5uy_nl9ox5WjQcz-DV7V6l5G5YhJXZHT0CFyA",
       "fullAlbumYtVideoId": "Kkl7CiCghVI",
       "fullAlbumYtDuration": 2873,
       "defaultYtVideoId": "hkofx4TkHXc"
@@ -26094,6 +26153,7 @@
           "duration": 1104
         }
       ],
+      "ytPlaylistId": "OLAK5uy_lTIRKgQaVTVa89_5xY91xGuikDoPmObGI",
       "fullAlbumYtVideoId": "AmyqmTO_L1M",
       "fullAlbumYtDuration": 1104,
       "defaultYtVideoId": "nVCgCF5A4Cs"
@@ -26650,6 +26710,7 @@
           "duration": 294
         }
       ],
+      "ytPlaylistId": "OLAK5uy_loOCEyqN60cloZEjkXELlwStJlmrp2RJk",
       "defaultYtVideoId": "BlopBb_b35w"
     },
     {
@@ -26963,6 +27024,7 @@
           "duration": 2530
         }
       ],
+      "ytPlaylistId": "OLAK5uy_mPdQEalWg_GLt27Npc8zD1VcNTLf5Tndk",
       "fullAlbumYtVideoId": "MXHikpA5COo",
       "fullAlbumYtDuration": 2400,
       "defaultYtVideoId": "ENLw_1TK6Ms"
@@ -27362,6 +27424,7 @@
           "duration": 139
         }
       ],
+      "ytPlaylistId": "OLAK5uy_mMWsx4iA37EP_9-VTXsRA5iqJOV-rZRYY",
       "fullAlbumYtVideoId": "OYHf4PNvOJk",
       "fullAlbumYtDuration": 2062,
       "defaultYtVideoId": "fl0Z72PoDdY"
@@ -28436,6 +28499,7 @@
           "duration": 269
         }
       ],
+      "ytPlaylistId": "OLAK5uy_m-mG4UYF02ZBaRxu7r4lPXocMwG7uWGzY",
       "fullAlbumYtVideoId": "hz16Wty7Gho",
       "fullAlbumYtDuration": 4585,
       "defaultYtVideoId": "tUltTV3t4OM"
@@ -28752,6 +28816,7 @@
           "duration": 233
         }
       ],
+      "ytPlaylistId": "OLAK5uy_n1E-c8zi3HsGGjbe_gOOlwlILiPeI8GRI",
       "defaultYtVideoId": "UgPujyXPM84"
     },
     {
@@ -29471,6 +29536,7 @@
           "duration": 240
         }
       ],
+      "ytPlaylistId": "OLAK5uy_kjFQ4unH3aHr3NJLPCvG3wdE7VvdvKGEM",
       "defaultYtVideoId": "ikUrxI7g6BM"
     },
     {
@@ -29840,6 +29906,7 @@
           "duration": 0
         }
       ],
+      "ytPlaylistId": "OLAK5uy_mSoZbmB-icrmzSIM5_ExVKQso-Afvbc8c",
       "fullAlbumYtVideoId": "O9YPqr9RMv8",
       "fullAlbumYtDuration": 2400,
       "defaultYtVideoId": "Tfv4PqEOZCU"
@@ -30165,6 +30232,7 @@
           "albumYtDuration": 3038
         }
       ],
+      "ytPlaylistId": "OLAK5uy_mA0CpXx2ZLtxSlgQYKbwA6geYcArMoYzA",
       "fullAlbumYtVideoId": "WMmA0iWI5zI",
       "fullAlbumYtDuration": 3038,
       "defaultYtVideoId": "WMmA0iWI5zI"
@@ -30830,6 +30898,7 @@
           "duration": 283
         }
       ],
+      "ytPlaylistId": "OLAK5uy_lRWGlYllOj5jsV6SI_0Ag8WgaaSJyT4EU",
       "fullAlbumYtVideoId": "M1jAETb7BJQ",
       "fullAlbumYtDuration": 3064,
       "defaultYtVideoId": "2Lf6K-WhDRM"
@@ -31195,6 +31264,7 @@
           "duration": 192
         }
       ],
+      "ytPlaylistId": "OLAK5uy_lfR-gneZtTU9HT7MsBTgj4xWJ5QNbJ7n4",
       "defaultYtVideoId": "rhMfz4HrcEA"
     },
     {
@@ -32008,6 +32078,7 @@
           "duration": 185
         }
       ],
+      "ytPlaylistId": "OLAK5uy_keZWRyTFJmt32EBBMTrJOx-wswzPKxtzM",
       "defaultYtVideoId": "DzeqwQ79BWg"
     },
     {
@@ -32954,6 +33025,7 @@
           "duration": 223
         }
       ],
+      "ytPlaylistId": "OLAK5uy_kNn5zFAuN_kPSGiMTxIjQaPAzjg5uRs2A",
       "fullAlbumYtVideoId": "l0EUPXP03YI",
       "fullAlbumYtDuration": 2400,
       "defaultYtVideoId": "5Oc0ja19_GU"
@@ -33408,6 +33480,7 @@
           "duration": 239
         }
       ],
+      "ytPlaylistId": "OLAK5uy_n3M4MFDDSmFbFMwI08V3banBAptO_nk88",
       "fullAlbumYtVideoId": "Q3ZvbcbskYA",
       "fullAlbumYtDuration": 2539,
       "defaultYtVideoId": "j9Mh6ea67hk"
@@ -33665,6 +33738,7 @@
           "duration": 0
         }
       ],
+      "ytPlaylistId": "OLAK5uy_n9njCIwlUTX4YqEXw3u5tSpza25XQcPmQ",
       "fullAlbumYtVideoId": "86i3YTruoGo",
       "fullAlbumYtDuration": 2400,
       "defaultYtVideoId": "86i3YTruoGo"
@@ -33897,7 +33971,8 @@
           "title": "Heaven In Hiding",
           "duration": ""
         }
-      ]
+      ],
+      "ytPlaylistId": "OLAK5uy_nmboIb3-gFCFMkqhl6S9abMIGjybsDIhI"
     },
     {
       "release_id": 34007283,
@@ -34356,7 +34431,8 @@
           "title": "Angel Song (JD Remix)",
           "duration": "3:46"
         }
-      ]
+      ],
+      "ytPlaylistId": "OLAK5uy_lCqfGIDbB07X9aB5flGvRRzkNOqIpS-kk"
     },
     {
       "release_id": 21047380,
@@ -34922,6 +34998,7 @@
           "duration": 237
         }
       ],
+      "ytPlaylistId": "OLAK5uy_kbEMwxM73fs0HoLrbecWn8q5yhV06cItU",
       "defaultYtVideoId": "T3E6AKDbI2Y"
     },
     {
@@ -35390,6 +35467,7 @@
           "duration": 288
         }
       ],
+      "ytPlaylistId": "OLAK5uy_k1TY3T2806F86ZcEcjtA73Iij5bR21pDY",
       "defaultYtVideoId": "Yo5fE-Zl-V4"
     },
     {
@@ -35802,6 +35880,7 @@
           "duration": 165
         }
       ],
+      "ytPlaylistId": "OLAK5uy_kh3lq60Rr_CSZbJjiQkQsbeXLw21gRjdI",
       "fullAlbumYtVideoId": "rzhRYwwVNJI",
       "fullAlbumYtDuration": 1719,
       "defaultYtVideoId": "nVEZlujnPR8"
@@ -36054,6 +36133,7 @@
           "albumYtDuration": 2030
         }
       ],
+      "ytPlaylistId": "OLAK5uy_n_502--oFhnzMN4LO3gNPUPFPHLuz4o1c",
       "fullAlbumYtVideoId": "xRLhcp_daow",
       "fullAlbumYtDuration": 2030,
       "defaultYtVideoId": "xRLhcp_daow"
@@ -36728,6 +36808,7 @@
           "duration": 1313
         }
       ],
+      "ytPlaylistId": "OLAK5uy_lqG2FIU1Izi-6UrUg9nVmbVWlWqnbfjpE",
       "fullAlbumYtVideoId": "0LS9jJVUGhI",
       "fullAlbumYtDuration": 1313,
       "defaultYtVideoId": "aAVp8qAh9eg"
@@ -36931,6 +37012,7 @@
           "duration": 332
         }
       ],
+      "ytPlaylistId": "OLAK5uy_nO1MNY2y0cD6vS5TnjQp8Z7vhLRRlSf1w",
       "fullAlbumYtVideoId": "IK78K2yQgn0",
       "fullAlbumYtDuration": 3845,
       "defaultYtVideoId": "rmtU2WJfPgU"
@@ -37378,6 +37460,7 @@
           "duration": 269
         }
       ],
+      "ytPlaylistId": "OLAK5uy_m-mG4UYF02ZBaRxu7r4lPXocMwG7uWGzY",
       "fullAlbumYtVideoId": "hz16Wty7Gho",
       "fullAlbumYtDuration": 4585,
       "defaultYtVideoId": "tUltTV3t4OM"
@@ -37919,6 +38002,7 @@
           "duration": 179
         }
       ],
+      "ytPlaylistId": "OLAK5uy_mf2flzAAdEJpDM2Px6HKywVYhNtRtsQlg",
       "defaultYtVideoId": "CI0xoI6WwOY"
     },
     {
@@ -38313,6 +38397,7 @@
           "duration": 212
         }
       ],
+      "ytPlaylistId": "OLAK5uy_nXy0obhpd_k0TwHlJJFg2RfG4DNbRJBSs",
       "fullAlbumYtVideoId": "o-GU_fmvZ3c",
       "fullAlbumYtDuration": 260,
       "defaultYtVideoId": "TnCUJVPQH3I"
@@ -39132,6 +39217,7 @@
           "duration": 222
         }
       ],
+      "ytPlaylistId": "OLAK5uy_nesjILKIcJfG4xDn-wJWV-ORvwYu1iDEQ",
       "defaultYtVideoId": "_1O1CuUuRWw"
     },
     {
@@ -39740,6 +39826,7 @@
           "duration": 250
         }
       ],
+      "ytPlaylistId": "OLAK5uy_n1e95E3pv7nDmpUFy7TFcE3oG-wW1SoI4",
       "fullAlbumYtVideoId": "xbOF5U2h_xg",
       "fullAlbumYtDuration": 106,
       "defaultYtVideoId": "xbOF5U2h_xg"
@@ -40014,6 +40101,7 @@
           "duration": 355
         }
       ],
+      "ytPlaylistId": "OLAK5uy_mAj5cOEMGw1sXigzAiy-ScpVRDBCiaLAE",
       "defaultYtVideoId": "YwvAgY3_Ju8"
     },
     {
@@ -40193,6 +40281,7 @@
           "albumYtDuration": 1202
         }
       ],
+      "ytPlaylistId": "OLAK5uy_mAw2qQ1eqOrJkTYM9ti-0m1B3fR-Ln2dw",
       "fullAlbumYtVideoId": "4tGapndn0K8",
       "fullAlbumYtDuration": 1202,
       "defaultYtVideoId": "4tGapndn0K8"
@@ -40550,6 +40639,7 @@
           "duration": 293
         }
       ],
+      "ytPlaylistId": "OLAK5uy_l_dGXXw7fY14_69904D7x3PixAi4Q2m-Q",
       "defaultYtVideoId": "n5JQnbI5aMM"
     },
     {
@@ -40783,6 +40873,7 @@
           "duration": 207
         }
       ],
+      "ytPlaylistId": "OLAK5uy_n8ubWLgABCf2-u3NwE3h1xRsONhEPgsN4",
       "defaultYtVideoId": "FrbwVzgvl3E"
     },
     {
@@ -41112,6 +41203,7 @@
           "duration": 298
         }
       ],
+      "ytPlaylistId": "OLAK5uy_mJyojXlZ8rugQG0uEnQanZygt_o2txVYU",
       "defaultYtVideoId": "k5HKMSVsUhU"
     },
     {
@@ -41288,7 +41380,8 @@
           "title": "Eureka",
           "duration": ""
         }
-      ]
+      ],
+      "ytPlaylistId": "OLAK5uy_ndh5rndKq5Jou0G6JokLvYszjwVQhv9U0"
     },
     {
       "release_id": 29237467,
@@ -41493,6 +41586,7 @@
           "duration": 332
         }
       ],
+      "ytPlaylistId": "OLAK5uy_nO1MNY2y0cD6vS5TnjQp8Z7vhLRRlSf1w",
       "fullAlbumYtVideoId": "IK78K2yQgn0",
       "fullAlbumYtDuration": 3845,
       "defaultYtVideoId": "rmtU2WJfPgU"
@@ -41925,6 +42019,7 @@
           "duration": 374
         }
       ],
+      "ytPlaylistId": "OLAK5uy_l52lt9IONBpWa8hyZcAIWi-HHNnOgBKLE",
       "fullAlbumYtVideoId": "M_B-uWfHFiY",
       "fullAlbumYtDuration": 4836,
       "defaultYtVideoId": "U1hHsTYdXxY"
@@ -42400,6 +42495,7 @@
           "duration": 0
         }
       ],
+      "ytPlaylistId": "OLAK5uy_lrGG8NasaVgZNiq16r35i0Yb1i_IXwHwc",
       "defaultYtVideoId": "Ip9xWCO8rdo"
     },
     {
@@ -42669,6 +42765,7 @@
           "albumYtDuration": 4836
         }
       ],
+      "ytPlaylistId": "OLAK5uy_lw6Oht1su02wNjx4lgLwrIdxL5wth-9Og",
       "fullAlbumYtVideoId": "M_B-uWfHFiY",
       "fullAlbumYtDuration": 4836,
       "defaultYtVideoId": "M_B-uWfHFiY"
@@ -43763,6 +43860,7 @@
           "duration": 279
         }
       ],
+      "ytPlaylistId": "OLAK5uy_l8wBLTgm_A2SRAdbeyfcbBiqE5zKWpx6Q",
       "fullAlbumYtVideoId": "oGEcCNdXqkM",
       "fullAlbumYtDuration": 2255,
       "defaultYtVideoId": "2V9Q_ExBHHs"
@@ -44061,6 +44159,7 @@
           "duration": 197
         }
       ],
+      "ytPlaylistId": "OLAK5uy_kl_qW0L1vbuh1ko5Nu6D9M4K_W8GA8lls",
       "defaultYtVideoId": "tptChkpxMoQ"
     },
     {
@@ -44406,6 +44505,7 @@
           "duration": 249
         }
       ],
+      "ytPlaylistId": "OLAK5uy_myxml01PaIU5ELofrBaYDGT3XBa_uWVfg",
       "fullAlbumYtVideoId": "O5gYwnkgGO0",
       "fullAlbumYtDuration": 2890,
       "defaultYtVideoId": "7xeFcjtnAQ0"
@@ -45157,6 +45257,7 @@
           "duration": 268
         }
       ],
+      "ytPlaylistId": "OLAK5uy_n-MZXGCBQFSjUur11sd58Mm_BXttjt1dA",
       "defaultYtVideoId": "LQ8KvLQIdMc"
     },
     {
@@ -45719,6 +45820,7 @@
           "duration": 241
         }
       ],
+      "ytPlaylistId": "OLAK5uy_kNeny3Vsr4fkAfq4pEwmhb6b6FylDLrXY",
       "defaultYtVideoId": "JV3lFDVisaI"
     },
     {
@@ -45972,6 +46074,7 @@
           "duration": 442
         }
       ],
+      "ytPlaylistId": "OLAK5uy_kgdHYy3-JA7OKOPQK4g-MEN1mQE7kFjR4",
       "defaultYtVideoId": "TikYbkbRC8A"
     },
     {
@@ -46311,6 +46414,7 @@
           "duration": 160
         }
       ],
+      "ytPlaylistId": "OLAK5uy_kruA60wPnEW1L0n5mTdHJsa18JbWho-wU",
       "fullAlbumYtVideoId": "OCowDtHZyUg",
       "fullAlbumYtDuration": 2317,
       "defaultYtVideoId": "ou0TdTwLhbQ"
@@ -46716,6 +46820,7 @@
           "duration": 2962
         }
       ],
+      "ytPlaylistId": "OLAK5uy_ncfV6gsBjXyer3e3SOaDSdb1_QGvSBbN4",
       "fullAlbumYtVideoId": "LpMxRApFkkI",
       "fullAlbumYtDuration": 172,
       "defaultYtVideoId": "LpMxRApFkkI"
@@ -47532,6 +47637,7 @@
           "duration": 305
         }
       ],
+      "ytPlaylistId": "OLAK5uy_ndodE3IhgnTwHRIPB8zBkeUfEO4x9aTvg",
       "defaultYtVideoId": "DOyyGlWoxeU"
     },
     {
@@ -47708,6 +47814,7 @@
           "duration": 244
         }
       ],
+      "ytPlaylistId": "OLAK5uy_nJQT2OjKkG-Uxqu09jPgmV3-l9U-i76rw",
       "defaultYtVideoId": "OI6BWndxkcs"
     },
     {
@@ -48504,6 +48611,7 @@
           "duration": 309
         }
       ],
+      "ytPlaylistId": "OLAK5uy_mCTrn6Byt4LrQG8aaAhWBYSANK6wey__Y",
       "defaultYtVideoId": "GzuSruxHL2g"
     },
     {
@@ -48957,6 +49065,7 @@
           "duration": 276
         }
       ],
+      "ytPlaylistId": "OLAK5uy_nF4oihNUjyHJqsiIiTVpNkvrNbbybVx_g",
       "defaultYtVideoId": "ei2wA2Ndm6M"
     },
     {
@@ -49455,6 +49564,7 @@
           "duration": 161
         }
       ],
+      "ytPlaylistId": "OLAK5uy_lNdSrKW6ETaBRt2HRC3aJGYh84QpmiJkY",
       "defaultYtVideoId": "XsvLfL3Qh1A"
     },
     {
@@ -49818,6 +49928,7 @@
           "duration": 213
         }
       ],
+      "ytPlaylistId": "OLAK5uy_lBL6L6Inkx3niyxRfvlFYh-ckr70bR1iY",
       "defaultYtVideoId": "9NBaKRUrr_M"
     },
     {
@@ -50269,6 +50380,7 @@
           "duration": 236
         }
       ],
+      "ytPlaylistId": "OLAK5uy_nNY4jMVsAwHmoQMPBtVJizcKzfGeVOUyQ",
       "fullAlbumYtVideoId": "YKY3jpl99XM",
       "fullAlbumYtDuration": 2400,
       "defaultYtVideoId": "O_IIAYZL1R4"
@@ -50497,6 +50609,7 @@
           "duration": 254
         }
       ],
+      "ytPlaylistId": "OLAK5uy_l_r54bht81OxZc7HEGwo-VYjMyXF0B23c",
       "fullAlbumYtVideoId": "hQ8p09u3umU",
       "fullAlbumYtDuration": 2771,
       "defaultYtVideoId": "AvECsj3mIF8"
@@ -50828,6 +50941,7 @@
           "duration": 282
         }
       ],
+      "ytPlaylistId": "OLAK5uy_kUMQd_oA9-98o1QObED5Sdk1DVrv8dz4Y",
       "defaultYtVideoId": "k2Wi7zw1gbI"
     },
     {
@@ -51128,6 +51242,7 @@
           "duration": 223
         }
       ],
+      "ytPlaylistId": "OLAK5uy_nTxQhMjPawdDRWhRUa3UM82zc8raIlzKU",
       "defaultYtVideoId": "QwhwskB_eWo"
     },
     {
@@ -51367,6 +51482,7 @@
           "duration": 0
         }
       ],
+      "ytPlaylistId": "OLAK5uy_kSEJxA44Mdz12lQs2Gkaq8a-dy63U-424",
       "fullAlbumYtVideoId": "CYv_AJDlahY",
       "fullAlbumYtDuration": 2400,
       "defaultYtVideoId": "Pi81RThE7NU"
@@ -51707,6 +51823,7 @@
           "duration": 0
         }
       ],
+      "ytPlaylistId": "OLAK5uy_mUnBw5wwMQIRYIaKeg8T_-YfzH9M6d26M",
       "defaultYtVideoId": "pFKSiOkRzb4"
     },
     {
@@ -52966,6 +53083,7 @@
           "duration": 203
         }
       ],
+      "ytPlaylistId": "OLAK5uy_nvkH8-lFcqoODuOABSNg4Ad84R4gu3eYE",
       "defaultYtVideoId": "JOBvn6ZLNxg"
     },
     {
@@ -53487,6 +53605,7 @@
           "duration": 177
         }
       ],
+      "ytPlaylistId": "OLAK5uy_mKxnfH8ow6LSdNUA41GJRKc6Y9e5bArfA",
       "fullAlbumYtVideoId": "Y5uLleCmm6k",
       "fullAlbumYtDuration": 2400,
       "defaultYtVideoId": "Y5uLleCmm6k"
@@ -53949,6 +54068,7 @@
           "duration": 317
         }
       ],
+      "ytPlaylistId": "OLAK5uy_lF0p5h_HhiIwhHPlNqXeuhxK2pEm83Vww",
       "defaultYtVideoId": "pOHvJuGwZJo"
     },
     {
@@ -54189,7 +54309,8 @@
           "title": "Mercia",
           "duration": ""
         }
-      ]
+      ],
+      "ytPlaylistId": "OLAK5uy_lZmmFEyZyV02qsKxrCNTlJ1fjyHa0VPYk"
     },
     {
       "release_id": 10024143,
@@ -54428,6 +54549,7 @@
           "duration": 233
         }
       ],
+      "ytPlaylistId": "OLAK5uy_lsMgKy05IjepC67Kw5XNgguB7hdLMbcak",
       "defaultYtVideoId": "anQ836BXbYw"
     },
     {
@@ -54663,6 +54785,7 @@
           "duration": 231
         }
       ],
+      "ytPlaylistId": "OLAK5uy_k9q5_11oHF-okjERQF_UnugGQYIro3Kuk",
       "defaultYtVideoId": "K0-CW1DbVIg"
     },
     {
@@ -55178,6 +55301,7 @@
           "albumYtDuration": 3038
         }
       ],
+      "ytPlaylistId": "OLAK5uy_mA0CpXx2ZLtxSlgQYKbwA6geYcArMoYzA",
       "fullAlbumYtVideoId": "WMmA0iWI5zI",
       "fullAlbumYtDuration": 3038,
       "defaultYtVideoId": "WMmA0iWI5zI"
@@ -55634,6 +55758,7 @@
           "duration": 205
         }
       ],
+      "ytPlaylistId": "OLAK5uy_nQaXefGC4soVxQTvPAYBiKmFmk9jbmvNE",
       "defaultYtVideoId": "cjU88QrCoDk"
     },
     {
@@ -56182,6 +56307,7 @@
           "duration": 194
         }
       ],
+      "ytPlaylistId": "OLAK5uy_kpJg7QHKWnRG-D5qixHxOoUVcAljZJaRA",
       "defaultYtVideoId": "1KOS-dQ9wOw"
     },
     {
@@ -56503,6 +56629,7 @@
           "duration": 264
         }
       ],
+      "ytPlaylistId": "OLAK5uy_md9xFDt8arSquZJoy6RYDCNg5iREaa5HM",
       "defaultYtVideoId": "XE68ORLCqa4"
     },
     {
@@ -57824,6 +57951,7 @@
           "duration": 349
         }
       ],
+      "ytPlaylistId": "OLAK5uy_mY43Br5z_zEPVpcibVdWcrf5xqc-OAKXY",
       "defaultYtVideoId": "qiRno1CVOSU"
     },
     {
@@ -58352,6 +58480,7 @@
           "duration": 265
         }
       ],
+      "ytPlaylistId": "OLAK5uy_mfdx_C0pR6XdVKoGGoXHVRdQlvEVtjw0c",
       "defaultYtVideoId": "eoVExOdCpjs"
     },
     {
@@ -58661,6 +58790,7 @@
           "duration": 228
         }
       ],
+      "ytPlaylistId": "OLAK5uy_kx-S5QCkV4Po13hehdQr6Zu2dVSZhKU18",
       "defaultYtVideoId": "iXY93aMLG7s"
     },
     {
@@ -59153,6 +59283,7 @@
           "duration": 258
         }
       ],
+      "ytPlaylistId": "OLAK5uy_lhUM49AQWi7kztmNUAuag8IkU7GF8RrOo",
       "defaultYtVideoId": "PIPPQbsWlgA"
     },
     {
@@ -59520,6 +59651,7 @@
           "duration": 220
         }
       ],
+      "ytPlaylistId": "OLAK5uy_l3aPoJqBXE01CaqFSK37kjeq90HTCDEsQ",
       "defaultYtVideoId": "lCPwR7R4hlA"
     },
     {
@@ -60378,6 +60510,7 @@
           "duration": 207
         }
       ],
+      "ytPlaylistId": "OLAK5uy_mUU8ogBuzXDV5QWRFzM_EMVcp3ET-Aesk",
       "defaultYtVideoId": "dDMuVL3sdU0"
     },
     {
@@ -60705,6 +60838,7 @@
           "duration": 216
         }
       ],
+      "ytPlaylistId": "OLAK5uy_n3bgQc3UixEaGNm49V_8euewYtYKAKl1g",
       "fullAlbumYtVideoId": "Bh9fROw9DE8",
       "fullAlbumYtDuration": 283,
       "defaultYtVideoId": "Ft1p8USWKHs"
@@ -60713,7 +60847,7 @@
   "flattening_queue": {
     "schema_version": "4.0.0",
     "storage_mode": "portable_inline_html+json",
-    "updated_at_utc": "2026-11-14T15:01:56Z",
+    "updated_at_utc": "2026-11-14T18:43:46Z",
     "protocol": "Bag on 6 until 130°F then drop to 4 — 2.5 hours once at 130°F on the plate",
     "need_to_be_done_release_ids": [
       28844782,

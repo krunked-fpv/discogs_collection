@@ -746,11 +746,12 @@ def fetch_full_collection(
             "images": img_selection,
             "wax_spec": wax_spec,
         }
+        existing_olak = str((existing_rec or {}).get("ytPlaylistId") or "").strip()
         if enrich_record_youtube_music(
             record_obj,
             rel_detail=rel_detail,
             existing_rec=existing_rec,
-            allow_network_search=(delta_status != "unchanged"),
+            allow_network_search=(delta_status != "unchanged" or not existing_olak.startswith("OLAK5uy_")),
             ui=ui,
         ):
             cache[rid_str] = rel_detail
