@@ -2,7 +2,7 @@
 """Pick The Right Pressing Photo & Static Index Compiler (`pick_pressing_photo.py`).
 
 Inspects releases in `data/collection.json` AND release folders in
-`assets/releases/<release_id>/` using the v4.0 Incremental Delta Engine:
+`assets/releases/<release_id>/` using the v4.7 Incremental Delta Engine:
 - Fast-paths `UNCHANGED` releases in sub-millisecond time without re-decoding
   images or re-running the 4-pass NumPy CV suite.
 - Runs the full Calibrated Multi-Scale Concentric Dual-Circle CV + Guideline 13.8
@@ -64,7 +64,7 @@ except ImportError:
     HAS_PIL = False
 
 DISCOGS_API_BASE = "https://api.discogs.com"
-USER_AGENT = "KrunkedDiscogsVault/4.0 +https://github.com/krunked-fpv/discogs_collection"
+USER_AGENT = "KrunkedDiscogsVault/4.7 +https://github.com/krunked-fpv/discogs_collection"
 DEFAULT_TOKEN = ""
 
 # Verified marketplace purchase prices for releases with 0 active copies currently listed on Discogs
@@ -455,7 +455,7 @@ def run_pick_pressing_photos(
     if ui is None:
         ui = VaultTerminalUI(
             title="KRUNKED // VINYL VAULT",
-            subtitle="PRESSING PICKER & DELTA ENGINE v4.0",
+            subtitle="PRESSING PICKER & DELTA ENGINE v4.7",
         )
         mode_str = "FULL CV REBUILD (--full)" if force_full else (
             f"TARGETED RESYNC ({sorted(force_rids)})" if force_rids else "INCREMENTAL DELTA PICKER"
@@ -909,7 +909,7 @@ def run_pick_pressing_photos(
     todo_count = sum(1 for r in records if r.get("flattening_status") == "Need to be done")
     done_count = sum(1 for r in records if r.get("flattening_status") == "Done")
 
-    collection_data["schema_version"] = "4.0.0"
+    collection_data["schema_version"] = "4.7.0"
     collection_data["is_offline_seed"] = False
     collection_data["synced_at_utc"] = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     collection_data["records"] = records
