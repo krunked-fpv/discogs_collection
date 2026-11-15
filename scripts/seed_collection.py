@@ -201,7 +201,7 @@ pressing_count = sum(1 for r in records if r["images"]["has_pressing_photo"])
 colored_count = sum(1 for r in records if r["wax_spec"]["pattern"] != "black")
 
 payload = {
-    "schema_version": "4.7.0",
+    "schema_version": "5.0.0",
     "source_of_truth": "https://www.discogs.com/user/krunked/collection",
     "api_documentation": "https://www.discogs.com/developers",
     "image_guidelines": "https://support.discogs.com/hc/en-us/articles/360005006874-Database-Guidelines-13-Images",

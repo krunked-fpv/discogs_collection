@@ -2,7 +2,7 @@
 """Deterministic Discogs Collection Sync & Static Site Builder (`sync_discogs.py`).
 
 Synchronizes `https://www.discogs.com/user/krunked/collection` via the official
-Discogs REST API v2.0 (`https://api.discogs.com`) using the v4.7 Incremental
+Discogs REST API v2.0 (`https://api.discogs.com`) using the v5.0 Incremental
 Delta Engine:
 - Compares incoming Discogs collection items against the local baseline in
   `data/collection.json`, `data/releases_cache.json`, `data/overrides.json`,
@@ -63,7 +63,7 @@ from pick_pressing_photo import (
 )
 
 DISCOGS_API_BASE = "https://api.discogs.com"
-USER_AGENT = "KrunkedDiscogsVault/4.7 +https://github.com/krunked-fpv/discogs_collection"
+USER_AGENT = "KrunkedDiscogsVault/5.0 +https://github.com/krunked-fpv/discogs_collection"
 DEFAULT_TOKEN = ""
 
 
@@ -337,7 +337,7 @@ def fetch_full_collection(
     force_rids: set[int] | None = None,
     ui: VaultTerminalUI | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
-    """Fetches Folder 0 ('All') and enriches releases using the v4.7 Delta Fast-Path Engine."""
+    """Fetches Folder 0 ('All') and enriches releases using the v5.0 Delta Fast-Path Engine."""
     force_rids = force_rids or set()
 
     # Load previous collection baseline for delta detection
@@ -786,7 +786,7 @@ def fetch_full_collection(
     }
 
     collection_payload = {
-        "schema_version": "4.7.0",
+        "schema_version": "5.0.0",
         "is_offline_seed": False,
         "source_of_truth": f"https://www.discogs.com/user/{username}/collection",
         "api_documentation": "https://www.discogs.com/developers",
@@ -854,7 +854,7 @@ def main() -> None:
     )
     ui = VaultTerminalUI(
         title="KRUNKED // VINYL VAULT",
-        subtitle="DISCOGS DELTA SYNC ENGINE v4.7",
+        subtitle="DISCOGS DELTA SYNC ENGINE v5.0",
     )
     ui.print_banner(mode_label=mode_str)
     ui.start_throbber(phase="Resolving credentials...")

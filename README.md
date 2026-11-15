@@ -1,131 +1,126 @@
-# 🎵 KRUNKED // DISCOGS VINYL VAULT (v4.7)
+# 🎰 KRUNKED // DISCOGS VINYL VAULT `v5.0`
+### *Kinetic Wax Roulette • Variant Clash Arena • UV Blacklight Shader • 4-Pass Polar CV • Full-Album Streaming Deck*
 
-[GitHub Repo](https://www.google.com/search?q=https://github.com/krunked-fpv/discogs_collection)
-[Live Vault](https://www.google.com/search?q=https://krunked-fpv.github.io/discogs_collection/)
+[Live Vault Showcase](https://www.google.com/search?q=https://krunked-fpv.github.io/discogs_collection/)
 [](https://www.discogs.com/user/krunked/collection)
+[](#)
+[](#)
 
-**KRUNKED // DISCOGS VINYL VAULT (v4.7)** is a pressing-first static web application and 100% deterministic Python synchronization pipeline built for [Alex Goresch's (`krunked`) Discogs Vinyl Collection](https://www.discogs.com/user/krunked/collection) and deployed to [GitHub Pages (krunked-fpv.github.io/discogs\_collection)](https://www.google.com/search?q=https://krunked-fpv.github.io/discogs_collection/) from [krunked-fpv/discogs\_collection](https://www.google.com/search?q=https://github.com/krunked-fpv/discogs_collection).
+Welcome to **v5.0** of the **[KRUNKED // DISCOGS VINYL VAULT](https://www.google.com/search?q=https://github.com/krunked-fpv/discogs_collection)**—where a deterministic Python computer-vision pipeline meets a neon-soaked audiophile command deck built for an **Audio-Technica AT-LP70XBT** turntable (`AT-VMN95ML` Microlinear stylus) and 18-speaker **"krunked homies"** whole-home playback.
 
-> *"Vibe coding a Discogs collection page to not look like trash."*
+Version 5.0 fuses the best of the **Wax Roulette Command Deck** directly into the production Vinyl Vault: a unified **Kinetic Wax Roulette & Direct-Drive Pressing Command Stage**, **3 Smart Spin Modes**, a 4-LP **Variant Clash Arena** knockout bracket, a reactive **UV Blacklight** shader, and a zero-dependency **Web Audio Analog SFX + 60-FPS Particle Burst Engine**—all while keeping the 3D Flip Music Player, Pressing Spec inspector, and single-command delta sync intact.
 
-Unlike generic collection grids that only display square front-sleeve thumbnails, this project downloads every release's candidate gallery images from the [Discogs Database Release endpoint (GET /releases/{release\_id})](https://www.google.com/search?q=https://www.discogs.com/developers/%23page:database,header:database-release), runs a **4-Pass Calibrated Concentric Dual-Circle Computer Vision (CV) classifier** paired with [Discogs Database Guidelines 13.8 (Image Order)](https://support.discogs.com/hc/en-us/articles/360005006874-Database-Guidelines-13-Images) to isolate the physical 12" vinyl pressing photo (`pressing.jpg` across **133 / 157 releases**), features a **3D Flip 30-Second Track Preview & Album Deck** with side-by-side **YouTube Music** and **Spotify** full-album deep links, tracks the **Owner Vinyl Inspection & Thermal Flattening Regimen** inline inside the HTML, and compiles a zero-backend static payload directly into [index.html](https://www.google.com/search?q=https://github.com/krunked-fpv/discogs_collection/blob/main/index.html).
+---
 
-## ✨ What's New in Version 4.7
+## 🚀 What's New in `v5.0` (The Mind-Blower Update)
 
-* **Clean 30-Second HTML5 Track Preview Deck (`#vault-preview-audio` — Zero YouTube Error 153 Boxes)**:
-  * **Native Cross-Origin 30s Audio Previews**: Replaces the fragile embedded YouTube IFrame box (which suffered from YouTube `Error 153` configuration blocks and `X-Frame-Options: SAMEORIGIN` restrictions) with a fast, zero-dependency HTML5 `<audio>` engine powered by the iTunes Search API (`fetch` + JSONP `<script>` fallback for `file://`) and Deezer JSONP fallback. Works reliably across `file://`, `http://localhost`, and [GitHub Pages (krunked-fpv.github.io/discogs\_collection)](https://www.google.com/search?q=https://krunked-fpv.github.io/discogs_collection/).
-  * **Strict User-Initiated Playback (Zero Autoplay on Page Load)**: Audio playback is strictly gated on `state.userRequestedPlay` (`state.isPreviewPlaying = false` on startup). Opening the page, flipping the card, or cycling through records in the carousel never auto-plays sound until you explicitly click **Play (`▶`)**, the album cover, or a track row (`1..N`).
-  * **Turntable Platter Sync & Continuous Auto-Advance (`🔁`)**: Clicking Play (`▶`), Prev (`⏮`), Next (`⏭`), Restart (`↺`), or any track row automatically lowers the tonearm, spins the 12" vinyl platter, updates the live 30-second progress scrubber (`0:00 / 0:30`), and auto-advances through each track's 30-second preview in order.
+### 1. 🎰 Unified Kinetic Wax Roulette & Direct-Drive Pressing Command Stage
+No more jumping between separate stages—the **3D Crate Reel** and the **Direct-Drive Turntable Plinth** now live together on one unified centerpiece stage:
+- **`🎰 SPIN THE CRATE [SPACE]`**: Smash the glowing magenta-to-cyan Roulette button (or tap `Spacebar` anywhere on the showcase) to launch a 26-step exponential-deceleration spin across your collection.
+- **3D Flanking Crate Wing Cards**: The previous and next records in your active pool peek out from behind the left and right cyan-lit edges of the turntable plinth—complete with live wax color orbs, `Flat ✓` / `Warped ⚠️` / release-year badges, and variant specs. Click either wing card to step through the crate.
+- **🛡️ Automatic Stylus Guard**: Any record currently flagged under `Need to be done` in your thermal flattening queue is automatically locked out of roulette spins so a warped disc never touches your Microlinear stylus.
 
-* **Side-by-Side Direct YouTube Music & Spotify Album Links (`157 / 157 Releases`)**:
-  * **Direct Album Playlist Mapping on YouTube Music (`YT Music ↗`)**: Every release resolves `getYouTubeMusicDeepLink()` directly to its full album playlist on [YouTube Music (`music.youtube.com/playlist?list=...`)](https://music.youtube.com/playlist?list=OLAK5uy_m80Evo-9vz_8XceYZ5xiRnlvifZRSAfCA) (never to a random single music video `watch?v=...`), backed by `VERIFIED_YTM_RELEASE_MAP` across all **157 LPs (1,856 tracks)** — including [Circa Survive – *On Letting Go* (`#29631781`)](https://music.youtube.com/playlist?list=OLAK5uy_m80Evo-9vz_8XceYZ5xiRnlvifZRSAfCA).
-  * **Direct Spotify Album Link (`Spotify ↗`)**: Adds a companion emerald **`Spotify ↗`** button (`#stream-spotify-direct-link`) right beside **`YT Music ↗`** in the Album Player header (plus compact `YT↗` and `SP↗` badges on every tracklist row) linking directly to the album on [Spotify (`open.spotify.com`)](https://open.spotify.com/search/Circa%20Survive%20On%20Letting%20Go/albums) for full-album streaming preference.
-
-* **Locked `516px` 3D Flip Card Geometry (`Side A ⇄ Side B`)**:
-  * Both faces of the 3D flip deck — **Pressing & Specs (`#hero-face-front`)** and **Album Preview Player (`#hero-face-back`)** — are locked to an identical `516px` desktop (`496px` mobile) height with `overflow: hidden`, eliminating bottom border/shadow artifacting or layout shifts on first click.
-
-* **+25% Larger Direct-Drive Turntable Stage**:
-  * Scaled the turntable plinth (`368×368px`), spinning 12" vinyl platter (`320×320px`), tonearm assembly (`140×280px`), and Prev/Next ghost discs (`180×180px`) **+25% larger** inside the left stage column while preserving the outer `"Direct-Drive Pressing Stage & Release Image Selector"` window dimensions.
-
-* **Unified Single-Command Delta Sync & Portable Inline Flattening Queue**:
-  * Pressing photo evaluation, SHA-256 delta caching (`delta_sig`), Discogs tracklist extraction (`extract_release_tracklist_and_videos()`), and HTML compilation are baked into [scripts/sync\_discogs.py](https://www.google.com/search?q=https://github.com/krunked-fpv/discogs_collection/blob/main/scripts/sync_discogs.py), while your thermal flattening queue (`Need to be done`, `Done`, `Not Listed`) and 2.5-hour (`150:00`) 130°F pouch hold timer stay synced between `#flattening-inline-form` in [index.html](https://www.google.com/search?q=https://github.com/krunked-fpv/discogs_collection/blob/main/index.html) and [data/flattening\_queue.json](https://www.google.com/search?q=https://github.com/krunked-fpv/discogs_collection/blob/main/data/flattening_queue.json).
-
-## 🧠 4-Tier Deterministic Pressing Selection Pipeline
-
-When querying a release from the [Discogs Database Release endpoint (GET /releases/{release\_id})](https://www.google.com/search?q=https://www.discogs.com/developers/%23page:database,header:database-release), the `images[]` array only classifies images as `"type": "primary"` (typically the front sleeve cover) or `"type": "secondary"` (back cover tracklist, inner gatefold spread, lyric insert, hype sticker, close-up 4" paper center label, or the 12" vinyl record itself).
-
-Rather than relying on slow, non-reproducible LLM vision calls, [scripts/detect\_pressing\_image.py](https://www.google.com/search?q=https://github.com/krunked-fpv/discogs_collection/blob/main/scripts/detect_pressing_image.py) uses a **4-Tier Deterministic Pipeline**:
-
-| Tier | Stage | Deterministic Mechanism |
+### 2. 🧠 Three Smart Spin Modes (Directly Above the Platter)
+Pick how the vault deals your next spin with one click right above the turntable:
+| Smart Spin Mode | Badge | What It Does |
 | :--- | :--- | :--- |
-| **Tier 1** | **Override Pinning (`data/overrides.json`)** | Locks a verified `assets/releases/<id>/pressing.jpg?v=...` path or manual `user_locked` `pressing_image_index` per `release_id`. Automatically purges stale auto-overrides if re-evaluated CV rejects a sticker or sleeve. |
-| **Tier 2** | **4-Pass Concentric Dual-Circle CV (`score_image_pixels_deterministic`)** | Evaluates candidate images in polar coordinates $(r, \theta)$ on a normalized $256 \times 256$ grid across 4 framing passes to verify the outer 12" disc rim ($R_{\text{disc}} \in [0.65, 0.99]$), the 4 diagonal background quadrants, the 4" center label step ($r_{\text{label}} \approx R_{\text{disc}} / 3$), 8-octant label-to-wax color distance (`q25_oct_lbl_wax`), and the center spindle hole ($r \le 0.035$). |
-| **Tier 3** | [**Discogs Guideline 13.8**](https://support.discogs.com/hc/en-us/articles/360005006874-Database-Guidelines-13-Images) **Positional Prior & Side-A Tie-Breaker** | Applies canonical Discogs image ordering rules (`[0]` front cover, `[1]` back cover / gatefold inner, `[2..3]` labels or inserts, `[4..5]` Side A/B physical disc) as an offline fallback when pixel dependencies are unavailable, and grants a `+0.038` tie-breaker bonus to the first verified physical disc (Side A). |
-| **Tier 4** | **Deterministic Wax Variant Parser (`parse_wax_variant`)** | Parses `formats[].descriptions`, `formats[].text`, and `(THIS)` release notes (`Pur`, `Cle`, `Ult`, `Mil`, `Gho`, `Cok`, `Ele`, `Blu`, `Gre`, `Aci`, `Neo`, `Ora`, `Pea`, `Yel`, `Can`, `Pin`, `Vio`, `Mag`, `Gal`, `Gra`, `Dus`, `Hou`, `Splatter`, `Swirl`, `Marble`, `Split`, `Color-in-Color`, `Etched`) into a `wax_spec` object with a SHA-256 `deterministic_seed`. Guides CV candidate scoring (`variant_color_bonus`) and renders the procedural vinyl disc when `has_pressing_photo` is `false`. |
+| **🎲 Full Vault Roulette** | `ALL SAFE` | Spins across every stylus-safe (non-warped) pressing in your [Discogs Collection](https://www.discogs.com/user/krunked/collection). |
+| **📺 Showroom Kiosk** | `AUTO 15s` | Hands-free living room / TV mode: automatically ignites **UV Blacklight Mode** and spins a fresh variant onto the platter every 15 seconds with a live countdown badge. |
+| **🌈 Eye-Candy Variants** | `FLEX WAX` | Filters the roulette pool strictly to loud visual pressings—**Splatter, Galaxy, Marble Swirl, Split Wax, and Color-in-Color** discs only. |
 
-### Multi-Pass CV Verification Benchmarks
+### 3. ⚔️ Variant Clash Arena (4-LP Head-to-Head Knockout Bracket)
+Can't decide what to spin with Marisa or guests? Switch to the **`⚔️ Variant Clash Arena`** tab in the top Command Deck bar:
+- Deals **4 stylus-safe pressings** into a 3-round knockout bracket (**Semifinal 1 → Semifinal 2 → 🏆 Championship Final**).
+- Filter the bracket pool by **`🎲 All Safe`**, **`🌈 Eye-Candy Only`**, or **`✓ Flat Certified`**.
+- Every contender card displays its **real Discogs jacket cover + spinning pressing photo** side-by-side AND includes an in-card **`🎧 Audition 30s`** button so you can preview studio audio before casting your vote.
+- Crowning the champion fires an 85-particle neon confetti burst, plays a 5-voice synth fanfare, and lets you load the winner straight onto the main turntable stage.
 
-| Release | Variant Format | Selected Image | CV Pass & Detection Signature |
-| :--- | :--- | :--- | :--- |
-| [Coheed and Cambria – *The Second Stage Turbine Blade* (`26690690`)](https://www.discogs.com/release/26690690-Coheed-And-Cambria-The-Second-Stage-Turbine-Blade) | Yellow w/ White & Black Splatter LP | `img_1.jpg` (`0.9532`) | **Pass 3 (Padded Studio Disc)**: Locks onto $R_{\text{disc}} = 0.712$ (`rim_step = 0.060`, `corner_wax_dist = 1.225`) while rejecting hype sticker `img_2.jpg`. |
-| [Rings Of Saturn – *Embryonic Anomaly (Remake)* (`17583742`)](https://www.discogs.com/release/17583742-Rings-Of-Saturn-Embryonic-Anomaly-Remake) | Purple / Green Splatter LP | `img_3.jpg` (`0.8126`) | **Pass 2 (Landscape Side-by-Side 4:3)**: Aligns square crop window over the right-hand 12" disc beside the jacket (`label_wax_dist = 0.54`). |
-| [Every Time I Die – *The Big Dirty* (`2343816`)](https://www.discogs.com/release/2343816) & [*Radical* (`20697637`)](https://www.discogs.com/release/20697637-Every-Time-I-Die-Radical) | Turntable Platter Photos | `img_1.jpg` (`0.8112` / `0.6942`) | **Pass 2 (Left-Shifted Platter 4:3)**: Shifts crop window left (`lf = 0.12`) so the right-hand tonearm does not break outer rim continuity. |
-| [Coheed and Cambria – *No World For Tomorrow* (`16251744`)](https://www.discogs.com/release/16251744-Coheed-And-Cambria-Good-Apollo-Im-Burning-Star-IV-Volume-Two-No-World-for-Tomorrow) | Red & Cream Mix w/ Black Splatter 2xLP | `img_1.jpg` (`0.7549`) | **Pass 4 (Close-Cropped 360° Label+Spindle)**: Detects full 8-octant label (`r_lbl = 0.44`, `q25 = 0.43`) and rejects rectangular hype sticker `img_2.jpg`. |
-| [Emarosa – *Peach Club* (`13203006`)](https://www.discogs.com/release/13203006-Emarosa-Peach-Club) | Limited Peach Opaque LP | `img_1.jpg` (`0.7363`) | **Pass 4 (Off-Center Angled Disc)**: Locates off-center 360° coral center label and spindle hole (`spindle_contrast = 0.362`, `oct_q25 = 0.282`). |
-| [Northlane – Node: Reloaded (37023150)](https://www.google.com/search?q=https://www.discogs.com/release/37023150) | Radial Splatter LP | `img_2.jpg` (`0.7046`) | **Pass 1 (Radial Splatter Spoke Exemption)**: Recognizes $\nabla_\theta I / \nabla_r I = 3.53$ as radial splatter rays rather than square-insert text noise. |
-| [Bring Me The Horizon – *That's The Spirit* (`35907826`)](https://www.discogs.com/release/35907826-Bring-Me-The-Horizon-Thats-The-Spirit) | 10th Anniv. Deluxe Swirl LP | `img_6.jpg` (`0.6988`) | **Pass 1 (Centered 12" Disc)**: Rejects zoomed 4" label scans (`img_4`–`img_5`), lyric booklet (`img_8`–`img_21`), and hype sticker (`img_22`). |
-| [Animals As Leaders – *Animals As Leaders* (`12988109`)](https://www.discogs.com/release/12988109-Animals-As-Leaders-Animals-As-Leaders) | Clear 2xLP on Inner Sleeve | `img_4.jpg` (`0.6464`) | **Pass 1 (`has_strong_concentric_disc`)**: Protects full-bleed 12" discs photographed over white inner sleeves on wood tables. |
-| [Nothing More – *Spirits* (`27927123`)](https://www.discogs.com/release/27927123-Nothing-More-Spirits) | Clear w/ Black Smoke Etched 2xLP | `img_4.jpg` (`0.5560`) | **Pass 2B (Portrait Vertical Window)**: Aligns vertical crop window (`yf = 0.56`) on 3:4 hand-held disc photo. |
+### 4. 🟣 UV Blacklight Toggle (`Shortcut: U`) & Dynamic Ambient Backdrop
+- **Dynamic Ambient Stage Glow**: As you step through records or lock in a roulette winner, the page's ambient radial backdrop (`--glow-primary`, `--glow-secondary`, `--glow-accent`) smoothly morphs to match the active record's exact `wax_spec` palette.
+- **UV Blacklight Mode (`🟣 UV Blacklight: ON`)**: Flip the header toggle (or press `U`) to drop the room into deep `#030108` ultraviolet obsidian and apply a high-saturation neon drop-shadow shader (`.uv-reactive`) across the spinning platter, Arena contenders, and all 157 crate grid discs.
 
-## 📁 Repository Architecture
+### 5. 🔊 Web Audio Analog SFX Synthesizer & 60-FPS Particle Engine
+Zero external MP3 sound files required—every sound is synthesized in real time via the browser's native **Web Audio API** (and can be muted anytime via **`🔊 Analog SFX: On/Off`**):
+- **Mechanical Crate Flip Ticks**: Velocity-scaled triangle-wave sleeve clicks that speed up and slow down in sync with the roulette physics wheel.
+- **Stylus Needle-Drop Thump**: Warm low-end analog cue thump (`98 Hz → 26 Hz`) whenever a record locks onto the platter.
+- **Roulette & Arena Synth Chords**: Multi-oscillator analog chords paired with a **60-FPS HTML5 Canvas Particle Burst** (`#fx-particles-canvas`) matched to the winning record's wax colors.
+- **UV Tube Ignition Sweep**: Fluorescent starter sweep when toggling UV Blacklight mode.
+- **Continuous Warm Vinyl Crackle**: Bandpass-filtered (`1900 Hz`) analog surface noise & micro-pops via the platter's **`🔊 Vinyl Crackle`** button.
 
-```text
-discogs_collection/
-├── .github/
-│   └── workflows/
-│       └── static.yml                 # GitHub Actions workflow deploying static build to GitHub Pages
-├── assets/
-│   ├── pressings/                     # Procedural fallback studio textures
-│   └── releases/
-│       └── <release_id>/              # Per-release cached Discogs gallery images (157 releases)
-│           ├── cover.jpg              # Primary front sleeve artwork (copied from img_0.jpg)
-│           ├── pressing.jpg           # Verified 12" vinyl pressing photo (133/157 releases)
-│           └── img_0.jpg .. img_N.jpg # Raw candidate images from Discogs GET /releases/{id}
-├── data/
-│   ├── collection.json                # Compiled schema v4.0.0 dataset for user `krunked` (157 LPs)
-│   ├── releases_cache.json            # Incremental Discogs /releases/{id} metadata & image cache
-│   ├── overrides.json                 # Per-release verified pressing paths & user-locked pins
-│   ├── flattening_queue.json          # Portable Vinyl Flattening Queue (synced with inline HTML form)
-│   └── sync_manifest.json             # SHA-256 content digest, record counts, & sync timestamp
-├── scripts/
-│   ├── sync_discogs.py                # Unified v4.7 Delta Sync, CV Photo Picker, & HTML Compiler
-│   ├── pick_pressing_photo.py         # Local/Offline CV photo selector & HTML KPI/Form injector
-│   ├── detect_pressing_image.py       # 4-Pass polar CV classifier, wax parser, YTM playlist map, & queue reconciler
-│   ├── build_site.py                  # Standalone static HTML payload compiler
-│   ├── setup_discogs_token.py         # Windows HKCU Registry + .env token installer & repo scrubber
-│   ├── seed_collection.py             # Offline deterministic collection seed builder
-│   └── validate_collection.py         # Schema v4.0.0 & Discogs URL integrity validator
-├── .env                               # Local git-ignored credentials (DISCOGS_USERNAME / DISCOGS_TOKEN)
-├── index.html                         # Self-contained +25% Turntable Stage, 3D Flip 30s Preview Deck, YT Music & Spotify Links
-└── requirements.txt                   # Python dependencies (Pillow, numpy)
-```
+---
 
-## 🚀 Local Workstation Setup & Daily Workflow (v4.7)
+## 🎵 Preserved Core Architecture (Untouched & Rock-Solid)
 
-### 1. Prerequisites & One-Time Token Setup
+### Side A / Side B 3D Flip Deck (`Shortcut: F`)
+- **Side A — Pressing Specs & Release Image Pinning**: Displays full Discogs format strings, `Media / Sleeve` grading, marketplace valuation, quick flattening status cycling (`+ 🔥 Queue` → `✓ Mark Done`), and the interactive **Discogs Release Images Strip** where clicking any thumbnail pins it as that record's verified pressing photo.
+- **Side B — 30-Second Studio Preview Player & Official Album Links**:
+  - **In-Page 30s Audio Previews**: Uses HTML5 `<audio>` backed by the iTunes Search API (`fetch` + JSONP fallback) and Deezer JSONP fallback with **zero autoplay**, interactive track scrubbing, and continuous auto-advance (`🔁`).
+  - **Verified Full-Album Streaming Links**: Side-by-side **`YT Music ↗`** (locked to official `OLAK5uy_...` album playlists across all 157 releases) and **`Spotify ↗`** (`open.spotify.com/album/...`) deep links.
 
-```powershell
-cd C:\DiscogsCollection\discogs_collection
-pip install -r requirements.txt
-python scripts/setup_discogs_token.py
-```
+### 🔥 Portable Inline Vinyl Flattening Queue & 2.5-Hour Thermal Plate Timer
+- **Zero Cloud Lock-In**: Your `Need to be done`, `Done`, and `Not Listed` inspection states live directly inside hidden HTML form inputs (`#flattening-inline-form`) in `index.html` and `data/flattening_queue.json`.
+- **Thermal Pouch Regimen (`130°F • 2.5h`)**: Built-in **Stage 1 Ramp (`Setting 6 → 130°F`)** stopwatch and **Stage 2 Hold (`Setting 4 • 02:30:00`)** countdown timer with Web Audio completion chime.
+- **Owner Inspection Bench**: Search uninspected LPs on arrival and queue warped pressings or log completed bakes in one click.
 
-### 2. Daily Incremental Sync & GitHub Pages Deploy
+---
 
-Whenever you add new records to your [Discogs collection](https://www.discogs.com/user/krunked/collection) or update your flattening queue in [index.html](https://www.google.com/search?q=https://github.com/krunked-fpv/discogs_collection/blob/main/index.html), run the unified single-command pipeline:
+## ⚡ Daily Local Sync Workflow (`C:\DiscogsCollection\discogs_collection`)
 
+The Python sync suite (`scripts/sync_discogs.py`) uses the **v5.0 Incremental Delta Engine** to compare your live [Discogs API](https://www.discogs.com/developers) Folder 0 collection against your local cache—skipping unchanged releases in microseconds (~70x faster) and running image downloads + **4-Pass Polar Computer Vision** (`detect_pressing_image.py`) only on new or resynced LPs.
+
+### 1. Standard Daily Sync & GitHub Pages Deploy (PowerShell)
 ```powershell
 cd C:\DiscogsCollection\discogs_collection
 python scripts/sync_discogs.py
-git add -A; git commit -m "chore(vault): sync discogs collection (v4.7)"; git push
+git add -A; git commit -m "chore(vault): sync discogs collection (v5.0)"; git push
 ```
 
-### 3. Targeted Release Resync or Full CV Rebuild
-
+### 2. Targeted Release Resync or Full Vault Rebuild
 ```powershell
-# Force re-download & re-run 4-pass CV on specific release ID(s)
+# Force re-download & re-evaluate specific Discogs release ID(s):
 python scripts/sync_discogs.py --resync 35668090,16610055
 
-# Bypass SHA-256 delta fast-path and re-evaluate all 157 releases
+# Bypass the SHA-256 delta cache and re-run 4-Pass CV across all 157+ LPs:
 python scripts/sync_discogs.py --full
 ```
 
-## 🛠️ Script Reference & CLI Flags
+### 3. Saving In-Browser Pressing Pins or Flattening Edits
+Whenever you pin a new pressing photo from the gallery strip or update your Flattening Queue in the browser:
+1. Click **`Sync & Export LP's`** in the top-right header (or **`💾 Save Updated index.html`** in the Flattening tab).
+2. Drop the downloaded self-contained `index.html` into `C:\DiscogsCollection\discogs_collection\index.html`.
+3. On your next `python scripts/sync_discogs.py` run, the Python engine automatically reads your updated inline form state and reconciles `data/flattening_queue.json` and `data/overrides.json`.
 
-| Script | Primary Role | Key CLI Arguments |
-| :--- | :--- | :--- |
-| [scripts/sync\_discogs.py](https://www.google.com/search?q=https://github.com/krunked-fpv/discogs_collection/blob/main/scripts/sync_discogs.py) | Unified v4.7 pipeline: paginates Folder 0, runs SHA-256 delta checks, downloads new gallery images, runs 4-pass CV selection, extracts tracklists & album links, reconciles inline HTML flattening state, and compiles `index.html`. | `--full` (`-f`), `--resync <id1,id2>`, `--username`, `--token`, `--output`, `--cache`, `--overrides`, `--flattening`, `--assets-dir`, `--inject-html` |
-| [scripts/pick\_pressing\_photo.py](https://www.google.com/search?q=https://github.com/krunked-fpv/discogs_collection/blob/main/scripts/pick_pressing_photo.py) | Standalone local/offline delta photo picker and HTML injector (called automatically at the end of `sync_discogs.py`, or runnable directly with `--offline`). | `--full` (`-f`), `--resync <id1,id2>`, `--offline`, `--collection`, `--cache`, `--overrides`, `--flattening`, `--assets-dir`, `--inject-html` |
-| [scripts/detect\_pressing\_image.py](https://www.google.com/search?q=https://github.com/krunked-fpv/discogs_collection/blob/main/scripts/detect_pressing_image.py) | Core deterministic library containing `score_image_pixels_deterministic()`, `select_release_images_deterministic()`, `parse_wax_variant()`, `VERIFIED_YTM_RELEASE_MAP` (157/157 album playlists), `extract_release_tracklist_and_videos()`, `reconcile_flattening_state()`, and `VaultTerminalUI`. | Imported by `sync_discogs.py`, `pick_pressing_photo.py`, and `seed_collection.py` |
-| [scripts/setup\_discogs\_token.py](https://www.google.com/search?q=https://github.com/krunked-fpv/discogs_collection/blob/main/scripts/setup_discogs_token.py) | Interactive credential installer that sanitizes pasted tokens, writes `.env` + `HKCU\Environment`, updates `.gitignore`, and scrubs exposed tokens from repo files. | `python scripts/setup_discogs_token.py` |
-| [scripts/validate\_collection.py](https://www.google.com/search?q=https://github.com/krunked-fpv/discogs_collection/blob/main/scripts/validate_collection.py) | Verifies `REQUIRED_RECORD_KEYS`, `https://www.discogs.com/release/` URLs, `wax_spec` completeness, and `delta_sig` coverage. | `python scripts/validate_collection.py [path/to/collection.json]` |
+---
+
+## ⌨️ Keyboard Shortcuts
+
+| Key | Action |
+| :---: | :--- |
+| **`Space`** | Trigger **`🎰 SPIN THE CRATE`** kinetic roulette spin (when on the Showcase tab) |
+| **`F`** | Flip the 3D Hero Card between **Side A (Pressing Specs)** and **Side B (Album Player & Tracklist)** |
+| **`U`** | Toggle **🟣 UV Blacklight Mode** on/off across the entire vault |
+
+---
+
+## 🗂️ Repository Layout
+
+```text
+C:\DiscogsCollection\discogs_collection\
+├── index.html                      # Self-contained v5.0 Command Deck & Vinyl Vault (157 LPs compiled inline)
+├── README.md                       # v5.0 Architecture, Roulette, Arena & Sync documentation
+├── assets/
+│   └── releases/<release_id>/      # Local cached Discogs images (cover.jpg, pressing.jpg, img_0..N.jpg)
+├── data/
+│   ├── collection.json             # Compiled collection payload, valuation & wax_spec metadata
+│   ├── overrides.json              # Verified & user-locked pressing photo overrides
+│   ├── flattening_queue.json       # Portable thermal flattening queue state
+│   ├── releases_cache.json         # Cached Discogs release API responses
+│   └── sync_manifest.json          # SHA-256 sync telemetry & collection counters
+└── scripts/
+    ├── sync_discogs.py             # Single-command v5.0 Incremental Delta Sync & HTML compiler
+    ├── pick_pressing_photo.py      # Pressing photo verifier, override manager & HTML injector
+    ├── detect_pressing_image.py    # 4-Pass Polar CV engine, format parser & terminal turntable UI
+    ├── setup_discogs_token.py      # Interactive token setup helper (.env / Windows HKCU Registry)
+    ├── seed_collection.py          # Offline baseline seeder
+    └── validate_collection.py      # Integrity checker for collection JSON & local assets
+```

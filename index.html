@@ -2,33 +2,84 @@
 <html lang="en" class="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
-  <title id="page-title">KRUNKED // DISCOGS VINYL VAULT v4.7 — Live Collection, Pressing &amp; Full-Album Streaming Showcase</title>
+  <title id="page-title">KRUNKED // DISCOGS VINYL VAULT v5.0 — Kinetic Wax Roulette, Variant Clash Arena &amp; Full-Album Showcase</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg-obsidian: #07080c;
-      --bg-panel: #10121a;
-      --bg-card: #151824;
+      --bg-obsidian: #06070b;
+      --bg-panel: #0e121d;
+      --bg-card: #131726;
+      --glow-primary: rgba(139, 44, 245, 0.28);
+      --glow-secondary: rgba(6, 182, 212, 0.24);
+      --glow-accent: rgba(244, 63, 94, 0.18);
     }
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background-color: var(--bg-obsidian);
-      color: #f1f5f9;
+      color: #f8fafc;
       overflow-x: hidden;
-      background-image:
-        radial-gradient(circle at 18% 12%, rgba(139, 92, 246, 0.14), transparent 36%),
-        radial-gradient(circle at 82% 18%, rgba(6, 182, 212, 0.12), transparent 38%),
-        radial-gradient(circle at 50% 85%, rgba(244, 63, 94, 0.08), transparent 45%);
+      letter-spacing: -0.01em;
     }
-    .font-mono-tech {
+    .font-mono-tech, .font-mono-code {
       font-family: 'JetBrains Mono', monospace;
     }
+    /* Command Deck Dynamic Ambient Stage Backdrop */
+    .ambient-stage-bg {
+      background:
+        radial-gradient(circle at 20% 22%, var(--glow-primary, rgba(139, 44, 245, 0.28)) 0%, transparent 46%),
+        radial-gradient(circle at 80% 26%, var(--glow-secondary, rgba(6, 182, 212, 0.24)) 0%, transparent 48%),
+        radial-gradient(circle at 50% 84%, var(--glow-accent, rgba(244, 63, 94, 0.18)) 0%, transparent 55%),
+        linear-gradient(180deg, #06080f 0%, #0a0e18 52%, #05060a 100%);
+      transition: background 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    /* UV Blacklight Mode */
+    body.uv-blacklight {
+      background-color: #030108 !important;
+      background-image:
+        radial-gradient(circle at 22% 24%, rgba(168, 85, 247, 0.38) 0%, transparent 48%),
+        radial-gradient(circle at 78% 28%, rgba(6, 182, 212, 0.32) 0%, transparent 50%),
+        radial-gradient(circle at 50% 82%, rgba(236, 72, 153, 0.26) 0%, transparent 55%),
+        linear-gradient(180deg, #020006 0%, #060212 52%, #020005 100%) !important;
+    }
+    body.uv-blacklight .uv-reactive {
+      filter: saturate(1.7) contrast(1.18) drop-shadow(0 0 18px var(--glow-primary)) drop-shadow(0 0 32px var(--glow-secondary));
+      transition: filter 0.35s ease;
+    }
+    body.uv-blacklight #turntable-plinth-box {
+      box-shadow: 0 0 42px rgba(168, 85, 247, 0.65), 0 0 80px rgba(6, 182, 212, 0.35), inset 0 0 32px rgba(6, 182, 212, 0.45) !important;
+      border-color: rgba(168, 85, 247, 0.65) !important;
+    }
+    body.uv-blacklight .card-record {
+      border-color: rgba(168, 85, 247, 0.35);
+      box-shadow: 0 10px 30px -10px rgba(139, 44, 245, 0.35);
+    }
+    /* Holographic Sleeve Shimmer */
+    .holo-sleeve {
+      position: relative;
+      overflow: hidden;
+    }
+    .holo-sleeve::after {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.16) 46%, rgba(6, 182, 212, 0.24) 50%, rgba(236, 72, 153, 0.2) 54%, transparent 65%);
+      transform: translateX(-85%) rotate(12deg);
+      transition: transform 0.8s ease;
+      pointer-events: none;
+    }
+    .holo-sleeve:hover::after,
+    .holo-sleeve.spinning-flash::after {
+      transform: translateX(85%) rotate(12deg);
+    }
+    /* Platter Spin Keyframes */
     @keyframes spinRecord33 {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
@@ -37,46 +88,95 @@
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
+    @keyframes spinRouletteBlur {
+      0% { transform: rotate(0deg) scale(0.97); filter: saturate(1.4) brightness(1.12); }
+      50% { transform: rotate(180deg) scale(1.02); filter: saturate(1.8) brightness(1.22); }
+      100% { transform: rotate(360deg) scale(0.97); filter: saturate(1.4) brightness(1.12); }
+    }
     .spin-33 {
       animation: spinRecord33 4.5s linear infinite;
     }
     .spin-45 {
       animation: spinRecord45 3.0s linear infinite;
     }
+    .spin-roulette-fast {
+      animation: spinRouletteBlur 0.32s linear infinite !important;
+    }
     .spin-paused {
       animation-play-state: paused !important;
     }
     .strobe-dots {
-      background-image: radial-gradient(rgba(6, 182, 212, 0.75) 1.2px, transparent 1.2px);
+      background-image: radial-gradient(rgba(6, 182, 212, 0.85) 1.25px, transparent 1.25px);
       background-size: 6px 6px;
     }
     .tonearm-pivot {
       transform-origin: 78% 18%;
-      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: transform 0.68s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     .tonearm-engaged {
       transform: rotate(22deg);
     }
     .tonearm-parked {
-      transform: rotate(-4deg);
+      transform: rotate(-6deg);
     }
     .card-record:hover .hover-spin {
       animation: spinRecord33 5.5s linear infinite;
     }
-    .custom-scrollbar::-webkit-scrollbar {
+    /* Center Plinth Cyan Edge Glow Brackets (matches user mockup image_b09c49.jpg) */
+    .plinth-edge-bracket-left {
+      position: absolute;
+      left: -3px;
+      top: 50%;
+      transform: translateY(-50%);
       width: 6px;
-      height: 6px;
+      height: 156px;
+      border-radius: 9999px;
+      background: linear-gradient(180deg, rgba(6,182,212,0) 0%, #22d3ee 20%, #67e8f9 50%, #22d3ee 80%, rgba(6,182,212,0) 100%);
+      box-shadow: -4px 0 22px rgba(6, 182, 212, 0.85), 0 0 12px rgba(103, 232, 249, 0.9);
+      pointer-events: none;
+      z-index: 25;
     }
-    .custom-scrollbar::-webkit-scrollbar-track {
-      background: rgba(15, 23, 42, 0.6);
+    .plinth-edge-bracket-right {
+      position: absolute;
+      right: -3px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 6px;
+      height: 156px;
+      border-radius: 9999px;
+      background: linear-gradient(180deg, rgba(6,182,212,0) 0%, #22d3ee 20%, #67e8f9 50%, #22d3ee 80%, rgba(6,182,212,0) 100%);
+      box-shadow: 4px 0 22px rgba(6, 182, 212, 0.85), 0 0 12px rgba(103, 232, 249, 0.9);
+      pointer-events: none;
+      z-index: 25;
     }
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: rgba(148, 163, 184, 0.3);
+    /* Crate Wing Cards (Left/Right of Turntable Plinth) */
+    .crate-wing-card {
+      transition: transform 0.26s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.26s ease, border-color 0.26s ease, box-shadow 0.26s ease;
+      will-change: transform, opacity;
+    }
+    .crate-wing-card.wing-tick-left {
+      transform: translateX(-8px) scale(0.95) rotateY(8deg);
+    }
+    .crate-wing-card.wing-tick-right {
+      transform: translateX(8px) scale(0.95) rotateY(-8deg);
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar, .custom-scrollbar::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-track, .custom-scrollbar::-webkit-scrollbar-track {
+      background: #090d16;
+    }
+    ::-webkit-scrollbar-thumb, .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #1e293b;
       border-radius: 9999px;
     }
-
+    ::-webkit-scrollbar-thumb:hover, .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #38bdf8;
+    }
     .hidden { display: none !important; }
-    /* v4.7 3D Flip Streaming & Tracklist Stage — Locked Equal Height & Zero Backface Bleed */
+    /* v5.0 3D Flip Streaming & Tracklist Stage — Locked Equal Height & Zero Backface Bleed */
     .hero-flip-perspective {
       perspective: 1600px;
     }
@@ -171,68 +271,88 @@
     }
   </style>
 </head>
-<body class="min-h-screen selection:bg-cyan-500 selection:text-slate-950">
+<body class="ambient-stage-bg min-h-screen text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-200">
+
+  <!-- 60FPS Particle Confetti & Spark Burst Canvas Overlay -->
+  <canvas id="fx-particles-canvas" class="fixed inset-0 pointer-events-none z-50"></canvas>
 
   <!-- PORTABLE INLINE FLATTENING STATE FORM (Read & Written by Browser UI + Python sync_discogs.py) -->
+  <!-- PORTABLE INLINE FLATTENING STATE FORM (Read & Written by Browser UI + Python sync_discogs.py) -->
   <form id="flattening-inline-form" class="hidden" aria-hidden="true" onsubmit="return false;">
-    <input type="hidden" id="flatten-hidden-version" name="schema_version" value="4.7.0" />
-    <input type="hidden" id="flatten-hidden-updated-at" name="updated_at_utc" value="2026-11-14T18:54:02Z" />
+    <input type="hidden" id="flatten-hidden-version" name="schema_version" value="5.0.0" />
+    <input type="hidden" id="flatten-hidden-updated-at" name="updated_at_utc" value="2026-11-15T04:19:22Z" />
     <input type="hidden" id="flatten-hidden-protocol" name="protocol" value="Bag on 6 until 130°F then drop to 4 — 2.5 hours once at 130°F on the plate" />
     <input type="hidden" id="flatten-hidden-todo-ids" name="need_to_be_done_release_ids" value="28844782,34756244,35907826" />
     <input type="hidden" id="flatten-hidden-done-ids" name="done_release_ids" value="3873517,9346527,11368406,12131049,13113361,14043330,14188877,14458307,16251744,20546863,21390094,22544762,23343893,23657633,23674760,23775551,26421509,26690690,27079776,27927123,28269505,29075062,29237467,29410045,29410354,29592373,30245600,30637357,31909216,33303678,34691910,35426350,35720014,35844376,36897417,37058814,37163709,37848120,38268432,38600733,38854575" />
     <input type="hidden" id="flatten-hidden-unlisted-ids" name="unlisted_release_ids" value="" />
-    <textarea id="flatten-hidden-json" name="flattening_queue_json" class="hidden" readonly>{&quot;schema_version&quot;: &quot;4.7.0&quot;, &quot;storage_mode&quot;: &quot;portable_inline_html+json&quot;, &quot;updated_at_utc&quot;: &quot;2026-11-14T18:54:02Z&quot;, &quot;protocol&quot;: &quot;Bag on 6 until 130°F then drop to 4 — 2.5 hours once at 130°F on the plate&quot;, &quot;need_to_be_done_release_ids&quot;: [28844782, 34756244, 35907826], &quot;done_release_ids&quot;: [3873517, 9346527, 11368406, 12131049, 13113361, 14043330, 14188877, 14458307, 16251744, 20546863, 21390094, 22544762, 23343893, 23657633, 23674760, 23775551, 26421509, 26690690, 27079776, 27927123, 28269505, 29075062, 29237467, 29410045, 29410354, 29592373, 30245600, 30637357, 31909216, 33303678, 34691910, 35426350, 35720014, 35844376, 36897417, 37058814, 37163709, 37848120, 38268432, 38600733, 38854575], &quot;unlisted_release_ids&quot;: [], &quot;need_to_be_done_entries&quot;: [{&quot;artist&quot;: &quot;A Day To Remember&quot;, &quot;album&quot;: &quot;For Those Who Have Heart&quot;, &quot;release_ids&quot;: [28844782]}, {&quot;artist&quot;: &quot;Bring Me The Horizon&quot;, &quot;album&quot;: &quot;That&#x27;s The Spirit&quot;, &quot;release_ids&quot;: [35907826]}, {&quot;artist&quot;: &quot;Imminence&quot;, &quot;album&quot;: &quot;The Return Of The Black &quot;, &quot;release_ids&quot;: [34756244]}], &quot;done_entries&quot;: [{&quot;artist&quot;: &quot;Allt&quot;, &quot;album&quot;: &quot;From The New World&quot;, &quot;release_ids&quot;: [31909216]}, {&quot;artist&quot;: &quot;Born Of Osiris&quot;, &quot;album&quot;: &quot;Angel Or Alien&quot;, &quot;release_ids&quot;: [20546863]}, {&quot;artist&quot;: &quot;Bring Me The Horizon&quot;, &quot;album&quot;: &quot;Amo&quot;, &quot;release_ids&quot;: [13113361]}, {&quot;artist&quot;: &quot;Coheed And Cambria&quot;, &quot;album&quot;: &quot;Good Apollo, I&#x27;m Burning Star IV, Volume Two: No World for Tomorrow&quot;, &quot;release_ids&quot;: [16251744]}, {&quot;artist&quot;: &quot;Coheed And Cambria&quot;, &quot;album&quot;: &quot;The Second Stage Turbine Blade&quot;, &quot;release_ids&quot;: [26690690]}, {&quot;artist&quot;: &quot;Coheed And Cambria&quot;, &quot;album&quot;: &quot;Vaxis II: A Window Of The Waking Mind&quot;, &quot;release_ids&quot;: [23674760]}, {&quot;artist&quot;: &quot;Don Broco&quot;, &quot;album&quot;: &quot;Amazing Things&quot;, &quot;release_ids&quot;: [23775551]}, {&quot;artist&quot;: &quot;Don Broco&quot;, &quot;album&quot;: &quot;Automatic&quot;, &quot;release_ids&quot;: [14188877]}, {&quot;artist&quot;: &quot;Don Broco&quot;, &quot;album&quot;: &quot;Nightmare Tripping&quot;, &quot;release_ids&quot;: [36897417]}, {&quot;artist&quot;: &quot;Don Broco&quot;, &quot;album&quot;: &quot;Technology&quot;, &quot;release_ids&quot;: [12131049]}, {&quot;artist&quot;: &quot;Every Time I Die&quot;, &quot;album&quot;: &quot;Gutter Phenomenon&quot;, &quot;release_ids&quot;: [29075062]}, {&quot;artist&quot;: &quot;Every Time I Die&quot;, &quot;album&quot;: &quot;Last Night ln Town&quot;, &quot;release_ids&quot;: [30245600]}, {&quot;artist&quot;: &quot;Greyhaven&quot;, &quot;album&quot;: &quot;This Bright And Beautiful World&quot;, &quot;release_ids&quot;: [27079776]}, {&quot;artist&quot;: &quot;Imminence&quot;, &quot;album&quot;: &quot;Axis Mundi&quot;, &quot;release_ids&quot;: [38600733]}, {&quot;artist&quot;: &quot;Imminence&quot;, &quot;album&quot;: &quot;Heaven In Hiding&quot;, &quot;release_ids&quot;: [22544762]}, {&quot;artist&quot;: &quot;Invent, Animate&quot;, &quot;album&quot;: &quot;Heavener&quot;, &quot;release_ids&quot;: [35720014]}, {&quot;artist&quot;: &quot;Knocked Loose&quot;, &quot;album&quot;: &quot;You Won’t Go Before You’re Supposed To&quot;, &quot;release_ids&quot;: [30637357]}, {&quot;artist&quot;: &quot;Nothing More&quot;, &quot;album&quot;: &quot;Spirits&quot;, &quot;release_ids&quot;: [27927123]}, {&quot;artist&quot;: &quot;Periphery&quot;, &quot;album&quot;: &quot;A Pale White Dot&quot;, &quot;release_ids&quot;: [38854575]}, {&quot;artist&quot;: &quot;Periphery&quot;, &quot;album&quot;: &quot;A Pale White Dot&quot;, &quot;release_ids&quot;: [37848120]}, {&quot;artist&quot;: &quot;Periphery&quot;, &quot;album&quot;: &quot;Juggernaut • Omega&quot;, &quot;release_ids&quot;: [29410354]}, {&quot;artist&quot;: &quot;Periphery&quot;, &quot;album&quot;: &quot;Periphery&quot;, &quot;release_ids&quot;: [29410045]}, {&quot;artist&quot;: &quot;Periphery&quot;, &quot;album&quot;: &quot;Periphery III: Select Difficulty&quot;, &quot;release_ids&quot;: [9346527]}, {&quot;artist&quot;: &quot;Periphery&quot;, &quot;album&quot;: &quot;Periphery III: Select Difficulty&quot;, &quot;release_ids&quot;: [29237467]}, {&quot;artist&quot;: &quot;Periphery&quot;, &quot;album&quot;: &quot;Periphery IV: Hail Stan&quot;, &quot;release_ids&quot;: [14043330]}, {&quot;artist&quot;: &quot;Periphery&quot;, &quot;album&quot;: &quot;Periphery V: Djent Is Not A Genre&quot;, &quot;release_ids&quot;: [26421509]}, {&quot;artist&quot;: &quot;Polaris&quot;, &quot;album&quot;: &quot;The Death Of Me&quot;, &quot;release_ids&quot;: [34691910]}, {&quot;artist&quot;: &quot;Silent Planet&quot;, &quot;album&quot;: &quot;Superbloom&quot;, &quot;release_ids&quot;: [29592373]}, {&quot;artist&quot;: &quot;Sleep Token&quot;, &quot;album&quot;: &quot;Sundowning&quot;, &quot;release_ids&quot;: [14458307]}, {&quot;artist&quot;: &quot;Sleep Token&quot;, &quot;album&quot;: &quot;Take Me Back To Eden&quot;, &quot;release_ids&quot;: [37163709]}, {&quot;artist&quot;: &quot;Spiritbox&quot;, &quot;album&quot;: &quot;Tsunami Sea&quot;, &quot;release_ids&quot;: [33303678]}, {&quot;artist&quot;: &quot;Tesseract&quot;, &quot;album&quot;: &quot;One&quot;, &quot;release_ids&quot;: [37058814]}, {&quot;artist&quot;: &quot;Tesseract&quot;, &quot;album&quot;: &quot;Polaris&quot;, &quot;release_ids&quot;: [35426350]}, {&quot;artist&quot;: &quot;Tesseract&quot;, &quot;album&quot;: &quot;Portals&quot;, &quot;release_ids&quot;: [21390094]}, {&quot;artist&quot;: &quot;Tesseract&quot;, &quot;album&quot;: &quot;War of Being&quot;, &quot;release_ids&quot;: [28269505]}, {&quot;artist&quot;: &quot;Thornhill&quot;, &quot;album&quot;: &quot;Heroine&quot;, &quot;release_ids&quot;: [23657633]}, {&quot;artist&quot;: &quot;Thrice&quot;, &quot;album&quot;: &quot;Identity Crisis&quot;, &quot;release_ids&quot;: [35844376]}, {&quot;artist&quot;: &quot;Thursday&quot;, &quot;album&quot;: &quot;War All The Time&quot;, &quot;release_ids&quot;: [3873517]}, {&quot;artist&quot;: &quot;Underoath&quot;, &quot;album&quot;: &quot;Define The Great Line&quot;, &quot;release_ids&quot;: [38268432]}, {&quot;artist&quot;: &quot;Unearth&quot;, &quot;album&quot;: &quot;The Stings Of Conscience&quot;, &quot;release_ids&quot;: [23343893]}, {&quot;artist&quot;: &quot;Veil of Maya&quot;, &quot;album&quot;: &quot;False Idol&quot;, &quot;release_ids&quot;: [11368406]}]}</textarea>
+    <textarea id="flatten-hidden-json" name="flattening_queue_json" class="hidden" readonly>{&quot;schema_version&quot;: &quot;5.0.0&quot;, &quot;storage_mode&quot;: &quot;portable_inline_html+json&quot;, &quot;updated_at_utc&quot;: &quot;2026-11-15T04:19:22Z&quot;, &quot;protocol&quot;: &quot;Bag on 6 until 130°F then drop to 4 — 2.5 hours once at 130°F on the plate&quot;, &quot;need_to_be_done_release_ids&quot;: [28844782, 34756244, 35907826], &quot;done_release_ids&quot;: [3873517, 9346527, 11368406, 12131049, 13113361, 14043330, 14188877, 14458307, 16251744, 20546863, 21390094, 22544762, 23343893, 23657633, 23674760, 23775551, 26421509, 26690690, 27079776, 27927123, 28269505, 29075062, 29237467, 29410045, 29410354, 29592373, 30245600, 30637357, 31909216, 33303678, 34691910, 35426350, 35720014, 35844376, 36897417, 37058814, 37163709, 37848120, 38268432, 38600733, 38854575], &quot;unlisted_release_ids&quot;: [], &quot;need_to_be_done_entries&quot;: [{&quot;artist&quot;: &quot;A Day To Remember&quot;, &quot;album&quot;: &quot;For Those Who Have Heart&quot;, &quot;release_ids&quot;: [28844782]}, {&quot;artist&quot;: &quot;Bring Me The Horizon&quot;, &quot;album&quot;: &quot;That&#x27;s The Spirit&quot;, &quot;release_ids&quot;: [35907826]}, {&quot;artist&quot;: &quot;Imminence&quot;, &quot;album&quot;: &quot;The Return Of The Black &quot;, &quot;release_ids&quot;: [34756244]}], &quot;done_entries&quot;: [{&quot;artist&quot;: &quot;Allt&quot;, &quot;album&quot;: &quot;From The New World&quot;, &quot;release_ids&quot;: [31909216]}, {&quot;artist&quot;: &quot;Born Of Osiris&quot;, &quot;album&quot;: &quot;Angel Or Alien&quot;, &quot;release_ids&quot;: [20546863]}, {&quot;artist&quot;: &quot;Bring Me The Horizon&quot;, &quot;album&quot;: &quot;Amo&quot;, &quot;release_ids&quot;: [13113361]}, {&quot;artist&quot;: &quot;Coheed And Cambria&quot;, &quot;album&quot;: &quot;Good Apollo, I&#x27;m Burning Star IV, Volume Two: No World for Tomorrow&quot;, &quot;release_ids&quot;: [16251744]}, {&quot;artist&quot;: &quot;Coheed And Cambria&quot;, &quot;album&quot;: &quot;The Second Stage Turbine Blade&quot;, &quot;release_ids&quot;: [26690690]}, {&quot;artist&quot;: &quot;Coheed And Cambria&quot;, &quot;album&quot;: &quot;Vaxis II: A Window Of The Waking Mind&quot;, &quot;release_ids&quot;: [23674760]}, {&quot;artist&quot;: &quot;Don Broco&quot;, &quot;album&quot;: &quot;Amazing Things&quot;, &quot;release_ids&quot;: [23775551]}, {&quot;artist&quot;: &quot;Don Broco&quot;, &quot;album&quot;: &quot;Automatic&quot;, &quot;release_ids&quot;: [14188877]}, {&quot;artist&quot;: &quot;Don Broco&quot;, &quot;album&quot;: &quot;Nightmare Tripping&quot;, &quot;release_ids&quot;: [36897417]}, {&quot;artist&quot;: &quot;Don Broco&quot;, &quot;album&quot;: &quot;Technology&quot;, &quot;release_ids&quot;: [12131049]}, {&quot;artist&quot;: &quot;Every Time I Die&quot;, &quot;album&quot;: &quot;Gutter Phenomenon&quot;, &quot;release_ids&quot;: [29075062]}, {&quot;artist&quot;: &quot;Every Time I Die&quot;, &quot;album&quot;: &quot;Last Night ln Town&quot;, &quot;release_ids&quot;: [30245600]}, {&quot;artist&quot;: &quot;Greyhaven&quot;, &quot;album&quot;: &quot;This Bright And Beautiful World&quot;, &quot;release_ids&quot;: [27079776]}, {&quot;artist&quot;: &quot;Imminence&quot;, &quot;album&quot;: &quot;Axis Mundi&quot;, &quot;release_ids&quot;: [38600733]}, {&quot;artist&quot;: &quot;Imminence&quot;, &quot;album&quot;: &quot;Heaven In Hiding&quot;, &quot;release_ids&quot;: [22544762]}, {&quot;artist&quot;: &quot;Invent, Animate&quot;, &quot;album&quot;: &quot;Heavener&quot;, &quot;release_ids&quot;: [35720014]}, {&quot;artist&quot;: &quot;Knocked Loose&quot;, &quot;album&quot;: &quot;You Won’t Go Before You’re Supposed To&quot;, &quot;release_ids&quot;: [30637357]}, {&quot;artist&quot;: &quot;Nothing More&quot;, &quot;album&quot;: &quot;Spirits&quot;, &quot;release_ids&quot;: [27927123]}, {&quot;artist&quot;: &quot;Periphery&quot;, &quot;album&quot;: &quot;A Pale White Dot&quot;, &quot;release_ids&quot;: [38854575]}, {&quot;artist&quot;: &quot;Periphery&quot;, &quot;album&quot;: &quot;A Pale White Dot&quot;, &quot;release_ids&quot;: [37848120]}, {&quot;artist&quot;: &quot;Periphery&quot;, &quot;album&quot;: &quot;Juggernaut • Omega&quot;, &quot;release_ids&quot;: [29410354]}, {&quot;artist&quot;: &quot;Periphery&quot;, &quot;album&quot;: &quot;Periphery&quot;, &quot;release_ids&quot;: [29410045]}, {&quot;artist&quot;: &quot;Periphery&quot;, &quot;album&quot;: &quot;Periphery III: Select Difficulty&quot;, &quot;release_ids&quot;: [9346527]}, {&quot;artist&quot;: &quot;Periphery&quot;, &quot;album&quot;: &quot;Periphery III: Select Difficulty&quot;, &quot;release_ids&quot;: [29237467]}, {&quot;artist&quot;: &quot;Periphery&quot;, &quot;album&quot;: &quot;Periphery IV: Hail Stan&quot;, &quot;release_ids&quot;: [14043330]}, {&quot;artist&quot;: &quot;Periphery&quot;, &quot;album&quot;: &quot;Periphery V: Djent Is Not A Genre&quot;, &quot;release_ids&quot;: [26421509]}, {&quot;artist&quot;: &quot;Polaris&quot;, &quot;album&quot;: &quot;The Death Of Me&quot;, &quot;release_ids&quot;: [34691910]}, {&quot;artist&quot;: &quot;Silent Planet&quot;, &quot;album&quot;: &quot;Superbloom&quot;, &quot;release_ids&quot;: [29592373]}, {&quot;artist&quot;: &quot;Sleep Token&quot;, &quot;album&quot;: &quot;Sundowning&quot;, &quot;release_ids&quot;: [14458307]}, {&quot;artist&quot;: &quot;Sleep Token&quot;, &quot;album&quot;: &quot;Take Me Back To Eden&quot;, &quot;release_ids&quot;: [37163709]}, {&quot;artist&quot;: &quot;Spiritbox&quot;, &quot;album&quot;: &quot;Tsunami Sea&quot;, &quot;release_ids&quot;: [33303678]}, {&quot;artist&quot;: &quot;Tesseract&quot;, &quot;album&quot;: &quot;One&quot;, &quot;release_ids&quot;: [37058814]}, {&quot;artist&quot;: &quot;Tesseract&quot;, &quot;album&quot;: &quot;Polaris&quot;, &quot;release_ids&quot;: [35426350]}, {&quot;artist&quot;: &quot;Tesseract&quot;, &quot;album&quot;: &quot;Portals&quot;, &quot;release_ids&quot;: [21390094]}, {&quot;artist&quot;: &quot;Tesseract&quot;, &quot;album&quot;: &quot;War of Being&quot;, &quot;release_ids&quot;: [28269505]}, {&quot;artist&quot;: &quot;Thornhill&quot;, &quot;album&quot;: &quot;Heroine&quot;, &quot;release_ids&quot;: [23657633]}, {&quot;artist&quot;: &quot;Thrice&quot;, &quot;album&quot;: &quot;Identity Crisis&quot;, &quot;release_ids&quot;: [35844376]}, {&quot;artist&quot;: &quot;Thursday&quot;, &quot;album&quot;: &quot;War All The Time&quot;, &quot;release_ids&quot;: [3873517]}, {&quot;artist&quot;: &quot;Underoath&quot;, &quot;album&quot;: &quot;Define The Great Line&quot;, &quot;release_ids&quot;: [38268432]}, {&quot;artist&quot;: &quot;Unearth&quot;, &quot;album&quot;: &quot;The Stings Of Conscience&quot;, &quot;release_ids&quot;: [23343893]}, {&quot;artist&quot;: &quot;Veil of Maya&quot;, &quot;album&quot;: &quot;False Idol&quot;, &quot;release_ids&quot;: [11368406]}]}</textarea>
   </form>
 
-  <!-- Top Navigation & Live Sync Telemetry Header -->
-  <header class="sticky top-0 z-40 backdrop-blur-xl bg-[#07080c]/90 border-b border-white/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+  <!-- Top Telemetry & Command Deck Navigation Header (v5.0) -->
+  <header class="sticky top-0 z-40 border-b border-white/10 bg-slate-950/85 backdrop-blur-xl">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+      <!-- Brand Identity -->
       <div class="flex items-center gap-3">
-        <div class="relative w-10 h-10 rounded-full bg-gradient-to-tr from-purple-600 via-cyan-500 to-rose-500 p-0.5 shadow-lg shadow-purple-500/20">
-          <div class="w-full h-full rounded-full bg-slate-950 flex items-center justify-center">
-            <div id="sync-status-dot" class="w-3 h-3 rounded-full bg-cyan-400 animate-pulse"></div>
+        <div class="relative w-10 h-10 rounded-2xl bg-gradient-to-br from-fuchsia-600 via-purple-600 to-cyan-500 p-0.5 shadow-lg shadow-purple-500/25">
+          <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center font-black text-xs tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 to-cyan-300">
+            KV5
           </div>
+          <span class="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-emerald-400 ring-2 ring-slate-950 animate-ping"></span>
+          <span id="sync-status-dot" class="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-emerald-400 ring-2 ring-slate-950"></span>
         </div>
         <div>
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2 flex-wrap">
             <span class="font-black tracking-tight text-base sm:text-lg text-white">KRUNKED // VINYL VAULT</span>
-            <span id="sync-badge-pill" class="px-2 py-0.5 text-[10px] font-mono-tech uppercase tracking-wider bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 rounded-full">v4.7 Full-Album Stream</span>
+            <span id="sync-badge-pill" class="px-2.5 py-0.5 text-[10px] font-mono-tech uppercase tracking-wider bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-400/30 rounded-full font-semibold">
+              v5.0 Command Deck &amp; Wax Roulette
+            </span>
           </div>
-          <div class="text-xs text-slate-400 flex items-center gap-2 flex-wrap">
-            <span>Source of Truth:</span>
+          <div class="text-[11px] text-slate-400 flex items-center gap-2 flex-wrap mt-0.5">
+            <span class="font-medium text-slate-300">AT-LP70XBT + AT-VMN95ML</span>
+            <span class="text-slate-600">•</span>
+            <span>Source:</span>
             <a href="https://www.discogs.com/user/krunked/collection" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 underline decoration-cyan-500/40 font-mono-tech">discogs.com/user/krunked/collection ↗</a>
-            <span id="bg-enrich-progress" class="text-[11px] font-mono-tech text-emerald-400">• 157 LPs &amp; 133 Pressing Photos Compiled</span>
+            <span id="bg-enrich-progress" class="text-[11px] font-mono-tech text-emerald-400 font-semibold">• 157 LPs &amp; 133 Pressing Photos Compiled</span>
           </div>
         </div>
       </div>
 
-      <!-- Primary View Tabs -->
-      <nav class="flex items-center bg-slate-900/90 p-1 rounded-xl border border-white/10" aria-label="Main views">
-        <button type="button" id="tab-btn-showcase" class="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-gradient-to-r from-cyan-500 to-purple-600 text-white shadow">
-          Turntable &amp; Crate
+      <!-- Primary View Switcher Tabs (Command Deck Pill Bar) -->
+      <nav class="flex items-center gap-1.5 bg-slate-900/90 p-1 rounded-2xl border border-white/10 overflow-x-auto max-w-full" aria-label="Main views">
+        <button type="button" id="tab-btn-showcase" class="px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap bg-gradient-to-r from-fuchsia-600 to-cyan-600 text-white shadow-md">
+          🎰 Turntable &amp; Crate
         </button>
-        <button type="button" id="tab-btn-pipeline" class="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-white">
-          Deterministic CV &amp; Local Sync
+        <button type="button" id="tab-btn-arena" class="px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap text-slate-300 hover:text-white hover:bg-white/5">
+          ⚔️ Variant Clash Arena
         </button>
-        <button type="button" id="tab-btn-flattening" class="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-white">
-          Flattening Queue
+        <button type="button" id="tab-btn-pipeline" class="px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap text-slate-300 hover:text-white hover:bg-white/5">
+          ⚡ CV &amp; Local Sync
+        </button>
+        <button type="button" id="tab-btn-flattening" class="px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap text-slate-300 hover:text-white hover:bg-white/5">
+          🔥 Flattening Queue
         </button>
       </nav>
 
-      <!-- Thumbnail Mode & Vault Tools Quick Controls -->
-      <div class="flex items-center gap-2">
-        <div class="hidden md:flex items-center bg-slate-900/90 rounded-xl p-1 border border-white/10 text-xs">
-          <button type="button" id="mode-btn-pressing" class="px-2.5 py-1 rounded-lg font-medium text-slate-400 hover:text-white" title="Show verified pressing photo when available, or split sleeve + release wax disc">
+      <!-- Hardware, UV Blacklight, Analog SFX & Vault Tools Quick Controls -->
+      <div class="flex flex-wrap items-center gap-2">
+        <button id="btn-uv-toggle" type="button" class="px-2.5 py-1.5 rounded-xl text-xs font-bold border border-purple-400/40 bg-purple-500/15 text-purple-200 hover:bg-purple-500/25 transition-all" title="Toggle UV Blacklight Neon Reactive Shader (Shortcut: U)">
+          🟣 UV Blacklight: Off
+        </button>
+        <button id="btn-sfx-toggle" type="button" class="px-2.5 py-1.5 rounded-xl text-xs font-bold border border-cyan-400/40 bg-cyan-500/15 text-cyan-200 hover:bg-cyan-500/25 transition-all" title="Toggle Web Audio Mechanical Crate, Needle Drop &amp; Fanfare SFX">
+          🔊 Analog SFX: On
+        </button>
+        <div class="hidden xl:flex items-center bg-slate-900/90 rounded-xl p-1 border border-white/10 text-xs">
+          <button type="button" id="mode-btn-pressing" class="px-2.5 py-1 rounded-lg font-semibold text-slate-400 hover:text-white" title="Show verified pressing photo when available, or split sleeve + release wax disc">
             Pressing First
           </button>
-          <button type="button" id="mode-btn-split" class="px-2.5 py-1 rounded-lg font-medium bg-cyan-500/20 text-cyan-300 border border-cyan-500/40" title="Show real Discogs jacket sleeve + vinyl disc side-by-side">
+          <button type="button" id="mode-btn-split" class="px-2.5 py-1 rounded-lg font-semibold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40" title="Show real Discogs jacket sleeve + vinyl disc side-by-side">
             Sleeve + Disc
           </button>
-          <button type="button" id="mode-btn-sleeve" class="px-2.5 py-1 rounded-lg font-medium text-slate-400 hover:text-white" title="Show real Discogs album cover with corner pressing badge">
+          <button type="button" id="mode-btn-sleeve" class="px-2.5 py-1 rounded-lg font-semibold text-slate-400 hover:text-white" title="Show real Discogs album cover with corner pressing badge">
             Sleeve First
           </button>
         </div>
-        <button type="button" id="btn-live-sync-modal" class="px-3 py-1.5 rounded-xl text-xs font-mono-tech font-semibold bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 flex items-center gap-1.5 transition-all" title="Open Local Sync CLI Builder, Inline HTML Baker &amp; JSON Exporter">
+        <button type="button" id="btn-live-sync-modal" class="px-3 py-1.5 rounded-xl text-xs font-mono-tech font-bold bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 flex items-center gap-1.5 transition-all" title="Open Local Sync CLI Builder, Inline HTML Baker &amp; JSON Exporter">
           <span id="sync-btn-dot" class="w-2 h-2 rounded-full bg-emerald-400"></span>
           <span id="sync-btn-label">Sync &amp; Export LP's</span>
         </button>
@@ -240,105 +360,177 @@
     </div>
   </header>
 
-  <!-- Telemetry KPI Strip -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 pt-5 pb-2">
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5">
-      <div class="bg-[#111420]/90 border border-white/10 rounded-xl p-3">
-        <div class="text-[11px] font-mono-tech uppercase text-slate-400">Discogs Collection</div>
-        <div id="kpi-total-records" class="text-xl sm:text-2xl font-extrabold text-white mt-0.5">157 LPs</div>
-        <div id="kpi-sync-sub" class="text-[11px] text-cyan-400 mt-0.5">Folder 0 • krunked</div>
+  <!-- Command Deck Live Telemetry KPI Strip (v5.0 Banner Style) -->
+  <section class="border-b border-white/10 bg-slate-950/55">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5">
+      <div class="bg-slate-900/80 border border-white/10 rounded-2xl px-3.5 py-2.5 shadow-lg backdrop-blur-md">
+        <div class="text-[10px] font-mono-tech uppercase tracking-wider text-slate-400 font-semibold">Discogs Crate</div>
+        <div id="kpi-total-records" class="text-lg sm:text-xl font-black text-white mt-0.5">157 LPs</div>
+        <div id="kpi-sync-sub" class="text-[11px] font-semibold text-cyan-400 mt-0.5">Folder 0 • krunked</div>
       </div>
-      <div class="bg-[#111420]/90 border border-white/10 rounded-xl p-3">
-        <div class="text-[11px] font-mono-tech uppercase text-slate-400">Verified Pressing Photos</div>
-        <div id="kpi-pressing-photos" class="text-xl sm:text-2xl font-extrabold text-purple-300 mt-0.5">133 / 157</div>
+      <div class="bg-slate-900/80 border border-purple-500/25 rounded-2xl px-3.5 py-2.5 shadow-lg backdrop-blur-md">
+        <div class="text-[10px] font-mono-tech uppercase tracking-wider text-purple-300/80 font-semibold">Verified Pressing Photos</div>
+        <div id="kpi-pressing-photos" class="text-lg sm:text-xl font-black text-purple-300 mt-0.5">133 / 157</div>
         <div class="text-[11px] text-slate-400 mt-0.5">4-Pass CV + Overrides</div>
       </div>
-      <div class="bg-[#111420]/90 border border-white/10 rounded-xl p-3">
-        <div class="text-[11px] font-mono-tech uppercase text-slate-400">Colored / Special Wax</div>
-        <div id="kpi-colored-wax" class="text-xl sm:text-2xl font-extrabold text-pink-400 mt-0.5">94.3%</div>
+      <div class="bg-slate-900/80 border border-fuchsia-500/25 rounded-2xl px-3.5 py-2.5 shadow-lg backdrop-blur-md">
+        <div class="text-[10px] font-mono-tech uppercase tracking-wider text-fuchsia-300/80 font-semibold">Colored / Special Wax</div>
+        <div id="kpi-colored-wax" class="text-lg sm:text-xl font-black text-fuchsia-400 mt-0.5">94.3%</div>
         <div class="text-[11px] text-slate-400 mt-0.5">Parsed from Format Codes</div>
       </div>
-      <div class="bg-[#111420]/90 border border-white/10 rounded-xl p-3">
-        <div class="text-[11px] font-mono-tech uppercase text-slate-400">Collection Value</div>
-        <div id="kpi-vault-value" class="text-xl sm:text-2xl font-extrabold text-emerald-400 mt-0.5">$6,252.80</div>
+      <div class="bg-slate-900/80 border border-emerald-500/25 rounded-2xl px-3.5 py-2.5 shadow-lg backdrop-blur-md">
+        <div class="text-[10px] font-mono-tech uppercase tracking-wider text-emerald-300/80 font-semibold">Vault Valuation</div>
+        <div id="kpi-vault-value" class="text-lg sm:text-xl font-black text-emerald-400 mt-0.5">$6,252.80</div>
         <div id="kpi-vault-range" class="text-[11px] text-slate-400 mt-0.5">Min $3,917.41 • Max $10,848.23</div>
       </div>
-      <div class="bg-[#111420]/90 border border-white/10 rounded-xl p-3">
-        <div class="text-[11px] font-mono-tech uppercase text-slate-400">Sum of Release Values</div>
-        <div id="kpi-nm-ratio" class="text-xl sm:text-2xl font-extrabold text-amber-300 mt-0.5">$7,533.49</div>
+      <div class="bg-slate-900/80 border border-amber-500/25 rounded-2xl px-3.5 py-2.5 shadow-lg backdrop-blur-md">
+        <div class="text-[10px] font-mono-tech uppercase tracking-wider text-amber-300/80 font-semibold">Sum of Release Values</div>
+        <div id="kpi-nm-ratio" class="text-lg sm:text-xl font-black text-amber-300 mt-0.5">$7,533.49</div>
         <div id="kpi-gallery-sub" class="text-[11px] text-slate-400 mt-0.5">157 LPs Individual Est.</div>
       </div>
-      <div class="bg-[#111420]/90 border border-white/10 rounded-xl p-3 cursor-pointer hover:border-cyan-500/40 transition" id="kpi-flattening-card" title="Click to open Vinyl Flattening Queue">
-        <div class="text-[11px] font-mono-tech uppercase text-slate-400">Flattening Plate</div>
-        <div id="kpi-flattening" class="text-xl sm:text-2xl font-extrabold text-cyan-300 mt-0.5">3 Queued / 41 Done</div>
-        <div id="kpi-flattening-sub" class="text-[11px] text-slate-400 mt-0.5">130°F • 2.5h Inline State</div>
+      <div class="bg-slate-900/80 border border-cyan-500/25 rounded-2xl px-3.5 py-2.5 shadow-lg backdrop-blur-md cursor-pointer hover:border-cyan-400/60 transition" id="kpi-flattening-card" title="Click to open Vinyl Flattening Queue">
+        <div class="text-[10px] font-mono-tech uppercase tracking-wider text-cyan-300/80 font-semibold">130°F Flattening Plate</div>
+        <div id="kpi-flattening" class="text-lg sm:text-xl font-black text-cyan-300 mt-0.5">3 Queued / 41 Done</div>
+        <div id="kpi-flattening-sub" class="text-[11px] text-emerald-400/90 mt-0.5">🛡️ Stylus Guard Linked</div>
       </div>
     </div>
   </section>
 
-  <!-- MAIN VIEW 1: TURNTABLE CAROUSEL & CRATE GRID -->
-  <main id="view-showcase" class="max-w-7xl mx-auto px-4 sm:px-6 py-4 space-y-6">
+  <!-- ========================================================================= -->
+  <!-- MAIN VIEW 1: COMBINED KINETIC WAX ROULETTE & DIRECT-DRIVE STAGE + CRATE   -->
+  <!-- ========================================================================= -->
+  <main id="view-showcase" class="max-w-7xl mx-auto px-3 sm:px-6 py-5 space-y-6">
 
-    <!-- HERO: 3D Pressing Carousel + Direct-Drive Strobe Turntable -->
-    <section class="relative rounded-2xl bg-gradient-to-b from-[#131726] to-[#0b0d15] border border-white/15 shadow-2xl overflow-hidden p-4 sm:p-6">
+    <!-- HERO: Combined Kinetic Crate Roulette + Direct-Drive Turntable Deck + 3D Flip Player -->
+    <section class="relative rounded-3xl bg-slate-900/85 border border-white/15 shadow-2xl overflow-hidden p-4 sm:p-6 backdrop-blur-md">
+      <!-- Command Deck Style Stage Header Banner -->
       <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-white/10">
         <div>
-          <div class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
-            <h1 class="text-sm sm:text-base font-bold uppercase tracking-wider text-slate-200 font-mono-tech">
-              Direct-Drive Pressing Stage &amp; Release Image Selector
+          <div class="flex items-center gap-2 flex-wrap mb-1">
+            <span class="text-[10px] font-mono-tech uppercase px-2.5 py-0.5 rounded-full bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-400/30 font-bold">
+              v5.0 Unified Roulette &amp; Platter Stage
+            </span>
+            <span id="active-spin-mode-pill" class="text-[10px] font-mono-tech uppercase px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-400/30 font-bold">
+              🎲 Full Vault Roulette • Stylus-Safe
+            </span>
+            <span id="reel-velocity-readout" class="text-[11px] font-mono-tech text-slate-400">
+              Velocity: 0.0 RPM • Ready
+            </span>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee] animate-pulse"></span>
+            <h1 class="text-base sm:text-xl font-black uppercase tracking-wider text-white font-mono-tech">
+              KINETIC WAX ROULETTE &amp; DIRECT-DRIVE PRESSING COMMAND STAGE
             </h1>
           </div>
-          <p class="text-xs text-slate-400 mt-0.5">
-            Defaults every record's spinning platter &amp; wax ring directly to its detected Discogs pressing photo (<span id="hero-pressing-ratio" class="text-cyan-300 font-mono-tech">133/157</span> releases), falling back to the deterministic wax shader only when no vinyl photo exists on Discogs.
+          <p class="text-xs text-slate-300 mt-1">
+            Defaults every record's spinning platter &amp; wax ring directly to its detected Discogs pressing photo (<span id="hero-pressing-ratio" class="text-cyan-300 font-mono-tech font-bold">133/157</span> releases), falling back to the deterministic wax shader only when no vinyl photo exists on Discogs.
           </p>
         </div>
 
-        <!-- Carousel Transport Controls -->
+        <!-- Stage Telemetry & Quick Arena Launch -->
         <div class="flex flex-wrap items-center gap-2">
-          <button type="button" id="btn-carousel-prev" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-white/10 transition">
-            ← Prev Record
-          </button>
-          <span id="carousel-counter" class="text-xs font-mono-tech text-cyan-300 px-2">1 / 157</span>
-          <button type="button" id="btn-carousel-next" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-white/10 transition">
-            Next Record →
-          </button>
-          <button type="button" id="btn-carousel-random" class="px-3 py-1.5 rounded-lg bg-purple-500/20 hover:bg-purple-500/30 text-xs font-semibold text-purple-300 border border-purple-500/30 transition">
-            🎲 Random LP
+          <span id="carousel-counter" class="px-3 py-1.5 rounded-xl bg-slate-950/90 border border-white/10 text-xs font-mono-tech font-bold text-cyan-300">1 / 157</span>
+          <button type="button" id="btn-hero-open-arena" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-fuchsia-600/25 to-cyan-600/25 hover:from-fuchsia-600/40 hover:to-cyan-600/40 text-xs font-bold text-fuchsia-200 border border-fuchsia-400/35 transition flex items-center gap-1.5 shadow-md">
+            <span>⚔️ Variant Clash Arena</span>
           </button>
         </div>
       </div>
 
-      <!-- Turntable Deck + Active Pressing Metadata & Release Gallery -->
+      <!-- Unified Turntable & Roulette Stage (Left 7 Cols) + 3D Flip Deck (Right 5 Cols) -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-5 items-center">
 
-        <!-- Left: Audiophile Direct-Drive Platter (+25% Larger Stage Footprint) -->
+        <!-- Left 7 Cols: Combined Spin-the-Crate + Smart Spin Modes + 3D Wing Cards + Direct-Drive Platter (Matches Mockup image_b09c49.jpg) -->
         <div class="lg:col-span-7 flex flex-col items-center justify-center">
-          <div class="relative w-full flex items-center justify-center py-1">
-            <!-- Ghost Prev Card (+25% Larger) -->
-            <button type="button" id="stage-prev-card" class="hidden sm:flex flex-col items-center opacity-45 hover:opacity-90 scale-75 transition-all cursor-pointer -mr-7 z-10" title="Load previous record">
-              <div id="stage-prev-disc" class="w-44 h-44 sm:w-[180px] sm:h-[180px] rounded-full shadow-xl border border-white/20 overflow-hidden"></div>
-              <span id="stage-prev-label" class="text-[11px] font-mono-tech text-slate-400 mt-2 max-w-[160px] truncate"></span>
+
+          <!-- 1. Top Spin-the-Crate Transport Bar (← Prev | 🎰 SPIN THE CRATE [SPACE] | Next →) -->
+          <div class="flex flex-wrap items-center justify-center gap-2.5 w-full mb-3">
+            <button type="button" id="btn-carousel-prev" class="px-4 py-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-xs sm:text-sm font-bold text-slate-100 border border-white/15 shadow transition active:scale-95">
+              ← Prev
             </button>
 
-            <!-- Center Active Direct-Drive Turntable Deck (+25% Larger: 320px -> 400px) -->
-            <div id="turntable-plinth-box" class="relative w-[340px] h-[340px] sm:w-[400px] sm:h-[400px] rounded-[28px] bg-gradient-to-br from-slate-900 via-[#0d1018] to-slate-950 border border-white/15 shadow-2xl flex items-center justify-center p-5 z-20">
-              <div class="absolute inset-3.5 rounded-full strobe-dots opacity-45 pointer-events-none"></div>
-              <div class="absolute inset-5 rounded-full border-2 border-slate-700/70 bg-slate-950 shadow-inner pointer-events-none"></div>
+            <button type="button" id="btn-carousel-random" class="px-6 py-2.5 rounded-2xl font-black text-xs sm:text-sm tracking-wider uppercase bg-gradient-to-r from-fuchsia-600 via-purple-600 to-cyan-500 hover:from-fuchsia-500 hover:to-cyan-400 text-white shadow-[0_0_28px_rgba(217,70,239,0.45),0_0_15px_rgba(6,182,212,0.3)] border border-white/20 active:scale-95 transition-all flex items-center gap-2.5">
+              <span>🎰 SPIN THE CRATE</span>
+              <span class="text-[10px] font-mono-tech font-bold bg-slate-950/55 border border-white/15 px-2 py-0.5 rounded-md text-cyan-200">SPACE</span>
+            </button>
+
+            <button type="button" id="btn-carousel-next" class="px-4 py-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-xs sm:text-sm font-bold text-slate-100 border border-white/15 shadow transition active:scale-95">
+              Next →
+            </button>
+          </div>
+
+          <!-- 2. Smart Spin Mode Selector Cards (Full Vault Roulette | Showroom Kiosk | Eye-Candy Variants) -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 w-full max-w-[560px] mb-4" id="smart-spin-modes-bar">
+            <button type="button" data-spin-mode="all" class="spin-mode-btn text-left p-2.5 rounded-2xl border-2 transition-all bg-cyan-500/15 border-cyan-400 text-white shadow-[0_0_20px_rgba(6,182,212,0.2)]">
+              <div class="flex items-center justify-between gap-1">
+                <span class="text-base">🎲</span>
+                <span id="spin-badge-all" class="text-[10px] font-mono-tech font-bold px-1.5 py-0.5 rounded bg-slate-950/80 text-cyan-300 border border-cyan-500/30">ALL SAFE</span>
+              </div>
+              <p class="font-extrabold text-xs text-white mt-1.5">Full Vault Roulette</p>
+              <p class="text-[10px] text-slate-300 leading-tight mt-0.5">Spins any non-warped pressing in the crate</p>
+            </button>
+
+            <button type="button" data-spin-mode="showroom" class="spin-mode-btn text-left p-2.5 rounded-2xl border transition-all bg-slate-950/80 border-white/15 text-slate-300 hover:border-purple-400/60 hover:text-white">
+              <div class="flex items-center justify-between gap-1">
+                <span class="text-base">📺</span>
+                <span id="spin-badge-showroom" class="text-[10px] font-mono-tech font-bold px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-400/30">AUTO 15s</span>
+              </div>
+              <p class="font-extrabold text-xs text-white mt-1.5">Showroom Kiosk</p>
+              <p class="text-[10px] text-slate-400 leading-tight mt-0.5">Auto-cycles variants for TV / guests</p>
+            </button>
+
+            <button type="button" data-spin-mode="eyecandy" class="spin-mode-btn text-left p-2.5 rounded-2xl border transition-all bg-slate-950/80 border-white/15 text-slate-300 hover:border-fuchsia-400/60 hover:text-white">
+              <div class="flex items-center justify-between gap-1">
+                <span class="text-base">🌈</span>
+                <span id="spin-badge-eyecandy" class="text-[10px] font-mono-tech font-bold px-1.5 py-0.5 rounded bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-400/30">FLEX WAX</span>
+              </div>
+              <p class="font-extrabold text-xs text-white mt-1.5">Eye-Candy Variants</p>
+              <p class="text-[10px] text-slate-400 leading-tight mt-0.5">Splatter, Galaxy, Marble &amp; Split only</p>
+            </button>
+          </div>
+
+          <!-- 3. Combined 3D Crate Wing Cards + Center Direct-Drive Turntable Plinth (Matches Mockup image_b09c49.jpg) -->
+          <div class="relative w-full flex items-center justify-center py-1 select-none">
+
+            <!-- Left Crate Wing Card (Peeking from behind left edge of turntable plinth) -->
+            <button type="button" id="stage-prev-card" class="crate-wing-card hidden sm:flex flex-col justify-between w-44 md:w-48 h-40 md:h-44 rounded-2xl bg-[#0a0d16]/95 border border-white/15 hover:border-cyan-400/60 p-3 text-center shadow-2xl cursor-pointer -mr-7 md:-mr-8 z-10 opacity-85 hover:opacity-100 transition-all" title="Click to load previous record in pool">
+              <div class="flex items-center justify-between gap-1 w-full">
+                <span id="stage-prev-orb" class="w-4 h-4 rounded-full border border-white/30 shrink-0" style="background: radial-gradient(circle, #dc2626, #18181b);"></span>
+                <span id="stage-prev-pill" class="px-1.5 py-0.5 rounded bg-white/10 text-slate-300 text-[9px] font-mono-tech font-bold">2023</span>
+              </div>
+              <div class="my-auto px-1">
+                <p id="stage-prev-artist" class="text-[10px] font-extrabold uppercase tracking-wider text-cyan-300 truncate">COHEED AND CAMBRIA</p>
+                <p id="stage-prev-title" class="text-xs font-black text-white line-clamp-2 leading-snug mt-0.5">In Keeping Secrets Of Silent Earth: 3</p>
+              </div>
+              <div id="stage-prev-badge" class="text-[9px] font-mono-tech text-slate-300 truncate bg-white/[0.06] border border-white/5 px-2 py-1 rounded-lg text-center w-full">
+                12" LP • Crimson Red
+              </div>
+              <div id="stage-prev-disc" class="hidden"></div>
+              <span id="stage-prev-label" class="hidden"></span>
+            </button>
+
+            <!-- Center Active Direct-Drive Turntable Plinth (+25% Scale with Cyan Neon Edge Brackets) -->
+            <div id="turntable-plinth-box" class="relative w-[336px] h-[336px] sm:w-[392px] sm:h-[392px] rounded-[30px] bg-gradient-to-br from-slate-900 via-[#0b0e17] to-slate-950 border border-white/20 shadow-[0_20px_60px_rgba(0,0,0,0.85)] flex items-center justify-center p-5 z-20 shrink-0">
+              <!-- Glowing Cyan Edge Brackets (Matches Mockup image_b09c49.jpg) -->
+              <div class="plinth-edge-bracket-left"></div>
+              <div class="plinth-edge-bracket-right"></div>
+
+              <div class="absolute inset-3.5 rounded-full strobe-dots opacity-50 pointer-events-none"></div>
+              <div class="absolute inset-5 rounded-full border-2 border-slate-700/75 bg-slate-950 shadow-inner pointer-events-none"></div>
 
               <!-- Status Strobe Lamp -->
-              <div class="absolute bottom-3.5 left-3.5 flex items-center gap-1.5 bg-slate-950/90 px-2.5 py-1 rounded-md border border-white/10 z-30">
-                <span id="platter-strobe-led" class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-                <span id="platter-rpm-readout" class="text-[10px] font-mono-tech text-cyan-300">33.3 RPM • QUARTZ LOCK</span>
+              <div class="absolute bottom-3.5 left-3.5 flex items-center gap-1.5 bg-slate-950/90 px-2.5 py-1 rounded-lg border border-white/15 z-30 shadow-md">
+                <span id="platter-strobe-led" class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_#22d3ee]"></span>
+                <span id="platter-rpm-readout" class="text-[10px] font-mono-tech font-bold text-cyan-300">33.3 RPM • QUARTZ LOCK</span>
               </div>
 
-              <!-- Spinning Vinyl Record Container (+25% Larger: 256px -> 320px) -->
-              <div id="active-platter-disc" class="relative w-[276px] h-[276px] sm:w-[320px] sm:h-[320px] rounded-full shadow-2xl spin-33 cursor-pointer overflow-hidden" title="Click to toggle spin / pause">
+              <!-- Spinning Vinyl Record Container (UV Reactive) -->
+              <div id="active-platter-disc" class="uv-reactive relative w-[272px] h-[272px] sm:w-[318px] sm:h-[318px] rounded-full shadow-2xl spin-33 cursor-pointer overflow-hidden" title="Click to toggle platter spin / pause">
               </div>
 
-              <!-- S-Shaped Audiophile Tonearm (+25% Larger: 112x224 -> 140x280) -->
+              <!-- S-Shaped Audiophile Tonearm -->
               <div id="turntable-tonearm" class="tonearm-pivot tonearm-engaged absolute top-3.5 right-3.5 w-32 h-64 sm:w-[140px] sm:h-[280px] pointer-events-none z-30">
-                <svg viewBox="0 0 120 240" class="w-full h-full drop-shadow-lg">
+                <svg viewBox="0 0 120 240" class="w-full h-full drop-shadow-xl">
                   <circle cx="94" cy="42" r="20" fill="#1e293b" stroke="#64748b" stroke-width="2" />
                   <circle cx="94" cy="42" r="9" fill="#94a3b8" />
                   <path d="M94 22 L94 8" stroke="#cbd5e1" stroke-width="6" stroke-linecap="round" />
@@ -348,44 +540,57 @@
               </div>
             </div>
 
-            <!-- Ghost Next Card (+25% Larger) -->
-            <button type="button" id="stage-next-card" class="hidden sm:flex flex-col items-center opacity-45 hover:opacity-90 scale-75 transition-all cursor-pointer -ml-7 z-10" title="Load next record">
-              <div id="stage-next-disc" class="w-44 h-44 sm:w-[180px] sm:h-[180px] rounded-full shadow-xl border border-white/20 overflow-hidden"></div>
-              <span id="stage-next-label" class="text-[11px] font-mono-tech text-slate-400 mt-2 max-w-[160px] truncate"></span>
+            <!-- Right Crate Wing Card (Peeking from behind right edge of turntable plinth) -->
+            <button type="button" id="stage-next-card" class="crate-wing-card hidden sm:flex flex-col justify-between w-44 md:w-48 h-40 md:h-44 rounded-2xl bg-[#0a0d16]/95 border border-white/15 hover:border-cyan-400/60 p-3 text-center shadow-2xl cursor-pointer -ml-7 md:-ml-8 z-10 opacity-85 hover:opacity-100 transition-all" title="Click to load next record in pool">
+              <div class="flex items-center justify-between gap-1 w-full">
+                <span id="stage-next-orb" class="w-4 h-4 rounded-full border border-white/30 shrink-0" style="background: radial-gradient(circle, #06b6d4, #2563eb);"></span>
+                <span id="stage-next-pill" class="px-1.5 py-0.5 rounded bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 text-[9px] font-mono-tech font-bold">Flat ✓</span>
+              </div>
+              <div class="my-auto px-1">
+                <p id="stage-next-artist" class="text-[10px] font-extrabold uppercase tracking-wider text-cyan-300 truncate">COHEED AND CAMBRIA</p>
+                <p id="stage-next-title" class="text-xs font-black text-white line-clamp-2 leading-snug mt-0.5">Vaxis II: A Window Of The Waking Mind</p>
+              </div>
+              <div id="stage-next-badge" class="text-[9px] font-mono-tech text-slate-300 truncate bg-white/[0.06] border border-white/5 px-2 py-1 rounded-lg text-center w-full">
+                12" LP • Cobalt Blue
+              </div>
+              <div id="stage-next-disc" class="hidden"></div>
+              <span id="stage-next-label" class="hidden"></span>
             </button>
           </div>
 
-          <!-- Platter Deck Controls Bar -->
-          <div class="flex flex-wrap items-center justify-center gap-2 mt-3">
-            <button type="button" id="btn-toggle-spin" class="px-3 py-1.5 rounded-lg text-xs font-mono-tech font-semibold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 hover:bg-cyan-500/30 transition">
-              ⏸ Pause Platter
-            </button>
-            <button type="button" id="btn-toggle-rpm" class="px-3 py-1.5 rounded-lg text-xs font-mono-tech font-semibold bg-slate-800 text-slate-300 border border-white/10 hover:text-white transition">
-              Speed: 33⅓ RPM
-            </button>
-            <button type="button" id="btn-toggle-audio" class="px-3 py-1.5 rounded-lg text-xs font-mono-tech font-semibold bg-slate-800 text-slate-300 border border-white/10 hover:text-white transition">
-              🔇 Vinyl Audio: Off
-            </button>
-            <div class="flex items-center bg-slate-900 rounded-lg p-0.5 border border-white/10 text-xs">
-              <button type="button" id="stage-view-auto" class="px-2.5 py-1 rounded-md font-medium bg-purple-500/25 text-purple-200">
+          <!-- 4. Platter Deck Controls Bar (Matches Mockup image_b09c49.jpg) -->
+          <div class="flex flex-col items-center gap-2 mt-3.5 w-full">
+            <div class="flex flex-wrap items-center justify-center gap-2">
+              <button type="button" id="btn-toggle-spin" class="px-3.5 py-1.5 rounded-xl text-xs font-mono-tech font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 hover:bg-cyan-500/30 transition">
+                ⏸ Pause Platter
+              </button>
+              <button type="button" id="btn-toggle-rpm" class="px-3.5 py-1.5 rounded-xl text-xs font-mono-tech font-bold bg-slate-800/90 text-slate-200 border border-white/10 hover:text-white transition">
+                Speed: 33⅓ RPM
+              </button>
+              <button type="button" id="btn-toggle-audio" class="px-3.5 py-1.5 rounded-xl text-xs font-mono-tech font-bold bg-slate-800/90 text-slate-300 border border-white/10 hover:text-white transition">
+                🔇 Vinyl Audio: Off
+              </button>
+            </div>
+            <div class="flex items-center bg-slate-950/90 rounded-xl p-1 border border-white/10 text-xs shadow-inner">
+              <button type="button" id="stage-view-auto" class="px-3 py-1 rounded-lg font-bold bg-purple-500/25 text-purple-200 border border-purple-400/30">
                 Pressing / Wax Disc
               </button>
-              <button type="button" id="stage-view-sleeve" class="px-2.5 py-1 rounded-md font-medium text-slate-400 hover:text-white">
+              <button type="button" id="stage-view-sleeve" class="px-3 py-1 rounded-lg font-semibold text-slate-400 hover:text-white">
                 Discogs Cover Art
               </button>
             </div>
           </div>
         </div>
 
-        <!-- Right: 3D Flip Deck (Side A: Pressing Metadata & Release Gallery | Side B: YouTube Music / Spotify Album & Tracklist Player) -->
+        <!-- Right 5 Cols: Preserved 3D Flip Deck (Side A: Pressing Specs & Release Gallery | Side B: 30s Audio Preview & YT Music / Spotify Links) -->
         <div class="lg:col-span-5 flex flex-col gap-3 relative pt-2">
 
-          <!-- Floating Top 3D Flip Handle (inspired by rotation handle badge) -->
+          <!-- Floating Top 3D Flip Handle -->
           <div class="flex justify-center -mb-5 z-30">
             <button
               type="button"
               id="btn-card-flip-top"
-              class="group px-3 py-1 rounded-full bg-[#141826] hover:bg-slate-800 border border-white/20 hover:border-cyan-400/60 shadow-lg flex items-center gap-1.5 text-[11px] font-mono-tech text-slate-200 hover:text-cyan-300 transition-all"
+              class="group px-3.5 py-1 rounded-full bg-slate-900 hover:bg-slate-800 border border-white/20 hover:border-cyan-400/60 shadow-lg flex items-center gap-1.5 text-[11px] font-mono-tech font-bold text-slate-200 hover:text-cyan-300 transition-all"
               title="Flip card between Pressing Specs and Album Streaming &amp; Tracklist (Shortcut: F)"
             >
               <span id="top-flip-icon" class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-white/10 text-cyan-300 group-hover:rotate-180 transition-transform duration-500">↻</span>
@@ -398,48 +603,48 @@
             <div id="hero-flip-inner" class="hero-flip-inner w-full">
 
               <!-- SIDE A (FRONT FACE): Active Pressing Metadata + Real Discogs Release Image Strip -->
-              <div id="hero-face-front" class="hero-flip-face hero-flip-front bg-[#0e111b] border border-white/15 rounded-2xl p-4 sm:p-5 flex flex-col justify-between shadow-2xl">
+              <div id="hero-face-front" class="hero-flip-face hero-flip-front bg-[#0c101b] border border-white/15 rounded-3xl p-4 sm:p-5 flex flex-col justify-between shadow-2xl">
                 <div class="flex items-start justify-between gap-3 pt-1">
                   <div>
                     <div class="flex items-center gap-2 flex-wrap">
-                      <span id="hero-variant-badge" class="px-2.5 py-0.5 rounded-full text-[11px] font-mono-tech font-semibold bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                      <span id="hero-variant-badge" class="px-2.5 py-0.5 rounded-full text-[11px] font-mono-tech font-bold bg-purple-500/20 text-purple-200 border border-purple-400/35">
                         12" LP • Purple
                       </span>
-                      <span id="hero-detection-pill" class="px-2.5 py-0.5 rounded-full text-[11px] font-mono-tech bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                      <span id="hero-detection-pill" class="px-2.5 py-0.5 rounded-full text-[11px] font-mono-tech font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
                         ✓ Real Pressing Photo Active
                       </span>
                     </div>
                     <h2 id="hero-title" class="text-xl sm:text-2xl font-black text-white mt-2 leading-tight">
                       Embryonic Anomaly (Remake)
                     </h2>
-                    <p id="hero-artist" class="text-sm sm:text-base font-semibold text-cyan-400">
+                    <p id="hero-artist" class="text-sm sm:text-base font-extrabold text-cyan-400 uppercase tracking-wide mt-0.5">
                       Rings Of Saturn
                     </p>
                   </div>
                   <div class="text-right shrink-0">
-                    <div class="text-[10px] font-mono-tech uppercase text-slate-400">Est. Value</div>
-                    <div id="hero-price" class="text-lg font-extrabold text-emerald-400 font-mono-tech">$60.00</div>
+                    <div class="text-[10px] font-mono-tech uppercase text-slate-400 font-bold">Est. Value</div>
+                    <div id="hero-price" class="text-lg font-black text-emerald-400 font-mono-tech">$60.00</div>
                   </div>
                 </div>
 
-                <div class="grid grid-cols-2 gap-2.5 text-xs bg-slate-900/70 p-3 rounded-xl border border-white/5">
+                <div class="grid grid-cols-2 gap-2.5 text-xs bg-slate-950/80 p-3 rounded-2xl border border-white/10">
                   <div>
-                    <span class="text-slate-400 block text-[10px] font-mono-tech uppercase">Label &amp; Cat#</span>
-                    <span id="hero-label-cat" class="font-semibold text-slate-200">Label • Cat#</span>
+                    <span class="text-slate-400 block text-[10px] font-mono-tech uppercase font-semibold">Label &amp; Cat#</span>
+                    <span id="hero-label-cat" class="font-bold text-slate-100">Label • Cat#</span>
                   </div>
                   <div>
-                    <span class="text-slate-400 block text-[10px] font-mono-tech uppercase">Format String (Discogs)</span>
-                    <span id="hero-format" class="font-mono-tech text-amber-300">LP, Album</span>
+                    <span class="text-slate-400 block text-[10px] font-mono-tech uppercase font-semibold">Format String (Discogs)</span>
+                    <span id="hero-format" class="font-mono-tech font-semibold text-amber-300">LP, Album</span>
                   </div>
                   <div>
-                    <span class="text-slate-400 block text-[10px] font-mono-tech uppercase">Media / Sleeve Grade</span>
-                    <span id="hero-grading" class="font-semibold text-emerald-300">NM / NM</span>
+                    <span class="text-slate-400 block text-[10px] font-mono-tech uppercase font-semibold">Media / Sleeve Grade</span>
+                    <span id="hero-grading" class="font-bold text-emerald-300">NM / NM</span>
                   </div>
                   <div>
-                    <span class="text-slate-400 block text-[10px] font-mono-tech uppercase">Release &amp; Flattening</span>
+                    <span class="text-slate-400 block text-[10px] font-mono-tech uppercase font-semibold">Release &amp; Flattening</span>
                     <div class="flex items-center justify-between gap-1.5 mt-0.5">
-                      <span id="hero-flattening" class="font-mono-tech font-semibold text-cyan-300 truncate">#17583742</span>
-                      <button type="button" id="btn-hero-flatten-cycle" class="shrink-0 px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-[10px] font-mono-tech text-slate-300 border border-white/10 transition" title="Cycle flattening status for this record (Unlisted → In Queue → Flattened)">
+                      <span id="hero-flattening" class="font-mono-tech font-bold text-cyan-300 truncate">#17583742</span>
+                      <button type="button" id="btn-hero-flatten-cycle" class="shrink-0 px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-[10px] font-mono-tech font-bold text-slate-300 border border-white/10 transition" title="Cycle flattening status for this record (Unlisted → In Queue → Flattened)">
                         + 🔥 Queue
                       </button>
                     </div>
@@ -447,10 +652,10 @@
                 </div>
 
                 <!-- Real Discogs Release Images Strip (Click any image to pin as Pressing Thumbnail!) -->
-                <div class="bg-slate-950/90 border border-cyan-500/20 rounded-xl p-3 space-y-2">
+                <div class="bg-slate-950/90 border border-cyan-500/25 rounded-2xl p-3 space-y-2">
                   <div class="flex items-center justify-between text-[11px] font-mono-tech">
-                    <span class="text-cyan-300 font-semibold uppercase">Discogs Release Images (Click to Pin Pressing Photo)</span>
-                    <button type="button" id="btn-fetch-this-release" class="text-[10px] px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 hover:bg-cyan-500/30">
+                    <span class="text-cyan-300 font-bold uppercase">Discogs Release Images (Click to Pin Pressing Photo)</span>
+                    <button type="button" id="btn-fetch-this-release" class="text-[10px] px-2 py-0.5 rounded bg-cyan-500/20 font-bold text-cyan-300 hover:bg-cyan-500/30">
                       ↻ Refresh Gallery
                     </button>
                   </div>
@@ -462,8 +667,8 @@
                 </div>
               </div>
 
-                                          <!-- SIDE B (BACK FACE): 30-Second Track Preview Player + Direct YouTube Music & Spotify Album Links -->
-              <div id="hero-face-back" class="hero-flip-face hero-flip-back relative bg-[#08090e] border border-white/15 rounded-2xl overflow-hidden shadow-2xl flex flex-col justify-between">
+              <!-- SIDE B (BACK FACE): 30-Second Track Preview Player + Direct YouTube Music & Spotify Album Links -->
+              <div id="hero-face-back" class="hero-flip-face hero-flip-back relative bg-[#08090e] border border-white/15 rounded-3xl overflow-hidden shadow-2xl flex flex-col justify-between">
                 <!-- Dynamic Ambient Album Glow Backdrop -->
                 <div id="stream-ambient-glow" class="absolute inset-x-0 top-0 h-64 opacity-45 pointer-events-none transition-all duration-700" style="background: radial-gradient(circle at 50% 15%, rgba(225, 29, 72, 0.48), rgba(88, 28, 135, 0.22) 55%, transparent 85%);"></div>
 
@@ -473,7 +678,7 @@
                     <button
                       type="button"
                       id="stream-artist-link"
-                      class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 text-[11px] font-semibold text-slate-100 transition truncate max-w-[44%]"
+                      class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 text-[11px] font-bold text-slate-100 transition truncate max-w-[44%]"
                       title="Play 30s Track Preview from Track 1"
                     >
                       <span id="stream-engine-dot" class="w-2 h-2 rounded-full bg-rose-500 shrink-0"></span>
@@ -487,7 +692,7 @@
                         href="https://music.youtube.com/playlist?list=OLAK5uy_m80Evo-9vz_8XceYZ5xiRnlvifZRSAfCA"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="px-2.5 py-0.5 rounded-full text-[10px] font-mono-tech font-semibold bg-rose-500/20 hover:bg-rose-500/35 text-rose-200 border border-rose-400/40 transition flex items-center gap-1 shadow"
+                        class="px-2.5 py-0.5 rounded-full text-[10px] font-mono-tech font-bold bg-rose-500/20 hover:bg-rose-500/35 text-rose-200 border border-rose-400/40 transition flex items-center gap-1 shadow"
                         title="Open Full Album Playlist on YouTube Music"
                       >
                         <svg class="w-3 h-3 fill-current text-rose-400 shrink-0" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 14.5c-2.49 0-4.5-2.01-4.5-4.5S9.51 7.5 12 7.5s4.5 2.01 4.5 4.5-2.01 4.5-4.5 4.5zm0-7.5c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zm-1 1.5v3l2.5-1.5-2.5-1.5z"/></svg>
@@ -499,7 +704,7 @@
                         href="https://open.spotify.com/search/Circa%20Survive%20On%20Letting%20Go/albums"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="px-2.5 py-0.5 rounded-full text-[10px] font-mono-tech font-semibold bg-emerald-500/20 hover:bg-emerald-500/35 text-emerald-200 border border-emerald-400/40 transition flex items-center gap-1 shadow"
+                        class="px-2.5 py-0.5 rounded-full text-[10px] font-mono-tech font-bold bg-emerald-500/20 hover:bg-emerald-500/35 text-emerald-200 border border-emerald-400/40 transition flex items-center gap-1 shadow"
                         title="Open Full Album on Spotify"
                       >
                         <svg class="w-3 h-3 fill-current text-emerald-400 shrink-0" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.563.387-.857.207-2.35-1.434-5.305-1.76-8.786-.963-.335.077-.67-.133-.746-.468-.077-.334.132-.67.468-.746 3.809-.87 7.076-.496 9.713 1.115.293.18.386.563.208.855zm1.224-2.722c-.226.367-.706.482-1.072.257-2.687-1.652-6.785-2.131-9.965-1.166-.413.127-.848-.106-.973-.517-.125-.413.108-.848.52-.973 3.632-1.102 8.147-.568 11.234 1.328.366.226.48.707.256 1.071zm.105-2.835C14.692 8.95 9.375 8.775 6.297 9.71c-.493.15-1.016-.129-1.166-.623-.148-.495.13-1.017.625-1.166 3.532-1.073 9.404-.866 13.115 1.337.445.264.59.838.327 1.282-.264.443-.838.59-1.283.327z"/></svg>
@@ -509,7 +714,7 @@
                     </div>
                   </div>
 
-                  <!-- Album Header Card (Replaces the YouTube Error 153 Box) -->
+                  <!-- Album Header Card -->
                   <div id="stream-cover-stage" class="flex items-center justify-between gap-3 bg-white/[0.04] border border-white/10 rounded-xl p-2.5 shadow-inner shrink-0">
                     <div class="flex items-center gap-3 min-w-0 flex-1">
                       <button
@@ -540,7 +745,7 @@
                         <h3 id="stream-album-title" class="text-sm sm:text-base font-black text-white truncate">
                           On Letting Go
                         </h3>
-                        <p id="stream-album-meta" class="text-[11px] font-medium text-slate-300 truncate">
+                        <p id="stream-album-meta" class="text-[11px] font-semibold text-slate-300 truncate">
                           Circa Survive • 2024 • 12 songs • 45 mins
                         </p>
                         <p id="stream-album-desc" class="text-[10px] text-cyan-300/90 font-mono-tech truncate">
@@ -553,7 +758,7 @@
                   <!-- 30-Second Preview Transport & Scrubber Deck -->
                   <div id="stream-scrubber-wrap" class="bg-white/[0.04] border border-white/10 rounded-xl px-3 py-2 space-y-1.5 shadow-inner shrink-0">
                     <div class="flex items-center justify-between gap-2 text-[10px] font-mono-tech">
-                      <span id="stream-now-playing-label" class="text-cyan-300 font-semibold truncate">Click ▶ or select any track below for 30s preview</span>
+                      <span id="stream-now-playing-label" class="text-cyan-300 font-bold truncate">Click ▶ or select any track below for 30s preview</span>
                       <span id="stream-time-readout" class="text-slate-300 font-bold shrink-0">0:00 / 0:30</span>
                     </div>
                     <input
@@ -636,15 +841,15 @@
           </div>
           <audio id="vault-preview-audio" preload="none" class="hidden"></audio>
 
-          <!-- Bottom Action Bar: Open on Discogs + 3D Stream/Tracklist Flip Button + Quick Launchers -->
+          <!-- Bottom Action Bar: Open on Discogs + 3D Stream/Tracklist Flip Button -->
           <div class="flex flex-wrap items-center gap-2 pt-0.5">
-            <a id="hero-discogs-link" href="https://www.discogs.com/user/krunked/collection" target="_blank" rel="noopener noreferrer" class="flex-1 min-w-[165px] text-center px-3.5 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs sm:text-sm transition shadow-lg shadow-cyan-500/20">
+            <a id="hero-discogs-link" href="https://www.discogs.com/user/krunked/collection" target="_blank" rel="noopener noreferrer" class="flex-1 min-w-[165px] text-center px-3.5 py-2.5 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-black text-xs sm:text-sm transition shadow-lg shadow-cyan-500/20">
               Open Release on Discogs ↗
             </a>
             <button
               type="button"
               id="btn-flip-streaming"
-              class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-rose-500/20 via-purple-500/20 to-emerald-500/20 hover:from-rose-500/30 hover:via-purple-500/30 hover:to-emerald-500/30 text-white font-semibold text-xs sm:text-sm border border-rose-400/35 hover:border-cyan-400/60 transition flex items-center gap-2 shadow-lg shadow-purple-500/10"
+              class="px-4 py-2.5 rounded-2xl bg-gradient-to-r from-fuchsia-600/25 via-purple-600/25 to-cyan-500/25 hover:from-fuchsia-600/35 hover:via-purple-600/35 hover:to-cyan-500/35 text-white font-bold text-xs sm:text-sm border border-fuchsia-400/35 hover:border-cyan-400/60 transition flex items-center gap-2 shadow-lg shadow-purple-500/10"
               title="Flip card to view Album Tracklist, Audio Previews, YouTube Music &amp; Spotify (Shortcut: F)"
             >
               <span class="inline-flex items-center gap-1">
@@ -660,25 +865,25 @@
       </div>
     </section>
 
-    <!-- FILTER, SEARCH & DISPLAY TOOLBAR -->
-    <section class="bg-[#111420]/95 border border-white/10 rounded-2xl p-4 space-y-3">
+    <!-- FILTER, SEARCH & DISPLAY TOOLBAR (Command Deck Banner Style) -->
+    <section class="bg-slate-900/85 border border-white/15 rounded-3xl p-4 sm:p-5 space-y-3 shadow-xl backdrop-blur-md">
       <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
         <div class="relative flex-1">
           <input
             type="text"
             id="search-input"
             placeholder="Search LP collection by artist, album, label, catalog #, or pressing color..."
-            class="w-full bg-slate-950 border border-white/15 focus:border-cyan-400 rounded-xl pl-9 pr-20 py-2 text-xs sm:text-sm text-white placeholder-slate-500 outline-none transition"
+            class="w-full bg-slate-950/90 border border-white/15 focus:border-cyan-400 rounded-2xl pl-9 pr-20 py-2.5 text-xs sm:text-sm font-medium text-white placeholder-slate-500 outline-none transition"
           />
           <span class="absolute left-3 top-2.5 text-slate-400 text-xs">🔎</span>
-          <button type="button" id="btn-clear-search" class="hidden absolute right-2.5 top-2 px-2 py-0.5 rounded bg-slate-800 text-[11px] text-slate-300 hover:text-white">
+          <button type="button" id="btn-clear-search" class="hidden absolute right-2.5 top-2 px-2.5 py-0.5 rounded-lg bg-slate-800 text-[11px] font-bold text-slate-300 hover:text-white">
             Clear
           </button>
         </div>
 
         <div class="flex flex-wrap items-center gap-2">
-          <label for="sort-select" class="text-xs font-mono-tech text-slate-400">Sort:</label>
-          <select id="sort-select" class="bg-slate-950 border border-white/15 rounded-xl px-3 py-2 text-xs text-slate-200 outline-none focus:border-cyan-400">
+          <label for="sort-select" class="text-xs font-mono-tech font-bold text-slate-400 uppercase">Sort:</label>
+          <select id="sort-select" class="bg-slate-950/90 border border-white/15 rounded-2xl px-3 py-2 text-xs font-semibold text-slate-200 outline-none focus:border-cyan-400">
             <option value="added_desc">Date Added (Newest First)</option>
             <option value="artist_asc">Artist (A → Z)</option>
             <option value="title_asc">Album Title (A → Z)</option>
@@ -686,9 +891,9 @@
             <option value="year_desc">Release Year (Newest)</option>
           </select>
 
-          <select id="mobile-mode-select" class="md:hidden bg-slate-950 border border-white/15 rounded-xl px-3 py-2 text-xs text-cyan-300 outline-none" aria-label="Thumbnail display mode">
+          <select id="mobile-mode-select" class="xl:hidden bg-slate-950/90 border border-white/15 rounded-2xl px-3 py-2 text-xs font-bold text-cyan-300 outline-none" aria-label="Thumbnail display mode">
             <option value="pressing">Thumb: Pressing First</option>
-            <option value="split" selected>Thumb: Sleeve + Pressing</option>
+            <option value="split" selected>Thumb: Sleeve + Disc</option>
             <option value="sleeve">Thumb: Sleeve Cover</option>
           </select>
         </div>
@@ -696,27 +901,27 @@
 
       <!-- Filter Chips -->
       <div class="flex items-center gap-1.5 overflow-x-auto custom-scrollbar pb-1" id="filter-chips-bar">
-        <button type="button" data-filter="all" class="filter-chip shrink-0 px-3 py-1 rounded-full text-xs font-semibold bg-cyan-500 text-slate-950">
+        <button type="button" data-filter="all" class="filter-chip shrink-0 px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-fuchsia-600 to-cyan-600 text-white shadow">
           All Releases
         </button>
-        <button type="button" data-filter="pressing_photo" class="filter-chip shrink-0 px-3 py-1 rounded-full text-xs font-semibold bg-slate-900 text-slate-300 hover:text-white border border-white/10">
+        <button type="button" data-filter="pressing_photo" class="filter-chip shrink-0 px-3 py-1 rounded-full text-xs font-bold bg-slate-950/80 text-slate-300 hover:text-white border border-white/10">
           📸 Verified Pressing Photo
         </button>
-        <button type="button" id="chip-flatten-todo" data-filter="flattening_todo" class="filter-chip shrink-0 px-3 py-1 rounded-full text-xs font-semibold bg-slate-900 text-amber-300 hover:text-white border border-amber-500/30">🔥 Flattening Queue (3)</button>
-        <button type="button" id="chip-flatten-done" data-filter="flattening_done" class="filter-chip shrink-0 px-3 py-1 rounded-full text-xs font-semibold bg-slate-900 text-emerald-300 hover:text-white border border-emerald-500/30">✓ Flattened &amp; Verified (41)</button>
-        <button type="button" data-filter="splatter" class="filter-chip shrink-0 px-3 py-1 rounded-full text-xs font-semibold bg-slate-900 text-slate-300 hover:text-white border border-white/10">
+        <button type="button" id="chip-flatten-todo" data-filter="flattening_todo" class="filter-chip shrink-0 px-3 py-1 rounded-full text-xs font-bold bg-slate-950/80 text-amber-300 hover:text-white border border-amber-500/30">🔥 Flattening Queue (3)</button>
+        <button type="button" id="chip-flatten-done" data-filter="flattening_done" class="filter-chip shrink-0 px-3 py-1 rounded-full text-xs font-bold bg-slate-950/80 text-emerald-300 hover:text-white border border-emerald-500/30">✓ Flattened &amp; Verified (41)</button>
+        <button type="button" data-filter="splatter" class="filter-chip shrink-0 px-3 py-1 rounded-full text-xs font-bold bg-slate-950/80 text-slate-300 hover:text-white border border-white/10">
           🎨 Splatter &amp; Color-in-Color
         </button>
-        <button type="button" data-filter="galaxy_marble" class="filter-chip shrink-0 px-3 py-1 rounded-full text-xs font-semibold bg-slate-900 text-slate-300 hover:text-white border border-white/10">
+        <button type="button" data-filter="galaxy_marble" class="filter-chip shrink-0 px-3 py-1 rounded-full text-xs font-bold bg-slate-950/80 text-slate-300 hover:text-white border border-white/10">
           🌌 Galaxy, Marble &amp; Split
         </button>
-        <button type="button" data-filter="translucent" class="filter-chip shrink-0 px-3 py-1 rounded-full text-xs font-semibold bg-slate-900 text-slate-300 hover:text-white border border-white/10">
+        <button type="button" data-filter="translucent" class="filter-chip shrink-0 px-3 py-1 rounded-full text-xs font-bold bg-slate-950/80 text-slate-300 hover:text-white border border-white/10">
           💎 Clear / Milky / Translucent
         </button>
-        <button type="button" data-filter="double_lp" class="filter-chip shrink-0 px-3 py-1 rounded-full text-xs font-semibold bg-slate-900 text-slate-300 hover:text-white border border-white/10">
+        <button type="button" data-filter="double_lp" class="filter-chip shrink-0 px-3 py-1 rounded-full text-xs font-bold bg-slate-950/80 text-slate-300 hover:text-white border border-white/10">
           💿 2xLP Double Sets
         </button>
-        <button type="button" data-filter="black_wax" class="filter-chip shrink-0 px-3 py-1 rounded-full text-xs font-semibold bg-slate-900 text-slate-300 hover:text-white border border-white/10">
+        <button type="button" data-filter="black_wax" class="filter-chip shrink-0 px-3 py-1 rounded-full text-xs font-bold bg-slate-950/80 text-slate-300 hover:text-white border border-white/10">
           ⚫ 180g Black Wax
         </button>
       </div>
@@ -724,11 +929,11 @@
 
     <!-- CRATE GALLERY GRID -->
     <section>
-      <div class="flex items-center justify-between mb-3">
-        <div id="grid-status-label" class="text-xs font-mono-tech text-slate-400">
+      <div class="flex items-center justify-between mb-3 px-1">
+        <div id="grid-status-label" class="text-xs font-mono-tech font-bold text-slate-300">
           Showing 157 of 157 releases in krunked's collection
         </div>
-        <a href="https://www.discogs.com/user/krunked/collection" target="_blank" rel="noopener noreferrer" class="text-xs font-mono-tech text-cyan-400 hover:underline">
+        <a href="https://www.discogs.com/user/krunked/collection" target="_blank" rel="noopener noreferrer" class="text-xs font-mono-tech font-bold text-cyan-400 hover:underline">
           Source: discogs.com/user/krunked/collection ↗
         </a>
       </div>
@@ -738,52 +943,126 @@
 
   </main>
 
-  <!-- MAIN VIEW 2: DETERMINISTIC PIPELINE & LOCAL SYNC INSTRUCTIONS (v4.7) -->
-  <section id="view-pipeline" class="hidden max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-6">
-    <div class="bg-[#111420] border border-white/10 rounded-2xl p-5 sm:p-6 space-y-5">
-      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4">
+  <!-- ========================================================================= -->
+  <!-- MAIN VIEW 2: VARIANT CLASH ARENA (HEAD-TO-HEAD 4-LP KNOCKOUT BRACKET)     -->
+  <!-- ========================================================================= -->
+  <section id="view-arena" class="hidden max-w-7xl mx-auto px-3 sm:px-6 py-6 space-y-6">
+    <div class="bg-slate-900/85 border border-white/15 rounded-3xl p-5 sm:p-6 shadow-2xl backdrop-blur-md">
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-5 pb-4 border-b border-white/10">
         <div>
-          <span class="text-xs font-mono-tech uppercase text-cyan-400">Local Workstation Workflow (`C:\DiscogsCollection\discogs_collection`) — v4.7 Delta Engine</span>
-          <h2 class="text-xl sm:text-2xl font-black text-white mt-0.5">
-            Single-Command Delta Sync &amp; 4-Pass Concentric CV Pipeline (`sync_discogs.py`)
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-[11px] font-mono-tech uppercase px-2.5 py-0.5 rounded-full bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-400/30 font-bold">
+              v5.0 Interactive 4-Variant Knockout Bracket
+            </span>
+            <span class="text-[11px] font-mono-tech uppercase px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-400/30 font-bold">
+              🛡️ Warped LPs Auto-Excluded
+            </span>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-black text-white mt-1.5">
+            ⚔️ Variant Clash Arena — Head-to-Head Wax Showdown
           </h2>
-          <p class="text-xs text-slate-400 mt-1">
-            Pressing photo detection, SHA-256 delta caching, inline HTML flattening queue reconciliation, and static HTML compilation are all baked directly into <code class="text-cyan-300">scripts/sync_discogs.py</code>.
+          <p class="text-xs text-slate-300 mt-0.5">
+            Can't decide what to put on the platter? Pit 4 pressings from your live Discogs collection against each other in 3 quick matchups to crown tonight's turntable champion.
           </p>
         </div>
-        <span class="px-3 py-1 rounded-full text-xs font-mono-tech bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+
+        <div class="flex flex-wrap items-center gap-2">
+          <!-- Bracket Pool Filter -->
+          <div class="flex items-center bg-slate-950/90 p-1 rounded-xl border border-white/10 text-xs">
+            <button type="button" data-arena-pool="all" class="arena-pool-btn px-2.5 py-1 rounded-lg font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+              🎲 All Safe
+            </button>
+            <button type="button" data-arena-pool="eyecandy" class="arena-pool-btn px-2.5 py-1 rounded-lg font-semibold text-slate-400 hover:text-white">
+              🌈 Eye-Candy Only
+            </button>
+            <button type="button" data-arena-pool="flat" class="arena-pool-btn px-2.5 py-1 rounded-lg font-semibold text-slate-400 hover:text-white">
+              ✓ Flat Certified
+            </button>
+          </div>
+
+          <span id="arena-round-badge" class="px-3.5 py-1.5 rounded-xl font-mono-tech text-xs font-extrabold bg-cyan-500/20 text-cyan-300 border border-cyan-400/40">
+            Semifinal 1 of 2
+          </span>
+          <button id="btn-arena-new-bracket" type="button" class="px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider bg-gradient-to-r from-fuchsia-600 to-cyan-600 hover:from-fuchsia-500 hover:to-cyan-500 text-white shadow-lg shadow-fuchsia-500/25 active:scale-95 transition-all">
+            🔄 Deal New 4-LP Bracket
+          </button>
+        </div>
+      </div>
+
+      <!-- Head-to-Head Contenders Grid -->
+      <div id="arena-matchup-container" class="grid grid-cols-1 lg:grid-cols-11 gap-4 items-stretch">
+        <!-- Left Contender -->
+        <div id="arena-card-left" class="lg:col-span-5 bg-slate-950/90 border-2 border-cyan-500/40 hover:border-cyan-400 rounded-3xl p-5 transition-all cursor-pointer group flex flex-col justify-between shadow-xl"></div>
+
+        <!-- Center VS Badge -->
+        <div class="lg:col-span-1 flex flex-col items-center justify-center py-2">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-fuchsia-600 via-purple-600 to-cyan-500 flex items-center justify-center font-black text-lg text-white shadow-xl shadow-fuchsia-500/30 rotate-6 border border-white/20">
+            VS
+          </div>
+          <p class="text-[10px] font-mono-tech font-bold text-slate-400 mt-2 uppercase text-center">Tap Winner</p>
+        </div>
+
+        <!-- Right Contender -->
+        <div id="arena-card-right" class="lg:col-span-5 bg-slate-950/90 border-2 border-fuchsia-500/40 hover:border-fuchsia-400 rounded-3xl p-5 transition-all cursor-pointer group flex flex-col justify-between shadow-xl"></div>
+      </div>
+
+      <!-- Bracket Progression Tracker -->
+      <div class="mt-6 pt-4 border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs" id="arena-bracket-summary">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- MAIN VIEW 3: DETERMINISTIC PIPELINE & LOCAL SYNC INSTRUCTIONS (v5.0)      -->
+  <!-- ========================================================================= -->
+  <section id="view-pipeline" class="hidden max-w-7xl mx-auto px-3 sm:px-6 py-6 space-y-6">
+    <div class="bg-slate-900/85 border border-white/15 rounded-3xl p-5 sm:p-6 space-y-5 shadow-2xl backdrop-blur-md">
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4">
+        <div>
+          <span class="text-[11px] font-mono-tech uppercase px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-400/30 font-bold">
+            Local Workstation Workflow (`C:\DiscogsCollection\discogs_collection`) — v5.0 Delta Engine
+          </span>
+          <h2 class="text-xl sm:text-2xl font-black text-white mt-1.5">
+            ⚡ Single-Command Delta Sync &amp; 4-Pass Concentric CV Pipeline (`sync_discogs.py`)
+          </h2>
+          <p class="text-xs text-slate-300 mt-1">
+            Pressing photo detection, SHA-256 delta caching, inline HTML flattening queue reconciliation, and static HTML compilation are all baked directly into <code class="text-cyan-300 font-mono-tech">scripts/sync_discogs.py</code>.
+          </p>
+        </div>
+        <span class="px-3 py-1 rounded-full text-xs font-mono-tech font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
           ⚡ Sub-Millisecond Delta Fast-Path Active
         </span>
       </div>
 
       <!-- Command Cards: Daily Sync vs Targeted Resync -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <div class="bg-slate-950 border border-emerald-500/30 rounded-xl p-4 space-y-2.5 flex flex-col justify-between">
+        <div class="bg-slate-950/90 border border-emerald-500/30 rounded-2xl p-4 space-y-2.5 flex flex-col justify-between">
           <div class="space-y-2">
             <div class="flex items-center justify-between gap-2">
-              <span class="text-xs font-mono-tech text-emerald-400 font-bold uppercase">1 // Standard Daily Sync &amp; Deploy (PowerShell)</span>
-              <button type="button" data-copy-cmd="cd C:\DiscogsCollection\discogs_collection&#10;python scripts/sync_discogs.py&#10;git add -A; git commit -m &quot;chore(vault): sync discogs collection (v4.7)&quot;; git push" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/30 text-[11px] font-mono-tech font-semibold transition">
+              <span class="text-xs font-mono-tech text-emerald-400 font-extrabold uppercase">1 // Standard Daily Sync &amp; Deploy (PowerShell)</span>
+              <button type="button" data-copy-cmd="cd C:\DiscogsCollection\discogs_collection&#10;python scripts/sync_discogs.py&#10;git add -A; git commit -m &quot;chore(vault): sync discogs collection (v5.0)&quot;; git push" class="px-2.5 py-1 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/30 text-[11px] font-mono-tech font-bold transition">
                 📋 Copy Commands
               </button>
             </div>
-            <pre class="bg-[#07080c] border border-white/10 rounded-lg p-3 text-xs font-mono-tech text-cyan-300 overflow-x-auto">cd C:\DiscogsCollection\discogs_collection
+            <pre class="bg-[#06070b] border border-white/10 rounded-xl p-3 text-xs font-mono-tech text-cyan-300 overflow-x-auto">cd C:\DiscogsCollection\discogs_collection
 python scripts/sync_discogs.py
-git add -A; git commit -m "chore(vault): sync discogs collection (v4.7)"; git push</pre>
+git add -A; git commit -m "chore(vault): sync discogs collection (v5.0)"; git push</pre>
           </div>
           <p class="text-xs text-slate-400 leading-relaxed">
             Paginates Folder 0 (`per_page=100`), fast-paths unchanged releases via <code class="text-slate-200">delta_sig</code>, downloads gallery images and runs the 4-pass CV pressing picker only on new/updated LPs, reconciles the inline HTML flattening state, and compiles <code class="text-slate-200">index.html</code> in one pass.
           </p>
         </div>
 
-        <div class="bg-slate-950 border border-purple-500/30 rounded-xl p-4 space-y-2.5 flex flex-col justify-between">
+        <div class="bg-slate-950/90 border border-purple-500/30 rounded-2xl p-4 space-y-2.5 flex flex-col justify-between">
           <div class="space-y-2">
             <div class="flex items-center justify-between gap-2">
-              <span class="text-xs font-mono-tech text-purple-300 font-bold uppercase">2 // Targeted Release Resync &amp; Full Rebuild Flags</span>
-              <button type="button" data-copy-cmd="python scripts/sync_discogs.py --resync 35668090,16610055" class="px-2.5 py-1 rounded-lg bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 border border-purple-500/30 text-[11px] font-mono-tech font-semibold transition">
+              <span class="text-xs font-mono-tech text-purple-300 font-extrabold uppercase">2 // Targeted Release Resync &amp; Full Rebuild Flags</span>
+              <button type="button" data-copy-cmd="python scripts/sync_discogs.py --resync 35668090,16610055" class="px-2.5 py-1 rounded-xl bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 border border-purple-500/30 text-[11px] font-mono-tech font-bold transition">
                 📋 Copy --resync
               </button>
             </div>
-            <pre class="bg-[#07080c] border border-white/10 rounded-lg p-3 text-xs font-mono-tech text-purple-200 overflow-x-auto"># Force re-download &amp; re-evaluate specific release ID(s):
+            <pre class="bg-[#06070b] border border-white/10 rounded-xl p-3 text-xs font-mono-tech text-purple-200 overflow-x-auto"># Force re-download &amp; re-evaluate specific release ID(s):
 python scripts/sync_discogs.py --resync 35668090,16610055
 
 # Bypass SHA-256 delta cache and re-scan every release in the vault:
@@ -797,23 +1076,23 @@ python scripts/sync_discogs.py --full</pre>
 
       <!-- 3 Dynamic Architecture Telemetry Cards -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="bg-slate-950/90 border border-white/10 rounded-xl p-4">
-          <div class="text-xs font-mono-tech text-cyan-400 font-bold">1 // 4-PASS CV &amp; SHA-256 DELTA ENGINE</div>
-          <div id="pipe-kpi-cv" class="text-sm font-bold text-white mt-1">133 / 157 Physical Discs Verified (84.7%)</div>
+        <div class="bg-slate-950/90 border border-white/10 rounded-2xl p-4">
+          <div class="text-xs font-mono-tech text-cyan-400 font-extrabold">1 // 4-PASS CV &amp; SHA-256 DELTA ENGINE</div>
+          <div id="pipe-kpi-cv" class="text-sm font-black text-white mt-1">133 / 157 Physical Discs Verified (84.7%)</div>
           <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">
             Evaluates candidate gallery images in polar coordinates <code class="text-slate-200">(r, θ)</code> across 4 framing passes (centered 12" disc, 4:3 turntable/side-by-side crop, padded studio frame, and 360° center-label+spindle), rejecting 4" label scans and hype stickers.
           </p>
         </div>
-        <div class="bg-slate-950/90 border border-white/10 rounded-xl p-4">
-          <div class="text-xs font-mono-tech text-purple-400 font-bold">2 // PORTABLE INLINE FLATTENING STATE</div>
-          <div id="pipe-kpi-flatten" class="text-sm font-bold text-white mt-1">3 Queued • 41 Flattened • 113 Uninspected</div>
+        <div class="bg-slate-950/90 border border-white/10 rounded-2xl p-4">
+          <div class="text-xs font-mono-tech text-purple-400 font-extrabold">2 // PORTABLE INLINE FLATTENING STATE</div>
+          <div id="pipe-kpi-flatten" class="text-sm font-black text-white mt-1">3 Queued • 41 Flattened • 113 Uninspected</div>
           <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">
             Stores your owner inspection &amp; thermal pouch queue directly inside <code class="text-slate-200">index.html</code> (<code class="text-slate-200">#flattening-inline-form</code> hidden inputs + <code class="text-slate-200">data/flattening_queue.json</code>)—100% self-contained and portable with zero external cloud dependencies.
           </p>
         </div>
-        <div class="bg-slate-950/90 border border-white/10 rounded-xl p-4">
-          <div class="text-xs font-mono-tech text-emerald-400 font-bold">3 // LIVE VALUATION &amp; OVERRIDE PINNING</div>
-          <div id="pipe-kpi-val" class="text-sm font-bold text-white mt-1">$6,252.80 Median • $7,533.49 Release Sum</div>
+        <div class="bg-slate-950/90 border border-white/10 rounded-2xl p-4">
+          <div class="text-xs font-mono-tech text-emerald-400 font-extrabold">3 // LIVE VALUATION &amp; OVERRIDE PINNING</div>
+          <div id="pipe-kpi-val" class="text-sm font-black text-white mt-1">$6,252.80 Median • $7,533.49 Release Sum</div>
           <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">
             Pre-compiles Discogs collection valuation (<code class="text-slate-200">Min / Median / Max</code>), individual release marketplace pricing, and gallery override pins (<code class="text-slate-200">data/overrides.json</code>) directly into <code class="text-slate-200">index.html</code> for instant zero-spinner loads.
           </p>
@@ -823,36 +1102,36 @@ python scripts/sync_discogs.py --full</pre>
       <!-- 4-Tier Deterministic CV Architecture Breakdown -->
       <div class="bg-slate-950/90 border border-white/10 rounded-2xl p-4 sm:p-5 space-y-3">
         <div class="flex flex-wrap items-center justify-between gap-2">
-          <h3 class="text-sm font-bold text-white font-mono-tech uppercase">
+          <h3 class="text-sm font-black text-white font-mono-tech uppercase">
             4-Tier Deterministic Pressing Selection Hierarchy (`detect_pressing_image.py`)
           </h3>
           <span class="text-[11px] font-mono-tech text-slate-400">Zero Probabilistic LLM Calls • 100% Reproducible</span>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
-          <div class="bg-[#0b0d16] border border-white/10 rounded-xl p-3 space-y-1">
-            <div class="text-[11px] font-mono-tech text-emerald-400 font-bold">TIER 1 // OVERRIDE LOCK</div>
-            <div class="font-semibold text-white">Manual &amp; Verified Pins</div>
+          <div class="bg-[#090c15] border border-white/10 rounded-xl p-3 space-y-1">
+            <div class="text-[11px] font-mono-tech text-emerald-400 font-extrabold">TIER 1 // OVERRIDE LOCK</div>
+            <div class="font-bold text-white">Manual &amp; Verified Pins</div>
             <p class="text-slate-400 text-[11px] leading-relaxed">
               Honors <code class="text-slate-200">user_locked</code> gallery pins from the Turntable strip and cache-busted <code class="text-slate-200">pressing.jpg?v=idx_sha256</code> paths in <code class="text-slate-200">data/overrides.json</code>.
             </p>
           </div>
-          <div class="bg-[#0b0d16] border border-white/10 rounded-xl p-3 space-y-1">
-            <div class="text-[11px] font-mono-tech text-cyan-400 font-bold">TIER 2 // 4-PASS POLAR CV</div>
-            <div class="font-semibold text-white">Concentric Dual-Circle Math</div>
+          <div class="bg-[#090c15] border border-white/10 rounded-xl p-3 space-y-1">
+            <div class="text-[11px] font-mono-tech text-cyan-400 font-extrabold">TIER 2 // 4-PASS POLAR CV</div>
+            <div class="font-bold text-white">Concentric Dual-Circle Math</div>
             <p class="text-slate-400 text-[11px] leading-relaxed">
               Verifies outer 12" rim step, 4 corner background quadrants, 8-octant label-to-wax continuity, radial splatter spokes, and center spindle hole contrast.
             </p>
           </div>
-          <div class="bg-[#0b0d16] border border-white/10 rounded-xl p-3 space-y-1">
-            <div class="text-[11px] font-mono-tech text-purple-400 font-bold">TIER 3 // GUIDELINE 13.8</div>
-            <div class="font-semibold text-white">Side-A Positional Prior</div>
+          <div class="bg-[#090c15] border border-white/10 rounded-xl p-3 space-y-1">
+            <div class="text-[11px] font-mono-tech text-purple-400 font-extrabold">TIER 3 // GUIDELINE 13.8</div>
+            <div class="font-bold text-white">Side-A Positional Prior</div>
             <p class="text-slate-400 text-[11px] leading-relaxed">
               Applies Discogs Database Guideline 13.8 image ordering (<code class="text-slate-200">[0]</code> cover, <code class="text-slate-200">[1]</code> back/gatefold, <code class="text-slate-200">[4..5]</code> physical disc) and a <code class="text-slate-200">+0.038</code> Side-A tie-breaker.
             </p>
           </div>
-          <div class="bg-[#0b0d16] border border-white/10 rounded-xl p-3 space-y-1">
-            <div class="text-[11px] font-mono-tech text-pink-400 font-bold">TIER 4 // WAX VARIANT PARSER</div>
-            <div class="font-semibold text-white">Deterministic SVG Shader</div>
+          <div class="bg-[#090c15] border border-white/10 rounded-xl p-3 space-y-1">
+            <div class="text-[11px] font-mono-tech text-fuchsia-400 font-extrabold">TIER 4 // WAX VARIANT PARSER</div>
+            <div class="font-bold text-white">Deterministic SVG Shader</div>
             <p class="text-slate-400 text-[11px] leading-relaxed">
               Parses Discogs format codes &amp; notes into a deterministic <code class="text-slate-200">wax_spec</code> shader whenever a release has only sleeve photos uploaded on Discogs.
             </p>
@@ -861,79 +1140,83 @@ python scripts/sync_discogs.py --full</pre>
       </div>
 
       <!-- Interactive Deterministic Format String & Wax Parser Sandbox -->
-      <div class="bg-slate-950 border border-cyan-500/25 rounded-2xl p-4 sm:p-5">
+      <div class="bg-slate-950/90 border border-cyan-500/25 rounded-2xl p-4 sm:p-5">
         <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
           <div>
-            <h3 class="text-sm font-bold text-white font-mono-tech uppercase">
+            <h3 class="text-sm font-black text-white font-mono-tech uppercase">
               Interactive Deterministic Format &amp; Pressing Parser Sandbox (Fallback for Sleeve-Only Releases)
             </h3>
             <p class="text-xs text-slate-400">
               Test any Discogs <code class="text-cyan-300">formats[].descriptions</code> string + seller notes to see how <code class="text-cyan-300">parse_wax_variant()</code> computes the fallback wax ring when a release has no vinyl photo on Discogs.
             </p>
           </div>
-          <button type="button" id="btn-sandbox-preset" class="px-3 py-1 rounded-lg bg-purple-500/20 text-purple-300 border border-purple-500/30 text-xs font-mono-tech hover:bg-purple-500/30">
+          <button type="button" id="btn-sandbox-preset" class="px-3 py-1 rounded-xl bg-purple-500/20 text-purple-300 border border-purple-500/30 text-xs font-mono-tech font-bold hover:bg-purple-500/30">
             Load Sample Variant
           </button>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
           <div class="md:col-span-7 space-y-3">
             <div>
-              <label for="sandbox-format-input" class="block text-[11px] font-mono-tech text-slate-400 uppercase mb-1">Discogs Format String</label>
+              <label for="sandbox-format-input" class="block text-[11px] font-mono-tech font-bold text-slate-400 uppercase mb-1">Discogs Format String</label>
               <input type="text" id="sandbox-format-input" value="2xLP, Album, Ltd, RE, RP, Gal" class="w-full bg-slate-900 border border-white/15 rounded-xl px-3 py-2 text-xs font-mono-tech text-cyan-300 outline-none focus:border-cyan-400" />
             </div>
             <div>
-              <label for="sandbox-notes-input" class="block text-[11px] font-mono-tech text-slate-400 uppercase mb-1">Release / Variant Notes</label>
+              <label for="sandbox-notes-input" class="block text-[11px] font-mono-tech font-bold text-slate-400 uppercase mb-1">Release / Variant Notes</label>
               <input type="text" id="sandbox-notes-input" value="Clear w/ Hot Pink and Electric Blue Splatter, Etched D-Side" class="w-full bg-slate-900 border border-white/15 rounded-xl px-3 py-2 text-xs font-mono-tech text-slate-200 outline-none focus:border-cyan-400" />
             </div>
-            <pre id="sandbox-json-output" class="bg-[#07080c] border border-white/10 rounded-xl p-3 text-[11px] font-mono-tech text-emerald-300 overflow-x-auto"></pre>
+            <pre id="sandbox-json-output" class="bg-[#06070b] border border-white/10 rounded-xl p-3 text-[11px] font-mono-tech text-emerald-300 overflow-x-auto"></pre>
           </div>
-          <div class="md:col-span-5 flex flex-col items-center justify-center bg-[#0b0d16] border border-white/10 rounded-xl p-4">
-            <div id="sandbox-disc-preview" class="w-44 h-44 rounded-full shadow-2xl spin-33"></div>
-            <div id="sandbox-badge-preview" class="mt-3 px-3 py-1 rounded-full text-xs font-mono-tech bg-cyan-500/15 text-cyan-300 border border-cyan-500/30"></div>
+          <div class="md:col-span-5 flex flex-col items-center justify-center bg-[#090c15] border border-white/10 rounded-2xl p-4">
+            <div id="sandbox-disc-preview" class="w-44 h-44 rounded-full shadow-2xl spin-33 uv-reactive"></div>
+            <div id="sandbox-badge-preview" class="mt-3 px-3 py-1 rounded-full text-xs font-mono-tech font-bold bg-cyan-500/15 text-cyan-300 border border-cyan-500/30"></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- MAIN VIEW 3: PORTABLE INLINE VINYL FLATTENING PLATE TRACKER & OWNER INSPECTION BENCH (v4.7) -->
-  <section id="view-flattening" class="hidden max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-6">
-    <div class="bg-[#111420] border border-white/10 rounded-2xl p-5 sm:p-6 space-y-5">
+  <!-- ========================================================================= -->
+  <!-- MAIN VIEW 4: PORTABLE INLINE VINYL FLATTENING PLATE TRACKER (v5.0)        -->
+  <!-- ========================================================================= -->
+  <section id="view-flattening" class="hidden max-w-7xl mx-auto px-3 sm:px-6 py-6 space-y-6">
+    <div class="bg-slate-900/85 border border-white/15 rounded-3xl p-5 sm:p-6 space-y-5 shadow-2xl backdrop-blur-md">
       <!-- Header & Inline Persistence Controls -->
       <div class="flex flex-wrap items-start justify-between gap-4 border-b border-white/10 pb-4">
         <div>
-          <span class="text-xs font-mono-tech uppercase text-amber-400">Thermal Pouch Protocol • Bag on 6 until 130°F → Drop to 4 for 2.5 Hours (150 Min) → Cool Completely</span>
-          <h2 class="text-xl sm:text-2xl font-black text-white mt-0.5">
-            Vinyl Flattening Queue &amp; Owner Inspection Regimen
+          <span class="text-[11px] font-mono-tech uppercase px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/30 font-bold">
+            Thermal Pouch Protocol • Bag on 6 until 130°F → Drop to 4 for 2.5 Hours (150 Min) → Cool Completely
+          </span>
+          <h2 class="text-xl sm:text-2xl font-black text-white mt-1.5">
+            🔥 Vinyl Flattening Queue &amp; Owner Inspection Regimen
           </h2>
-          <p class="text-xs text-slate-400 mt-1">
-            100% portable inline state stored inside hidden HTML form fields (<code class="text-cyan-300">#flattening-inline-form</code>) + <code class="text-cyan-300">data/flattening_queue.json</code>. Inspect any record on arrival, queue warped LPs, track completed bakes, and save directly in-line.
+          <p class="text-xs text-slate-300 mt-1">
+            100% portable inline state stored inside hidden HTML form fields (<code class="text-cyan-300">#flattening-inline-form</code>) + <code class="text-cyan-300">data/flattening_queue.json</code>. Records in <strong class="text-amber-300">Need To Be Done</strong> are automatically locked out of Roulette &amp; Clash Arena spins to protect your AT-VMN95ML stylus!
           </p>
         </div>
 
         <div class="flex flex-wrap items-center gap-2">
-          <span id="flatten-inline-status" class="px-2.5 py-1 rounded-lg text-[11px] font-mono-tech bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+          <span id="flatten-inline-status" class="px-2.5 py-1 rounded-xl text-[11px] font-mono-tech font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
             ✓ Inline HTML Form Synced
           </span>
-          <button type="button" id="btn-flatten-save-html" class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs font-mono-tech transition shadow-lg shadow-cyan-500/20" title="Download updated index.html with your current flattening queue baked directly into the inline HTML form &amp; payload">
+          <button type="button" id="btn-flatten-save-html" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-black text-xs font-mono-tech transition shadow-lg shadow-cyan-500/20" title="Download updated index.html with your current flattening queue baked directly into the inline HTML form &amp; payload">
             💾 Save Updated index.html
           </button>
-          <button type="button" id="btn-flatten-export-json" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs font-mono-tech border border-white/10 transition" title="Download data/flattening_queue.json">
+          <button type="button" id="btn-flatten-export-json" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs font-mono-tech border border-white/10 transition" title="Download data/flattening_queue.json">
             ⬇ Export flattening_queue.json
           </button>
         </div>
       </div>
 
       <!-- Interactive 2.5-Hour (150:00) Thermal Plate Session Timer -->
-      <div class="bg-slate-950/95 border border-amber-500/30 rounded-xl p-4 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
+      <div class="bg-slate-950/95 border border-amber-500/30 rounded-2xl p-4 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
         <div class="flex items-center gap-3">
-          <div class="w-11 h-11 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-lg shrink-0">
+          <div class="w-11 h-11 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-lg shrink-0">
             🔥
           </div>
           <div>
             <div class="flex items-center gap-2 flex-wrap">
-              <span class="text-xs font-mono-tech font-bold uppercase text-amber-300">Thermal Pouch Session Timer</span>
-              <span id="timer-phase-badge" class="px-2 py-0.5 rounded-full text-[10px] font-mono-tech bg-slate-800 text-slate-300 border border-white/10">
+              <span class="text-xs font-mono-tech font-extrabold uppercase text-amber-300">Thermal Pouch Session Timer</span>
+              <span id="timer-phase-badge" class="px-2 py-0.5 rounded-full text-[10px] font-mono-tech font-bold bg-slate-800 text-slate-300 border border-white/10">
                 Plate Idle • Ready
               </span>
             </div>
@@ -947,16 +1230,16 @@ python scripts/sync_discogs.py --full</pre>
           <select id="timer-record-select" class="bg-slate-900 border border-white/15 rounded-xl px-3 py-1.5 text-xs font-mono-tech text-slate-200 outline-none focus:border-amber-400 max-w-[230px]" aria-label="Select record in thermal pouch">
             <option value="">Select LP in Pouch...</option>
           </select>
-          <div id="timer-readout" class="px-3.5 py-1.5 rounded-xl bg-[#07080c] border border-white/15 text-base sm:text-lg font-mono-tech font-extrabold text-cyan-300 min-w-[108px] text-center">
+          <div id="timer-readout" class="px-3.5 py-1.5 rounded-xl bg-[#06070b] border border-white/15 text-base sm:text-lg font-mono-tech font-black text-cyan-300 min-w-[108px] text-center">
             02:30:00
           </div>
-          <button type="button" id="btn-timer-ramp" class="px-3 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 text-xs font-mono-tech font-semibold transition">
+          <button type="button" id="btn-timer-ramp" class="px-3 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 text-xs font-mono-tech font-bold transition">
             🔥 Ramp (Set 6 → 130°F)
           </button>
-          <button type="button" id="btn-timer-start" class="px-3 py-1.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/30 text-xs font-mono-tech font-semibold transition">
+          <button type="button" id="btn-timer-start" class="px-3 py-1.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/30 text-xs font-mono-tech font-bold transition">
             ▶ Start 2.5h Hold (Set 4)
           </button>
-          <button type="button" id="btn-timer-reset" class="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-white/10 text-xs font-mono-tech transition">
+          <button type="button" id="btn-timer-reset" class="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-white/10 text-xs font-mono-tech font-bold transition">
             ↺ Reset
           </button>
         </div>
@@ -964,31 +1247,31 @@ python scripts/sync_discogs.py --full</pre>
 
       <!-- Queue & Completed Columns -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="bg-slate-950/90 border border-amber-500/30 rounded-xl p-4 space-y-3 flex flex-col">
+        <div class="bg-slate-950/90 border border-amber-500/30 rounded-2xl p-4 space-y-3 flex flex-col">
           <div class="flex items-center justify-between">
             <div>
-              <h3 class="text-sm font-bold text-amber-300 font-mono-tech uppercase">🔥 Need To Be Done (Warped Queue)</h3>
+              <h3 class="text-sm font-black text-amber-300 font-mono-tech uppercase">🔥 Need To Be Done (Warped Queue)</h3>
               <p class="text-[11px] text-slate-400">Examined &amp; queued for the 130°F thermal pouch</p>
             </div>
-            <span id="flatten-todo-count" class="px-2.5 py-0.5 rounded-full text-xs font-mono-tech bg-amber-500/20 text-amber-300">3 Records</span>
+            <span id="flatten-todo-count" class="px-2.5 py-0.5 rounded-full text-xs font-mono-tech font-bold bg-amber-500/20 text-amber-300">3 Records</span>
           </div>
           <div id="flatten-todo-list" class="space-y-2 max-h-[520px] overflow-y-auto custom-scrollbar pr-1"></div>
         </div>
 
-        <div class="bg-slate-950/90 border border-emerald-500/30 rounded-xl p-4 space-y-3 flex flex-col">
+        <div class="bg-slate-950/90 border border-emerald-500/30 rounded-2xl p-4 space-y-3 flex flex-col">
           <div class="flex items-center justify-between gap-2">
             <div>
-              <h3 class="text-sm font-bold text-emerald-300 font-mono-tech uppercase">✓ Flattened &amp; Verified (Done)</h3>
+              <h3 class="text-sm font-black text-emerald-300 font-mono-tech uppercase">✓ Flattened &amp; Verified (Done)</h3>
               <p class="text-[11px] text-slate-400">Completed 2.5-hour thermal plate cycle &amp; play-tested</p>
             </div>
-            <span id="flatten-done-count" class="px-2.5 py-0.5 rounded-full text-xs font-mono-tech bg-emerald-500/20 text-emerald-300">41 Records</span>
+            <span id="flatten-done-count" class="px-2.5 py-0.5 rounded-full text-xs font-mono-tech font-bold bg-emerald-500/20 text-emerald-300">41 Records</span>
           </div>
           <div>
             <input
               type="text"
               id="flatten-done-search"
               placeholder="Filter flattened records by artist or album..."
-              class="w-full bg-slate-900 border border-white/10 focus:border-emerald-400 rounded-lg px-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 outline-none"
+              class="w-full bg-slate-900 border border-white/10 focus:border-emerald-400 rounded-xl px-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 outline-none"
             />
           </div>
           <div id="flatten-done-list" class="space-y-2 max-h-[475px] overflow-y-auto custom-scrollbar pr-1"></div>
@@ -996,12 +1279,12 @@ python scripts/sync_discogs.py --full</pre>
       </div>
 
       <!-- Owner Inspection Bench: Search & Add Any Collection LP to Queue or Done -->
-      <div class="bg-slate-950/90 border border-cyan-500/25 rounded-xl p-4 space-y-3">
+      <div class="bg-slate-950/90 border border-cyan-500/25 rounded-2xl p-4 space-y-3">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div>
             <div class="flex items-center gap-2">
-              <h3 class="text-sm font-bold text-cyan-300 font-mono-tech uppercase">🔎 Owner Inspection Bench — Add Collection LPs to Queue or Done</h3>
-              <span id="flatten-unlisted-count" class="px-2 py-0.5 rounded-full text-[11px] font-mono-tech bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">113 Records</span>
+              <h3 class="text-sm font-black text-cyan-300 font-mono-tech uppercase">🔎 Owner Inspection Bench — Add Collection LPs to Queue or Done</h3>
+              <span id="flatten-unlisted-count" class="px-2 py-0.5 rounded-full text-[11px] font-mono-tech font-bold bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">113 Records</span>
             </div>
             <p class="text-xs text-slate-400 mt-0.5">
               Inspecting a newly arrived LP on your turntable? Search your uninspected collection below to queue warped pressings or log completed bakes.
@@ -1024,25 +1307,25 @@ python scripts/sync_discogs.py --full</pre>
     </div>
   </section>
 
-  <!-- MODAL: VAULT STATE MANAGER, LOCAL SYNC CLI & PORTABLE EXPORTER (v4.7) -->
+  <!-- MODAL: VAULT STATE MANAGER, LOCAL SYNC CLI & PORTABLE EXPORTER (v5.0) -->
   <div id="modal-backdrop" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-[#111420] border border-white/15 rounded-2xl max-w-2xl w-full p-5 sm:p-6 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto custom-scrollbar">
+    <div class="bg-slate-900 border border-white/15 rounded-3xl max-w-2xl w-full p-5 sm:p-6 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto custom-scrollbar">
       <div class="flex items-center justify-between border-b border-white/10 pb-3">
         <div>
-          <span class="text-[10px] font-mono-tech uppercase text-cyan-400">v4.7 Portable State &amp; Local Sync Hub</span>
-          <h3 id="modal-title" class="text-base sm:text-lg font-bold text-white font-mono-tech">
+          <span class="text-[10px] font-mono-tech uppercase px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-400/30 font-bold">v5.0 Portable State &amp; Local Sync Hub</span>
+          <h3 id="modal-title" class="text-base sm:text-lg font-black text-white font-mono-tech mt-1">
             Vault State Manager, CLI Builder &amp; Self-Contained Exporter
           </h3>
         </div>
-        <button type="button" id="btn-close-modal" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-slate-300">
+        <button type="button" id="btn-close-modal" class="px-2.5 py-1 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300">
           ✕ Close
         </button>
       </div>
 
       <div id="modal-body" class="space-y-4 text-xs sm:text-sm text-slate-300">
         <!-- Why Local Sync vs Browser Export -->
-        <div class="bg-slate-950/90 border border-white/10 rounded-xl p-3.5 space-y-1.5">
-          <div class="text-xs font-mono-tech font-bold text-emerald-400 uppercase">How Syncing &amp; In-Browser Edits Work Together (v4.7)</div>
+        <div class="bg-slate-950/90 border border-white/10 rounded-2xl p-3.5 space-y-1.5">
+          <div class="text-xs font-mono-tech font-extrabold text-emerald-400 uppercase">How Syncing &amp; In-Browser Edits Work Together (v5.0)</div>
           <p class="text-xs text-slate-400 leading-relaxed">
             Because browser sandboxing cannot execute local Python scripts or write JPEGs to <code class="text-slate-200">assets/releases/</code>, <strong class="text-slate-200">Discogs API syncing + 4-Pass CV photo picking</strong> runs in PowerShell via <code class="text-cyan-300">python scripts/sync_discogs.py</code>. Meanwhile, any <strong class="text-slate-200">Pressing Photo Pins</strong> or <strong class="text-slate-200">Flattening Queue changes</strong> you make right here in the browser can be baked straight back into <code class="text-cyan-300">index.html</code> (or exported as JSON) with one click below!
           </p>
@@ -1050,84 +1333,84 @@ python scripts/sync_discogs.py --full</pre>
 
         <!-- Session Telemetry Grid -->
         <div class="grid grid-cols-3 gap-2.5 text-center">
-          <div class="bg-slate-950 border border-white/10 rounded-xl p-2.5">
-            <div class="text-[10px] font-mono-tech uppercase text-slate-400">Compiled Vault</div>
-            <div id="modal-stat-lps" class="text-sm sm:text-base font-extrabold text-white mt-0.5">156 LPs</div>
-            <div id="modal-stat-photos" class="text-[10px] font-mono-tech text-cyan-400">132 Pressing Photos</div>
+          <div class="bg-slate-950 border border-white/10 rounded-2xl p-2.5">
+            <div class="text-[10px] font-mono-tech uppercase text-slate-400 font-bold">Compiled Vault</div>
+            <div id="modal-stat-lps" class="text-sm sm:text-base font-black text-white mt-0.5">157 LPs</div>
+            <div id="modal-stat-photos" class="text-[10px] font-mono-tech text-cyan-400">133 Pressing Photos</div>
           </div>
-          <div class="bg-slate-950 border border-white/10 rounded-xl p-2.5">
-            <div class="text-[10px] font-mono-tech uppercase text-slate-400">Flattening State</div>
-            <div id="modal-stat-flatten" class="text-sm sm:text-base font-extrabold text-amber-300 mt-0.5">3 Queued / 41 Done</div>
+          <div class="bg-slate-950 border border-white/10 rounded-2xl p-2.5">
+            <div class="text-[10px] font-mono-tech uppercase text-slate-400 font-bold">Flattening State</div>
+            <div id="modal-stat-flatten" class="text-sm sm:text-base font-black text-amber-300 mt-0.5">3 Queued / 41 Done</div>
             <div class="text-[10px] font-mono-tech text-slate-400">Inline Form + JSON</div>
           </div>
-          <div class="bg-slate-950 border border-white/10 rounded-xl p-2.5">
-            <div class="text-[10px] font-mono-tech uppercase text-slate-400">Browser Session Edits</div>
-            <div id="modal-stat-edits" class="text-sm sm:text-base font-extrabold text-emerald-400 mt-0.5">0 Unsaved</div>
+          <div class="bg-slate-950 border border-white/10 rounded-2xl p-2.5">
+            <div class="text-[10px] font-mono-tech uppercase text-slate-400 font-bold">Browser Session Edits</div>
+            <div id="modal-stat-edits" class="text-sm sm:text-base font-black text-emerald-400 mt-0.5">0 Unsaved</div>
             <div id="modal-stat-edits-sub" class="text-[10px] font-mono-tech text-slate-400">In Sync with HTML</div>
           </div>
         </div>
 
         <!-- Primary Action: Bake Everything into Self-Contained index.html -->
-        <div class="bg-slate-950 border border-cyan-500/30 rounded-xl p-4 space-y-2.5">
+        <div class="bg-slate-950 border border-cyan-500/30 rounded-2xl p-4 space-y-2.5">
           <div class="flex items-center justify-between gap-2 flex-wrap">
             <div>
-              <div class="text-xs font-mono-tech font-bold text-cyan-300 uppercase">Option A // Portable Single-File HTML Bake (Recommended)</div>
+              <div class="text-xs font-mono-tech font-extrabold text-cyan-300 uppercase">Option A // Portable Single-File HTML Bake (Recommended)</div>
               <p class="text-[11px] text-slate-400 mt-0.5">
                 Downloads a complete <code class="text-slate-200">index.html</code> with your pinned pressing photos, hidden flattening form inputs (<code class="text-slate-200">#flattening-inline-form</code>), and KPI counters baked in. Drop it into <code class="text-slate-200">C:\DiscogsCollection\discogs_collection\index.html</code>—<code class="text-slate-200">sync_discogs.py</code> automatically reads your inline form state on its next run!
               </p>
             </div>
           </div>
           <div class="flex flex-wrap items-center gap-2 pt-1">
-            <button type="button" id="btn-bake-full-html" class="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs font-mono-tech transition shadow-lg shadow-cyan-500/20">
+            <button type="button" id="btn-bake-full-html" class="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-black text-xs font-mono-tech transition shadow-lg shadow-cyan-500/20">
               💾 Download Updated index.html (Bake All Edits In-Line)
             </button>
-            <button type="button" id="btn-reset-browser-cache" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-mono-tech border border-white/10 transition" title="Discard temporary browser localStorage edits and reload compiled HTML baseline">
+            <button type="button" id="btn-reset-browser-cache" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-mono-tech font-bold border border-white/10 transition" title="Discard temporary browser localStorage edits and reload compiled HTML baseline">
               ↺ Reset Browser Cache
             </button>
           </div>
         </div>
 
         <!-- Secondary Action: Export Individual JSON Data Files -->
-        <div class="bg-slate-950 border border-white/10 rounded-xl p-4 space-y-2.5">
-          <div class="text-xs font-mono-tech font-bold text-purple-300 uppercase">Option B // Export Individual JSON Files for `data/`</div>
+        <div class="bg-slate-950 border border-white/10 rounded-2xl p-4 space-y-2.5">
+          <div class="text-xs font-mono-tech font-extrabold text-purple-300 uppercase">Option B // Export Individual JSON Files for `data/`</div>
           <div class="flex flex-wrap items-center gap-2">
-            <button type="button" id="btn-export-overrides" class="px-3.5 py-2 rounded-xl bg-purple-500/20 hover:bg-purple-500/30 text-purple-200 font-semibold text-xs font-mono-tech border border-purple-500/30 transition">
+            <button type="button" id="btn-export-overrides" class="px-3.5 py-2 rounded-xl bg-purple-500/20 hover:bg-purple-500/30 text-purple-200 font-bold text-xs font-mono-tech border border-purple-500/30 transition">
               ⬇ Download overrides.json
             </button>
-            <button type="button" id="btn-export-flattening" class="px-3.5 py-2 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-200 font-semibold text-xs font-mono-tech border border-amber-500/30 transition">
+            <button type="button" id="btn-export-flattening" class="px-3.5 py-2 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-200 font-bold text-xs font-mono-tech border border-amber-500/30 transition">
               ⬇ Download flattening_queue.json
             </button>
-            <button type="button" id="btn-export-json" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs font-mono-tech border border-white/10 transition">
+            <button type="button" id="btn-export-json" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs font-mono-tech border border-white/10 transition">
               ⬇ Download collection.json
             </button>
           </div>
         </div>
 
         <!-- PowerShell CLI Command Helper -->
-        <div class="bg-slate-950 border border-white/10 rounded-xl p-4 space-y-2">
+        <div class="bg-slate-950 border border-white/10 rounded-2xl p-4 space-y-2">
           <div class="flex items-center justify-between gap-2">
-            <span class="text-xs font-mono-tech font-bold text-emerald-400 uppercase">Local PowerShell Sync Commands</span>
+            <span class="text-xs font-mono-tech font-extrabold text-emerald-400 uppercase">Local PowerShell Sync Commands</span>
             <div class="flex items-center gap-1.5">
-              <button type="button" id="btn-copy-sync-cmd" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/30 text-[11px] font-mono-tech font-semibold transition">
+              <button type="button" id="btn-copy-sync-cmd" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/30 text-[11px] font-mono-tech font-bold transition">
                 📋 Copy Daily Sync
               </button>
-              <button type="button" id="btn-copy-resync-active" class="px-2.5 py-1 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/30 text-[11px] font-mono-tech font-semibold transition">
+              <button type="button" id="btn-copy-resync-active" class="px-2.5 py-1 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/30 text-[11px] font-mono-tech font-bold transition">
                 📋 Copy --resync Active LP
               </button>
             </div>
           </div>
-          <pre id="sync-log-output" class="bg-[#07080c] border border-white/10 rounded-xl p-3 text-[11px] font-mono-tech text-cyan-300 overflow-x-auto max-h-48 custom-scrollbar">cd C:\DiscogsCollection\discogs_collection
+          <pre id="sync-log-output" class="bg-[#06070b] border border-white/10 rounded-xl p-3 text-[11px] font-mono-tech text-cyan-300 overflow-x-auto max-h-48 custom-scrollbar">cd C:\DiscogsCollection\discogs_collection
 python scripts/sync_discogs.py</pre>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Toast Notification -->
-  <div id="toast-banner" class="hidden fixed bottom-5 right-5 z-50 px-4 py-2.5 rounded-xl bg-slate-900/95 border border-cyan-500/40 text-xs font-mono-tech text-cyan-200 shadow-2xl"></div>
+  <!-- Toast Notification Banner -->
+  <div id="toast-banner" class="hidden fixed bottom-5 right-5 z-50 max-w-md px-4 py-3 rounded-2xl bg-slate-900/95 border border-cyan-400/50 text-xs font-mono-tech font-bold text-cyan-200 shadow-2xl backdrop-blur-md"></div>
 
   <script>
-    /* __DISCOGS_COLLECTION_DATA_START__ */
+        /* __DISCOGS_COLLECTION_DATA_START__ */
     window.__DISCOGS_OVERRIDES__ = {
   "2343816": "assets/releases/2343816/pressing.jpg?v=1_e56ca9c1",
   "3093365": "assets/releases/3093365/pressing.jpg?v=4_38f4bf24",
@@ -1264,12 +1547,12 @@ python scripts/sync_discogs.py</pre>
   "38854575": "assets/releases/38854575/pressing.jpg?v=4_bfc7da28"
 };
     window.__DISCOGS_COLLECTION__ = {
-  "schema_version": "4.7.0",
+  "schema_version": "5.0.0",
   "is_offline_seed": false,
   "source_of_truth": "https://www.discogs.com/user/krunked/collection",
   "api_documentation": "https://www.discogs.com/developers",
   "username": "krunked",
-  "synced_at_utc": "2026-11-14T18:54:02Z",
+  "synced_at_utc": "2026-11-15T04:19:22Z",
   "profile": {
     "username": "krunked",
     "owner_name": "krunked",
@@ -62110,9 +62393,9 @@ python scripts/sync_discogs.py</pre>
     }
   ],
   "flattening_queue": {
-    "schema_version": "4.7.0",
+    "schema_version": "5.0.0",
     "storage_mode": "portable_inline_html+json",
-    "updated_at_utc": "2026-11-14T18:54:02Z",
+    "updated_at_utc": "2026-11-15T04:19:22Z",
     "protocol": "Bag on 6 until 130°F then drop to 4 — 2.5 hours once at 130°F on the plate",
     "need_to_be_done_release_ids": [
       28844782,
@@ -62478,7 +62761,7 @@ python scripts/sync_discogs.py</pre>
   }
 };
     try {
-      var __pySyncStamp = "2026-11-14T18:54:02Z";
+      var __pySyncStamp = "2026-11-15T04:19:22Z";
       if (typeof localStorage !== 'undefined' && localStorage.getItem('__discogs_py_sync_stamp__') !== __pySyncStamp) {
         Object.keys(localStorage).forEach(function(k) {
           if (k.toLowerCase().indexOf('token') === -1 && k.indexOf('flattening_timer') === -1) {
@@ -62496,7 +62779,7 @@ python scripts/sync_discogs.py</pre>
       activeIndex: 0,
       thumbMode: 'split', // 'pressing' | 'split' | 'sleeve'
       stageMode: 'auto',  // 'auto' | 'sleeve'
-      activeTab: 'showcase',
+      activeTab: 'showcase', // 'showcase' | 'arena' | 'pipeline' | 'flattening'
       filter: 'all',
       sortBy: 'added_desc',
       searchQuery: '',
@@ -62506,14 +62789,26 @@ python scripts/sync_discogs.py</pre>
       rpm: 33,
       audioPlaying: false,
       audioCtx: null,
+      analogSfx: true,
+      uvBlacklight: false,
+      spinMode: 'all', // 'all' | 'showroom' | 'eyecandy'
+      showroomInterval: null,
+      showroomCountdown: 15,
+      showroomTickInterval: null,
+      isSpinningRoulette: false,
+      arenaPoolMode: 'all', // 'all' | 'eyecandy' | 'flat'
+      arenaBracket: [],
+      arenaWinners: [],
+      arenaStage: 0, // 0: Semi 1, 1: Semi 2, 2: Final, 3: Champion Crowned
+      arenaChampion: null,
       userOverrides: {},       // release_id -> pinned pressing image URL
       releaseGalleryCache: {}, // release_id -> array of Discogs image objects
       unsavedPinCount: 0,
       unsavedFlattenCount: 0,
       timerInterval: null,
       isCardFlipped: false,
-      preferredService: 'ytm', // 'ytm' (Full 16:9 Embedded Player) | 'spotify' (Expanded Cover + Mini-Embed Dock)
-      showVideoStage: true,    // Embedded YouTube Music / YouTube Player visible by default!
+      preferredService: 'ytm',
+      showVideoStage: true,
       autoAdvanceTracks: true,
       activePlaybackEngine: 'yt',
       ytApiReady: false,
@@ -62528,7 +62823,8 @@ python scripts/sync_discogs.py</pre>
       ytProgressTimer: null,
       ytPendingAction: null,
       failedYtIds: new Set(),
-      streamCache: {},         // release_id -> { tracks, totalMinutes, year, description, ytPlaylistId, fullAlbumYtVideoId }
+      streamCache: {},
+      previewUrlCache: {},
       activeStreamRid: null,
       cuedStreamRid: null,
       activeTrackIndex: -1,
@@ -62552,6 +62848,192 @@ python scripts/sync_discogs.py</pre>
       el.classList.remove('hidden');
       clearTimeout(window.__toastTimer);
       window.__toastTimer = setTimeout(() => el.classList.add('hidden'), 3600);
+    }
+
+    // =========================================================================
+    // v5.0 WEB AUDIO ANALOG SFX SYNTHESIZER & 60FPS PARTICLE BURST ENGINE
+    // =========================================================================
+    let sfxCtx = null;
+
+    function ensureSfxCtx() {
+      if (!sfxCtx) {
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (AC) sfxCtx = new AC();
+      }
+      if (sfxCtx && sfxCtx.state === 'suspended') {
+        sfxCtx.resume().catch(() => {});
+      }
+      return sfxCtx;
+    }
+
+    // Velocity-sensitive mechanical crate sleeve flip tick
+    function playCrateTickSound(pitchFactor = 1.0) {
+      if (!state.analogSfx) return;
+      try {
+        const ctx = ensureSfxCtx();
+        if (!ctx) return;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(240 * pitchFactor, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(58, ctx.currentTime + 0.036);
+        gain.gain.setValueAtTime(0.15, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.038);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.04);
+      } catch (e) {}
+    }
+
+    // Warm analog stylus needle drop thump + micro-crackle kiss
+    function playNeedleDropSound() {
+      if (!state.analogSfx) return;
+      try {
+        const ctx = ensureSfxCtx();
+        if (!ctx) return;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(98, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(26, ctx.currentTime + 0.19);
+        gain.gain.setValueAtTime(0.28, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.21);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.22);
+      } catch (e) {}
+    }
+
+    // Triumphant warm synth chord on Roulette Lock-In or Arena Crown
+    function playRouletteWinChord(isArenaChampion = false) {
+      if (!state.analogSfx) return;
+      try {
+        const ctx = ensureSfxCtx();
+        if (!ctx) return;
+        const freqs = isArenaChampion
+          ? [261.63, 329.63, 392.00, 523.25, 659.25]
+          : [293.66, 369.99, 440.00, 587.33];
+        freqs.forEach((f, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = idx % 2 === 0 ? 'triangle' : 'sine';
+          const startT = ctx.currentTime + idx * 0.045;
+          osc.frequency.setValueAtTime(f, startT);
+          gain.gain.setValueAtTime(0.09, startT);
+          gain.gain.exponentialRampToValueAtTime(0.0008, startT + 0.45);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(startT);
+          osc.stop(startT + 0.46);
+        });
+      } catch (e) {}
+    }
+
+    // UV Blacklight Tube Ignition / Power-Down SFX
+    function playUvToggleSound(turningOn) {
+      if (!state.analogSfx) return;
+      try {
+        const ctx = ensureSfxCtx();
+        if (!ctx) return;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sawtooth';
+        const now = ctx.currentTime;
+        osc.frequency.setValueAtTime(turningOn ? 110 : 320, now);
+        osc.frequency.exponentialRampToValueAtTime(turningOn ? 440 : 85, now + 0.16);
+        gain.gain.setValueAtTime(0.08, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.19);
+      } catch (e) {}
+    }
+
+    // 60FPS Particle Confetti Burst Canvas Engine
+    const fxCanvas = document.getElementById('fx-particles-canvas');
+    const fxCtx = fxCanvas ? fxCanvas.getContext('2d') : null;
+    let fxParticles = [];
+    let fxAnimRunning = false;
+
+    function resizeFxCanvas() {
+      if (!fxCanvas) return;
+      fxCanvas.width = window.innerWidth;
+      fxCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeFxCanvas);
+    resizeFxCanvas();
+
+    function tickParticles() {
+      if (!fxCtx || !fxCanvas) return;
+      fxCtx.clearRect(0, 0, fxCanvas.width, fxCanvas.height);
+      for (let i = fxParticles.length - 1; i >= 0; i--) {
+        const p = fxParticles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.22;
+        p.rotation += p.vRot;
+        p.alpha -= p.decay;
+        if (p.alpha <= 0) {
+          fxParticles.splice(i, 1);
+        } else {
+          fxCtx.save();
+          fxCtx.globalAlpha = p.alpha;
+          fxCtx.translate(p.x, p.y);
+          fxCtx.rotate(p.rotation);
+          fxCtx.fillStyle = p.color;
+          fxCtx.shadowColor = p.color;
+          fxCtx.shadowBlur = 8;
+          fxCtx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.7);
+          fxCtx.restore();
+        }
+      }
+      if (fxParticles.length > 0) {
+        requestAnimationFrame(tickParticles);
+      } else {
+        fxAnimRunning = false;
+        fxCtx.clearRect(0, 0, fxCanvas.width, fxCanvas.height);
+      }
+    }
+
+    function spawnParticles(c1, c2, c3, count = 64) {
+      if (!fxCanvas || !fxCtx) return;
+      const platterEl = document.getElementById('turntable-plinth-box');
+      let cx = window.innerWidth * 0.35;
+      let cy = window.innerHeight * 0.45;
+      if (platterEl && state.activeTab === 'showcase') {
+        const rect = platterEl.getBoundingClientRect();
+        if (rect.width > 0) {
+          cx = rect.left + rect.width / 2;
+          cy = rect.top + rect.height / 2;
+        }
+      } else {
+        cx = window.innerWidth / 2;
+        cy = window.innerHeight * 0.38;
+      }
+      const palette = [c1 || '#d946ef', c2 || '#06b6d4', c3 || '#facc15', '#38bdf8', '#ffffff'];
+      for (let i = 0; i < count; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 3.2 + Math.random() * 9.5;
+        fxParticles.push({
+          x: cx,
+          y: cy,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed - 2.4,
+          size: 4 + Math.random() * 6,
+          color: palette[i % palette.length],
+          alpha: 1,
+          decay: 0.015 + Math.random() * 0.014,
+          rotation: Math.random() * Math.PI * 2,
+          vRot: (Math.random() - 0.5) * 0.25,
+        });
+      }
+      if (!fxAnimRunning) {
+        fxAnimRunning = true;
+        requestAnimationFrame(tickParticles);
+      }
     }
 
     // Deterministic Discogs Format & Variant Parser (matches detect_pressing_image.py)
@@ -62736,7 +63218,7 @@ python scripts/sync_discogs.py</pre>
       const unlistedIds = Array.from(new Set(prevUnlisted)).filter(id => !todoIds.includes(id) && !doneIds.includes(id)).sort((a, b) => a - b);
 
       return {
-        schema_version: '4.7.0',
+        schema_version: '5.0.0',
         storage_mode: 'portable_inline_html+json',
         updated_at_utc: ts,
         protocol,
@@ -62901,7 +63383,7 @@ python scripts/sync_discogs.py</pre>
 
       if (window.__DISCOGS_COLLECTION__) {
         window.__DISCOGS_COLLECTION__.synced_at_utc = nowStamp;
-        window.__DISCOGS_COLLECTION__.schema_version = '4.7.0';
+        window.__DISCOGS_COLLECTION__.schema_version = '5.0.0';
         window.__DISCOGS_COLLECTION__.records = state.records;
         window.__DISCOGS_COLLECTION__.flattening_queue = fqObj;
         if (window.__DISCOGS_COLLECTION__.profile) {
@@ -62928,7 +63410,7 @@ python scripts/sync_discogs.py</pre>
       if (jsonArea) jsonArea.textContent = JSON.stringify(fqObj);
 
       let rawDoc = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
-      // v4.7: Clean HTML5 <audio> 30s preview deck (no YouTube iframe bridge)
+      // v5.0: Clean HTML5 <audio> 30s preview deck (no YouTube iframe bridge)
 
       const overridesJs = JSON.stringify(state.userOverrides, null, 2);
       const collectionJs = JSON.stringify(window.__DISCOGS_COLLECTION__, null, 2);
@@ -63108,7 +63590,98 @@ python scripts/sync_discogs.py</pre>
       `;
     }
 
-    // Render Hero Turntable Stage & Release Gallery Strip
+
+    // Helper: Get the Stylus-Safe Smart Spin Pool based on state.spinMode
+    function getSmartSpinPool() {
+      const base = state.records.length ? state.records : [];
+      // Always lock out warped ("Need to be done") records from Roulette so the AT-VMN95ML stylus is protected!
+      const safePool = base.filter(r => r.flattening_status !== 'Need to be done');
+      const working = safePool.length ? safePool : base;
+
+      if (state.spinMode === 'eyecandy') {
+        const eyeCandy = working.filter(r => {
+          const pat = (r.wax_spec && r.wax_spec.pattern) || '';
+          return ['splatter', 'galaxy', 'marble', 'split', 'color_in_color'].includes(pat);
+        });
+        return eyeCandy.length ? eyeCandy : working;
+      }
+      return working;
+    }
+
+    function updateSmartSpinModeBadges() {
+      const base = state.records.length ? state.records : [];
+      const safePool = base.filter(r => r.flattening_status !== 'Need to be done');
+      const eyeCandyPool = safePool.filter(r => {
+        const pat = (r.wax_spec && r.wax_spec.pattern) || '';
+        return ['splatter', 'galaxy', 'marble', 'split', 'color_in_color'].includes(pat);
+      });
+
+      const badgeAll = document.getElementById('spin-badge-all');
+      if (badgeAll) badgeAll.textContent = `ALL SAFE (${safePool.length})`;
+      const badgeEye = document.getElementById('spin-badge-eyecandy');
+      if (badgeEye) badgeEye.textContent = `FLEX WAX (${eyeCandyPool.length})`;
+      const badgeShow = document.getElementById('spin-badge-showroom');
+      if (badgeShow) {
+        badgeShow.textContent = state.showroomInterval ? `AUTO ${state.showroomCountdown}s` : 'AUTO 15s';
+      }
+
+      const modePill = document.getElementById('active-spin-mode-pill');
+      if (modePill) {
+        if (state.spinMode === 'showroom') {
+          modePill.textContent = `📺 Showroom Kiosk Active • Auto-Cycle (${state.showroomCountdown}s)`;
+          modePill.className = 'text-[10px] font-mono-tech uppercase px-2.5 py-0.5 rounded-full bg-purple-500/25 text-purple-200 border border-purple-400/50 font-bold animate-pulse';
+        } else if (state.spinMode === 'eyecandy') {
+          modePill.textContent = `🌈 Eye-Candy Variants • ${eyeCandyPool.length} Flex Wax LPs`;
+          modePill.className = 'text-[10px] font-mono-tech uppercase px-2.5 py-0.5 rounded-full bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-400/35 font-bold';
+        } else {
+          modePill.textContent = `🎲 Full Vault Roulette • ${safePool.length} Stylus-Safe LPs`;
+          modePill.className = 'text-[10px] font-mono-tech uppercase px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-400/35 font-bold';
+        }
+      }
+    }
+
+    // Populate Left or Right Crate Wing Card (Matches Mockup image_b09c49.jpg)
+    function populateCrateWingCard(prefix, rec) {
+      if (!rec) return;
+      const wax = rec.wax_spec || {};
+      const c1 = wax.primary_color || '#8b2cf5';
+      const c2 = wax.secondary_color || '#06b6d4';
+
+      const orbEl = document.getElementById(`${prefix}-orb`);
+      if (orbEl) {
+        orbEl.style.background = `radial-gradient(circle, ${c2}, ${c1})`;
+      }
+
+      const pillEl = document.getElementById(`${prefix}-pill`);
+      if (pillEl) {
+        if (rec.flattening_status === 'Done') {
+          pillEl.textContent = 'Flat ✓';
+          pillEl.className = 'px-1.5 py-0.5 rounded bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 text-[9px] font-mono-tech font-bold';
+        } else if (rec.flattening_status === 'Need to be done') {
+          pillEl.textContent = 'Warped ⚠️';
+          pillEl.className = 'px-1.5 py-0.5 rounded bg-rose-500/30 text-rose-200 border border-rose-500/40 text-[9px] font-mono-tech font-bold';
+        } else {
+          pillEl.textContent = String(rec.year || 'LP');
+          pillEl.className = 'px-1.5 py-0.5 rounded bg-white/10 text-slate-300 text-[9px] font-mono-tech font-bold';
+        }
+      }
+
+      const artEl = document.getElementById(`${prefix}-artist`);
+      if (artEl) artEl.textContent = (rec.artist || 'ARTIST').toUpperCase();
+
+      const titEl = document.getElementById(`${prefix}-title`);
+      if (titEl) titEl.textContent = rec.title || 'Album';
+
+      const bdgEl = document.getElementById(`${prefix}-badge`);
+      if (bdgEl) bdgEl.textContent = wax.variant_badge || '12" LP';
+
+      const legacyDisc = document.getElementById(`${prefix}-disc`);
+      if (legacyDisc) legacyDisc.innerHTML = renderDeterministicWaxSVG(rec, 180, true);
+      const legacyLbl = document.getElementById(`${prefix}-label`);
+      if (legacyLbl) legacyLbl.textContent = `${rec.artist} — ${rec.title}`;
+    }
+
+    // Render Hero Turntable Stage, Wing Cards, Ambient Glow & Release Gallery Strip
     function renderHeroStage() {
       const list = state.filteredRecords.length ? state.filteredRecords : state.records;
       if (!list.length) return;
@@ -63119,10 +63692,22 @@ python scripts/sync_discogs.py</pre>
       const prevRec = list[(state.activeIndex - 1 + list.length) % list.length];
       const nextRec = list[(state.activeIndex + 1) % list.length];
 
+      // Update Command Deck Ambient Stage Backdrop Glow to match active record's wax palette
+      const wax = rec.wax_spec || {};
+      const c1 = wax.primary_color || '#8b2cf5';
+      const c2 = wax.secondary_color || '#06b6d4';
+      const c3 = wax.accent_color || '#f43f5e';
+      document.documentElement.style.setProperty('--glow-primary', c1 + '44');
+      document.documentElement.style.setProperty('--glow-secondary', c2 + '40');
+      document.documentElement.style.setProperty('--glow-accent', c3 + '33');
+
       document.getElementById('carousel-counter').textContent = `${state.activeIndex + 1} / ${list.length}`;
 
       const platterEl = document.getElementById('active-platter-disc');
-      platterEl.className = `relative w-[276px] h-[276px] sm:w-[320px] sm:h-[320px] rounded-full shadow-2xl cursor-pointer overflow-hidden ${state.rpm === 45 ? 'spin-45' : 'spin-33'} ${state.isSpinning ? '' : 'spin-paused'}`;
+      const spinClass = state.isSpinningRoulette
+        ? 'spin-roulette-fast'
+        : `${state.rpm === 45 ? 'spin-45' : 'spin-33'} ${state.isSpinning ? '' : 'spin-paused'}`;
+      platterEl.className = `uv-reactive relative w-[272px] h-[272px] sm:w-[318px] sm:h-[318px] rounded-full shadow-2xl cursor-pointer overflow-hidden ${spinClass}`;
 
       if (state.stageMode === 'sleeve') {
         platterEl.innerHTML = renderJacketSleeveHTML(rec);
@@ -63130,26 +63715,19 @@ python scripts/sync_discogs.py</pre>
         platterEl.innerHTML = renderDeterministicWaxSVG(rec, 320, true);
       }
 
-      const prevDisc = document.getElementById('stage-prev-disc');
-      const nextDisc = document.getElementById('stage-next-disc');
-      if (prevDisc && prevRec) {
-        prevDisc.innerHTML = renderDeterministicWaxSVG(prevRec, 180, true);
-        document.getElementById('stage-prev-label').textContent = `${prevRec.artist} — ${prevRec.title}`;
-      }
-      if (nextDisc && nextRec) {
-        nextDisc.innerHTML = renderDeterministicWaxSVG(nextRec, 180, true);
-        document.getElementById('stage-next-label').textContent = `${nextRec.artist} — ${nextRec.title}`;
-      }
+      // Populate Left & Right Crate Wing Cards
+      populateCrateWingCard('stage-prev', prevRec);
+      populateCrateWingCard('stage-next', nextRec);
 
-      document.getElementById('hero-variant-badge').textContent = rec.wax_spec.variant_badge;
+      document.getElementById('hero-variant-badge').textContent = wax.variant_badge || '12" LP';
       const verifiedUrl = getVerifiedPressingPhotoUrl(rec);
       const pillEl = document.getElementById('hero-detection-pill');
       if (verifiedUrl) {
         pillEl.textContent = '✓ Real Pressing Photo Active';
-        pillEl.className = 'px-2.5 py-0.5 rounded-full text-[11px] font-mono-tech bg-emerald-500/15 text-emerald-300 border border-emerald-500/30';
+        pillEl.className = 'px-2.5 py-0.5 rounded-full text-[11px] font-mono-tech font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30';
       } else {
         pillEl.textContent = 'Sleeve-Only on Discogs • Wax Ring';
-        pillEl.className = 'px-2.5 py-0.5 rounded-full text-[11px] font-mono-tech bg-slate-800 text-slate-300 border border-white/10';
+        pillEl.className = 'px-2.5 py-0.5 rounded-full text-[11px] font-mono-tech font-bold bg-slate-800 text-slate-300 border border-white/10';
       }
 
       document.getElementById('hero-title').textContent = rec.title;
@@ -63172,27 +63750,434 @@ python scripts/sync_discogs.py</pre>
       if (cycleBtn) {
         if (flatStatus === 'Not Listed') {
           cycleBtn.textContent = '+ 🔥 Queue';
-          cycleBtn.className = 'shrink-0 px-2 py-0.5 rounded bg-amber-500/15 hover:bg-amber-500/25 text-[10px] font-mono-tech text-amber-300 border border-amber-500/30 transition';
+          cycleBtn.className = 'shrink-0 px-2 py-0.5 rounded bg-amber-500/15 hover:bg-amber-500/25 text-[10px] font-mono-tech font-bold text-amber-300 border border-amber-500/30 transition';
         } else if (flatStatus === 'Need to be done') {
           cycleBtn.textContent = '✓ Mark Done';
-          cycleBtn.className = 'shrink-0 px-2 py-0.5 rounded bg-emerald-500/20 hover:bg-emerald-500/30 text-[10px] font-mono-tech text-emerald-300 border border-emerald-500/30 transition';
+          cycleBtn.className = 'shrink-0 px-2 py-0.5 rounded bg-emerald-500/20 hover:bg-emerald-500/30 text-[10px] font-mono-tech font-bold text-emerald-300 border border-emerald-500/30 transition';
         } else {
           cycleBtn.textContent = '↺ Unlist';
-          cycleBtn.className = 'shrink-0 px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-[10px] font-mono-tech text-slate-300 border border-white/10 transition';
+          cycleBtn.className = 'shrink-0 px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-[10px] font-mono-tech font-bold text-slate-300 border border-white/10 transition';
         }
       }
 
       document.getElementById('hero-discogs-link').href = rec.discogs_url || `https://www.discogs.com/release/${rec.release_id}`;
 
-      // Update modal CLI preview with active record ID
       const syncLogEl = document.getElementById('sync-log-output');
       if (syncLogEl) {
         syncLogEl.textContent = `# Daily Incremental Delta Sync (Fast-Paths Unchanged LPs):\ncd C:\\DiscogsCollection\\discogs_collection\npython scripts/sync_discogs.py\n\n# Force Resync Active Turntable Record (#${rec.release_id} — ${rec.artist}):\npython scripts/sync_discogs.py --resync ${rec.release_id}`;
       }
 
-      renderHeroGalleryStrip(rec);
-      renderStreamingDeck(rec);
-      updateStreamingQuickLinks(rec);
+      updateSmartSpinModeBadges();
+
+      // During rapid kinetic roulette ticks, skip heavy gallery/tracklist DOM rebuilds until lock-in
+      if (!state.isSpinningRoulette) {
+        renderHeroGalleryStrip(rec);
+        renderStreamingDeck(rec);
+        updateStreamingQuickLinks(rec);
+      }
+    }
+
+    // Trigger Kinetic "SPIN THE CRATE" Roulette Animation on the Unified Stage
+    function triggerKineticCrateSpin() {
+      if (state.isSpinningRoulette) return;
+      const pool = getSmartSpinPool();
+      if (!pool.length) return;
+
+      // Ensure all records in filteredRecords can show the winner, or reset filter if current filter excludes pool
+      const list = state.filteredRecords.length ? state.filteredRecords : state.records;
+      const candidateSet = new Set(pool.map(r => Number(r.release_id)));
+      let validIndices = [];
+      list.forEach((r, idx) => {
+        if (candidateSet.has(Number(r.release_id))) validIndices.push(idx);
+      });
+      if (!validIndices.length) {
+        // Reset crate grid filter to 'all' so any Smart Spin Mode record can lock onto the stage
+        state.filter = 'all';
+        state.searchQuery = '';
+        const sIn = document.getElementById('search-input');
+        if (sIn) sIn.value = '';
+        applyFiltersAndSort();
+        state.filteredRecords.forEach((r, idx) => {
+          if (candidateSet.has(Number(r.release_id))) validIndices.push(idx);
+        });
+      }
+      if (!validIndices.length) {
+        validIndices = list.map((_, i) => i);
+      }
+
+      state.isSpinningRoulette = true;
+      const totalSteps = 22 + Math.floor(Math.random() * 8);
+      let step = 0;
+
+      // Lift tonearm during crate spin
+      const armEl = document.getElementById('turntable-tonearm');
+      if (armEl) {
+        armEl.className = 'tonearm-pivot tonearm-parked absolute top-3.5 right-3.5 w-32 h-64 sm:w-[140px] sm:h-[280px] pointer-events-none z-30';
+      }
+
+      const prevWing = document.getElementById('stage-prev-card');
+      const nextWing = document.getElementById('stage-next-card');
+      const velReadout = document.getElementById('reel-velocity-readout');
+
+      function stepRoulette() {
+        step++;
+        const progress = step / totalSteps;
+        // Pick next index in validIndices
+        const pickIdx = validIndices[Math.floor(Math.random() * validIndices.length)];
+        state.activeIndex = pickIdx;
+
+        // Pitch scales down as reel decelerates
+        const pitch = 1.45 - progress * 0.65;
+        playCrateTickSound(pitch);
+
+        const rpmSim = Math.max(4.2, (1 - progress) * 96).toFixed(1);
+        if (velReadout) {
+          velReadout.textContent = `Velocity: ${rpmSim} RPM • Spinning Crate...`;
+          velReadout.className = 'text-[11px] font-mono-tech font-bold text-fuchsia-300 animate-pulse';
+        }
+
+        if (prevWing && nextWing) {
+          prevWing.classList.toggle('wing-tick-left', step % 2 === 0);
+          nextWing.classList.toggle('wing-tick-right', step % 2 === 1);
+        }
+
+        renderHeroStage();
+
+        if (step < totalSteps) {
+          // Exponential ease-out delay from 38ms up to 240ms
+          const nextDelay = Math.round(38 + Math.pow(progress, 2.35) * 210);
+          setTimeout(stepRoulette, nextDelay);
+        } else {
+          // Winner Locked In!
+          state.isSpinningRoulette = false;
+          if (prevWing) prevWing.classList.remove('wing-tick-left');
+          if (nextWing) nextWing.classList.remove('wing-tick-right');
+
+          if (armEl && state.isSpinning) {
+            armEl.className = 'tonearm-pivot tonearm-engaged absolute top-3.5 right-3.5 w-32 h-64 sm:w-[140px] sm:h-[280px] pointer-events-none z-30';
+          }
+
+          const activeList = state.filteredRecords.length ? state.filteredRecords : state.records;
+          const winner = activeList[state.activeIndex];
+
+          playNeedleDropSound();
+          setTimeout(() => playRouletteWinChord(false), 90);
+
+          if (winner) {
+            const wax = winner.wax_spec || {};
+            spawnParticles(wax.primary_color, wax.secondary_color, wax.accent_color, 68);
+            if (velReadout) {
+              velReadout.textContent = `Locked: #${winner.release_id} • ${winner.artist}`;
+              velReadout.className = 'text-[11px] font-mono-tech font-bold text-emerald-300';
+            }
+            showToast(`🎰 Spin Winner: ${winner.artist} — "${winner.title}" (${wax.variant_badge || 'LP'})`);
+          }
+
+          renderHeroStage();
+          renderCrateGrid();
+        }
+      }
+
+      stepRoulette();
+    }
+
+    // Set Smart Spin Mode ('all' | 'showroom' | 'eyecandy')
+    function setSmartSpinMode(mode, autoTriggerSpin = true) {
+      // Clear any active Showroom Kiosk timers first
+      if (state.showroomInterval) {
+        clearInterval(state.showroomInterval);
+        state.showroomInterval = null;
+      }
+      if (state.showroomTickInterval) {
+        clearInterval(state.showroomTickInterval);
+        state.showroomTickInterval = null;
+      }
+
+      state.spinMode = mode;
+
+      document.querySelectorAll('.spin-mode-btn').forEach(btn => {
+        const m = btn.getAttribute('data-spin-mode');
+        const isAct = m === mode;
+        if (isAct) {
+          btn.className = 'spin-mode-btn text-left p-2.5 rounded-2xl border-2 transition-all bg-cyan-500/15 border-cyan-400 text-white shadow-[0_0_20px_rgba(6,182,212,0.25)]';
+        } else {
+          btn.className = 'spin-mode-btn text-left p-2.5 rounded-2xl border transition-all bg-slate-950/80 border-white/15 text-slate-300 hover:border-cyan-400/50 hover:text-white';
+        }
+      });
+
+      if (mode === 'showroom') {
+        state.showroomCountdown = 15;
+        // Automatically enable UV Blacklight for Showroom Kiosk mode if not already on
+        if (!state.uvBlacklight) {
+          toggleUvBlacklight(true);
+        }
+        state.showroomTickInterval = setInterval(() => {
+          if (!state.isSpinningRoulette) {
+            state.showroomCountdown--;
+            if (state.showroomCountdown <= 0) {
+              state.showroomCountdown = 15;
+              triggerKineticCrateSpin();
+            }
+            updateSmartSpinModeBadges();
+          }
+        }, 1000);
+        showToast('📺 Showroom Kiosk Active: Auto-spinning a new pressing every 15s with UV Blacklight!');
+      }
+
+      updateSmartSpinModeBadges();
+      if (autoTriggerSpin) {
+        triggerKineticCrateSpin();
+      }
+    }
+
+    // Toggle UV Blacklight Mode
+    function toggleUvBlacklight(forceState) {
+      state.uvBlacklight = typeof forceState === 'boolean' ? forceState : !state.uvBlacklight;
+      document.body.classList.toggle('uv-blacklight', state.uvBlacklight);
+      const uvBtn = document.getElementById('btn-uv-toggle');
+      if (uvBtn) {
+        uvBtn.textContent = state.uvBlacklight ? '🟣 UV Blacklight: ON' : '🟣 UV Blacklight: Off';
+        uvBtn.className = state.uvBlacklight
+          ? 'px-2.5 py-1.5 rounded-xl text-xs font-black border-2 border-fuchsia-400 bg-fuchsia-500/30 text-white shadow-[0_0_20px_rgba(217,70,239,0.5)] transition-all'
+          : 'px-2.5 py-1.5 rounded-xl text-xs font-bold border border-purple-400/40 bg-purple-500/15 text-purple-200 hover:bg-purple-500/25 transition-all';
+      }
+      playUvToggleSound(state.uvBlacklight);
+      showToast(state.uvBlacklight ? '🟣 UV Blacklight ON — Neon reactive wax shader active!' : '🟣 UV Blacklight Off — Standard studio lighting restored.');
+    }
+
+    // =========================================================================
+    // v5.0 VARIANT CLASH ARENA (4-LP HEAD-TO-HEAD KNOCKOUT BRACKET)
+    // =========================================================================
+    function getArenaCandidatePool() {
+      const base = state.records.length ? state.records : [];
+      const safe = base.filter(r => r.flattening_status !== 'Need to be done');
+      const working = safe.length >= 4 ? safe : base;
+
+      if (state.arenaPoolMode === 'eyecandy') {
+        const ec = working.filter(r => ['splatter', 'galaxy', 'marble', 'split', 'color_in_color'].includes((r.wax_spec && r.wax_spec.pattern) || ''));
+        if (ec.length >= 4) return ec;
+      } else if (state.arenaPoolMode === 'flat') {
+        const fl = working.filter(r => r.flattening_status === 'Done');
+        if (fl.length >= 4) return fl;
+      }
+      return working;
+    }
+
+    function initArenaBracket() {
+      const pool = getArenaCandidatePool();
+      if (pool.length < 4) return;
+      const shuffled = pool.slice().sort(() => Math.random() - 0.5);
+      state.arenaBracket = shuffled.slice(0, 4);
+      state.arenaWinners = [];
+      state.arenaStage = 0;
+      state.arenaChampion = null;
+      renderArenaView();
+    }
+
+    function renderArenaContenderCard(rec, side) {
+      if (!rec) return '';
+      const wax = rec.wax_spec || {};
+      const verifiedPhoto = Boolean(getVerifiedPressingPhotoUrl(rec));
+      const flatLabel = rec.flattening_status === 'Done'
+        ? '✓ 130°F Flat Certified'
+        : '🛡️ Stylus Safe';
+      const flatClass = rec.flattening_status === 'Done'
+        ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30'
+        : 'bg-cyan-500/15 text-cyan-300 border-cyan-500/30';
+
+      return `
+        <div>
+          <div class="flex flex-wrap items-center justify-between gap-2 text-xs mb-3">
+            <div class="flex flex-wrap items-center gap-1.5">
+              <span class="px-2.5 py-0.5 rounded-full font-mono-tech font-bold bg-purple-500/20 text-purple-200 border border-purple-400/35">
+                ${wax.variant_badge || '12" LP'}
+              </span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-mono-tech font-bold border ${flatClass}">
+                ${flatLabel}
+              </span>
+            </div>
+            <span class="font-mono-tech font-black text-emerald-400">$${Number(rec.estimated_value_usd || 35).toFixed(2)}</span>
+          </div>
+
+          <!-- Dual Visual Showcase: Real Jacket Cover + Spinning Pressing Disc -->
+          <div class="relative h-44 rounded-2xl bg-gradient-to-b from-slate-900/90 to-[#070910] border border-white/10 flex items-center justify-center px-4 overflow-hidden my-3">
+            <div class="relative w-32 h-32 z-10 shadow-2xl -ml-6 transition-transform duration-300 group-hover:-translate-x-2 holo-sleeve rounded-xl overflow-hidden">
+              ${renderJacketSleeveHTML(rec)}
+            </div>
+            <div class="uv-reactive relative w-32 h-32 -ml-8 z-20 rounded-full shadow-2xl spin-33 transition-transform duration-300 group-hover:translate-x-2">
+              ${renderDeterministicWaxSVG(rec, 128, true)}
+            </div>
+            <span class="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-full text-[10px] font-mono-tech font-bold ${verifiedPhoto ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : 'bg-slate-900/90 text-cyan-300 border border-white/10'} z-30">
+              ${verifiedPhoto ? '📸 Real Pressing Photo' : '⚙ Wax Shader'}
+            </span>
+            <span class="absolute bottom-2 right-2.5 text-[10px] font-mono-tech text-slate-400">#${rec.release_id}</span>
+          </div>
+
+          <div class="mt-2">
+            <p class="text-xs font-extrabold uppercase tracking-wider text-cyan-400 truncate">${rec.artist} • ${rec.year || 'LP'}</p>
+            <h3 class="text-lg sm:text-xl font-black text-white leading-snug mt-0.5 line-clamp-1">${rec.title}</h3>
+            <p class="text-[11px] font-mono-tech text-slate-400 mt-1 truncate">${rec.label} (${rec.catno}) • ${rec.format_string}</p>
+          </div>
+        </div>
+
+        <div class="mt-4 pt-3 border-t border-white/10 flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+          <button
+            type="button"
+            data-arena-audition="${rec.release_id}"
+            class="px-3 py-2.5 rounded-xl font-mono-tech font-bold text-xs bg-slate-900 hover:bg-slate-800 text-cyan-300 border border-cyan-500/30 transition flex items-center justify-center gap-1.5 shrink-0"
+            title="Audition a 30-second studio track preview before voting"
+          >
+            <span>🎧 Audition 30s</span>
+          </button>
+          <button
+            type="button"
+            data-arena-vote="${side}"
+            class="flex-1 py-2.5 px-4 rounded-xl font-black text-xs uppercase tracking-wider text-center bg-gradient-to-r ${side === 'left' ? 'from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950' : 'from-fuchsia-600 to-purple-600 hover:from-fuchsia-500 hover:to-purple-500 text-white'} shadow-lg group-hover:scale-[1.01] transition-transform"
+          >
+            ${state.arenaStage === 3 ? '💿 Load Champion on Turntable Stage' : `⚡ Crown ${rec.artist} as Winner`}
+          </button>
+        </div>
+      `;
+    }
+
+    function renderArenaView() {
+      const badgeEl = document.getElementById('arena-round-badge');
+      const leftEl = document.getElementById('arena-card-left');
+      const rightEl = document.getElementById('arena-card-right');
+      const summaryEl = document.getElementById('arena-bracket-summary');
+      if (!badgeEl || !leftEl || !rightEl || !summaryEl) return;
+
+      if (!state.arenaBracket || state.arenaBracket.length < 4) {
+        initArenaBracket();
+        return;
+      }
+
+      let leftRec = null;
+      let rightRec = null;
+
+      if (state.arenaStage === 0) {
+        badgeEl.textContent = 'Semifinal 1 of 2';
+        badgeEl.className = 'px-3.5 py-1.5 rounded-xl font-mono-tech text-xs font-extrabold bg-cyan-500/20 text-cyan-300 border border-cyan-400/40';
+        leftRec = state.arenaBracket[0];
+        rightRec = state.arenaBracket[1];
+      } else if (state.arenaStage === 1) {
+        badgeEl.textContent = 'Semifinal 2 of 2';
+        badgeEl.className = 'px-3.5 py-1.5 rounded-xl font-mono-tech text-xs font-extrabold bg-purple-500/20 text-purple-300 border border-purple-400/40';
+        leftRec = state.arenaBracket[2];
+        rightRec = state.arenaBracket[3];
+      } else if (state.arenaStage === 2) {
+        badgeEl.textContent = '🏆 Championship Final';
+        badgeEl.className = 'px-3.5 py-1.5 rounded-xl font-mono-tech text-xs font-extrabold bg-amber-500/25 text-amber-200 border border-amber-400/50 animate-pulse';
+        leftRec = state.arenaWinners[0];
+        rightRec = state.arenaWinners[1];
+      } else {
+        badgeEl.textContent = '👑 Champion Crowned!';
+        badgeEl.className = 'px-3.5 py-1.5 rounded-xl font-mono-tech text-xs font-extrabold bg-emerald-500/25 text-emerald-200 border border-emerald-400/50';
+        leftRec = state.arenaChampion;
+        rightRec = state.arenaChampion;
+      }
+
+      if (leftRec && rightRec) {
+        leftEl.innerHTML = renderArenaContenderCard(leftRec, 'left');
+        rightEl.innerHTML = renderArenaContenderCard(rightRec, 'right');
+
+        leftEl.onclick = (e) => {
+          const audBtn = e.target.closest('[data-arena-audition]');
+          if (audBtn) {
+            e.stopPropagation();
+            playAlbumTrackAtIndex(leftRec, 0);
+            showToast(`🎧 Auditioning 30s preview: ${leftRec.artist} — "${leftRec.title}"`);
+            return;
+          }
+          advanceArenaBracket(leftRec);
+        };
+        rightEl.onclick = (e) => {
+          const audBtn = e.target.closest('[data-arena-audition]');
+          if (audBtn) {
+            e.stopPropagation();
+            playAlbumTrackAtIndex(rightRec, 0);
+            showToast(`🎧 Auditioning 30s preview: ${rightRec.artist} — "${rightRec.title}"`);
+            return;
+          }
+          advanceArenaBracket(rightRec);
+        };
+      }
+
+      summaryEl.innerHTML = `
+        <div class="bg-slate-950/90 p-3.5 rounded-2xl border border-white/10">
+          <p class="text-[10px] font-mono-tech font-bold uppercase text-cyan-400">Semifinal 1 Winner</p>
+          <p class="font-extrabold text-white mt-1 truncate">${state.arenaWinners[0] ? state.arenaWinners[0].artist + ' — ' + state.arenaWinners[0].title : 'Battle in progress...'}</p>
+        </div>
+        <div class="bg-slate-950/90 p-3.5 rounded-2xl border border-white/10">
+          <p class="text-[10px] font-mono-tech font-bold uppercase text-fuchsia-400">Semifinal 2 Winner</p>
+          <p class="font-extrabold text-white mt-1 truncate">${state.arenaWinners[1] ? state.arenaWinners[1].artist + ' — ' + state.arenaWinners[1].title : 'Waiting for Semifinal 2...'}</p>
+        </div>
+        <div class="bg-slate-950/90 p-3.5 rounded-2xl border ${state.arenaChampion ? 'border-amber-400/60 bg-amber-500/10' : 'border-amber-500/30'} flex items-center justify-between gap-2">
+          <div class="min-w-0">
+            <p class="text-[10px] font-mono-tech font-bold uppercase text-amber-300">👑 Tonight's Turntable Champion</p>
+            <p class="font-black text-amber-200 mt-1 truncate">${state.arenaChampion ? state.arenaChampion.artist + ' — ' + state.arenaChampion.title : 'Win 2 rounds to crown!'}</p>
+          </div>
+          ${state.arenaChampion ? `
+            <button type="button" id="btn-arena-load-champ" class="shrink-0 px-3 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs transition shadow-md">
+              Spin Winner →
+            </button>
+          ` : ''}
+        </div>
+      `;
+
+      const loadChampBtn = document.getElementById('btn-arena-load-champ');
+      if (loadChampBtn && state.arenaChampion) {
+        loadChampBtn.onclick = () => jumpToRecordOnTurntable(state.arenaChampion.release_id);
+      }
+    }
+
+    function advanceArenaBracket(winnerRec) {
+      if (!winnerRec) return;
+      if (state.arenaStage === 0) {
+        playCrateTickSound(1.3);
+        state.arenaWinners[0] = winnerRec;
+        state.arenaStage = 1;
+        renderArenaView();
+      } else if (state.arenaStage === 1) {
+        playCrateTickSound(1.45);
+        state.arenaWinners[1] = winnerRec;
+        state.arenaStage = 2;
+        renderArenaView();
+      } else if (state.arenaStage === 2) {
+        state.arenaChampion = winnerRec;
+        state.arenaStage = 3;
+        playNeedleDropSound();
+        setTimeout(() => playRouletteWinChord(true), 80);
+        const wax = winnerRec.wax_spec || {};
+        spawnParticles(wax.primary_color, wax.secondary_color, wax.accent_color, 85);
+        renderArenaView();
+        showToast(`👑 Variant Clash Champion: ${winnerRec.artist} — "${winnerRec.title}"! Click again to load on Turntable.`);
+      } else {
+        jumpToRecordOnTurntable(winnerRec.release_id);
+      }
+    }
+
+    function jumpToRecordOnTurntable(releaseId) {
+      const rid = Number(releaseId);
+      let idx = state.filteredRecords.findIndex(r => Number(r.release_id) === rid);
+      if (idx === -1) {
+        state.filter = 'all';
+        state.searchQuery = '';
+        const sIn = document.getElementById('search-input');
+        if (sIn) sIn.value = '';
+        applyFiltersAndSort();
+        idx = state.filteredRecords.findIndex(r => Number(r.release_id) === rid);
+      }
+      if (idx !== -1) {
+        state.activeIndex = idx;
+      }
+      if (typeof window.__setMainVaultTab === 'function') {
+        window.__setMainVaultTab('showcase');
+      }
+      playNeedleDropSound();
+      renderHeroStage();
+      renderCrateGrid();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     // Curated album metadata & YouTube Music / YouTube stream map (100% Embedded YouTube Player — zero iTunes 30s previews)
@@ -67088,7 +68073,7 @@ python scripts/sync_discogs.py</pre>
 };
 
     // ============================================================================
-    // v4.7 CLEAN 30-SECOND HTML5 AUDIO PREVIEW PLAYER + YT MUSIC & SPOTIFY LINKS
+    // v5.0 CLEAN 30-SECOND HTML5 AUDIO PREVIEW PLAYER + YT MUSIC & SPOTIFY LINKS
     // - Zero YouTube IFrame / Error 153 boxes (100% native HTML5 <audio> 30s clips)
     // - Zero autoplay on page load (plays ONLY when user clicks Play or a track row)
     // - Direct Album Links to YouTube Music (playlist?list=...) & Spotify
@@ -68360,7 +69345,7 @@ python scripts/sync_discogs.py</pre>
           visualHtml = `
             <div class="relative w-full h-52 bg-gradient-to-b from-slate-900/90 to-[#090b12] flex items-center justify-center p-4 overflow-hidden">
               ${flatPill}
-              <div class="w-40 h-40 rounded-full shadow-2xl hover-spin transition-transform duration-300 group-hover:scale-105">
+              <div class="uv-reactive w-40 h-40 rounded-full shadow-2xl hover-spin transition-transform duration-300 group-hover:scale-105">
                 ${renderDeterministicWaxSVG(rec, 160, true)}
               </div>
               <div class="absolute bottom-2.5 left-2.5 w-14 h-14 rounded-lg shadow-lg overflow-hidden border border-white/20 z-20">
@@ -68378,7 +69363,7 @@ python scripts/sync_discogs.py</pre>
               <div class="w-40 h-40 shadow-2xl">
                 ${renderJacketSleeveHTML(rec)}
               </div>
-              <div class="absolute bottom-2.5 right-2.5 w-16 h-16 rounded-full shadow-2xl hover-spin border border-white/20 z-20">
+              <div class="absolute bottom-2.5 right-2.5 uv-reactive w-16 h-16 rounded-full shadow-2xl hover-spin border border-white/20 z-20">
                 ${renderDeterministicWaxSVG(rec, 68, true)}
               </div>
             </div>
@@ -68390,7 +69375,7 @@ python scripts/sync_discogs.py</pre>
               <div class="relative w-32 h-32 z-10 shadow-2xl -ml-8 transition-transform group-hover:-translate-x-1">
                 ${renderJacketSleeveHTML(rec)}
               </div>
-              <div class="relative w-32 h-32 -ml-10 z-20 rounded-full shadow-2xl hover-spin transition-transform group-hover:translate-x-3">
+              <div class="relative uv-reactive w-32 h-32 -ml-10 z-20 rounded-full shadow-2xl hover-spin transition-transform group-hover:translate-x-3">
                 ${renderDeterministicWaxSVG(rec, 130, true)}
               </div>
               <span class="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-full text-[10px] font-mono-tech ${verifiedPressingUrl ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : 'bg-slate-900/90 text-cyan-300 border border-white/10'} z-30">
@@ -68846,27 +69831,39 @@ python scripts/sync_discogs.py</pre>
 
       loadExternalJsonIfNewer();
 
-      // View Tabs
+      // View Tabs (v5.0 Command Deck Navigation + Variant Clash Arena)
       const setTab = (tab) => {
         state.activeTab = tab;
         document.getElementById('view-showcase').classList.toggle('hidden', tab !== 'showcase');
+        const arenaEl = document.getElementById('view-arena');
+        if (arenaEl) arenaEl.classList.toggle('hidden', tab !== 'arena');
         document.getElementById('view-pipeline').classList.toggle('hidden', tab !== 'pipeline');
         document.getElementById('view-flattening').classList.toggle('hidden', tab !== 'flattening');
 
         const tabs = [
           ['showcase', 'tab-btn-showcase'],
+          ['arena', 'tab-btn-arena'],
           ['pipeline', 'tab-btn-pipeline'],
           ['flattening', 'tab-btn-flattening'],
         ];
         for (const [tName, btnId] of tabs) {
           const b = document.getElementById(btnId);
+          if (!b) continue;
           b.className = (tName === tab)
-            ? 'px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-gradient-to-r from-cyan-500 to-purple-600 text-white shadow'
-            : 'px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-white';
+            ? 'px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap bg-gradient-to-r from-fuchsia-600 to-cyan-600 text-white shadow-md'
+            : 'px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap text-slate-300 hover:text-white hover:bg-white/5';
+        }
+        if (tab === 'arena') {
+          renderArenaView();
         }
       };
+      window.__setMainVaultTab = setTab;
 
       document.getElementById('tab-btn-showcase').addEventListener('click', () => setTab('showcase'));
+      const tabArenaBtn = document.getElementById('tab-btn-arena');
+      if (tabArenaBtn) tabArenaBtn.addEventListener('click', () => setTab('arena'));
+      const heroArenaBtn = document.getElementById('btn-hero-open-arena');
+      if (heroArenaBtn) heroArenaBtn.addEventListener('click', () => setTab('arena'));
       document.getElementById('tab-btn-pipeline').addEventListener('click', () => setTab('pipeline'));
       document.getElementById('tab-btn-flattening').addEventListener('click', () => setTab('flattening'));
       const flatCard = document.getElementById('kpi-flattening-card');
@@ -68896,33 +69893,91 @@ python scripts/sync_discogs.py</pre>
       document.getElementById('mode-btn-sleeve').addEventListener('click', () => setThumbMode('sleeve'));
       document.getElementById('mobile-mode-select').addEventListener('change', (e) => setThumbMode(e.target.value));
 
-      // Carousel Transport
+      // Carousel & Kinetic Spin-the-Crate Transport (v5.0)
       document.getElementById('btn-carousel-prev').addEventListener('click', () => {
+        playCrateTickSound(0.92);
         state.activeIndex--;
         renderHeroStage();
         renderCrateGrid();
       });
       document.getElementById('btn-carousel-next').addEventListener('click', () => {
+        playCrateTickSound(1.08);
         state.activeIndex++;
         renderHeroStage();
         renderCrateGrid();
       });
       document.getElementById('stage-prev-card').addEventListener('click', () => {
+        playCrateTickSound(0.92);
         state.activeIndex--;
         renderHeroStage();
         renderCrateGrid();
       });
       document.getElementById('stage-next-card').addEventListener('click', () => {
+        playCrateTickSound(1.08);
         state.activeIndex++;
         renderHeroStage();
         renderCrateGrid();
       });
       document.getElementById('btn-carousel-random').addEventListener('click', () => {
-        const len = state.filteredRecords.length || 1;
-        state.activeIndex = Math.floor(Math.random() * len);
-        renderHeroStage();
-        renderCrateGrid();
+        triggerKineticCrateSpin();
       });
+
+      // Smart Spin Mode Cards (Full Vault Roulette | Showroom Kiosk | Eye-Candy Variants)
+      document.querySelectorAll('.spin-mode-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const mode = btn.getAttribute('data-spin-mode') || 'all';
+          if (mode === 'showroom' && state.spinMode === 'showroom' && state.showroomInterval) {
+            setSmartSpinMode('all', false);
+            showToast('📺 Showroom Kiosk Paused — Returned to Full Vault Roulette.');
+            return;
+          }
+          setSmartSpinMode(mode, true);
+        });
+      });
+
+      // UV Blacklight & Analog SFX Header Toggles
+      const uvBtnEl = document.getElementById('btn-uv-toggle');
+      if (uvBtnEl) {
+        uvBtnEl.addEventListener('click', () => toggleUvBlacklight());
+      }
+      const sfxBtnEl = document.getElementById('btn-sfx-toggle');
+      if (sfxBtnEl) {
+        sfxBtnEl.addEventListener('click', () => {
+          state.analogSfx = !state.analogSfx;
+          sfxBtnEl.textContent = state.analogSfx ? '🔊 Analog SFX: On' : '🔇 Analog SFX: Off';
+          sfxBtnEl.className = state.analogSfx
+            ? 'px-2.5 py-1.5 rounded-xl text-xs font-bold border border-cyan-400/40 bg-cyan-500/15 text-cyan-200 hover:bg-cyan-500/25 transition-all'
+            : 'px-2.5 py-1.5 rounded-xl text-xs font-bold border border-white/10 bg-slate-900 text-slate-400 hover:text-white transition-all';
+          if (state.analogSfx) playCrateTickSound(1.15);
+          showToast(state.analogSfx ? '🔊 Web Audio Analog SFX Enabled' : '🔇 Web Audio Analog SFX Muted');
+        });
+      }
+
+      // Variant Clash Arena Controls
+      const newBracketBtn = document.getElementById('btn-arena-new-bracket');
+      if (newBracketBtn) {
+        newBracketBtn.addEventListener('click', () => {
+          playCrateTickSound(1.2);
+          initArenaBracket();
+          showToast('⚔️ Dealt a fresh 4-LP Variant Clash Bracket!');
+        });
+      }
+      document.querySelectorAll('.arena-pool-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          state.arenaPoolMode = btn.getAttribute('data-arena-pool') || 'all';
+          document.querySelectorAll('.arena-pool-btn').forEach(b => {
+            const act = b.getAttribute('data-arena-pool') === state.arenaPoolMode;
+            b.className = act
+              ? 'arena-pool-btn px-2.5 py-1 rounded-lg font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30'
+              : 'arena-pool-btn px-2.5 py-1 rounded-lg font-semibold text-slate-400 hover:text-white';
+          });
+          playCrateTickSound(1.1);
+          initArenaBracket();
+        });
+      });
+
+      // Initialize Arena Bracket on boot
+      initArenaBracket();
 
       // Quick Flattening Status Cycle on Hero Turntable Stage
       document.getElementById('btn-hero-flatten-cycle').addEventListener('click', () => {
@@ -69064,8 +70119,8 @@ python scripts/sync_discogs.py</pre>
         document.querySelectorAll('.filter-chip').forEach(chip => {
           const active = chip.getAttribute('data-filter') === state.filter;
           chip.className = active
-            ? 'filter-chip shrink-0 px-3 py-1 rounded-full text-xs font-semibold bg-cyan-500 text-slate-950'
-            : 'filter-chip shrink-0 px-3 py-1 rounded-full text-xs font-semibold bg-slate-900 text-slate-300 hover:text-white border border-white/10';
+            ? 'filter-chip shrink-0 px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-fuchsia-600 to-cyan-600 text-white shadow'
+            : 'filter-chip shrink-0 px-3 py-1 rounded-full text-xs font-bold bg-slate-950/80 text-slate-300 hover:text-white border border-white/10';
         });
         applyFiltersAndSort();
       });
@@ -69199,7 +70254,7 @@ python scripts/sync_discogs.py</pre>
         updateSessionEditIndicators();
         modal.classList.remove('hidden');
       });
-      // v4.7 3D Flip Deck & Embedded YouTube Music Audio Player Event Listeners
+      // v5.0 3D Flip Deck & Embedded YouTube Music Audio Player Event Listeners
       ensureYouTubeIframeApiLoaded();
 
       const audioEl = document.getElementById('vault-preview-audio');
@@ -69238,12 +70293,19 @@ python scripts/sync_discogs.py</pre>
       document.getElementById('btn-card-flip-top').addEventListener('click', () => toggleHeroCardFlip());
 
       window.addEventListener('keydown', (e) => {
-        if (e.key && e.key.toLowerCase() === 'f' && !e.ctrlKey && !e.metaKey && !e.altKey) {
-          const tag = (document.activeElement && document.activeElement.tagName) ? document.activeElement.tagName.toLowerCase() : '';
-          if (tag !== 'input' && tag !== 'textarea' && tag !== 'select') {
-            e.preventDefault();
-            toggleHeroCardFlip();
-          }
+        const tag = (document.activeElement && document.activeElement.tagName) ? document.activeElement.tagName.toLowerCase() : '';
+        if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+        if (e.ctrlKey || e.metaKey || e.altKey) return;
+
+        if (e.code === 'Space' && state.activeTab === 'showcase') {
+          e.preventDefault();
+          triggerKineticCrateSpin();
+        } else if (e.key && e.key.toLowerCase() === 'f') {
+          e.preventDefault();
+          toggleHeroCardFlip();
+        } else if (e.key && e.key.toLowerCase() === 'u') {
+          e.preventDefault();
+          toggleUvBlacklight();
         }
       });
 

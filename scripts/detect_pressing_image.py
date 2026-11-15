@@ -1494,7 +1494,7 @@ def build_flattening_queue_payload(
 
     ts = updated_at_utc or str(base_queue.get("updated_at_utc") or "") or _dt.datetime.now(_dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     return {
-        "schema_version": "4.7.0",
+        "schema_version": "5.0.0",
         "storage_mode": "portable_inline_html+json",
         "updated_at_utc": ts,
         "protocol": protocol,
@@ -1541,7 +1541,7 @@ def reconcile_flattening_state(
 
 
 # ==============================================================================
-# DELTA SYNC ENGINE & LIVE TERMINAL UI / TURNTABLE THROBBER (v4.7)
+# DELTA SYNC ENGINE & LIVE TERMINAL UI / TURNTABLE THROBBER (v5.0)
 # ==============================================================================
 
 import datetime as _dt
@@ -7872,7 +7872,7 @@ class VaultTerminalUI:
         "▂▄▆█▇▅▃",
     )
 
-    def __init__(self, title: str = "KRUNKED // VINYL VAULT", subtitle: str = "DELTA SYNC ENGINE v4.7") -> None:
+    def __init__(self, title: str = "KRUNKED // VINYL VAULT", subtitle: str = "DELTA SYNC ENGINE v5.0") -> None:
         self.title = title
         self.subtitle = subtitle
         self.start_time = _time.perf_counter()
