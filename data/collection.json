@@ -4,7 +4,7 @@
   "source_of_truth": "https://www.discogs.com/user/krunked/collection",
   "api_documentation": "https://www.discogs.com/developers",
   "username": "krunked",
-  "synced_at_utc": "2026-11-15T04:19:22Z",
+  "synced_at_utc": "2026-11-15T04:46:29Z",
   "profile": {
     "username": "krunked",
     "owner_name": "krunked",
@@ -60847,7 +60847,7 @@
   "flattening_queue": {
     "schema_version": "5.0.0",
     "storage_mode": "portable_inline_html+json",
-    "updated_at_utc": "2026-11-15T04:19:22Z",
+    "updated_at_utc": "2026-11-15T04:46:29Z",
     "protocol": "Bag on 6 until 130°F then drop to 4 — 2.5 hours once at 130°F on the plate",
     "need_to_be_done_release_ids": [
       28844782,

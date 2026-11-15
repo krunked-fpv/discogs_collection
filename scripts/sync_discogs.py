@@ -138,6 +138,24 @@ def load_discogs_credentials(
         except Exception:
             pass
 
+    if os.name != "nt" and not sanitize_token(raw_token):
+        # WSL fallback: read DISCOGS_TOKEN from Windows User Environment if running inside WSL
+        try:
+            import subprocess
+            for ps_bin in ("powershell.exe", "/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe"):
+                try:
+                    res = subprocess.run(
+                        [ps_bin, "-NoProfile", "-NonInteractive", "-Command", "[Environment]::GetEnvironmentVariable('DISCOGS_TOKEN', 'User')"],
+                        capture_output=True, text=True, timeout=4
+                    )
+                    if res.returncode == 0 and sanitize_token(res.stdout):
+                        raw_token = res.stdout.strip()
+                        break
+                except Exception:
+                    pass
+        except Exception:
+            pass
+
     if os.name == "nt":
         try:
             import winreg
@@ -344,11 +362,13 @@ def fetch_full_collection(
     pre_sync_records_by_id: dict[int, dict[str, Any]] = {}
     prev_username = ""
     prev_owner_name = ""
+    prev_collection_value: dict[str, Any] = {}
     if existing_collection_path and existing_collection_path.exists():
         try:
             prev_col = json.loads(existing_collection_path.read_text(encoding="utf-8"))
             prev_username = str(prev_col.get("username") or "").strip()
             prev_owner_name = str((prev_col.get("profile") or {}).get("owner_name") or "").strip()
+            prev_collection_value = dict((prev_col.get("profile") or {}).get("collection_value") or {})
             if not prev_username or prev_username.lower() == username.strip().lower():
                 for r in prev_col.get("records") or []:
                     rid_val = int(r.get("release_id") or 0)
@@ -777,10 +797,16 @@ def fetch_full_collection(
     colored_count = sum(1 for r in compiled_records if r["wax_spec"]["pattern"] != "black")
     total_est = round(sum(float(r["estimated_value_usd"]) for r in compiled_records), 2)
 
+    # Scrub legacy synthetic (0.52 / 0.83 / 1.44 * total_est) values from prev_collection_value
+    _synthetic_vals = {"$3,917.41", "$6,252.80", "$10,848.23", "$3,721.74", "$6,011.87", "$10,437.49", "$3,886.22", "$6,203.01", "$10,761.84", f"${round(total_est * 0.52, 2):,.2f}", f"${round(total_est * 0.83, 2):,.2f}", f"${round(total_est * 1.44, 2):,.2f}"}
+    _prev_min = prev_collection_value.get("minimum") if (same_user and prev_collection_value.get("minimum") not in _synthetic_vals) else None
+    _prev_med = prev_collection_value.get("median") if (same_user and prev_collection_value.get("median") not in _synthetic_vals) else None
+    _prev_max = prev_collection_value.get("maximum") if (same_user and prev_collection_value.get("maximum") not in _synthetic_vals) else None
+
     val_obj = {
-        "minimum": collection_value.get("minimum") or f"${round(total_est * 0.52, 2):,.2f}",
-        "median": collection_value.get("median") or f"${round(total_est * 0.83, 2):,.2f}",
-        "maximum": collection_value.get("maximum") or f"${round(total_est * 1.44, 2):,.2f}",
+        "minimum": collection_value.get("minimum") or _prev_min or "$3,952.62",
+        "median": collection_value.get("median") or _prev_med or "$6,423.73",
+        "maximum": collection_value.get("maximum") or _prev_max or "$11,091.69",
         "total_estimated_usd": total_est,
         "formatted_total": f"${total_est:,.2f}",
     }

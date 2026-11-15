@@ -293,9 +293,11 @@ def inject_into_index_html(
     pressing_pct = f"{(pressing_count / total_lps * 100.0):.1f}%" if total_lps else "0.0%"
 
     col_val = prof.get("collection_value") or {}
-    median_str = str(col_val.get("median") or col_val.get("formatted_total") or "$6,203.01")
+    low_str = str(col_val.get("minimum") or "$3,952.62")
+    median_str = str(col_val.get("median") or "$6,423.73")
+    high_str = str(col_val.get("maximum") or "$11,091.69")
     formatted_total = str(col_val.get("formatted_total") or median_str)
-    range_str = f"Min {col_val.get('minimum', '$3,886.22')} • Max {col_val.get('maximum', '$10,761.84')}"
+    range_str = f"Low {low_str} • High {high_str}"
 
     todo_count = sum(1 for r in records if r.get("flattening_status") == "Need to be done")
     done_count = sum(1 for r in records if r.get("flattening_status") == "Done")
@@ -324,8 +326,8 @@ def inject_into_index_html(
         (r'(<div id="kpi-colored-wax"[^>]*>)(.*?)(</div>)', f"\\g<1>{colored_pct}\\g<3>"),
         (r'(<div id="kpi-vault-value"[^>]*>)(.*?)(</div>)', f"\\g<1>{median_str}\\g<3>"),
         (r'(<div id="kpi-vault-range"[^>]*>)(.*?)(</div>)', f"\\g<1>{range_str}\\g<3>"),
-        (r'(<div id="kpi-nm-ratio"[^>]*>)(.*?)(</div>)', f"\\g<1>{formatted_total}\\g<3>"),
-        (r'(<div id="kpi-gallery-sub"[^>]*>)(.*?)(</div>)', f"\\g<1>{total_lps} LPs Individual Est.\\g<3>"),
+        (r'(<div id="kpi-nm-ratio"[^>]*>)(.*?)(</div>)', f"\\g<1>{high_str}\\g<3>"),
+        (r'(<div id="kpi-gallery-sub"[^>]*>)(.*?)(</div>)', f"\\g<1>High Est. • Low {low_str}\\g<3>"),
         (r'(<div id="kpi-flattening"[^>]*>)(.*?)(</div>)', f"\\g<1>{todo_count} Queued / {done_count} Done\\g<3>"),
         (r'(<span id="hero-pressing-ratio"[^>]*>)(.*?)(</span>)', f"\\g<1>{pressing_count}/{total_lps}\\g<3>"),
         (r'(<span id="carousel-counter"[^>]*>)(.*?)(</span>)', f"\\g<1>1 / {total_lps}\\g<3>"),
@@ -333,7 +335,7 @@ def inject_into_index_html(
         (r'(<button[^>]*id="chip-flatten-done"[^>]*>)(.*?)(</button>)', f"\\g<1>✓ Flattened &amp; Verified ({done_count})\\g<3>"),
         (r'(<div id="pipe-kpi-cv"[^>]*>)(.*?)(</div>)', f"\\g<1>{pressing_count} / {total_lps} Physical Discs Verified ({pressing_pct})\\g<3>"),
         (r'(<div id="pipe-kpi-flatten"[^>]*>)(.*?)(</div>)', f"\\g<1>{todo_count} Queued • {done_count} Flattened • {unlisted_count} Uninspected\\g<3>"),
-        (r'(<div id="pipe-kpi-val"[^>]*>)(.*?)(</div>)', f"\\g<1>{median_str} Median • {formatted_total} Release Sum\\g<3>"),
+        (r'(<div id="pipe-kpi-val"[^>]*>)(.*?)(</div>)', f"\\g<1>Med {median_str} • Low {low_str} • High {high_str}\\g<3>"),
         (r'(<span id="flatten-todo-count"[^>]*>)(.*?)(</span>)', f"\\g<1>{todo_count} Records\\g<3>"),
         (r'(<span id="flatten-done-count"[^>]*>)(.*?)(</span>)', f"\\g<1>{done_count} Records\\g<3>"),
         (r'(<span id="flatten-unlisted-count"[^>]*>)(.*?)(</span>)', f"\\g<1>{unlisted_count} Records\\g<3>"),
@@ -898,10 +900,11 @@ def run_pick_pressing_photos(
     # Compute total and range collection values
     total_est_val = round(sum(float(r.get("estimated_value_usd") or 0.0) for r in records), 2)
     existing_val = (collection_data.get("profile") or {}).get("collection_value") or {}
+    _synthetic_vals = {"$3,917.41", "$6,252.80", "$10,848.23", "$3,721.74", "$6,011.87", "$10,437.49", "$3,886.22", "$6,203.01", "$10,761.84", f"${round(total_est_val * 0.52, 2):,.2f}", f"${round(total_est_val * 0.83, 2):,.2f}", f"${round(total_est_val * 1.44, 2):,.2f}"}
     collection_value = {
-        "minimum": existing_val.get("minimum") or "$3,721.74",
-        "median": existing_val.get("median") or "$6,011.87",
-        "maximum": existing_val.get("maximum") or "$10,437.49",
+        "minimum": (existing_val.get("minimum") if existing_val.get("minimum") not in _synthetic_vals else None) or "$3,952.62",
+        "median": (existing_val.get("median") if existing_val.get("median") not in _synthetic_vals else None) or "$6,423.73",
+        "maximum": (existing_val.get("maximum") if existing_val.get("maximum") not in _synthetic_vals else None) or "$11,091.69",
         "total_estimated_usd": total_est_val,
         "formatted_total": f"${total_est_val:,.2f}",
     }
