@@ -48213,6 +48213,345 @@
     "videos": [],
     "year": 2025
   },
+  "34513906": {
+    "_full_images_fetched": true,
+    "_ytm_resolved": {
+      "fullAlbumYtDuration": 2400,
+      "fullAlbumYtVideoId": "CRE_-_6TAQs",
+      "spotifyAlbumId": "",
+      "trackIds": {
+        "0": "YxUY_EU5mzg",
+        "1": "YxUY_EU5mzg",
+        "10": "JwgqUhDFolE",
+        "11": "nK-Ia4rHKIg",
+        "12": "nK-Ia4rHKIg",
+        "3": "oYmmfmI81hI",
+        "4": "nK-Ia4rHKIg",
+        "5": "a2gL4kbQb6U",
+        "6": "YxUY_EU5mzg",
+        "7": "9OyMRRAq9fI",
+        "8": "nK-Ia4rHKIg",
+        "9": "nK-Ia4rHKIg"
+      },
+      "ytPlaylistId": "OLAK5uy_lJaM0oc0jzNYh--NHKrIQ2oIttFYBPxII"
+    },
+    "artists": [
+      {
+        "anv": "",
+        "id": 1674212,
+        "join": "",
+        "name": "Born Of Osiris",
+        "resource_url": "https://api.discogs.com/artists/1674212",
+        "role": "",
+        "thumbnail_url": "https://i.discogs.com/1wyR_l7Pj_ryf7e-vSBXd52B6SY6huABg-HHO707Atk/rs:fit/g:sm/q:90/h:201/w:400/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9BLTE2NzQy/MTItMTc2MDU1MTk5/NS04NDAwLmpwZWc.jpeg",
+        "tracks": ""
+      }
+    ],
+    "artists_sort": "Born Of Osiris",
+    "blocked_from_sale": false,
+    "community": {
+      "contributors": [
+        {
+          "resource_url": "https://api.discogs.com/users/vrp_pdx",
+          "username": "vrp_pdx"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/OpethFlames",
+          "username": "OpethFlames"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/safecamp",
+          "username": "safecamp"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/manulifan",
+          "username": "manulifan"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/LJBrecords",
+          "username": "LJBrecords"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/RobPullar",
+          "username": "RobPullar"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/kypck",
+          "username": "kypck"
+        }
+      ],
+      "data_quality": "Needs Vote",
+      "have": 110,
+      "rating": {
+        "average": 5.0,
+        "count": 4
+      },
+      "status": "Accepted",
+      "submitter": {
+        "resource_url": "https://api.discogs.com/users/vrp_pdx",
+        "username": "vrp_pdx"
+      },
+      "want": 17
+    },
+    "companies": [
+      {
+        "catno": "",
+        "entity_type": "13",
+        "entity_type_name": "Phonographic Copyright (p)",
+        "id": 97958,
+        "name": "Sumerian Records",
+        "resource_url": "https://api.discogs.com/labels/97958",
+        "thumbnail_url": "https://i.discogs.com/ZwnREeOehLTd9McGWAEMxqZ4cLjI7IyzlWkQ-HLmCXQ/rs:fit/g:sm/q:90/h:210/w:240/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTk3OTU4/LTE1MjY4NjcyNTQt/NTQ4NC5qcGVn.jpeg"
+      },
+      {
+        "catno": "",
+        "entity_type": "14",
+        "entity_type_name": "Copyright (c)",
+        "id": 97958,
+        "name": "Sumerian Records",
+        "resource_url": "https://api.discogs.com/labels/97958",
+        "thumbnail_url": "https://i.discogs.com/ZwnREeOehLTd9McGWAEMxqZ4cLjI7IyzlWkQ-HLmCXQ/rs:fit/g:sm/q:90/h:210/w:240/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTk3OTU4/LTE1MjY4NjcyNTQt/NTQ4NC5qcGVn.jpeg"
+      }
+    ],
+    "country": "US",
+    "data_quality": "Needs Vote",
+    "date_added": "2025-07-11T12:16:11-07:00",
+    "date_changed": "2025-10-15T12:23:37-07:00",
+    "estimated_weight": 230,
+    "format_quantity": 1,
+    "formats": [
+      {
+        "descriptions": [
+          "LP",
+          "Album",
+          "Limited Edition"
+        ],
+        "name": "Vinyl",
+        "qty": "1",
+        "text": "Black Ice + Blue Cloudy"
+      }
+    ],
+    "genres": [
+      "Rock"
+    ],
+    "id": 34513906,
+    "identifiers": [
+      {
+        "type": "Barcode",
+        "value": "198704463471"
+      }
+    ],
+    "images": [
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/9gV7uge7xE-LOQEklF5lp3bcgrkHzh3acQroHy6cjXs/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NTI0NDYx/NzctMTYzMS5qcGVn.jpeg",
+        "type": "primary",
+        "uri": "https://i.discogs.com/9gV7uge7xE-LOQEklF5lp3bcgrkHzh3acQroHy6cjXs/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NTI0NDYx/NzctMTYzMS5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/OW3dcIRFDWEKyo1Pmiua5TRdxm56x1936tgvo8j4Nns/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NTI0NDYx/NzctMTYzMS5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 591,
+        "resource_url": "https://i.discogs.com/ews4DtDPJVUStokTASuVJA6Guv05c43LWCzphiuqMK8/rs:fit/g:sm/q:90/h:591/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NTI0NDYx/NjQtNTEwNy5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/ews4DtDPJVUStokTASuVJA6Guv05c43LWCzphiuqMK8/rs:fit/g:sm/q:90/h:591/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NTI0NDYx/NjQtNTEwNy5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/8QAGDrIWWQUeleZk1IZJMEwFf45IjfU9AvSrrfCMcgM/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NTI0NDYx/NjQtNTEwNy5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 593,
+        "resource_url": "https://i.discogs.com/KpKF4-LJbcKc2ZWGpxU45WTzghT0eEaXTlSxT3svNtg/rs:fit/g:sm/q:90/h:593/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NTI0NDYx/NzQtMzg3MS5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/KpKF4-LJbcKc2ZWGpxU45WTzghT0eEaXTlSxT3svNtg/rs:fit/g:sm/q:90/h:593/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NTI0NDYx/NzQtMzg3MS5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/EQ-eAXOe3c1z6BYBT40sy2Kz2V1tDKQ7upNwzivwX5o/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NTI0NDYx/NzQtMzg3MS5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/yXHoyqWUzNeoi0eYBPqE-y7P0JJrMcRH0jqW9Ytpoqk/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NTI0NDYx/NjgtMTkxMC5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/yXHoyqWUzNeoi0eYBPqE-y7P0JJrMcRH0jqW9Ytpoqk/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NTI0NDYx/NjgtMTkxMC5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/Bx-2H--_2BhfapPAgE83BoGy719WjAy5iMZrQ2K1UgQ/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NTI0NDYx/NjgtMTkxMC5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 587,
+        "resource_url": "https://i.discogs.com/jR3mA_qEsA344355gjSTdSjmYbR-ifGG6M6Ygcc1zE0/rs:fit/g:sm/q:90/h:587/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NTI0NDYx/NzAtMjczNS5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/jR3mA_qEsA344355gjSTdSjmYbR-ifGG6M6Ygcc1zE0/rs:fit/g:sm/q:90/h:587/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NTI0NDYx/NzAtMjczNS5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/D9mbx3FsGv8xrin-2BSFQXAbMOF7a3SW8eshb9-oA2s/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NTI0NDYx/NzAtMjczNS5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 576,
+        "resource_url": "https://i.discogs.com/fLY9e51pUDSAb6C_uOS6mJylhp7H81H9pI5rDfbjSUg/rs:fit/g:sm/q:90/h:576/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NTI0NDYx/NjUtNTc4OC5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/fLY9e51pUDSAb6C_uOS6mJylhp7H81H9pI5rDfbjSUg/rs:fit/g:sm/q:90/h:576/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NTI0NDYx/NjUtNTc4OC5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/K02hmDUxt0ZZtGXprTLxwXqHwyrNvLUD46_24zPSGZM/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NTI0NDYx/NjUtNTc4OC5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/D1t6EKAWM-Jhzqs-oR-tmbgNMnFuTvd4wc-HtA3pj14/rs:fit/g:sm/q:90/h:600/w:598/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NjA1MzM3/MjAtMTY0OC5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/D1t6EKAWM-Jhzqs-oR-tmbgNMnFuTvd4wc-HtA3pj14/rs:fit/g:sm/q:90/h:600/w:598/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NjA1MzM3/MjAtMTY0OC5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/HXBGG32sYI_ByzMHubL7I1wLD97xgEk_5LP3X2uz82M/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NjA1MzM3/MjAtMTY0OC5qcGVn.jpeg",
+        "width": 598
+      },
+      {
+        "height": 594,
+        "resource_url": "https://i.discogs.com/1lbgsaL6CsxGntPpLSBAtxUG6iy8S1FeSgo69vSs2w8/rs:fit/g:sm/q:90/h:594/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NjA1MzM3/MjAtNDE1My5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/1lbgsaL6CsxGntPpLSBAtxUG6iy8S1FeSgo69vSs2w8/rs:fit/g:sm/q:90/h:594/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NjA1MzM3/MjAtNDE1My5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/94ieiMdrnbhRaAtY7WJ6Qa-7tzKvnAyxc-w_Xs0Jkx0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NjA1MzM3/MjAtNDE1My5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 599,
+        "resource_url": "https://i.discogs.com/Oac46r9sgA1q9lE5Rv9cSvM-X6pwX-tGB2p4xhYCY6Q/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NjA1MzM3/MjEtMTIwOS5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/Oac46r9sgA1q9lE5Rv9cSvM-X6pwX-tGB2p4xhYCY6Q/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NjA1MzM3/MjEtMTIwOS5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/M-lCIL-a-CPc-TByhuImM-9oRhP-3VW3tziygzQ5rhs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NjA1MzM3/MjEtMTIwOS5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 595,
+        "resource_url": "https://i.discogs.com/7Rsx-cD9raUrdzf9e62q4JMPT-fcKpO_tGfXIMmQ8a4/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NjA1MzM3/MjAtMjk0OS5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/7Rsx-cD9raUrdzf9e62q4JMPT-fcKpO_tGfXIMmQ8a4/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NjA1MzM3/MjAtMjk0OS5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/U-TwWOvtJOGSPT2Ia8oYSITCKVM1abuMBEKUe5H7QAY/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NjA1MzM3/MjAtMjk0OS5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/xtHnB242yZ0WBq2mafa0zUXPECv0m_7_k7clpxO6rFo/rs:fit/g:sm/q:90/h:600/w:324/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NTI0NDYx/NTctMTU5MS5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/xtHnB242yZ0WBq2mafa0zUXPECv0m_7_k7clpxO6rFo/rs:fit/g:sm/q:90/h:600/w:324/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NTI0NDYx/NTctMTU5MS5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/TM2CbfJ5IzOBfRFgHAhLwZ1MBdm4kD9uVRavE5OzfzA/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NTI0NDYx/NTctMTU5MS5qcGVn.jpeg",
+        "width": 324
+      }
+    ],
+    "is_offensive": false,
+    "labels": [
+      {
+        "catno": "SUM3506",
+        "entity_type": "1",
+        "entity_type_name": "Label",
+        "id": 97958,
+        "name": "Sumerian Records",
+        "resource_url": "https://api.discogs.com/labels/97958",
+        "thumbnail_url": "https://i.discogs.com/ZwnREeOehLTd9McGWAEMxqZ4cLjI7IyzlWkQ-HLmCXQ/rs:fit/g:sm/q:90/h:210/w:240/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTk3OTU4/LTE1MjY4NjcyNTQt/NTQ4NC5qcGVn.jpeg"
+      }
+    ],
+    "lowest_price": 22.99,
+    "master_id": 3906391,
+    "master_url": "https://api.discogs.com/masters/3906391",
+    "notes": "Gatefold jacket with insert. \nIndie Exclusive.\nIncludes digital download.\nSticker Made in Czech Republic.",
+    "num_for_sale": 20,
+    "released": "2025-07-11",
+    "released_formatted": "11 Jul 2025",
+    "resource_url": "https://api.discogs.com/releases/34513906",
+    "series": [],
+    "status": "Accepted",
+    "styles": [
+      "Metalcore",
+      "Deathcore",
+      "Progressive Metal"
+    ],
+    "thumb": "https://i.discogs.com/OW3dcIRFDWEKyo1Pmiua5TRdxm56x1936tgvo8j4Nns/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NTI0NDYx/NzctMTYzMS5qcGVn.jpeg",
+    "title": "Through Shadows",
+    "tracklist": [
+      {
+        "duration": "",
+        "position": "A1",
+        "title": "Seppuku",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "A2",
+        "title": "Elevate",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "A3",
+        "title": "Through Shadows",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "A4",
+        "title": "The War That You Are",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "A5",
+        "title": "Inverno",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "A6",
+        "title": "A Mind Short Circuiting",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "B1",
+        "title": "Burning Light",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "B2",
+        "title": "In Desolation",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "B3",
+        "title": "Torchbearer",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "B4",
+        "title": "Activated",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "B5",
+        "title": "Dark Fable",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "B6",
+        "title": "Transcendence",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "B7",
+        "title": "Blackwater",
+        "type_": "track"
+      }
+    ],
+    "uri": "https://www.discogs.com/release/34513906-Born-Of-Osiris-Through-Shadows",
+    "videos": [
+      {
+        "description": "BORN OF OSIRIS // THROUGH SHADOWS // OUT NOW\n\nNEW ALBUM 'THROUGH SHADOWS' OUT 7.11\n\nPRE-ORDER 'Through Shadows': https://sumerian.lnk.to/throughshadows\n\nDirected/Edited: Eric DiCarlo \nCamera A: Matthew Colomiet \nCamera B: James Perry \nGrip/BTS: Matthew So",
+        "duration": 310,
+        "embed": true,
+        "title": "BORN OF OSIRIS - Through Shadows (Official Music Video)",
+        "uri": "https://www.youtube.com/watch?v=YxUY_EU5mzg"
+      }
+    ],
+    "year": 2025
+  },
   "34691910": {
     "artists": [
       {
