@@ -2,3 +2,6 @@
 .env
 .env.*
 *.env
+
+*.bak
+*.cookie_bak
