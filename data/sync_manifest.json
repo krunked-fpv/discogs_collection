@@ -3,10 +3,10 @@
   "record_count": 158,
   "pressing_photos_detected": 134,
   "colored_or_special_variants": 149,
-  "flattening_need_to_be_done": 3,
-  "flattening_done": 41,
+  "flattening_need_to_be_done": 2,
+  "flattening_done": 50,
   "collection_value_median": "$6,423.73",
-  "collection_value_total_usd": 7556.48,
-  "content_sha256": "0603b447a61f4dc9dbdaf88d9139bc4f12c12571cb74b4914724027ce208fdfc",
-  "synced_at_utc": "2026-11-17T05:50:45Z"
+  "collection_value_total_usd": 7436.55,
+  "content_sha256": "409c296307ca5f84bce9267fce60edc3d6480e38e1ad3de9fb209e4ceedfedec",
+  "synced_at_utc": "2026-11-18T19:23:41Z"
 }

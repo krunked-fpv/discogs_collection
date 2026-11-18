@@ -121,22 +121,22 @@ def load_discogs_credentials(
     raw_user = cli_username or os.environ.get("DISCOGS_USERNAME") or os.environ.get("DISCOGS_USER") or ""
     raw_token = cli_token if cli_token is not None else (os.environ.get("DISCOGS_TOKEN") or os.environ.get("DISCOGS_API_TOKEN") or "")
 
-    dotenv_path = repo_root / ".env"
-    if dotenv_path.exists():
-        try:
-            for line in dotenv_path.read_text(encoding="utf-8", errors="ignore").splitlines():
-                line_s = line.strip()
-                if not line_s or line_s.startswith("#") or "=" not in line_s:
-                    continue
-                k, v = line_s.split("=", 1)
-                k = k.strip()
-                v = v.strip()
-                if k in ("DISCOGS_TOKEN", "DISCOGS_API_TOKEN") and not sanitize_token(raw_token):
-                    raw_token = v
-                elif k in ("DISCOGS_USERNAME", "DISCOGS_USER") and not sanitize_username(raw_user, ""):
-                    raw_user = v
-        except Exception:
-            pass
+    for dotenv_path in (repo_root / ".env", SCRIPT_DIR / ".env", pathlib.Path.cwd() / ".env"):
+        if dotenv_path.exists():
+            try:
+                for line in dotenv_path.read_text(encoding="utf-8", errors="ignore").splitlines():
+                    line_s = line.strip()
+                    if not line_s or line_s.startswith("#") or "=" not in line_s:
+                        continue
+                    k, v = line_s.split("=", 1)
+                    k = k.strip()
+                    v = v.strip()
+                    if k in ("DISCOGS_TOKEN", "DISCOGS_API_TOKEN") and not sanitize_token(raw_token):
+                        raw_token = v
+                    elif k in ("DISCOGS_USERNAME", "DISCOGS_USER") and not sanitize_username(raw_user, ""):
+                        raw_user = v
+            except Exception:
+                pass
 
     if os.name != "nt" and not sanitize_token(raw_token):
         # WSL fallback: read DISCOGS_TOKEN from Windows User Environment if running inside WSL
@@ -160,21 +160,29 @@ def load_discogs_credentials(
         try:
             import winreg
 
-            with winreg.OpenKey(winreg.HKEY_CURRENT_USER, "Environment", 0, winreg.KEY_READ) as key:
-                if not sanitize_token(raw_token):
-                    try:
-                        reg_val, _ = winreg.QueryValueEx(key, "DISCOGS_TOKEN")
-                        if reg_val:
-                            raw_token = str(reg_val)
-                    except Exception:
-                        pass
-                if not sanitize_username(raw_user, ""):
-                    try:
-                        reg_user, _ = winreg.QueryValueEx(key, "DISCOGS_USERNAME")
-                        if reg_user:
-                            raw_user = str(reg_user)
-                    except Exception:
-                        pass
+            reg_targets = [
+                (winreg.HKEY_CURRENT_USER, "Environment"),
+                (winreg.HKEY_LOCAL_MACHINE, r"SYSTEM\CurrentControlSet\Control\Session Manager\Environment"),
+            ]
+            for hive, subkey in reg_targets:
+                try:
+                    with winreg.OpenKey(hive, subkey, 0, winreg.KEY_READ) as key:
+                        if not sanitize_token(raw_token):
+                            try:
+                                reg_val, _ = winreg.QueryValueEx(key, "DISCOGS_TOKEN")
+                                if reg_val:
+                                    raw_token = str(reg_val)
+                            except Exception:
+                                pass
+                        if not sanitize_username(raw_user, ""):
+                            try:
+                                reg_user, _ = winreg.QueryValueEx(key, "DISCOGS_USERNAME")
+                                if reg_user:
+                                    raw_user = str(reg_user)
+                            except Exception:
+                                pass
+                except Exception:
+                    pass
         except Exception:
             pass
 
@@ -466,10 +474,11 @@ def fetch_full_collection(
             seen_api_rids.add(rid)
             deduped_items.append(item)
 
-    removed_records: list[dict[str, Any]] = [
-        r for rid, r in pre_sync_records_by_id.items()
-        if rid not in seen_api_rids and not (download_dir / str(rid)).exists()
-    ]
+    removed_records: list[dict[str, Any]] = (
+        [r for rid, r in pre_sync_records_by_id.items() if rid not in seen_api_rids]
+        if seen_api_rids
+        else []
+    )
 
     compiled_records: list[dict[str, Any]] = []
     evaluated_rids: set[int] = set()
@@ -478,7 +487,19 @@ def fetch_full_collection(
     unchanged_count = 0
     upgraded_pressing_files = 0
     removed_false_pressing_files = 0
+    newly_detected_overrides = 0
     cache_dirty = False
+
+    # Prune stale overrides and cache entries for releases removed from the user's Discogs collection
+    if same_user and seen_api_rids:
+        seen_api_rid_strs = {str(x) for x in seen_api_rids}
+        for stale_k in [k for k in list(overrides.keys()) if str(k).isdigit() and str(k) not in seen_api_rid_strs]:
+            ov_v = overrides.get(stale_k)
+            if not (isinstance(ov_v, dict) and ov_v.get("user_locked") is True):
+                overrides.pop(stale_k, None)
+        for stale_ck in [k for k in list(cache.keys()) if str(k).isdigit() and str(k) not in seen_api_rid_strs]:
+            cache.pop(stale_ck, None)
+            cache_dirty = True
 
     total_items = len(deduped_items)
     if ui:
@@ -501,7 +522,7 @@ def fetch_full_collection(
         if needs_enrich:
             if ui:
                 ui.log("api", f"Enriching release metadata from Discogs API for #{release_id}...")
-                ui.update_throbber(current_item=f"🌐 API Enrich #{release_id}")
+                ui.update_throbber(current_item=f"▸ API Enrich #{release_id}")
             try:
                 rel_detail_fetched = client.get_json(f"/releases/{release_id}", params={"curr_abbr": "USD"})
                 if isinstance(rel_detail_fetched, dict) and rel_detail_fetched.get("id"):
@@ -595,7 +616,7 @@ def fetch_full_collection(
                     new_count=len(new_records),
                     resync_count=len(resynced_records),
                     cached_count=unchanged_count,
-                    current_item=f"⚡ Cached #{rid_str} ({artist_name})",
+                    current_item=f"▸ Cached #{rid_str} ({artist_name})",
                 )
         else:
             # ACTIVE SUITE: Run full image download + 4-Pass Concentric Dual-Circle CV
@@ -605,10 +626,10 @@ def fetch_full_collection(
                 ui.update_throbber(
                     done=idx_item,
                     total=total_items,
-                    new_count=len(new_records),
-                    resync_count=len(resynced_records),
+                    new_count=len(new_records) + (1 if delta_status == "new" else 0),
+                    resync_count=len(resynced_records) + (1 if delta_status != "new" else 0),
                     cached_count=unchanged_count,
-                    current_item=f"🔍 Full Suite #{rid_str} {artist_name}...",
+                    current_item=f"▸ Full Suite #{rid_str} {artist_name}...",
                 )
 
             downloaded_bytes: dict[str, bytes] = {}
@@ -713,9 +734,11 @@ def fetch_full_collection(
                 )
                 if preferred_url and not is_user_locked and prev_ov != preferred_url:
                     overrides[rid_str] = preferred_url
+                    newly_detected_overrides += 1
             elif not img_selection.get("has_pressing_photo"):
                 if rid_str in overrides and not is_user_locked:
                     overrides.pop(rid_str, None)
+                    newly_detected_overrides += 1
 
             img_selection["delta_sig"] = compute_release_delta_signature(
                 release_id=release_id,
@@ -792,6 +815,14 @@ def fetch_full_collection(
         cache_path.parent.mkdir(parents=True, exist_ok=True)
         cache_path.write_text(json.dumps(cache, indent=2, sort_keys=True), encoding="utf-8")
 
+    if same_user:
+        overrides_sorted = {
+            k: overrides[k]
+            for k in sorted(overrides.keys(), key=lambda x: int(x) if str(x).isdigit() else str(x))
+        }
+        overrides_path.parent.mkdir(parents=True, exist_ok=True)
+        overrides_path.write_text(json.dumps(overrides_sorted, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
     compiled_records.sort(key=lambda r: (r.get("date_added") or "", r["artist"], r["title"]), reverse=True)
     pressing_photo_count = sum(1 for r in compiled_records if r["images"].get("has_pressing_photo"))
     colored_count = sum(1 for r in compiled_records if r["wax_spec"]["pattern"] != "black")
@@ -845,6 +876,7 @@ def fetch_full_collection(
         "unchanged_count": unchanged_count,
         "upgraded_pressing_files": upgraded_pressing_files,
         "removed_false_pressing_files": removed_false_pressing_files,
+        "newly_detected_overrides": newly_detected_overrides,
     }
     return collection_payload, delta_summary
 

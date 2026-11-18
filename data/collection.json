@@ -4,7 +4,7 @@
   "source_of_truth": "https://www.discogs.com/user/krunked/collection",
   "api_documentation": "https://www.discogs.com/developers",
   "username": "krunked",
-  "synced_at_utc": "2026-11-17T05:50:45Z",
+  "synced_at_utc": "2026-11-18T19:23:41Z",
   "profile": {
     "username": "krunked",
     "owner_name": "krunked",
@@ -13,17 +13,377 @@
     "num_collection": 158,
     "pressing_photos_detected": 134,
     "colored_or_special_variants": 149,
-    "flattening_need_to_be_done": 3,
-    "flattening_done": 41,
+    "flattening_need_to_be_done": 2,
+    "flattening_done": 50,
     "collection_value": {
       "minimum": "$3,952.62",
       "median": "$6,423.73",
       "maximum": "$11,091.69",
-      "total_estimated_usd": 7556.48,
-      "formatted_total": "$7,556.48"
+      "total_estimated_usd": 7436.55,
+      "formatted_total": "$7,436.55"
     }
   },
   "records": [
+    {
+      "release_id": 13257813,
+      "instance_id": 2205948208,
+      "artist": "Born Of Osiris",
+      "title": "The Simulation",
+      "year": 2019,
+      "format_string": "Vinyl, 12\", 45 RPM, Mini-Album, Limited Edition, Gold Inside Clear w/White Splatter",
+      "label": "Sumerian Records",
+      "catno": "none",
+      "media_condition": "Near Mint (NM or M-)",
+      "sleeve_condition": "Near Mint (NM or M-)",
+      "comments": "",
+      "date_added": "2026-11-18T09:35:13-08:00",
+      "discogs_url": "https://www.discogs.com/release/13257813-Born-Of-Osiris-The-Simulation",
+      "estimated_value_usd": 36.25,
+      "flattening_status": "Not Listed",
+      "genres": [
+        "Rock"
+      ],
+      "styles": [
+        "Metalcore",
+        "Progressive Metal"
+      ],
+      "images": {
+        "cover_image_url": "https://i.discogs.com/5A1ofgiQvHtA-w5glihmo6j_jalB9ffEm8bmhdopfeU/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE1NTA4NjU0/MTYtNTQzNS5qcGVn.jpeg",
+        "pressing_image_url": "assets/releases/13257813/pressing.jpg?v=2_20e55d6f",
+        "center_label_image_url": "https://i.discogs.com/HwZ-DN1dWGXCzthWDJVCcsTAwy8sEsdDsti8yBZblgU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE1NTA4NjU0/MTYtNTQzNS5qcGVn.jpeg",
+        "display_thumbnail_url": "assets/releases/13257813/pressing.jpg?v=2_20e55d6f",
+        "has_pressing_photo": true,
+        "selected_index": 2,
+        "selected_score": 0.9766,
+        "detection_method": "deterministic_annular_cv+guideline_13_8",
+        "classified_images": [
+          {
+            "index": 0,
+            "uri": "https://i.discogs.com/5A1ofgiQvHtA-w5glihmo6j_jalB9ffEm8bmhdopfeU/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE1NTA4NjU0/MTYtNTQzNS5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/HwZ-DN1dWGXCzthWDJVCcsTAwy8sEsdDsti8yBZblgU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE1NTA4NjU0/MTYtNTQzNS5qcGVn.jpeg",
+            "width": 600,
+            "height": 600,
+            "aspect_ratio": 1.0,
+            "role": "front_cover",
+            "deterministic_score": 0.05,
+            "local_uri": "assets/releases/13257813/img_0.jpg"
+          },
+          {
+            "index": 1,
+            "uri": "https://i.discogs.com/nxQB2dpeOyXLgW2ySDn-yHGanp9VcUouXNWE-Lpj37g/rs:fit/g:sm/q:90/h:594/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/MzktMzQxOC5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/K6IDYMi2zN5krI_53hDpG4dWllrVAGssVLtl9NXfbnI/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/MzktMzQxOC5qcGVn.jpeg",
+            "width": 600,
+            "height": 594,
+            "aspect_ratio": 1.01,
+            "role": "insert_or_sleeve",
+            "deterministic_score": 0.0632,
+            "local_uri": "assets/releases/13257813/img_1.jpg",
+            "cv_metrics": {
+              "is_pressing": false,
+              "is_zoomed_label_scan": false,
+              "is_hype_sticker_or_text_insert": false,
+              "is_square_insert_or_sleeve": true,
+              "detected_disc_radius": 0.99,
+              "active_diagonal_quadrants": 3,
+              "score": 0.0597,
+              "raw_annular_score": 0.2388,
+              "aspect_ratio": 1.008,
+              "corner_std": 0.145,
+              "corner_wax_dist": 0.1645,
+              "circularity_ratio": 0.7883,
+              "label_wax_dist": 0.1752,
+              "octant_label_wax_q25": 0.0657,
+              "hv_wax_anisotropy": 0.1316,
+              "spindle_contrast": 0.0347,
+              "rim_step": 0.0075,
+              "label_step": 0.0088,
+              "reason": "rejected_square_insert_or_sleeve"
+            }
+          },
+          {
+            "index": 2,
+            "uri": "https://i.discogs.com/72dEFQlVlkBSKdTOp07P208KnuBjQNBX1nZjDfhUOQU/rs:fit/g:sm/q:90/h:593/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/NDEtODk0OS5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/FvdWcZyXiRlFw59FrTtYAeFClRwNH5zelfAelQ_hIxM/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/NDEtODk0OS5qcGVn.jpeg",
+            "width": 600,
+            "height": 593,
+            "aspect_ratio": 1.012,
+            "role": "pressing_disc",
+            "deterministic_score": 0.9766,
+            "local_uri": "assets/releases/13257813/img_2.jpg",
+            "cv_metrics": {
+              "is_pressing": true,
+              "is_zoomed_label_scan": false,
+              "is_hype_sticker_or_text_insert": false,
+              "is_square_insert_or_sleeve": false,
+              "detected_disc_radius": 0.98,
+              "active_diagonal_quadrants": 4,
+              "score": 0.9463,
+              "raw_annular_score": 0.9463,
+              "aspect_ratio": 1.01,
+              "corner_std": 0.017,
+              "corner_wax_dist": 0.7423,
+              "circularity_ratio": 3.7101,
+              "label_wax_dist": 0.5484,
+              "octant_label_wax_q25": 0.4252,
+              "hv_wax_anisotropy": 0.0014,
+              "spindle_contrast": 0.0164,
+              "rim_step": 0.065,
+              "label_step": 0.0403,
+              "reason": "deterministic_annular_cv_match"
+            }
+          },
+          {
+            "index": 3,
+            "uri": "https://i.discogs.com/A-G-n__6_g5p1ZuoiNtFGT6DOln2xT43PeVnA68u3rY/rs:fit/g:sm/q:90/h:593/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/NDEtNDk4Mi5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/3i3uvzi_zPZ-fv8OLLApOXJBNJWJ-KSRqjKi4fdA_7A/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/NDEtNDk4Mi5qcGVn.jpeg",
+            "width": 600,
+            "height": 593,
+            "aspect_ratio": 1.012,
+            "role": "pressing_disc",
+            "deterministic_score": 0.9219,
+            "local_uri": "assets/releases/13257813/img_3.jpg",
+            "cv_metrics": {
+              "is_pressing": true,
+              "is_zoomed_label_scan": false,
+              "is_hype_sticker_or_text_insert": false,
+              "is_square_insert_or_sleeve": false,
+              "detected_disc_radius": 0.97,
+              "active_diagonal_quadrants": 4,
+              "score": 0.9281,
+              "raw_annular_score": 0.9281,
+              "aspect_ratio": 1.01,
+              "corner_std": 0.0155,
+              "corner_wax_dist": 0.708,
+              "circularity_ratio": 3.3535,
+              "label_wax_dist": 0.6519,
+              "octant_label_wax_q25": 0.4517,
+              "hv_wax_anisotropy": 0.0056,
+              "spindle_contrast": 0.0235,
+              "rim_step": 0.061,
+              "label_step": 0.0368,
+              "reason": "deterministic_annular_cv_match"
+            }
+          },
+          {
+            "index": 4,
+            "uri": "https://i.discogs.com/TcDYkN_HZ8H41i0LKTCtbURtxvTZAkfzIACneNO8xgE/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/NDAtOTY5NS5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/HB3VjZc8OsNTqXLyW9WVFWbEVyxxQRAz3OT1e-ItPBU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/NDAtOTY5NS5qcGVn.jpeg",
+            "width": 600,
+            "height": 599,
+            "aspect_ratio": 1.002,
+            "role": "insert_or_sleeve",
+            "deterministic_score": 0.1165,
+            "local_uri": "assets/releases/13257813/img_4.jpg",
+            "cv_metrics": {
+              "is_pressing": false,
+              "is_zoomed_label_scan": false,
+              "is_hype_sticker_or_text_insert": true,
+              "is_square_insert_or_sleeve": true,
+              "detected_disc_radius": 0.99,
+              "active_diagonal_quadrants": 4,
+              "score": 0.0912,
+              "raw_annular_score": 0.3647,
+              "aspect_ratio": 1.0,
+              "corner_std": 0.1289,
+              "corner_wax_dist": 0.1401,
+              "circularity_ratio": 0.9494,
+              "label_wax_dist": 0.2436,
+              "octant_label_wax_q25": 0.0484,
+              "hv_wax_anisotropy": 0.0447,
+              "spindle_contrast": 0.0025,
+              "rim_step": 0.0139,
+              "label_step": 0.0128,
+              "reason": "rejected_sleeve_disc_mockup"
+            }
+          },
+          {
+            "index": 5,
+            "uri": "https://i.discogs.com/DeUR5uMMObemsT44DYIw_c9aFcn9LF1KGIBP67z_rXU/rs:fit/g:sm/q:90/h:597/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/NDAtMTcwMy5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/gm2qsRLC7ybj0TIGnzFGy96dl4t9WCUzFqu6Fyxm6hg/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/NDAtMTcwMy5qcGVn.jpeg",
+            "width": 600,
+            "height": 597,
+            "aspect_ratio": 1.005,
+            "role": "insert_or_sleeve",
+            "deterministic_score": 0.1176,
+            "local_uri": "assets/releases/13257813/img_5.jpg",
+            "cv_metrics": {
+              "is_pressing": false,
+              "is_zoomed_label_scan": false,
+              "is_hype_sticker_or_text_insert": false,
+              "is_square_insert_or_sleeve": true,
+              "detected_disc_radius": 0.82,
+              "active_diagonal_quadrants": 4,
+              "score": 0.0936,
+              "raw_annular_score": 0.3746,
+              "aspect_ratio": 1.005,
+              "corner_std": 0.067,
+              "corner_wax_dist": 0.0718,
+              "circularity_ratio": 1.0235,
+              "label_wax_dist": 0.334,
+              "octant_label_wax_q25": 0.1064,
+              "hv_wax_anisotropy": 0.1038,
+              "spindle_contrast": 0.0758,
+              "rim_step": 0.0098,
+              "label_step": 0.0256,
+              "reason": "rejected_square_insert_or_sleeve"
+            }
+          },
+          {
+            "index": 6,
+            "uri": "https://i.discogs.com/4MwFBSZWiqO3F18IrjA044wRbqdJixuqrWQjNJqYYjY/rs:fit/g:sm/q:90/h:448/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2MTU3NTMw/MjQtNzU2Mi5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/svmW7bbRVzYrshdebl7Cp_1gmqGLWCIvwAXpsg4qEsU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2MTU3NTMw/MjQtNzU2Mi5qcGVn.jpeg",
+            "width": 600,
+            "height": 448,
+            "aspect_ratio": 1.339,
+            "role": "center_label_closeup",
+            "deterministic_score": 0.0994,
+            "local_uri": "assets/releases/13257813/img_6.jpg",
+            "cv_metrics": {
+              "is_pressing": false,
+              "is_zoomed_label_scan": true,
+              "is_hype_sticker_or_text_insert": false,
+              "is_square_insert_or_sleeve": true,
+              "detected_disc_radius": 0.84,
+              "active_diagonal_quadrants": 4,
+              "score": 0.0728,
+              "raw_annular_score": 0.291,
+              "aspect_ratio": 1.339,
+              "corner_std": 0.1233,
+              "corner_wax_dist": 0.1322,
+              "circularity_ratio": 1.0438,
+              "label_wax_dist": 0.1185,
+              "octant_label_wax_q25": 0.0171,
+              "hv_wax_anisotropy": 0.089,
+              "spindle_contrast": 0.0635,
+              "rim_step": 0.0151,
+              "label_step": 0.0078,
+              "reason": "rejected_sleeve_disc_mockup"
+            }
+          }
+        ],
+        "local_cover_image_url": "assets/releases/13257813/cover.jpg",
+        "local_pressing_image_url": "assets/releases/13257813/pressing.jpg?v=2_20e55d6f",
+        "remote_pressing_image_url": "https://i.discogs.com/72dEFQlVlkBSKdTOp07P208KnuBjQNBX1nZjDfhUOQU/rs:fit/g:sm/q:90/h:593/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/NDEtODk0OS5qcGVn.jpeg",
+        "delta_sig": "b49a79c5f2158053"
+      },
+      "wax_spec": {
+        "pattern": "splatter",
+        "primary_color": "#d97706",
+        "secondary_color": "#cbd5e1",
+        "accent_color": "#f8fafc",
+        "color_name": "Metallic Gold",
+        "translucent": false,
+        "etched": false,
+        "is_double_lp": false,
+        "is_limited": true,
+        "is_repress": true,
+        "variant_badge": "12\" LP • Metallic Gold + Crystal Clear • Splatter • Ltd Ed",
+        "deterministic_seed": 720818026
+      },
+      "tracklist": [
+        {
+          "position": "A1",
+          "title": "The Accursed",
+          "duration": "3:33",
+          "ytVideoId": "IHlZOcVW2SI",
+          "ytTitle": "BORN OF OSIRIS - The Accursed (Official Music Video)",
+          "albumYtVideoId": "GP-XFV2LOCU",
+          "albumYtStart": 0,
+          "albumYtDuration": 2400
+        },
+        {
+          "position": "A2",
+          "title": "Disconnectome",
+          "duration": "",
+          "ytVideoId": "IHlZOcVW2SI",
+          "ytTitle": "Born Of Osiris - Disconnectome",
+          "albumYtVideoId": "GP-XFV2LOCU",
+          "albumYtStart": 213,
+          "albumYtDuration": 2400
+        },
+        {
+          "position": "A3",
+          "title": "Cycles Of Tragedy",
+          "duration": "3:17",
+          "ytVideoId": "l56plK0uReo",
+          "ytTitle": "BORN OF OSIRIS - Cycles Of Tragedy (Official Music Video)",
+          "albumYtVideoId": "GP-XFV2LOCU",
+          "albumYtStart": 428,
+          "albumYtDuration": 2400
+        },
+        {
+          "position": "A4",
+          "title": "Under The Gun",
+          "duration": "3:40",
+          "ytVideoId": "C4ztgTvAqlQ",
+          "ytTitle": "BORN OF OSIRIS -  Under The Gun (Official Live Music Video)",
+          "albumYtVideoId": "GP-XFV2LOCU",
+          "albumYtStart": 625,
+          "albumYtDuration": 2400
+        },
+        {
+          "position": "B1",
+          "title": "Recursion",
+          "duration": "",
+          "ytVideoId": "IHlZOcVW2SI",
+          "ytTitle": "Born Of Osiris - Recursion",
+          "albumYtVideoId": "GP-XFV2LOCU",
+          "albumYtStart": 845,
+          "albumYtDuration": 2400
+        },
+        {
+          "position": "B2",
+          "title": "Analogs In A Cell",
+          "duration": "",
+          "ytVideoId": "tOQZELpuPuU",
+          "ytTitle": "Born Of Osiris - Analogs In A Cell",
+          "albumYtVideoId": "GP-XFV2LOCU",
+          "albumYtStart": 1060,
+          "albumYtDuration": 2400
+        },
+        {
+          "position": "B3",
+          "title": "Silence The Echo",
+          "duration": "",
+          "ytVideoId": "TVHlu71ct1Q",
+          "ytTitle": "Born Of Osiris - Silence The Echo",
+          "albumYtVideoId": "GP-XFV2LOCU",
+          "albumYtStart": 1275,
+          "albumYtDuration": 2400
+        },
+        {
+          "position": "B4",
+          "title": "One Without The Other",
+          "duration": "",
+          "ytVideoId": "d2Ic79HqGhk",
+          "ytTitle": "Born Of Osiris - One Without The Other",
+          "albumYtVideoId": "GP-XFV2LOCU",
+          "albumYtStart": 1490,
+          "albumYtDuration": 2400
+        }
+      ],
+      "youtube_videos": [
+        {
+          "uri": "https://www.youtube.com/watch?v=l56plK0uReo",
+          "title": "BORN OF OSIRIS - Cycles Of Tragedy (Official Music Video)",
+          "duration": 197
+        },
+        {
+          "uri": "https://www.youtube.com/watch?v=C4ztgTvAqlQ",
+          "title": "BORN OF OSIRIS -  Under The Gun (Official Live Music Video)",
+          "duration": 220
+        },
+        {
+          "uri": "https://www.youtube.com/watch?v=IHlZOcVW2SI",
+          "title": "BORN OF OSIRIS - The Accursed (Official Music Video)",
+          "duration": 213
+        }
+      ],
+      "ytPlaylistId": "OLAK5uy_njBM-tGWWOIIUVpI_IcyRQ-07vOCEnLi4",
+      "fullAlbumYtVideoId": "GP-XFV2LOCU",
+      "fullAlbumYtDuration": 2400,
+      "defaultYtVideoId": "IHlZOcVW2SI"
+    },
     {
       "release_id": 34513906,
       "instance_id": 2205482599,
@@ -4127,788 +4487,6 @@
       "defaultYtVideoId": "4RtpvN42zM8"
     },
     {
-      "release_id": 16839336,
-      "instance_id": 2203313865,
-      "artist": "A Day To Remember",
-      "title": "What Separates Me From You",
-      "year": 2021,
-      "format_string": "Vinyl, LP, Album, Limited Edition, Reissue, Repress, Blue, White, & Purple Starburst",
-      "label": "Victory Records",
-      "catno": "VR603",
-      "media_condition": "Near Mint (NM or M-)",
-      "sleeve_condition": "Near Mint (NM or M-)",
-      "comments": "",
-      "date_added": "2026-11-10T20:23:40-08:00",
-      "discogs_url": "https://www.discogs.com/release/16839336-A-Day-To-Remember-What-Separates-Me-From-You",
-      "estimated_value_usd": 156.18,
-      "flattening_status": "Not Listed",
-      "genres": [
-        "Rock"
-      ],
-      "styles": [
-        "Metalcore",
-        "Pop Punk"
-      ],
-      "images": {
-        "cover_image_url": "https://i.discogs.com/PkhUGsnRqc59wECUUDSToRrgnsWRUqkFpz-Gau8g8kQ/rs:fit/g:sm/q:90/h:600/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTYtMzQyMC5qcGVn.jpeg",
-        "pressing_image_url": "assets/releases/16839336/pressing.jpg?v=2_14bd2772",
-        "center_label_image_url": "https://i.discogs.com/T_K4ktBM-EueyYPDW9MKJ2gvEAC-rGHQudCkIn4T7eE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTYtMzQyMC5qcGVn.jpeg",
-        "display_thumbnail_url": "assets/releases/16839336/pressing.jpg?v=2_14bd2772",
-        "has_pressing_photo": true,
-        "selected_index": 2,
-        "selected_score": 0.9763,
-        "detection_method": "deterministic_annular_cv+guideline_13_8",
-        "classified_images": [
-          {
-            "index": 0,
-            "uri": "https://i.discogs.com/PkhUGsnRqc59wECUUDSToRrgnsWRUqkFpz-Gau8g8kQ/rs:fit/g:sm/q:90/h:600/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTYtMzQyMC5qcGVn.jpeg",
-            "uri150": "https://i.discogs.com/T_K4ktBM-EueyYPDW9MKJ2gvEAC-rGHQudCkIn4T7eE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTYtMzQyMC5qcGVn.jpeg",
-            "width": 599,
-            "height": 599,
-            "aspect_ratio": 1.0,
-            "role": "front_cover",
-            "deterministic_score": 0.05,
-            "local_uri": "assets/releases/16839336/img_0.jpg"
-          },
-          {
-            "index": 1,
-            "uri": "https://i.discogs.com/3LH9LaQidaQlHH8-EjesIynFWDbKelj4VS8KNLelaDA/rs:fit/g:sm/q:90/h:600/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTItODk4Mi5qcGVn.jpeg",
-            "uri150": "https://i.discogs.com/lRh58icnF_naJFgeiQ_72Ky4whAZX2v4YmU2Sj4l2ZQ/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTItODk4Mi5qcGVn.jpeg",
-            "width": 599,
-            "height": 599,
-            "aspect_ratio": 1.0,
-            "role": "insert_or_sleeve",
-            "deterministic_score": 0.0792,
-            "local_uri": "assets/releases/16839336/img_1.jpg",
-            "cv_metrics": {
-              "is_pressing": false,
-              "is_zoomed_label_scan": false,
-              "is_hype_sticker_or_text_insert": false,
-              "is_square_insert_or_sleeve": true,
-              "detected_disc_radius": 0.9,
-              "active_diagonal_quadrants": 3,
-              "score": 0.0785,
-              "raw_annular_score": 0.3138,
-              "aspect_ratio": 1.0,
-              "corner_std": 0.1591,
-              "corner_wax_dist": 0.1599,
-              "circularity_ratio": 1.5444,
-              "label_wax_dist": 0.3804,
-              "octant_label_wax_q25": 0.1568,
-              "hv_wax_anisotropy": 0.2186,
-              "spindle_contrast": 0.0878,
-              "rim_step": 0.0066,
-              "label_step": 0.0424,
-              "reason": "rejected_square_insert_or_sleeve"
-            }
-          },
-          {
-            "index": 2,
-            "uri": "https://i.discogs.com/kVKz8Z3s_esJ1rso6VeXC2VcCXKD8_qp8kRwrFbGT_4/rs:fit/g:sm/q:90/h:600/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTYtMTA2MS5qcGVn.jpeg",
-            "uri150": "https://i.discogs.com/-VLe-s_UkefN-Ruc4Hzy-BV4U6sO9TjtRZg5lfPioTI/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTYtMTA2MS5qcGVn.jpeg",
-            "width": 599,
-            "height": 599,
-            "aspect_ratio": 1.0,
-            "role": "pressing_disc",
-            "deterministic_score": 0.9763,
-            "local_uri": "assets/releases/16839336/img_2.jpg",
-            "cv_metrics": {
-              "is_pressing": true,
-              "is_zoomed_label_scan": false,
-              "is_hype_sticker_or_text_insert": false,
-              "is_square_insert_or_sleeve": false,
-              "detected_disc_radius": 0.99,
-              "active_diagonal_quadrants": 4,
-              "score": 0.946,
-              "raw_annular_score": 0.946,
-              "aspect_ratio": 1.0,
-              "corner_std": 0.1244,
-              "corner_wax_dist": 0.4617,
-              "circularity_ratio": 5.0563,
-              "label_wax_dist": 0.6447,
-              "octant_label_wax_q25": 0.8345,
-              "hv_wax_anisotropy": 0.0023,
-              "spindle_contrast": 0.2239,
-              "rim_step": 0.0571,
-              "label_step": 0.0829,
-              "reason": "deterministic_annular_cv_match"
-            }
-          },
-          {
-            "index": 3,
-            "uri": "https://i.discogs.com/KHX0s00xG49rxy6LQNRCiNMPv8r-22tg850gyBztpzo/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTMtMTczMC5qcGVn.jpeg",
-            "uri150": "https://i.discogs.com/b7RZlAdhrL4KEL2Qan-XF8ypNJyiL9JgZvlo4rmGR-Y/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTMtMTczMC5qcGVn.jpeg",
-            "width": 600,
-            "height": 600,
-            "aspect_ratio": 1.0,
-            "role": "pressing_disc",
-            "deterministic_score": 0.94,
-            "local_uri": "assets/releases/16839336/img_3.jpg",
-            "cv_metrics": {
-              "is_pressing": true,
-              "is_zoomed_label_scan": false,
-              "is_hype_sticker_or_text_insert": false,
-              "is_square_insert_or_sleeve": false,
-              "detected_disc_radius": 0.97,
-              "active_diagonal_quadrants": 4,
-              "score": 0.9478,
-              "raw_annular_score": 0.9478,
-              "aspect_ratio": 1.0,
-              "corner_std": 0.1825,
-              "corner_wax_dist": 0.5339,
-              "circularity_ratio": 4.3261,
-              "label_wax_dist": 0.4939,
-              "octant_label_wax_q25": 0.656,
-              "hv_wax_anisotropy": 0.0608,
-              "spindle_contrast": 0.5063,
-              "rim_step": 0.0537,
-              "label_step": 0.0715,
-              "reason": "deterministic_annular_cv_match"
-            }
-          },
-          {
-            "index": 4,
-            "uri": "https://i.discogs.com/3Q6DL7_lhlwTxwcfxz7CEpsNaIC3tZ8wNBTyNzeB3Ck/rs:fit/g:sm/q:90/h:600/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTYtMTg1MS5qcGVn.jpeg",
-            "uri150": "https://i.discogs.com/L2WDzy-2Mr2UMbRk-tof_GlQpOH5nuCjWDnmA6W1Jas/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTYtMTg1MS5qcGVn.jpeg",
-            "width": 599,
-            "height": 599,
-            "aspect_ratio": 1.0,
-            "role": "insert_or_sleeve",
-            "deterministic_score": 0.1241,
-            "local_uri": "assets/releases/16839336/img_4.jpg",
-            "cv_metrics": {
-              "is_pressing": false,
-              "is_zoomed_label_scan": false,
-              "is_hype_sticker_or_text_insert": false,
-              "is_square_insert_or_sleeve": true,
-              "detected_disc_radius": 0.83,
-              "active_diagonal_quadrants": 4,
-              "score": 0.1001,
-              "raw_annular_score": 0.4002,
-              "aspect_ratio": 1.0,
-              "corner_std": 0.0999,
-              "corner_wax_dist": 0.165,
-              "circularity_ratio": 0.9114,
-              "label_wax_dist": 0.3394,
-              "octant_label_wax_q25": 0.139,
-              "hv_wax_anisotropy": 0.0807,
-              "spindle_contrast": 0.0237,
-              "rim_step": 0.0064,
-              "label_step": 0.0266,
-              "reason": "rejected_square_insert_or_sleeve"
-            }
-          },
-          {
-            "index": 5,
-            "uri": "https://i.discogs.com/yNQaCF1Ej0c7-uI7-i5Xu6RuZqtkdiDoCctcwvyU8T0/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTYtOTUxMS5qcGVn.jpeg",
-            "uri150": "https://i.discogs.com/ElSySC9OWbCO9ibfyxKt8ufjTRlG7vnDudDwuK8Q2NI/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTYtOTUxMS5qcGVn.jpeg",
-            "width": 600,
-            "height": 600,
-            "aspect_ratio": 1.0,
-            "role": "center_label_closeup",
-            "deterministic_score": 0.101,
-            "local_uri": "assets/releases/16839336/img_5.jpg",
-            "cv_metrics": {
-              "is_pressing": false,
-              "is_zoomed_label_scan": true,
-              "is_hype_sticker_or_text_insert": true,
-              "is_square_insert_or_sleeve": true,
-              "detected_disc_radius": 0.81,
-              "active_diagonal_quadrants": 4,
-              "score": 0.0741,
-              "raw_annular_score": 0.2964,
-              "aspect_ratio": 1.0,
-              "corner_std": 0.2168,
-              "corner_wax_dist": 0.088,
-              "circularity_ratio": 1.1424,
-              "label_wax_dist": 0.0872,
-              "octant_label_wax_q25": 0.1329,
-              "hv_wax_anisotropy": 0.3368,
-              "spindle_contrast": 0.3518,
-              "rim_step": 0.0254,
-              "label_step": 0.0167,
-              "reason": "rejected_zoomed_center_label_scan"
-            }
-          },
-          {
-            "index": 6,
-            "uri": "https://i.discogs.com/SwCUEmQV6ZQibBSeuDGtRdRW-7uu_-rnnZVF8JtLt1w/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTUtMjIzMy5qcGVn.jpeg",
-            "uri150": "https://i.discogs.com/1fzBtDztlNh7_FcgEfjZ44zgfnrlF6SLVeNsJf2oeF0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTUtMjIzMy5qcGVn.jpeg",
-            "width": 600,
-            "height": 600,
-            "aspect_ratio": 1.0,
-            "role": "insert_or_sleeve",
-            "deterministic_score": 0.1238,
-            "local_uri": "assets/releases/16839336/img_6.jpg",
-            "cv_metrics": {
-              "is_pressing": false,
-              "is_zoomed_label_scan": false,
-              "is_hype_sticker_or_text_insert": true,
-              "is_square_insert_or_sleeve": true,
-              "detected_disc_radius": 0.8,
-              "active_diagonal_quadrants": 3,
-              "score": 0.1015,
-              "raw_annular_score": 0.4059,
-              "aspect_ratio": 1.0,
-              "corner_std": 0.0503,
-              "corner_wax_dist": 0.1617,
-              "circularity_ratio": 1.6524,
-              "label_wax_dist": 0.1418,
-              "octant_label_wax_q25": 0.0416,
-              "hv_wax_anisotropy": 0.0433,
-              "spindle_contrast": 0.0535,
-              "rim_step": 0.0162,
-              "label_step": 0.0677,
-              "reason": "rejected_hype_sticker_or_text_insert"
-            }
-          },
-          {
-            "index": 7,
-            "uri": "https://i.discogs.com/cT2owEem3MqznRkcTF4SUqfOSuecxArLUv3z95fbv74/rs:fit/g:sm/q:90/h:600/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzUtMzU2OC5qcGVn.jpeg",
-            "uri150": "https://i.discogs.com/kklEmiyTCtYgnsjC_5UR3uA3tD6ykt85cgK1W4ayC5Y/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzUtMzU2OC5qcGVn.jpeg",
-            "width": 599,
-            "height": 600,
-            "aspect_ratio": 0.998,
-            "role": "center_label_closeup",
-            "deterministic_score": 0.121,
-            "local_uri": "assets/releases/16839336/img_7.jpg",
-            "cv_metrics": {
-              "is_pressing": false,
-              "is_zoomed_label_scan": true,
-              "is_hype_sticker_or_text_insert": true,
-              "is_square_insert_or_sleeve": true,
-              "detected_disc_radius": 0.83,
-              "active_diagonal_quadrants": 4,
-              "score": 0.0982,
-              "raw_annular_score": 0.3929,
-              "aspect_ratio": 0.998,
-              "corner_std": 0.1751,
-              "corner_wax_dist": 0.0385,
-              "circularity_ratio": 1.514,
-              "label_wax_dist": 0.009,
-              "octant_label_wax_q25": 0.0034,
-              "hv_wax_anisotropy": 0.2963,
-              "spindle_contrast": 0.1223,
-              "rim_step": 0.0411,
-              "label_step": 0.0434,
-              "reason": "rejected_zoomed_center_label_scan"
-            }
-          },
-          {
-            "index": 8,
-            "uri": "https://i.discogs.com/ZVPeSyubHSvDvPITOb8aHmotKJD1NPg88LbYpjOdwz0/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzItODYzMC5qcGVn.jpeg",
-            "uri150": "https://i.discogs.com/k2rli37zEALQbL0ZeJ9JRsnuxEDvcsHf2rfRGPGszYQ/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzItODYzMC5qcGVn.jpeg",
-            "width": 600,
-            "height": 599,
-            "aspect_ratio": 1.002,
-            "role": "center_label_closeup",
-            "deterministic_score": 0.1035,
-            "local_uri": "assets/releases/16839336/img_8.jpg",
-            "cv_metrics": {
-              "is_pressing": false,
-              "is_zoomed_label_scan": true,
-              "is_hype_sticker_or_text_insert": false,
-              "is_square_insert_or_sleeve": true,
-              "detected_disc_radius": 0.99,
-              "active_diagonal_quadrants": 4,
-              "score": 0.0776,
-              "raw_annular_score": 0.3103,
-              "aspect_ratio": 1.002,
-              "corner_std": 0.2109,
-              "corner_wax_dist": 0.0906,
-              "circularity_ratio": 1.5589,
-              "label_wax_dist": 0.0131,
-              "octant_label_wax_q25": 0.0069,
-              "hv_wax_anisotropy": 0.2538,
-              "spindle_contrast": 0.0691,
-              "rim_step": 0.0364,
-              "label_step": 0.028,
-              "reason": "rejected_zoomed_center_label_scan"
-            }
-          },
-          {
-            "index": 9,
-            "uri": "https://i.discogs.com/Cf0g3K-l2pcAXuEtcXdBZPCxKWP9irUzFvLOywo8wzw/rs:fit/g:sm/q:90/h:600/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzUtMTg5OC5qcGVn.jpeg",
-            "uri150": "https://i.discogs.com/-0YSfDDY4fTpiyhLSGdVD7c8TShTMMH4N3Hyg5fH6lE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzUtMTg5OC5qcGVn.jpeg",
-            "width": 599,
-            "height": 599,
-            "aspect_ratio": 1.0,
-            "role": "center_label_closeup",
-            "deterministic_score": 0.1137,
-            "local_uri": "assets/releases/16839336/img_9.jpg",
-            "cv_metrics": {
-              "is_pressing": false,
-              "is_zoomed_label_scan": true,
-              "is_hype_sticker_or_text_insert": true,
-              "is_square_insert_or_sleeve": true,
-              "detected_disc_radius": 0.81,
-              "active_diagonal_quadrants": 4,
-              "score": 0.0897,
-              "raw_annular_score": 0.3588,
-              "aspect_ratio": 1.0,
-              "corner_std": 0.1461,
-              "corner_wax_dist": 0.0238,
-              "circularity_ratio": 1.4853,
-              "label_wax_dist": 0.0036,
-              "octant_label_wax_q25": 0.0324,
-              "hv_wax_anisotropy": 0.4271,
-              "spindle_contrast": 0.0571,
-              "rim_step": 0.0335,
-              "label_step": 0.0422,
-              "reason": "rejected_zoomed_center_label_scan"
-            }
-          },
-          {
-            "index": 10,
-            "uri": "https://i.discogs.com/2ZZ4bJt2T7q2RGrBQZtJ8ilS72Wl2IECd2Sq_TKR_y8/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzUtNTcyNC5qcGVn.jpeg",
-            "uri150": "https://i.discogs.com/LxTwAXSgTTX20lLReGOZIRBdZHr2TmDSBLKdJCqNZxI/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzUtNTcyNC5qcGVn.jpeg",
-            "width": 600,
-            "height": 599,
-            "aspect_ratio": 1.002,
-            "role": "center_label_closeup",
-            "deterministic_score": 0.1228,
-            "local_uri": "assets/releases/16839336/img_10.jpg",
-            "cv_metrics": {
-              "is_pressing": false,
-              "is_zoomed_label_scan": true,
-              "is_hype_sticker_or_text_insert": true,
-              "is_square_insert_or_sleeve": true,
-              "detected_disc_radius": 0.97,
-              "active_diagonal_quadrants": 4,
-              "score": 0.1004,
-              "raw_annular_score": 0.4015,
-              "aspect_ratio": 1.002,
-              "corner_std": 0.2059,
-              "corner_wax_dist": 0.1302,
-              "circularity_ratio": 1.5982,
-              "label_wax_dist": 0.012,
-              "octant_label_wax_q25": 0.0204,
-              "hv_wax_anisotropy": 0.2813,
-              "spindle_contrast": 0.1155,
-              "rim_step": 0.0369,
-              "label_step": 0.0447,
-              "reason": "rejected_zoomed_center_label_scan"
-            }
-          },
-          {
-            "index": 11,
-            "uri": "https://i.discogs.com/EANVOf4oAiHMEc3e0swZYqInDKBEc7XrklZ0AZ2q-30/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzUtMzg4Ni5qcGVn.jpeg",
-            "uri150": "https://i.discogs.com/WRxvRg5jInxR3xGQRY7RvRMcu34fHjE9qPy4hD4fjF0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzUtMzg4Ni5qcGVn.jpeg",
-            "width": 599,
-            "height": 599,
-            "aspect_ratio": 1.0,
-            "role": "center_label_closeup",
-            "deterministic_score": 0.1051,
-            "local_uri": "assets/releases/16839336/img_11.jpg",
-            "cv_metrics": {
-              "is_pressing": false,
-              "is_zoomed_label_scan": true,
-              "is_hype_sticker_or_text_insert": false,
-              "is_square_insert_or_sleeve": true,
-              "detected_disc_radius": 0.92,
-              "active_diagonal_quadrants": 4,
-              "score": 0.0795,
-              "raw_annular_score": 0.3178,
-              "aspect_ratio": 1.0,
-              "corner_std": 0.1221,
-              "corner_wax_dist": 0.0294,
-              "circularity_ratio": 1.4604,
-              "label_wax_dist": 0.0244,
-              "octant_label_wax_q25": 0.0237,
-              "hv_wax_anisotropy": 0.2184,
-              "spindle_contrast": 0.0049,
-              "rim_step": 0.0287,
-              "label_step": 0.0354,
-              "reason": "rejected_zoomed_center_label_scan"
-            }
-          },
-          {
-            "index": 12,
-            "uri": "https://i.discogs.com/0C9B-rw9GzH9-9A65S_T7fWaKxp7D1be0m64Ya672Y0/rs:fit/g:sm/q:90/h:600/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzQtMzkzOS5qcGVn.jpeg",
-            "uri150": "https://i.discogs.com/F1lDPz8DlKSV-yptmgxJz7lXtG4B7KRlmBYniXweNio/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzQtMzkzOS5qcGVn.jpeg",
-            "width": 599,
-            "height": 599,
-            "aspect_ratio": 1.0,
-            "role": "center_label_closeup",
-            "deterministic_score": 0.1077,
-            "local_uri": "assets/releases/16839336/img_12.jpg",
-            "cv_metrics": {
-              "is_pressing": false,
-              "is_zoomed_label_scan": true,
-              "is_hype_sticker_or_text_insert": true,
-              "is_square_insert_or_sleeve": true,
-              "detected_disc_radius": 0.99,
-              "active_diagonal_quadrants": 4,
-              "score": 0.0826,
-              "raw_annular_score": 0.3302,
-              "aspect_ratio": 1.0,
-              "corner_std": 0.2129,
-              "corner_wax_dist": 0.0893,
-              "circularity_ratio": 1.5261,
-              "label_wax_dist": 0.02,
-              "octant_label_wax_q25": 0.0098,
-              "hv_wax_anisotropy": 0.3341,
-              "spindle_contrast": 0.0865,
-              "rim_step": 0.0345,
-              "label_step": 0.033,
-              "reason": "rejected_zoomed_center_label_scan"
-            }
-          },
-          {
-            "index": 13,
-            "uri": "https://i.discogs.com/oFESCiKTTcJTOiFYRKjSSUsBGyPumUyyZzz1vtRG0l4/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzItODQ4OC5qcGVn.jpeg",
-            "uri150": "https://i.discogs.com/ow_1ZeYUDS6gGjD8-1K8gfkSO7G_YQI0BqZzNUU_ipQ/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzItODQ4OC5qcGVn.jpeg",
-            "width": 600,
-            "height": 600,
-            "aspect_ratio": 1.0,
-            "role": "center_label_closeup",
-            "deterministic_score": 0.1086,
-            "local_uri": "assets/releases/16839336/img_13.jpg",
-            "cv_metrics": {
-              "is_pressing": false,
-              "is_zoomed_label_scan": true,
-              "is_hype_sticker_or_text_insert": true,
-              "is_square_insert_or_sleeve": true,
-              "detected_disc_radius": 0.99,
-              "active_diagonal_quadrants": 4,
-              "score": 0.0837,
-              "raw_annular_score": 0.3347,
-              "aspect_ratio": 1.0,
-              "corner_std": 0.1633,
-              "corner_wax_dist": 0.0389,
-              "circularity_ratio": 1.43,
-              "label_wax_dist": 0.0305,
-              "octant_label_wax_q25": 0.0083,
-              "hv_wax_anisotropy": 0.338,
-              "spindle_contrast": 0.0052,
-              "rim_step": 0.0331,
-              "label_step": 0.0368,
-              "reason": "rejected_zoomed_center_label_scan"
-            }
-          },
-          {
-            "index": 14,
-            "uri": "https://i.discogs.com/LeGorRBejXfPYknwAM7A_h4tW6FebGeOnNyL0IbVa80/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzEtMjA5Ni5qcGVn.jpeg",
-            "uri150": "https://i.discogs.com/jXBbIfITyA7KadBCKy6OFDaeGBdAHBtSsIj9LShpTwY/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzEtMjA5Ni5qcGVn.jpeg",
-            "width": 600,
-            "height": 600,
-            "aspect_ratio": 1.0,
-            "role": "center_label_closeup",
-            "deterministic_score": 0.1145,
-            "local_uri": "assets/releases/16839336/img_14.jpg",
-            "cv_metrics": {
-              "is_pressing": false,
-              "is_zoomed_label_scan": true,
-              "is_hype_sticker_or_text_insert": true,
-              "is_square_insert_or_sleeve": true,
-              "detected_disc_radius": 0.89,
-              "active_diagonal_quadrants": 4,
-              "score": 0.0906,
-              "raw_annular_score": 0.3624,
-              "aspect_ratio": 1.0,
-              "corner_std": 0.1276,
-              "corner_wax_dist": 0.024,
-              "circularity_ratio": 1.329,
-              "label_wax_dist": 0.0324,
-              "octant_label_wax_q25": 0.0172,
-              "hv_wax_anisotropy": 0.2872,
-              "spindle_contrast": 0.0365,
-              "rim_step": 0.0319,
-              "label_step": 0.0372,
-              "reason": "rejected_zoomed_center_label_scan"
-            }
-          },
-          {
-            "index": 15,
-            "uri": "https://i.discogs.com/Ynty5hd6aM0ixpHlLrfLjejPIosQY59TOUhx1eo8jOI/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzAtMTg0NS5qcGVn.jpeg",
-            "uri150": "https://i.discogs.com/QFeKkVJ54goZaYjT7793foIWo-wASY821wJ-uHi0zl0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzAtMTg0NS5qcGVn.jpeg",
-            "width": 600,
-            "height": 600,
-            "aspect_ratio": 1.0,
-            "role": "center_label_closeup",
-            "deterministic_score": 0.112,
-            "local_uri": "assets/releases/16839336/img_15.jpg",
-            "cv_metrics": {
-              "is_pressing": false,
-              "is_zoomed_label_scan": true,
-              "is_hype_sticker_or_text_insert": true,
-              "is_square_insert_or_sleeve": true,
-              "detected_disc_radius": 0.84,
-              "active_diagonal_quadrants": 4,
-              "score": 0.0876,
-              "raw_annular_score": 0.3504,
-              "aspect_ratio": 1.0,
-              "corner_std": 0.1569,
-              "corner_wax_dist": 0.0212,
-              "circularity_ratio": 1.4416,
-              "label_wax_dist": 0.0111,
-              "octant_label_wax_q25": 0.0127,
-              "hv_wax_anisotropy": 0.2636,
-              "spindle_contrast": 0.1632,
-              "rim_step": 0.0361,
-              "label_step": 0.0381,
-              "reason": "rejected_zoomed_center_label_scan"
-            }
-          },
-          {
-            "index": 16,
-            "uri": "https://i.discogs.com/MYuVJIvkV0wYNilS0J8zfPIgiv5Gq8PLpHCKfOdGfyo/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzMtNjA5OS5qcGVn.jpeg",
-            "uri150": "https://i.discogs.com/yyrpu3W40FN1rgLFQsKepCW5fDRxm2yW4qZYJXD7liU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzMtNjA5OS5qcGVn.jpeg",
-            "width": 600,
-            "height": 600,
-            "aspect_ratio": 1.0,
-            "role": "center_label_closeup",
-            "deterministic_score": 0.1229,
-            "local_uri": "assets/releases/16839336/img_16.jpg",
-            "cv_metrics": {
-              "is_pressing": false,
-              "is_zoomed_label_scan": true,
-              "is_hype_sticker_or_text_insert": true,
-              "is_square_insert_or_sleeve": true,
-              "detected_disc_radius": 0.8,
-              "active_diagonal_quadrants": 4,
-              "score": 0.1005,
-              "raw_annular_score": 0.4021,
-              "aspect_ratio": 1.0,
-              "corner_std": 0.154,
-              "corner_wax_dist": 0.0069,
-              "circularity_ratio": 1.3686,
-              "label_wax_dist": 0.0441,
-              "octant_label_wax_q25": 0.0087,
-              "hv_wax_anisotropy": 0.3575,
-              "spindle_contrast": 0.1147,
-              "rim_step": 0.0373,
-              "label_step": 0.0461,
-              "reason": "rejected_zoomed_center_label_scan"
-            }
-          },
-          {
-            "index": 17,
-            "uri": "https://i.discogs.com/BmVm9iB30j5s3GlbFoC-3unklCYwrfD1fBx6FmbL25I/rs:fit/g:sm/q:90/h:600/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzMtMzI5OS5qcGVn.jpeg",
-            "uri150": "https://i.discogs.com/_Nt7dWIN_olpsWHBzv8-Pn4rbtKVZs4v314T1iXFLGA/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzMtMzI5OS5qcGVn.jpeg",
-            "width": 599,
-            "height": 600,
-            "aspect_ratio": 0.998,
-            "role": "center_label_closeup",
-            "deterministic_score": 0.121,
-            "local_uri": "assets/releases/16839336/img_17.jpg",
-            "cv_metrics": {
-              "is_pressing": false,
-              "is_zoomed_label_scan": true,
-              "is_hype_sticker_or_text_insert": false,
-              "is_square_insert_or_sleeve": true,
-              "detected_disc_radius": 0.84,
-              "active_diagonal_quadrants": 4,
-              "score": 0.0982,
-              "raw_annular_score": 0.3928,
-              "aspect_ratio": 0.998,
-              "corner_std": 0.1598,
-              "corner_wax_dist": 0.0502,
-              "circularity_ratio": 1.704,
-              "label_wax_dist": 0.0481,
-              "octant_label_wax_q25": 0.0242,
-              "hv_wax_anisotropy": 0.0122,
-              "spindle_contrast": 0.0299,
-              "rim_step": 0.0318,
-              "label_step": 0.0517,
-              "reason": "rejected_zoomed_center_label_scan"
-            }
-          },
-          {
-            "index": 18,
-            "uri": "https://i.discogs.com/zXt_NgscUuVQpUFeqDpu8OVbXnCfxOeC8Db1KYNXyYk/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzMtNjk5My5qcGVn.jpeg",
-            "uri150": "https://i.discogs.com/Hq-wuZiozU8m7guh5rXbcb8PPkIvlcc-TdI46ecVf4o/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzMtNjk5My5qcGVn.jpeg",
-            "width": 600,
-            "height": 600,
-            "aspect_ratio": 1.0,
-            "role": "center_label_closeup",
-            "deterministic_score": 0.093,
-            "local_uri": "assets/releases/16839336/img_18.jpg",
-            "cv_metrics": {
-              "is_pressing": false,
-              "is_zoomed_label_scan": true,
-              "is_hype_sticker_or_text_insert": true,
-              "is_square_insert_or_sleeve": true,
-              "detected_disc_radius": 0.86,
-              "active_diagonal_quadrants": 4,
-              "score": 0.0653,
-              "raw_annular_score": 0.2612,
-              "aspect_ratio": 1.0,
-              "corner_std": 0.1314,
-              "corner_wax_dist": 0.0551,
-              "circularity_ratio": 1.1278,
-              "label_wax_dist": 0.0043,
-              "octant_label_wax_q25": 0.0046,
-              "hv_wax_anisotropy": 0.5049,
-              "spindle_contrast": 0.0287,
-              "rim_step": 0.0185,
-              "label_step": 0.0229,
-              "reason": "rejected_zoomed_center_label_scan"
-            }
-          },
-          {
-            "index": 19,
-            "uri": "https://i.discogs.com/JT15Sx40paQe4bLjEXZN5P9ODk8y49S8lVPoy--XtU4/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzQtOTY0NC5qcGVn.jpeg",
-            "uri150": "https://i.discogs.com/Anj4PPMLLR2egcLk0D1qVBptOHjG5bbaES4EozqP_0E/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzQtOTY0NC5qcGVn.jpeg",
-            "width": 600,
-            "height": 600,
-            "aspect_ratio": 1.0,
-            "role": "center_label_closeup",
-            "deterministic_score": 0.1242,
-            "local_uri": "assets/releases/16839336/img_19.jpg",
-            "cv_metrics": {
-              "is_pressing": false,
-              "is_zoomed_label_scan": true,
-              "is_hype_sticker_or_text_insert": true,
-              "is_square_insert_or_sleeve": true,
-              "detected_disc_radius": 0.82,
-              "active_diagonal_quadrants": 4,
-              "score": 0.102,
-              "raw_annular_score": 0.408,
-              "aspect_ratio": 1.0,
-              "corner_std": 0.1507,
-              "corner_wax_dist": 0.0236,
-              "circularity_ratio": 1.5231,
-              "label_wax_dist": 0.0047,
-              "octant_label_wax_q25": 0.0098,
-              "hv_wax_anisotropy": 0.5774,
-              "spindle_contrast": 0.0205,
-              "rim_step": 0.0448,
-              "label_step": 0.0397,
-              "reason": "rejected_zoomed_center_label_scan"
-            }
-          },
-          {
-            "index": 20,
-            "uri": "https://i.discogs.com/93C8gSguNrIggEPxdlAxD9xpvh7Rb1bMDj4ZK346qNI/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzMtNzQzMS5qcGVn.jpeg",
-            "uri150": "https://i.discogs.com/JzPXT8NVwAtLFAnCk7qfnCd4KNRLhtfQOay_D2NIr-g/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzMtNzQzMS5qcGVn.jpeg",
-            "width": 600,
-            "height": 600,
-            "aspect_ratio": 1.0,
-            "role": "center_label_closeup",
-            "deterministic_score": 0.0471,
-            "local_uri": "assets/releases/16839336/img_20.jpg",
-            "cv_metrics": {
-              "is_pressing": false,
-              "is_zoomed_label_scan": true,
-              "is_hype_sticker_or_text_insert": false,
-              "is_square_insert_or_sleeve": true,
-              "detected_disc_radius": 0.8,
-              "active_diagonal_quadrants": 0,
-              "score": 0.0113,
-              "raw_annular_score": 0.0453,
-              "aspect_ratio": 1.0,
-              "corner_std": 0.0416,
-              "corner_wax_dist": 0.036,
-              "circularity_ratio": 0.5211,
-              "label_wax_dist": 0.0074,
-              "octant_label_wax_q25": 0.0298,
-              "hv_wax_anisotropy": 0.0143,
-              "spindle_contrast": 0.0144,
-              "rim_step": 0.0043,
-              "label_step": 0.0043,
-              "reason": "rejected_sleeve_disc_mockup"
-            }
-          }
-        ],
-        "local_cover_image_url": "assets/releases/16839336/cover.jpg",
-        "local_pressing_image_url": "assets/releases/16839336/pressing.jpg?v=2_14bd2772",
-        "remote_pressing_image_url": "https://i.discogs.com/kVKz8Z3s_esJ1rso6VeXC2VcCXKD8_qp8kRwrFbGT_4/rs:fit/g:sm/q:90/h:600/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTYtMTA2MS5qcGVn.jpeg",
-        "delta_sig": "658dc2e01c6634f8"
-      },
-      "wax_spec": {
-        "pattern": "splatter",
-        "primary_color": "#2563eb",
-        "secondary_color": "#f8fafc",
-        "accent_color": "#8b2cf5",
-        "color_name": "Cobalt Blue",
-        "translucent": true,
-        "etched": false,
-        "is_double_lp": false,
-        "is_limited": true,
-        "is_repress": true,
-        "variant_badge": "12\" LP • Cobalt Blue + Opaque White • Splatter • Ltd Ed",
-        "deterministic_seed": 1231040756
-      },
-      "tracklist": [
-        {
-          "position": "A1",
-          "title": "Sticks & Bricks",
-          "duration": "3:16"
-        },
-        {
-          "position": "A2",
-          "title": "All I Want",
-          "duration": "3:22",
-          "ytVideoId": "Pn-6eOxnEMI",
-          "ytTitle": "A Day To Remember - All I Want"
-        },
-        {
-          "position": "A3",
-          "title": "It's Complicated",
-          "duration": "2:57"
-        },
-        {
-          "position": "A4",
-          "title": "This Is The House That Doubt Built",
-          "duration": "3:30"
-        },
-        {
-          "position": "A5",
-          "title": "2nd Sucks",
-          "duration": "2:27",
-          "ytVideoId": "n6T9olarH-U",
-          "ytTitle": "A Day To Remember - 2nd Sucks"
-        },
-        {
-          "position": "B6",
-          "title": "Better Off This Way",
-          "duration": "3:26"
-        },
-        {
-          "position": "B7",
-          "title": "All Signs Point To Lauderdale",
-          "duration": "3:17",
-          "ytVideoId": "08PszRp2cBg",
-          "ytTitle": "A Day To Remember - All Signs Point To Lauderdale"
-        },
-        {
-          "position": "B8",
-          "title": "You Be Tails, I'll Be Sonic",
-          "duration": "3:47"
-        },
-        {
-          "position": "B9",
-          "title": "Out Of Time",
-          "duration": "3:26"
-        },
-        {
-          "position": "B10",
-          "title": "If I Leave",
-          "duration": "3:24"
-        }
-      ],
-      "youtube_videos": [
-        {
-          "uri": "https://www.youtube.com/watch?v=Pn-6eOxnEMI",
-          "title": "A Day To Remember - All I Want (Official Video)",
-          "duration": 215
-        },
-        {
-          "uri": "https://www.youtube.com/watch?v=n6T9olarH-U",
-          "title": "A Day To Remember - 2nd Sucks",
-          "duration": 305
-        },
-        {
-          "uri": "https://www.youtube.com/watch?v=08PszRp2cBg",
-          "title": "A Day To Remember - All Signs Point to Lauderdale (Official Video)",
-          "duration": 197
-        }
-      ],
-      "ytPlaylistId": "OLAK5uy_n0ZRkqJr8BEjnsuOQ6LW0xtJFjIjCAX0s",
-      "defaultYtVideoId": "Pn-6eOxnEMI"
-    },
-    {
       "release_id": 38199639,
       "instance_id": 2203310787,
       "artist": "Vianova",
@@ -8163,7 +7741,7 @@
       "date_added": "2026-11-09T14:50:05-08:00",
       "discogs_url": "https://www.discogs.com/release/28593982-Currents-3-The-Place-I-Feel-Safest",
       "estimated_value_usd": 96.63,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -14012,7 +13590,7 @@
       "date_added": "2026-11-07T09:11:59-08:00",
       "discogs_url": "https://www.discogs.com/release/25484485-Born-Of-Osiris-Tomorrow-We-Die-live",
       "estimated_value_usd": 44.52,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -16105,7 +15683,7 @@
       "date_added": "2026-11-06T15:28:35-08:00",
       "discogs_url": "https://www.discogs.com/release/22153450-Northlane-Discoveries",
       "estimated_value_usd": 39.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -20946,7 +20524,7 @@
       "date_added": "2026-11-03T21:10:20-08:00",
       "discogs_url": "https://www.discogs.com/release/25541158-Born-Of-Osiris-Soul-Sphere",
       "estimated_value_usd": 45.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -32109,7 +31687,7 @@
       "date_added": "2026-10-29T10:50:53-07:00",
       "discogs_url": "https://www.discogs.com/release/34756244-Imminence-The-Return-Of-The-Black-",
       "estimated_value_usd": 100.0,
-      "flattening_status": "Need to be done",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -47719,7 +47297,7 @@
       "date_added": "2026-10-10T05:38:00-07:00",
       "discogs_url": "https://www.discogs.com/release/20518822-Minus-The-Bear-Infinity-Overhead",
       "estimated_value_usd": 15.95,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Electronic",
         "Rock"
@@ -49882,7 +49460,7 @@
       "date_added": "2026-10-09T10:06:59-07:00",
       "discogs_url": "https://www.discogs.com/release/2343816-Every-Time-I-Die-The-Big-Dirty",
       "estimated_value_usd": 133.33,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -55082,7 +54660,7 @@
       "date_added": "2026-10-05T17:06:39-07:00",
       "discogs_url": "https://www.discogs.com/release/13990219-Northlane-Alien",
       "estimated_value_usd": 36.39,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Electronic",
         "Rock"
@@ -61043,7 +60621,7 @@
       "date_added": "2026-10-01T18:59:41-07:00",
       "discogs_url": "https://www.discogs.com/release/37023150-Northlane-Node-Reloaded",
       "estimated_value_usd": 47.95,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -61362,35 +60940,41 @@
   "flattening_queue": {
     "schema_version": "5.0.0",
     "storage_mode": "portable_inline_html+json",
-    "updated_at_utc": "2026-11-17T05:50:45Z",
+    "updated_at_utc": "2026-11-18T19:23:41Z",
     "protocol": "Bag on 6 until 130°F then drop to 4 — 2.5 hours once at 130°F on the plate",
     "need_to_be_done_release_ids": [
       28844782,
-      34756244,
       35907826
     ],
     "done_release_ids": [
+      2343816,
       3873517,
       9346527,
       11368406,
       12131049,
       13113361,
+      13990219,
       14043330,
       14188877,
       14458307,
       16251744,
+      20518822,
       20546863,
       21390094,
+      22153450,
       22544762,
       23343893,
       23657633,
       23674760,
       23775551,
+      25484485,
+      25541158,
       26421509,
       26690690,
       27079776,
       27927123,
       28269505,
+      28593982,
       29075062,
       29237467,
       29410045,
@@ -61401,10 +60985,12 @@
       31909216,
       33303678,
       34691910,
+      34756244,
       35426350,
       35720014,
       35844376,
       36897417,
+      37023150,
       37058814,
       37163709,
       37848120,
@@ -61427,13 +61013,6 @@
         "release_ids": [
           35907826
         ]
-      },
-      {
-        "artist": "Imminence",
-        "album": "The Return Of The Black ",
-        "release_ids": [
-          34756244
-        ]
       }
     ],
     "done_entries": [
@@ -61449,6 +61028,20 @@
         "album": "Angel Or Alien",
         "release_ids": [
           20546863
+        ]
+      },
+      {
+        "artist": "Born Of Osiris",
+        "album": "Soul Sphere",
+        "release_ids": [
+          25541158
+        ]
+      },
+      {
+        "artist": "Born Of Osiris",
+        "album": "Tomorrow We Die ∆live",
+        "release_ids": [
+          25484485
         ]
       },
       {
@@ -61477,6 +61070,13 @@
         "album": "Vaxis II: A Window Of The Waking Mind",
         "release_ids": [
           23674760
+        ]
+      },
+      {
+        "artist": "Currents",
+        "album": "The Place I Feel Safest",
+        "release_ids": [
+          28593982
         ]
       },
       {
@@ -61522,6 +61122,13 @@
         ]
       },
       {
+        "artist": "Every Time I Die",
+        "album": "The Big Dirty",
+        "release_ids": [
+          2343816
+        ]
+      },
+      {
         "artist": "Greyhaven",
         "album": "This Bright And Beautiful World",
         "release_ids": [
@@ -61543,6 +61150,13 @@
         ]
       },
       {
+        "artist": "Imminence",
+        "album": "The Return Of The Black ",
+        "release_ids": [
+          34756244
+        ]
+      },
+      {
         "artist": "Invent, Animate",
         "album": "Heavener",
         "release_ids": [
@@ -61554,6 +61168,34 @@
         "album": "You Won’t Go Before You’re Supposed To",
         "release_ids": [
           30637357
+        ]
+      },
+      {
+        "artist": "Minus The Bear",
+        "album": "Infinity Overhead",
+        "release_ids": [
+          20518822
+        ]
+      },
+      {
+        "artist": "Northlane",
+        "album": "Alien",
+        "release_ids": [
+          13990219
+        ]
+      },
+      {
+        "artist": "Northlane",
+        "album": "Discoveries",
+        "release_ids": [
+          22153450
+        ]
+      },
+      {
+        "artist": "Northlane",
+        "album": "Node: Reloaded",
+        "release_ids": [
+          37023150
         ]
       },
       {

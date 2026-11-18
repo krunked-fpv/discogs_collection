@@ -448,6 +448,7 @@ def run_pick_pressing_photos(
     force_rids: set[int] | None = None,
     pre_sync_delta: dict[str, Any] | None = None,
     ui: VaultTerminalUI | None = None,
+    discover_unindexed_folders: bool = False,
 ) -> dict[str, Any]:
     """Evaluates release images with Delta Fast-Path, picks the best pressing photo, updates JSONs, and injects index.html."""
     if not collection_path.exists():
@@ -504,14 +505,15 @@ def run_pick_pressing_photos(
     unchanged_count: int = int(pre_sync_delta.get("unchanged_count", 0)) if pre_sync_delta else 0
     upgraded_pressing_files: int = int(pre_sync_delta.get("upgraded_pressing_files", 0)) if pre_sync_delta else 0
     removed_false_pressing_files: int = int(pre_sync_delta.get("removed_false_pressing_files", 0)) if pre_sync_delta else 0
+    newly_detected_overrides: int = int(pre_sync_delta.get("newly_detected_overrides", 0)) if pre_sync_delta else 0
 
     newly_added_folder_rids: set[int] = set()
 
-    # 1. Discover any newly added folders in assets/releases/<rid>/ that aren't in collection.json yet
+    # 1. Discover any newly added folders in assets/releases/<rid>/ only when explicitly requested (--discover-folders)
     known_rids: set[int] = {int(r.get("release_id") or 0) for r in records if int(r.get("release_id") or 0) > 0}
     cache_dirty = False
 
-    for child_dir in (sorted(assets_releases_dir.iterdir()) if pre_sync_delta is None else []):
+    for child_dir in (sorted(assets_releases_dir.iterdir()) if (pre_sync_delta is None and discover_unindexed_folders) else []):
         if not child_dir.is_dir() or not child_dir.name.isdigit():
             continue
         folder_rid = int(child_dir.name)
@@ -576,7 +578,6 @@ def run_pick_pressing_photos(
 
     pressing_photo_count = 0
     colored_count = 0
-    newly_detected_overrides = 0
     total_recs = len(records)
 
     for idx_rec, rec in enumerate(records, start=1):
@@ -625,7 +626,7 @@ def run_pick_pressing_photos(
                     new_count=len(new_records),
                     resync_count=len(resynced_records),
                     cached_count=unchanged_count,
-                    current_item=f"⚡ Cached #{rid_str} ({rec.get('artist')})",
+                    current_item=f"▸ Cached #{rid_str} ({rec.get('artist')})",
                 )
             else:
                 # Active Delta Path: NEW or RESYNCED
@@ -640,7 +641,7 @@ def run_pick_pressing_photos(
                     new_count=len(new_records),
                     resync_count=len(resynced_records),
                     cached_count=unchanged_count,
-                    current_item=f"🔍 CV Scanning #{rid_str} {rec.get('artist')}...",
+                    current_item=f"▸ CV Scanning #{rid_str} {rec.get('artist')}...",
                 )
 
                 local_files = _discover_local_release_images(rel_dir, rid_str)
@@ -821,64 +822,42 @@ def run_pick_pressing_photos(
                         "action": action_desc,
                     })
 
-        # Sync overrides.json for records evaluated in Stage 1 of sync_discogs.py
         if rid in already_evaluated_rids and rid not in newly_added_folder_rids:
-            prev_ov = overrides.get(rid_str)
-            is_user_locked = isinstance(prev_ov, dict) and prev_ov.get("user_locked") is True
-            classified_len = len(img_selection.get("classified_images") or [])
-            if img_selection.get("has_pressing_photo") and classified_len > 1:
-                preferred_url = (
-                    img_selection.get("local_pressing_image_url")
-                    or img_selection.get("pressing_image_url")
-                    or ""
-                )
-                if preferred_url and not is_user_locked and prev_ov != preferred_url:
-                    overrides[rid_str] = preferred_url
-                    newly_detected_overrides += 1
-            elif not img_selection.get("has_pressing_photo"):
-                if rid_str in overrides and not is_user_locked:
-                    overrides.pop(rid_str, None)
-                    newly_detected_overrides += 1
-            img_selection["delta_sig"] = compute_release_delta_signature(
-                release_id=rid,
-                rel_dir=rel_dir,
-                format_str=fmt_str,
-                notes=combined_notes,
-                override_val=overrides.get(rid_str),
-            )
-            rec["images"] = img_selection
-
-        # Re-verify lightweight metadata (fast, <0.02ms per record)
-        wax_spec = parse_wax_variant(fmt_str, comments=combined_notes, release_id=rid)
-        rec["wax_spec"] = wax_spec
-
-        lowest_price = rel_detail.get("lowest_price")
-        if isinstance(lowest_price, (int, float)) and float(lowest_price) > 0:
-            rec["estimated_value_usd"] = round(float(lowest_price), 2)
-        elif rid in VERIFIED_PRICE_FALLBACKS:
-            rec["estimated_value_usd"] = VERIFIED_PRICE_FALLBACKS[rid]
-        elif not isinstance(rec.get("estimated_value_usd"), (int, float)) or float(rec.get("estimated_value_usd") or 0) <= 0:
-            rec["estimated_value_usd"] = 35.0
+            # Already enriched, CV-evaluated, and signed in Stage 1 of sync_discogs.py
+            wax_spec = rec.get("wax_spec") or parse_wax_variant(fmt_str, comments=combined_notes, release_id=rid)
+            rec["wax_spec"] = wax_spec
         else:
-            rec["estimated_value_usd"] = round(float(rec["estimated_value_usd"]), 2)
+            # Re-verify lightweight metadata (fast, <0.02ms per record)
+            wax_spec = parse_wax_variant(fmt_str, comments=combined_notes, release_id=rid)
+            rec["wax_spec"] = wax_spec
 
-        if flattening_queue:
-            rec["flattening_status"] = resolve_flattening_status(
-                artist=str(rec.get("artist") or ""),
-                title=str(rec.get("title") or ""),
-                release_id=rid,
-                queue_data=flattening_queue,
-            )
+            lowest_price = rel_detail.get("lowest_price")
+            if isinstance(lowest_price, (int, float)) and float(lowest_price) > 0:
+                rec["estimated_value_usd"] = round(float(lowest_price), 2)
+            elif rid in VERIFIED_PRICE_FALLBACKS:
+                rec["estimated_value_usd"] = VERIFIED_PRICE_FALLBACKS[rid]
+            elif not isinstance(rec.get("estimated_value_usd"), (int, float)) or float(rec.get("estimated_value_usd") or 0) <= 0:
+                rec["estimated_value_usd"] = 35.0
+            else:
+                rec["estimated_value_usd"] = round(float(rec["estimated_value_usd"]), 2)
 
-        if enrich_record_youtube_music(
-            rec,
-            rel_detail=rel_detail,
-            existing_rec=rec,
-            allow_network_search=download_missing,
-            ui=ui,
-        ):
-            cache[rid_str] = rel_detail
-            cache_dirty = True
+            if flattening_queue:
+                rec["flattening_status"] = resolve_flattening_status(
+                    artist=str(rec.get("artist") or ""),
+                    title=str(rec.get("title") or ""),
+                    release_id=rid,
+                    queue_data=flattening_queue,
+                )
+
+            if enrich_record_youtube_music(
+                rec,
+                rel_detail=rel_detail,
+                existing_rec=rec,
+                allow_network_search=(download_missing and delta_status != "unchanged"),
+                ui=ui,
+            ):
+                cache[rid_str] = rel_detail
+                cache_dirty = True
 
         if img_selection.get("has_pressing_photo"):
             pressing_photo_count += 1
@@ -971,6 +950,7 @@ def run_pick_pressing_photos(
         encoding="utf-8",
     )
 
+    ui.update_throbber(phase="Injecting static data into index.html...", current_item="▸ Writing index.html")
     injected = inject_into_index_html(html_path, collection_data, overrides_sorted)
 
     ui.print_summary_report(
@@ -1028,6 +1008,12 @@ def main() -> None:
         help="Comma-separated list of specific release_ids to force re-evaluate (e.g. 35668090,16610055)",
     )
     parser.add_argument("--token", default=None)
+    parser.add_argument(
+        "--discover-folders",
+        action="store_true",
+        default=False,
+        help="Scan assets/releases/<rid>/ for unindexed local folders and add them to collection.json",
+    )
     args = parser.parse_args()
 
     clean_token = resolve_discogs_token(cli_token=args.token, repo_root=REPO_ROOT)
@@ -1044,6 +1030,7 @@ def main() -> None:
         token=clean_token,
         force_full=args.full,
         force_rids=force_rids,
+        discover_unindexed_folders=args.discover_folders,
     )
 
 

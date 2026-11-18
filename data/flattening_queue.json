@@ -1,35 +1,41 @@
 {
   "schema_version": "5.0.0",
   "storage_mode": "portable_inline_html+json",
-  "updated_at_utc": "2026-11-17T05:50:45Z",
+  "updated_at_utc": "2026-11-18T19:23:41Z",
   "protocol": "Bag on 6 until 130°F then drop to 4 — 2.5 hours once at 130°F on the plate",
   "need_to_be_done_release_ids": [
     28844782,
-    34756244,
     35907826
   ],
   "done_release_ids": [
+    2343816,
     3873517,
     9346527,
     11368406,
     12131049,
     13113361,
+    13990219,
     14043330,
     14188877,
     14458307,
     16251744,
+    20518822,
     20546863,
     21390094,
+    22153450,
     22544762,
     23343893,
     23657633,
     23674760,
     23775551,
+    25484485,
+    25541158,
     26421509,
     26690690,
     27079776,
     27927123,
     28269505,
+    28593982,
     29075062,
     29237467,
     29410045,
@@ -40,10 +46,12 @@
     31909216,
     33303678,
     34691910,
+    34756244,
     35426350,
     35720014,
     35844376,
     36897417,
+    37023150,
     37058814,
     37163709,
     37848120,
@@ -66,13 +74,6 @@
       "release_ids": [
         35907826
       ]
-    },
-    {
-      "artist": "Imminence",
-      "album": "The Return Of The Black ",
-      "release_ids": [
-        34756244
-      ]
     }
   ],
   "done_entries": [
@@ -88,6 +89,20 @@
       "album": "Angel Or Alien",
       "release_ids": [
         20546863
+      ]
+    },
+    {
+      "artist": "Born Of Osiris",
+      "album": "Soul Sphere",
+      "release_ids": [
+        25541158
+      ]
+    },
+    {
+      "artist": "Born Of Osiris",
+      "album": "Tomorrow We Die ∆live",
+      "release_ids": [
+        25484485
       ]
     },
     {
@@ -116,6 +131,13 @@
       "album": "Vaxis II: A Window Of The Waking Mind",
       "release_ids": [
         23674760
+      ]
+    },
+    {
+      "artist": "Currents",
+      "album": "The Place I Feel Safest",
+      "release_ids": [
+        28593982
       ]
     },
     {
@@ -161,6 +183,13 @@
       ]
     },
     {
+      "artist": "Every Time I Die",
+      "album": "The Big Dirty",
+      "release_ids": [
+        2343816
+      ]
+    },
+    {
       "artist": "Greyhaven",
       "album": "This Bright And Beautiful World",
       "release_ids": [
@@ -182,6 +211,13 @@
       ]
     },
     {
+      "artist": "Imminence",
+      "album": "The Return Of The Black ",
+      "release_ids": [
+        34756244
+      ]
+    },
+    {
       "artist": "Invent, Animate",
       "album": "Heavener",
       "release_ids": [
@@ -193,6 +229,34 @@
       "album": "You Won’t Go Before You’re Supposed To",
       "release_ids": [
         30637357
+      ]
+    },
+    {
+      "artist": "Minus The Bear",
+      "album": "Infinity Overhead",
+      "release_ids": [
+        20518822
+      ]
+    },
+    {
+      "artist": "Northlane",
+      "album": "Alien",
+      "release_ids": [
+        13990219
+      ]
+    },
+    {
+      "artist": "Northlane",
+      "album": "Discoveries",
+      "release_ids": [
+        22153450
+      ]
+    },
+    {
+      "artist": "Northlane",
+      "album": "Node: Reloaded",
+      "release_ids": [
+        37023150
       ]
     },
     {

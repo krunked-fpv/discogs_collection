@@ -5350,6 +5350,296 @@
     ],
     "year": 2019
   },
+  "13257813": {
+    "_full_images_fetched": true,
+    "_ytm_resolved": {
+      "fullAlbumYtDuration": 2400,
+      "fullAlbumYtVideoId": "GP-XFV2LOCU",
+      "spotifyAlbumId": "",
+      "trackIds": {
+        "1": "IHlZOcVW2SI",
+        "4": "IHlZOcVW2SI",
+        "5": "tOQZELpuPuU",
+        "6": "TVHlu71ct1Q",
+        "7": "d2Ic79HqGhk"
+      },
+      "ytPlaylistId": "OLAK5uy_njBM-tGWWOIIUVpI_IcyRQ-07vOCEnLi4"
+    },
+    "artists": [
+      {
+        "anv": "",
+        "id": 1674212,
+        "join": "",
+        "name": "Born Of Osiris",
+        "resource_url": "https://api.discogs.com/artists/1674212",
+        "role": "",
+        "thumbnail_url": "https://i.discogs.com/1wyR_l7Pj_ryf7e-vSBXd52B6SY6huABg-HHO707Atk/rs:fit/g:sm/q:90/h:201/w:400/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9BLTE2NzQy/MTItMTc2MDU1MTk5/NS04NDAwLmpwZWc.jpeg",
+        "tracks": ""
+      }
+    ],
+    "artists_sort": "Born Of Osiris",
+    "blocked_from_sale": false,
+    "community": {
+      "contributors": [
+        {
+          "resource_url": "https://api.discogs.com/users/DancingEagleFeather",
+          "username": "DancingEagleFeather"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/duncanwick",
+          "username": "duncanwick"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/V3XED",
+          "username": "V3XED"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/zerutul101",
+          "username": "zerutul101"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/manulifan",
+          "username": "manulifan"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/Bobbybombardment",
+          "username": "Bobbybombardment"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/DylanFrazier",
+          "username": "DylanFrazier"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/mnc61510",
+          "username": "mnc61510"
+        }
+      ],
+      "data_quality": "Needs Vote",
+      "have": 201,
+      "rating": {
+        "average": 4.53,
+        "count": 17
+      },
+      "status": "Accepted",
+      "submitter": {
+        "resource_url": "https://api.discogs.com/users/DancingEagleFeather",
+        "username": "DancingEagleFeather"
+      },
+      "want": 109
+    },
+    "companies": [
+      {
+        "catno": "",
+        "entity_type": "42",
+        "entity_type_name": "Exclusive Retailer",
+        "id": 97958,
+        "name": "Sumerian Records",
+        "resource_url": "https://api.discogs.com/labels/97958",
+        "thumbnail_url": "https://i.discogs.com/ZwnREeOehLTd9McGWAEMxqZ4cLjI7IyzlWkQ-HLmCXQ/rs:fit/g:sm/q:90/h:210/w:240/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTk3OTU4/LTE1MjY4NjcyNTQt/NTQ4NC5qcGVn.jpeg"
+      }
+    ],
+    "country": "US",
+    "data_quality": "Needs Vote",
+    "date_added": "2019-02-22T11:56:55-08:00",
+    "date_changed": "2025-05-28T14:04:07-07:00",
+    "estimated_weight": 230,
+    "format_quantity": 1,
+    "formats": [
+      {
+        "descriptions": [
+          "12\"",
+          "45 RPM",
+          "Mini-Album",
+          "Limited Edition"
+        ],
+        "name": "Vinyl",
+        "qty": "1",
+        "text": "Gold Inside Clear w/White Splatter"
+      }
+    ],
+    "genres": [
+      "Rock"
+    ],
+    "id": 13257813,
+    "identifiers": [
+      {
+        "description": "On sticker",
+        "type": "Barcode",
+        "value": "817424019934"
+      },
+      {
+        "description": "side a, stamped",
+        "type": "Matrix / Runout",
+        "value": "184054M1/A"
+      },
+      {
+        "description": "side b, stamped",
+        "type": "Matrix / Runout",
+        "value": "184054M2/A"
+      }
+    ],
+    "images": [
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/5A1ofgiQvHtA-w5glihmo6j_jalB9ffEm8bmhdopfeU/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE1NTA4NjU0/MTYtNTQzNS5qcGVn.jpeg",
+        "type": "primary",
+        "uri": "https://i.discogs.com/5A1ofgiQvHtA-w5glihmo6j_jalB9ffEm8bmhdopfeU/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE1NTA4NjU0/MTYtNTQzNS5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/HwZ-DN1dWGXCzthWDJVCcsTAwy8sEsdDsti8yBZblgU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE1NTA4NjU0/MTYtNTQzNS5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 594,
+        "resource_url": "https://i.discogs.com/nxQB2dpeOyXLgW2ySDn-yHGanp9VcUouXNWE-Lpj37g/rs:fit/g:sm/q:90/h:594/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/MzktMzQxOC5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/nxQB2dpeOyXLgW2ySDn-yHGanp9VcUouXNWE-Lpj37g/rs:fit/g:sm/q:90/h:594/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/MzktMzQxOC5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/K6IDYMi2zN5krI_53hDpG4dWllrVAGssVLtl9NXfbnI/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/MzktMzQxOC5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 593,
+        "resource_url": "https://i.discogs.com/72dEFQlVlkBSKdTOp07P208KnuBjQNBX1nZjDfhUOQU/rs:fit/g:sm/q:90/h:593/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/NDEtODk0OS5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/72dEFQlVlkBSKdTOp07P208KnuBjQNBX1nZjDfhUOQU/rs:fit/g:sm/q:90/h:593/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/NDEtODk0OS5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/FvdWcZyXiRlFw59FrTtYAeFClRwNH5zelfAelQ_hIxM/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/NDEtODk0OS5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 593,
+        "resource_url": "https://i.discogs.com/A-G-n__6_g5p1ZuoiNtFGT6DOln2xT43PeVnA68u3rY/rs:fit/g:sm/q:90/h:593/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/NDEtNDk4Mi5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/A-G-n__6_g5p1ZuoiNtFGT6DOln2xT43PeVnA68u3rY/rs:fit/g:sm/q:90/h:593/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/NDEtNDk4Mi5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/3i3uvzi_zPZ-fv8OLLApOXJBNJWJ-KSRqjKi4fdA_7A/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/NDEtNDk4Mi5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 599,
+        "resource_url": "https://i.discogs.com/TcDYkN_HZ8H41i0LKTCtbURtxvTZAkfzIACneNO8xgE/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/NDAtOTY5NS5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/TcDYkN_HZ8H41i0LKTCtbURtxvTZAkfzIACneNO8xgE/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/NDAtOTY5NS5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/HB3VjZc8OsNTqXLyW9WVFWbEVyxxQRAz3OT1e-ItPBU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/NDAtOTY5NS5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 597,
+        "resource_url": "https://i.discogs.com/DeUR5uMMObemsT44DYIw_c9aFcn9LF1KGIBP67z_rXU/rs:fit/g:sm/q:90/h:597/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/NDAtMTcwMy5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/DeUR5uMMObemsT44DYIw_c9aFcn9LF1KGIBP67z_rXU/rs:fit/g:sm/q:90/h:597/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/NDAtMTcwMy5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/gm2qsRLC7ybj0TIGnzFGy96dl4t9WCUzFqu6Fyxm6hg/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/NDAtMTcwMy5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 448,
+        "resource_url": "https://i.discogs.com/4MwFBSZWiqO3F18IrjA044wRbqdJixuqrWQjNJqYYjY/rs:fit/g:sm/q:90/h:448/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2MTU3NTMw/MjQtNzU2Mi5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/4MwFBSZWiqO3F18IrjA044wRbqdJixuqrWQjNJqYYjY/rs:fit/g:sm/q:90/h:448/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2MTU3NTMw/MjQtNzU2Mi5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/svmW7bbRVzYrshdebl7Cp_1gmqGLWCIvwAXpsg4qEsU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2MTU3NTMw/MjQtNzU2Mi5qcGVn.jpeg",
+        "width": 600
+      }
+    ],
+    "is_offensive": false,
+    "labels": [
+      {
+        "catno": "none",
+        "entity_type": "1",
+        "entity_type_name": "Label",
+        "id": 97958,
+        "name": "Sumerian Records",
+        "resource_url": "https://api.discogs.com/labels/97958",
+        "thumbnail_url": "https://i.discogs.com/ZwnREeOehLTd9McGWAEMxqZ4cLjI7IyzlWkQ-HLmCXQ/rs:fit/g:sm/q:90/h:210/w:240/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTk3OTU4/LTE1MjY4NjcyNTQt/NTQ4NC5qcGVn.jpeg"
+      }
+    ],
+    "lowest_price": 36.25,
+    "master_id": 1506459,
+    "master_url": "https://api.discogs.com/masters/1506459",
+    "notes": "Limited edition of 500\n\nIncludes printed inner sleeve and download card",
+    "num_for_sale": 7,
+    "released": "2019",
+    "released_formatted": "2019",
+    "resource_url": "https://api.discogs.com/releases/13257813",
+    "series": [],
+    "status": "Accepted",
+    "styles": [
+      "Metalcore",
+      "Progressive Metal"
+    ],
+    "thumb": "https://i.discogs.com/HwZ-DN1dWGXCzthWDJVCcsTAwy8sEsdDsti8yBZblgU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE1NTA4NjU0/MTYtNTQzNS5qcGVn.jpeg",
+    "title": "The Simulation",
+    "tracklist": [
+      {
+        "duration": "",
+        "position": "A1",
+        "title": "The Accursed",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "A2",
+        "title": "Disconnectome",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "A3",
+        "title": "Cycles Of Tragedy",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "A4",
+        "title": "Under The Gun",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "B1",
+        "title": "Recursion",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "B2",
+        "title": "Analogs In A Cell",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "B3",
+        "title": "Silence The Echo",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "B4",
+        "title": "One Without The Other",
+        "type_": "track"
+      }
+    ],
+    "uri": "https://www.discogs.com/release/13257813-Born-Of-Osiris-The-Simulation",
+    "videos": [
+      {
+        "description": "BORN OF OSIRIS // The Simulation - OUT NOW\n\nCD/Vinyl Bundles: http://bornofosiris.com \niTunes: http://smarturl.it/TheSimulation-IT\nAmazon: http://smarturl.it/TheSimulation-AM\nGooglePlay: http://smarturl.it/TheSimulation-GP\n\n\u2014\n\nDirected by Steven Contrer",
+        "duration": 197,
+        "embed": true,
+        "title": "BORN OF OSIRIS - Cycles Of Tragedy (Official Music Video)",
+        "uri": "https://www.youtube.com/watch?v=l56plK0uReo"
+      },
+      {
+        "description": "BORN OF OSIRIS // The Simulation - OUT NOW\n\nCD/Vinyl Bundles: http://bornofosiris.com \niTunes: http://smarturl.it/TheSimulation-IT\nAmazon: http://smarturl.it/TheSimulation-AM\nGooglePlay: http://smarturl.it/TheSimulation-GP\n\n--\n\nCatch Born of Osiris on tou",
+        "duration": 220,
+        "embed": true,
+        "title": "BORN OF OSIRIS -  Under The Gun (Official Live Music Video)",
+        "uri": "https://www.youtube.com/watch?v=C4ztgTvAqlQ"
+      },
+      {
+        "description": "BORN OF OSIRIS // The Simulation - OUT NOW\n\nCD/Vinyl Bundles: http://bornofosiris.com \niTunes: http://smarturl.it/TheSimulation-IT\nAmazon: http://smarturl.it/TheSimulation-AM\nGooglePlay: http://smarturl.it/TheSimulation-GP\n\n\u2014\n\nDirected by Steven Contrer",
+        "duration": 213,
+        "embed": true,
+        "title": "BORN OF OSIRIS - The Accursed (Official Music Video)",
+        "uri": "https://www.youtube.com/watch?v=IHlZOcVW2SI"
+      }
+    ],
+    "year": 2019
+  },
   "13990219": {
     "artists": [
       {
@@ -11197,642 +11487,6 @@
       }
     ],
     "year": 2020
-  },
-  "16839336": {
-    "artists": [
-      {
-        "anv": "",
-        "id": 746771,
-        "join": "",
-        "name": "A Day To Remember",
-        "resource_url": "https://api.discogs.com/artists/746771",
-        "role": "",
-        "thumbnail_url": "https://i.discogs.com/w4yuHk8j1vcqaetiVL4BsxknYRkdSLz3vIAPvqxQF7k/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9BLTc0Njc3/MS0xNzQwMTQzMzU4/LTgxNTQuanBlZw.jpeg",
-        "tracks": ""
-      }
-    ],
-    "artists_sort": "A Day To Remember",
-    "blocked_from_sale": false,
-    "community": {
-      "contributors": [
-        {
-          "resource_url": "https://api.discogs.com/users/willydrac",
-          "username": "willydrac"
-        },
-        {
-          "resource_url": "https://api.discogs.com/users/hackedtogore",
-          "username": "hackedtogore"
-        },
-        {
-          "resource_url": "https://api.discogs.com/users/StevenG9320",
-          "username": "StevenG9320"
-        },
-        {
-          "resource_url": "https://api.discogs.com/users/vom",
-          "username": "vom"
-        },
-        {
-          "resource_url": "https://api.discogs.com/users/TheDeadSea182",
-          "username": "TheDeadSea182"
-        },
-        {
-          "resource_url": "https://api.discogs.com/users/erikkkk39",
-          "username": "erikkkk39"
-        },
-        {
-          "resource_url": "https://api.discogs.com/users/Dustyguac",
-          "username": "Dustyguac"
-        },
-        {
-          "resource_url": "https://api.discogs.com/users/Collector_Corrector",
-          "username": "Collector_Corrector"
-        }
-      ],
-      "data_quality": "Needs Vote",
-      "have": 228,
-      "rating": {
-        "average": 4.22,
-        "count": 23
-      },
-      "status": "Accepted",
-      "submitter": {
-        "resource_url": "https://api.discogs.com/users/willydrac",
-        "username": "willydrac"
-      },
-      "want": 549
-    },
-    "companies": [
-      {
-        "catno": "",
-        "entity_type": "13",
-        "entity_type_name": "Phonographic Copyright (p)",
-        "id": 33329,
-        "name": "Victory Records",
-        "resource_url": "https://api.discogs.com/labels/33329",
-        "thumbnail_url": "https://i.discogs.com/yidjHDv1vQQZKUp4F2m0Ac8L3CAiQdfAxioqbeJH9-Q/rs:fit/g:sm/q:90/h:600/w:573/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTMzMzI5/LTE0MjE3MTA2NTAt/OTU2MS5qcGVn.jpeg"
-      },
-      {
-        "catno": "",
-        "entity_type": "14",
-        "entity_type_name": "Copyright (c)",
-        "id": 301981,
-        "name": "Another Victory Inc.",
-        "resource_url": "https://api.discogs.com/labels/301981",
-        "thumbnail_url": "https://i.discogs.com/4dCV6ytFWdZLs10XFR7Ub-p9vsP2fAoQdeevPP6oOIY/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTMwMTk4/MS0xNDE0NjE1Mzc0/LTg0NTguanBlZw.jpeg"
-      },
-      {
-        "catno": "",
-        "entity_type": "29",
-        "entity_type_name": "Mastered At",
-        "id": 264060,
-        "name": "Sterling Sound",
-        "resource_url": "https://api.discogs.com/labels/264060",
-        "thumbnail_url": "https://i.discogs.com/Z8f0gMBrt5jLL4TAcCYDGXmMPOLi9V0UW593WXP6BUU/rs:fit/g:sm/q:90/h:118/w:400/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTI2NDA2/MC0xNTAwMjgzMzYy/LTMyMTguanBlZw.jpeg"
-      },
-      {
-        "catno": "",
-        "entity_type": "23",
-        "entity_type_name": "Recorded At",
-        "id": 476210,
-        "name": "The Wade Studio",
-        "resource_url": "https://api.discogs.com/labels/476210",
-        "thumbnail_url": "https://i.discogs.com/NKYVGJObalOTvgxFcnnN2Ue3B9zVOE41nDDOvoCSNwc/rs:fit/g:sm/q:90/h:194/w:259/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTQ3NjIx/MC0xNTI2ODY0OTY1/LTcyNjguanBlZw.jpeg"
-      },
-      {
-        "catno": "",
-        "entity_type": "42",
-        "entity_type_name": "Exclusive Retailer",
-        "id": 615687,
-        "name": "Newbury Comics",
-        "resource_url": "https://api.discogs.com/labels/615687",
-        "thumbnail_url": "https://i.discogs.com/swRqebGMDVrMJ_f2ZieoGCWrKULfXO62N7ZH1ee-HJQ/rs:fit/g:sm/q:90/h:125/w:161/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTYxNTY4/Ny0xNDE4MzE0ODc1/LTcyNjYuanBlZw.jpeg"
-      }
-    ],
-    "country": "US",
-    "data_quality": "Needs Vote",
-    "date_added": "2021-01-08T12:34:12-08:00",
-    "date_changed": "2026-01-31T12:03:20-08:00",
-    "estimated_weight": 230,
-    "extraartists": [
-      {
-        "anv": "",
-        "id": 2009156,
-        "join": "",
-        "name": "Jeremy McKinnon",
-        "resource_url": "https://api.discogs.com/artists/2009156",
-        "role": "Art Direction",
-        "tracks": ""
-      },
-      {
-        "anv": "",
-        "id": 2022987,
-        "join": "",
-        "name": "Joshua Woodard",
-        "resource_url": "https://api.discogs.com/artists/2022987",
-        "role": "Bass",
-        "tracks": ""
-      },
-      {
-        "anv": "",
-        "id": 2487723,
-        "join": "",
-        "name": "Tobbe Lorentz",
-        "resource_url": "https://api.discogs.com/artists/2487723",
-        "role": "Booking [International Booking At The Agency Group]",
-        "tracks": ""
-      },
-      {
-        "anv": "",
-        "id": 2419120,
-        "join": "",
-        "name": "Dave Shapiro (3)",
-        "resource_url": "https://api.discogs.com/artists/2419120",
-        "role": "Booking [North American Booking At The Agency Group]",
-        "tracks": ""
-      },
-      {
-        "anv": "",
-        "id": 2186146,
-        "join": "",
-        "name": "Andrew Wade",
-        "resource_url": "https://api.discogs.com/artists/2186146",
-        "role": "Co-producer, Engineer [Engineered By]",
-        "tracks": ""
-      },
-      {
-        "anv": "Alex Shellnutt",
-        "id": 3415412,
-        "join": "",
-        "name": "Alex Shelnutt",
-        "resource_url": "https://api.discogs.com/artists/3415412",
-        "role": "Drums",
-        "tracks": ""
-      },
-      {
-        "anv": "",
-        "id": 2061115,
-        "join": "",
-        "name": "Rob Dobi",
-        "resource_url": "https://api.discogs.com/artists/2061115",
-        "role": "Illustration [Digipack]",
-        "tracks": ""
-      },
-      {
-        "anv": "",
-        "id": 4345850,
-        "join": "",
-        "name": "Mark Cortada",
-        "resource_url": "https://api.discogs.com/artists/4345850",
-        "role": "Illustration [Inside Booklet]",
-        "tracks": ""
-      },
-      {
-        "anv": "",
-        "id": 1937224,
-        "join": "",
-        "name": "Doublej",
-        "resource_url": "https://api.discogs.com/artists/1937224",
-        "role": "Layout",
-        "tracks": ""
-      },
-      {
-        "anv": "",
-        "id": 2022990,
-        "join": "",
-        "name": "Kevin Skaff",
-        "resource_url": "https://api.discogs.com/artists/2022990",
-        "role": "Lead Guitar, Vocals",
-        "tracks": ""
-      },
-      {
-        "anv": "",
-        "id": 2009156,
-        "join": "",
-        "name": "Jeremy McKinnon",
-        "resource_url": "https://api.discogs.com/artists/2009156",
-        "role": "Lead Vocals, Co-producer",
-        "tracks": ""
-      },
-      {
-        "anv": "",
-        "id": 2118186,
-        "join": "",
-        "name": "John Youngman",
-        "resource_url": "https://api.discogs.com/artists/2118186",
-        "role": "Management",
-        "tracks": ""
-      },
-      {
-        "anv": "",
-        "id": 1742804,
-        "join": "",
-        "name": "Mark Mercado",
-        "resource_url": "https://api.discogs.com/artists/1742804",
-        "role": "Management",
-        "tracks": ""
-      },
-      {
-        "anv": "",
-        "id": 2118186,
-        "join": "",
-        "name": "John Youngman",
-        "resource_url": "https://api.discogs.com/artists/2118186",
-        "role": "Management [At Fly South Music Group]",
-        "tracks": ""
-      },
-      {
-        "anv": "",
-        "id": 1742804,
-        "join": "",
-        "name": "Mark Mercado",
-        "resource_url": "https://api.discogs.com/artists/1742804",
-        "role": "Management [At Fly South Music Group]",
-        "tracks": ""
-      },
-      {
-        "anv": "",
-        "id": 1986316,
-        "join": "",
-        "name": "Jason Childress",
-        "resource_url": "https://api.discogs.com/artists/1986316",
-        "role": "Management [Business Management, At Curo Financial]",
-        "tracks": ""
-      },
-      {
-        "anv": "",
-        "id": 16573370,
-        "join": "",
-        "name": "Noel Hartough (2)",
-        "resource_url": "https://api.discogs.com/artists/16573370",
-        "role": "Management [Business Management, At Curo Financial]",
-        "tracks": ""
-      },
-      {
-        "anv": "",
-        "id": 259758,
-        "join": "",
-        "name": "Ted Jensen",
-        "resource_url": "https://api.discogs.com/artists/259758",
-        "role": "Mastered By",
-        "tracks": ""
-      },
-      {
-        "anv": "",
-        "id": 358335,
-        "join": "",
-        "name": "Dan Korneff",
-        "resource_url": "https://api.discogs.com/artists/358335",
-        "role": "Mixed By",
-        "tracks": "A1, A5 to B9"
-      },
-      {
-        "anv": "",
-        "id": 18995,
-        "join": "",
-        "name": "David Bendeth",
-        "resource_url": "https://api.discogs.com/artists/18995",
-        "role": "Mixed By",
-        "tracks": "A2, A3, A4, B10"
-      },
-      {
-        "anv": "",
-        "id": 435840,
-        "join": "",
-        "name": "Chad Gilbert",
-        "resource_url": "https://api.discogs.com/artists/435840",
-        "role": "Producer",
-        "tracks": ""
-      },
-      {
-        "anv": "",
-        "id": 2022989,
-        "join": "",
-        "name": "Neil Westfall",
-        "resource_url": "https://api.discogs.com/artists/2022989",
-        "role": "Rhythm Guitar, Backing Vocals",
-        "tracks": ""
-      }
-    ],
-    "format_quantity": 1,
-    "formats": [
-      {
-        "descriptions": [
-          "LP",
-          "Album",
-          "Limited Edition",
-          "Reissue",
-          "Repress"
-        ],
-        "name": "Vinyl",
-        "qty": "1",
-        "text": "Blue, White, & Purple Starburst"
-      }
-    ],
-    "genres": [
-      "Rock"
-    ],
-    "id": 16839336,
-    "identifiers": [
-      {
-        "type": "Barcode",
-        "value": "7-46105-06031-9"
-      },
-      {
-        "description": "Side A",
-        "type": "Matrix / Runout",
-        "value": "7856-VR603-1(A) 5-74684"
-      },
-      {
-        "description": "Side B",
-        "type": "Matrix / Runout",
-        "value": "7856-VR603-1(B) 5-74685"
-      }
-    ],
-    "images": [
-      {
-        "height": 599,
-        "resource_url": "https://i.discogs.com/PkhUGsnRqc59wECUUDSToRrgnsWRUqkFpz-Gau8g8kQ/rs:fit/g:sm/q:90/h:600/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTYtMzQyMC5qcGVn.jpeg",
-        "type": "primary",
-        "uri": "https://i.discogs.com/PkhUGsnRqc59wECUUDSToRrgnsWRUqkFpz-Gau8g8kQ/rs:fit/g:sm/q:90/h:600/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTYtMzQyMC5qcGVn.jpeg",
-        "uri150": "https://i.discogs.com/T_K4ktBM-EueyYPDW9MKJ2gvEAC-rGHQudCkIn4T7eE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTYtMzQyMC5qcGVn.jpeg",
-        "width": 599
-      },
-      {
-        "height": 599,
-        "resource_url": "https://i.discogs.com/3LH9LaQidaQlHH8-EjesIynFWDbKelj4VS8KNLelaDA/rs:fit/g:sm/q:90/h:600/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTItODk4Mi5qcGVn.jpeg",
-        "type": "secondary",
-        "uri": "https://i.discogs.com/3LH9LaQidaQlHH8-EjesIynFWDbKelj4VS8KNLelaDA/rs:fit/g:sm/q:90/h:600/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTItODk4Mi5qcGVn.jpeg",
-        "uri150": "https://i.discogs.com/lRh58icnF_naJFgeiQ_72Ky4whAZX2v4YmU2Sj4l2ZQ/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTItODk4Mi5qcGVn.jpeg",
-        "width": 599
-      },
-      {
-        "height": 599,
-        "resource_url": "https://i.discogs.com/kVKz8Z3s_esJ1rso6VeXC2VcCXKD8_qp8kRwrFbGT_4/rs:fit/g:sm/q:90/h:600/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTYtMTA2MS5qcGVn.jpeg",
-        "type": "secondary",
-        "uri": "https://i.discogs.com/kVKz8Z3s_esJ1rso6VeXC2VcCXKD8_qp8kRwrFbGT_4/rs:fit/g:sm/q:90/h:600/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTYtMTA2MS5qcGVn.jpeg",
-        "uri150": "https://i.discogs.com/-VLe-s_UkefN-Ruc4Hzy-BV4U6sO9TjtRZg5lfPioTI/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTYtMTA2MS5qcGVn.jpeg",
-        "width": 599
-      },
-      {
-        "height": 600,
-        "resource_url": "https://i.discogs.com/KHX0s00xG49rxy6LQNRCiNMPv8r-22tg850gyBztpzo/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTMtMTczMC5qcGVn.jpeg",
-        "type": "secondary",
-        "uri": "https://i.discogs.com/KHX0s00xG49rxy6LQNRCiNMPv8r-22tg850gyBztpzo/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTMtMTczMC5qcGVn.jpeg",
-        "uri150": "https://i.discogs.com/b7RZlAdhrL4KEL2Qan-XF8ypNJyiL9JgZvlo4rmGR-Y/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTMtMTczMC5qcGVn.jpeg",
-        "width": 600
-      },
-      {
-        "height": 599,
-        "resource_url": "https://i.discogs.com/3Q6DL7_lhlwTxwcfxz7CEpsNaIC3tZ8wNBTyNzeB3Ck/rs:fit/g:sm/q:90/h:600/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTYtMTg1MS5qcGVn.jpeg",
-        "type": "secondary",
-        "uri": "https://i.discogs.com/3Q6DL7_lhlwTxwcfxz7CEpsNaIC3tZ8wNBTyNzeB3Ck/rs:fit/g:sm/q:90/h:600/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTYtMTg1MS5qcGVn.jpeg",
-        "uri150": "https://i.discogs.com/L2WDzy-2Mr2UMbRk-tof_GlQpOH5nuCjWDnmA6W1Jas/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTYtMTg1MS5qcGVn.jpeg",
-        "width": 599
-      },
-      {
-        "height": 600,
-        "resource_url": "https://i.discogs.com/yNQaCF1Ej0c7-uI7-i5Xu6RuZqtkdiDoCctcwvyU8T0/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTYtOTUxMS5qcGVn.jpeg",
-        "type": "secondary",
-        "uri": "https://i.discogs.com/yNQaCF1Ej0c7-uI7-i5Xu6RuZqtkdiDoCctcwvyU8T0/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTYtOTUxMS5qcGVn.jpeg",
-        "uri150": "https://i.discogs.com/ElSySC9OWbCO9ibfyxKt8ufjTRlG7vnDudDwuK8Q2NI/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTYtOTUxMS5qcGVn.jpeg",
-        "width": 600
-      },
-      {
-        "height": 600,
-        "resource_url": "https://i.discogs.com/SwCUEmQV6ZQibBSeuDGtRdRW-7uu_-rnnZVF8JtLt1w/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTUtMjIzMy5qcGVn.jpeg",
-        "type": "secondary",
-        "uri": "https://i.discogs.com/SwCUEmQV6ZQibBSeuDGtRdRW-7uu_-rnnZVF8JtLt1w/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTUtMjIzMy5qcGVn.jpeg",
-        "uri150": "https://i.discogs.com/1fzBtDztlNh7_FcgEfjZ44zgfnrlF6SLVeNsJf2oeF0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTUtMjIzMy5qcGVn.jpeg",
-        "width": 600
-      },
-      {
-        "height": 600,
-        "resource_url": "https://i.discogs.com/cT2owEem3MqznRkcTF4SUqfOSuecxArLUv3z95fbv74/rs:fit/g:sm/q:90/h:600/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzUtMzU2OC5qcGVn.jpeg",
-        "type": "secondary",
-        "uri": "https://i.discogs.com/cT2owEem3MqznRkcTF4SUqfOSuecxArLUv3z95fbv74/rs:fit/g:sm/q:90/h:600/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzUtMzU2OC5qcGVn.jpeg",
-        "uri150": "https://i.discogs.com/kklEmiyTCtYgnsjC_5UR3uA3tD6ykt85cgK1W4ayC5Y/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzUtMzU2OC5qcGVn.jpeg",
-        "width": 599
-      },
-      {
-        "height": 599,
-        "resource_url": "https://i.discogs.com/ZVPeSyubHSvDvPITOb8aHmotKJD1NPg88LbYpjOdwz0/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzItODYzMC5qcGVn.jpeg",
-        "type": "secondary",
-        "uri": "https://i.discogs.com/ZVPeSyubHSvDvPITOb8aHmotKJD1NPg88LbYpjOdwz0/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzItODYzMC5qcGVn.jpeg",
-        "uri150": "https://i.discogs.com/k2rli37zEALQbL0ZeJ9JRsnuxEDvcsHf2rfRGPGszYQ/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzItODYzMC5qcGVn.jpeg",
-        "width": 600
-      },
-      {
-        "height": 599,
-        "resource_url": "https://i.discogs.com/Cf0g3K-l2pcAXuEtcXdBZPCxKWP9irUzFvLOywo8wzw/rs:fit/g:sm/q:90/h:600/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzUtMTg5OC5qcGVn.jpeg",
-        "type": "secondary",
-        "uri": "https://i.discogs.com/Cf0g3K-l2pcAXuEtcXdBZPCxKWP9irUzFvLOywo8wzw/rs:fit/g:sm/q:90/h:600/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzUtMTg5OC5qcGVn.jpeg",
-        "uri150": "https://i.discogs.com/-0YSfDDY4fTpiyhLSGdVD7c8TShTMMH4N3Hyg5fH6lE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzUtMTg5OC5qcGVn.jpeg",
-        "width": 599
-      },
-      {
-        "height": 599,
-        "resource_url": "https://i.discogs.com/2ZZ4bJt2T7q2RGrBQZtJ8ilS72Wl2IECd2Sq_TKR_y8/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzUtNTcyNC5qcGVn.jpeg",
-        "type": "secondary",
-        "uri": "https://i.discogs.com/2ZZ4bJt2T7q2RGrBQZtJ8ilS72Wl2IECd2Sq_TKR_y8/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzUtNTcyNC5qcGVn.jpeg",
-        "uri150": "https://i.discogs.com/LxTwAXSgTTX20lLReGOZIRBdZHr2TmDSBLKdJCqNZxI/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzUtNTcyNC5qcGVn.jpeg",
-        "width": 600
-      },
-      {
-        "height": 599,
-        "resource_url": "https://i.discogs.com/EANVOf4oAiHMEc3e0swZYqInDKBEc7XrklZ0AZ2q-30/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzUtMzg4Ni5qcGVn.jpeg",
-        "type": "secondary",
-        "uri": "https://i.discogs.com/EANVOf4oAiHMEc3e0swZYqInDKBEc7XrklZ0AZ2q-30/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzUtMzg4Ni5qcGVn.jpeg",
-        "uri150": "https://i.discogs.com/WRxvRg5jInxR3xGQRY7RvRMcu34fHjE9qPy4hD4fjF0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzUtMzg4Ni5qcGVn.jpeg",
-        "width": 599
-      },
-      {
-        "height": 599,
-        "resource_url": "https://i.discogs.com/0C9B-rw9GzH9-9A65S_T7fWaKxp7D1be0m64Ya672Y0/rs:fit/g:sm/q:90/h:600/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzQtMzkzOS5qcGVn.jpeg",
-        "type": "secondary",
-        "uri": "https://i.discogs.com/0C9B-rw9GzH9-9A65S_T7fWaKxp7D1be0m64Ya672Y0/rs:fit/g:sm/q:90/h:600/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzQtMzkzOS5qcGVn.jpeg",
-        "uri150": "https://i.discogs.com/F1lDPz8DlKSV-yptmgxJz7lXtG4B7KRlmBYniXweNio/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzQtMzkzOS5qcGVn.jpeg",
-        "width": 599
-      },
-      {
-        "height": 600,
-        "resource_url": "https://i.discogs.com/oFESCiKTTcJTOiFYRKjSSUsBGyPumUyyZzz1vtRG0l4/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzItODQ4OC5qcGVn.jpeg",
-        "type": "secondary",
-        "uri": "https://i.discogs.com/oFESCiKTTcJTOiFYRKjSSUsBGyPumUyyZzz1vtRG0l4/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzItODQ4OC5qcGVn.jpeg",
-        "uri150": "https://i.discogs.com/ow_1ZeYUDS6gGjD8-1K8gfkSO7G_YQI0BqZzNUU_ipQ/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzItODQ4OC5qcGVn.jpeg",
-        "width": 600
-      },
-      {
-        "height": 600,
-        "resource_url": "https://i.discogs.com/LeGorRBejXfPYknwAM7A_h4tW6FebGeOnNyL0IbVa80/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzEtMjA5Ni5qcGVn.jpeg",
-        "type": "secondary",
-        "uri": "https://i.discogs.com/LeGorRBejXfPYknwAM7A_h4tW6FebGeOnNyL0IbVa80/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzEtMjA5Ni5qcGVn.jpeg",
-        "uri150": "https://i.discogs.com/jXBbIfITyA7KadBCKy6OFDaeGBdAHBtSsIj9LShpTwY/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzEtMjA5Ni5qcGVn.jpeg",
-        "width": 600
-      },
-      {
-        "height": 600,
-        "resource_url": "https://i.discogs.com/Ynty5hd6aM0ixpHlLrfLjejPIosQY59TOUhx1eo8jOI/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzAtMTg0NS5qcGVn.jpeg",
-        "type": "secondary",
-        "uri": "https://i.discogs.com/Ynty5hd6aM0ixpHlLrfLjejPIosQY59TOUhx1eo8jOI/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzAtMTg0NS5qcGVn.jpeg",
-        "uri150": "https://i.discogs.com/QFeKkVJ54goZaYjT7793foIWo-wASY821wJ-uHi0zl0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzAtMTg0NS5qcGVn.jpeg",
-        "width": 600
-      },
-      {
-        "height": 600,
-        "resource_url": "https://i.discogs.com/MYuVJIvkV0wYNilS0J8zfPIgiv5Gq8PLpHCKfOdGfyo/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzMtNjA5OS5qcGVn.jpeg",
-        "type": "secondary",
-        "uri": "https://i.discogs.com/MYuVJIvkV0wYNilS0J8zfPIgiv5Gq8PLpHCKfOdGfyo/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzMtNjA5OS5qcGVn.jpeg",
-        "uri150": "https://i.discogs.com/yyrpu3W40FN1rgLFQsKepCW5fDRxm2yW4qZYJXD7liU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzMtNjA5OS5qcGVn.jpeg",
-        "width": 600
-      },
-      {
-        "height": 600,
-        "resource_url": "https://i.discogs.com/BmVm9iB30j5s3GlbFoC-3unklCYwrfD1fBx6FmbL25I/rs:fit/g:sm/q:90/h:600/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzMtMzI5OS5qcGVn.jpeg",
-        "type": "secondary",
-        "uri": "https://i.discogs.com/BmVm9iB30j5s3GlbFoC-3unklCYwrfD1fBx6FmbL25I/rs:fit/g:sm/q:90/h:600/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzMtMzI5OS5qcGVn.jpeg",
-        "uri150": "https://i.discogs.com/_Nt7dWIN_olpsWHBzv8-Pn4rbtKVZs4v314T1iXFLGA/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzMtMzI5OS5qcGVn.jpeg",
-        "width": 599
-      },
-      {
-        "height": 600,
-        "resource_url": "https://i.discogs.com/zXt_NgscUuVQpUFeqDpu8OVbXnCfxOeC8Db1KYNXyYk/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzMtNjk5My5qcGVn.jpeg",
-        "type": "secondary",
-        "uri": "https://i.discogs.com/zXt_NgscUuVQpUFeqDpu8OVbXnCfxOeC8Db1KYNXyYk/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzMtNjk5My5qcGVn.jpeg",
-        "uri150": "https://i.discogs.com/Hq-wuZiozU8m7guh5rXbcb8PPkIvlcc-TdI46ecVf4o/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzMtNjk5My5qcGVn.jpeg",
-        "width": 600
-      },
-      {
-        "height": 600,
-        "resource_url": "https://i.discogs.com/JT15Sx40paQe4bLjEXZN5P9ODk8y49S8lVPoy--XtU4/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzQtOTY0NC5qcGVn.jpeg",
-        "type": "secondary",
-        "uri": "https://i.discogs.com/JT15Sx40paQe4bLjEXZN5P9ODk8y49S8lVPoy--XtU4/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzQtOTY0NC5qcGVn.jpeg",
-        "uri150": "https://i.discogs.com/Anj4PPMLLR2egcLk0D1qVBptOHjG5bbaES4EozqP_0E/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzQtOTY0NC5qcGVn.jpeg",
-        "width": 600
-      },
-      {
-        "height": 600,
-        "resource_url": "https://i.discogs.com/93C8gSguNrIggEPxdlAxD9xpvh7Rb1bMDj4ZK346qNI/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzMtNzQzMS5qcGVn.jpeg",
-        "type": "secondary",
-        "uri": "https://i.discogs.com/93C8gSguNrIggEPxdlAxD9xpvh7Rb1bMDj4ZK346qNI/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzMtNzQzMS5qcGVn.jpeg",
-        "uri150": "https://i.discogs.com/JzPXT8NVwAtLFAnCk7qfnCd4KNRLhtfQOay_D2NIr-g/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NzMtNzQzMS5qcGVn.jpeg",
-        "width": 600
-      }
-    ],
-    "is_offensive": false,
-    "labels": [
-      {
-        "catno": "VR603",
-        "entity_type": "1",
-        "entity_type_name": "Label",
-        "id": 33329,
-        "name": "Victory Records",
-        "resource_url": "https://api.discogs.com/labels/33329",
-        "thumbnail_url": "https://i.discogs.com/yidjHDv1vQQZKUp4F2m0Ac8L3CAiQdfAxioqbeJH9-Q/rs:fit/g:sm/q:90/h:600/w:573/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTMzMzI5/LTE0MjE3MTA2NTAt/OTU2MS5qcGVn.jpeg"
-      }
-    ],
-    "lowest_price": 156.18,
-    "master_id": 346387,
-    "master_url": "https://api.discogs.com/masters/346387",
-    "notes": "Newbury Comics exclusive. Limited to 300 copies.\n\nRecorded at the Wade Studio in Ocala FL (The Back of a Bus, With no AC in Germany, and a Closet in New Jersey).\n\nTracks positions given sequentially regardless of LP sides on back.",
-    "num_for_sale": 3,
-    "released": "2021-01-08",
-    "released_formatted": "08 Jan 2021",
-    "resource_url": "https://api.discogs.com/releases/16839336",
-    "series": [],
-    "status": "Accepted",
-    "styles": [
-      "Metalcore",
-      "Pop Punk"
-    ],
-    "thumb": "https://i.discogs.com/T_K4ktBM-EueyYPDW9MKJ2gvEAC-rGHQudCkIn4T7eE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2ODM5/MzM2LTE2NTIxNTky/NTYtMzQyMC5qcGVn.jpeg",
-    "title": "What Separates Me From You",
-    "tracklist": [
-      {
-        "duration": "3:16",
-        "position": "A1",
-        "title": "Sticks & Bricks",
-        "type_": "track"
-      },
-      {
-        "duration": "3:22",
-        "position": "A2",
-        "title": "All I Want",
-        "type_": "track"
-      },
-      {
-        "duration": "2:57",
-        "position": "A3",
-        "title": "It's Complicated",
-        "type_": "track"
-      },
-      {
-        "duration": "3:30",
-        "position": "A4",
-        "title": "This Is The House That Doubt Built",
-        "type_": "track"
-      },
-      {
-        "duration": "2:27",
-        "position": "A5",
-        "title": "2nd Sucks",
-        "type_": "track"
-      },
-      {
-        "duration": "3:26",
-        "position": "B6",
-        "title": "Better Off This Way",
-        "type_": "track"
-      },
-      {
-        "duration": "3:17",
-        "position": "B7",
-        "title": "All Signs Point To Lauderdale",
-        "type_": "track"
-      },
-      {
-        "duration": "3:47",
-        "position": "B8",
-        "title": "You Be Tails, I'll Be Sonic",
-        "type_": "track"
-      },
-      {
-        "duration": "3:26",
-        "position": "B9",
-        "title": "Out Of Time",
-        "type_": "track"
-      },
-      {
-        "duration": "3:24",
-        "position": "B10",
-        "title": "If I Leave",
-        "type_": "track"
-      }
-    ],
-    "uri": "https://www.discogs.com/release/16839336-A-Day-To-Remember-What-Separates-Me-From-You",
-    "videos": [
-      {
-        "description": "A Day To Remember \"All I Want\" is from their album, What Separates Me From You, available now.\n\niTunes: http://bit.ly/13tfukv\nAmazon: http://amzn.to/145v2e3\nDirect (CD / Vinyl): http://bit.ly/1avir7s \nSpotify: http://spoti.fi/7guuh9 \n\nDirected by Drew Rus",
-        "duration": 215,
-        "embed": true,
-        "title": "A Day To Remember - All I Want (Official Video)",
-        "uri": "https://www.youtube.com/watch?v=Pn-6eOxnEMI"
-      },
-      {
-        "description": "A Day To Remember \"2nd Sucks\" is from their album, What Separates Me From You, available now.\n\niTunes: http://bit.ly/13tfukv\nAmazon: http://amzn.to/145v2e3\nDirect (CD / Vinyl): http://bit.ly/1avir7s \nSpotify: http://spoti.fi/7guuh9 \n\nDirected by Drew Russ",
-        "duration": 305,
-        "embed": true,
-        "title": "A Day To Remember - 2nd Sucks",
-        "uri": "https://www.youtube.com/watch?v=n6T9olarH-U"
-      },
-      {
-        "description": "Music video by A Day To Remember performing All Signs Point to Lauderdale. (C) 2010 Another Victory\n\n#ADayToRemember #AllSignsPointToLauderdale #Vevo",
-        "duration": 197,
-        "embed": true,
-        "title": "A Day To Remember - All Signs Point to Lauderdale (Official Video)",
-        "uri": "https://www.youtube.com/watch?v=08PszRp2cBg"
-      }
-    ],
-    "year": 2021
   },
   "17583742": {
     "artists": [

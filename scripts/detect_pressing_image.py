@@ -7464,6 +7464,23 @@ def resolve_youtube_music_live_py(
         if isinstance(tr, dict) and not tr.get("ytVideoId") and str(tr.get("title") or "").strip()
     ]
 
+    # 3A. Fast-path: If we have an official OLAK5uy_ album playlist, extract ordered track videoIds from the playlist page
+    if missing_indices and str(result.get("ytPlaylistId") or "").startswith("OLAK5uy_"):
+        pl_page = _fetch_yt_html(
+            f"https://www.youtube.com/playlist?list={urllib.parse.quote(str(result['ytPlaylistId']))}",
+            timeout_s=7.0,
+        )
+        if pl_page:
+            pl_vids: list[str] = []
+            for m_pv in re.finditer(r'"playlistVideoRenderer":\{"videoId":"([A-Za-z0-9_-]{11})"', pl_page):
+                v_id = m_pv.group(1)
+                if v_id and v_id not in pl_vids:
+                    pl_vids.append(v_id)
+            if len(pl_vids) == len(tracks):
+                for t_idx, _ in list(missing_indices):
+                    result["trackIds"][str(t_idx)] = pl_vids[t_idx]
+                missing_indices = []
+
     if missing_indices:
         def _resolve_one_track(item: tuple[int, str]) -> tuple[int, str]:
             t_idx, t_name = item
@@ -7484,11 +7501,16 @@ def resolve_youtube_music_live_py(
         except Exception:
             pass
 
+    already_had_vid = sum(
+        1 for idx, tr in enumerate(tracks[:24])
+        if isinstance(tr, dict) and (tr.get("ytVideoId") or str(idx) in result["trackIds"])
+    )
+    total_covered = max(already_had_vid, len(tracks) if result.get("fullAlbumYtVideoId") else already_had_vid)
     if ui and (result["ytPlaylistId"] or result["fullAlbumYtVideoId"] or result["trackIds"]):
         ui.log(
             "yt-music",
             f"Auto-resolved YouTube Music streams for {clean_art} — {clean_tit} "
-            f"(playlist={result['ytPlaylistId'] or 'none'}, tracks={len(result['trackIds'])}/{len(tracks)})",
+            f"(playlist={result['ytPlaylistId'] or 'none'}, tracks={total_covered}/{len(tracks)})",
         )
     return result
 
@@ -7738,11 +7760,13 @@ def enrich_record_youtube_music(
     track_durs_map = enr.get("trackDurations") if isinstance(enr.get("trackDurations"), dict) else {}
 
     # Always resolve over the network when allow_network_search is True and OLAK5uy_ is still missing (or brand-new release lacks track coverage)
+    cached_ytm_dict = rel_detail.get("_ytm_resolved") if isinstance(rel_detail, dict) and isinstance(rel_detail.get("_ytm_resolved"), dict) else {}
     already_resolved = bool(
         (rid in VERIFIED_YTM_RELEASE_MAP and yt_playlist_id.startswith("OLAK5uy_"))
-        or (isinstance(rel_detail, dict) and isinstance(rel_detail.get("_ytm_resolved"), dict) and str(rel_detail["_ytm_resolved"].get("ytPlaylistId") or "").startswith("OLAK5uy_"))
+        or str(cached_ytm_dict.get("ytPlaylistId") or "").startswith("OLAK5uy_")
+        or bool(cached_ytm_dict.get("resolved"))
     )
-    if allow_network_search and (not yt_playlist_id.startswith("OLAK5uy_") or (tracks and not already_resolved)):
+    if allow_network_search and not already_resolved:
         covered = sum(
             1
             for idx, t in enumerate(tracks)
@@ -7772,6 +7796,7 @@ def enrich_record_youtube_music(
                 track_ids_map = merged_t
             if isinstance(rel_detail, dict):
                 rel_detail["_ytm_resolved"] = {
+                    "resolved": True,
                     "ytPlaylistId": yt_playlist_id,
                     "spotifyAlbumId": spotify_album_id,
                     "fullAlbumYtVideoId": full_album_vid_id,
@@ -7849,27 +7874,32 @@ def enrich_record_youtube_music(
 
 
 class VaultTerminalUI:
-    """Fancy Cyber-Audiophile CLI UI, Live Spinning Turntable Throbber, and Delta Summary Reporter."""
+    """Fancy Cyber-Audiophile CLI UI, Live Spinning Turntable Throbber, and Delta Summary Reporter.
 
+    Engineered for zero line-wrapping and 100% glyph compatibility across Windows PowerShell 5.1
+    (conhost.exe Consolas/Lucida Console), Windows Terminal, VS Code Terminal, and WSL/Linux.
+    """
+
+    # Uses strictly WGL4 / CP437 / Consolas-supported box-drawing & block glyphs (zero [?] boxes in PowerShell)
     PLATTER_FRAMES = (
-        "╭◉╮",
-        "◝◉◞",
-        "╰◉╯",
-        "◟◉◝",
-        "╭◎╮",
-        "◝◎◞",
-        "╰◎╯",
-        "◟◎◝",
+        "╭●╮",
+        "│●│",
+        "╰●╯",
+        "│○│",
+        "╭○╮",
+        "│○│",
+        "╰○╯",
+        "│●│",
     )
     EQ_FRAMES = (
-        "▂▄▆█▆▄▂",
-        "▄▆█▇▅▃▂",
-        "▆█▇▅▃▂▄",
-        "█▇▅▃▂▄▆",
-        "▇▅▃▂▄▆█",
-        "▅▃▂▄▆█▇",
-        "▃▂▄▆█▇▅",
-        "▂▄▆█▇▅▃",
+        "▄■▓█▓■▄",
+        "■▓█▓■▄■",
+        "▓█▓■▄■▓",
+        "█▓■▄■▓█",
+        "▓■▄■▓█▓",
+        "■▄■▓█▓■",
+        "▄■▓█▓■▄",
+        "■▓██▓■▄",
     )
 
     def __init__(self, title: str = "KRUNKED // VINYL VAULT", subtitle: str = "DELTA SYNC ENGINE v5.0") -> None:
@@ -7884,6 +7914,7 @@ class VaultTerminalUI:
         self._running = False
         self._thread: _threading.Thread | None = None
         self._frame_idx = 0
+        self._last_render_ts = 0.0
         self._phase = "Initializing..."
         self._current_item = ""
         self._done = 0
@@ -7914,15 +7945,32 @@ class VaultTerminalUI:
             try:
                 import ctypes
                 kernel32 = ctypes.windll.kernel32
-                # STD_OUTPUT_HANDLE = -11, ENABLE_VIRTUAL_TERMINAL_PROCESSING = 0x0004
-                handle = kernel32.GetStdHandle(-11)
-                mode = ctypes.c_ulong()
-                if kernel32.GetConsoleMode(handle, ctypes.byref(mode)):
-                    kernel32.SetConsoleMode(handle, mode.value | 0x0004)
-                    is_tty = True
+                # Set UTF-8 console code page (CP65001) and ENABLE_VIRTUAL_TERMINAL_PROCESSING (0x0004)
+                try:
+                    kernel32.SetConsoleOutputCP(65001)
+                    kernel32.SetConsoleCP(65001)
+                except Exception:
+                    pass
+                for std_handle_id in (-11, -12):  # STD_OUTPUT_HANDLE (-11), STD_ERROR_HANDLE (-12)
+                    handle = kernel32.GetStdHandle(std_handle_id)
+                    mode = ctypes.c_ulong()
+                    if kernel32.GetConsoleMode(handle, ctypes.byref(mode)):
+                        kernel32.SetConsoleMode(handle, mode.value | 0x0004)
+                        if std_handle_id == -11:
+                            is_tty = True
             except Exception:
                 pass
         return is_tty
+
+    @staticmethod
+    def _get_box_width(target_w: int = 114) -> int:
+        """Returns a safe line/box width strictly less than the current terminal column width to prevent conhost auto-wrap."""
+        try:
+            import shutil as _shutil
+            term_cols = int(_shutil.get_terminal_size((120, 24)).columns or 120)
+        except Exception:
+            term_cols = 120
+        return min(target_w, max(64, term_cols - 2))
 
     def c(self, text: str, ansi_code: str) -> str:
         if not self.color_enabled:
@@ -7940,11 +7988,11 @@ class VaultTerminalUI:
     def print_banner(self, mode_label: str = "INCREMENTAL DELTA", extra_info: str = "") -> None:
         with self.lock:
             self._clear_line_unlocked()
-            w = 114
+            w = self._get_box_width(114)
             top = "╭" + ("─" * (w - 2)) + "╮"
             bot = "╰" + ("─" * (w - 2)) + "╯"
             print(self.c(top, "38;5;45"))
-            line1 = _pad_to_width(f"  ◉━━━  {self.title}  •  {self.subtitle}", w - 2)
+            line1 = _pad_to_width(f"  ●━━━  {self.title}  •  {self.subtitle}", w - 2)
             print(
                 self.c("│", "38;5;45")
                 + self.c(line1, "1;38;5;213")
@@ -7973,6 +8021,7 @@ class VaultTerminalUI:
     def _render_throbber_unlocked(self) -> None:
         if not self.is_tty or not self._running:
             return
+        max_w = self._get_box_width(114)
         platter = self.PLATTER_FRAMES[self._frame_idx % len(self.PLATTER_FRAMES)]
         eq = self.EQ_FRAMES[self._frame_idx % len(self.EQ_FRAMES)]
 
@@ -7988,20 +8037,44 @@ class VaultTerminalUI:
             bar_chars[spin_bar_pos] = "█"
             if spin_bar_pos > 0:
                 bar_chars[spin_bar_pos - 1] = "▓"
-            prog_str = f"[{''.join(bar_chars)}] {self._phase}"
+            prog_str = f"[{''.join(bar_chars)}] {_pad_to_width(self._phase, 28).rstrip()}"
 
         delta_str = f"+{self._new_count} new • ~{self._resync_count} sync • {self._cached_count} cached"
-        item_str = f" │ {_pad_to_width(self._current_item, 34).rstrip()}" if self._current_item else ""
+        el_str = self.elapsed_str()
+
+        # Calculate exact column budget so the rendered line NEVER reaches the terminal right margin
+        prefix_cols = 1 + _term_display_width(platter) + 1 + _term_display_width(eq) + 1 + _term_display_width(prog_str)
+        delta_cols = 3 + _term_display_width(delta_str)
+        el_cols = 3 + _term_display_width(el_str)
+
+        include_delta = (prefix_cols + delta_cols + el_cols) <= max_w
+        used_cols = prefix_cols + (delta_cols if include_delta else 0) + el_cols
+
+        item_str = ""
+        if self._current_item and (max_w - used_cols) >= 10:
+            avail_item_w = max_w - used_cols - 3
+            # Sanitize any astral/wide emoji prefixes to single-column WGL4 '▸' so conhost never wraps or shows [?]
+            clean_item = (
+                self._current_item
+                .replace("⚡", "▸")
+                .replace("🌐", "▸")
+                .replace("🔍", "▸")
+                .replace("⚙", "▸")
+            )
+            item_trimmed = _pad_to_width(clean_item, avail_item_w).rstrip()
+            if item_trimmed:
+                item_str = f" │ {item_trimmed}"
 
         colored_line = (
             f" {self.c(platter, '1;38;5;213')} "
             f"{self.c(eq, '38;5;45')} "
-            f"{self.c(prog_str, '1;38;5;159')} "
-            f"│ {self.c(delta_str, '38;5;221')} "
-            f"│ {self.c(self.elapsed_str(), '38;5;248')}"
-            f"{self.c(item_str, '38;5;114') if item_str else ''}"
+            f"{self.c(prog_str, '1;38;5;159')}"
+            + (f" │ {self.c(delta_str, '38;5;221')}" if include_delta else "")
+            + f" │ {self.c(el_str, '38;5;248')}"
+            + (f"{self.c(item_str, '38;5;114')}" if item_str else "")
         )
-        sys.stdout.write("\r\033[K" + colored_line)
+        self._last_render_ts = _time.perf_counter()
+        sys.stdout.write("\r" + colored_line + "\033[K")
         sys.stdout.flush()
 
     def _throbber_loop(self) -> None:
@@ -8035,6 +8108,7 @@ class VaultTerminalUI:
         api_remaining: int | None = None,
     ) -> None:
         with self.lock:
+            phase_changed = phase is not None and phase != self._phase
             if phase is not None:
                 self._phase = phase
             if current_item is not None:
@@ -8051,7 +8125,16 @@ class VaultTerminalUI:
                 self._cached_count = cached_count
             if api_remaining is not None:
                 self._api_remaining = api_remaining
-            self._render_throbber_unlocked()
+
+            now = _time.perf_counter()
+            is_boundary = (
+                phase_changed
+                or (done is not None and (done <= 1 or (self._total > 0 and done >= self._total)))
+            )
+            if is_boundary or (now - self._last_render_ts) >= 0.035:
+                if not is_boundary:
+                    self._frame_idx += 1
+                self._render_throbber_unlocked()
 
     def stop_throbber(self) -> None:
         self._running = False
@@ -8072,6 +8155,7 @@ class VaultTerminalUI:
             "info": "1;38;5;81",       # Sky Cyan
             "auth": "1;38;5;117",      # Light Blue
             "api": "1;38;5;177",       # Orchid Purple
+            "yt-music": "1;38;5;198",  # Neon Crimson Pink
             "delta": "1;38;5;220",     # Gold/Amber
             "fast-path": "38;5;245",   # Dim Grey
             "new": "1;38;5;48",        # Neon Emerald Green
@@ -8117,7 +8201,7 @@ class VaultTerminalUI:
     ) -> None:
         """Prints the comprehensive box-drawn end-of-run summary & changelog."""
         self.stop_throbber()
-        w = 114
+        w = self._get_box_width(114)
         inner_w = w - 4
         hr_top = "╭" + ("─" * (w - 2)) + "╮"
         hr_mid = "├" + ("─" * (w - 2)) + "┤"
@@ -8135,12 +8219,13 @@ class VaultTerminalUI:
         self.log(
             "delta",
             f"Run Summary: +{len(new_records)} NEW • ~{len(resynced_records)} RESYNCED • "
-            f"{unchanged_count} FAST-PATH CACHED ({skip_pct:.1f}% skipped)",
+            + (f"-{len(removed_records)} REMOVED • " if removed_records else "")
+            + f"{unchanged_count} FAST-PATH CACHED ({skip_pct:.1f}% skipped)",
         )
 
         print()
         print(self.c(hr_top, "38;5;45"))
-        row(f"◉  {mode_title} — COMPLETE IN {self.elapsed_str()}", "1;38;5;48")
+        row(f"●  {mode_title} — COMPLETE IN {self.elapsed_str()}", "1;38;5;48")
         print(self.c(hr_mid, "38;5;45"))
 
         # Section 1: Delta Engine Performance
@@ -8194,7 +8279,7 @@ class VaultTerminalUI:
                 else:
                     photo_tag = "Photo: Procedural Wax Seed"
                 row(f"  {idx}. + [#{rid}] {art} — {tit}{yr_s}", "1;38;5;120")
-                row(f"       ↳ {badge} │ ${val_f:,.2f} │ {photo_tag}", "38;5;250")
+                row(f"       └─ {badge} │ ${val_f:,.2f} │ {photo_tag}", "38;5;250")
         else:
             row("▸ NEWLY ADDED RECORDS (0 ADDED THIS RUN)", "1;38;5;81")
             row("  • No brand-new releases detected on this run (Vault is 100% synced).", "38;5;246")
@@ -8212,7 +8297,7 @@ class VaultTerminalUI:
                     d_add = str(r.get("date_added") or "")[:10]
                     imgs = r.get("images") or {}
                     p_str = f"img_{imgs.get('selected_index')}.jpg" if imgs.get("has_pressing_photo") else "seed"
-                    row(f"    ↳ [{d_add}] #{rid} {art} — {tit} ({p_str})", "38;5;248")
+                    row(f"    └─ [{d_add}] #{rid} {art} — {tit} ({p_str})", "38;5;248")
 
         # Section 4: Resynced / Updated Records (if any)
         if resynced_records:
@@ -8226,7 +8311,7 @@ class VaultTerminalUI:
                 art = str(rec.get("artist") or "")
                 tit = str(rec.get("title") or "")
                 row(f"  {idx}. ~ [#{rid}] {art} — {tit}", "38;5;222")
-                detail_line = f"       ↳ {reason}" + (f" │ {action}" if action else "")
+                detail_line = f"       └─ {reason}" + (f" │ {action}" if action else "")
                 row(detail_line, "38;5;246")
             if len(resynced_records) > 12:
                 row(f"  ... and {len(resynced_records) - 12} more resynced records.", "38;5;246")
