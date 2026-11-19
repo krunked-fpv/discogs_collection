@@ -372,6 +372,8 @@ def inject_into_index_html(
         (r'(<div id="kpi-nm-ratio"[^>]*>)(.*?)(</div>)', f"\\g<1>{high_str}\\g<3>"),
         (r'(<div id="kpi-gallery-sub"[^>]*>)(.*?)(</div>)', f"\\g<1>High Est. • Low {low_str}\\g<3>"),
         (r'(<div id="kpi-flattening"[^>]*>)(.*?)(</div>)', f"\\g<1>{todo_count} Queued / {done_count} Done\\g<3>"),
+        (r'(<span id="active-spin-mode-pill"[^>]*>)(.*?)(</span>)', f"\\g<1>🎲 Full Vault Roulette • {total_lps} LPs\\g<3>"),
+        (r'(<span id="spin-badge-all"[^>]*>)(.*?)(</span>)', f"\\g<1>ALL LPS ({total_lps})\\g<3>"),
         (r'(<span id="hero-pressing-ratio"[^>]*>)(.*?)(</span>)', f"\\g<1>{pressing_count}/{total_lps}\\g<3>"),
         (r'(<span id="carousel-counter"[^>]*>)(.*?)(</span>)', f"\\g<1>1 / {total_lps}\\g<3>"),
         (r'(<button[^>]*id="chip-flatten-todo"[^>]*>)(.*?)(</button>)', f"\\g<1>🔥 Flattening Queue ({todo_count})\\g<3>"),

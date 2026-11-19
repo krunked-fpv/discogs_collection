@@ -38,17 +38,17 @@ The Vault combines deterministic CLI state baking, portable in-browser synchroni
 ## 🔥 Key Features in v5.0
 
 * **Combined Kinetic Wax Roulette & Direct-Drive Pressing Command Stage:** Merges the `🎰 SPIN THE CRATE [SPACE]` kinetic physics reel, 3D flanking crate wing cards (`#stage-prev-card`, `#stage-next-card`), and cyan-bracketed quartz-locked 33⅓ RPM direct-drive turntable platter onto one unified command deck.
-* **3 Smart Spin Modes (Stylus-Safe Filtering):**
-  * `🎲 Full Vault Roulette` (`ALL SAFE`): Automatically excludes warped `"Need to be done"` LPs from random spins to protect the Audio-Technica AT-VMN95ML microlinear stylus.
+* **3 Smart Spin Modes:**
+  * `🎲 Full Vault Roulette` (`ALL LPS`): Spins across every record in your full collection.
   * `📺 Showroom Kiosk` (`AUTO 15s`): Hands-free showcase mode that automatically spins and drops a fresh pressing onto the platter every 15 seconds.
   * `🌈 Eye-Candy Variants` (`FLEX WAX`): Filters spins exclusively to high-contrast Splatter, Galaxy, Marble, Split, and Color-in-Color pressings.
-* **Variant Clash Arena (`#view-arena`):** Launch a 4-LP head-to-head knockout tournament (`Semifinal 1 → Semifinal 2 → Championship Final`) with pool filters (`All Safe`, `Eye-Candy Only`, `Flat Certified`) and in-card `🎧 Audition 30s` studio preview buttons.
+* **Variant Clash Arena (`#view-arena`):** Launch a 4-LP head-to-head knockout tournament (`Semifinal 1 → Semifinal 2 → Championship Final`) with pool filters (`All LPs`, `Eye-Candy Only`) and in-card `🎧 Audition 30s` studio preview buttons.
 * **UV Blacklight Mode (`🟣 UV Blacklight: ON` by Default, Shortcut `U`):** Boots with `body.uv-blacklight` active on page load, applying a reactive neon shader (`.uv-reactive`) across the main platter, Variant Clash Arena contenders, and all 158 crate grid discs, paired with synthesized Web Audio analog SFX and 60-FPS canvas particle bursts.
 * **Official Discogs Historical Sales Valuation (`GET /users/krunked/collection/value`):** Queries the authenticated [Discogs Collection Value endpoint](https://www.discogs.com/developers) to display exact historical completed-sales valuation (`Low $3,952.62` • `Med $6,423.73` • `High $11,091.69`) and automatically scrubs legacy synthetic Marketplace asking-price estimates.
 * **3D Flip Deck (`#hero-flip-stage`):**
   * **Side A (Pressing Specs & Gallery Pinning Strip):** Inspect runout matrix codes, pressing plant telemetry, wax color shaders, and click any release gallery thumbnail to pin it as the canonical pressing photo (`overrides.json`).
   * **Side B (30s Studio Audio Previews & Streaming):** Zero-autoplay 30-second HTML5 `<audio id="vault-preview-audio">` track previews powered by the iTunes Search API with automatic Deezer JSONP fallback, plus side-by-side **YT Music ↗** (`OLAK5uy_...` official album playlists) and **Spotify ↗** (`open.spotify.com/album/...`) deep links.
-* **Portable Thermal Vinyl Flattening Queue (`#flattening-inline-form`):** Every newly added LP automatically enters `Need to be done` for arrival inspection (locked out of Roulette & Clash Arena to protect the AT-VMN95ML stylus) until you either flatten it (`Bag on 6 → 130°F → Drop to 4 for 2.5 hours`) or confirm it arrived flat and toggle it to `Done (Flat Verified)` (and toggle back anytime), backed by `data/flattening_queue.json`, `localStorage`, and shadow cookies.
+* **Portable Thermal Vinyl Flattening Queue (`#flattening-inline-form`):** Every newly added LP automatically enters `Need to be done` for arrival inspection until you either flatten it (`Bag on 6 → 130°F → Drop to 4 for 2.5 hours`) or confirm it arrived flat and toggle it to `Done (Flat Verified)` (and toggle back anytime), backed by `data/flattening_queue.json`, `localStorage`, and shadow cookies.
 
 ## 🧠 Deterministic 12" Vinyl vs. 4" Label Computer Vision (`detect_pressing_image.py`)
 

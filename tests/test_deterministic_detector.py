@@ -462,6 +462,9 @@ class TestDeterministicDetector(unittest.TestCase):
             self.assertIn('id="flatten-hidden-done-ids" name="done_release_ids" value="2001"', compiled)
             self.assertIn('id="flatten-hidden-unlisted-ids" name="unlisted_release_ids" value="2002"', compiled)
             self.assertIn('id="kpi-flattening" class="text-lg sm:text-xl font-black text-cyan-300 mt-0.5">1 Queued / 1 Done</div>', compiled)
+            self.assertIn('id="spin-badge-all" class="text-[10px] font-mono-tech font-bold px-1.5 py-0.5 rounded bg-slate-950/80 text-cyan-300 border border-cyan-500/30">ALL LPS (3)</span>', compiled)
+            self.assertNotIn("r.flattening_status !== 'Need to be done'", compiled)
+            self.assertNotIn("Stylus Guard Linked", compiled)
 
 
 if __name__ == "__main__":
