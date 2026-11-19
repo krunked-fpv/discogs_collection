@@ -11,6 +11,7 @@ import sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 from detect_pressing_image import (
+    DEFAULT_FLATTENING_STATUS,
     enrich_record_youtube_music,
     parse_wax_variant,
     score_image_pixels_deterministic,
@@ -178,7 +179,7 @@ for idx, row in enumerate(RAW_RELEASES, start=1):
         "date_added": date_added,
         "discogs_url": discogs_url,
         "estimated_value_usd": price,
-        "flattening_status": flatten_status,
+        "flattening_status": flatten_status if flatten_status == "Done" else DEFAULT_FLATTENING_STATUS,
         "genres": ["Rock"],
         "styles": ["Metalcore", "Progressive Metal", "Post-Hardcore"],
         "images": {
@@ -199,6 +200,8 @@ for idx, row in enumerate(RAW_RELEASES, start=1):
 total_val = round(sum(r["estimated_value_usd"] for r in records), 2)
 pressing_count = sum(1 for r in records if r["images"]["has_pressing_photo"])
 colored_count = sum(1 for r in records if r["wax_spec"]["pattern"] != "black")
+todo_count = sum(1 for r in records if r["flattening_status"] == "Need to be done")
+done_count = sum(1 for r in records if r["flattening_status"] == "Done")
 
 payload = {
     "schema_version": "5.0.0",
@@ -215,6 +218,8 @@ payload = {
         "num_collection": len(records),
         "pressing_photos_detected": pressing_count,
         "colored_or_special_variants": colored_count,
+        "flattening_need_to_be_done": todo_count,
+        "flattening_done": done_count,
         "collection_value": {
             "minimum": f"${round(total_val * 0.78, 2):,.2f}",
             "median": f"${total_val:,.2f}",

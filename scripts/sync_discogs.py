@@ -46,6 +46,7 @@ if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
 from detect_pressing_image import (
+    DEFAULT_FLATTENING_STATUS,
     VaultTerminalUI,
     build_flattening_queue_payload,
     compute_release_delta_signature,
@@ -54,6 +55,7 @@ from detect_pressing_image import (
     extract_release_tracklist_and_videos,
     parse_wax_variant,
     reconcile_flattening_state,
+    reconcile_overrides_state,
     resolve_flattening_status,
     select_release_images_deterministic,
 )
@@ -399,14 +401,11 @@ def fetch_full_collection(
         except Exception:
             cache = {}
 
-    overrides: dict[str, Any] = {}
-    if same_user and overrides_path.exists():
-        try:
-            overrides = json.loads(overrides_path.read_text(encoding="utf-8"))
-        except Exception:
-            overrides = {}
-
     html_candidate = existing_collection_path.parent.parent / "index.html" if existing_collection_path else None
+    overrides: dict[str, Any] = {}
+    if same_user:
+        overrides, _ = reconcile_overrides_state(overrides_path, html_candidate)
+
     flattening_queue: dict[str, Any] = (
         reconcile_flattening_state(flattening_path, html_candidate) if same_user else {}
     )
@@ -766,7 +765,7 @@ def fetch_full_collection(
                 queue_data=flattening_queue,
             )
         else:
-            flatten_status = str((existing_rec or {}).get("flattening_status") or "Not Listed")
+            flatten_status = str((existing_rec or {}).get("flattening_status") or DEFAULT_FLATTENING_STATUS)
 
         record_obj = {
             "release_id": release_id,
@@ -804,6 +803,11 @@ def fetch_full_collection(
 
         if delta_status == "new":
             new_records.append(record_obj)
+            if ui and flatten_status == "Need to be done":
+                ui.log(
+                    "new",
+                    f"Auto-queued #{rid_str} ({artist_name} — {title_str}) into Flattening Queue for arrival inspection.",
+                )
         elif delta_status == "resynced":
             resynced_records.append({
                 "record": record_obj,

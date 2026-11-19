@@ -1,61 +1,168 @@
 {
   "schema_version": "5.0.0",
   "storage_mode": "portable_inline_html+json",
-  "updated_at_utc": "2026-11-19T04:14:50Z",
+  "updated_at_utc": "2026-11-19T20:43:56Z",
   "protocol": "Bag on 6 until 130°F then drop to 4 — 2.5 hours once at 130°F on the plate",
   "need_to_be_done_release_ids": [
+    2486041,
+    4902348,
+    13257813,
+    15985409,
+    17583742,
+    20154643,
+    21929479,
+    25599913,
+    26986229,
+    27945363,
     28844782,
+    29631781,
+    31082741,
+    34513906,
+    35668090,
     35907826
   ],
   "done_release_ids": [
     2343816,
+    3093365,
+    3780990,
     3873517,
+    5632601,
+    7685817,
+    8781739,
     9346527,
+    9545877,
+    10024143,
+    10142402,
+    11095447,
     11368406,
+    11625165,
+    11771142,
+    11812427,
     12131049,
+    12852715,
+    12988109,
     13113361,
+    13203006,
     13990219,
     14043330,
     14188877,
     14458307,
+    14816287,
+    14947161,
+    15043916,
+    15594164,
+    15847991,
+    15962864,
+    15985411,
     16251744,
+    16595574,
+    16610055,
+    17743813,
+    18670618,
+    18801928,
+    19084276,
+    19249243,
+    20247346,
     20518822,
     20546863,
+    20697637,
+    21047380,
+    21315247,
     21390094,
+    21958303,
+    22031968,
     22153450,
     22544762,
+    22568519,
+    22879535,
+    22968539,
     23343893,
+    23605157,
     23657633,
     23674760,
+    23753615,
     23775551,
+    25089742,
+    25367083,
+    25418758,
     25484485,
     25541158,
+    26047147,
+    26047519,
+    26411060,
     26421509,
     26690690,
+    26831573,
+    26847641,
+    26917130,
+    27066432,
     27079776,
+    27137034,
+    27611781,
+    27717681,
     27927123,
+    27938112,
+    28129036,
     28269505,
+    28518913,
+    28575079,
     28593982,
+    28895677,
     29075062,
     29237467,
     29410045,
     29410354,
+    29410450,
+    29410576,
+    29425159,
     29592373,
     30245600,
     30637357,
+    31200271,
+    31699214,
     31909216,
+    32219745,
+    32282064,
+    32367897,
+    33201711,
     33303678,
+    33399134,
+    34007283,
     34691910,
     34756244,
+    34889219,
+    35331742,
+    35336893,
     35426350,
+    35485618,
     35720014,
+    35844325,
     35844376,
+    35852386,
+    36085903,
+    36224473,
+    36282118,
+    36342703,
+    36666961,
+    36763201,
     36897417,
+    36991890,
     37023150,
     37058814,
+    37084122,
     37163709,
+    37227948,
+    37450368,
+    37838730,
     37848120,
+    38020071,
+    38113617,
+    38199639,
+    38267097,
     38268432,
+    38337288,
+    38345517,
+    38464542,
     38600733,
     38854575
   ],
@@ -69,19 +176,229 @@
       ]
     },
     {
+      "artist": "Born Of Osiris",
+      "album": "The Simulation",
+      "release_ids": [
+        13257813
+      ]
+    },
+    {
+      "artist": "Born Of Osiris",
+      "album": "Through Shadows",
+      "release_ids": [
+        34513906
+      ]
+    },
+    {
       "artist": "Bring Me The Horizon",
       "album": "That's The Spirit",
       "release_ids": [
         35907826
       ]
+    },
+    {
+      "artist": "Chromeo",
+      "album": "Business Casual",
+      "release_ids": [
+        2486041
+      ]
+    },
+    {
+      "artist": "Chromeo",
+      "album": "Fancy Footwork",
+      "release_ids": [
+        35668090
+      ]
+    },
+    {
+      "artist": "Circa Survive",
+      "album": "On Letting Go",
+      "release_ids": [
+        29631781
+      ]
+    },
+    {
+      "artist": "Currents",
+      "album": "The Way It Ends ",
+      "release_ids": [
+        31082741
+      ]
+    },
+    {
+      "artist": "Incubus",
+      "album": "S.C.I.E.N.C.E.",
+      "release_ids": [
+        4902348
+      ]
+    },
+    {
+      "artist": "Knocked Loose",
+      "album": "A Different Shade of Blue",
+      "release_ids": [
+        15985409
+      ]
+    },
+    {
+      "artist": "Mac Miller",
+      "album": "Swimming",
+      "release_ids": [
+        27945363
+      ]
+    },
+    {
+      "artist": "Minus The Bear",
+      "album": "Omni",
+      "release_ids": [
+        20154643
+      ]
+    },
+    {
+      "artist": "Parkway Drive",
+      "album": "Horizons ",
+      "release_ids": [
+        25599913
+      ]
+    },
+    {
+      "artist": "Rings Of Saturn",
+      "album": "Embryonic Anomaly (Remake)",
+      "release_ids": [
+        17583742
+      ]
+    },
+    {
+      "artist": "The Plot In You",
+      "album": "Swan Song",
+      "release_ids": [
+        21929479
+      ]
+    },
+    {
+      "artist": "Unearth",
+      "album": "The Wretched; The Ruinous",
+      "release_ids": [
+        26986229
+      ]
     }
   ],
   "done_entries": [
+    {
+      "artist": "156/Silence",
+      "album": "From A Distance",
+      "release_ids": [
+        38337288
+      ]
+    },
+    {
+      "artist": "A Day To Remember",
+      "album": "Big Ole Album Vol. 1",
+      "release_ids": [
+        33201711
+      ]
+    },
+    {
+      "artist": "Allt",
+      "album": "Ataraxia",
+      "release_ids": [
+        38020071
+      ]
+    },
     {
       "artist": "Allt",
       "album": "From The New World",
       "release_ids": [
         31909216
+      ]
+    },
+    {
+      "artist": "Animals As Leaders",
+      "album": "Animals As Leaders",
+      "release_ids": [
+        12988109
+      ]
+    },
+    {
+      "artist": "Animals As Leaders",
+      "album": "Weightless",
+      "release_ids": [
+        14816287
+      ]
+    },
+    {
+      "artist": "Architects",
+      "album": "All Our Gods Have Abandoned Us ",
+      "release_ids": [
+        37450368
+      ]
+    },
+    {
+      "artist": "Architects",
+      "album": "Daybreaker",
+      "release_ids": [
+        26831573
+      ]
+    },
+    {
+      "artist": "Architects",
+      "album": "For Those That Wish To Exist",
+      "release_ids": [
+        17743813
+      ]
+    },
+    {
+      "artist": "Architects",
+      "album": "The Classic Symptoms Of A Broken Spirit",
+      "release_ids": [
+        25089742
+      ]
+    },
+    {
+      "artist": "As I Lay Dying",
+      "album": "Frail Words Collapse",
+      "release_ids": [
+        36282118
+      ]
+    },
+    {
+      "artist": "As I Lay Dying",
+      "album": "Shadows Are Security",
+      "release_ids": [
+        36085903
+      ]
+    },
+    {
+      "artist": "August Burns Red",
+      "album": "Guardians",
+      "release_ids": [
+        15043916
+      ]
+    },
+    {
+      "artist": "Beartooth",
+      "album": "The Surface",
+      "release_ids": [
+        28575079
+      ]
+    },
+    {
+      "artist": "Bilmuri",
+      "album": "American Motor Sports",
+      "release_ids": [
+        36224473
+      ]
+    },
+    {
+      "artist": "Bilmuri",
+      "album": "Eggy Pocket",
+      "release_ids": [
+        38464542
+      ]
+    },
+    {
+      "artist": "Bilmuri",
+      "album": "Kinda Hard",
+      "release_ids": [
+        37084122
       ]
     },
     {
@@ -100,6 +417,13 @@
     },
     {
       "artist": "Born Of Osiris",
+      "album": "The Discovery",
+      "release_ids": [
+        36991890
+      ]
+    },
+    {
+      "artist": "Born Of Osiris",
       "album": "Tomorrow We Die ∆live",
       "release_ids": [
         25484485
@@ -113,10 +437,52 @@
       ]
     },
     {
+      "artist": "Bring Me The Horizon",
+      "album": "Count Your Blessings Repented.",
+      "release_ids": [
+        37838730
+      ]
+    },
+    {
+      "artist": "Chiodos",
+      "album": "All's Well That Ends Well",
+      "release_ids": [
+        15847991
+      ]
+    },
+    {
+      "artist": "Circa Survive",
+      "album": "Juturna",
+      "release_ids": [
+        38267097
+      ]
+    },
+    {
+      "artist": "Coheed And Cambria",
+      "album": "Good Apollo I'm Burning Star IV Volume One: From Fear Through The Eyes Of Madness",
+      "release_ids": [
+        10142402
+      ]
+    },
+    {
       "artist": "Coheed And Cambria",
       "album": "Good Apollo, I'm Burning Star IV, Volume Two: No World for Tomorrow",
       "release_ids": [
         16251744
+      ]
+    },
+    {
+      "artist": "Coheed And Cambria",
+      "album": "In Keeping Secrets Of Silent Earth: 3",
+      "release_ids": [
+        28518913
+      ]
+    },
+    {
+      "artist": "Coheed And Cambria",
+      "album": "The Color Before The Sun",
+      "release_ids": [
+        7685817
       ]
     },
     {
@@ -134,10 +500,52 @@
       ]
     },
     {
+      "artist": "Coheed And Cambria",
+      "album": "Vaxis III: The Father Of Make Believe",
+      "release_ids": [
+        33399134
+      ]
+    },
+    {
+      "artist": "Currents",
+      "album": "All That Follows",
+      "release_ids": [
+        36342703
+      ]
+    },
+    {
       "artist": "Currents",
       "album": "The Place I Feel Safest",
       "release_ids": [
         28593982
+      ]
+    },
+    {
+      "artist": "Currents",
+      "album": "The Way It Ends",
+      "release_ids": [
+        22031968
+      ]
+    },
+    {
+      "artist": "Cursive",
+      "album": "Domestica",
+      "release_ids": [
+        35485618
+      ]
+    },
+    {
+      "artist": "Cursive",
+      "album": "The Ugly Organ",
+      "release_ids": [
+        35331742
+      ]
+    },
+    {
+      "artist": "Deftones",
+      "album": "White Pony",
+      "release_ids": [
+        36763201
       ]
     },
     {
@@ -169,6 +577,62 @@
       ]
     },
     {
+      "artist": "Ed Sheeran",
+      "album": "+-=÷× (Tour Collection)",
+      "release_ids": [
+        31699214
+      ]
+    },
+    {
+      "artist": "Emarosa",
+      "album": "131",
+      "release_ids": [
+        29425159
+      ]
+    },
+    {
+      "artist": "Emarosa",
+      "album": "High Horse Heaven",
+      "release_ids": [
+        37227948
+      ]
+    },
+    {
+      "artist": "Emarosa",
+      "album": "Peach Club",
+      "release_ids": [
+        13203006
+      ]
+    },
+    {
+      "artist": "Emery",
+      "album": "The Question Live",
+      "release_ids": [
+        23605157
+      ]
+    },
+    {
+      "artist": "Erra",
+      "album": "Drift",
+      "release_ids": [
+        27611781
+      ]
+    },
+    {
+      "artist": "Erra",
+      "album": "Neon",
+      "release_ids": [
+        27717681
+      ]
+    },
+    {
+      "artist": "Erra",
+      "album": "Silence Outlives The Earth",
+      "release_ids": [
+        36666961
+      ]
+    },
+    {
       "artist": "Every Time I Die",
       "album": "Gutter Phenomenon",
       "release_ids": [
@@ -184,9 +648,30 @@
     },
     {
       "artist": "Every Time I Die",
+      "album": "Radical",
+      "release_ids": [
+        20697637
+      ]
+    },
+    {
+      "artist": "Every Time I Die",
       "album": "The Big Dirty",
       "release_ids": [
         2343816
+      ]
+    },
+    {
+      "artist": "Fit For A King",
+      "album": "The Path",
+      "release_ids": [
+        15962864
+      ]
+    },
+    {
+      "artist": "Greyhaven",
+      "album": "Empty Black",
+      "release_ids": [
+        26847641
       ]
     },
     {
@@ -194,6 +679,13 @@
       "album": "This Bright And Beautiful World",
       "release_ids": [
         27079776
+      ]
+    },
+    {
+      "artist": "I Prevail",
+      "album": "True Power",
+      "release_ids": [
+        25418758
       ]
     },
     {
@@ -218,10 +710,45 @@
       ]
     },
     {
+      "artist": "Imminence",
+      "album": "Turn The Light On",
+      "release_ids": [
+        22568519
+      ]
+    },
+    {
+      "artist": "Invent, Animate",
+      "album": "Everchanger",
+      "release_ids": [
+        18670618
+      ]
+    },
+    {
+      "artist": "Invent, Animate",
+      "album": "Greyview",
+      "release_ids": [
+        15985411
+      ]
+    },
+    {
       "artist": "Invent, Animate",
       "album": "Heavener",
       "release_ids": [
         35720014
+      ]
+    },
+    {
+      "artist": "Invent, Animate",
+      "album": "Stillworld",
+      "release_ids": [
+        27938112
+      ]
+    },
+    {
+      "artist": "Knocked Loose",
+      "album": "Laugh Tracks",
+      "release_ids": [
+        16595574
       ]
     },
     {
@@ -232,10 +759,38 @@
       ]
     },
     {
+      "artist": "Make Them Suffer",
+      "album": "Make Them Suffer",
+      "release_ids": [
+        32367897
+      ]
+    },
+    {
       "artist": "Minus The Bear",
       "album": "Infinity Overhead",
       "release_ids": [
         20518822
+      ]
+    },
+    {
+      "artist": "Minus The Bear",
+      "album": "Menos El Oso",
+      "release_ids": [
+        34889219
+      ]
+    },
+    {
+      "artist": "Minus The Bear",
+      "album": "Planet Of Ice",
+      "release_ids": [
+        32219745
+      ]
+    },
+    {
+      "artist": "Monuments",
+      "album": "In Stasis",
+      "release_ids": [
+        22879535
       ]
     },
     {
@@ -254,9 +809,44 @@
     },
     {
       "artist": "Northlane",
+      "album": "Mesmer",
+      "release_ids": [
+        10024143
+      ]
+    },
+    {
+      "artist": "Northlane",
       "album": "Node: Reloaded",
       "release_ids": [
         37023150
+      ]
+    },
+    {
+      "artist": "Northlane",
+      "album": "Obsidian",
+      "release_ids": [
+        22968539
+      ]
+    },
+    {
+      "artist": "Northlane",
+      "album": "Singularity",
+      "release_ids": [
+        9545877
+      ]
+    },
+    {
+      "artist": "Nothing More",
+      "album": "Carnal (Deluxe)",
+      "release_ids": [
+        34007283
+      ]
+    },
+    {
+      "artist": "Nothing More",
+      "album": "Nothing More",
+      "release_ids": [
+        32282064
       ]
     },
     {
@@ -264,6 +854,20 @@
       "album": "Spirits",
       "release_ids": [
         27927123
+      ]
+    },
+    {
+      "artist": "Nothing More",
+      "album": "The Stories We Tell Ourselves",
+      "release_ids": [
+        21047380
+      ]
+    },
+    {
+      "artist": "Parkway Drive",
+      "album": "Deep Blue ",
+      "release_ids": [
+        25367083
       ]
     },
     {
@@ -282,6 +886,20 @@
     },
     {
       "artist": "Periphery",
+      "album": "Icarus EP",
+      "release_ids": [
+        29410576
+      ]
+    },
+    {
+      "artist": "Periphery",
+      "album": "Juggernaut • Alpha",
+      "release_ids": [
+        29410450
+      ]
+    },
+    {
+      "artist": "Periphery",
       "album": "Juggernaut • Omega",
       "release_ids": [
         29410354
@@ -292,6 +910,20 @@
       "album": "Periphery",
       "release_ids": [
         29410045
+      ]
+    },
+    {
+      "artist": "Periphery",
+      "album": "Periphery II: This Time It's Personal",
+      "release_ids": [
+        3780990
+      ]
+    },
+    {
+      "artist": "Periphery",
+      "album": "Periphery II: This Time It's Personal",
+      "release_ids": [
+        15594164
       ]
     },
     {
@@ -324,9 +956,51 @@
     },
     {
       "artist": "Polaris",
+      "album": "Fatalism ",
+      "release_ids": [
+        28129036
+      ]
+    },
+    {
+      "artist": "Polaris",
       "album": "The Death Of Me",
       "release_ids": [
         34691910
+      ]
+    },
+    {
+      "artist": "Polaris",
+      "album": "The Mortal Coil",
+      "release_ids": [
+        11095447
+      ]
+    },
+    {
+      "artist": "President",
+      "album": "Blood Of Your Empire",
+      "release_ids": [
+        38345517
+      ]
+    },
+    {
+      "artist": "Protest The Hero",
+      "album": "Fortress",
+      "release_ids": [
+        26047519
+      ]
+    },
+    {
+      "artist": "Protest The Hero",
+      "album": "Kezia",
+      "release_ids": [
+        26047147
+      ]
+    },
+    {
+      "artist": "Silent Planet",
+      "album": "Everything Was Sound",
+      "release_ids": [
+        16610055
       ]
     },
     {
@@ -348,6 +1022,13 @@
       "album": "Take Me Back To Eden",
       "release_ids": [
         37163709
+      ]
+    },
+    {
+      "artist": "Spiritbox",
+      "album": "Eternal Blue",
+      "release_ids": [
+        20247346
       ]
     },
     {
@@ -386,6 +1067,41 @@
       ]
     },
     {
+      "artist": "The Devil Wears Prada",
+      "album": "Zombie EP",
+      "release_ids": [
+        35336893
+      ]
+    },
+    {
+      "artist": "The Plot In You",
+      "album": "Dispose",
+      "release_ids": [
+        11625165
+      ]
+    },
+    {
+      "artist": "The Plot In You",
+      "album": "Happiness In Self Destruction",
+      "release_ids": [
+        18801928
+      ]
+    },
+    {
+      "artist": "The Prize Fighter Inferno",
+      "album": "My Brother's Blood Machine",
+      "release_ids": [
+        28895677
+      ]
+    },
+    {
+      "artist": "Thornhill",
+      "album": "Bodies: Definitive",
+      "release_ids": [
+        38113617
+      ]
+    },
+    {
       "artist": "Thornhill",
       "album": "Heroine",
       "release_ids": [
@@ -397,6 +1113,55 @@
       "album": "Identity Crisis",
       "release_ids": [
         35844376
+      ]
+    },
+    {
+      "artist": "Thrice",
+      "album": "Major / Minor",
+      "release_ids": [
+        3093365
+      ]
+    },
+    {
+      "artist": "Thrice",
+      "album": "The Alchemy Index Vols. I ● II (Fire & Water)",
+      "release_ids": [
+        35844325
+      ]
+    },
+    {
+      "artist": "Thrice",
+      "album": "The Alchemy Index Vols. III ● IV (Air & Earth)",
+      "release_ids": [
+        35852386
+      ]
+    },
+    {
+      "artist": "Thrice",
+      "album": "The Artist In The Ambulance",
+      "release_ids": [
+        8781739
+      ]
+    },
+    {
+      "artist": "Thrice",
+      "album": "The Illusion Of Safety",
+      "release_ids": [
+        26411060
+      ]
+    },
+    {
+      "artist": "Thrice",
+      "album": "To Be Everywhere Is To Be Nowhere",
+      "release_ids": [
+        19084276
+      ]
+    },
+    {
+      "artist": "Thursday",
+      "album": "Full Collapse",
+      "release_ids": [
+        5632601
       ]
     },
     {
@@ -414,6 +1179,34 @@
       ]
     },
     {
+      "artist": "Underoath",
+      "album": "Erase Me",
+      "release_ids": [
+        11812427
+      ]
+    },
+    {
+      "artist": "Underoath",
+      "album": "They're Only Chasing Safety",
+      "release_ids": [
+        31200271
+      ]
+    },
+    {
+      "artist": "Unearth",
+      "album": "Extinction[s]",
+      "release_ids": [
+        12852715
+      ]
+    },
+    {
+      "artist": "Unearth",
+      "album": "III: In The Eyes Of Fire",
+      "release_ids": [
+        21315247
+      ]
+    },
+    {
       "artist": "Unearth",
       "album": "The Stings Of Conscience",
       "release_ids": [
@@ -421,10 +1214,73 @@
       ]
     },
     {
+      "artist": "Unearth",
+      "album": "The Wretched; The Ruinous",
+      "release_ids": [
+        27137034
+      ]
+    },
+    {
+      "artist": "Unearth",
+      "album": "Watchers Of Rule",
+      "release_ids": [
+        19249243
+      ]
+    },
+    {
+      "artist": "Veil of Maya",
+      "album": "[Id]",
+      "release_ids": [
+        14947161
+      ]
+    },
+    {
+      "artist": "Veil of Maya",
+      "album": "[M]other",
+      "release_ids": [
+        27066432
+      ]
+    },
+    {
       "artist": "Veil of Maya",
       "album": "False Idol",
       "release_ids": [
         11368406
+      ]
+    },
+    {
+      "artist": "Veil of Maya",
+      "album": "Matriarch",
+      "release_ids": [
+        23753615
+      ]
+    },
+    {
+      "artist": "Veil of Maya",
+      "album": "The Common Man's Collapse",
+      "release_ids": [
+        26917130
+      ]
+    },
+    {
+      "artist": "Vianova",
+      "album": "Hit It!",
+      "release_ids": [
+        38199639
+      ]
+    },
+    {
+      "artist": "Wage War",
+      "album": "Deadweight",
+      "release_ids": [
+        11771142
+      ]
+    },
+    {
+      "artist": "Wage War",
+      "album": "Manic",
+      "release_ids": [
+        21958303
       ]
     }
   ]

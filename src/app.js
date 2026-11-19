@@ -422,6 +422,19 @@
       return rec.images.local_cover_image_url || rec.images.center_label_image_url || rec.images.cover_image_url || '';
     }
 
+    // Auto-queue rule: any newly added or untracked LP automatically goes onto the
+    // Flattening Queue ('Need to be done') for arrival inspection unless explicitly
+    // marked 'Done' (flattened or confirmed flat) or explicitly 'Not Listed'.
+    const DEFAULT_FLATTENING_STATUS = 'Need to be done';
+
+    function normalizeDefaultFlatteningStatuses() {
+      for (const rec of state.records) {
+        if (!rec.flattening_status) {
+          rec.flattening_status = DEFAULT_FLATTENING_STATUS;
+        }
+      }
+    }
+
     // Build and sync the portable inline HTML form (#flattening-inline-form) + window.__DISCOGS_COLLECTION__
     function buildFlatteningQueueObject(customTimestamp) {
       const ts = customTimestamp || new Date().toISOString().replace(/\.\d{3}Z$/, 'Z');
@@ -431,11 +444,15 @@
         : 'Bag on 6 until 130°F then drop to 4 — 2.5 hours once at 130°F on the plate';
 
       const todoRecs = state.records
-        .filter(r => r.flattening_status === 'Need to be done')
+        .filter(r => (r.flattening_status || DEFAULT_FLATTENING_STATUS) === 'Need to be done')
         .sort((a, b) => a.artist.localeCompare(b.artist) || a.title.localeCompare(b.title));
       const doneRecs = state.records
         .filter(r => r.flattening_status === 'Done')
         .sort((a, b) => a.artist.localeCompare(b.artist) || a.title.localeCompare(b.title));
+      const explicitUnlistedIds = state.records
+        .filter(r => r.flattening_status === 'Not Listed')
+        .map(r => Number(r.release_id))
+        .filter(Boolean);
 
       const todoIds = todoRecs.map(r => Number(r.release_id)).filter(Boolean).sort((a, b) => a - b);
       const doneIds = doneRecs.map(r => Number(r.release_id)).filter(Boolean).sort((a, b) => a - b);
@@ -444,7 +461,9 @@
       const prevUnlisted = (unlistedEl && unlistedEl.value)
         ? unlistedEl.value.split(',').map(x => Number(x.trim())).filter(Boolean)
         : [];
-      const unlistedIds = Array.from(new Set(prevUnlisted)).filter(id => !todoIds.includes(id) && !doneIds.includes(id)).sort((a, b) => a - b);
+      const unlistedIds = Array.from(new Set([...prevUnlisted, ...explicitUnlistedIds]))
+        .filter(id => !todoIds.includes(id) && !doneIds.includes(id))
+        .sort((a, b) => a - b);
 
       return {
         schema_version: '5.0.0',
@@ -513,7 +532,10 @@
       const doneSet = new Set((fqObj.done_release_ids || []).map(Number));
       const unlistedSet = new Set((fqObj.unlisted_release_ids || []).map(Number));
 
-      if (!todoSet.size && !doneSet.size && !unlistedSet.size) return;
+      if (!todoSet.size && !doneSet.size && !unlistedSet.size) {
+        normalizeDefaultFlatteningStatuses();
+        return;
+      }
 
       for (const rec of state.records) {
         const rid = Number(rec.release_id);
@@ -524,7 +546,9 @@
         } else if (doneSet.has(rid)) {
           rec.flattening_status = 'Done';
         } else {
-          rec.flattening_status = 'Not Listed';
+          // Auto-queue rule: any newly added/unknown LP automatically goes onto the
+          // Flattening Queue for arrival inspection unless explicitly Done or Unlisted.
+          rec.flattening_status = DEFAULT_FLATTENING_STATUS;
         }
       }
     }
@@ -558,9 +582,9 @@
       renderCrateGrid();
 
       const labelMap = {
-        'Need to be done': '🔥 Added to Flattening Queue',
-        'Done': '✓ Marked Flattened & Verified',
-        'Not Listed': 'Removed from Flattening Queue',
+        'Need to be done': '🔥 Queued for Arrival Inspection / Flattening',
+        'Done': '✓ Verified Flat / Done',
+        'Not Listed': 'Excluded from Flattening Queue (Not Listed)',
       };
       showToast(`${rec.artist} — "${rec.title}": ${labelMap[newStatus] || newStatus}`);
     }
@@ -973,12 +997,13 @@
 
       const pillEl = document.getElementById(`${prefix}-pill`);
       if (pillEl) {
-        if (rec.flattening_status === 'Done') {
+        const wingFlat = rec.flattening_status || DEFAULT_FLATTENING_STATUS;
+        if (wingFlat === 'Done') {
           pillEl.textContent = 'Flat ✓';
           pillEl.className = 'px-1.5 py-0.5 rounded bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 text-[9px] font-mono-tech font-bold';
-        } else if (rec.flattening_status === 'Need to be done') {
-          pillEl.textContent = 'Warped ⚠️';
-          pillEl.className = 'px-1.5 py-0.5 rounded bg-rose-500/30 text-rose-200 border border-rose-500/40 text-[9px] font-mono-tech font-bold';
+        } else if (wingFlat === 'Need to be done') {
+          pillEl.textContent = 'Queue 🔥';
+          pillEl.className = 'px-1.5 py-0.5 rounded bg-amber-500/25 text-amber-200 border border-amber-500/40 text-[9px] font-mono-tech font-bold';
         } else {
           pillEl.textContent = String(rec.year || 'LP');
           pillEl.className = 'px-1.5 py-0.5 rounded bg-white/10 text-slate-300 text-[9px] font-mono-tech font-bold';
@@ -1059,23 +1084,26 @@
       const sShort = (rec.sleeve_condition || 'NM').split('(')[0].trim();
       document.getElementById('hero-grading').textContent = `Media: ${mShort} / Sleeve: ${sShort}`;
 
-      const flatStatus = rec.flattening_status || 'Not Listed';
+      const flatStatus = rec.flattening_status || DEFAULT_FLATTENING_STATUS;
       const flatBadge = flatStatus === 'Need to be done'
         ? ` • 🔥 Queue`
-        : (flatStatus === 'Done' ? ` • ✓ Flattened` : '');
+        : (flatStatus === 'Done' ? ` • ✓ Flat / Done` : ' • Unlisted');
       document.getElementById('hero-flattening').textContent = `#${rec.release_id}${flatBadge}`;
 
       const cycleBtn = document.getElementById('btn-hero-flatten-cycle');
       if (cycleBtn) {
-        if (flatStatus === 'Not Listed') {
+        if (flatStatus === 'Need to be done') {
+          cycleBtn.textContent = '✓ Flat / Done';
+          cycleBtn.className = 'shrink-0 px-2 py-0.5 rounded bg-emerald-500/20 hover:bg-emerald-500/30 text-[10px] font-mono-tech font-bold text-emerald-300 border border-emerald-500/30 transition';
+          cycleBtn.title = 'Mark flattened or confirm already flat upon arrival (Done)';
+        } else if (flatStatus === 'Done') {
+          cycleBtn.textContent = '🔥 Re-Queue';
+          cycleBtn.className = 'shrink-0 px-2 py-0.5 rounded bg-amber-500/15 hover:bg-amber-500/25 text-[10px] font-mono-tech font-bold text-amber-300 border border-amber-500/30 transition';
+          cycleBtn.title = 'Toggle back onto the Flattening Queue (Need to be done)';
+        } else {
           cycleBtn.textContent = '+ 🔥 Queue';
           cycleBtn.className = 'shrink-0 px-2 py-0.5 rounded bg-amber-500/15 hover:bg-amber-500/25 text-[10px] font-mono-tech font-bold text-amber-300 border border-amber-500/30 transition';
-        } else if (flatStatus === 'Need to be done') {
-          cycleBtn.textContent = '✓ Mark Done';
-          cycleBtn.className = 'shrink-0 px-2 py-0.5 rounded bg-emerald-500/20 hover:bg-emerald-500/30 text-[10px] font-mono-tech font-bold text-emerald-300 border border-emerald-500/30 transition';
-        } else {
-          cycleBtn.textContent = '↺ Unlist';
-          cycleBtn.className = 'shrink-0 px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-[10px] font-mono-tech font-bold text-slate-300 border border-white/10 transition';
+          cycleBtn.title = 'Add back onto the Flattening Queue (Need to be done)';
         }
       }
 
@@ -2772,7 +2800,7 @@
           if (!hay.includes(q)) return false;
         }
         if (state.filter === 'pressing_photo') return Boolean(getVerifiedPressingPhotoUrl(rec));
-        if (state.filter === 'flattening_todo') return rec.flattening_status === 'Need to be done';
+        if (state.filter === 'flattening_todo') return (rec.flattening_status || DEFAULT_FLATTENING_STATUS) === 'Need to be done';
         if (state.filter === 'flattening_done') return rec.flattening_status === 'Done';
         if (state.filter === 'splatter') return ['splatter', 'color_in_color'].includes(rec.wax_spec.pattern);
         if (state.filter === 'galaxy_marble') return ['galaxy', 'marble', 'split'].includes(rec.wax_spec.pattern);
@@ -2843,7 +2871,7 @@
       if (sumEl) sumEl.textContent = highStr;
       if (sumSubEl) sumSubEl.textContent = `High Est. • Low ${lowStr}`;
 
-      const todoCount = state.records.filter(r => r.flattening_status === 'Need to be done').length;
+      const todoCount = state.records.filter(r => (r.flattening_status || DEFAULT_FLATTENING_STATUS) === 'Need to be done').length;
       const doneCount = state.records.filter(r => r.flattening_status === 'Done').length;
       const unlistedCount = Math.max(0, total - todoCount - doneCount);
 
@@ -2861,7 +2889,7 @@
       const pipeCv = document.getElementById('pipe-kpi-cv');
       if (pipeCv) pipeCv.textContent = `${verifiedCount} / ${total} Physical Discs Verified (${pressPct}%)`;
       const pipeFlat = document.getElementById('pipe-kpi-flatten');
-      if (pipeFlat) pipeFlat.textContent = `${todoCount} Queued • ${doneCount} Flattened • ${unlistedCount} Uninspected`;
+      if (pipeFlat) pipeFlat.textContent = `${todoCount} Queued • ${doneCount} Flat / Done • ${unlistedCount} Unlisted`;
       const pipeVal = document.getElementById('pipe-kpi-val');
       if (pipeVal) pipeVal.textContent = `Med ${medianStr} • Low ${lowStr} • High ${highStr}`;
 
@@ -2894,11 +2922,11 @@
         const isSelected = idx === state.activeIndex;
         const verifiedPressingUrl = getVerifiedPressingPhotoUrl(rec);
         const hasRealCover = Boolean(getRealCoverUrl(rec));
-        const flatStatus = rec.flattening_status || 'Not Listed';
+        const flatStatus = rec.flattening_status || DEFAULT_FLATTENING_STATUS;
         const flatPill = flatStatus === 'Need to be done'
           ? `<span class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-full text-[10px] font-mono-tech bg-amber-500/25 text-amber-200 border border-amber-400/40 z-30">🔥 Flatten Queue</span>`
           : (flatStatus === 'Done'
-            ? `<span class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-full text-[10px] font-mono-tech bg-emerald-500/20 text-emerald-200 border border-emerald-400/30 z-30">✓ Flattened</span>`
+            ? `<span class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-full text-[10px] font-mono-tech bg-emerald-500/20 text-emerald-200 border border-emerald-400/30 z-30">✓ Flat / Done</span>`
             : '');
 
         let visualHtml = '';
@@ -3020,22 +3048,22 @@
       return imgs;
     }
 
-    // Render Flattening Queue View + Owner Inspection Bench
+    // Render Flattening Queue View + Unlisted / Excluded Bench
     function renderFlatteningView() {
       const todo = state.records
-        .filter(r => r.flattening_status === 'Need to be done')
+        .filter(r => (r.flattening_status || DEFAULT_FLATTENING_STATUS) === 'Need to be done')
         .sort((a, b) => a.artist.localeCompare(b.artist) || a.title.localeCompare(b.title));
       const allDone = state.records
         .filter(r => r.flattening_status === 'Done')
         .sort((a, b) => a.artist.localeCompare(b.artist) || a.title.localeCompare(b.title));
       const allUnlisted = state.records
-        .filter(r => r.flattening_status !== 'Need to be done' && r.flattening_status !== 'Done')
+        .filter(r => r.flattening_status === 'Not Listed')
         .sort((a, b) => a.artist.localeCompare(b.artist) || a.title.localeCompare(b.title));
 
       document.getElementById('flatten-todo-count').textContent = `${todo.length} Records`;
       document.getElementById('flatten-done-count').textContent = `${allDone.length} Records`;
       const unlistedCountEl = document.getElementById('flatten-unlisted-count');
-      if (unlistedCountEl) unlistedCountEl.textContent = `${allUnlisted.length} Uninspected`;
+      if (unlistedCountEl) unlistedCountEl.textContent = `${allUnlisted.length} Unlisted`;
 
       // Populate thermal timer record dropdown
       const timerSelect = document.getElementById('timer-record-select');
@@ -3065,10 +3093,10 @@
             </div>
           </div>
           <div class="flex items-center gap-1.5 shrink-0">
-            <button type="button" data-set-flatten="${r.release_id}" data-target-status="${isTodo ? 'Done' : 'Need to be done'}" class="px-2.5 py-1 rounded-lg text-[11px] font-mono-tech font-semibold ${isTodo ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500/30' : 'bg-amber-500/15 text-amber-300 border border-amber-500/30 hover:bg-amber-500/25'}">
-              ${isTodo ? '✓ Mark Done' : '🔥 Re-Queue'}
+            <button type="button" data-set-flatten="${r.release_id}" data-target-status="${isTodo ? 'Done' : 'Need to be done'}" class="px-2.5 py-1 rounded-lg text-[11px] font-mono-tech font-semibold ${isTodo ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500/30' : 'bg-amber-500/15 text-amber-300 border border-amber-500/30 hover:bg-amber-500/25'}" title="${isTodo ? 'Mark flattened or confirm already flat upon arrival (Done)' : 'Toggle back onto Flattening Queue (Need to be done)'}">
+              ${isTodo ? '✓ Flat / Done' : '🔥 Re-Queue'}
             </button>
-            <button type="button" data-set-flatten="${r.release_id}" data-target-status="Not Listed" class="px-2 py-1 rounded-lg text-[11px] font-mono-tech bg-slate-800 hover:bg-rose-500/20 text-slate-400 hover:text-rose-300 border border-white/10" title="Remove from Flattening Queue (set to Not Listed)">
+            <button type="button" data-set-flatten="${r.release_id}" data-target-status="Not Listed" class="px-2 py-1 rounded-lg text-[11px] font-mono-tech bg-slate-800 hover:bg-rose-500/20 text-slate-400 hover:text-rose-300 border border-white/10" title="Exclude from Flattening Queue (set to Not Listed)">
               ✕
             </button>
             <a href="${r.discogs_url || ('https://www.discogs.com/release/' + r.release_id)}" target="_blank" rel="noopener noreferrer" class="text-xs font-mono-tech text-cyan-400 hover:underline px-1">↗</a>
@@ -3077,11 +3105,11 @@
       `;
 
       document.getElementById('flatten-todo-list').innerHTML = todo.map(r => renderRow(r, true)).join('') ||
-        '<div class="p-4 rounded-xl bg-slate-900/50 border border-white/5 text-xs text-slate-400 text-center">Queue is clear! Use the Owner Inspection Bench below to add any warped LP.</div>';
+        '<div class="p-4 rounded-xl bg-slate-900/50 border border-white/5 text-xs text-slate-400 text-center">Queue is clear! Every new Discogs addition will automatically appear here for arrival inspection.</div>';
       document.getElementById('flatten-done-list').innerHTML = filteredDone.map(r => renderRow(r, false)).join('') ||
-        '<div class="p-4 rounded-xl bg-slate-900/50 border border-white/5 text-xs text-slate-400 text-center">No matching flattened records.</div>';
+        '<div class="p-4 rounded-xl bg-slate-900/50 border border-white/5 text-xs text-slate-400 text-center">No matching flat &amp; verified records.</div>';
 
-      // Render Owner Inspection Bench (unlisted records matching benchSearchQuery)
+      // Render Unlisted / Excluded Bench (only records manually marked Not Listed via ✕)
       const benchEl = document.getElementById('flatten-bench-list');
       if (benchEl) {
         const bq = state.benchSearchQuery.trim().toLowerCase();
@@ -3101,15 +3129,19 @@
               </div>
             </div>
             <div class="flex items-center gap-1 shrink-0">
-              <button type="button" data-set-flatten="${r.release_id}" data-target-status="Need to be done" class="px-2 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 text-[10px] font-mono-tech font-semibold" title="Add warped LP to Flattening Queue">
+              <button type="button" data-set-flatten="${r.release_id}" data-target-status="Need to be done" class="px-2 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 text-[10px] font-mono-tech font-semibold" title="Return LP to Flattening Queue">
                 + 🔥 Queue
               </button>
-              <button type="button" data-set-flatten="${r.release_id}" data-target-status="Done" class="px-2 py-1 rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 text-[10px] font-mono-tech font-semibold" title="Mark LP as Flattened &amp; Verified">
+              <button type="button" data-set-flatten="${r.release_id}" data-target-status="Done" class="px-2 py-1 rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 text-[10px] font-mono-tech font-semibold" title="Mark LP as Flat &amp; Verified">
                 + ✓ Done
               </button>
             </div>
           </div>
-        `).join('') || '<div class="col-span-full text-xs text-slate-400 py-3 text-center">No matching uninspected records found.</div>';
+        `).join('') || (
+          allUnlisted.length === 0
+            ? '<div class="col-span-full text-xs text-slate-400 py-3 text-center">0 unlisted records — all collection LPs are tracked above (new additions auto-queue to Need To Be Done).</div>'
+            : '<div class="col-span-full text-xs text-slate-400 py-3 text-center">No matching unlisted records found.</div>'
+        );
       }
     }
 
@@ -3283,6 +3315,7 @@
               }
               window.__DISCOGS_COLLECTION__ = extCol;
               state.records = extCol.records;
+              normalizeDefaultFlatteningStatuses();
               changed = true;
             }
           }
@@ -3363,6 +3396,7 @@
       if (data && Array.isArray(data.records)) {
         state.records = data.records;
       }
+      normalizeDefaultFlatteningStatuses();
 
       // 2. Reconcile Flattening Queue from inline HTML form (#flattening-inline-form) + localStorage
       const todoInput = document.getElementById('flatten-hidden-todo-ids');
@@ -3370,7 +3404,7 @@
       const unlistedInput = document.getElementById('flatten-hidden-unlisted-ids');
       const htmlTsInput = document.getElementById('flatten-hidden-updated-at');
 
-      if (todoInput && doneInput && (todoInput.value || doneInput.value)) {
+      if (todoInput && doneInput && (todoInput.value || doneInput.value || (unlistedInput && unlistedInput.value))) {
         applyFlatteningQueueObjectToRecords({
           need_to_be_done_release_ids: todoInput.value.split(',').map(x => Number(x.trim())).filter(Boolean),
           done_release_ids: doneInput.value.split(',').map(x => Number(x.trim())).filter(Boolean),
@@ -3550,13 +3584,13 @@
       // Initialize Arena Bracket on boot
       initArenaBracket();
 
-      // Quick Flattening Status Cycle on Hero Turntable Stage
+      // Quick Flattening Status Toggle on Hero Turntable Stage (Flattening Queue <-> Flat/Done)
       document.getElementById('btn-hero-flatten-cycle').addEventListener('click', () => {
         const list = state.filteredRecords.length ? state.filteredRecords : state.records;
         const rec = list[state.activeIndex];
         if (!rec) return;
-        const cur = rec.flattening_status || 'Not Listed';
-        const nextStatus = cur === 'Not Listed' ? 'Need to be done' : (cur === 'Need to be done' ? 'Done' : 'Not Listed');
+        const cur = rec.flattening_status || DEFAULT_FLATTENING_STATUS;
+        const nextStatus = cur === 'Need to be done' ? 'Done' : 'Need to be done';
         setRecordFlatteningStatus(rec.release_id, nextStatus);
       });
 

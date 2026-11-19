@@ -32,6 +32,7 @@ if str(SCRIPT_DIR) not in sys.path:
 from detect_pressing_image import (
     build_flattening_queue_payload,
     reconcile_flattening_state,
+    reconcile_overrides_state,
     resolve_flattening_status,
 )
 from pick_pressing_photo import (
@@ -67,17 +68,27 @@ def build_index_html(
         raise FileNotFoundError(f"Collection JSON not found at {collection_path}")
 
     collection_data: dict[str, Any] = json.loads(collection_path.read_text(encoding="utf-8"))
-    overrides_data: dict[str, Any] = {}
-    if overrides_path.exists():
-        try:
-            overrides_data = json.loads(overrides_path.read_text(encoding="utf-8"))
-        except Exception:
-            overrides_data = {}
+    existing_html = html_path if html_path.exists() else None
+    overrides_data, overrides_merged = reconcile_overrides_state(
+        overrides_path=overrides_path,
+        html_path=existing_html,
+    )
+    if overrides_merged:
+        overrides_sorted = {
+            k: overrides_data[k]
+            for k in sorted(overrides_data.keys(), key=lambda x: int(x) if str(x).isdigit() else str(x))
+        }
+        overrides_path.parent.mkdir(parents=True, exist_ok=True)
+        overrides_path.write_text(
+            json.dumps(overrides_sorted, indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8",
+        )
+        overrides_data = overrides_sorted
 
     # Reconcile any newer inline #flattening-inline-form state from an existing index.html before overwriting it
     flattening_queue = reconcile_flattening_state(
         flattening_path=flattening_path,
-        html_path=html_path if html_path.exists() else None,
+        html_path=existing_html,
     )
     records = collection_data.get("records") or []
     collection_updated = False
@@ -99,6 +110,15 @@ def build_index_html(
         base_queue=flattening_queue,
         updated_at_utc=str(flattening_queue.get("updated_at_utc") or collection_data.get("synced_at_utc") or ""),
     )
+    prof = collection_data.get("profile")
+    if isinstance(prof, dict):
+        new_todo = len(canonical_fq.get("need_to_be_done_release_ids") or [])
+        new_done = len(canonical_fq.get("done_release_ids") or [])
+        if prof.get("flattening_need_to_be_done") != new_todo or prof.get("flattening_done") != new_done:
+            prof["flattening_need_to_be_done"] = new_todo
+            prof["flattening_done"] = new_done
+            collection_updated = True
+
     if collection_data.get("flattening_queue") != canonical_fq:
         collection_data["flattening_queue"] = canonical_fq
         collection_updated = True
@@ -108,6 +128,15 @@ def build_index_html(
             json.dumps(collection_data, indent=2, ensure_ascii=False) + "\n",
             encoding="utf-8",
         )
+
+    existing_fq_disk: dict[str, Any] | None = None
+    if flattening_path.exists():
+        try:
+            existing_fq_disk = json.loads(flattening_path.read_text(encoding="utf-8"))
+        except Exception:
+            existing_fq_disk = None
+    if existing_fq_disk != canonical_fq:
+        flattening_path.parent.mkdir(parents=True, exist_ok=True)
         flattening_path.write_text(
             json.dumps(canonical_fq, indent=2, ensure_ascii=False) + "\n",
             encoding="utf-8",

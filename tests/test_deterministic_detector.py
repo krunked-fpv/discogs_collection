@@ -21,7 +21,12 @@ sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
 import build_html
 from detect_pressing_image import (
+    DEFAULT_FLATTENING_STATUS,
+    build_flattening_queue_payload,
     parse_wax_variant,
+    reconcile_flattening_state,
+    reconcile_overrides_state,
+    resolve_flattening_status,
     score_image_pixels_deterministic,
     select_release_images_deterministic,
 )
@@ -281,6 +286,182 @@ class TestDeterministicDetector(unittest.TestCase):
             self.assertIn("window.__MODULAR_COMPILER_TEST__ = true;", compiled)
             self.assertIn('<div id="kpi-total-records" class="text-lg sm:text-xl font-black text-white mt-0.5">1 LPs</div>', compiled)
             self.assertIn('id="flatten-hidden-done-ids" name="done_release_ids" value="2001"', compiled)
+
+    def test_flattening_auto_queue_rule_for_new_albums(self) -> None:
+        self.assertEqual(DEFAULT_FLATTENING_STATUS, "Need to be done")
+        # Empty / missing queue always defaults new albums into the Flattening Queue
+        self.assertEqual(resolve_flattening_status("Currents", "The Way It Ends", 31082741, None), "Need to be done")
+        self.assertEqual(resolve_flattening_status("Currents", "The Way It Ends", 31082741, {}), "Need to be done")
+
+        queue = {
+            "need_to_be_done_release_ids": [1001],
+            "done_release_ids": [1002],
+            "unlisted_release_ids": [1003],
+        }
+        self.assertEqual(resolve_flattening_status("Band A", "Album A", 1001, queue), "Need to be done")
+        self.assertEqual(resolve_flattening_status("Band B", "Album B", 1002, queue), "Done")
+        self.assertEqual(resolve_flattening_status("Band C", "Album C", 1003, queue), "Not Listed")
+        # Brand-new release not in Done or Unlisted auto-queues for arrival inspection
+        self.assertEqual(resolve_flattening_status("Band D", "Brand New LP", 99999999, queue), "Need to be done")
+
+        # Payload builder defaults missing flattening_status to Need to be done and keeps explicit Not Listed
+        payload = build_flattening_queue_payload(
+            records=[
+                {"release_id": 1002, "artist": "Band B", "title": "Album B", "flattening_status": "Done"},
+                {"release_id": 1003, "artist": "Band C", "title": "Album C", "flattening_status": "Not Listed"},
+                {"release_id": 1004, "artist": "Band D", "title": "Arrival LP"},
+            ],
+            base_queue={},
+            updated_at_utc="2026-11-19T21:00:00Z",
+        )
+        self.assertEqual(payload["need_to_be_done_release_ids"], [1004])
+        self.assertEqual(payload["done_release_ids"], [1002])
+        self.assertEqual(payload["unlisted_release_ids"], [1003])
+
+    def test_reconcile_flattening_state_preserves_empty_queue_and_no_stale_entry_leak(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_root = pathlib.Path(tmpdir)
+            fq_path = tmp_root / "flattening_queue.json"
+            html_path = tmp_root / "index.html"
+
+            # Case 1: Newer JSON cleared queue to [] — must NOT resurrect stale todo ID from older HTML
+            fq_path.write_text(
+                json.dumps(
+                    {
+                        "updated_at_utc": "2026-11-19T22:00:00Z",
+                        "need_to_be_done_release_ids": [],
+                        "done_release_ids": [1001, 1002],
+                        "unlisted_release_ids": [],
+                    }
+                ),
+                encoding="utf-8",
+            )
+            html_path.write_text(
+                '<form id="flattening-inline-form">'
+                '<input type="hidden" id="flatten-hidden-updated-at" value="2026-11-19T20:00:00Z">'
+                '<input type="hidden" id="flatten-hidden-todo-ids" value="1001">'
+                '<input type="hidden" id="flatten-hidden-done-ids" value="1002">'
+                '<input type="hidden" id="flatten-hidden-unlisted-ids" value="">'
+                "</form>",
+                encoding="utf-8",
+            )
+            reconciled = reconcile_flattening_state(fq_path, html_path)
+            self.assertEqual(reconciled["need_to_be_done_release_ids"], [])
+            self.assertEqual(resolve_flattening_status("Band A", "Album A", 1001, reconciled), "Done")
+
+            # Case 2: Newer HTML moved 1001 to Done — must NOT leak older JSON's need_to_be_done_entries
+            fq_path.write_text(
+                json.dumps(
+                    {
+                        "updated_at_utc": "2026-11-19T18:00:00Z",
+                        "need_to_be_done_release_ids": [1001],
+                        "done_release_ids": [1002],
+                        "unlisted_release_ids": [],
+                        "need_to_be_done_entries": [
+                            {"artist": "Band A", "album": "Album A", "release_ids": [1001]}
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+            html_path.write_text(
+                '<form id="flattening-inline-form">'
+                '<input type="hidden" id="flatten-hidden-updated-at" value="2026-11-19T23:00:00Z">'
+                '<input type="hidden" id="flatten-hidden-todo-ids" value="">'
+                '<input type="hidden" id="flatten-hidden-done-ids" value="1001,1002">'
+                '<input type="hidden" id="flatten-hidden-unlisted-ids" value="">'
+                "</form>",
+                encoding="utf-8",
+            )
+            reconciled2 = reconcile_flattening_state(fq_path, html_path)
+            self.assertEqual(reconciled2["need_to_be_done_release_ids"], [])
+            self.assertEqual(resolve_flattening_status("Band A", "Album A", 1001, reconciled2), "Done")
+            self.assertEqual(resolve_flattening_status("Band New", "Fresh Arrival", 1003, reconciled2), "Need to be done")
+
+    def test_build_index_html_auto_queues_new_album_and_preserves_user_locked_overrides(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_root = pathlib.Path(tmpdir)
+            tmp_data = tmp_root / "data"
+            tmp_data.mkdir()
+            col_path = tmp_data / "collection.json"
+            ovr_path = tmp_data / "overrides.json"
+            flat_path = tmp_data / "flattening_queue.json"
+            out_html = tmp_root / "index.html"
+
+            synthetic_collection = {
+                "schema_version": "5.0.0",
+                "username": "krunked",
+                "synced_at_utc": "2026-11-19T21:00:00Z",
+                "profile": {
+                    "username": "krunked",
+                    "num_collection": 3,
+                    "pressing_photos_detected": 1,
+                    "colored_or_special_variants": 3,
+                    "collection_value": {
+                        "minimum": "$30.00",
+                        "median": "$60.00",
+                        "maximum": "$90.00",
+                        "formatted_total": "$60.00",
+                    },
+                },
+                "records": [
+                    {"release_id": 2001, "artist": "Periphery", "title": "Hail Stan", "flattening_status": "Done"},
+                    {"release_id": 2002, "artist": "Northlane", "title": "Alien", "flattening_status": "Not Listed"},
+                    {"release_id": 2003, "artist": "Currents", "title": "The Way It Ends"},
+                ],
+            }
+            col_path.write_text(json.dumps(synthetic_collection), encoding="utf-8")
+            ovr_path.write_text(json.dumps({"2001": "assets/releases/2001/pressing.jpg"}), encoding="utf-8")
+            flat_path.write_text(
+                json.dumps(
+                    {
+                        "schema_version": "5.0.0",
+                        "updated_at_utc": "2026-11-19T21:00:00Z",
+                        "need_to_be_done_release_ids": [],
+                        "done_release_ids": [2001],
+                        "unlisted_release_ids": [2002],
+                    }
+                ),
+                encoding="utf-8",
+            )
+            # Pre-seed an existing index.html carrying a user_locked pin
+            out_html.write_text(
+                'window.__DISCOGS_OVERRIDES__ = {"2001": {"uri": "assets/releases/2001/img_5.jpg", "pressing_image_index": 5, "user_locked": true}};\n'
+                "window.__DISCOGS_COLLECTION__ = {};\n",
+                encoding="utf-8",
+            )
+
+            ok = build_html.build_index_html(
+                src_dir=REPO_ROOT / "src",
+                collection_path=col_path,
+                overrides_path=ovr_path,
+                flattening_path=flat_path,
+                html_path=out_html,
+            )
+            self.assertTrue(ok)
+
+            # Brand-new LP 2003 was automatically queued into Need to be done
+            updated_col = json.loads(col_path.read_text(encoding="utf-8"))
+            by_id = {r["release_id"]: r["flattening_status"] for r in updated_col["records"]}
+            self.assertEqual(by_id, {2001: "Done", 2002: "Not Listed", 2003: "Need to be done"})
+            self.assertEqual(updated_col["profile"]["flattening_need_to_be_done"], 1)
+            self.assertEqual(updated_col["profile"]["flattening_done"], 1)
+
+            updated_fq = json.loads(flat_path.read_text(encoding="utf-8"))
+            self.assertEqual(updated_fq["need_to_be_done_release_ids"], [2003])
+            self.assertEqual(updated_fq["done_release_ids"], [2001])
+            self.assertEqual(updated_fq["unlisted_release_ids"], [2002])
+
+            updated_ov = json.loads(ovr_path.read_text(encoding="utf-8"))
+            self.assertTrue(updated_ov["2001"]["user_locked"])
+            self.assertEqual(updated_ov["2001"]["pressing_image_index"], 5)
+
+            compiled = out_html.read_text(encoding="utf-8")
+            self.assertIn("const DEFAULT_FLATTENING_STATUS = 'Need to be done';", compiled)
+            self.assertIn('id="flatten-hidden-todo-ids" name="need_to_be_done_release_ids" value="2003"', compiled)
+            self.assertIn('id="flatten-hidden-done-ids" name="done_release_ids" value="2001"', compiled)
+            self.assertIn('id="flatten-hidden-unlisted-ids" name="unlisted_release_ids" value="2002"', compiled)
+            self.assertIn('id="kpi-flattening" class="text-lg sm:text-xl font-black text-cyan-300 mt-0.5">1 Queued / 1 Done</div>', compiled)
 
 
 if __name__ == "__main__":
