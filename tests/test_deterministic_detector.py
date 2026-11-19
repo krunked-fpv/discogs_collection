@@ -22,6 +22,7 @@ sys.path.insert(0, str(REPO_ROOT / "scripts"))
 import build_html
 from detect_pressing_image import (
     DEFAULT_FLATTENING_STATUS,
+    _eval_offcenter_disc,
     build_flattening_queue_payload,
     parse_wax_variant,
     reconcile_flattening_state,
@@ -32,6 +33,8 @@ from detect_pressing_image import (
 )
 import pick_pressing_photo
 import setup_discogs_token
+import sync_discogs
+import validate_collection
 
 
 def _make_synthetic_vinyl_pressing_png() -> bytes:
@@ -465,6 +468,230 @@ class TestDeterministicDetector(unittest.TestCase):
             self.assertIn('id="spin-badge-all" class="text-[10px] font-mono-tech font-bold px-1.5 py-0.5 rounded bg-slate-950/80 text-cyan-300 border border-cyan-500/30">ALL LPS (3)</span>', compiled)
             self.assertNotIn("r.flattening_status !== 'Need to be done'", compiled)
             self.assertNotIn("Stylus Guard Linked", compiled)
+
+    def test_inject_into_index_html_safe_script_escaping_and_scoped_storage_eviction(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_html = pathlib.Path(tmpdir) / "index.html"
+            synthetic_collection = {
+                "schema_version": "5.0.0",
+                "username": r"user\1<img src=x>",
+                "synced_at_utc": "2026-11-19T22:00:00Z",
+                "profile": {
+                    "username": r"user\1<img src=x>",
+                    "num_collection": 1,
+                    "pressing_photos_detected": 0,
+                    "colored_or_special_variants": 1,
+                    "collection_value": {
+                        "minimum": "$10.00",
+                        "median": "$20.00",
+                        "maximum": "$30.00",
+                        "formatted_total": "$20.00",
+                    },
+                },
+                "records": [
+                    {
+                        "release_id": 5001,
+                        "artist": "Test Artist",
+                        "title": "Album </script><script>alert(1)</script> <!-- comment -->",
+                        "flattening_status": "Need to be done",
+                    }
+                ],
+            }
+
+            ok = pick_pressing_photo.inject_into_index_html(
+                html_path=tmp_html,
+                collection_data=synthetic_collection,
+                overrides_data={},
+                src_dir=REPO_ROOT / "src",
+            )
+            self.assertTrue(ok)
+            out = tmp_html.read_text(encoding="utf-8")
+            self.assertNotIn("Album </script><script>alert(1)</script>", out)
+            self.assertIn(r"Album <\/script><script>alert(1)<\/script> \u003c!-- comment -->", out)
+            self.assertIn("Folder 0 • user\\1&lt;img src=x&gt;", out)
+            self.assertNotIn("Object.keys(localStorage)", out)
+            self.assertIn("krunked_pressing_overrides_v2_2", out)
+            self.assertIn("__savedFq.updated_at_utc > __pySyncStamp", out)
+
+    def test_sync_discogs_aborts_on_mid_pagination_failure_and_scopes_auth_header(self) -> None:
+        import urllib.error
+
+        # 1. DiscogsClient.download_bytes must never leak PAT to CDN hosts or wipe self.token on 403
+        token = "SecretDiscogsPAT123456789012345678901234"
+        client = sync_discogs.DiscogsClient(token=token)
+        seen_headers: list[tuple[str, dict[str, str]]] = []
+
+        def fake_urlopen_cdn(req, timeout=25):
+            hdrs = {k.lower(): v for k, v in req.header_items()}
+            seen_headers.append((req.full_url, hdrs))
+            raise urllib.error.HTTPError(req.full_url, 403, "Forbidden", {}, None)
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen_cdn):
+            res = client.download_bytes("https://i.discogs.com/some/pressing.jpg")
+        self.assertIsNone(res)
+        self.assertEqual(len(seen_headers), 1)
+        self.assertNotIn("authorization", seen_headers[0][1])
+        self.assertEqual(client.token, token)
+
+        # Also verify api.discogs.com sends auth once, retries without auth on 403, and keeps client.token intact
+        api_seen: list[dict[str, str]] = []
+
+        def fake_urlopen_api(req, timeout=25):
+            hdrs = {k.lower(): v for k, v in req.header_items()}
+            api_seen.append(hdrs)
+            raise urllib.error.HTTPError(req.full_url, 403, "Forbidden", {}, None)
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen_api):
+            res_api = client.download_bytes("https://api.discogs.com/images/test.jpg")
+        self.assertIsNone(res_api)
+        self.assertEqual(len(api_seen), 2)
+        self.assertEqual(api_seen[0].get("authorization"), f"Discogs token={token}")
+        self.assertNotIn("authorization", api_seen[1])
+        self.assertEqual(client.token, token)
+
+        # 2. Mid-pagination failure must abort safely without pruning existing overrides/cache
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_root = pathlib.Path(tmpdir)
+            cache_path = tmp_root / "releases_cache.json"
+            overrides_path = tmp_root / "overrides.json"
+            flattening_path = tmp_root / "flattening_queue.json"
+            assets_dir = tmp_root / "assets"
+            html_path = tmp_root / "index.html"
+
+            cache_path.write_text(json.dumps({"999": {"id": 999, "title": "Preserved LP"}}), encoding="utf-8")
+            overrides_path.write_text(json.dumps({"999": {"uri": "assets/releases/999/pressing.jpg", "user_locked": True}}), encoding="utf-8")
+
+            pages_requested: list[int] = []
+
+            def fake_get_json(url: str, params: dict | None = None):
+                if "/collection/folders/0/releases" in url:
+                    p = int((params or {}).get("page") or 1)
+                    pages_requested.append(p)
+                    if p == 1:
+                        return {
+                            "pagination": {"page": 1, "pages": 2, "items": 2},
+                            "releases": [{"id": 999, "basic_information": {"id": 999, "title": "Preserved LP"}}],
+                        }
+                    raise RuntimeError("Simulated HTTP 502 on page 2")
+                return {}
+
+            col_path = tmp_root / "collection.json"
+            col_path.write_text(json.dumps({"username": "krunked", "records": [{"release_id": 999}]}), encoding="utf-8")
+
+            with mock.patch.object(client, "get_json", side_effect=fake_get_json):
+                col_data, summary = sync_discogs.fetch_full_collection(
+                    client=client,
+                    username="krunked",
+                    cache_path=cache_path,
+                    overrides_path=overrides_path,
+                    flattening_path=flattening_path,
+                    download_dir=assets_dir,
+                    analyze_pixels=False,
+                    existing_collection_path=col_path,
+                )
+
+            self.assertEqual(pages_requested, [1, 2])
+            self.assertEqual(col_data["records"], [])
+            self.assertEqual(summary["removed_records"], [])
+            self.assertIn("999", json.loads(overrides_path.read_text(encoding="utf-8")))
+            self.assertIn("999", json.loads(cache_path.read_text(encoding="utf-8")))
+
+    def test_mixed_override_keys_sort_and_validate_collection_raises_value_error(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_root = pathlib.Path(tmpdir)
+            col_path = tmp_root / "collection.json"
+            ovr_path = tmp_root / "overrides.json"
+            flat_path = tmp_root / "flattening_queue.json"
+            out_html = tmp_root / "index.html"
+
+            synthetic_collection = {
+                "schema_version": "5.0.0",
+                "username": "krunked",
+                "synced_at_utc": "2026-11-19T22:00:00Z",
+                "profile": {
+                    "username": "krunked",
+                    "num_collection": 1,
+                    "pressing_photos_detected": 1,
+                    "colored_or_special_variants": 1,
+                    "collection_value": {
+                        "minimum": "$10.00",
+                        "median": "$20.00",
+                        "maximum": "$30.00",
+                        "formatted_total": "$20.00",
+                    },
+                },
+                "records": [
+                    {"release_id": 2001, "artist": "Periphery", "title": "Hail Stan", "flattening_status": "Done"},
+                ],
+            }
+            col_path.write_text(json.dumps(synthetic_collection), encoding="utf-8")
+            ovr_path.write_text(
+                json.dumps({"_note": "metadata", "2001": "assets/releases/2001/pressing.jpg"}),
+                encoding="utf-8",
+            )
+            flat_path.write_text(
+                json.dumps(
+                    {
+                        "schema_version": "5.0.0",
+                        "updated_at_utc": "2026-11-19T22:00:00Z",
+                        "need_to_be_done_release_ids": [],
+                        "done_release_ids": [2001],
+                        "unlisted_release_ids": [],
+                    }
+                ),
+                encoding="utf-8",
+            )
+            # Pre-seed index.html with a user_locked pin so build_index_html exercises overrides_merged sorting
+            out_html.write_text(
+                'window.__DISCOGS_OVERRIDES__ = {"2001": {"uri": "assets/releases/2001/img_2.jpg", "pressing_image_index": 2, "user_locked": true}};\n'
+                "window.__DISCOGS_COLLECTION__ = {};\n",
+                encoding="utf-8",
+            )
+
+            ok = build_html.build_index_html(
+                src_dir=REPO_ROOT / "src",
+                collection_path=col_path,
+                overrides_path=ovr_path,
+                flattening_path=flat_path,
+                html_path=out_html,
+            )
+            self.assertTrue(ok)
+            saved_ov_keys = list(json.loads(ovr_path.read_text(encoding="utf-8")).keys())
+            self.assertEqual(saved_ov_keys, ["2001", "_note"])
+
+            bad_col = tmp_root / "bad_collection.json"
+            bad_col.write_text(
+                json.dumps({"username": "krunked", "source_of_truth": "https://wrong.example", "records": []}),
+                encoding="utf-8",
+            )
+            with self.assertRaises(ValueError):
+                validate_collection.validate_collection(bad_col)
+
+    def test_bool_override_ignored_and_offcenter_empty_mask_safe(self) -> None:
+        import warnings
+
+        images = [
+            {"type": "primary", "uri": "https://img.discogs.com/front.jpg", "width": 600, "height": 600},
+            {"type": "secondary", "uri": "https://img.discogs.com/back.jpg", "width": 600, "height": 600},
+            {"type": "secondary", "uri": "https://img.discogs.com/pressing.jpg", "width": 600, "height": 600},
+        ]
+        # bool is a subclass of int in Python; True must NOT be misinterpreted as image index 1
+        res = select_release_images_deterministic(
+            images=images,
+            formats=[{"name": "Vinyl", "qty": "1", "descriptions": ["LP", "Album", "Ltd", "Pur"]}],
+            release_id=17583742,
+            overrides={"17583742": True},
+        )
+        self.assertEqual(res["selected_index"], 2)
+
+        # Edge-heavy blank/wide-aspect image should never emit empty-slice RuntimeWarning or NaN
+        blank_rgb = np.zeros((256, 256, 3), dtype=np.float32)
+        with warnings.catch_warnings(record=True) as caught:
+            warnings.simplefilter("always")
+            off_res = _eval_offcenter_disc(blank_rgb, aspect=2.0)
+        runtime_warns = [w for w in caught if issubclass(w.category, RuntimeWarning)]
+        self.assertEqual(runtime_warns, [])
+        self.assertIsNone(off_res)
 
 
 if __name__ == "__main__":

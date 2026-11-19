@@ -27,6 +27,7 @@ import argparse
 from concurrent.futures import ThreadPoolExecutor
 import datetime as dt
 import hashlib
+import html as _html_mod
 import io
 import json
 import os
@@ -36,6 +37,7 @@ import shutil
 import sys
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 from typing import Any
 
@@ -124,7 +126,9 @@ def _download_image_bytes(url: str, token: str = "") -> bytes | None:
     if not url or not url.startswith("http"):
         return None
     clean_tok = sanitize_token(token)
-    for use_token in ([clean_tok, ""] if clean_tok else [""]):
+    parsed_host = (urllib.parse.urlparse(url).hostname or "").lower()
+    send_auth = bool(clean_tok and parsed_host == "api.discogs.com")
+    for use_token in ([clean_tok, ""] if send_auth else [""]):
         headers = {"User-Agent": USER_AGENT}
         if use_token:
             headers["Authorization"] = f"Discogs token={use_token}"
@@ -263,6 +267,17 @@ def render_template_from_src(src_dir: pathlib.Path | None = None) -> str:
     return template_text
 
 
+def _safe_json_for_script(obj: Any, indent: int | None = 2) -> str:
+    """Serializes JSON safely for embedding inside an HTML `<script>` tag without breaking `</script>` or `<!--`."""
+    raw = json.dumps(obj, indent=indent, ensure_ascii=False)
+    return (
+        raw.replace("</", "<\\/")
+        .replace("<!--", "\\u003c!--")
+        .replace("\u2028", "\\u2028")
+        .replace("\u2029", "\\u2029")
+    )
+
+
 def inject_into_index_html(
     html_path: pathlib.Path,
     collection_data: dict[str, Any],
@@ -289,28 +304,36 @@ def inject_into_index_html(
         html_text,
         flags=re.IGNORECASE,
     )
-    if "â" in html_text or "Ã" in html_text:
-        try:
-            html_text = html_text.encode("cp1252").decode("utf-8")
-        except Exception:
-            pass
 
-    payload_js = json.dumps(collection_data, indent=2, ensure_ascii=False)
-    overrides_js = json.dumps(overrides_data, indent=2, ensure_ascii=False)
+    payload_js = _safe_json_for_script(collection_data, indent=2)
+    overrides_js = _safe_json_for_script(overrides_data, indent=2)
 
     sync_stamp = str(collection_data.get("synced_at_utc") or "")
+    sync_stamp_js = _safe_json_for_script(sync_stamp, indent=None)
     replacement_block = (
         "/* __DISCOGS_COLLECTION_DATA_START__ */\n"
         f"    window.__DISCOGS_OVERRIDES__ = {overrides_js};\n"
         f"    window.__DISCOGS_COLLECTION__ = {payload_js};\n"
         "    try {\n"
-        f"      var __pySyncStamp = {json.dumps(sync_stamp)};\n"
+        f"      var __pySyncStamp = {sync_stamp_js};\n"
         "      if (typeof localStorage !== 'undefined' && localStorage.getItem('__discogs_py_sync_stamp__') !== __pySyncStamp) {\n"
-        "        Object.keys(localStorage).forEach(function(k) {\n"
-        "          if (k.toLowerCase().indexOf('token') === -1 && k.indexOf('flattening_timer') === -1) {\n"
-        "            localStorage.removeItem(k);\n"
+        "        var __vaultStaleKeys = ['krunked_discogs_collection_v2_1', 'krunked_pressing_overrides_v2_2'];\n"
+        "        for (var __i = 0; __i < __vaultStaleKeys.length; __i++) {\n"
+        "          localStorage.removeItem(__vaultStaleKeys[__i]);\n"
+        "        }\n"
+        "        var __savedFqRaw = localStorage.getItem('krunked_flattening_state_v4');\n"
+        "        if (__savedFqRaw) {\n"
+        "          var __shouldDropFq = true;\n"
+        "          try {\n"
+        "            var __savedFq = JSON.parse(__savedFqRaw);\n"
+        "            if (__savedFq && __savedFq.updated_at_utc && __pySyncStamp && __savedFq.updated_at_utc > __pySyncStamp) {\n"
+        "              __shouldDropFq = false;\n"
+        "            }\n"
+        "          } catch (e2) {}\n"
+        "          if (__shouldDropFq) {\n"
+        "            localStorage.removeItem('krunked_flattening_state_v4');\n"
         "          }\n"
-        "        });\n"
+        "        }\n"
         "        localStorage.setItem('__discogs_py_sync_stamp__', __pySyncStamp);\n"
         "      }\n"
         "    } catch (e) {}\n"
@@ -336,11 +359,15 @@ def inject_into_index_html(
     pressing_pct = f"{(pressing_count / total_lps * 100.0):.1f}%" if total_lps else "0.0%"
 
     col_val = prof.get("collection_value") or {}
-    low_str = str(col_val.get("minimum") or "$3,952.62")
-    median_str = str(col_val.get("median") or "$6,423.73")
-    high_str = str(col_val.get("maximum") or "$11,091.69")
-    formatted_total = str(col_val.get("formatted_total") or median_str)
+    low_str = _html_mod.escape(str(col_val.get("minimum") or "$3,952.62"), quote=True)
+    median_str = _html_mod.escape(str(col_val.get("median") or "$6,423.73"), quote=True)
+    high_str = _html_mod.escape(str(col_val.get("maximum") or "$11,091.69"), quote=True)
     range_str = f"Low {low_str} • High {high_str}"
+
+    raw_uname = str(prof.get("username") or collection_data.get("username") or "krunked")
+    uname_html = _html_mod.escape(raw_uname, quote=True)
+    uname_upper_html = _html_mod.escape(raw_uname.upper(), quote=True)
+    uname_url = urllib.parse.quote(raw_uname, safe="")
 
     todo_count = sum(1 for r in records if (r.get("flattening_status") or DEFAULT_FLATTENING_STATUS) == "Need to be done")
     done_count = sum(1 for r in records if r.get("flattening_status") == "Done")
@@ -354,48 +381,50 @@ def inject_into_index_html(
     todo_csv = ",".join(str(x) for x in fq_payload.get("need_to_be_done_release_ids", []))
     done_csv = ",".join(str(x) for x in fq_payload.get("done_release_ids", []))
     unlisted_csv = ",".join(str(x) for x in fq_payload.get("unlisted_release_ids", []))
-    fq_updated_at = str(fq_payload.get("updated_at_utc") or sync_stamp)
-    import html as _html_mod
+    fq_updated_at = _html_mod.escape(str(fq_payload.get("updated_at_utc") or sync_stamp), quote=True)
     fq_json_escaped = _html_mod.escape(json.dumps(fq_payload, ensure_ascii=False))
 
+    def _wrap_rep(inner_text: str):
+        return lambda m, txt=inner_text: f"{m.group(1)}{txt}{m.group(3)}"
+
     kpi_replacements = [
-        (r'(<span id="bg-enrich-progress"[^>]*>)(.*?)(</span>)', f"\\g<1>• {total_lps} LPs &amp; {pressing_count} Pressing Photos Compiled\\g<3>"),
-        (r'(<div id="kpi-total-records"[^>]*>)(.*?)(</div>)', f"\\g<1>{total_lps} LPs\\g<3>"),
-        (r'(<div id="kpi-sync-sub"[^>]*>)(.*?)(</div>)', f"\\g<1>Folder 0 • {prof.get('username') or collection_data.get('username') or 'krunked'}\\g<3>"),
-        (r'(<span class="font-black tracking-tight text-base sm:text-lg text-white">)(.*?)( // VINYL VAULT</span>)', f"\\g<1>{(prof.get('username') or collection_data.get('username') or 'krunked').upper()}\\g<3>"),
-        (r'https://www\.discogs\.com/user/[^/"\']+/collection', f"https://www.discogs.com/user/{prof.get('username') or collection_data.get('username') or 'krunked'}/collection"),
-        (r'Source: discogs\.com/user/[^<]+/collection', f"Source: discogs.com/user/{prof.get('username') or collection_data.get('username') or 'krunked'}/collection"),
-        (r'(<div id="kpi-pressing-photos"[^>]*>)(.*?)(</div>)', f"\\g<1>{pressing_count} / {total_lps}\\g<3>"),
-        (r'(<div id="kpi-colored-wax"[^>]*>)(.*?)(</div>)', f"\\g<1>{colored_pct}\\g<3>"),
-        (r'(<div id="kpi-vault-value"[^>]*>)(.*?)(</div>)', f"\\g<1>{median_str}\\g<3>"),
-        (r'(<div id="kpi-vault-range"[^>]*>)(.*?)(</div>)', f"\\g<1>{range_str}\\g<3>"),
-        (r'(<div id="kpi-nm-ratio"[^>]*>)(.*?)(</div>)', f"\\g<1>{high_str}\\g<3>"),
-        (r'(<div id="kpi-gallery-sub"[^>]*>)(.*?)(</div>)', f"\\g<1>High Est. • Low {low_str}\\g<3>"),
-        (r'(<div id="kpi-flattening"[^>]*>)(.*?)(</div>)', f"\\g<1>{todo_count} Queued / {done_count} Done\\g<3>"),
-        (r'(<span id="active-spin-mode-pill"[^>]*>)(.*?)(</span>)', f"\\g<1>🎲 Full Vault Roulette • {total_lps} LPs\\g<3>"),
-        (r'(<span id="spin-badge-all"[^>]*>)(.*?)(</span>)', f"\\g<1>ALL LPS ({total_lps})\\g<3>"),
-        (r'(<span id="hero-pressing-ratio"[^>]*>)(.*?)(</span>)', f"\\g<1>{pressing_count}/{total_lps}\\g<3>"),
-        (r'(<span id="carousel-counter"[^>]*>)(.*?)(</span>)', f"\\g<1>1 / {total_lps}\\g<3>"),
-        (r'(<button[^>]*id="chip-flatten-todo"[^>]*>)(.*?)(</button>)', f"\\g<1>🔥 Flattening Queue ({todo_count})\\g<3>"),
-        (r'(<button[^>]*id="chip-flatten-done"[^>]*>)(.*?)(</button>)', f"\\g<1>✓ Flattened &amp; Verified ({done_count})\\g<3>"),
-        (r'(<div id="pipe-kpi-cv"[^>]*>)(.*?)(</div>)', f"\\g<1>{pressing_count} / {total_lps} Physical Discs Verified ({pressing_pct})\\g<3>"),
-        (r'(<div id="pipe-kpi-flatten"[^>]*>)(.*?)(</div>)', f"\\g<1>{todo_count} Queued • {done_count} Flat / Done • {unlisted_count} Unlisted\\g<3>"),
-        (r'(<div id="pipe-kpi-val"[^>]*>)(.*?)(</div>)', f"\\g<1>Med {median_str} • Low {low_str} • High {high_str}\\g<3>"),
-        (r'(<span id="flatten-todo-count"[^>]*>)(.*?)(</span>)', f"\\g<1>{todo_count} Records\\g<3>"),
-        (r'(<span id="flatten-done-count"[^>]*>)(.*?)(</span>)', f"\\g<1>{done_count} Records\\g<3>"),
-        (r'(<span id="flatten-unlisted-count"[^>]*>)(.*?)(</span>)', f"\\g<1>{unlisted_count} Unlisted\\g<3>"),
-        (r'(<div id="modal-stat-lps"[^>]*>)(.*?)(</div>)', f"\\g<1>{total_lps} LPs\\g<3>"),
-        (r'(<div id="modal-stat-photos"[^>]*>)(.*?)(</div>)', f"\\g<1>{pressing_count} Pressing Photos\\g<3>"),
-        (r'(<div id="modal-stat-flatten"[^>]*>)(.*?)(</div>)', f"\\g<1>{todo_count} Queued / {done_count} Done\\g<3>"),
+        (r'(<span id="bg-enrich-progress"[^>]*>)(.*?)(</span>)', _wrap_rep(f"• {total_lps} LPs &amp; {pressing_count} Pressing Photos Compiled")),
+        (r'(<div id="kpi-total-records"[^>]*>)(.*?)(</div>)', _wrap_rep(f"{total_lps} LPs")),
+        (r'(<div id="kpi-sync-sub"[^>]*>)(.*?)(</div>)', _wrap_rep(f"Folder 0 • {uname_html}")),
+        (r'(<span class="font-black tracking-tight text-base sm:text-lg text-white">)(.*?)( // VINYL VAULT</span>)', _wrap_rep(uname_upper_html)),
+        (r'https://www\.discogs\.com/user/[^/"\']+/collection', lambda _m, u=uname_url: f"https://www.discogs.com/user/{u}/collection"),
+        (r'Source: discogs\.com/user/[^<]+/collection', lambda _m, u=uname_html: f"Source: discogs.com/user/{u}/collection"),
+        (r'(<div id="kpi-pressing-photos"[^>]*>)(.*?)(</div>)', _wrap_rep(f"{pressing_count} / {total_lps}")),
+        (r'(<div id="kpi-colored-wax"[^>]*>)(.*?)(</div>)', _wrap_rep(colored_pct)),
+        (r'(<div id="kpi-vault-value"[^>]*>)(.*?)(</div>)', _wrap_rep(median_str)),
+        (r'(<div id="kpi-vault-range"[^>]*>)(.*?)(</div>)', _wrap_rep(range_str)),
+        (r'(<div id="kpi-nm-ratio"[^>]*>)(.*?)(</div>)', _wrap_rep(high_str)),
+        (r'(<div id="kpi-gallery-sub"[^>]*>)(.*?)(</div>)', _wrap_rep(f"High Est. • Low {low_str}")),
+        (r'(<div id="kpi-flattening"[^>]*>)(.*?)(</div>)', _wrap_rep(f"{todo_count} Queued / {done_count} Done")),
+        (r'(<span id="active-spin-mode-pill"[^>]*>)(.*?)(</span>)', _wrap_rep(f"🎲 Full Vault Roulette • {total_lps} LPs")),
+        (r'(<span id="spin-badge-all"[^>]*>)(.*?)(</span>)', _wrap_rep(f"ALL LPS ({total_lps})")),
+        (r'(<span id="hero-pressing-ratio"[^>]*>)(.*?)(</span>)', _wrap_rep(f"{pressing_count}/{total_lps}")),
+        (r'(<span id="carousel-counter"[^>]*>)(.*?)(</span>)', _wrap_rep(f"1 / {total_lps}")),
+        (r'(<button[^>]*id="chip-flatten-todo"[^>]*>)(.*?)(</button>)', _wrap_rep(f"🔥 Flattening Queue ({todo_count})")),
+        (r'(<button[^>]*id="chip-flatten-done"[^>]*>)(.*?)(</button>)', _wrap_rep(f"✓ Flattened &amp; Verified ({done_count})")),
+        (r'(<div id="pipe-kpi-cv"[^>]*>)(.*?)(</div>)', _wrap_rep(f"{pressing_count} / {total_lps} Physical Discs Verified ({pressing_pct})")),
+        (r'(<div id="pipe-kpi-flatten"[^>]*>)(.*?)(</div>)', _wrap_rep(f"{todo_count} Queued • {done_count} Flat / Done • {unlisted_count} Unlisted")),
+        (r'(<div id="pipe-kpi-val"[^>]*>)(.*?)(</div>)', _wrap_rep(f"Med {median_str} • Low {low_str} • High {high_str}")),
+        (r'(<span id="flatten-todo-count"[^>]*>)(.*?)(</span>)', _wrap_rep(f"{todo_count} Records")),
+        (r'(<span id="flatten-done-count"[^>]*>)(.*?)(</span>)', _wrap_rep(f"{done_count} Records")),
+        (r'(<span id="flatten-unlisted-count"[^>]*>)(.*?)(</span>)', _wrap_rep(f"{unlisted_count} Unlisted")),
+        (r'(<div id="modal-stat-lps"[^>]*>)(.*?)(</div>)', _wrap_rep(f"{total_lps} LPs")),
+        (r'(<div id="modal-stat-photos"[^>]*>)(.*?)(</div>)', _wrap_rep(f"{pressing_count} Pressing Photos")),
+        (r'(<div id="modal-stat-flatten"[^>]*>)(.*?)(</div>)', _wrap_rep(f"{todo_count} Queued / {done_count} Done")),
         (
             r'(<div id="grid-status-label"[^>]*>\s*)(.*?)(\s*</div>)',
-            f"\\g<1>Showing {total_lps} of {total_lps} releases in {prof.get('username') or collection_data.get('username') or 'krunked'}'s collection\\g<3>",
+            _wrap_rep(f"Showing {total_lps} of {total_lps} releases in {uname_html}'s collection"),
         ),
-        (r'(<input[^>]*id="flatten-hidden-updated-at"[^>]*value=")([^"]*)(")', f"\\g<1>{fq_updated_at}\\g<3>"),
-        (r'(<input[^>]*id="flatten-hidden-todo-ids"[^>]*value=")([^"]*)(")', f"\\g<1>{todo_csv}\\g<3>"),
-        (r'(<input[^>]*id="flatten-hidden-done-ids"[^>]*value=")([^"]*)(")', f"\\g<1>{done_csv}\\g<3>"),
-        (r'(<input[^>]*id="flatten-hidden-unlisted-ids"[^>]*value=")([^"]*)(")', f"\\g<1>{unlisted_csv}\\g<3>"),
-        (r'(<textarea[^>]*id="flatten-hidden-json"[^>]*>)(.*?)(</textarea>)', lambda m: f"{m.group(1)}{fq_json_escaped}{m.group(3)}"),
+        (r'(<input[^>]*id="flatten-hidden-updated-at"[^>]*value=")([^"]*)(")', _wrap_rep(fq_updated_at)),
+        (r'(<input[^>]*id="flatten-hidden-todo-ids"[^>]*value=")([^"]*)(")', _wrap_rep(todo_csv)),
+        (r'(<input[^>]*id="flatten-hidden-done-ids"[^>]*value=")([^"]*)(")', _wrap_rep(done_csv)),
+        (r'(<input[^>]*id="flatten-hidden-unlisted-ids"[^>]*value=")([^"]*)(")', _wrap_rep(unlisted_csv)),
+        (r'(<textarea[^>]*id="flatten-hidden-json"[^>]*>)(.*?)(</textarea>)', _wrap_rep(fq_json_escaped)),
     ]
     for pat_str, rep_val in kpi_replacements:
         html_text = re.sub(pat_str, rep_val, html_text, flags=re.DOTALL)
@@ -416,11 +445,13 @@ def _write_pressing_and_cover_files(
     When `has_pressing_photo` is False, any stale `pressing.jpg` in `rel_dir` is deleted so
     the release cleanly displays its deterministic procedural wax seed.
     """
-    if not (rel_dir / "cover.jpg").exists():
-        if (rel_dir / "img_0.jpg").exists():
-            shutil.copyfile(rel_dir / "img_0.jpg", rel_dir / "cover.jpg")
-        elif local_files:
-            shutil.copyfile(local_files[0][1], rel_dir / "cover.jpg")
+    dest_cover = rel_dir / "cover.jpg"
+    src_cover = rel_dir / "img_0.jpg"
+    if src_cover.exists():
+        if not dest_cover.exists() or dest_cover.read_bytes() != src_cover.read_bytes():
+            shutil.copyfile(src_cover, dest_cover)
+    elif not dest_cover.exists() and local_files:
+        shutil.copyfile(local_files[0][1], dest_cover)
 
     dest_pressing = rel_dir / "pressing.jpg"
 
@@ -916,7 +947,7 @@ def run_pick_pressing_photos(
     # Save sorted overrides.json
     overrides_sorted = {
         k: overrides[k]
-        for k in sorted(overrides.keys(), key=lambda x: int(x) if str(x).isdigit() else str(x))
+        for k in sorted(overrides.keys(), key=lambda x: (0, int(x), "") if str(x).isdigit() else (1, 0, str(x)))
     }
     overrides_path.parent.mkdir(parents=True, exist_ok=True)
     overrides_path.write_text(json.dumps(overrides_sorted, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
@@ -1032,9 +1063,9 @@ def main() -> None:
     parser.add_argument("--inject-html", default=str(REPO_ROOT / "index.html"))
     parser.add_argument(
         "--download-missing",
-        action="store_true",
+        action=argparse.BooleanOptionalAction,
         default=True,
-        help="Download any missing release images from Discogs (enabled by default)",
+        help="Download any missing release images from Discogs (enabled by default; pass --no-download-missing to disable)",
     )
     parser.add_argument(
         "--offline",

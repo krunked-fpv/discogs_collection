@@ -26,13 +26,19 @@ References:
 
 from __future__ import annotations
 
+import datetime as _dt
 import hashlib
+import html as _html_mod
 import io
 import json
+import os as _os
 import pathlib
 import re
 import subprocess
 import sys
+import threading as _threading
+import time as _time
+import unicodedata as _unicodedata
 from typing import Any
 
 HAS_CV_DEPS = False
@@ -834,7 +840,13 @@ def _eval_offcenter_disc(rgb: "np.ndarray", aspect: float) -> dict[str, Any] | N
                 for k in range(8):
                     a0 = -np.pi + k * (np.pi / 4.0)
                     ang = (theta >= a0) & (theta < a0 + np.pi / 4.0)
-                    octs.append(float(np.linalg.norm(np.mean(rgb[lbl_in & ang], axis=0) - np.mean(rgb[wax_m & ang], axis=0))))
+                    io_m = lbl_in & ang
+                    oo_m = wax_m & ang
+                    if not np.any(io_m) or not np.any(oo_m):
+                        break
+                    octs.append(float(np.linalg.norm(np.mean(rgb[io_m], axis=0) - np.mean(rgb[oo_m], axis=0))))
+                if len(octs) < 8:
+                    continue
                 q25 = sorted(octs)[1]
                 wax_gm = float(np.mean(grad_mag[wax_m]))
                 aniso = abs(float(np.log((np.mean(np.abs(gy[wax_m])) + 1e-5) / (np.mean(np.abs(gx[wax_m])) + 1e-5))))
@@ -1207,7 +1219,7 @@ def select_release_images_deterministic(
                 ov_idx = idx_cand
                 ov_url = images[ov_idx].get("uri") or images[ov_idx].get("resource_url") or ""
                 is_manual_pin = bool(ov.get("manual_pin", True))
-        elif isinstance(ov, int) and 0 <= ov < len(images):
+        elif isinstance(ov, int) and not isinstance(ov, bool) and 0 <= ov < len(images):
             ov_idx = ov
             ov_url = images[ov_idx].get("uri") or images[ov_idx].get("resource_url") or ""
             is_manual_pin = True
@@ -1387,7 +1399,6 @@ def extract_inline_flattening_from_html(html_path: pathlib.Path | None) -> dict[
         raw_json = m_json.group(1).strip()
         if raw_json:
             try:
-                import html as _html_mod
                 parsed = json.loads(_html_mod.unescape(raw_json))
                 if isinstance(parsed, dict):
                     result.update(parsed)
@@ -1404,7 +1415,7 @@ def extract_inline_flattening_from_html(html_path: pathlib.Path | None) -> dict[
         if not m_tag:
             return (False, "")
         m_val = re.search(r'value="([^"]*)"', m_tag.group(0), flags=re.IGNORECASE)
-        return (True, m_val.group(1).strip() if m_val else "")
+        return (True, _html_mod.unescape(m_val.group(1)).strip() if m_val else "")
 
     has_todo, todo_csv = _extract_input_val("flatten-hidden-todo-ids")
     has_done, done_csv = _extract_input_val("flatten-hidden-done-ids")
@@ -1625,12 +1636,6 @@ def reconcile_overrides_state(
 # DELTA SYNC ENGINE & LIVE TERMINAL UI / TURNTABLE THROBBER (v5.0)
 # ==============================================================================
 
-import datetime as _dt
-import os as _os
-import threading as _threading
-import time as _time
-import unicodedata as _unicodedata
-
 CV_DELTA_VERSION = "2.4.0"
 
 
@@ -1781,7 +1786,7 @@ def evaluate_release_delta_status(
         return ("resynced", "stale pressing.jpg found -> cleaning/re-evaluating", current_sig)
 
     # Check explicit manual override changes
-    if isinstance(ov_val, int) and existing_images.get("selected_index") != ov_val:
+    if isinstance(ov_val, int) and not isinstance(ov_val, bool) and existing_images.get("selected_index") != ov_val:
         return ("resynced", f"manual override pin -> img_{ov_val}.jpg", current_sig)
     if isinstance(ov_val, dict) and "pressing_image_index" in ov_val:
         pin_idx = int(ov_val["pressing_image_index"])

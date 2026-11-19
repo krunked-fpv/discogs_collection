@@ -22,10 +22,10 @@ REPO_ROOT = pathlib.Path(__file__).resolve().parent.parent
 
 # Compute real deterministic CV metrics on the 4 studio pressing images
 PRESSING_PHOTO_MAP = {
-    "purple_galaxy": "user_uploaded_files/ttl=63d/tool_generated/pressing_purple_galaxy.jpg",
-    "clear_splatter": "user_uploaded_files/ttl=63d/tool_generated/pressing_clear_splatter.jpg",
-    "crimson_nebula": "user_uploaded_files/ttl=63d/tool_generated/pressing_crimson_nebula.jpg",
-    "neon_split": "user_uploaded_files/ttl=63d/tool_generated/pressing_neon_split.jpg",
+    "purple_galaxy": "assets/pressings/pressing_purple_galaxy.jpg",
+    "clear_splatter": "assets/pressings/pressing_clear_splatter.jpg",
+    "crimson_nebula": "assets/pressings/pressing_crimson_nebula.jpg",
+    "neon_split": "assets/pressings/pressing_neon_split.jpg",
 }
 
 CV_CACHE = {}
