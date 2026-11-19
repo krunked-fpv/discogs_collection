@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import hashlib
 import io
+import json
 import pathlib
 import shutil
 import sys
@@ -18,6 +19,7 @@ from PIL import Image
 REPO_ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
+import build_html
 from detect_pressing_image import (
     parse_wax_variant,
     score_image_pixels_deterministic,
@@ -117,8 +119,13 @@ class TestDeterministicDetector(unittest.TestCase):
         self.assertFalse(setup_discogs_token.is_old_exposed_token("short"))
         self.assertFalse(setup_discogs_token.is_old_exposed_token("A" * 40))
 
-        # Verify no tracked script or index.html embeds the revoked legacy token
-        for rel in [REPO_ROOT / "index.html", *sorted((REPO_ROOT / "scripts").glob("*.py"))]:
+        # Verify no tracked script, src/*, or index.html embeds the revoked legacy token
+        tracked_files = [
+            REPO_ROOT / "index.html",
+            *sorted(p for p in (REPO_ROOT / "src").iterdir() if p.is_file()),
+            *sorted((REPO_ROOT / "scripts").glob("*.py")),
+        ]
+        for rel in tracked_files:
             raw = rel.read_text(encoding="utf-8")
             for m in setup_discogs_token._CANDIDATE_TOKEN_RE.finditer(raw):
                 self.assertFalse(
@@ -133,14 +140,17 @@ class TestDeterministicDetector(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             tmp_root = pathlib.Path(tmpdir)
             (tmp_root / "scripts").mkdir()
+            (tmp_root / "src").mkdir()
             (tmp_root / "index.html").write_text(f'<input value="{fake_leaked}">', encoding="utf-8")
+            (tmp_root / "src" / "app.js").write_text(f'const t = "{fake_leaked}";\n', encoding="utf-8")
             (tmp_root / "scripts" / "sample.py").write_text(f'DEFAULT_TOKEN = "{fake_leaked}"\n', encoding="utf-8")
 
             with mock.patch.object(setup_discogs_token, "OLD_EXPOSED_TOKEN_SHA256", fake_hash):
                 scrubbed = setup_discogs_token.scrub_exposed_token_from_repo(tmp_root)
 
-            self.assertEqual(len(scrubbed), 2)
+            self.assertEqual(len(scrubbed), 3)
             self.assertNotIn(fake_leaked, (tmp_root / "index.html").read_text(encoding="utf-8"))
+            self.assertNotIn(fake_leaked, (tmp_root / "src" / "app.js").read_text(encoding="utf-8"))
             self.assertIn('DEFAULT_TOKEN = ""', (tmp_root / "scripts" / "sample.py").read_text(encoding="utf-8"))
 
     def test_inject_into_index_html_preserves_markers_and_updates_kpis(self) -> None:
@@ -192,6 +202,85 @@ class TestDeterministicDetector(unittest.TestCase):
             self.assertIn('id="kpi-flattening" class="text-lg sm:text-xl font-black text-cyan-300 mt-0.5">1 Queued / 1 Done</div>', out)
             self.assertIn('id="flatten-hidden-todo-ids" name="need_to_be_done_release_ids" value="1001"', out)
             self.assertIn('id="flatten-hidden-done-ids" name="done_release_ids" value="1002"', out)
+
+    def test_modular_src_template_compiler_and_build_html(self) -> None:
+        self.assertTrue(build_html.build_index_html(check_only=True))
+        rendered_shell = pick_pressing_photo.render_template_from_src()
+        self.assertIn("<!-- BEGIN KRUNKED_COOKIE_VAULT_V1 -->", rendered_shell)
+        self.assertIn("/* __DISCOGS_COLLECTION_DATA_START__ */", rendered_shell)
+        self.assertIn("const VERIFIED_YTM_RELEASE_MAP =", rendered_shell)
+        self.assertIn("window.addEventListener('DOMContentLoaded', initApp);", rendered_shell)
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_root = pathlib.Path(tmpdir)
+            tmp_src = tmp_root / "src"
+            shutil.copytree(REPO_ROOT / "src", tmp_src)
+
+            # Edit modular CSS and JS in tmp_src and verify changes compile into a fresh index.html
+            (tmp_src / "styles.css").write_text(
+                (tmp_src / "styles.css").read_text(encoding="utf-8") + "\n.modular-test-selector { color: #00ffff; }\n",
+                encoding="utf-8",
+            )
+            (tmp_src / "app.js").write_text(
+                (tmp_src / "app.js").read_text(encoding="utf-8") + "\nwindow.__MODULAR_COMPILER_TEST__ = true;\n",
+                encoding="utf-8",
+            )
+
+            tmp_data = tmp_root / "data"
+            tmp_data.mkdir()
+            col_path = tmp_data / "collection.json"
+            ovr_path = tmp_data / "overrides.json"
+            flat_path = tmp_data / "flattening_queue.json"
+            out_html = tmp_root / "index.html"
+
+            synthetic_collection = {
+                "schema_version": "5.0.0",
+                "username": "krunked",
+                "synced_at_utc": "2026-11-18T21:00:00Z",
+                "profile": {
+                    "username": "krunked",
+                    "num_collection": 1,
+                    "pressing_photos_detected": 1,
+                    "colored_or_special_variants": 1,
+                    "collection_value": {
+                        "minimum": "$20.00",
+                        "median": "$40.00",
+                        "maximum": "$80.00",
+                        "formatted_total": "$40.00",
+                    },
+                },
+                "records": [
+                    {"release_id": 2001, "artist": "Periphery", "title": "Hail Stan", "flattening_status": "Done"},
+                ],
+            }
+            col_path.write_text(json.dumps(synthetic_collection), encoding="utf-8")
+            ovr_path.write_text(json.dumps({"2001": "assets/releases/2001/pressing.jpg"}), encoding="utf-8")
+            flat_path.write_text(
+                json.dumps(
+                    {
+                        "schema_version": "5.0.0",
+                        "updated_at_utc": "2026-11-18T21:00:00Z",
+                        "need_to_be_done_release_ids": [],
+                        "done_release_ids": [2001],
+                        "unlisted_release_ids": [],
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            ok = build_html.build_index_html(
+                src_dir=tmp_src,
+                collection_path=col_path,
+                overrides_path=ovr_path,
+                flattening_path=flat_path,
+                html_path=out_html,
+            )
+            self.assertTrue(ok)
+            compiled = out_html.read_text(encoding="utf-8")
+            self.assertIn(".modular-test-selector { color: #00ffff; }", compiled)
+            self.assertIn("window.__MODULAR_COMPILER_TEST__ = true;", compiled)
+            self.assertIn('<div id="kpi-total-records" class="text-lg sm:text-xl font-black text-white mt-0.5">1 LPs</div>', compiled)
+            self.assertIn('id="flatten-hidden-done-ids" name="done_release_ids" value="2001"', compiled)
 
 
 if __name__ == "__main__":

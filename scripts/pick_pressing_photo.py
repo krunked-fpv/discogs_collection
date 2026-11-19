@@ -229,17 +229,58 @@ def _discover_local_release_images(rel_dir: pathlib.Path, rid_str: str) -> list[
     return found
 
 
+DEFAULT_SRC_DIR = REPO_ROOT / "src"
+
+
+def render_template_from_src(src_dir: pathlib.Path | None = None) -> str:
+    """Assembles the modular frontend HTML/CSS/JS shell from `src/` before collection JSON & KPI injection."""
+    resolved_src = src_dir if src_dir is not None else DEFAULT_SRC_DIR
+    required_files = ("template.html", "cookie_vault.js", "styles.css", "ytm_maps.js", "app.js")
+    for fname in required_files:
+        fpath = resolved_src / fname
+        if not fpath.exists():
+            raise FileNotFoundError(f"Missing modular frontend source file: {fpath}")
+
+    template_text = (resolved_src / "template.html").read_text(encoding="utf-8")
+    cookie_vault_js = (resolved_src / "cookie_vault.js").read_text(encoding="utf-8").rstrip("\n")
+    styles_css = (resolved_src / "styles.css").read_text(encoding="utf-8").rstrip("\n")
+    ytm_maps_js = (resolved_src / "ytm_maps.js").read_text(encoding="utf-8").rstrip("\n")
+    app_js = (resolved_src / "app.js").read_text(encoding="utf-8").rstrip("\n")
+
+    replacements = (
+        ("/* __KRUNKED_COOKIE_VAULT_JS__ */", cookie_vault_js),
+        ("/* __VAULT_STYLES_CSS__ */", styles_css),
+        ("/* __VAULT_APP_JS__ */", app_js),
+        ("/* __VAULT_YTM_MAPS_JS__ */", ytm_maps_js),
+    )
+    for marker, content in replacements:
+        if marker not in template_text:
+            raise ValueError(f"Template placeholder {marker!r} missing from modular frontend templates in {resolved_src}")
+        template_text = template_text.replace(marker, content, 1)
+
+    return template_text
+
+
 def inject_into_index_html(
     html_path: pathlib.Path,
     collection_data: dict[str, Any],
     overrides_data: dict[str, Any],
+    src_dir: pathlib.Path | None = None,
 ) -> bool:
-    """Injects window.__DISCOGS_COLLECTION__, window.__DISCOGS_OVERRIDES__, inline flattening hidden inputs, and KPI values into index.html."""
-    if not html_path.exists():
+    """Compiles modular `src/*` (when present) and injects window.__DISCOGS_COLLECTION__, window.__DISCOGS_OVERRIDES__, inline flattening hidden inputs, and KPI values into index.html."""
+    candidate_src = src_dir
+    if candidate_src is None and (html_path.parent / "src" / "template.html").exists():
+        candidate_src = html_path.parent / "src"
+    elif candidate_src is None and not html_path.exists() and (DEFAULT_SRC_DIR / "template.html").exists():
+        candidate_src = DEFAULT_SRC_DIR
+
+    if candidate_src is not None and (candidate_src / "template.html").exists():
+        html_text = render_template_from_src(candidate_src)
+    elif html_path.exists():
+        html_text = html_path.read_text(encoding="utf-8")
+    else:
         print(f"[warn] HTML file not found at {html_path}", file=sys.stderr)
         return False
-
-    html_text = html_path.read_text(encoding="utf-8")
     html_text = re.sub(
         r'<meta\s+name=["\']referrer["\']\s+content=["\']no-referrer["\']\s*/?>',
         '<meta name="referrer" content="strict-origin-when-cross-origin" />',
