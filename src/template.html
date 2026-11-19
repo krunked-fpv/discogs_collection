@@ -137,7 +137,7 @@
       <div class="bg-slate-900/80 border border-cyan-500/25 rounded-2xl px-3.5 py-2.5 shadow-lg backdrop-blur-md cursor-pointer hover:border-cyan-400/60 transition" id="kpi-flattening-card" title="Click to open Vinyl Flattening Queue">
         <div class="text-[10px] font-mono-tech uppercase tracking-wider text-cyan-300/80 font-semibold">130°F Flattening Plate</div>
         <div id="kpi-flattening" class="text-lg sm:text-xl font-black text-cyan-300 mt-0.5">2 Queued / 50 Done</div>
-        <div id="kpi-flattening-sub" class="text-[11px] text-emerald-400/90 mt-0.5">🛡️ Stylus Guard Linked</div>
+        <div id="kpi-flattening-sub" class="text-[11px] text-amber-300/85 mt-0.5">🔥 Arrival &amp; Thermal Tracker</div>
       </div>
     </div>
   </section>
@@ -156,7 +156,7 @@
             <span class="text-[10px] font-mono-tech uppercase px-2.5 py-0.5 rounded-full bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-400/30 font-bold">
               v5.0 Unified Roulette &amp; Platter Stage
             </span>
-            <span id="active-spin-mode-pill" class="text-[10px] font-mono-tech uppercase px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-400/35 font-bold">🎲 Full Vault Roulette • 156 Stylus-Safe LPs</span>
+            <span id="active-spin-mode-pill" class="text-[10px] font-mono-tech uppercase px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-400/35 font-bold">🎲 Full Vault Roulette • 159 LPs</span>
             <span id="reel-velocity-readout" class="text-[11px] font-mono-tech text-slate-400">
               Velocity: 0.0 RPM • Ready
             </span>
@@ -208,10 +208,10 @@
             <button type="button" data-spin-mode="all" class="spin-mode-btn text-left p-2.5 rounded-2xl border-2 transition-all bg-cyan-500/15 border-cyan-400 text-white shadow-[0_0_20px_rgba(6,182,212,0.2)]">
               <div class="flex items-center justify-between gap-1">
                 <span class="text-base">🎲</span>
-                <span id="spin-badge-all" class="text-[10px] font-mono-tech font-bold px-1.5 py-0.5 rounded bg-slate-950/80 text-cyan-300 border border-cyan-500/30">ALL SAFE (156)</span>
+                <span id="spin-badge-all" class="text-[10px] font-mono-tech font-bold px-1.5 py-0.5 rounded bg-slate-950/80 text-cyan-300 border border-cyan-500/30">ALL LPS (159)</span>
               </div>
               <p class="font-extrabold text-xs text-white mt-1.5">Full Vault Roulette</p>
-              <p class="text-[10px] text-slate-300 leading-tight mt-0.5">Excludes Flattening Queue LPs to protect stylus</p>
+              <p class="text-[10px] text-slate-300 leading-tight mt-0.5">Spins any pressing in your full crate</p>
             </button>
 
             <button type="button" data-spin-mode="showroom" class="spin-mode-btn text-left p-2.5 rounded-2xl border transition-all bg-slate-950/80 border-white/15 text-slate-300 hover:border-purple-400/60 hover:text-white">
@@ -1010,9 +1010,6 @@
             <span class="text-[11px] font-mono-tech uppercase px-2.5 py-0.5 rounded-full bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-400/30 font-bold">
               v5.0 Interactive 4-Variant Knockout Bracket
             </span>
-            <span class="text-[11px] font-mono-tech uppercase px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-400/30 font-bold">
-              🛡️ Flattening Queue Auto-Excluded
-            </span>
           </div>
           <h2 class="text-xl sm:text-2xl font-black text-white mt-1.5">
             ⚔️ Variant Clash Arena — Head-to-Head Wax Showdown
@@ -1026,13 +1023,10 @@
           <!-- Bracket Pool Filter -->
           <div class="flex items-center bg-slate-950/90 p-1 rounded-xl border border-white/10 text-xs">
             <button type="button" data-arena-pool="all" class="arena-pool-btn px-2.5 py-1 rounded-lg font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
-              🎲 All Safe
+              🎲 All LPs
             </button>
             <button type="button" data-arena-pool="eyecandy" class="arena-pool-btn px-2.5 py-1 rounded-lg font-semibold text-slate-400 hover:text-white">
               🌈 Eye-Candy Only
-            </button>
-            <button type="button" data-arena-pool="flat" class="arena-pool-btn px-2.5 py-1 rounded-lg font-semibold text-slate-400 hover:text-white">
-              ✓ Flat Certified
             </button>
           </div>
 
@@ -1305,7 +1299,7 @@ python scripts/sync_discogs.py --full</pre>
             🔥 Vinyl Flattening Queue &amp; Arrival Inspection Regimen
           </h2>
           <p class="text-xs text-slate-300 mt-1">
-            100% portable inline state stored inside hidden HTML form fields (<code class="text-cyan-300">#flattening-inline-form</code>) + <code class="text-cyan-300">data/flattening_queue.json</code>. Every new album added to your collection automatically enters <strong class="text-amber-300">Need To Be Done</strong> for arrival inspection—flatten it or confirm it's already flat and toggle it either way (queued LPs stay locked out of Roulette &amp; Clash Arena to protect your AT-VMN95ML stylus).
+            100% portable inline state stored inside hidden HTML form fields (<code class="text-cyan-300">#flattening-inline-form</code>) + <code class="text-cyan-300">data/flattening_queue.json</code>. Every new album added to your collection automatically enters <strong class="text-amber-300">Need To Be Done</strong> for arrival inspection—flatten it or confirm it's already flat and toggle it either way.
           </p>
         </div>
 
@@ -1369,7 +1363,7 @@ python scripts/sync_discogs.py --full</pre>
           <div class="flex items-center justify-between gap-2">
             <div>
               <h3 class="text-sm font-black text-emerald-300 font-mono-tech uppercase">✓ Flat &amp; Verified (Done)</h3>
-              <p class="text-[11px] text-slate-400">Flattened on the 130°F plate or confirmed already flat upon arrival — stylus-safe</p>
+              <p class="text-[11px] text-slate-400">Flattened on the 130°F plate or confirmed already flat upon arrival</p>
             </div>
             <span id="flatten-done-count" class="px-2.5 py-0.5 rounded-full text-xs font-mono-tech font-bold bg-emerald-500/20 text-emerald-300">0 Records</span>
           </div>

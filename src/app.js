@@ -20,7 +20,7 @@
       showroomCountdown: 15,
       showroomTickInterval: null,
       isSpinningRoulette: false,
-      arenaPoolMode: 'all', // 'all' | 'eyecandy' | 'flat'
+      arenaPoolMode: 'all', // 'all' | 'eyecandy'
       arenaBracket: [],
       arenaWinners: [],
       arenaStage: 0, // 0: Semi 1, 1: Semi 2, 2: Final, 3: Champion Crowned
@@ -934,12 +934,9 @@
     }
 
 
-    // Helper: Get the Stylus-Safe Smart Spin Pool based on state.spinMode
+    // Helper: Get the Smart Spin Pool based on state.spinMode (includes all records regardless of flattening status)
     function getSmartSpinPool() {
-      const base = state.records.length ? state.records : [];
-      // Always lock out warped ("Need to be done") records from Roulette so the AT-VMN95ML stylus is protected!
-      const safePool = base.filter(r => r.flattening_status !== 'Need to be done');
-      const working = safePool.length ? safePool : base;
+      const working = state.records.length ? state.records : [];
 
       if (state.spinMode === 'eyecandy') {
         const eyeCandy = working.filter(r => {
@@ -953,14 +950,13 @@
 
     function updateSmartSpinModeBadges() {
       const base = state.records.length ? state.records : [];
-      const safePool = base.filter(r => r.flattening_status !== 'Need to be done');
-      const eyeCandyPool = safePool.filter(r => {
+      const eyeCandyPool = base.filter(r => {
         const pat = (r.wax_spec && r.wax_spec.pattern) || '';
         return ['splatter', 'galaxy', 'marble', 'split', 'color_in_color'].includes(pat);
       });
 
       const badgeAll = document.getElementById('spin-badge-all');
-      if (badgeAll) badgeAll.textContent = `ALL SAFE (${safePool.length})`;
+      if (badgeAll) badgeAll.textContent = `ALL LPS (${base.length})`;
       const badgeEye = document.getElementById('spin-badge-eyecandy');
       if (badgeEye) badgeEye.textContent = `FLEX WAX (${eyeCandyPool.length})`;
       const badgeShow = document.getElementById('spin-badge-showroom');
@@ -977,7 +973,7 @@
           modePill.textContent = `🌈 Eye-Candy Variants • ${eyeCandyPool.length} Flex Wax LPs`;
           modePill.className = 'text-[10px] font-mono-tech uppercase px-2.5 py-0.5 rounded-full bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-400/35 font-bold';
         } else {
-          modePill.textContent = `🎲 Full Vault Roulette • ${safePool.length} Stylus-Safe LPs`;
+          modePill.textContent = `🎲 Full Vault Roulette • ${base.length} LPs`;
           modePill.className = 'text-[10px] font-mono-tech uppercase px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-400/35 font-bold';
         }
       }
@@ -1292,16 +1288,11 @@
     // v5.0 VARIANT CLASH ARENA (4-LP HEAD-TO-HEAD KNOCKOUT BRACKET)
     // =========================================================================
     function getArenaCandidatePool() {
-      const base = state.records.length ? state.records : [];
-      const safe = base.filter(r => r.flattening_status !== 'Need to be done');
-      const working = safe.length >= 4 ? safe : base;
+      const working = state.records.length ? state.records : [];
 
       if (state.arenaPoolMode === 'eyecandy') {
         const ec = working.filter(r => ['splatter', 'galaxy', 'marble', 'split', 'color_in_color'].includes((r.wax_spec && r.wax_spec.pattern) || ''));
         if (ec.length >= 4) return ec;
-      } else if (state.arenaPoolMode === 'flat') {
-        const fl = working.filter(r => r.flattening_status === 'Done');
-        if (fl.length >= 4) return fl;
       }
       return working;
     }
@@ -1321,12 +1312,12 @@
       if (!rec) return '';
       const wax = rec.wax_spec || {};
       const verifiedPhoto = Boolean(getVerifiedPressingPhotoUrl(rec));
-      const flatLabel = rec.flattening_status === 'Done'
-        ? '✓ 130°F Flat Certified'
-        : '🛡️ Stylus Safe';
-      const flatClass = rec.flattening_status === 'Done'
-        ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30'
-        : 'bg-cyan-500/15 text-cyan-300 border-cyan-500/30';
+      const flatStatus = rec.flattening_status || DEFAULT_FLATTENING_STATUS;
+      const flatPillHtml = flatStatus === 'Done'
+        ? `<span class="px-2 py-0.5 rounded-full text-[10px] font-mono-tech font-bold border bg-emerald-500/20 text-emerald-300 border-emerald-500/30">✓ Flat / Done</span>`
+        : (flatStatus === 'Need to be done'
+          ? `<span class="px-2 py-0.5 rounded-full text-[10px] font-mono-tech font-bold border bg-amber-500/20 text-amber-200 border-amber-400/35">🔥 Flatten Queue</span>`
+          : '');
 
       return `
         <div>
@@ -1335,9 +1326,7 @@
               <span class="px-2.5 py-0.5 rounded-full font-mono-tech font-bold bg-purple-500/20 text-purple-200 border border-purple-400/35">
                 ${wax.variant_badge || '12" LP'}
               </span>
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-mono-tech font-bold border ${flatClass}">
-                ${flatLabel}
-              </span>
+              ${flatPillHtml}
             </div>
             <span class="font-mono-tech font-black text-emerald-400">$${Number(rec.estimated_value_usd || 35).toFixed(2)}</span>
           </div>
