@@ -64,6 +64,7 @@ discogs_collection/
 │   └── workflows/
 │       └── static.yml                     # Deploys static site to GitHub Pages
 ├── assets/
+│   ├── favicon/                           # favicon.svg (source) + .ico, Apple touch, PWA icons & site.webmanifest
 │   ├── pressings/                         # Stock pressing fallback assets
 │   └── releases/                          # Per-release cached covers, galleries & pressing photos
 ├── data/

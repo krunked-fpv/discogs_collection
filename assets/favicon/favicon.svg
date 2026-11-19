@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <title>KRUNKED // Discogs Vinyl Vault</title>
+  <defs>
+    <!-- Brand gradient: fuchsia-400 → purple-600 → cyan-400 (matches header KV5 badge) -->
+    <linearGradient id="wax" x1="7" y1="7" x2="57" y2="57" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e879f9"/>
+      <stop offset="0.5" stop-color="#9333ea"/>
+      <stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+    <linearGradient id="label" x1="24" y1="24" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#67e8f9"/>
+      <stop offset="1" stop-color="#34d399"/>
+    </linearGradient>
+  </defs>
+  <!-- Obsidian tile -->
+  <rect width="64" height="64" rx="14" fill="#06070b"/>
+  <!-- Colored wax disc -->
+  <circle cx="32" cy="32" r="27" fill="url(#wax)"/>
+  <!-- Grooves -->
+  <g fill="none" stroke="#06070b" stroke-opacity="0.5">
+    <circle cx="32" cy="32" r="22.5" stroke-width="1.3"/>
+    <circle cx="32" cy="32" r="17.5" stroke-width="1.1"/>
+  </g>
+  <!-- Light sheen wedges -->
+  <g fill="#ffffff" fill-opacity="0.22">
+    <path d="M32 32 L41.23 6.63 A27 27 0 0 1 52.68 14.64 Z"/>
+    <path d="M32 32 L22.77 57.37 A27 27 0 0 1 11.32 49.36 Z"/>
+  </g>
+  <!-- Center label + spindle hole -->
+  <circle cx="32" cy="32" r="10.5" fill="#06070b"/>
+  <circle cx="32" cy="32" r="7" fill="url(#label)"/>
+  <circle cx="32" cy="32" r="2.2" fill="#06070b"/>
+</svg>

@@ -693,6 +693,34 @@ class TestDeterministicDetector(unittest.TestCase):
         self.assertEqual(runtime_warns, [])
         self.assertIsNone(off_res)
 
+    def test_favicon_links_and_assets_present(self) -> None:
+        rendered = pick_pressing_photo.render_template_from_src(REPO_ROOT / "src")
+        head = rendered.split("</head>", 1)[0]
+        favicon_dir = REPO_ROOT / "assets" / "favicon"
+        for href in (
+            "assets/favicon/favicon.svg",
+            "assets/favicon/favicon.ico",
+            "assets/favicon/apple-touch-icon.png",
+            "assets/favicon/site.webmanifest",
+        ):
+            self.assertIn(f'href="{href}"', head)
+            self.assertTrue((REPO_ROOT / href).is_file(), href)
+        self.assertIn('<meta name="theme-color"', head)
+
+        with Image.open(favicon_dir / "favicon.ico") as ico:
+            self.assertTrue({(16, 16), (32, 32)} <= set(ico.ico.sizes()))
+        with Image.open(favicon_dir / "apple-touch-icon.png") as apple:
+            self.assertEqual(apple.size, (180, 180))
+
+        manifest = json.loads((favicon_dir / "site.webmanifest").read_text(encoding="utf-8"))
+        for icon in manifest["icons"]:
+            icon_path = favicon_dir / icon["src"]
+            self.assertTrue(icon_path.is_file(), icon["src"])
+            if icon["type"] == "image/png":
+                w, h = (int(v) for v in icon["sizes"].split("x"))
+                with Image.open(icon_path) as im:
+                    self.assertEqual(im.size, (w, h), icon["src"])
+
 
 if __name__ == "__main__":
     unittest.main()
