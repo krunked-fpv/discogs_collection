@@ -11,7 +11,7 @@
 
 ## 🌟 Core Tenet & Project Philosophy
 
-Standard [Discogs collection grids](https://www.discogs.com/user/krunked/collection) bury custom splatter, galaxy, marble, and color-in-color vinyl pressings behind tiny square cardboard sleeve thumbnails. **KRUNKED // DISCOGS VINYL VAULT** was built from a single founding rule—**"Vibe coding a Discogs collection page to not look like trash"**—turning a 157-LP collection into an interactive, pressing-first 33⅓ RPM direct-drive command stage powered by deterministic computer vision, official [Discogs REST API v2.0](https://www.discogs.com/developers) telemetry, and a 3-tier persistence architecture that never loses your custom pressing pins or thermal flattening queue.
+Standard [Discogs collection grids](https://www.discogs.com/user/krunked/collection) bury custom splatter, galaxy, marble, and color-in-color vinyl pressings behind tiny square cardboard sleeve thumbnails. **KRUNKED // DISCOGS VINYL VAULT** was built from a single founding rule—**"Vibe coding a Discogs collection page to not look like trash"**—turning a 158-LP collection into an interactive, pressing-first 33⅓ RPM direct-drive command stage powered by deterministic computer vision, official [Discogs REST API v2.0](https://www.discogs.com/developers) telemetry, and a 3-tier persistence architecture that never loses your custom pressing pins or thermal flattening queue.
 
 ## 🛡️ 3-Tier Persistence Architecture (`Local Sync` + `Shadow-Cookie Auto-Healer`)
 
@@ -21,7 +21,7 @@ The Vault combines deterministic CLI state baking, portable in-browser synchroni
 | :--- | :--- | :--- |
 | **Tier 1: CLI Static HTML & JSON Injection** | `scripts/sync_discogs.py` + `data/*.json` + `index.html` | Compiles `data/collection.json`, `data/overrides.json`, and `data/flattening_queue.json`, and injects live collection counters and release payloads directly into `index.html` while preserving `<!-- BEGIN KRUNKED_COOKIE_VAULT_V1 -->` markers inside `<head>`. |
 | **Tier 2: Portable In-Browser `💾 Local Sync`** | `localStorage` + `#flattening-inline-form` + JSON Export | Persists pinned pressing photo overrides, inline Vinyl Flattening Queue edits (`Need to be done` / `Done`), UV Blacklight toggle state, `split` (`Sleeve + Disc`) thumbnail mode, Smart Spin mode, and Variant Clash Arena stats with one-click JSON export/import. |
-| **Tier 3: Shadow-Cookie Auto-Healer (`kv1_*`)** | `<script id="krunked-cookie-vault-v1">` in `<head>` (400-day `SameSite=Lax` cookies) | Transparently hooks `Storage.prototype.setItem`, `removeItem`, and `clear`. Smartly skips the 157-LP full API release array (`records`) to stay under the browser's 4 KB cookie cap, splits user overrides and preferences into 3.2 KB chunks (`Max-Age=34560000`), self-heals `localStorage` on page boot before the main Vault script runs, and updates the shared cross-app `krunked_family_pulse` (`Path=/`) root cookie across `krunked-fpv.github.io`. |
+| **Tier 3: Shadow-Cookie Auto-Healer (`kv1_*`)** | `<script id="krunked-cookie-vault-v1">` in `<head>` (400-day `SameSite=Lax` cookies) | Transparently hooks `Storage.prototype.setItem`, `removeItem`, and `clear`. Smartly skips the 158-LP full API release array (`records`) to stay under the browser's 4 KB cookie cap, splits user overrides and preferences into 3.2 KB chunks (`Max-Age=34560000`), self-heals `localStorage` on page boot before the main Vault script runs, and updates the shared cross-app `krunked_family_pulse` (`Path=/`) root cookie across `krunked-fpv.github.io`. |
 
 ### Patching, Rollback & Console Diagnostics
 
@@ -43,7 +43,7 @@ The Vault combines deterministic CLI state baking, portable in-browser synchroni
   * `📺 Showroom Kiosk` (`AUTO 15s`): Hands-free showcase mode that automatically spins and drops a fresh pressing onto the platter every 15 seconds.
   * `🌈 Eye-Candy Variants` (`FLEX WAX`): Filters spins exclusively to high-contrast Splatter, Galaxy, Marble, Split, and Color-in-Color pressings.
 * **Variant Clash Arena (`#view-arena`):** Launch a 4-LP head-to-head knockout tournament (`Semifinal 1 → Semifinal 2 → Championship Final`) with pool filters (`All Safe`, `Eye-Candy Only`, `Flat Certified`) and in-card `🎧 Audition 30s` studio preview buttons.
-* **UV Blacklight Mode (`🟣 UV Blacklight: ON` by Default, Shortcut `U`):** Boots with `body.uv-blacklight` active on page load, applying a reactive neon shader (`.uv-reactive`) across the main platter, Variant Clash Arena contenders, and all 157 crate grid discs, paired with synthesized Web Audio analog SFX and 60-FPS canvas particle bursts.
+* **UV Blacklight Mode (`🟣 UV Blacklight: ON` by Default, Shortcut `U`):** Boots with `body.uv-blacklight` active on page load, applying a reactive neon shader (`.uv-reactive`) across the main platter, Variant Clash Arena contenders, and all 158 crate grid discs, paired with synthesized Web Audio analog SFX and 60-FPS canvas particle bursts.
 * **Official Discogs Historical Sales Valuation (`GET /users/krunked/collection/value`):** Queries the authenticated [Discogs Collection Value endpoint](https://www.discogs.com/developers) to display exact historical completed-sales valuation (`Low $3,952.62` • `Med $6,423.73` • `High $11,091.69`) and automatically scrubs legacy synthetic Marketplace asking-price estimates.
 * **3D Flip Deck (`#hero-flip-stage`):**
   * **Side A (Pressing Specs & Gallery Pinning Strip):** Inspect runout matrix codes, pressing plant telemetry, wax color shaders, and click any release gallery thumbnail to pin it as the canonical pressing photo (`overrides.json`).
@@ -69,29 +69,32 @@ discogs_collection/
 │   └── workflows/
 │       └── static.yml                     # Deploys static site to GitHub Pages
 ├── assets/
-│   └── pressings/                         # Cached pressing photography & release assets
+│   ├── pressings/                         # Stock pressing fallback assets
+│   └── releases/                          # Per-release cached covers, galleries & pressing photos
 ├── data/
-│   ├── collection.json                    # Compiled 157-LP collection dataset & official Discogs valuation
+│   ├── collection.json                    # Compiled 158-LP collection dataset & official Discogs valuation
 │   ├── flattening_queue.json              # Portable thermal flattening queue ("Need to be done" / "Done")
 │   ├── overrides.json                     # Per-release pinned pressing image overrides
-│   └── sync_manifest.json                 # SHA-256 content digest & delta sync telemetry
+│   ├── releases_cache.json                # Raw Discogs /releases/<id> API response cache
+│   └── sync_manifest.json                 # Compiled collection counters & delta sync telemetry
 ├── scripts/
-│   ├── sync_discogs.py                    # Single-command delta sync engine, valuation scrubber & HTML injector
-│   ├── pick_pressing_photo.py             # Interactive local photo picker & override manager
+│   ├── sync_discogs.py                    # Single-command delta sync engine & Discogs API fetcher
+│   ├── pick_pressing_photo.py             # Deterministic CV pressing photo picker, override compiler & HTML injector
 │   ├── detect_pressing_image.py           # Deterministic 12" annular CV + Guideline 13.8 classifier + wax parser
-│   ├── seed_collection.py                 # Offline deterministic collection builder
+│   ├── setup_discogs_token.py             # Local Windows/env Discogs token setup & legacy token scrubber
+│   ├── seed_collection.py                 # Legacy offline deterministic collection builder
 │   └── validate_collection.py             # Strict schema & URL integrity validator
 ├── tests/
 │   └── test_deterministic_detector.py     # Unit tests for annular CV, Guideline 13.8, and wax code parsing
 ├── index.html                             # Self-contained v5.0 Command Stage + Shadow-Cookie Auto-Healer
 ├── publish.sh                             # Automated build, sync, and git publish helper script
-└── requirements.txt                       # Python dependencies (Pillow, numpy, requests)
+└── requirements.txt                       # Python dependencies (Pillow, numpy)
 ```
 
 ## 🚀 Running Locally & Syncing (`Windows 11` / `WSL` / `Linux`)
 
 ### 1. Single-Command Delta Sync (Recommended)
-`scripts/sync_discogs.py` automatically discovers `DISCOGS_TOKEN` from your environment (or Windows/WSL environment variables), fetches only newly added or removed releases unless `--force` is passed, preserves your official Discogs Low/Med/High collection valuation, and keeps `<script id="krunked-cookie-vault-v1">` intact inside `index.html`:
+`scripts/sync_discogs.py` automatically discovers `DISCOGS_TOKEN` from your environment (or Windows/WSL environment variables), fetches only newly added or changed releases unless `--full` or `--resync <release_id>` is passed, preserves your official Discogs Low/Med/High collection valuation, and keeps `<script id="krunked-cookie-vault-v1">` intact inside `index.html`:
 
 ```powershell
 # Windows PowerShell (from C:\DiscogsCollection\discogs_collection)
@@ -104,13 +107,16 @@ python scripts/sync_discogs.py
 DISCOGS_TOKEN="your_discogs_personal_access_token" python3 scripts/sync_discogs.py
 ```
 
-### 2. Full Re-Analysis & Interactive Photo Picker
+### 2. Full Re-Analysis, Offline Rebuild & Validation
 ```powershell
-# Force full CV re-evaluation across all 157 releases
-python scripts/sync_discogs.py --force --analyze-pixels
+# Force full Discogs & CV re-evaluation across all 158 releases
+python scripts/sync_discogs.py --full
 
-# Launch interactive local pressing photo selector
-python scripts/pick_pressing_photo.py
+# Force resync specific release ID(s)
+python scripts/sync_discogs.py --resync 13257813
+
+# Re-run deterministic CV pressing photo picker & HTML injector offline
+python scripts/pick_pressing_photo.py --offline
 
 # Run unit tests & schema validation
 python -m unittest discover -s tests -p "test_*.py" -v
