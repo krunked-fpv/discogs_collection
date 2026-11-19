@@ -38793,6 +38793,381 @@
     ],
     "year": 2011
   },
+  "31082741": {
+    "_full_images_fetched": true,
+    "_ytm_resolved": {
+      "fullAlbumYtDuration": 2400,
+      "fullAlbumYtVideoId": "dy8IMkekW4U",
+      "resolved": true,
+      "spotifyAlbumId": "",
+      "trackIds": {
+        "0": "L4-HXp7n1xA",
+        "10": "Sk-geMg8Tyc",
+        "2": "2Wxk3E84w4k",
+        "3": "L4-HXp7n1xA",
+        "5": "q3f_6xSNH_w",
+        "6": "0Vj3sGSquGU",
+        "7": "L4-HXp7n1xA",
+        "8": "Xg6-T3fOt9A",
+        "9": "uqGPonkEtME"
+      },
+      "ytPlaylistId": "OLAK5uy_mLkbs8yvA3eDYGlHb8hMWeKZXbT52QBMc"
+    },
+    "artists": [
+      {
+        "anv": "",
+        "id": 5238860,
+        "join": "",
+        "name": "Currents (3)",
+        "resource_url": "https://api.discogs.com/artists/5238860",
+        "role": "",
+        "thumbnail_url": "https://i.discogs.com/l8Q1V3c2PANN5yNT48EgOYf8HT9-lR2iyzXrl8WwARY/rs:fit/g:sm/q:90/h:600/w:400/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9BLTUyMzg4/NjAtMTc5MTU2NDY2/OC03MTYzLmpwZWc.jpeg",
+        "tracks": ""
+      }
+    ],
+    "artists_sort": "Currents (3)",
+    "blocked_from_sale": false,
+    "community": {
+      "contributors": [
+        {
+          "resource_url": "https://api.discogs.com/users/Redscroll",
+          "username": "Redscroll"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/vrp_pdx",
+          "username": "vrp_pdx"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/Paul.ws",
+          "username": "Paul.ws"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/Hiney2112",
+          "username": "Hiney2112"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/jcx200",
+          "username": "jcx200"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/uplinksc",
+          "username": "uplinksc"
+        }
+      ],
+      "data_quality": "Needs Vote",
+      "have": 556,
+      "rating": {
+        "average": 4.92,
+        "count": 38
+      },
+      "status": "Accepted",
+      "submitter": {
+        "resource_url": "https://api.discogs.com/users/Redscroll",
+        "username": "Redscroll"
+      },
+      "want": 156
+    },
+    "companies": [
+      {
+        "catno": "",
+        "entity_type": "13",
+        "entity_type_name": "Phonographic Copyright (p)",
+        "id": 1178623,
+        "name": "SharpTone Records, INC",
+        "resource_url": "https://api.discogs.com/labels/1178623"
+      },
+      {
+        "catno": "",
+        "entity_type": "14",
+        "entity_type_name": "Copyright (c)",
+        "id": 1178623,
+        "name": "SharpTone Records, INC",
+        "resource_url": "https://api.discogs.com/labels/1178623"
+      },
+      {
+        "catno": "",
+        "entity_type": "21",
+        "entity_type_name": "Published By",
+        "id": 1842706,
+        "name": "Currents Music",
+        "resource_url": "https://api.discogs.com/labels/1842706"
+      }
+    ],
+    "country": "USA & Europe",
+    "data_quality": "Needs Vote",
+    "date_added": "2024-06-28T10:07:33-07:00",
+    "date_changed": "2024-07-19T15:45:06-07:00",
+    "estimated_weight": 230,
+    "extraartists": [
+      {
+        "anv": "",
+        "id": 1999283,
+        "join": "",
+        "name": "Adam Burke",
+        "resource_url": "https://api.discogs.com/artists/1999283",
+        "role": "Artwork",
+        "tracks": ""
+      },
+      {
+        "anv": "",
+        "id": 3350564,
+        "join": "",
+        "name": "Ricky Armellino",
+        "resource_url": "https://api.discogs.com/artists/3350564",
+        "role": "Engineer",
+        "tracks": ""
+      },
+      {
+        "anv": "",
+        "id": 0,
+        "join": "",
+        "name": "Shawn Keith",
+        "resource_url": "",
+        "role": "Executive Producer",
+        "tracks": ""
+      },
+      {
+        "anv": "",
+        "id": 2338301,
+        "join": "",
+        "name": "Levi Benton",
+        "resource_url": "https://api.discogs.com/artists/2338301",
+        "role": "Layout, Design",
+        "tracks": ""
+      },
+      {
+        "anv": "",
+        "id": 688649,
+        "join": "",
+        "name": "Kris Crummett",
+        "resource_url": "https://api.discogs.com/artists/688649",
+        "role": "Mastered By",
+        "tracks": ""
+      },
+      {
+        "anv": "Adam Nolly Getgood",
+        "id": 1827526,
+        "join": "",
+        "name": "Adam Getgood",
+        "resource_url": "https://api.discogs.com/artists/1827526",
+        "role": "Mixed By",
+        "tracks": ""
+      },
+      {
+        "anv": "",
+        "id": 1951868,
+        "join": "",
+        "name": "Ryan Leitru",
+        "resource_url": "https://api.discogs.com/artists/1951868",
+        "role": "Producer",
+        "tracks": ""
+      },
+      {
+        "anv": "",
+        "id": 5272624,
+        "join": "",
+        "name": "Chris Wiseman",
+        "resource_url": "https://api.discogs.com/artists/5272624",
+        "role": "Producer, Engineer",
+        "tracks": ""
+      }
+    ],
+    "format_quantity": 1,
+    "formats": [
+      {
+        "descriptions": [
+          "LP",
+          "Album",
+          "Limited Edition",
+          "Repress"
+        ],
+        "name": "Vinyl",
+        "qty": "1",
+        "text": "Black Smoke"
+      }
+    ],
+    "genres": [
+      "Rock"
+    ],
+    "id": 31082741,
+    "identifiers": [
+      {
+        "description": "Sticker",
+        "type": "Barcode",
+        "value": "4 065629 605148"
+      },
+      {
+        "type": "Label Code",
+        "value": "LC 52563"
+      },
+      {
+        "description": "Etched (Side A)",
+        "type": "Matrix / Runout",
+        "value": "2_011566811-A-1"
+      },
+      {
+        "description": "Etched (Side B)",
+        "type": "Matrix / Runout",
+        "value": "2_011566811-B-1"
+      }
+    ],
+    "images": [
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/zn6wni0vhajoOC3AVD11cgpAHIArlcGN8c-kLX1l5wY/rs:fit/g:sm/q:90/h:600/w:569/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2OTM1/NzAtMzcwOS5qcGVn.jpeg",
+        "type": "primary",
+        "uri": "https://i.discogs.com/zn6wni0vhajoOC3AVD11cgpAHIArlcGN8c-kLX1l5wY/rs:fit/g:sm/q:90/h:600/w:569/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2OTM1/NzAtMzcwOS5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/ximgQoS4_JQhLvr5hEWLqZ2zWinzbWvW2_ATAw9EYzs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2OTM1/NzAtMzcwOS5qcGVn.jpeg",
+        "width": 569
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/SpIAk4KcWfTi639f2ZwEwEsoYB2O0HilNwx8JotUQak/rs:fit/g:sm/q:90/h:600/w:544/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2OTM1/NzAtNTcyMS5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/SpIAk4KcWfTi639f2ZwEwEsoYB2O0HilNwx8JotUQak/rs:fit/g:sm/q:90/h:600/w:544/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2OTM1/NzAtNTcyMS5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/Cohjd78ZA66Ynmkr2OOUrHZF0ROOSrK1QGWuoR9n7MA/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2OTM1/NzAtNTcyMS5qcGVn.jpeg",
+        "width": 544
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/CwSLbmcvKNQwzhP1aKTL-cuwXuwTwCOLs7M48stUq2s/rs:fit/g:sm/q:90/h:600/w:583/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2OTM1/NzAtMjk5Ni5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/CwSLbmcvKNQwzhP1aKTL-cuwXuwTwCOLs7M48stUq2s/rs:fit/g:sm/q:90/h:600/w:583/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2OTM1/NzAtMjk5Ni5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/VzEmvZ9s0mLoAQKFc_8s3zg6DS1fMoa2-oTfTJRZ_ZQ/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2OTM1/NzAtMjk5Ni5qcGVn.jpeg",
+        "width": 583
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/pgMqAwnbTc-P1wKNEPlBo1ifojUohzpKTo5SypZU3Sg/rs:fit/g:sm/q:90/h:600/w:507/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2OTM1/NjgtMTc2MS5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/pgMqAwnbTc-P1wKNEPlBo1ifojUohzpKTo5SypZU3Sg/rs:fit/g:sm/q:90/h:600/w:507/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2OTM1/NjgtMTc2MS5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/e1cts1_r-UfkTDMIr2Lt3PQnk8fl-kYxE0C8ZzUKJlU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2OTM1/NjgtMTc2MS5qcGVn.jpeg",
+        "width": 507
+      },
+      {
+        "height": 449,
+        "resource_url": "https://i.discogs.com/VCUqEzIPGe4BPBFqLr4krgMV7ZHAQTpRkdi-VSdWsOc/rs:fit/g:sm/q:90/h:449/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2MTIw/MjItODA1OC5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/VCUqEzIPGe4BPBFqLr4krgMV7ZHAQTpRkdi-VSdWsOc/rs:fit/g:sm/q:90/h:449/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2MTIw/MjItODA1OC5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/G3jxIR2s0wz64AEy-oNazdXgC5atFt5R0WIsgtai0LU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2MTIw/MjItODA1OC5qcGVn.jpeg",
+        "width": 600
+      }
+    ],
+    "is_offensive": false,
+    "labels": [
+      {
+        "catno": "6051-4",
+        "entity_type": "1",
+        "entity_type_name": "Label",
+        "id": 1178624,
+        "name": "SharpTone",
+        "resource_url": "https://api.discogs.com/labels/1178624",
+        "thumbnail_url": "https://i.discogs.com/OwFJ4cezqGHVzda3icCej_lB-EIL_lexRChLwuDyMoo/rs:fit/g:sm/q:90/h:330/w:550/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTExNzg2/MjQtMTQ4ODU1MDYz/OS02NDQzLmpwZWc.jpeg"
+      }
+    ],
+    "lowest_price": 174.73,
+    "master_id": 1751288,
+    "master_url": "https://api.discogs.com/masters/1751288",
+    "notes": "Limited to 1500 copies.\n\nTrack B5 is not listed on rear of sleeve but is listed on the lyric sheet and is featured on the record.\n\n\u2117 + \u00a9 2024 SharpTone Records, INC.\n\nMade in the EU.\n\nHype sticker reads\nLimited Pressing\nSharpTone\nBlack Smoke\nOnly 1500",
+    "num_for_sale": 1,
+    "released": "2024-06-28",
+    "released_formatted": "28 Jun 2024",
+    "resource_url": "https://api.discogs.com/releases/31082741",
+    "series": [],
+    "status": "Accepted",
+    "styles": [
+      "Metalcore",
+      "Progressive Metal"
+    ],
+    "thumb": "https://i.discogs.com/ximgQoS4_JQhLvr5hEWLqZ2zWinzbWvW2_ATAw9EYzs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2OTM1/NzAtMzcwOS5qcGVn.jpeg",
+    "title": "The Way It Ends ",
+    "tracklist": [
+      {
+        "duration": "",
+        "position": "A1",
+        "title": "Never There",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "A2",
+        "title": "A Flag To Wave",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "A3",
+        "title": "Poverty Of Self",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "A4",
+        "title": "Monsters",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "A5",
+        "title": "Kill The Ache",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "A6",
+        "title": "Let Me Leave",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "B1",
+        "title": "Origin",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "B2",
+        "title": "Split",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "B3",
+        "title": "Second Skin",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "B4",
+        "title": "How I Fall Apart",
+        "type_": "track"
+      },
+      {
+        "duration": "",
+        "position": "B5",
+        "title": "Better Days",
+        "type_": "track"
+      }
+    ],
+    "uri": "https://www.discogs.com/release/31082741-Currents-3-The-Way-It-Ends-",
+    "videos": [
+      {
+        "description": "#Currents #AFlagToWave #TheWayItEnds\nPurchase / Stream here: https://shrptn.co/aflagtowave\nWebsite, Tour Dates: https://www.currentsofficial.com\nPre-Order 'The Way It Ends' available - June 5th\n\nSubscribe: https://smarturl.it/SharpToneRecs\n\nI find myself ",
+        "duration": 225,
+        "embed": true,
+        "title": "Currents - A Flag To Wave (Official Music Video)",
+        "uri": "https://www.youtube.com/watch?v=hZnZ-CpX57Y"
+      },
+      {
+        "description": "#Currents #TheWayItEnds #KillTheAche\nPurchase, Stream here: http://Shrptn.co/thewayitends\nFrom the album \"The Way It Ends\" out now!\n\nSubscribe: https://smarturl.it/SharpToneRecs\n\nDirected by: Chris Klumpp\n\nHow much more do you think it takes? \nThey\u2019re o",
+        "duration": 234,
+        "embed": true,
+        "title": "Currents - Kill The Ache",
+        "uri": "https://www.youtube.com/watch?v=upTN4u7SjTM"
+      }
+    ],
+    "year": 2024
+  },
   "31200271": {
     "artists": [
       {

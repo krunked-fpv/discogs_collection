@@ -4,26 +4,337 @@
   "source_of_truth": "https://www.discogs.com/user/krunked/collection",
   "api_documentation": "https://www.discogs.com/developers",
   "username": "krunked",
-  "synced_at_utc": "2026-11-18T19:23:41Z",
+  "synced_at_utc": "2026-11-19T04:14:50Z",
   "profile": {
     "username": "krunked",
     "owner_name": "krunked",
     "discogs_url": "https://www.discogs.com/user/krunked/collection",
     "github_repo": "https://github.com/krunked-fpv/discogs_collection",
-    "num_collection": 158,
-    "pressing_photos_detected": 134,
-    "colored_or_special_variants": 149,
+    "num_collection": 159,
+    "pressing_photos_detected": 135,
+    "colored_or_special_variants": 150,
     "flattening_need_to_be_done": 2,
     "flattening_done": 50,
     "collection_value": {
       "minimum": "$3,952.62",
       "median": "$6,423.73",
       "maximum": "$11,091.69",
-      "total_estimated_usd": 7436.55,
-      "formatted_total": "$7,436.55"
+      "total_estimated_usd": 7611.28,
+      "formatted_total": "$7,611.28"
     }
   },
   "records": [
+    {
+      "release_id": 31082741,
+      "instance_id": 2206080465,
+      "artist": "Currents",
+      "title": "The Way It Ends ",
+      "year": 2024,
+      "format_string": "Vinyl, LP, Album, Limited Edition, Repress, Black Smoke",
+      "label": "SharpTone",
+      "catno": "6051-4",
+      "media_condition": "Near Mint (NM or M-)",
+      "sleeve_condition": "Near Mint (NM or M-)",
+      "comments": "",
+      "date_added": "2026-11-18T18:22:18-08:00",
+      "discogs_url": "https://www.discogs.com/release/31082741-Currents-3-The-Way-It-Ends-",
+      "estimated_value_usd": 174.73,
+      "flattening_status": "Not Listed",
+      "genres": [
+        "Rock"
+      ],
+      "styles": [
+        "Metalcore",
+        "Progressive Metal"
+      ],
+      "images": {
+        "cover_image_url": "https://i.discogs.com/zn6wni0vhajoOC3AVD11cgpAHIArlcGN8c-kLX1l5wY/rs:fit/g:sm/q:90/h:600/w:569/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2OTM1/NzAtMzcwOS5qcGVn.jpeg",
+        "pressing_image_url": "assets/releases/31082741/pressing.jpg?v=2_9f7941a5",
+        "center_label_image_url": "https://i.discogs.com/ximgQoS4_JQhLvr5hEWLqZ2zWinzbWvW2_ATAw9EYzs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2OTM1/NzAtMzcwOS5qcGVn.jpeg",
+        "display_thumbnail_url": "assets/releases/31082741/pressing.jpg?v=2_9f7941a5",
+        "has_pressing_photo": true,
+        "selected_index": 2,
+        "selected_score": 0.6836,
+        "detection_method": "deterministic_annular_cv+guideline_13_8",
+        "classified_images": [
+          {
+            "index": 0,
+            "uri": "https://i.discogs.com/zn6wni0vhajoOC3AVD11cgpAHIArlcGN8c-kLX1l5wY/rs:fit/g:sm/q:90/h:600/w:569/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2OTM1/NzAtMzcwOS5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/ximgQoS4_JQhLvr5hEWLqZ2zWinzbWvW2_ATAw9EYzs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2OTM1/NzAtMzcwOS5qcGVn.jpeg",
+            "width": 569,
+            "height": 600,
+            "aspect_ratio": 0.948,
+            "role": "front_cover",
+            "deterministic_score": 0.05,
+            "local_uri": "assets/releases/31082741/img_0.jpg"
+          },
+          {
+            "index": 1,
+            "uri": "https://i.discogs.com/SpIAk4KcWfTi639f2ZwEwEsoYB2O0HilNwx8JotUQak/rs:fit/g:sm/q:90/h:600/w:544/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2OTM1/NzAtNTcyMS5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/Cohjd78ZA66Ynmkr2OOUrHZF0ROOSrK1QGWuoR9n7MA/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2OTM1/NzAtNTcyMS5qcGVn.jpeg",
+            "width": 544,
+            "height": 600,
+            "aspect_ratio": 0.907,
+            "role": "center_label_closeup",
+            "deterministic_score": 0.0999,
+            "local_uri": "assets/releases/31082741/img_1.jpg",
+            "cv_metrics": {
+              "is_pressing": false,
+              "is_zoomed_label_scan": true,
+              "is_hype_sticker_or_text_insert": false,
+              "is_square_insert_or_sleeve": true,
+              "detected_disc_radius": 0.96,
+              "active_diagonal_quadrants": 4,
+              "score": 0.1028,
+              "raw_annular_score": 0.4113,
+              "aspect_ratio": 0.907,
+              "corner_std": 0.1342,
+              "corner_wax_dist": 0.093,
+              "circularity_ratio": 1.5921,
+              "label_wax_dist": 0.1441,
+              "octant_label_wax_q25": 0.0768,
+              "hv_wax_anisotropy": 0.116,
+              "spindle_contrast": 0.0134,
+              "rim_step": 0.0304,
+              "label_step": 0.0405,
+              "reason": "rejected_zoomed_center_label_scan"
+            }
+          },
+          {
+            "index": 2,
+            "uri": "https://i.discogs.com/CwSLbmcvKNQwzhP1aKTL-cuwXuwTwCOLs7M48stUq2s/rs:fit/g:sm/q:90/h:600/w:583/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2OTM1/NzAtMjk5Ni5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/VzEmvZ9s0mLoAQKFc_8s3zg6DS1fMoa2-oTfTJRZ_ZQ/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2OTM1/NzAtMjk5Ni5qcGVn.jpeg",
+            "width": 583,
+            "height": 600,
+            "aspect_ratio": 0.972,
+            "role": "pressing_disc",
+            "deterministic_score": 0.6836,
+            "local_uri": "assets/releases/31082741/img_2.jpg",
+            "cv_metrics": {
+              "is_pressing": true,
+              "is_zoomed_label_scan": false,
+              "is_hype_sticker_or_text_insert": false,
+              "is_square_insert_or_sleeve": false,
+              "detected_disc_radius": 0.99,
+              "active_diagonal_quadrants": 4,
+              "score": 0.6278,
+              "raw_annular_score": 0.6278,
+              "aspect_ratio": 0.972,
+              "corner_std": 0.1235,
+              "corner_wax_dist": 0.3217,
+              "circularity_ratio": 3.4644,
+              "label_wax_dist": 0.2024,
+              "octant_label_wax_q25": 0.0499,
+              "hv_wax_anisotropy": 0.0858,
+              "spindle_contrast": 0.4141,
+              "rim_step": 0.0392,
+              "label_step": 0.0464,
+              "reason": "deterministic_annular_cv_match"
+            }
+          },
+          {
+            "index": 3,
+            "uri": "https://i.discogs.com/pgMqAwnbTc-P1wKNEPlBo1ifojUohzpKTo5SypZU3Sg/rs:fit/g:sm/q:90/h:600/w:507/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2OTM1/NjgtMTc2MS5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/e1cts1_r-UfkTDMIr2Lt3PQnk8fl-kYxE0C8ZzUKJlU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2OTM1/NjgtMTc2MS5qcGVn.jpeg",
+            "width": 507,
+            "height": 600,
+            "aspect_ratio": 0.845,
+            "role": "center_label_closeup",
+            "deterministic_score": 0.0844,
+            "local_uri": "assets/releases/31082741/img_3.jpg",
+            "cv_metrics": {
+              "is_pressing": false,
+              "is_zoomed_label_scan": true,
+              "is_hype_sticker_or_text_insert": false,
+              "is_square_insert_or_sleeve": true,
+              "detected_disc_radius": 0.92,
+              "active_diagonal_quadrants": 4,
+              "score": 0.0617,
+              "raw_annular_score": 0.2467,
+              "aspect_ratio": 0.846,
+              "corner_std": 0.1287,
+              "corner_wax_dist": 0.1245,
+              "circularity_ratio": 0.7533,
+              "label_wax_dist": 0.0372,
+              "octant_label_wax_q25": 0.0516,
+              "hv_wax_anisotropy": 0.0638,
+              "spindle_contrast": 0.0985,
+              "rim_step": 0.007,
+              "label_step": 0.0197,
+              "reason": "rejected_zoomed_center_label_scan"
+            }
+          },
+          {
+            "index": 4,
+            "uri": "https://i.discogs.com/VCUqEzIPGe4BPBFqLr4krgMV7ZHAQTpRkdi-VSdWsOc/rs:fit/g:sm/q:90/h:449/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2MTIw/MjItODA1OC5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/G3jxIR2s0wz64AEy-oNazdXgC5atFt5R0WIsgtai0LU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2MTIw/MjItODA1OC5qcGVn.jpeg",
+            "width": 600,
+            "height": 449,
+            "aspect_ratio": 1.336,
+            "role": "pressing_disc",
+            "deterministic_score": 0.5873,
+            "local_uri": "assets/releases/31082741/img_4.jpg",
+            "cv_metrics": {
+              "is_pressing": true,
+              "is_zoomed_label_scan": false,
+              "is_hype_sticker_or_text_insert": false,
+              "is_square_insert_or_sleeve": false,
+              "detected_disc_radius": 0.98,
+              "active_diagonal_quadrants": 4,
+              "score": 0.5645,
+              "raw_annular_score": 0.5645,
+              "aspect_ratio": 1.334,
+              "corner_std": 0.1334,
+              "corner_wax_dist": 0.1304,
+              "circularity_ratio": 1.5347,
+              "label_wax_dist": 0.3521,
+              "octant_label_wax_q25": 0.1008,
+              "hv_wax_anisotropy": 0.1971,
+              "spindle_contrast": 0.0582,
+              "rim_step": 0.0326,
+              "label_step": 0.0365,
+              "reason": "deterministic_annular_cv_match"
+            }
+          }
+        ],
+        "local_cover_image_url": "assets/releases/31082741/cover.jpg",
+        "local_pressing_image_url": "assets/releases/31082741/pressing.jpg?v=2_9f7941a5",
+        "remote_pressing_image_url": "https://i.discogs.com/CwSLbmcvKNQwzhP1aKTL-cuwXuwTwCOLs7M48stUq2s/rs:fit/g:sm/q:90/h:600/w:583/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2OTM1/NzAtMjk5Ni5qcGVn.jpeg",
+        "delta_sig": "da596b7f24bff33a"
+      },
+      "wax_spec": {
+        "pattern": "galaxy",
+        "primary_color": "#18181b",
+        "secondary_color": "#64748b",
+        "accent_color": "#f43f5e",
+        "color_name": "180g Audiophile Black",
+        "translucent": false,
+        "etched": false,
+        "is_double_lp": false,
+        "is_limited": true,
+        "is_repress": true,
+        "variant_badge": "12\" LP • 180g Audiophile Black + Translucent Smoke • Galaxy • Ltd Ed",
+        "deterministic_seed": 198890624
+      },
+      "tracklist": [
+        {
+          "position": "A1",
+          "title": "Never There",
+          "duration": "",
+          "ytVideoId": "L4-HXp7n1xA",
+          "albumYtVideoId": "dy8IMkekW4U",
+          "albumYtDuration": 2400
+        },
+        {
+          "position": "A2",
+          "title": "A Flag To Wave",
+          "duration": "3:45",
+          "ytVideoId": "hZnZ-CpX57Y",
+          "ytTitle": "Currents - A Flag To Wave (Official Music Video)",
+          "albumYtVideoId": "dy8IMkekW4U",
+          "albumYtDuration": 2400,
+          "albumYtStart": 215
+        },
+        {
+          "position": "A3",
+          "title": "Poverty Of Self",
+          "duration": "",
+          "ytVideoId": "2Wxk3E84w4k",
+          "albumYtVideoId": "dy8IMkekW4U",
+          "albumYtDuration": 2400,
+          "albumYtStart": 440
+        },
+        {
+          "position": "A4",
+          "title": "Monsters",
+          "duration": "",
+          "ytVideoId": "L4-HXp7n1xA",
+          "albumYtVideoId": "dy8IMkekW4U",
+          "albumYtDuration": 2400,
+          "albumYtStart": 655
+        },
+        {
+          "position": "A5",
+          "title": "Kill The Ache",
+          "duration": "3:54",
+          "ytVideoId": "upTN4u7SjTM",
+          "ytTitle": "Currents - Kill The Ache",
+          "albumYtVideoId": "dy8IMkekW4U",
+          "albumYtDuration": 2400,
+          "albumYtStart": 870
+        },
+        {
+          "position": "A6",
+          "title": "Let Me Leave",
+          "duration": "",
+          "ytVideoId": "q3f_6xSNH_w",
+          "albumYtVideoId": "dy8IMkekW4U",
+          "albumYtDuration": 2400,
+          "albumYtStart": 1104
+        },
+        {
+          "position": "B1",
+          "title": "Origin",
+          "duration": "",
+          "ytVideoId": "0Vj3sGSquGU",
+          "albumYtVideoId": "dy8IMkekW4U",
+          "albumYtDuration": 2400,
+          "albumYtStart": 1319
+        },
+        {
+          "position": "B2",
+          "title": "Split",
+          "duration": "",
+          "ytVideoId": "L4-HXp7n1xA",
+          "albumYtVideoId": "dy8IMkekW4U",
+          "albumYtDuration": 2400,
+          "albumYtStart": 1534
+        },
+        {
+          "position": "B3",
+          "title": "Second Skin",
+          "duration": "",
+          "ytVideoId": "Xg6-T3fOt9A",
+          "albumYtVideoId": "dy8IMkekW4U",
+          "albumYtDuration": 2400,
+          "albumYtStart": 1749
+        },
+        {
+          "position": "B4",
+          "title": "How I Fall Apart",
+          "duration": "",
+          "ytVideoId": "uqGPonkEtME",
+          "albumYtVideoId": "dy8IMkekW4U",
+          "albumYtDuration": 2400,
+          "albumYtStart": 1964
+        },
+        {
+          "position": "B5",
+          "title": "Better Days",
+          "duration": "",
+          "ytVideoId": "Sk-geMg8Tyc",
+          "albumYtVideoId": "dy8IMkekW4U",
+          "albumYtDuration": 2400,
+          "albumYtStart": 2179
+        }
+      ],
+      "youtube_videos": [
+        {
+          "uri": "https://www.youtube.com/watch?v=hZnZ-CpX57Y",
+          "title": "Currents - A Flag To Wave (Official Music Video)",
+          "duration": 225
+        },
+        {
+          "uri": "https://www.youtube.com/watch?v=upTN4u7SjTM",
+          "title": "Currents - Kill The Ache",
+          "duration": 234
+        }
+      ],
+      "ytPlaylistId": "OLAK5uy_mLkbs8yvA3eDYGlHb8hMWeKZXbT52QBMc",
+      "fullAlbumYtVideoId": "dy8IMkekW4U",
+      "fullAlbumYtDuration": 2400,
+      "defaultYtVideoId": "L4-HXp7n1xA"
+    },
     {
       "release_id": 13257813,
       "instance_id": 2205948208,
@@ -28442,7 +28753,7 @@
         "delta_sig": "59415aeba5a4d983"
       },
       "wax_spec": {
-        "pattern": "marble",
+        "pattern": "split",
         "primary_color": "#10b981",
         "secondary_color": "#ccff00",
         "accent_color": "#f43f5e",
@@ -28452,7 +28763,7 @@
         "is_double_lp": true,
         "is_limited": true,
         "is_repress": true,
-        "variant_badge": "2xLP • Emerald Green + Neon Highlighter • Marble Swirl • Ltd Ed",
+        "variant_badge": "2xLP • Emerald Green + Neon Highlighter • Split Swirl • Ltd Ed",
         "deterministic_seed": 2483238862
       },
       "tracklist": [
@@ -60940,7 +61251,7 @@
   "flattening_queue": {
     "schema_version": "5.0.0",
     "storage_mode": "portable_inline_html+json",
-    "updated_at_utc": "2026-11-18T19:23:41Z",
+    "updated_at_utc": "2026-11-19T04:14:50Z",
     "protocol": "Bag on 6 until 130°F then drop to 4 — 2.5 hours once at 130°F on the plate",
     "need_to_be_done_release_ids": [
       28844782,
