@@ -80,13 +80,20 @@ discogs_collection/
 ├── scripts/
 │   ├── sync_discogs.py                    # Single-command delta sync engine & Discogs API fetcher
 │   ├── pick_pressing_photo.py             # Deterministic CV pressing photo picker, override compiler & HTML injector
+│   ├── build_html.py                      # Fast offline compiler: assembles src/* + data/*.json -> index.html
 │   ├── detect_pressing_image.py           # Deterministic 12" annular CV + Guideline 13.8 classifier + wax parser
 │   ├── setup_discogs_token.py             # Local Windows/env Discogs token setup & legacy token scrubber
 │   ├── seed_collection.py                 # Legacy offline deterministic collection builder
 │   └── validate_collection.py             # Strict schema & URL integrity validator
+├── src/
+│   ├── template.html                      # Modular HTML shell, Tailwind layout, views & modal markup (~1,520 lines)
+│   ├── styles.css                         # Custom dark-obsidian theme, turntable & 3D flip stylesheet (~259 lines)
+│   ├── cookie_vault.js                    # Shadow-Cookie Auto-Healer (KRUNKED_COOKIE_VAULT_V1, ~444 lines)
+│   ├── app.js                             # Frontend application logic, audio engine & arena (~4,110 lines)
+│   └── ytm_maps.js                        # Verified YouTube Music playlist & track lookup maps (~3,751 lines)
 ├── tests/
-│   └── test_deterministic_detector.py     # Unit tests for annular CV, Guideline 13.8, and wax code parsing
-├── index.html                             # Self-contained v5.0 Command Stage + Shadow-Cookie Auto-Healer
+│   └── test_deterministic_detector.py     # Unit tests for annular CV, Guideline 13.8, wax parsing & HTML compilation
+├── index.html                             # Compiled self-contained v5.0 Command Stage (zero-spinner single-file artifact)
 ├── publish.sh                             # Automated build, sync, and git publish helper script
 └── requirements.txt                       # Python dependencies (Pillow, numpy)
 ```
@@ -94,7 +101,7 @@ discogs_collection/
 ## 🚀 Running Locally & Syncing (`Windows 11` / `WSL` / `Linux`)
 
 ### 1. Single-Command Delta Sync (Recommended)
-`scripts/sync_discogs.py` automatically discovers `DISCOGS_TOKEN` from your environment (or Windows/WSL environment variables), fetches only newly added or changed releases unless `--full` or `--resync <release_id>` is passed, preserves your official Discogs Low/Med/High collection valuation, and keeps `<script id="krunked-cookie-vault-v1">` intact inside `index.html`:
+`scripts/sync_discogs.py` automatically discovers `DISCOGS_TOKEN` from your environment (or Windows/WSL environment variables), fetches only newly added or changed releases unless `--full` or `--resync <release_id>` is passed, preserves your official Discogs Low/Med/High collection valuation, and compiles `src/*` + `data/*.json` into `index.html`:
 
 ```powershell
 # Windows PowerShell (from C:\DiscogsCollection\discogs_collection)
@@ -107,7 +114,18 @@ python scripts/sync_discogs.py
 DISCOGS_TOKEN="your_discogs_personal_access_token" python3 scripts/sync_discogs.py
 ```
 
-### 2. Full Re-Analysis, Offline Rebuild & Validation
+### 2. Editing Frontend UI (`src/*`) & Fast Offline Compilation
+Edit the modular frontend source files in `src/` (`src/template.html`, `src/styles.css`, `src/app.js`, `src/cookie_vault.js`, `src/ytm_maps.js`) instead of editing the 71,598-line compiled `index.html` directly, then compile in `<0.2s` with zero network calls:
+
+```powershell
+# Compile src/* + data/*.json into index.html
+python scripts/build_html.py
+
+# Dry-run template integrity check without modifying index.html
+python scripts/build_html.py --check
+```
+
+### 3. Full Re-Analysis, Offline Rebuild & Validation
 ```powershell
 # Force full Discogs & CV re-evaluation across all 158 releases
 python scripts/sync_discogs.py --full

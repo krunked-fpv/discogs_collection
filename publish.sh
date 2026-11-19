@@ -13,7 +13,13 @@ if [ ! -d ".git" ]; then
   git reset --soft origin/main || true
 fi
 
-git add README.md requirements.txt index.html .github/ scripts/ data/ tests/ assets/ publish.sh
+if command -v python3 >/dev/null 2>&1; then
+  python3 scripts/build_html.py
+elif command -v python >/dev/null 2>&1; then
+  python scripts/build_html.py
+fi
+
+git add README.md requirements.txt index.html src/ .github/ scripts/ data/ tests/ assets/ publish.sh
 if ! git diff --cached --quiet; then
   git commit -m "feat: pressing-first Discogs collection vault & deterministic sync pipeline"
 fi

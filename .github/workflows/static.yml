@@ -52,7 +52,8 @@ jobs:
               --download-images \
               --analyze-pixels
           else
-            echo "DISCOGS_TOKEN secret not configured; deploying static files as-is."
+            echo "DISCOGS_TOKEN secret not configured; compiling index.html from modular src/ templates and existing data/*.json..."
+            python scripts/build_html.py
           fi
 
       - name: Configure Pages
