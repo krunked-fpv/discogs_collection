@@ -19,6 +19,7 @@ What it does:
 
 from __future__ import annotations
 
+import hashlib
 import os
 import pathlib
 import re
@@ -28,8 +29,18 @@ import sys
 SCRIPT_DIR = pathlib.Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parent if SCRIPT_DIR.name == "scripts" else SCRIPT_DIR
 
-# The previously exposed token prefix/string to scrub from tracked files
-OLD_EXPOSED_TOKEN = "HWLciALlIIgSGquWsckHVkbEXCbmXlcrULmVdogi"
+# SHA-256 fingerprint of the previously exposed (revoked) 40-char Discogs token
+# so we can scrub it from tracked files without keeping a plaintext secret in source.
+OLD_EXPOSED_TOKEN_LEN = 40
+OLD_EXPOSED_TOKEN_SHA256 = "5a98a9dc14e3f2b9a94ee53d86944c6021655f9896c6b19ac153c3999c0a5eb2"
+_CANDIDATE_TOKEN_RE = re.compile(rf"\b[A-Za-z0-9]{{{OLD_EXPOSED_TOKEN_LEN}}}\b")
+
+
+def is_old_exposed_token(candidate: str | None) -> bool:
+    """Returns True if `candidate` matches the SHA-256 hash of the revoked legacy token."""
+    if not candidate or len(candidate) != OLD_EXPOSED_TOKEN_LEN:
+        return False
+    return hashlib.sha256(candidate.encode("utf-8")).hexdigest() == OLD_EXPOSED_TOKEN_SHA256
 
 
 def sanitize_token(raw_token: str | None) -> str:
@@ -116,7 +127,7 @@ def write_local_dotenv(repo_root: pathlib.Path, token: str, username: str = "kru
 
 
 def scrub_exposed_token_from_repo(repo_root: pathlib.Path) -> list[pathlib.Path]:
-    """Removes the old exposed token from index.html and scripts/*.py."""
+    """Removes the old exposed token (matched by SHA-256 hash) from index.html and scripts/*.py."""
     scrubbed_files: list[pathlib.Path] = []
     candidate_paths = [repo_root / "index.html"]
     scripts_dir = repo_root / "scripts"
@@ -131,11 +142,18 @@ def scrub_exposed_token_from_repo(repo_root: pathlib.Path) -> list[pathlib.Path]
         except Exception:
             continue
 
-        if OLD_EXPOSED_TOKEN in raw:
-            updated = raw.replace(f'DEFAULT_TOKEN = "{OLD_EXPOSED_TOKEN}"', 'DEFAULT_TOKEN = ""')
-            updated = updated.replace(f"DEFAULT_TOKEN = '{OLD_EXPOSED_TOKEN}'", 'DEFAULT_TOKEN = ""')
-            updated = updated.replace(f'value="{OLD_EXPOSED_TOKEN}"', 'value=""')
-            updated = updated.replace(OLD_EXPOSED_TOKEN, "")
+        matched_tokens = {
+            m.group(0)
+            for m in _CANDIDATE_TOKEN_RE.finditer(raw)
+            if is_old_exposed_token(m.group(0))
+        }
+        if matched_tokens:
+            updated = raw
+            for leaked in matched_tokens:
+                updated = updated.replace(f'DEFAULT_TOKEN = "{leaked}"', 'DEFAULT_TOKEN = ""')
+                updated = updated.replace(f"DEFAULT_TOKEN = '{leaked}'", 'DEFAULT_TOKEN = ""')
+                updated = updated.replace(f'value="{leaked}"', 'value=""')
+                updated = updated.replace(leaked, "")
             path.write_text(updated, encoding="utf-8")
             scrubbed_files.append(path)
 
@@ -167,7 +185,7 @@ def main() -> None:
     ensure_gitignore_has_env(REPO_ROOT)
 
     if token:
-        if token == OLD_EXPOSED_TOKEN:
+        if is_old_exposed_token(token):
             print(
                 "\n[warn] That is the OLD exposed token! Please generate a fresh one at "
                 "https://www.discogs.com/settings/developers so the leaked one cannot be used.",

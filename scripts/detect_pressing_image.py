@@ -251,7 +251,7 @@ def parse_wax_variant(
     etched = bool(re.search(r"\betch", lower))
 
     pattern_source = fmt_lower if re.search(
-        r"splatter|starburst|blood pool|in clear|color-in-color|ripple|gal|galaxy|nebula|dus|dust|dusk|gho|ghost|ghostly|smoke|smoky|swirl|marb|marble|split|smash|twister|cle|ult|mil|cok|clear|translucent",
+        r"splatter|starburst|blood pool|in clear|color-in-color|ripple|\b(gal|galaxy|nebula|dus|dust|dusk|gho|ghost|ghostly|smoke|smoky|smokey|cloudy|glitter|starlight|swirl|marb|marble|hou|aci|acid|split|smash|twister|flip|neo|neon|fun dip)\b",
         fmt_lower,
     ) else lower
 
@@ -1115,10 +1115,10 @@ def select_release_images_deterministic(
                     pos_score = 0.76 if is_near_square else 0.60
                 elif idx == 1 and num_imgs == 3:
                     role = "pressing_candidate"
-                    pos_score = 0.78
-                elif idx == 2 and num_imgs == 3:
-                    role = "pressing_candidate"
                     pos_score = 0.74
+                elif idx == 2 and num_imgs == 3:
+                    role = "pressing_disc"
+                    pos_score = 0.78
                 elif idx >= 2:
                     role = "pressing_disc"
                     pos_score = 0.80

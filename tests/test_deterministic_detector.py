@@ -3,21 +3,28 @@
 
 from __future__ import annotations
 
+import hashlib
 import io
 import pathlib
+import shutil
 import sys
+import tempfile
 import unittest
+from unittest import mock
 
 import numpy as np
 from PIL import Image
 
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent / "scripts"))
+REPO_ROOT = pathlib.Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
 from detect_pressing_image import (
     parse_wax_variant,
     score_image_pixels_deterministic,
     select_release_images_deterministic,
 )
+import pick_pressing_photo
+import setup_discogs_token
 
 
 def _make_synthetic_vinyl_pressing_png() -> bytes:
@@ -68,6 +75,17 @@ class TestDeterministicDetector(unittest.TestCase):
         self.assertEqual(splatter_spec["pattern"], "splatter")
         self.assertTrue(splatter_spec["translucent"])
 
+    def test_wax_variant_explicit_format_overrides_multi_pressing_notes(self) -> None:
+        spec = parse_wax_variant(
+            "2xLP, Album, Ltd, Green Neon",
+            "Red/Black Swirl or Neon Green (this)",
+            release_id=3780990,
+        )
+        self.assertNotEqual(spec["pattern"], "marble")
+        self.assertEqual(spec["pattern"], "split")
+        self.assertEqual(spec["color_name"], "Emerald Green")
+        self.assertTrue(spec["is_double_lp"])
+
     def test_annular_cv_distinguishes_pressing_from_sleeve(self) -> None:
         vinyl_bytes = _make_synthetic_vinyl_pressing_png()
         sleeve_bytes = _make_synthetic_sleeve_cover_png()
@@ -93,6 +111,87 @@ class TestDeterministicDetector(unittest.TestCase):
         self.assertTrue(res["has_pressing_photo"])
         self.assertEqual(res["selected_index"], 2)
         self.assertEqual(res["display_thumbnail_url"], "https://img.discogs.com/pressing.jpg")
+
+    def test_setup_discogs_token_hash_scrubber_and_no_plaintext_secret(self) -> None:
+        self.assertFalse(setup_discogs_token.is_old_exposed_token(""))
+        self.assertFalse(setup_discogs_token.is_old_exposed_token("short"))
+        self.assertFalse(setup_discogs_token.is_old_exposed_token("A" * 40))
+
+        # Verify no tracked script or index.html embeds the revoked legacy token
+        for rel in [REPO_ROOT / "index.html", *sorted((REPO_ROOT / "scripts").glob("*.py"))]:
+            raw = rel.read_text(encoding="utf-8")
+            for m in setup_discogs_token._CANDIDATE_TOKEN_RE.finditer(raw):
+                self.assertFalse(
+                    setup_discogs_token.is_old_exposed_token(m.group(0)),
+                    f"Revoked legacy token found in {rel}",
+                )
+
+        # Verify hash-based scrubber strips matching 40-char tokens in a temp repo
+        fake_leaked = "TestFakeDiscogsToken0123456789abcdefghij"
+        self.assertEqual(len(fake_leaked), setup_discogs_token.OLD_EXPOSED_TOKEN_LEN)
+        fake_hash = hashlib.sha256(fake_leaked.encode("utf-8")).hexdigest()
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_root = pathlib.Path(tmpdir)
+            (tmp_root / "scripts").mkdir()
+            (tmp_root / "index.html").write_text(f'<input value="{fake_leaked}">', encoding="utf-8")
+            (tmp_root / "scripts" / "sample.py").write_text(f'DEFAULT_TOKEN = "{fake_leaked}"\n', encoding="utf-8")
+
+            with mock.patch.object(setup_discogs_token, "OLD_EXPOSED_TOKEN_SHA256", fake_hash):
+                scrubbed = setup_discogs_token.scrub_exposed_token_from_repo(tmp_root)
+
+            self.assertEqual(len(scrubbed), 2)
+            self.assertNotIn(fake_leaked, (tmp_root / "index.html").read_text(encoding="utf-8"))
+            self.assertIn('DEFAULT_TOKEN = ""', (tmp_root / "scripts" / "sample.py").read_text(encoding="utf-8"))
+
+    def test_inject_into_index_html_preserves_markers_and_updates_kpis(self) -> None:
+        src_html = REPO_ROOT / "index.html"
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_html = pathlib.Path(tmpdir) / "index.html"
+            shutil.copy2(src_html, tmp_html)
+
+            synthetic_collection = {
+                "schema_version": "5.0.0",
+                "username": "krunked",
+                "synced_at_utc": "2026-11-18T20:00:00Z",
+                "profile": {
+                    "username": "krunked",
+                    "num_collection": 2,
+                    "pressing_photos_detected": 1,
+                    "colored_or_special_variants": 2,
+                    "collection_value": {
+                        "minimum": "$10.00",
+                        "median": "$25.00",
+                        "maximum": "$50.00",
+                        "formatted_total": "$25.00",
+                    },
+                },
+                "records": [
+                    {"release_id": 1001, "artist": "Band A", "title": "Album A", "flattening_status": "Need to be done"},
+                    {"release_id": 1002, "artist": "Band B", "title": "Album B", "flattening_status": "Done"},
+                ],
+                "flattening_queue": {
+                    "schema_version": "5.0.0",
+                    "protocol": "Test protocol",
+                    "need_to_be_done_release_ids": [1001],
+                    "done_release_ids": [1002],
+                    "unlisted_release_ids": [],
+                },
+            }
+
+            ok = pick_pressing_photo.inject_into_index_html(
+                html_path=tmp_html,
+                collection_data=synthetic_collection,
+                overrides_data={"1001": "assets/releases/1001/pressing.jpg"},
+            )
+            self.assertTrue(ok)
+
+            out = tmp_html.read_text(encoding="utf-8")
+            self.assertIn("<!-- BEGIN KRUNKED_COOKIE_VAULT_V1 -->", out)
+            self.assertIn("<!-- END KRUNKED_COOKIE_VAULT_V1 -->", out)
+            self.assertIn('<div id="kpi-total-records" class="text-lg sm:text-xl font-black text-white mt-0.5">2 LPs</div>', out)
+            self.assertIn('id="kpi-flattening" class="text-lg sm:text-xl font-black text-cyan-300 mt-0.5">1 Queued / 1 Done</div>', out)
+            self.assertIn('id="flatten-hidden-todo-ids" name="need_to_be_done_release_ids" value="1001"', out)
+            self.assertIn('id="flatten-hidden-done-ids" name="done_release_ids" value="1002"', out)
 
 
 if __name__ == "__main__":

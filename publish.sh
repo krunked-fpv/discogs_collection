@@ -32,7 +32,7 @@ if command -v gh >/dev/null 2>&1; then
   fi
 
   echo "[gh] Triggering Sync Discogs Collection & Deploy to GitHub Pages workflow..."
-  gh workflow run "sync-and-deploy.yml" --repo "$REPO_SLUG" || true
+  gh workflow run "static.yml" --repo "$REPO_SLUG" || true
   echo "[ok] Published! Live URL: https://krunked-fpv.github.io/discogs_collection/"
 else
   echo "[ok] Pushed to main! Enable GitHub Pages (Source: GitHub Actions) at:"
