@@ -39,14 +39,19 @@ def validate_collection(path: pathlib.Path) -> None:
         raise FileNotFoundError(f"Missing collection file: {path}")
     data = json.loads(path.read_text(encoding="utf-8"))
     uname = str(data.get("username") or "").strip()
-    assert uname, "Expected non-empty username in collection.json"
-    assert data.get("source_of_truth") == f"https://www.discogs.com/user/{uname}/collection"
+    if not uname:
+        raise ValueError("Expected non-empty username in collection.json")
+    expected_sot = f"https://www.discogs.com/user/{uname}/collection"
+    if data.get("source_of_truth") != expected_sot:
+        raise ValueError(f"Expected source_of_truth={expected_sot!r}, got {data.get('source_of_truth')!r}")
     records = data.get("records")
-    assert isinstance(records, list) and len(records) > 0, "Expected non-empty records list"
+    if not isinstance(records, list) or len(records) == 0:
+        raise ValueError("Expected non-empty records list")
 
     prof = data.get("profile") or {}
     col_val = prof.get("collection_value") or {}
-    assert col_val.get("median"), "Missing profile.collection_value.median"
+    if not col_val.get("median"):
+        raise ValueError("Missing profile.collection_value.median")
 
     delta_sig_count = 0
     total_tracks = 0

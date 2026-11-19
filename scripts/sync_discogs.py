@@ -322,7 +322,10 @@ class DiscogsClient:
     def download_bytes(self, url: str) -> bytes | None:
         if not url:
             return None
-        for use_token in ([self.token, ""] if self.token else [""]):
+        parsed_host = (urllib.parse.urlparse(url).hostname or "").lower()
+        send_auth = bool(self.token and parsed_host == "api.discogs.com")
+        token_attempts = [self.token, ""] if send_auth else [""]
+        for use_token in token_attempts:
             headers = {"User-Agent": self.user_agent}
             if use_token:
                 headers["Authorization"] = f"Discogs token={use_token}"
@@ -332,7 +335,6 @@ class DiscogsClient:
                     return resp.read()
             except urllib.error.HTTPError as exc:
                 if exc.code in (400, 401, 403) and use_token:
-                    self.token = ""
                     continue
                 self._log("warn", f"Could not download image {url}: {exc}")
                 return None
@@ -442,6 +444,7 @@ def fetch_full_collection(
 
     raw_items: list[dict[str, Any]] = []
     page = 1
+    pagination_complete = True
     while True:
         if ui:
             ui.update_throbber(phase=f"Fetching Discogs Folder 0 (Page {page})...")
@@ -452,6 +455,7 @@ def fetch_full_collection(
             )
         except Exception as exc:
             client._log("error", f"Failed fetching collection page {page} for '{username}': {exc}")
+            pagination_complete = False
             break
         releases_page = payload.get("releases") or []
         raw_items.extend(releases_page)
@@ -462,6 +466,26 @@ def fetch_full_collection(
         if page >= total_pages:
             break
         page += 1
+
+    if not pagination_complete:
+        client._log(
+            "error",
+            f"Aborting collection overwrite because Folder 0 pagination stopped early at page {page} "
+            f"(fetched {len(raw_items)} partial items); preserving existing local data.",
+        )
+        return (
+            {"username": username, "records": []},
+            {
+                "evaluated_rids": set(),
+                "new_records": [],
+                "resynced_records": [],
+                "removed_records": [],
+                "unchanged_count": 0,
+                "upgraded_pressing_files": 0,
+                "removed_false_pressing_files": 0,
+                "newly_detected_overrides": 0,
+            },
+        )
 
     # Deduplicate raw_items by release_id (preserving most recent instance) while tracking all seen release_ids
     seen_api_rids: set[int] = set()
@@ -544,7 +568,7 @@ def fetch_full_collection(
         if "notes" in item and isinstance(item.get("notes"), list):
             media_cond = "Near Mint (NM or M-)"
             sleeve_cond = "Near Mint (NM or M-)"
-            user_comments = ""
+            comment_parts: list[str] = []
             for note_obj in item["notes"]:
                 fid = int(note_obj.get("field_id") or 0)
                 val = str(note_obj.get("value") or "").strip()
@@ -553,7 +577,8 @@ def fetch_full_collection(
                 elif fid == 2 and val:
                     sleeve_cond = val
                 elif val:
-                    user_comments = val
+                    comment_parts.append(val)
+            user_comments = " | ".join(comment_parts)
         else:
             media_cond = str((existing_rec or {}).get("media_condition") or "Near Mint (NM or M-)")
             sleeve_cond = str((existing_rec or {}).get("sleeve_condition") or "Near Mint (NM or M-)")
@@ -663,8 +688,10 @@ def fetch_full_collection(
                             downloaded_bytes[u_str] = raw_b
                             downloaded_bytes[f"idx:{i_idx}"] = raw_b
 
-            if (rel_asset_dir / "img_0.jpg").exists() and not (rel_asset_dir / "cover.jpg").exists():
-                shutil.copyfile(rel_asset_dir / "img_0.jpg", rel_asset_dir / "cover.jpg")
+            src_cover = rel_asset_dir / "img_0.jpg"
+            dest_cover = rel_asset_dir / "cover.jpg"
+            if src_cover.exists() and (not dest_cover.exists() or dest_cover.read_bytes() != src_cover.read_bytes()):
+                shutil.copyfile(src_cover, dest_cover)
 
             img_selection = select_release_images_deterministic(
                 images=images,
@@ -822,7 +849,7 @@ def fetch_full_collection(
     if same_user:
         overrides_sorted = {
             k: overrides[k]
-            for k in sorted(overrides.keys(), key=lambda x: int(x) if str(x).isdigit() else str(x))
+            for k in sorted(overrides.keys(), key=lambda x: (0, int(x), "") if str(x).isdigit() else (1, 0, str(x)))
         }
         overrides_path.parent.mkdir(parents=True, exist_ok=True)
         overrides_path.write_text(json.dumps(overrides_sorted, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
@@ -895,8 +922,8 @@ def main() -> None:
     parser.add_argument("--flattening", default=str(REPO_ROOT / "data" / "flattening_queue.json"))
     parser.add_argument("--assets-dir", default=str(REPO_ROOT / "assets" / "releases"))
     parser.add_argument("--inject-html", default=str(REPO_ROOT / "index.html"))
-    parser.add_argument("--analyze-pixels", action="store_true", default=True)
-    parser.add_argument("--download-images", action="store_true", default=True)
+    parser.add_argument("--analyze-pixels", action=argparse.BooleanOptionalAction, default=True)
+    parser.add_argument("--download-images", action=argparse.BooleanOptionalAction, default=True)
     parser.add_argument(
         "--full",
         "-f",

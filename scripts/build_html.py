@@ -76,7 +76,7 @@ def build_index_html(
     if overrides_merged:
         overrides_sorted = {
             k: overrides_data[k]
-            for k in sorted(overrides_data.keys(), key=lambda x: int(x) if str(x).isdigit() else str(x))
+            for k in sorted(overrides_data.keys(), key=lambda x: (0, int(x), "") if str(x).isdigit() else (1, 0, str(x)))
         }
         overrides_path.parent.mkdir(parents=True, exist_ok=True)
         overrides_path.write_text(

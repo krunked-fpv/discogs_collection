@@ -56,6 +56,12 @@ jobs:
             python scripts/build_html.py
           fi
 
+      - name: Verify unit tests, collection schema, and modular templates
+        run: |
+          python -m unittest discover -s tests -p "test_*.py" -v
+          python -O scripts/validate_collection.py data/collection.json
+          python scripts/build_html.py --check
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 

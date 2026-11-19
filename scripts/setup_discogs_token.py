@@ -204,12 +204,12 @@ def main() -> None:
         os.environ["DISCOGS_TOKEN"] = token
         os.environ["DISCOGS_USERNAME"] = username
         print(f"\n[success] Clean token ({len(token)} chars) stored safely outside of your code!")
-        print("          You can now run `python .\\sync_discogs.py` immediately without restarting PowerShell.")
+        print("          You can now run `python .\\scripts\\sync_discogs.py` immediately without restarting PowerShell.")
     else:
         print("\n[info] No valid token entered. Clearing any corrupted DISCOGS_TOKEN from .env / Registry...")
         if os.name == "nt":
             set_windows_user_env_var("DISCOGS_TOKEN", "")
-        write_local_dotenv(REPO_ROOT, "")
+        write_local_dotenv(REPO_ROOT, "", username=username)
 
 
 if __name__ == "__main__":

@@ -26,33 +26,23 @@
       arenaStage: 0, // 0: Semi 1, 1: Semi 2, 2: Final, 3: Champion Crowned
       arenaChampion: null,
       userOverrides: {},       // release_id -> pinned pressing image URL
+      localOverrideEdits: {},  // release_id -> user pin object or null (explicit wax-shader clear)
       releaseGalleryCache: {}, // release_id -> array of Discogs image objects
       unsavedPinCount: 0,
       unsavedFlattenCount: 0,
       timerInterval: null,
       isCardFlipped: false,
       preferredService: 'ytm',
-      showVideoStage: true,
       autoAdvanceTracks: true,
-      activePlaybackEngine: 'yt',
-      ytApiReady: false,
-      ytApiLoading: false,
-      ytPlayer: null,
-      ytPlayerReady: false,
-      ytCurrentVideoId: '',
-      ytCurrentPlaylistId: '',
-      ytIsFullAlbumStream: false,
-      ytIsPlaylistMode: false,
-      ytFallbackCanvasMode: false,
-      ytProgressTimer: null,
-      ytPendingAction: null,
-      failedYtIds: new Set(),
+      activePlaybackEngine: 'html5',
+      userRequestedPlay: false,
       streamCache: {},
       previewUrlCache: {},
       activeStreamRid: null,
       cuedStreamRid: null,
       activeTrackIndex: -1,
       isPreviewPlaying: false,
+      isAudioMuted: false,
     };
 
     function safeGetStorage(key) {
@@ -63,6 +53,65 @@
     }
     function safeRemoveStorage(key) {
       try { localStorage.removeItem(key); } catch (e) {}
+    }
+
+    function escapeHtml(val) {
+      return String(val ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function safeExternalUrl(url, fallback = '#') {
+      const s = String(url || '').trim();
+      return /^https?:\/\//i.test(s) ? s : fallback;
+    }
+
+    function safeImageSrc(url) {
+      const s = String(url || '').trim();
+      if (!s) return '';
+      return /^(?:https?:\/\/|assets\/|\.\/assets\/)/i.test(s) ? s : '';
+    }
+
+    function safeCssColor(val, fallback = '#18181b') {
+      const s = String(val || '').trim();
+      return /^#[0-9a-fA-F]{3,8}$/.test(s) ? s : fallback;
+    }
+
+    function safeJsonForScript(obj, indent = 2) {
+      return JSON.stringify(obj, null, indent)
+        .replace(/<\//g, '<\\/')
+        .replace(/<!--/g, '\\u003c!--')
+        .replace(/\u2028/g, '\\u2028')
+        .replace(/\u2029/g, '\\u2029');
+    }
+
+    function copyTextToClipboard(text, successMsg) {
+      if (!text) return;
+      const fallbackCopy = () => {
+        try {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.setAttribute('readonly', '');
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          const ok = document.execCommand('copy');
+          document.body.removeChild(ta);
+          if (ok) showToast(successMsg);
+          else showToast('Copy blocked by browser — select and copy manually.');
+        } catch (err) {
+          showToast('Copy unavailable in this browser.');
+        }
+      };
+      if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+        navigator.clipboard.writeText(text).then(() => showToast(successMsg)).catch(fallbackCopy);
+      } else {
+        fallbackCopy();
+      }
     }
 
     function showToast(msg) {
@@ -331,11 +380,11 @@
       if (!matched.length) matched.push(['bla', '#18181b', '180g Black Wax', false]);
 
       let pattern = 'solid_color';
-      if (combined.includes('splatter') || combined.includes('starburst')) pattern = 'splatter';
-      else if (combined.includes('in clear') || combined.includes('color-in-color') || combined.includes('bone in')) pattern = 'color_in_color';
-      else if (combined.includes('gal') || combined.includes('smoke') || combined.includes('gho') || combined.includes('dus') || combined.includes('glitter')) pattern = 'galaxy';
-      else if (combined.includes('swirl') || combined.includes('marb') || combined.includes('hou')) pattern = 'marble';
-      else if (combined.includes('split') || combined.includes('smash') || combined.includes('twister') || combined.includes('neo')) pattern = 'split';
+      if (/splatter|starburst|blood pool/.test(combined)) pattern = 'splatter';
+      else if (/in clear|color-in-color|milky in clear|bone in|pink in|black in|red in|ripple/.test(combined)) pattern = 'color_in_color';
+      else if (/\b(gal|galaxy|nebula|dus|dust|dusk|gho|ghost|ghostly|smoke|smoky|smokey|cloudy|glitter|starlight)\b/.test(combined)) pattern = 'galaxy';
+      else if (/\b(swirl|marb|marble|hou|aci|acid)\b/.test(combined)) pattern = 'marble';
+      else if (/\b(split|smash|twister|flip|neo|neon|fun dip)\b/.test(combined)) pattern = 'split';
       else if (matched[0][1] === '#18181b') pattern = 'black';
       else if (matched[0][3]) pattern = 'translucent';
 
@@ -761,20 +810,33 @@
       let rawDoc = '<!DOCTYPE html>\n' + docClone.outerHTML;
       // v5.0: Clean HTML5 <audio> 30s preview deck (no YouTube iframe bridge)
 
-      const overridesJs = JSON.stringify(state.userOverrides, null, 2);
-      const collectionJs = JSON.stringify(window.__DISCOGS_COLLECTION__, null, 2);
+      const overridesJs = safeJsonForScript(state.userOverrides, 2);
+      const collectionJs = safeJsonForScript(window.__DISCOGS_COLLECTION__, 2);
+      const syncStampJs = safeJsonForScript(nowStamp, null);
       const replacementBlock = [
         '/* __DISCOGS_COLLECTION_DATA_' + 'START__ */',
         `    window.__DISCOGS_OVERRIDES__ = ${overridesJs};`,
         `    window.__DISCOGS_COLLECTION__ = ${collectionJs};`,
         '    try {',
-        `      var __pySyncStamp = ${JSON.stringify(nowStamp)};`,
+        `      var __pySyncStamp = ${syncStampJs};`,
         "      if (typeof localStorage !== 'undefined' && localStorage.getItem('__discogs_py_sync_stamp__') !== __pySyncStamp) {",
-        '        Object.keys(localStorage).forEach(function(k) {',
-        "          if (k.toLowerCase().indexOf('token') === -1 && k.indexOf('flattening_timer') === -1) {",
-        '            localStorage.removeItem(k);',
+        "        var __vaultStaleKeys = ['krunked_discogs_collection_v2_1', 'krunked_pressing_overrides_v2_2'];",
+        '        for (var __i = 0; __i < __vaultStaleKeys.length; __i++) {',
+        '          localStorage.removeItem(__vaultStaleKeys[__i]);',
+        '        }',
+        "        var __savedFqRaw = localStorage.getItem('krunked_flattening_state_v4');",
+        '        if (__savedFqRaw) {',
+        '          var __shouldDropFq = true;',
+        '          try {',
+        '            var __savedFq = JSON.parse(__savedFqRaw);',
+        '            if (__savedFq && __savedFq.updated_at_utc && __pySyncStamp && __savedFq.updated_at_utc > __pySyncStamp) {',
+        '              __shouldDropFq = false;',
+        '            }',
+        '          } catch (e2) {}',
+        '          if (__shouldDropFq) {',
+        "            localStorage.removeItem('krunked_flattening_state_v4');",
         '          }',
-        '        });',
+        '        }',
         "        localStorage.setItem('__discogs_py_sync_stamp__', __pySyncStamp);",
         '      }',
         '    } catch (e) {}',
@@ -803,22 +865,23 @@
     // falling back to the deterministic SVG wax shader ONLY when no pressing photo exists on Discogs.
     function renderDeterministicWaxSVG(rec, sizePx = 240, allowVerifiedPressingPhoto = true) {
       const wax = rec.wax_spec || {};
-      const c1 = wax.primary_color || '#18181b';
-      const c2 = wax.secondary_color || '#3f3f46';
-      const c3 = wax.accent_color || '#06b6d4';
+      const c1 = safeCssColor(wax.primary_color, '#18181b');
+      const c2 = safeCssColor(wax.secondary_color, '#3f3f46');
+      const c3 = safeCssColor(wax.accent_color, '#06b6d4');
       const pattern = wax.pattern || 'black';
       const seed = Math.abs(Number(wax.deterministic_seed || rec.release_id || 12345));
 
       if (allowVerifiedPressingPhoto) {
         const { primary, fallback } = getPressingPhotoUrls(rec);
-        const activeUrl = primary || fallback;
+        const activeUrl = safeImageSrc(primary) || safeImageSrc(fallback);
+        const safeFb = safeImageSrc(fallback);
         if (activeUrl) {
-          const onErrAttr = (fallback && fallback !== activeUrl)
-            ? `onerror="if(this.dataset.fb && this.src!==this.dataset.fb){this.src=this.dataset.fb;}" data-fb="${fallback}"`
+          const onErrAttr = (safeFb && safeFb !== activeUrl)
+            ? `onerror="if(this.dataset.fb && this.src!==this.dataset.fb){this.src=this.dataset.fb;}" data-fb="${escapeHtml(safeFb)}"`
             : '';
           return `
             <div class="relative w-full h-full rounded-full overflow-hidden shadow-2xl border-2 border-white/25 bg-slate-950 select-none">
-              <img src="${activeUrl}" ${onErrAttr} referrerpolicy="no-referrer" alt="${rec.artist} - ${rec.title} pressing" class="w-full h-full object-cover rounded-full" />
+              <img src="${escapeHtml(activeUrl)}" ${onErrAttr} referrerpolicy="no-referrer" alt="${escapeHtml(rec.artist)} - ${escapeHtml(rec.title)} pressing" class="w-full h-full object-cover rounded-full" />
               <div class="absolute inset-0 rounded-full ring-1 ring-inset ring-white/20 pointer-events-none" style="background: radial-gradient(circle, transparent 62%, rgba(0,0,0,0.22) 96%, rgba(255,255,255,0.16) 100%);"></div>
               <div class="absolute inset-[47.8%] rounded-full bg-[#05060a]/90 border border-white/35 pointer-events-none"></div>
             </div>
@@ -826,8 +889,8 @@
         }
       }
 
-      const centerArtUrl = getCenterLabelArtUrl(rec);
-      const uid = 'wax-' + rec.release_id + '-' + sizePx + '-' + Math.floor(Math.random() * 10000);
+      const centerArtUrl = safeImageSrc(getCenterLabelArtUrl(rec));
+      const uid = 'wax-' + String(rec.release_id || 0).replace(/[^a-zA-Z0-9_-]/g, '') + '-' + sizePx + '-' + Math.floor(Math.random() * 10000);
 
       let raysSvg = '';
       for (let i = 0; i < 28; i++) {
@@ -852,7 +915,7 @@
         `;
       }
 
-      const initials = (rec.artist || 'LP').split(/\s+/).map(w => w[0] || '').join('').slice(0, 3).toUpperCase();
+      const initials = escapeHtml((rec.artist || 'LP').split(/\s+/).map(w => w[0] || '').join('').slice(0, 3).toUpperCase());
 
       return `
         <div class="relative w-full h-full rounded-full overflow-hidden select-none">
@@ -880,14 +943,14 @@
               <!-- Center Label Ring -->
               <circle cx="50" cy="50" r="16.8" fill="#11131c" stroke="${c3}" stroke-width="0.7" />
               <text x="50" y="45" text-anchor="middle" fill="#e2e8f0" font-size="4.2" font-weight="800" font-family="Inter, sans-serif">${initials}</text>
-              <text x="50" y="57.5" text-anchor="middle" fill="#94a3b8" font-size="3.1" font-family="JetBrains Mono, monospace">${rec.year || ''}</text>
+              <text x="50" y="57.5" text-anchor="middle" fill="#94a3b8" font-size="3.1" font-family="JetBrains Mono, monospace">${escapeHtml(rec.year || '')}</text>
               <circle cx="50" cy="50" r="2.2" fill="#05060a" stroke="#cbd5e1" stroke-width="0.4" />
             </g>
             <circle cx="50" cy="50" r="48" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="0.8" />
           </svg>
           ${centerArtUrl ? `
             <div class="absolute inset-[33.5%] rounded-full overflow-hidden border border-white/30 shadow-inner pointer-events-none">
-              <img src="${centerArtUrl}" referrerpolicy="no-referrer" alt="" class="w-full h-full object-cover" />
+              <img src="${escapeHtml(centerArtUrl)}" referrerpolicy="no-referrer" alt="" class="w-full h-full object-cover" />
               <div class="absolute inset-[42%] rounded-full bg-[#07080c] border border-slate-300/70"></div>
             </div>
           ` : ''}
@@ -898,36 +961,37 @@
     // Render Real Discogs Album Jacket Cover
     function renderJacketSleeveHTML(rec) {
       const { primary, fallback } = getCoverUrls(rec);
-      const coverUrl = primary || fallback;
+      const coverUrl = safeImageSrc(primary) || safeImageSrc(fallback);
+      const safeFb = safeImageSrc(fallback);
       if (coverUrl) {
-        const onErrAttr = (fallback && fallback !== coverUrl)
-          ? `onerror="if(this.dataset.fb && this.src!==this.dataset.fb){this.src=this.dataset.fb;}" data-fb="${fallback}"`
+        const onErrAttr = (safeFb && safeFb !== coverUrl)
+          ? `onerror="if(this.dataset.fb && this.src!==this.dataset.fb){this.src=this.dataset.fb;}" data-fb="${escapeHtml(safeFb)}"`
           : '';
         return `
           <div class="relative w-full h-full rounded-xl overflow-hidden border border-white/20 bg-slate-950 shadow-xl select-none">
-            <img src="${coverUrl}" ${onErrAttr} referrerpolicy="no-referrer" alt="${rec.artist} - ${rec.title}" class="w-full h-full object-cover" />
+            <img src="${escapeHtml(coverUrl)}" ${onErrAttr} referrerpolicy="no-referrer" alt="${escapeHtml(rec.artist)} - ${escapeHtml(rec.title)}" class="w-full h-full object-cover" />
           </div>
         `;
       }
       const wax = rec.wax_spec || {};
-      const c1 = wax.primary_color || '#6d28d9';
-      const c2 = wax.secondary_color || '#06b6d4';
-      const c3 = wax.accent_color || '#f43f5e';
+      const c1 = safeCssColor(wax.primary_color, '#6d28d9');
+      const c2 = safeCssColor(wax.secondary_color, '#06b6d4');
+      const c3 = safeCssColor(wax.accent_color, '#f43f5e');
       return `
         <div class="relative w-full h-full rounded-xl overflow-hidden border border-white/15 p-3 flex flex-col justify-between select-none"
              style="background: linear-gradient(135deg, #0f121d 0%, ${c1}44 55%, ${c2}55 100%);">
           <div class="relative z-10 flex items-center justify-between gap-1">
-            <span class="px-1.5 py-0.5 rounded text-[9px] font-mono-tech uppercase bg-black/60 text-slate-300 border border-white/10 truncate max-w-[70%]">${rec.label}</span>
-            <span class="text-[9px] font-mono-tech text-slate-400">${rec.year || ''}</span>
+            <span class="px-1.5 py-0.5 rounded text-[9px] font-mono-tech uppercase bg-black/60 text-slate-300 border border-white/10 truncate max-w-[70%]">${escapeHtml(rec.label || '')}</span>
+            <span class="text-[9px] font-mono-tech text-slate-400">${escapeHtml(rec.year || '')}</span>
           </div>
           <div class="relative z-10 my-auto py-2">
             <div class="w-8 h-0.5 mb-1.5" style="background:${c3}"></div>
-            <div class="text-xs font-black uppercase tracking-tight text-white leading-snug line-clamp-2">${rec.artist}</div>
-            <div class="text-[11px] font-semibold text-slate-200 leading-tight mt-0.5 line-clamp-2">${rec.title}</div>
+            <div class="text-xs font-black uppercase tracking-tight text-white leading-snug line-clamp-2">${escapeHtml(rec.artist || '')}</div>
+            <div class="text-[11px] font-semibold text-slate-200 leading-tight mt-0.5 line-clamp-2">${escapeHtml(rec.title || '')}</div>
           </div>
           <div class="relative z-10 flex items-center justify-between text-[9px] font-mono-tech text-slate-300 border-t border-white/10 pt-1.5">
-            <span class="truncate max-w-[65%]">${rec.catno !== 'none' ? rec.catno : 'LP'}</span>
-            <span class="text-cyan-300">#${rec.release_id}</span>
+            <span class="truncate max-w-[65%]">${escapeHtml(rec.catno && rec.catno !== 'none' ? rec.catno : 'LP')}</span>
+            <span class="text-cyan-300">#${escapeHtml(rec.release_id)}</span>
           </div>
         </div>
       `;
@@ -1165,8 +1229,12 @@
       function stepRoulette() {
         step++;
         const progress = step / totalSteps;
-        // Pick next index in validIndices
-        const pickIdx = validIndices[Math.floor(Math.random() * validIndices.length)];
+        // Pick next index in validIndices (avoid repeating the exact same record back-to-back)
+        let pickIdx = validIndices[Math.floor(Math.random() * validIndices.length)];
+        if (validIndices.length > 1 && pickIdx === state.activeIndex) {
+          const altPool = validIndices.filter(i => i !== state.activeIndex);
+          pickIdx = altPool[Math.floor(Math.random() * altPool.length)];
+        }
         state.activeIndex = pickIdx;
 
         // Pitch scales down as reel decelerates
@@ -1251,7 +1319,9 @@
           toggleUvBlacklight(true);
         }
         state.showroomTickInterval = setInterval(() => {
-          if (!state.isSpinningRoulette) {
+          const modalEl = document.getElementById('modal-backdrop');
+          const modalOpen = Boolean(modalEl && !modalEl.classList.contains('hidden'));
+          if (!state.isSpinningRoulette && state.activeTab === 'showcase' && !modalOpen && !document.hidden) {
             state.showroomCountdown--;
             if (state.showroomCountdown <= 0) {
               state.showroomCountdown = 15;
@@ -1299,8 +1369,18 @@
 
     function initArenaBracket() {
       const pool = getArenaCandidatePool();
-      if (pool.length < 4) return;
-      const shuffled = pool.slice().sort(() => Math.random() - 0.5);
+      if (pool.length < 4) {
+        state.arenaBracket = [];
+        state.arenaWinners = [];
+        state.arenaStage = 0;
+        state.arenaChampion = null;
+        return;
+      }
+      const shuffled = pool.slice();
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
       state.arenaBracket = shuffled.slice(0, 4);
       state.arenaWinners = [];
       state.arenaStage = 0;
@@ -1324,7 +1404,7 @@
           <div class="flex flex-wrap items-center justify-between gap-2 text-xs mb-3">
             <div class="flex flex-wrap items-center gap-1.5">
               <span class="px-2.5 py-0.5 rounded-full font-mono-tech font-bold bg-purple-500/20 text-purple-200 border border-purple-400/35">
-                ${wax.variant_badge || '12" LP'}
+                ${escapeHtml(wax.variant_badge || '12" LP')}
               </span>
               ${flatPillHtml}
             </div>
@@ -1342,20 +1422,20 @@
             <span class="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-full text-[10px] font-mono-tech font-bold ${verifiedPhoto ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : 'bg-slate-900/90 text-cyan-300 border border-white/10'} z-30">
               ${verifiedPhoto ? '📸 Real Pressing Photo' : '⚙ Wax Shader'}
             </span>
-            <span class="absolute bottom-2 right-2.5 text-[10px] font-mono-tech text-slate-400">#${rec.release_id}</span>
+            <span class="absolute bottom-2 right-2.5 text-[10px] font-mono-tech text-slate-400">#${escapeHtml(rec.release_id)}</span>
           </div>
 
           <div class="mt-2">
-            <p class="text-xs font-extrabold uppercase tracking-wider text-cyan-400 truncate">${rec.artist} • ${rec.year || 'LP'}</p>
-            <h3 class="text-lg sm:text-xl font-black text-white leading-snug mt-0.5 line-clamp-1">${rec.title}</h3>
-            <p class="text-[11px] font-mono-tech text-slate-400 mt-1 truncate">${rec.label} (${rec.catno}) • ${rec.format_string}</p>
+            <p class="text-xs font-extrabold uppercase tracking-wider text-cyan-400 truncate">${escapeHtml(rec.artist)} • ${escapeHtml(rec.year || 'LP')}</p>
+            <h3 class="text-lg sm:text-xl font-black text-white leading-snug mt-0.5 line-clamp-1">${escapeHtml(rec.title)}</h3>
+            <p class="text-[11px] font-mono-tech text-slate-400 mt-1 truncate">${escapeHtml(rec.label || '')} (${escapeHtml(rec.catno || 'none')}) • ${escapeHtml(rec.format_string || '')}</p>
           </div>
         </div>
 
         <div class="mt-4 pt-3 border-t border-white/10 flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
           <button
             type="button"
-            data-arena-audition="${rec.release_id}"
+            data-arena-audition="${escapeHtml(rec.release_id)}"
             class="px-3 py-2.5 rounded-xl font-mono-tech font-bold text-xs bg-slate-900 hover:bg-slate-800 text-cyan-300 border border-cyan-500/30 transition flex items-center justify-center gap-1.5 shrink-0"
             title="Audition a 30-second studio track preview before voting"
           >
@@ -1363,10 +1443,10 @@
           </button>
           <button
             type="button"
-            data-arena-vote="${side}"
+            data-arena-vote="${escapeHtml(side)}"
             class="flex-1 py-2.5 px-4 rounded-xl font-black text-xs uppercase tracking-wider text-center bg-gradient-to-r ${side === 'left' ? 'from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950' : 'from-fuchsia-600 to-purple-600 hover:from-fuchsia-500 hover:to-purple-500 text-white'} shadow-lg group-hover:scale-[1.01] transition-transform"
           >
-            ${state.arenaStage === 3 ? '💿 Load Champion on Turntable Stage' : `⚡ Crown ${rec.artist} as Winner`}
+            ${state.arenaStage === 3 ? '💿 Load Champion on Turntable Stage' : `⚡ Crown ${escapeHtml(rec.artist)} as Winner`}
           </button>
         </div>
       `;
@@ -1380,7 +1460,15 @@
       if (!badgeEl || !leftEl || !rightEl || !summaryEl) return;
 
       if (!state.arenaBracket || state.arenaBracket.length < 4) {
-        initArenaBracket();
+        if (getArenaCandidatePool().length >= 4) {
+          initArenaBracket();
+          return;
+        }
+        badgeEl.textContent = 'Need 4+ LPs';
+        leftEl.innerHTML = '<div class="p-6 text-center text-xs text-slate-400">Add at least 4 records to launch a Variant Clash bracket.</div>';
+        rightEl.innerHTML = '<div class="p-6 text-center text-xs text-slate-400">Add at least 4 records to launch a Variant Clash bracket.</div>';
+        leftEl.onclick = null;
+        rightEl.onclick = null;
         return;
       }
 
@@ -1438,16 +1526,16 @@
       summaryEl.innerHTML = `
         <div class="bg-slate-950/90 p-3.5 rounded-2xl border border-white/10">
           <p class="text-[10px] font-mono-tech font-bold uppercase text-cyan-400">Semifinal 1 Winner</p>
-          <p class="font-extrabold text-white mt-1 truncate">${state.arenaWinners[0] ? state.arenaWinners[0].artist + ' — ' + state.arenaWinners[0].title : 'Battle in progress...'}</p>
+          <p class="font-extrabold text-white mt-1 truncate">${state.arenaWinners[0] ? escapeHtml(state.arenaWinners[0].artist + ' — ' + state.arenaWinners[0].title) : 'Battle in progress...'}</p>
         </div>
         <div class="bg-slate-950/90 p-3.5 rounded-2xl border border-white/10">
           <p class="text-[10px] font-mono-tech font-bold uppercase text-fuchsia-400">Semifinal 2 Winner</p>
-          <p class="font-extrabold text-white mt-1 truncate">${state.arenaWinners[1] ? state.arenaWinners[1].artist + ' — ' + state.arenaWinners[1].title : 'Waiting for Semifinal 2...'}</p>
+          <p class="font-extrabold text-white mt-1 truncate">${state.arenaWinners[1] ? escapeHtml(state.arenaWinners[1].artist + ' — ' + state.arenaWinners[1].title) : 'Waiting for Semifinal 2...'}</p>
         </div>
         <div class="bg-slate-950/90 p-3.5 rounded-2xl border ${state.arenaChampion ? 'border-amber-400/60 bg-amber-500/10' : 'border-amber-500/30'} flex items-center justify-between gap-2">
           <div class="min-w-0">
             <p class="text-[10px] font-mono-tech font-bold uppercase text-amber-300">👑 Tonight's Turntable Champion</p>
-            <p class="font-black text-amber-200 mt-1 truncate">${state.arenaChampion ? state.arenaChampion.artist + ' — ' + state.arenaChampion.title : 'Win 2 rounds to crown!'}</p>
+            <p class="font-black text-amber-200 mt-1 truncate">${state.arenaChampion ? escapeHtml(state.arenaChampion.artist + ' — ' + state.arenaChampion.title) : 'Win 2 rounds to crown!'}</p>
           </div>
           ${state.arenaChampion ? `
             <button type="button" id="btn-arena-load-champ" class="shrink-0 px-3 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs transition shadow-md">
@@ -1660,15 +1748,6 @@
     // - Zero autoplay on page load (plays ONLY when user clicks Play or a track row)
     // - Direct Album Links to YouTube Music (playlist?list=...) & Spotify
     // ============================================================================
-    state.userRequestedPlay = false;
-    state.activePlaybackEngine = 'html5';
-    state.previewUrlCache = {};
-
-    function ensureYouTubeIframeApiLoaded() {
-      return Promise.resolve(false);
-    }
-    function stopYtProgressPoller() {}
-    function startYtProgressPoller() {}
 
     function resolveAlbumStreamingData(rec) {
       const rid = Number(rec.release_id);
@@ -2099,16 +2178,17 @@
             for (const entityType of ['album', 'song']) {
               const itunesUrl = `https://itunes.apple.com/search?term=${encodeURIComponent(qVar)}&media=music&entity=${entityType}&limit=15`;
               let itunesData = null;
+              const ctrl = new AbortController();
+              const tid = setTimeout(() => ctrl.abort(), 3000);
               try {
-                const ctrl = new AbortController();
-                const tid = setTimeout(() => ctrl.abort(), 3000);
                 const resp = await fetch(itunesUrl, { signal: ctrl.signal });
-                clearTimeout(tid);
                 if (resp.ok) itunesData = await resp.json();
               } catch (e) {
                 try {
                   itunesData = await fetchJsonpUrl(itunesUrl, 'callback', 3200);
                 } catch (e2) {}
+              } finally {
+                clearTimeout(tid);
               }
               if (itunesData && itunesData.results) {
                 evaluateResults(itunesData.results);
@@ -2138,11 +2218,10 @@
                 `https://api.allorigins.win/raw?url=${encodeURIComponent(ytPlSearchUrl)}`,
                 `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(ytPlSearchUrl)}`,
               ]) {
+                const ctrl = new AbortController();
+                const tid = setTimeout(() => ctrl.abort(), 4500);
                 try {
-                  const ctrl = new AbortController();
-                  const tid = setTimeout(() => ctrl.abort(), 4500);
                   const r = await fetch(proxyUrl, { signal: ctrl.signal });
-                  clearTimeout(tid);
                   if (r.ok) {
                     const txt = await r.text();
                     const mOl = txt.match(/(OLAK5uy_[A-Za-z0-9_-]{10,})/);
@@ -2151,7 +2230,9 @@
                       break;
                     }
                   }
-                } catch (e) {}
+                } catch (e) {} finally {
+                  clearTimeout(tid);
+                }
               }
               if (olakId) break;
             }
@@ -2267,6 +2348,12 @@
       return score;
     }
 
+    function getPreviewCacheKey(rec, trackTitle) {
+      const cleanArt = cleanArtistName((rec && rec.artist) || '');
+      const cleanTrk = cleanSearchTitle(trackTitle || (rec && rec.title) || '');
+      return `prev30_v47_${normalizeTrackKey(cleanArt)}_${normalizeTrackKey(cleanTrk)}`;
+    }
+
     // Resolve a 30-second MP3/M4A preview URL from iTunes Search API (fetch + JSONP) or Deezer JSONP
     async function resolve30sTrackPreviewUrl(rec, trackTitle) {
       const cleanArt = cleanArtistName(rec.artist || '');
@@ -2275,13 +2362,13 @@
       const artKey = normalizeTrackKey(cleanArt);
       const trkKey = normalizeTrackKey(cleanTrk);
       const albKey = normalizeTrackKey(cleanAlb);
-      const cacheKey = `prev30_v47_${artKey}_${trkKey}`;
+      const cacheKey = getPreviewCacheKey(rec, trackTitle);
 
       if (state.previewUrlCache[cacheKey]) {
         return state.previewUrlCache[cacheKey];
       }
       const saved = safeGetStorage(cacheKey);
-      if (saved && saved.startsWith('http')) {
+      if (saved && saved.startsWith('http') && !/dzcdn\.net/i.test(saved)) {
         state.previewUrlCache[cacheKey] = saved;
         return saved;
       }
@@ -2314,11 +2401,10 @@
       // 1. iTunes Search API via fetch (fast) with JSONP fallback (for file://)
       for (const q of queries) {
         const baseUrl = `https://itunes.apple.com/search?term=${encodeURIComponent(q)}&media=music&entity=song&limit=20`;
+        const ctrl = new AbortController();
+        const tid = setTimeout(() => ctrl.abort(), 2800);
         try {
-          const ctrl = new AbortController();
-          const tid = setTimeout(() => ctrl.abort(), 2800);
           const resp = await fetch(baseUrl, { signal: ctrl.signal });
-          clearTimeout(tid);
           if (resp.ok) {
             const data = await resp.json();
             const best = pickBestFromItunesResults(data && data.results);
@@ -2338,10 +2424,12 @@
               return best;
             }
           } catch (e2) {}
+        } finally {
+          clearTimeout(tid);
         }
       }
 
-      // 2. Deezer JSONP API fallback
+      // 2. Deezer JSONP API fallback (keep in-memory only because dzcdn.net preview tokens expire quickly)
       try {
         const dzUrl = `https://api.deezer.com/search?q=${encodeURIComponent(cleanArt + ' ' + cleanTrk)}&output=jsonp`;
         const dzData = await fetchJsonpUrl(dzUrl, 'callback', 3200);
@@ -2365,7 +2453,6 @@
         }
         if (bestDz) {
           state.previewUrlCache[cacheKey] = bestDz;
-          safeSetStorage(cacheKey, bestDz);
           return bestDz;
         }
       } catch (e) {}
@@ -2445,8 +2532,8 @@
       if (!listEl) return;
 
       const isThisRecordActive = state.activeStreamRid === rid;
-      const albumYtmUrl = getYouTubeMusicDeepLink(rec, null, streamData);
-      const albumSpotifyUrl = getSpotifyAlbumDeepLink(rec);
+      const albumYtmUrl = escapeHtml(safeExternalUrl(getYouTubeMusicDeepLink(rec, null, streamData), 'https://music.youtube.com'));
+      const albumSpotifyUrl = escapeHtml(safeExternalUrl(getSpotifyAlbumDeepLink(rec), 'https://open.spotify.com'));
 
       listEl.innerHTML = tracks.map((t, idx) => {
         const isCurrent = isThisRecordActive && state.activeTrackIndex === idx;
@@ -2477,10 +2564,10 @@
               </div>
               <div class="min-w-0 flex-1">
                 <div class="text-xs font-bold truncate ${isCurrent ? 'text-rose-200' : 'text-white group-hover:text-rose-200'}">
-                  ${t.title}
+                  ${escapeHtml(t.title)}
                 </div>
                 <div class="text-[10px] text-slate-400 truncate">
-                  ${subMeta}
+                  ${escapeHtml(subMeta)}
                 </div>
               </div>
             </div>
@@ -2513,7 +2600,7 @@
               >
                 SP↗
               </a>
-              <span class="text-[11px] font-mono-tech text-slate-400 w-9 text-right">${t.duration || '3:45'}</span>
+              <span class="text-[11px] font-mono-tech text-slate-400 w-9 text-right">${escapeHtml(t.duration || '3:45')}</span>
             </div>
           </div>
         `;
@@ -2631,6 +2718,11 @@
         paintStreamingTracklistUI(rec, streamData, false);
       } catch (err) {
         state.isPreviewPlaying = false;
+        if (!err || err.name !== 'NotAllowedError') {
+          const cacheKey = getPreviewCacheKey(rec, track.title);
+          delete state.previewUrlCache[cacheKey];
+          safeRemoveStorage(cacheKey);
+        }
         paintStreamingTracklistUI(rec, streamData, false);
         if (nowLabel) {
           nowLabel.textContent = `Click ▶ again to start "${track.title}" (or open YT Music / Spotify ↗)`;
@@ -2722,80 +2814,84 @@
       const activePressingUrl = activePrimary || activeFallback;
 
       if (!classified.length) {
-        const coverUrl = getRealCoverUrl(rec);
+        const coverUrl = safeImageSrc(getRealCoverUrl(rec));
         if (coverUrl) {
           stripEl.innerHTML = `
             <div class="flex items-center gap-2">
-              <img src="${coverUrl}" referrerpolicy="no-referrer" alt="Cover" class="w-12 h-12 rounded-lg object-cover border border-cyan-400" />
-              <span class="text-[11px] text-slate-400">Primary cover loaded. Click <strong>↻ Refresh Gallery</strong> to fetch secondary images from Discogs for #${rec.release_id}.</span>
+              <img src="${escapeHtml(coverUrl)}" referrerpolicy="no-referrer" alt="Cover" class="w-12 h-12 rounded-lg object-cover border border-cyan-400" />
+              <span class="text-[11px] text-slate-400">Primary cover loaded. Click <strong>↻ Refresh Gallery</strong> to fetch secondary images from Discogs for #${escapeHtml(rec.release_id)}.</span>
             </div>
           `;
         } else {
           stripEl.innerHTML = `<span class="text-[11px] text-slate-400">Click <strong>↻ Refresh Gallery</strong> to load Discogs release photos.</span>`;
         }
-        expEl.textContent = `Format parsed: ${rec.wax_spec.variant_badge}`;
+        expEl.textContent = `Format parsed: ${(rec.wax_spec && rec.wax_spec.variant_badge) || '12" LP'}`;
         return;
       }
 
       const selIdx = (rec.images && typeof rec.images.selected_index === 'number') ? rec.images.selected_index : -1;
 
       stripEl.innerHTML = classified.map((img, i) => {
-        const remoteUri = img.uri || img.uri150 || '';
-        const thumbSrc = img.local_uri || img.uri150 || remoteUri;
-        const pinTarget = img.local_uri || remoteUri || '';
+        const remoteUri = safeImageSrc(img.uri || img.uri150 || '');
+        const localUri = safeImageSrc(img.local_uri || '');
+        const thumbSrc = localUri || safeImageSrc(img.uri150 || '') || remoteUri;
+        const pinTarget = localUri || remoteUri || '';
         const isPinned = Boolean(
           activePressingUrl && (
-            activePressingUrl === remoteUri ||
-            activePressingUrl === img.local_uri ||
+            activePressingUrl === (img.uri || img.uri150 || '') ||
+            activePressingUrl === (img.local_uri || '') ||
             (!state.userOverrides[rid] && i === selIdx && rec.images && rec.images.has_pressing_photo)
           )
         );
         const roleLabel = i === 0 ? 'Cover [0]' : (isPinned || img.role === 'pressing_disc' ? `Pressing [${i}]` : `Img [${i}]`);
-        const onErrAttr = (img.local_uri && remoteUri)
-          ? `onerror="if(this.dataset.fb && this.src!==this.dataset.fb){this.src=this.dataset.fb;}" data-fb="${img.uri150 || remoteUri}"`
+        const fbSrc = safeImageSrc(img.uri150 || remoteUri);
+        const onErrAttr = (localUri && fbSrc)
+          ? `onerror="if(this.dataset.fb && this.src!==this.dataset.fb){this.src=this.dataset.fb;}" data-fb="${escapeHtml(fbSrc)}"`
           : '';
         return `
           <button
             type="button"
-            data-pin-image-url="${pinTarget}"
+            data-pin-image-url="${escapeHtml(pinTarget)}"
             data-pin-image-index="${i}"
-            data-pin-release-id="${rec.release_id}"
+            data-pin-release-id="${escapeHtml(rec.release_id)}"
             class="shrink-0 group relative rounded-lg overflow-hidden border-2 ${isPinned ? 'border-emerald-400 ring-2 ring-emerald-400/30' : 'border-white/15 hover:border-cyan-400'} transition"
-            title="Click to pin image [${i}] as the vinyl pressing photo for ${rec.title}"
+            title="Click to pin image [${i}] as the vinyl pressing photo for ${escapeHtml(rec.title)}"
           >
-            <img src="${thumbSrc}" ${onErrAttr} referrerpolicy="no-referrer" alt="${roleLabel}" class="w-14 h-14 object-cover bg-slate-900" />
+            <img src="${escapeHtml(thumbSrc)}" ${onErrAttr} referrerpolicy="no-referrer" alt="${escapeHtml(roleLabel)}" class="w-14 h-14 object-cover bg-slate-900" />
             <span class="absolute bottom-0 inset-x-0 bg-black/80 text-[9px] font-mono-tech text-center py-0.5 ${isPinned ? 'text-emerald-300 font-bold' : 'text-slate-300'}">
               ${isPinned ? `✓ Photo [${i}]` : roleLabel}
             </span>
           </button>
         `;
       }).join('') + (activePressingUrl ? `
-        <button type="button" data-clear-pin="${rec.release_id}" class="shrink-0 px-2.5 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-[10px] font-mono-tech text-slate-300 border border-white/10" title="Switch to procedural SVG wax ring">
+        <button type="button" data-clear-pin="${escapeHtml(rec.release_id)}" class="shrink-0 px-2.5 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-[10px] font-mono-tech text-slate-300 border border-white/10" title="Switch to procedural SVG wax ring">
           Use Wax Shader
         </button>
       ` : '');
 
+      const badgeText = escapeHtml((rec.wax_spec && rec.wax_spec.variant_badge) || '12" LP');
       expEl.innerHTML = activePressingUrl
-        ? `Defaulted wax ring to verified pressing photo for <strong>#${rec.release_id}</strong> (${classified.length} images in release gallery — click any thumbnail above to change).`
-        : `No separate vinyl disc photo uploaded on Discogs for <strong>#${rec.release_id}</strong> (${classified.length} sleeve image${classified.length === 1 ? '' : 's'}) — displaying <strong>${rec.wax_spec.variant_badge}</strong> wax ring.`;
+        ? `Defaulted wax ring to verified pressing photo for <strong>#${escapeHtml(rec.release_id)}</strong> (${classified.length} images in release gallery — click any thumbnail above to change).`
+        : `No separate vinyl disc photo uploaded on Discogs for <strong>#${escapeHtml(rec.release_id)}</strong> (${classified.length} sleeve image${classified.length === 1 ? '' : 's'}) — displaying <strong>${badgeText}</strong> wax ring.`;
     }
 
     // Filter & Sort Records
     function applyFiltersAndSort() {
       const q = state.searchQuery.trim().toLowerCase();
       let list = state.records.filter(rec => {
+        const wax = rec.wax_spec || {};
         if (q) {
-          const hay = `${rec.artist} ${rec.title} ${rec.label} ${rec.catno} ${rec.format_string} ${rec.wax_spec.variant_badge} ${rec.comments} ${rec.flattening_status || ''}`.toLowerCase();
+          const hay = `${rec.artist || ''} ${rec.title || ''} ${rec.label || ''} ${rec.catno || ''} ${rec.format_string || ''} ${wax.variant_badge || ''} ${rec.comments || ''} ${rec.flattening_status || ''}`.toLowerCase();
           if (!hay.includes(q)) return false;
         }
         if (state.filter === 'pressing_photo') return Boolean(getVerifiedPressingPhotoUrl(rec));
         if (state.filter === 'flattening_todo') return (rec.flattening_status || DEFAULT_FLATTENING_STATUS) === 'Need to be done';
         if (state.filter === 'flattening_done') return rec.flattening_status === 'Done';
-        if (state.filter === 'splatter') return ['splatter', 'color_in_color'].includes(rec.wax_spec.pattern);
-        if (state.filter === 'galaxy_marble') return ['galaxy', 'marble', 'split'].includes(rec.wax_spec.pattern);
-        if (state.filter === 'translucent') return Boolean(rec.wax_spec.translucent);
-        if (state.filter === 'double_lp') return Boolean(rec.wax_spec.is_double_lp);
-        if (state.filter === 'black_wax') return rec.wax_spec.pattern === 'black';
+        if (state.filter === 'splatter') return ['splatter', 'color_in_color'].includes(wax.pattern);
+        if (state.filter === 'galaxy_marble') return ['galaxy', 'marble', 'split'].includes(wax.pattern);
+        if (state.filter === 'translucent') return Boolean(wax.translucent);
+        if (state.filter === 'double_lp') return Boolean(wax.is_double_lp);
+        if (state.filter === 'black_wax') return wax.pattern === 'black';
         return true;
       });
 
@@ -2964,6 +3060,8 @@
           `;
         }
 
+        const safeDiscogsHref = escapeHtml(safeExternalUrl(rec.discogs_url, `https://www.discogs.com/release/${rec.release_id}`));
+        const waxBadge = (rec.wax_spec && rec.wax_spec.variant_badge) || '12" LP';
         return `
           <article
             data-card-index="${idx}"
@@ -2974,24 +3072,24 @@
               <div class="p-3.5 space-y-2">
                 <div class="flex items-center justify-between gap-1 flex-wrap">
                   <span class="px-2 py-0.5 rounded-md text-[10px] font-mono-tech font-medium bg-white/5 text-purple-300 border border-white/10 truncate max-w-[74%]">
-                    ${rec.wax_spec.variant_badge}
+                    ${escapeHtml(waxBadge)}
                   </span>
                   <span class="text-xs font-mono-tech font-bold text-emerald-400">$${Number(rec.estimated_value_usd || 35).toFixed(2)}</span>
                 </div>
                 <div>
-                  <h3 class="text-sm font-extrabold text-white group-hover:text-cyan-300 transition line-clamp-1">${rec.title}</h3>
-                  <p class="text-xs font-semibold text-slate-400 line-clamp-1">${rec.artist} • <span class="text-slate-500">${rec.year || 'LP'}</span></p>
+                  <h3 class="text-sm font-extrabold text-white group-hover:text-cyan-300 transition line-clamp-1">${escapeHtml(rec.title)}</h3>
+                  <p class="text-xs font-semibold text-slate-400 line-clamp-1">${escapeHtml(rec.artist)} • <span class="text-slate-500">${escapeHtml(rec.year || 'LP')}</span></p>
                 </div>
                 <div class="text-[11px] font-mono-tech text-slate-400 flex items-center justify-between pt-1 border-t border-white/5">
-                  <span class="truncate max-w-[68%]">${rec.label} (${rec.catno})</span>
-                  <span>${(rec.media_condition || 'NM').split('(')[0].trim()}</span>
+                  <span class="truncate max-w-[68%]">${escapeHtml(rec.label || '')} (${escapeHtml(rec.catno || 'none')})</span>
+                  <span>${escapeHtml((rec.media_condition || 'NM').split('(')[0].trim())}</span>
                 </div>
               </div>
             </div>
             <div class="px-3.5 pb-3 flex items-center justify-between gap-2">
-              <span class="text-[10px] font-mono-tech text-slate-500">#${rec.release_id}</span>
+              <span class="text-[10px] font-mono-tech text-slate-500">#${escapeHtml(rec.release_id)}</span>
               <a
-                href="${rec.discogs_url || ('https://www.discogs.com/release/' + rec.release_id)}"
+                href="${safeDiscogsHref}"
                 target="_blank"
                 rel="noopener noreferrer"
                 data-stop-prop="true"
@@ -3059,7 +3157,7 @@
       if (timerSelect) {
         const prevVal = timerSelect.value;
         timerSelect.innerHTML = `<option value="">Select LP in Pouch (${todo.length} Queued)...</option>` +
-          todo.map(r => `<option value="${r.release_id}">${r.artist} — ${r.title}</option>`).join('');
+          todo.map(r => `<option value="${escapeHtml(r.release_id)}">${escapeHtml(r.artist)} — ${escapeHtml(r.title)}</option>`).join('');
         if (prevVal && todo.some(r => String(r.release_id) === String(prevVal))) {
           timerSelect.value = prevVal;
         }
@@ -3067,31 +3165,35 @@
 
       const doneQ = state.doneSearchQuery.trim().toLowerCase();
       const filteredDone = doneQ
-        ? allDone.filter(r => `${r.artist} ${r.title} ${r.wax_spec.variant_badge}`.toLowerCase().includes(doneQ))
+        ? allDone.filter(r => `${r.artist || ''} ${r.title || ''} ${(r.wax_spec && r.wax_spec.variant_badge) || ''}`.toLowerCase().includes(doneQ))
         : allDone;
 
-      const renderRow = (r, isTodo) => `
+      const renderRow = (r, isTodo) => {
+        const safeHref = escapeHtml(safeExternalUrl(r.discogs_url, `https://www.discogs.com/release/${r.release_id}`));
+        const badge = (r.wax_spec && r.wax_spec.variant_badge) || '12" LP';
+        return `
         <div class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-900/90 border border-white/10 hover:border-cyan-500/30 transition">
-          <div class="flex items-center gap-3 min-w-0 cursor-pointer" data-load-turntable="${r.release_id}" title="Click to load onto Turntable Stage">
+          <div class="flex items-center gap-3 min-w-0 cursor-pointer" data-load-turntable="${escapeHtml(r.release_id)}" title="Click to load onto Turntable Stage">
             <div class="w-11 h-11 rounded-full shrink-0 overflow-hidden shadow">
               ${renderDeterministicWaxSVG(r, 44, true)}
             </div>
             <div class="min-w-0">
-              <div class="text-xs font-bold text-white hover:text-cyan-300 truncate">${r.artist} — ${r.title}</div>
-              <div class="text-[11px] font-mono-tech text-slate-400 truncate">${r.wax_spec.variant_badge} • <span class="text-emerald-400">$${Number(r.estimated_value_usd || 35).toFixed(2)}</span></div>
+              <div class="text-xs font-bold text-white hover:text-cyan-300 truncate">${escapeHtml(r.artist)} — ${escapeHtml(r.title)}</div>
+              <div class="text-[11px] font-mono-tech text-slate-400 truncate">${escapeHtml(badge)} • <span class="text-emerald-400">$${Number(r.estimated_value_usd || 35).toFixed(2)}</span></div>
             </div>
           </div>
           <div class="flex items-center gap-1.5 shrink-0">
-            <button type="button" data-set-flatten="${r.release_id}" data-target-status="${isTodo ? 'Done' : 'Need to be done'}" class="px-2.5 py-1 rounded-lg text-[11px] font-mono-tech font-semibold ${isTodo ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500/30' : 'bg-amber-500/15 text-amber-300 border border-amber-500/30 hover:bg-amber-500/25'}" title="${isTodo ? 'Mark flattened or confirm already flat upon arrival (Done)' : 'Toggle back onto Flattening Queue (Need to be done)'}">
+            <button type="button" data-set-flatten="${escapeHtml(r.release_id)}" data-target-status="${isTodo ? 'Done' : 'Need to be done'}" class="px-2.5 py-1 rounded-lg text-[11px] font-mono-tech font-semibold ${isTodo ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500/30' : 'bg-amber-500/15 text-amber-300 border border-amber-500/30 hover:bg-amber-500/25'}" title="${isTodo ? 'Mark flattened or confirm already flat upon arrival (Done)' : 'Toggle back onto Flattening Queue (Need to be done)'}">
               ${isTodo ? '✓ Flat / Done' : '🔥 Re-Queue'}
             </button>
-            <button type="button" data-set-flatten="${r.release_id}" data-target-status="Not Listed" class="px-2 py-1 rounded-lg text-[11px] font-mono-tech bg-slate-800 hover:bg-rose-500/20 text-slate-400 hover:text-rose-300 border border-white/10" title="Exclude from Flattening Queue (set to Not Listed)">
+            <button type="button" data-set-flatten="${escapeHtml(r.release_id)}" data-target-status="Not Listed" class="px-2 py-1 rounded-lg text-[11px] font-mono-tech bg-slate-800 hover:bg-rose-500/20 text-slate-400 hover:text-rose-300 border border-white/10" title="Exclude from Flattening Queue (set to Not Listed)">
               ✕
             </button>
-            <a href="${r.discogs_url || ('https://www.discogs.com/release/' + r.release_id)}" target="_blank" rel="noopener noreferrer" class="text-xs font-mono-tech text-cyan-400 hover:underline px-1">↗</a>
+            <a href="${safeHref}" target="_blank" rel="noopener noreferrer" class="text-xs font-mono-tech text-cyan-400 hover:underline px-1">↗</a>
           </div>
         </div>
       `;
+      };
 
       document.getElementById('flatten-todo-list').innerHTML = todo.map(r => renderRow(r, true)).join('') ||
         '<div class="p-4 rounded-xl bg-slate-900/50 border border-white/5 text-xs text-slate-400 text-center">Queue is clear! Every new Discogs addition will automatically appear here for arrival inspection.</div>';
@@ -3103,25 +3205,25 @@
       if (benchEl) {
         const bq = state.benchSearchQuery.trim().toLowerCase();
         const benchPool = bq
-          ? allUnlisted.filter(r => `${r.artist} ${r.title} ${r.label} ${r.catno} ${r.wax_spec.variant_badge} ${r.release_id}`.toLowerCase().includes(bq))
+          ? allUnlisted.filter(r => `${r.artist || ''} ${r.title || ''} ${r.label || ''} ${r.catno || ''} ${(r.wax_spec && r.wax_spec.variant_badge) || ''} ${r.release_id || ''}`.toLowerCase().includes(bq))
           : allUnlisted.slice(0, 18);
 
         benchEl.innerHTML = benchPool.map(r => `
           <div class="flex items-center justify-between gap-2 p-2.5 rounded-xl bg-slate-900/80 border border-white/10 hover:border-cyan-500/30 transition">
-            <div class="flex items-center gap-2.5 min-w-0 cursor-pointer" data-load-turntable="${r.release_id}" title="Click to inspect on Turntable Stage">
+            <div class="flex items-center gap-2.5 min-w-0 cursor-pointer" data-load-turntable="${escapeHtml(r.release_id)}" title="Click to inspect on Turntable Stage">
               <div class="w-9 h-9 rounded-full shrink-0 overflow-hidden shadow">
                 ${renderDeterministicWaxSVG(r, 36, true)}
               </div>
               <div class="min-w-0">
-                <div class="text-xs font-bold text-white truncate">${r.artist} — ${r.title}</div>
-                <div class="text-[10px] font-mono-tech text-slate-400 truncate">#${r.release_id} • ${r.wax_spec.variant_badge}</div>
+                <div class="text-xs font-bold text-white truncate">${escapeHtml(r.artist)} — ${escapeHtml(r.title)}</div>
+                <div class="text-[10px] font-mono-tech text-slate-400 truncate">#${escapeHtml(r.release_id)} • ${escapeHtml((r.wax_spec && r.wax_spec.variant_badge) || '12" LP')}</div>
               </div>
             </div>
             <div class="flex items-center gap-1 shrink-0">
-              <button type="button" data-set-flatten="${r.release_id}" data-target-status="Need to be done" class="px-2 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 text-[10px] font-mono-tech font-semibold" title="Return LP to Flattening Queue">
+              <button type="button" data-set-flatten="${escapeHtml(r.release_id)}" data-target-status="Need to be done" class="px-2 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 text-[10px] font-mono-tech font-semibold" title="Return LP to Flattening Queue">
                 + 🔥 Queue
               </button>
-              <button type="button" data-set-flatten="${r.release_id}" data-target-status="Done" class="px-2 py-1 rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 text-[10px] font-mono-tech font-semibold" title="Mark LP as Flat &amp; Verified">
+              <button type="button" data-set-flatten="${escapeHtml(r.release_id)}" data-target-status="Done" class="px-2 py-1 rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 text-[10px] font-mono-tech font-semibold" title="Mark LP as Flat &amp; Verified">
                 + ✓ Done
               </button>
             </div>
@@ -3147,9 +3249,8 @@
 
     function playTimerChime() {
       try {
-        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-        if (!AudioContextClass) return;
-        const ctx = new AudioContextClass();
+        const ctx = ensureSfxCtx();
+        if (!ctx) return;
         [523.25, 659.25, 783.99, 1046.5].forEach((freq, i) => {
           const osc = ctx.createOscillator();
           const gain = ctx.createGain();
@@ -3267,27 +3368,91 @@
       btn.className = 'px-3 py-1.5 rounded-lg text-xs font-mono-tech font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 transition';
     }
 
+    function applyLocalOverrideEditsToRecords() {
+      for (const [rid, editVal] of Object.entries(state.localOverrideEdits || {})) {
+        const rec = state.records.find(r => String(r.release_id) === String(rid));
+        if (editVal === null) {
+          delete state.userOverrides[rid];
+          if (rec && rec.images) {
+            rec.images.pressing_image_url = '';
+            rec.images.local_pressing_image_url = '';
+            rec.images.has_pressing_photo = false;
+          }
+        } else if (editVal) {
+          state.userOverrides[rid] = editVal;
+          const url = typeof editVal === 'object' ? (editVal.uri || editVal.local_uri || '') : String(editVal);
+          if (rec && rec.images && url) {
+            rec.images.pressing_image_url = url;
+            rec.images.has_pressing_photo = true;
+            if (typeof editVal === 'object' && typeof editVal.pressing_image_index === 'number') {
+              rec.images.selected_index = editVal.pressing_image_index;
+            }
+            const matched = (rec.images.classified_images || []).find(
+              im => (typeof editVal === 'object' && im.index === editVal.pressing_image_index) || im.uri === url || im.local_uri === url
+            );
+            rec.images.local_pressing_image_url = (matched && matched.local_uri) ? matched.local_uri : url;
+          }
+        }
+      }
+    }
+
     async function loadExternalJsonIfNewer() {
       try {
-        const [ovResp, colResp, fqResp] = await Promise.all([
+        const [ovResp, manifestResp, fqResp] = await Promise.all([
           fetch('./data/overrides.json', { cache: 'no-store' }).catch(() => null),
-          fetch('./data/collection.json', { cache: 'no-store' }).catch(() => null),
+          fetch('./data/sync_manifest.json', { cache: 'no-store' }).catch(() => null),
           fetch('./data/flattening_queue.json', { cache: 'no-store' }).catch(() => null),
         ]);
         let changed = false;
         if (ovResp && ovResp.ok) {
           const extOv = await ovResp.json();
           if (extOv && typeof extOv === 'object') {
-            state.userOverrides = { ...extOv, ...state.userOverrides };
-            changed = true;
+            let ovChanged = false;
+            for (const [k, v] of Object.entries(extOv)) {
+              if (Object.prototype.hasOwnProperty.call(state.localOverrideEdits, k)) continue;
+              if (JSON.stringify(state.userOverrides[k]) !== JSON.stringify(v)) {
+                state.userOverrides[k] = v;
+                ovChanged = true;
+              }
+            }
+            if (ovChanged) changed = true;
           }
         }
+
+        const curCol = window.__DISCOGS_COLLECTION__ || {};
+        const curPressings = state.records.filter(r => r.images && r.images.has_pressing_photo).length;
+        let shouldFetchCollection = true;
+        if (manifestResp && manifestResp.ok) {
+          try {
+            const manifest = await manifestResp.json();
+            if (manifest && typeof manifest === 'object' && manifest.synced_at_utc) {
+              const manNewerTs = Boolean(curCol.synced_at_utc && manifest.synced_at_utc > curCol.synced_at_utc);
+              const manRecords = Number(manifest.record_count || 0);
+              const manPressings = Number(manifest.pressing_photos_detected || 0);
+              shouldFetchCollection = (
+                manNewerTs ||
+                manRecords > state.records.length ||
+                (manRecords >= state.records.length && manPressings > curPressings)
+              );
+            }
+          } catch (e) {}
+        }
+
+        const colResp = shouldFetchCollection
+          ? await fetch('./data/collection.json', { cache: 'no-store' }).catch(() => null)
+          : null;
         if (colResp && colResp.ok) {
           const extCol = await colResp.json();
-          if (extCol && Array.isArray(extCol.records) && extCol.records.length >= state.records.length) {
+          const extNewerTs = Boolean(
+            extCol && extCol.synced_at_utc && curCol.synced_at_utc && extCol.synced_at_utc > curCol.synced_at_utc
+          );
+          if (extCol && Array.isArray(extCol.records) && extCol.records.length > 0) {
             const extPressings = extCol.records.filter(r => r.images && r.images.has_pressing_photo).length;
-            const curPressings = state.records.filter(r => r.images && r.images.has_pressing_photo).length;
-            if (extCol.records.length > state.records.length || extPressings > curPressings) {
+            if (
+              extNewerTs ||
+              extCol.records.length > state.records.length ||
+              (extCol.records.length >= state.records.length && extPressings > curPressings)
+            ) {
               extCol.records.forEach(r => {
                 const olak = getVerifiedOlakPlaylistId(r, null);
                 if (olak) r.ytPlaylistId = olak;
@@ -3304,6 +3469,8 @@
               }
               window.__DISCOGS_COLLECTION__ = extCol;
               state.records = extCol.records;
+              state.streamCache = {};
+              applyLocalOverrideEditsToRecords();
               normalizeDefaultFlatteningStatuses();
               changed = true;
             }
@@ -3370,21 +3537,49 @@
 
       safeRemoveStorage('krunked_discogs_collection_v2_1');
 
-      // 1. Initialize overrides from injected window.__DISCOGS_OVERRIDES__ + any user browser overrides
+      // 1. Initialize overrides from injected window.__DISCOGS_OVERRIDES__ + compact user delta edits
       const baseOverrides = (window.__DISCOGS_OVERRIDES__ && typeof window.__DISCOGS_OVERRIDES__ === 'object')
         ? window.__DISCOGS_OVERRIDES__
         : {};
       let localOverrides = {};
       const savedOverrides = safeGetStorage('krunked_pressing_overrides_v2_2');
       if (savedOverrides) {
-        try { localOverrides = JSON.parse(savedOverrides) || {}; } catch (e) {}
+        try {
+          const parsedOv = JSON.parse(savedOverrides);
+          if (parsedOv && typeof parsedOv === 'object') {
+            localOverrides = parsedOv;
+          }
+        } catch (e) {}
       }
-      state.userOverrides = { ...baseOverrides, ...localOverrides };
+      // Compact any legacy full-map localStorage backup down to only user edits/clears
+      // so Tier-3 Shadow-Cookie persistence stays well under the 4-chunk cookie cap.
+      const deltaEdits = {};
+      let hadBloatedEntries = false;
+      for (const [k, v] of Object.entries(localOverrides)) {
+        if (v === null) {
+          deltaEdits[k] = null;
+        } else if (JSON.stringify(baseOverrides[k]) !== JSON.stringify(v)) {
+          deltaEdits[k] = v;
+        } else {
+          hadBloatedEntries = true;
+        }
+      }
+      state.localOverrideEdits = deltaEdits;
+      state.unsavedPinCount = Object.keys(deltaEdits).length;
+      if (hadBloatedEntries) {
+        if (Object.keys(deltaEdits).length > 0) {
+          safeSetStorage('krunked_pressing_overrides_v2_2', JSON.stringify(deltaEdits));
+        } else {
+          safeRemoveStorage('krunked_pressing_overrides_v2_2');
+        }
+      }
+      state.userOverrides = { ...baseOverrides };
 
       let data = window.__DISCOGS_COLLECTION__;
       if (data && Array.isArray(data.records)) {
         state.records = data.records;
       }
+      applyLocalOverrideEditsToRecords();
       normalizeDefaultFlatteningStatuses();
 
       // 2. Reconcile Flattening Queue from inline HTML form (#flattening-inline-form) + localStorage
@@ -3489,24 +3684,28 @@
 
       // Carousel & Kinetic Spin-the-Crate Transport (v5.0)
       document.getElementById('btn-carousel-prev').addEventListener('click', () => {
+        if (state.isSpinningRoulette) return;
         playCrateTickSound(0.92);
         state.activeIndex--;
         renderHeroStage();
         renderCrateGrid();
       });
       document.getElementById('btn-carousel-next').addEventListener('click', () => {
+        if (state.isSpinningRoulette) return;
         playCrateTickSound(1.08);
         state.activeIndex++;
         renderHeroStage();
         renderCrateGrid();
       });
       document.getElementById('stage-prev-card').addEventListener('click', () => {
+        if (state.isSpinningRoulette) return;
         playCrateTickSound(0.92);
         state.activeIndex--;
         renderHeroStage();
         renderCrateGrid();
       });
       document.getElementById('stage-next-card').addEventListener('click', () => {
+        if (state.isSpinningRoulette) return;
         playCrateTickSound(1.08);
         state.activeIndex++;
         renderHeroStage();
@@ -3606,23 +3805,23 @@
           const url = pinBtn.getAttribute('data-pin-image-url');
           const idxAttr = Number(pinBtn.getAttribute('data-pin-image-index') || 0);
           const rid = String(pinBtn.getAttribute('data-pin-release-id'));
-          state.userOverrides[rid] = {
+          const pinObj = {
             pressing_image_index: idxAttr,
             user_locked: true,
             uri: url,
           };
+          state.userOverrides[rid] = pinObj;
+          state.localOverrideEdits[rid] = pinObj;
           const rec = state.records.find(r => String(r.release_id) === rid);
           if (rec && rec.images) {
             rec.images.pressing_image_url = url;
             rec.images.has_pressing_photo = true;
             rec.images.selected_index = idxAttr;
             const matched = (rec.images.classified_images || []).find(im => im.index === idxAttr || im.uri === url || im.local_uri === url);
-            if (matched) {
-              rec.images.local_pressing_image_url = matched.local_uri || url;
-            }
+            rec.images.local_pressing_image_url = (matched && matched.local_uri) ? matched.local_uri : url;
           }
           state.unsavedPinCount++;
-          safeSetStorage('krunked_pressing_overrides_v2_2', JSON.stringify(state.userOverrides));
+          safeSetStorage('krunked_pressing_overrides_v2_2', JSON.stringify(state.localOverrideEdits));
           updateSessionEditIndicators();
           updateKpiStrip();
           renderHeroStage();
@@ -3634,6 +3833,7 @@
         if (clearBtn) {
           const rid = String(clearBtn.getAttribute('data-clear-pin'));
           delete state.userOverrides[rid];
+          state.localOverrideEdits[rid] = null;
           const rec = state.records.find(r => String(r.release_id) === rid);
           if (rec && rec.images) {
             rec.images.pressing_image_url = '';
@@ -3641,7 +3841,7 @@
             rec.images.has_pressing_photo = false;
           }
           state.unsavedPinCount++;
-          safeSetStorage('krunked_pressing_overrides_v2_2', JSON.stringify(state.userOverrides));
+          safeSetStorage('krunked_pressing_overrides_v2_2', JSON.stringify(state.localOverrideEdits));
           updateSessionEditIndicators();
           updateKpiStrip();
           renderHeroStage();
@@ -3735,8 +3935,8 @@
         const copyBtn = e.target.closest('[data-copy-cmd]');
         if (!copyBtn) return;
         const cmd = copyBtn.getAttribute('data-copy-cmd');
-        if (navigator.clipboard && cmd) {
-          navigator.clipboard.writeText(cmd).then(() => showToast('Copied PowerShell command to clipboard!'));
+        if (cmd) {
+          copyTextToClipboard(cmd, 'Copied PowerShell command to clipboard!');
         }
       });
 
@@ -3848,9 +4048,7 @@
         updateSessionEditIndicators();
         modal.classList.remove('hidden');
       });
-      // v5.0 3D Flip Deck & Embedded YouTube Music Audio Player Event Listeners
-      ensureYouTubeIframeApiLoaded();
-
+      // v5.0 3D Flip Deck & HTML5 Audio Preview Player Event Listeners
       const audioEl = document.getElementById('vault-preview-audio');
       if (audioEl) {
         audioEl.addEventListener('timeupdate', () => {
@@ -3863,22 +4061,25 @@
             if (seekSlider) seekSlider.value = String(pct);
             const timeReadout = document.getElementById('stream-time-readout');
             if (timeReadout) {
-              timeReadout.textContent = `${formatMillisToDuration(curSec * 1000) || '0:00'} / ${formatMillisToDuration(totSec * 1000) || '3:45'}`;
+              timeReadout.textContent = `${formatMillisToDuration(curSec * 1000) || '0:00'} / ${formatMillisToDuration(totSec * 1000) || '0:30'}`;
             }
           }
         });
         audioEl.addEventListener('ended', () => {
           if (state.activePlaybackEngine !== 'html5') return;
-          const list = state.filteredRecords.length ? state.filteredRecords : state.records;
-          const curRec = list[state.activeIndex];
-          const curRid = curRec ? Number(curRec.release_id) : state.activeStreamRid;
-          const sData = state.streamCache[curRid] || (curRec ? resolveAlbumStreamingData(curRec) : null);
+          const playingRec = state.records.find(r => Number(r.release_id) === Number(state.activeStreamRid));
+          const playingRid = playingRec ? Number(playingRec.release_id) : state.activeStreamRid;
+          const sData = state.streamCache[playingRid] || (playingRec ? resolveAlbumStreamingData(playingRec) : null);
           const trList = (sData && Array.isArray(sData.tracks)) ? sData.tracks : [];
-          if (curRec && state.autoAdvanceTracks && state.activeTrackIndex + 1 < trList.length) {
-            playAlbumTrackAtIndex(curRec, state.activeTrackIndex + 1);
+          if (playingRec && state.activeTab !== 'arena' && state.autoAdvanceTracks && state.activeTrackIndex + 1 < trList.length) {
+            playAlbumTrackAtIndex(playingRec, state.activeTrackIndex + 1);
           } else {
             stopPreviewAudio();
-            if (curRec && sData) paintStreamingTracklistUI(curRec, sData, false);
+            const list = state.filteredRecords.length ? state.filteredRecords : state.records;
+            const stageRec = list[state.activeIndex];
+            if (stageRec && playingRec && Number(stageRec.release_id) === Number(playingRec.release_id) && sData) {
+              paintStreamingTracklistUI(stageRec, sData, false);
+            }
           }
         });
       }
@@ -3902,12 +4103,14 @@
           e.preventDefault();
           triggerKineticCrateSpin();
         } else if (e.key === 'ArrowLeft' && state.activeTab === 'showcase') {
+          if (state.isSpinningRoulette) return;
           e.preventDefault();
           playCrateTickSound(0.92);
           state.activeIndex--;
           renderHeroStage();
           renderCrateGrid();
         } else if (e.key === 'ArrowRight' && state.activeTab === 'showcase') {
+          if (state.isSpinningRoulette) return;
           e.preventDefault();
           playCrateTickSound(1.08);
           state.activeIndex++;
@@ -3976,12 +4179,6 @@
           e.stopPropagation();
           state.isAudioMuted = !state.isAudioMuted;
           muteBtn.textContent = state.isAudioMuted ? '🔇' : '🔊';
-          if (state.ytPlayer && state.ytPlayerReady) {
-            try {
-              if (state.isAudioMuted) state.ytPlayer.mute();
-              else state.ytPlayer.unMute();
-            } catch (err) {}
-          }
           if (audioEl) {
             audioEl.muted = Boolean(state.isAudioMuted);
           }
@@ -4049,30 +4246,15 @@
           state.lastTrackSwitchAt = Date.now();
           if (state.activePlaybackEngine === 'html5' && audioEl && audioEl.duration > 0) {
             audioEl.currentTime = (pct / 100) * audioEl.duration;
-            return;
-          }
-          if (state.ytPlayer && state.ytPlayerReady) {
-            try {
-              const totalDur = Number(state.ytPlayer.getDuration() || 0);
-              const list = state.filteredRecords.length ? state.filteredRecords : state.records;
-              const rec = list[state.activeIndex];
-              const rid = rec ? Number(rec.release_id) : state.activeStreamRid;
-              const sData = state.streamCache[rid] || (rec ? resolveAlbumStreamingData(rec) : null);
-              const trList = (sData && Array.isArray(sData.tracks)) ? sData.tracks : [];
-              const curTr = trList[state.activeTrackIndex];
-
-              if (state.ytIsFullAlbumStream && !state.ytIsPlaylistMode && curTr && totalDur >= 1080) {
-                const trStart = Number(curTr.albumYtStart || 0);
-                const trDur = parseDurationToSeconds(curTr.duration);
-                state.ytPlayer.seekTo(trStart + (pct / 100) * trDur, true);
-              } else if (totalDur > 0) {
-                state.ytPlayer.seekTo((pct / 100) * totalDur, true);
-              }
-            } catch (err) {}
           }
         });
       }
       document.getElementById('btn-close-modal').addEventListener('click', () => modal.classList.add('hidden'));
+      if (modal) {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) modal.classList.add('hidden');
+        });
+      }
 
       document.getElementById('btn-bake-full-html').addEventListener('click', downloadSelfContainedIndexHtml);
       document.getElementById('btn-export-flattening').addEventListener('click', exportFlatteningJson);
@@ -4080,6 +4262,7 @@
       document.getElementById('btn-reset-browser-cache').addEventListener('click', () => {
         safeRemoveStorage('krunked_pressing_overrides_v2_2');
         safeRemoveStorage('krunked_flattening_state_v4');
+        state.localOverrideEdits = {};
         state.unsavedPinCount = 0;
         state.unsavedFlattenCount = 0;
         window.location.reload();
@@ -4114,9 +4297,7 @@
 
       document.getElementById('btn-copy-sync-cmd').addEventListener('click', () => {
         const cmd = 'cd C:\\DiscogsCollection\\discogs_collection\npython scripts/sync_discogs.py';
-        if (navigator.clipboard) {
-          navigator.clipboard.writeText(cmd).then(() => showToast('Copied daily sync command to clipboard!'));
-        }
+        copyTextToClipboard(cmd, 'Copied daily sync command to clipboard!');
       });
 
       document.getElementById('btn-copy-resync-active').addEventListener('click', () => {
@@ -4124,9 +4305,7 @@
         const rec = list[state.activeIndex];
         const rid = rec ? rec.release_id : '';
         const cmd = `cd C:\\DiscogsCollection\\discogs_collection\npython scripts/sync_discogs.py --resync ${rid}`;
-        if (navigator.clipboard) {
-          navigator.clipboard.writeText(cmd).then(() => showToast(`Copied --resync ${rid} command to clipboard!`));
-        }
+        copyTextToClipboard(cmd, `Copied --resync ${rid} command to clipboard!`);
       });
     }
 
