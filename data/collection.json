@@ -4,17 +4,17 @@
   "source_of_truth": "https://www.discogs.com/user/krunked/collection",
   "api_documentation": "https://www.discogs.com/developers",
   "username": "krunked",
-  "synced_at_utc": "2026-11-19T04:14:50Z",
+  "synced_at_utc": "2026-11-19T20:43:56Z",
   "profile": {
     "username": "krunked",
     "owner_name": "krunked",
     "discogs_url": "https://www.discogs.com/user/krunked/collection",
     "github_repo": "https://github.com/krunked-fpv/discogs_collection",
     "num_collection": 159,
-    "pressing_photos_detected": 135,
+    "pressing_photos_detected": 136,
     "colored_or_special_variants": 150,
-    "flattening_need_to_be_done": 2,
-    "flattening_done": 50,
+    "flattening_need_to_be_done": 16,
+    "flattening_done": 143,
     "collection_value": {
       "minimum": "$3,952.62",
       "median": "$6,423.73",
@@ -39,7 +39,7 @@
       "date_added": "2026-11-18T18:22:18-08:00",
       "discogs_url": "https://www.discogs.com/release/31082741-Currents-3-The-Way-It-Ends-",
       "estimated_value_usd": 174.73,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Need to be done",
       "genres": [
         "Rock"
       ],
@@ -137,8 +137,8 @@
             "uri": "https://i.discogs.com/pgMqAwnbTc-P1wKNEPlBo1ifojUohzpKTo5SypZU3Sg/rs:fit/g:sm/q:90/h:600/w:507/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2OTM1/NjgtMTc2MS5qcGVn.jpeg",
             "uri150": "https://i.discogs.com/e1cts1_r-UfkTDMIr2Lt3PQnk8fl-kYxE0C8ZzUKJlU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2OTM1/NjgtMTc2MS5qcGVn.jpeg",
             "width": 507,
-            "height": 600,
-            "aspect_ratio": 0.845,
+            "height": 599,
+            "aspect_ratio": 0.846,
             "role": "center_label_closeup",
             "deterministic_score": 0.0844,
             "local_uri": "assets/releases/31082741/img_3.jpg",
@@ -168,9 +168,9 @@
             "index": 4,
             "uri": "https://i.discogs.com/VCUqEzIPGe4BPBFqLr4krgMV7ZHAQTpRkdi-VSdWsOc/rs:fit/g:sm/q:90/h:449/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2MTIw/MjItODA1OC5qcGVn.jpeg",
             "uri150": "https://i.discogs.com/G3jxIR2s0wz64AEy-oNazdXgC5atFt5R0WIsgtai0LU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2MTIw/MjItODA1OC5qcGVn.jpeg",
-            "width": 600,
+            "width": 599,
             "height": 449,
-            "aspect_ratio": 1.336,
+            "aspect_ratio": 1.334,
             "role": "pressing_disc",
             "deterministic_score": 0.5873,
             "local_uri": "assets/releases/31082741/img_4.jpg",
@@ -200,7 +200,7 @@
         "local_cover_image_url": "assets/releases/31082741/cover.jpg",
         "local_pressing_image_url": "assets/releases/31082741/pressing.jpg?v=2_9f7941a5",
         "remote_pressing_image_url": "https://i.discogs.com/CwSLbmcvKNQwzhP1aKTL-cuwXuwTwCOLs7M48stUq2s/rs:fit/g:sm/q:90/h:600/w:583/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMDgy/NzQxLTE3MTk2OTM1/NzAtMjk5Ni5qcGVn.jpeg",
-        "delta_sig": "da596b7f24bff33a"
+        "delta_sig": "81a733a7805b2e21"
       },
       "wax_spec": {
         "pattern": "galaxy",
@@ -222,7 +222,9 @@
           "title": "Never There",
           "duration": "",
           "ytVideoId": "L4-HXp7n1xA",
+          "ytTitle": "Currents (3) - Never There",
           "albumYtVideoId": "dy8IMkekW4U",
+          "albumYtStart": 0,
           "albumYtDuration": 2400
         },
         {
@@ -232,26 +234,28 @@
           "ytVideoId": "hZnZ-CpX57Y",
           "ytTitle": "Currents - A Flag To Wave (Official Music Video)",
           "albumYtVideoId": "dy8IMkekW4U",
-          "albumYtDuration": 2400,
-          "albumYtStart": 215
+          "albumYtStart": 215,
+          "albumYtDuration": 2400
         },
         {
           "position": "A3",
           "title": "Poverty Of Self",
           "duration": "",
           "ytVideoId": "2Wxk3E84w4k",
+          "ytTitle": "Currents (3) - Poverty Of Self",
           "albumYtVideoId": "dy8IMkekW4U",
-          "albumYtDuration": 2400,
-          "albumYtStart": 440
+          "albumYtStart": 440,
+          "albumYtDuration": 2400
         },
         {
           "position": "A4",
           "title": "Monsters",
           "duration": "",
           "ytVideoId": "L4-HXp7n1xA",
+          "ytTitle": "Currents (3) - Monsters",
           "albumYtVideoId": "dy8IMkekW4U",
-          "albumYtDuration": 2400,
-          "albumYtStart": 655
+          "albumYtStart": 655,
+          "albumYtDuration": 2400
         },
         {
           "position": "A5",
@@ -260,62 +264,68 @@
           "ytVideoId": "upTN4u7SjTM",
           "ytTitle": "Currents - Kill The Ache",
           "albumYtVideoId": "dy8IMkekW4U",
-          "albumYtDuration": 2400,
-          "albumYtStart": 870
+          "albumYtStart": 870,
+          "albumYtDuration": 2400
         },
         {
           "position": "A6",
           "title": "Let Me Leave",
           "duration": "",
           "ytVideoId": "q3f_6xSNH_w",
+          "ytTitle": "Currents (3) - Let Me Leave",
           "albumYtVideoId": "dy8IMkekW4U",
-          "albumYtDuration": 2400,
-          "albumYtStart": 1104
+          "albumYtStart": 1104,
+          "albumYtDuration": 2400
         },
         {
           "position": "B1",
           "title": "Origin",
           "duration": "",
           "ytVideoId": "0Vj3sGSquGU",
+          "ytTitle": "Currents (3) - Origin",
           "albumYtVideoId": "dy8IMkekW4U",
-          "albumYtDuration": 2400,
-          "albumYtStart": 1319
+          "albumYtStart": 1319,
+          "albumYtDuration": 2400
         },
         {
           "position": "B2",
           "title": "Split",
           "duration": "",
           "ytVideoId": "L4-HXp7n1xA",
+          "ytTitle": "Currents (3) - Split",
           "albumYtVideoId": "dy8IMkekW4U",
-          "albumYtDuration": 2400,
-          "albumYtStart": 1534
+          "albumYtStart": 1534,
+          "albumYtDuration": 2400
         },
         {
           "position": "B3",
           "title": "Second Skin",
           "duration": "",
           "ytVideoId": "Xg6-T3fOt9A",
+          "ytTitle": "Currents (3) - Second Skin",
           "albumYtVideoId": "dy8IMkekW4U",
-          "albumYtDuration": 2400,
-          "albumYtStart": 1749
+          "albumYtStart": 1749,
+          "albumYtDuration": 2400
         },
         {
           "position": "B4",
           "title": "How I Fall Apart",
           "duration": "",
           "ytVideoId": "uqGPonkEtME",
+          "ytTitle": "Currents (3) - How I Fall Apart",
           "albumYtVideoId": "dy8IMkekW4U",
-          "albumYtDuration": 2400,
-          "albumYtStart": 1964
+          "albumYtStart": 1964,
+          "albumYtDuration": 2400
         },
         {
           "position": "B5",
           "title": "Better Days",
           "duration": "",
           "ytVideoId": "Sk-geMg8Tyc",
+          "ytTitle": "Currents (3) - Better Days",
           "albumYtVideoId": "dy8IMkekW4U",
-          "albumYtDuration": 2400,
-          "albumYtStart": 2179
+          "albumYtStart": 2179,
+          "albumYtDuration": 2400
         }
       ],
       "youtube_videos": [
@@ -350,7 +360,7 @@
       "date_added": "2026-11-18T09:35:13-08:00",
       "discogs_url": "https://www.discogs.com/release/13257813-Born-Of-Osiris-The-Simulation",
       "estimated_value_usd": 36.25,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Need to be done",
       "genres": [
         "Rock"
       ],
@@ -383,9 +393,9 @@
             "index": 1,
             "uri": "https://i.discogs.com/nxQB2dpeOyXLgW2ySDn-yHGanp9VcUouXNWE-Lpj37g/rs:fit/g:sm/q:90/h:594/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/MzktMzQxOC5qcGVn.jpeg",
             "uri150": "https://i.discogs.com/K6IDYMi2zN5krI_53hDpG4dWllrVAGssVLtl9NXfbnI/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/MzktMzQxOC5qcGVn.jpeg",
-            "width": 600,
+            "width": 599,
             "height": 594,
-            "aspect_ratio": 1.01,
+            "aspect_ratio": 1.008,
             "role": "insert_or_sleeve",
             "deterministic_score": 0.0632,
             "local_uri": "assets/releases/13257813/img_1.jpg",
@@ -415,9 +425,9 @@
             "index": 2,
             "uri": "https://i.discogs.com/72dEFQlVlkBSKdTOp07P208KnuBjQNBX1nZjDfhUOQU/rs:fit/g:sm/q:90/h:593/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/NDEtODk0OS5qcGVn.jpeg",
             "uri150": "https://i.discogs.com/FvdWcZyXiRlFw59FrTtYAeFClRwNH5zelfAelQ_hIxM/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/NDEtODk0OS5qcGVn.jpeg",
-            "width": 600,
+            "width": 599,
             "height": 593,
-            "aspect_ratio": 1.012,
+            "aspect_ratio": 1.01,
             "role": "pressing_disc",
             "deterministic_score": 0.9766,
             "local_uri": "assets/releases/13257813/img_2.jpg",
@@ -447,9 +457,9 @@
             "index": 3,
             "uri": "https://i.discogs.com/A-G-n__6_g5p1ZuoiNtFGT6DOln2xT43PeVnA68u3rY/rs:fit/g:sm/q:90/h:593/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/NDEtNDk4Mi5qcGVn.jpeg",
             "uri150": "https://i.discogs.com/3i3uvzi_zPZ-fv8OLLApOXJBNJWJ-KSRqjKi4fdA_7A/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/NDEtNDk4Mi5qcGVn.jpeg",
-            "width": 600,
+            "width": 599,
             "height": 593,
-            "aspect_ratio": 1.012,
+            "aspect_ratio": 1.01,
             "role": "pressing_disc",
             "deterministic_score": 0.9219,
             "local_uri": "assets/releases/13257813/img_3.jpg",
@@ -479,9 +489,9 @@
             "index": 4,
             "uri": "https://i.discogs.com/TcDYkN_HZ8H41i0LKTCtbURtxvTZAkfzIACneNO8xgE/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/NDAtOTY5NS5qcGVn.jpeg",
             "uri150": "https://i.discogs.com/HB3VjZc8OsNTqXLyW9WVFWbEVyxxQRAz3OT1e-ItPBU/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/NDAtOTY5NS5qcGVn.jpeg",
-            "width": 600,
+            "width": 599,
             "height": 599,
-            "aspect_ratio": 1.002,
+            "aspect_ratio": 1.0,
             "role": "insert_or_sleeve",
             "deterministic_score": 0.1165,
             "local_uri": "assets/releases/13257813/img_4.jpg",
@@ -575,7 +585,7 @@
         "local_cover_image_url": "assets/releases/13257813/cover.jpg",
         "local_pressing_image_url": "assets/releases/13257813/pressing.jpg?v=2_20e55d6f",
         "remote_pressing_image_url": "https://i.discogs.com/72dEFQlVlkBSKdTOp07P208KnuBjQNBX1nZjDfhUOQU/rs:fit/g:sm/q:90/h:593/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjU3/ODEzLTE2NzQwODM2/NDEtODk0OS5qcGVn.jpeg",
-        "delta_sig": "b49a79c5f2158053"
+        "delta_sig": "699607784d443681"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -710,7 +720,7 @@
       "date_added": "2026-11-16T21:49:42-08:00",
       "discogs_url": "https://www.discogs.com/release/34513906-Born-Of-Osiris-Through-Shadows",
       "estimated_value_usd": 22.99,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Need to be done",
       "genres": [
         "Rock"
       ],
@@ -840,9 +850,9 @@
             "index": 4,
             "uri": "https://i.discogs.com/jR3mA_qEsA344355gjSTdSjmYbR-ifGG6M6Ygcc1zE0/rs:fit/g:sm/q:90/h:587/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NTI0NDYx/NzAtMjczNS5qcGVn.jpeg",
             "uri150": "https://i.discogs.com/D9mbx3FsGv8xrin-2BSFQXAbMOF7a3SW8eshb9-oA2s/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NTI0NDYx/NzAtMjczNS5qcGVn.jpeg",
-            "width": 600,
+            "width": 599,
             "height": 587,
-            "aspect_ratio": 1.022,
+            "aspect_ratio": 1.02,
             "role": "pressing_disc",
             "deterministic_score": 0.8788,
             "local_uri": "assets/releases/34513906/img_4.jpg",
@@ -872,9 +882,9 @@
             "index": 5,
             "uri": "https://i.discogs.com/fLY9e51pUDSAb6C_uOS6mJylhp7H81H9pI5rDfbjSUg/rs:fit/g:sm/q:90/h:576/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NTI0NDYx/NjUtNTc4OC5qcGVn.jpeg",
             "uri150": "https://i.discogs.com/K02hmDUxt0ZZtGXprTLxwXqHwyrNvLUD46_24zPSGZM/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NTI0NDYx/NjUtNTc4OC5qcGVn.jpeg",
-            "width": 600,
+            "width": 599,
             "height": 576,
-            "aspect_ratio": 1.042,
+            "aspect_ratio": 1.04,
             "role": "pressing_disc",
             "deterministic_score": 0.5983,
             "local_uri": "assets/releases/34513906/img_5.jpg",
@@ -936,9 +946,9 @@
             "index": 7,
             "uri": "https://i.discogs.com/1lbgsaL6CsxGntPpLSBAtxUG6iy8S1FeSgo69vSs2w8/rs:fit/g:sm/q:90/h:594/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NjA1MzM3/MjAtNDE1My5qcGVn.jpeg",
             "uri150": "https://i.discogs.com/94ieiMdrnbhRaAtY7WJ6Qa-7tzKvnAyxc-w_Xs0Jkx0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NjA1MzM3/MjAtNDE1My5qcGVn.jpeg",
-            "width": 600,
+            "width": 599,
             "height": 594,
-            "aspect_ratio": 1.01,
+            "aspect_ratio": 1.008,
             "role": "pressing_disc",
             "deterministic_score": 0.9834,
             "local_uri": "assets/releases/34513906/img_7.jpg",
@@ -1000,9 +1010,9 @@
             "index": 9,
             "uri": "https://i.discogs.com/7Rsx-cD9raUrdzf9e62q4JMPT-fcKpO_tGfXIMmQ8a4/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NjA1MzM3/MjAtMjk0OS5qcGVn.jpeg",
             "uri150": "https://i.discogs.com/U-TwWOvtJOGSPT2Ia8oYSITCKVM1abuMBEKUe5H7QAY/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NjA1MzM3/MjAtMjk0OS5qcGVn.jpeg",
-            "width": 600,
+            "width": 599,
             "height": 595,
-            "aspect_ratio": 1.008,
+            "aspect_ratio": 1.007,
             "role": "center_label_closeup",
             "deterministic_score": 0.0905,
             "local_uri": "assets/releases/34513906/img_9.jpg",
@@ -1033,8 +1043,8 @@
             "uri": "https://i.discogs.com/xtHnB242yZ0WBq2mafa0zUXPECv0m_7_k7clpxO6rFo/rs:fit/g:sm/q:90/h:600/w:324/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NTI0NDYx/NTctMTU5MS5qcGVn.jpeg",
             "uri150": "https://i.discogs.com/TM2CbfJ5IzOBfRFgHAhLwZ1MBdm4kD9uVRavE5OzfzA/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NTI0NDYx/NTctMTU5MS5qcGVn.jpeg",
             "width": 324,
-            "height": 600,
-            "aspect_ratio": 0.54,
+            "height": 599,
+            "aspect_ratio": 0.541,
             "role": "insert_or_sleeve",
             "deterministic_score": 0.0475,
             "local_uri": "assets/releases/34513906/img_10.jpg",
@@ -1050,7 +1060,7 @@
         "local_cover_image_url": "assets/releases/34513906/cover.jpg",
         "local_pressing_image_url": "assets/releases/34513906/pressing.jpg?v=6_1afe66de",
         "remote_pressing_image_url": "https://i.discogs.com/D1t6EKAWM-Jhzqs-oR-tmbgNMnFuTvd4wc-HtA3pj14/rs:fit/g:sm/q:90/h:600/w:598/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTEz/OTA2LTE3NjA1MzM3/MjAtMTY0OC5qcGVn.jpeg",
-        "delta_sig": "1ebfc5b3cd8be3db"
+        "delta_sig": "99fe640eed3b3c8c"
       },
       "wax_spec": {
         "pattern": "galaxy",
@@ -1225,7 +1235,7 @@
       "date_added": "2026-11-13T18:18:23-08:00",
       "discogs_url": "https://www.discogs.com/release/29631781-Circa-Survive-On-Letting-Go",
       "estimated_value_usd": 59.99,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Need to be done",
       "genres": [
         "Rock"
       ],
@@ -1484,9 +1494,9 @@
             "index": 8,
             "uri": "https://i.discogs.com/XMnVMlubvia8CzmyMQiLYLWOAcFWJtYacpLBsgMtJSw/rs:fit/g:sm/q:90/h:591/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3MjU3/ODAtOTE5Ni5qcGVn.jpeg",
             "uri150": "https://i.discogs.com/d713daP-PeJxHctTg9btxFeZ7M0h8b6E_Dr4V4fNG1w/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3MjU3/ODAtOTE5Ni5qcGVn.jpeg",
-            "width": 600,
+            "width": 599,
             "height": 591,
-            "aspect_ratio": 1.015,
+            "aspect_ratio": 1.014,
             "role": "center_label_closeup",
             "deterministic_score": 0.1089,
             "local_uri": "assets/releases/29631781/img_8.jpg",
@@ -1548,7 +1558,7 @@
         "local_cover_image_url": "assets/releases/29631781/cover.jpg",
         "local_pressing_image_url": "assets/releases/29631781/pressing.jpg?v=4_dd9a14dc",
         "remote_pressing_image_url": "https://i.discogs.com/WujM0HYVYfhYWP1r6WXnqLkGkI5qKnlKjIatlCh_6Dg/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NjMx/NzgxLTE3MDY3Mjg0/NDQtNjUyMi5qcGVn.jpeg",
-        "delta_sig": "93378c3869ed1857"
+        "delta_sig": "f55559739457acc8"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -1758,7 +1768,7 @@
       "date_added": "2026-11-13T11:25:48-08:00",
       "discogs_url": "https://www.discogs.com/release/17743813-Architects-2-For-Those-That-Wish-To-Exist",
       "estimated_value_usd": 93.33,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -1889,7 +1899,7 @@
         "local_cover_image_url": "assets/releases/17743813/cover.jpg",
         "local_pressing_image_url": "assets/releases/17743813/pressing.jpg?v=3_a97a6f9e",
         "remote_pressing_image_url": "https://i.discogs.com/k2bmLtenGjDXcJ2oCEj-2j574oGnPL3yBgbQTzX60-M/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE3NzQz/ODEzLTE2MTUyMjI4/MzYtMTU2NS5qcGVn.jpeg",
-        "delta_sig": "e449f617e962117d"
+        "delta_sig": "2ad74facc467d2ab"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -2082,7 +2092,7 @@
       "date_added": "2026-11-12T15:44:33-08:00",
       "discogs_url": "https://www.discogs.com/release/2486041-Chromeo-Business-Casual",
       "estimated_value_usd": 40.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Need to be done",
       "genres": [
         "Electronic",
         "Funk / Soul",
@@ -2147,7 +2157,7 @@
           }
         ],
         "local_cover_image_url": "assets/releases/2486041/cover.jpg",
-        "delta_sig": "006e34161942f63f"
+        "delta_sig": "d6d6ebd969d9c904"
       },
       "wax_spec": {
         "pattern": "solid_color",
@@ -2314,7 +2324,7 @@
       "date_added": "2026-11-11T22:16:38-08:00",
       "discogs_url": "https://www.discogs.com/release/16610055-Silent-Planet-Everything-Was-Sound",
       "estimated_value_usd": 35.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -2506,7 +2516,7 @@
         "local_cover_image_url": "assets/releases/16610055/cover.jpg",
         "local_pressing_image_url": "assets/releases/16610055/pressing.jpg?v=5_2a2b07f7",
         "remote_pressing_image_url": "https://i.discogs.com/LdCTRej_ihZLIv3CQj5echjmfOW1fwgZCy_poFNSERE/rs:fit/g:sm/q:90/h:600/w:577/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2NjEw/MDU1LTE2MDg3ODY2/ODMtOTQyOS5qcGVn.jpeg",
-        "delta_sig": "79ed645b1b461f27"
+        "delta_sig": "c34b92a58514263e"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -2681,7 +2691,7 @@
       "date_added": "2026-11-11T20:16:20-08:00",
       "discogs_url": "https://www.discogs.com/release/35668090-Chromeo-Fancy-Footwork",
       "estimated_value_usd": 94.44,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Need to be done",
       "genres": [
         "Electronic"
       ],
@@ -2876,7 +2886,7 @@
         "local_cover_image_url": "assets/releases/35668090/cover.jpg",
         "local_pressing_image_url": "assets/releases/35668090/pressing.jpg?v=4_f7de4398",
         "remote_pressing_image_url": "https://i.discogs.com/4YYKKvsP8AdeRUdK8dxPVA7JfiWdvaDmATPlKOl33TE/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NjY4/MDkwLTE3NjMxOTM4/MjctODUzNi5qcGVn.jpeg",
-        "delta_sig": "3a31bd28cf151563"
+        "delta_sig": "d6cfbb6d0202cf8b"
       },
       "wax_spec": {
         "pattern": "color_in_color",
@@ -3045,7 +3055,7 @@
       "date_added": "2026-11-11T19:40:55-08:00",
       "discogs_url": "https://www.discogs.com/release/33201711-A-Day-To-Remember-Big-Ole-Album-Vol-1",
       "estimated_value_usd": 37.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -3081,7 +3091,7 @@
             "height": 599,
             "aspect_ratio": 0.992,
             "role": "insert_or_sleeve",
-            "deterministic_score": 0.1847,
+            "deterministic_score": 0.1827,
             "local_uri": "assets/releases/33201711/img_1.jpg",
             "cv_metrics": {
               "is_pressing": false,
@@ -3141,7 +3151,7 @@
         "local_cover_image_url": "assets/releases/33201711/cover.jpg",
         "local_pressing_image_url": "assets/releases/33201711/pressing.jpg?v=2_e96c3ba4",
         "remote_pressing_image_url": "https://i.discogs.com/Tre5Rz6XrZWK7XRsjPLJyLogi8AePsFRbJtiUFQ6awY/rs:fit/g:sm/q:90/h:597/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMjAx/NzExLTE3NDAxNTc1/MjEtNTQ5OS5wbmc.jpeg",
-        "delta_sig": "157a1f6721d9b415"
+        "delta_sig": "4b79fec2467ea74b"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -3260,7 +3270,7 @@
       "date_added": "2026-11-11T19:28:57-08:00",
       "discogs_url": "https://www.discogs.com/release/26047147-Protest-The-Hero-Kezia",
       "estimated_value_usd": 35.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -3470,7 +3480,7 @@
         "local_cover_image_url": "assets/releases/26047147/cover.jpg",
         "local_pressing_image_url": "assets/releases/26047147/pressing.jpg?v=5_ff78ac00",
         "remote_pressing_image_url": "https://i.discogs.com/jvprvizI9MW5fBqUqpLOVosQO_Nfeg4hAiHT4Qb7Idk/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/MTQ3LTE2NzU5NzE1/NzQtNjM1Ni5qcGVn.jpeg",
-        "delta_sig": "c45952afa6d16df9"
+        "delta_sig": "f9c8c0841c7c338e"
       },
       "wax_spec": {
         "pattern": "color_in_color",
@@ -3628,7 +3638,7 @@
       "date_added": "2026-11-11T05:40:13-08:00",
       "discogs_url": "https://www.discogs.com/release/17583742-Rings-Of-Saturn-Embryonic-Anomaly-Remake",
       "estimated_value_usd": 60.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Need to be done",
       "genres": [
         "Rock"
       ],
@@ -3790,7 +3800,7 @@
         "local_cover_image_url": "assets/releases/17583742/cover.jpg",
         "local_pressing_image_url": "assets/releases/17583742/pressing.jpg?v=3_a5e817e3",
         "remote_pressing_image_url": "https://i.discogs.com/eQKSJyDbxgQjTo96VpDB4VehAwFleEt3cco9ePOfels/rs:fit/g:sm/q:90/h:450/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE3NTgz/NzQyLTE2MTQ2Mjg0/NTctMTQ2MC5qcGVn.jpeg",
-        "delta_sig": "529498121eceb528"
+        "delta_sig": "810d8a51a9ee5c8a"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -3926,7 +3936,7 @@
       "date_added": "2026-11-10T21:44:51-08:00",
       "discogs_url": "https://www.discogs.com/release/27945363-Mac-Miller-Swimming",
       "estimated_value_usd": 52.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Need to be done",
       "genres": [
         "Hip Hop"
       ],
@@ -4212,7 +4222,7 @@
           }
         ],
         "local_cover_image_url": "assets/releases/27945363/cover.jpg",
-        "delta_sig": "f8506a58e2cd5479"
+        "delta_sig": "cd51ff72724eec1b"
       },
       "wax_spec": {
         "pattern": "marble",
@@ -4695,7 +4705,7 @@
         "local_cover_image_url": "assets/releases/28844782/cover.jpg",
         "local_pressing_image_url": "assets/releases/28844782/pressing.jpg?v=2_3c481187",
         "remote_pressing_image_url": "https://i.discogs.com/iuiAb4SAVRiz4XbTgHzcWmOBTrjBQy-OrlKOuG7EIfE/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4ODQ0/NzgyLTE2OTk1MjEw/MDQtOTE4NS5qcGVn.jpeg",
-        "delta_sig": "026679691afa2160"
+        "delta_sig": "04f70b8389231289"
       },
       "wax_spec": {
         "pattern": "galaxy",
@@ -4812,7 +4822,7 @@
       "date_added": "2026-11-10T20:02:45-08:00",
       "discogs_url": "https://www.discogs.com/release/38199639-Vianova-Hit-It",
       "estimated_value_usd": 31.16,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -4896,7 +4906,7 @@
         "local_cover_image_url": "assets/releases/38199639/cover.jpg",
         "local_pressing_image_url": "assets/releases/38199639/pressing.jpg?v=1_ccc48da1",
         "remote_pressing_image_url": "https://i.discogs.com/F2DI0dYsB0NetY1Qfilg_VFxNLSry80GkzNpYUOv4ZQ/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM4MTk5/NjM5LTE3ODcyMjE5/NTctMTU2Ny5qcGVn.jpeg",
-        "delta_sig": "3b562f0842e459ae"
+        "delta_sig": "16d4a77ebfe79035"
       },
       "wax_spec": {
         "pattern": "solid_color",
@@ -5009,7 +5019,7 @@
       "date_added": "2026-11-10T19:42:11-08:00",
       "discogs_url": "https://www.discogs.com/release/27137034-Unearth-The-Wretched-The-Ruinous",
       "estimated_value_usd": 45.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -5201,7 +5211,7 @@
         "local_cover_image_url": "assets/releases/27137034/cover.jpg",
         "local_pressing_image_url": "assets/releases/27137034/pressing.jpg?v=4_439b157a",
         "remote_pressing_image_url": "https://i.discogs.com/hV6NE9TPW_EdRV0Hsf3B-jWzbABQyu0eTUvucC4zsOA/rs:fit/g:sm/q:90/h:600/w:595/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3MTM3/MDM0LTE2ODY1ODE2/MjMtNTIzMS5qcGVn.jpeg",
-        "delta_sig": "e37f49b1a7d14820"
+        "delta_sig": "494d0d737280d208"
       },
       "wax_spec": {
         "pattern": "galaxy",
@@ -5322,7 +5332,7 @@
       "date_added": "2026-11-10T19:36:53-08:00",
       "discogs_url": "https://www.discogs.com/release/14816287-Animals-As-Leaders-Weightless",
       "estimated_value_usd": 29.98,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -5359,7 +5369,7 @@
             "height": 599,
             "aspect_ratio": 0.993,
             "role": "insert_or_sleeve",
-            "deterministic_score": 0.0795,
+            "deterministic_score": 0.0775,
             "local_uri": "assets/releases/14816287/img_1.jpg",
             "cv_metrics": {
               "is_pressing": false,
@@ -5403,7 +5413,7 @@
           }
         ],
         "local_cover_image_url": "assets/releases/14816287/cover.jpg",
-        "delta_sig": "c260a2984486206e"
+        "delta_sig": "20c9a4bbb8afcf32"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -5508,7 +5518,7 @@
       "date_added": "2026-11-10T17:59:27-08:00",
       "discogs_url": "https://www.discogs.com/release/15962864-Fit-For-A-King-The-Path",
       "estimated_value_usd": 24.99,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -5764,7 +5774,7 @@
         "local_cover_image_url": "assets/releases/15962864/cover.jpg",
         "local_pressing_image_url": "assets/releases/15962864/pressing.jpg?v=2_b7bcc7fd",
         "remote_pressing_image_url": "https://i.discogs.com/nsw9ZcfsDsiLzaOS_qP9cN9505p-tbNcSw6cTvs2CSg/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE1OTYy/ODY0LTE2MDE1OTUz/MTUtMTgyMS5qcGVn.jpeg",
-        "delta_sig": "0ddfdb67072bd25d"
+        "delta_sig": "4ae6d55e0feecd08"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -5866,7 +5876,7 @@
       "date_added": "2026-11-10T14:41:18-08:00",
       "discogs_url": "https://www.discogs.com/release/14947161-Veil-Of-Maya-Id",
       "estimated_value_usd": 109.99,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -6059,7 +6069,7 @@
         "local_cover_image_url": "assets/releases/14947161/cover.jpg",
         "local_pressing_image_url": "assets/releases/14947161/pressing.jpg?v=4_3e76ecd8",
         "remote_pressing_image_url": "https://i.discogs.com/45RJQgBzJZRdmulue0-AdYtOjgWvA6eFua-fPwnrNPU/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0OTQ3/MTYxLTE1ODQ1NTMw/NjctNzIzNy5qcGVn.jpeg",
-        "delta_sig": "2af974507918dfd5"
+        "delta_sig": "dca2da73c11680b7"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -6229,7 +6239,7 @@
       "date_added": "2026-11-10T14:36:46-08:00",
       "discogs_url": "https://www.discogs.com/release/26917130-Veil-of-Maya-The-Common-Mans-Collapse",
       "estimated_value_usd": 25.54,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -6421,7 +6431,7 @@
         "local_cover_image_url": "assets/releases/26917130/cover.jpg",
         "local_pressing_image_url": "assets/releases/26917130/pressing.jpg?v=4_c886ce1b",
         "remote_pressing_image_url": "https://i.discogs.com/3kppzBO-YojjtYo0IU__RM3fofys-9266vbStYATD_4/rs:fit/g:sm/q:90/h:587/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2OTE3/MTMwLTE2ODI3NDA4/MjYtNjEwNy5qcGVn.jpeg",
-        "delta_sig": "3cc5dcfccab1a8b7"
+        "delta_sig": "9e10d81df0f34b25"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -6530,7 +6540,7 @@
       "date_added": "2026-11-10T11:59:20-08:00",
       "discogs_url": "https://www.discogs.com/release/27938112-Invent-Animate-Stillworld",
       "estimated_value_usd": 39.99,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -6690,7 +6700,7 @@
         "local_cover_image_url": "assets/releases/27938112/cover.jpg",
         "local_pressing_image_url": "assets/releases/27938112/pressing.jpg?v=2_c32f9554",
         "remote_pressing_image_url": "https://i.discogs.com/EUZA9rFJaDn6C86iRgqK9M-g3iSBkAJ6vP1fPbf2B4U/rs:fit/g:sm/q:90/h:590/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3OTM4/MTEyLTE2OTE3MDgw/NzgtMTczMC5qcGVn.jpeg",
-        "delta_sig": "f41a02faeb472f62"
+        "delta_sig": "8bd213391f953314"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -6808,7 +6818,7 @@
       "date_added": "2026-11-10T07:41:43-08:00",
       "discogs_url": "https://www.discogs.com/release/37084122-Bilmuri-Kinda-Hard",
       "estimated_value_usd": 25.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock",
         "Folk, World, & Country"
@@ -7097,7 +7107,7 @@
         "local_cover_image_url": "assets/releases/37084122/cover.jpg",
         "local_pressing_image_url": "assets/releases/37084122/pressing.jpg?v=2_1c1bb400",
         "remote_pressing_image_url": "https://i.discogs.com/qexd8uf1OMJz6AognZq1AJ3aCdoi1C2dtqW5LGxlFzU/rs:fit/g:sm/q:90/h:600/w:592/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM3MDg0/MTIyLTE3NzY0NTg3/NjktNTQ3OS5qcGVn.jpeg",
-        "delta_sig": "38dbe66297a8634f"
+        "delta_sig": "08d235fbf54afd60"
       },
       "wax_spec": {
         "pattern": "galaxy",
@@ -7254,7 +7264,7 @@
       "date_added": "2026-11-10T07:40:38-08:00",
       "discogs_url": "https://www.discogs.com/release/38464542-Bilmuri-Eggy-Pocket",
       "estimated_value_usd": 50.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Electronic",
         "Jazz",
@@ -7449,7 +7459,7 @@
         "local_cover_image_url": "assets/releases/38464542/cover.jpg",
         "local_pressing_image_url": "assets/releases/38464542/pressing.jpg?v=2_ca79c096",
         "remote_pressing_image_url": "https://i.discogs.com/DUwubM7aDLme_FnC6UD3WtksbwD6RcC2SwPhNSCrOgg/rs:fit/g:sm/q:90/h:600/w:596/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM4NDY0/NTQyLTE3ODk3NTM4/OTMtOTExNS5qcGVn.jpeg",
-        "delta_sig": "307e1d840a92976d"
+        "delta_sig": "1d0447427b46b118"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -7600,7 +7610,7 @@
       "date_added": "2026-11-09T15:52:11-08:00",
       "discogs_url": "https://www.discogs.com/release/18801928-The-Plot-In-You-Happiness-In-Self-Destruction",
       "estimated_value_usd": 65.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -7857,7 +7867,7 @@
         "local_cover_image_url": "assets/releases/18801928/cover.jpg",
         "local_pressing_image_url": "assets/releases/18801928/pressing.jpg?v=4_db457e2e",
         "remote_pressing_image_url": "https://i.discogs.com/CwGMaC-1u6QDw33936S1KmtD4ex_EeC8mOypesejNA4/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE4ODAx/OTI4LTE2MzUwNzk0/NTEtNzc5OC5qcGVn.jpeg",
-        "delta_sig": "7d262342d13a17dc"
+        "delta_sig": "ae413b1189f608f5"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -8404,7 +8414,7 @@
         "local_cover_image_url": "assets/releases/28593982/cover.jpg",
         "local_pressing_image_url": "assets/releases/28593982/pressing.jpg?v=7_0d962c5c",
         "remote_pressing_image_url": "https://i.discogs.com/4HVMHm5wXMiaPYQ4WPb2yL8eeyrlyB2IZgpgxI4f_Vg/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4NTkz/OTgyLTE3MjUzMjEx/NjAtMTAzNy5qcGVn.jpeg",
-        "delta_sig": "f96834372a8ce840"
+        "delta_sig": "51728c04c55fe9ab"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -8535,7 +8545,7 @@
       "date_added": "2026-11-09T00:02:50-08:00",
       "discogs_url": "https://www.discogs.com/release/26986229-Unearth-The-Wretched-The-Ruinous",
       "estimated_value_usd": 12.36,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Need to be done",
       "genres": [
         "Rock"
       ],
@@ -8695,7 +8705,7 @@
         "local_cover_image_url": "assets/releases/26986229/cover.jpg",
         "local_pressing_image_url": "assets/releases/26986229/pressing.jpg?v=3_20e6bdc4",
         "remote_pressing_image_url": "https://i.discogs.com/TqLLCnHfxOdR2Eoi-dYk7tjZ_FBX4jv7tNb2obtrlec/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2OTg2/MjI5LTE2ODM0NTQz/NTEtNjkyNy5qcGVn.jpeg",
-        "delta_sig": "3b87a8611ee3f1ca"
+        "delta_sig": "dbbe141079ee6410"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -8816,7 +8826,7 @@
       "date_added": "2026-11-08T18:46:08-08:00",
       "discogs_url": "https://www.discogs.com/release/35844325-Thrice-The-Alchemy-Index-Vols-I-II-Fire-Water",
       "estimated_value_usd": 44.94,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -9427,7 +9437,7 @@
         "local_cover_image_url": "assets/releases/35844325/cover.jpg",
         "local_pressing_image_url": "assets/releases/35844325/pressing.jpg?v=8_3b846201",
         "remote_pressing_image_url": "https://i.discogs.com/TsdZI2MOtrvlwvXd9BmhrpOlW88EIaNKpClZ4DfvVlc/rs:fit/g:sm/q:90/h:580/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1ODQ0/MzI1LTE3NjQ5NDMy/ODgtMTE3Ni5qcGVn.jpeg",
-        "delta_sig": "8033ae33dd9bacdc"
+        "delta_sig": "50c5052e5a63aee4"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -9570,7 +9580,7 @@
       "date_added": "2026-11-08T18:45:56-08:00",
       "discogs_url": "https://www.discogs.com/release/35852386-Thrice-The-Alchemy-Index-Vols-III-IV-Air-Earth",
       "estimated_value_usd": 39.04,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -10180,7 +10190,7 @@
         "local_cover_image_url": "assets/releases/35852386/cover.jpg",
         "local_pressing_image_url": "assets/releases/35852386/pressing.jpg?v=6_a5de9739",
         "remote_pressing_image_url": "https://i.discogs.com/3CVrjq8ldFB-OWjNdMqlQxQSAPIM1-ZB8bDCF05srXc/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1ODUy/Mzg2LTE3NjU3NDE2/MDMtMTExMi5qcGVn.jpeg",
-        "delta_sig": "c271c2f5755bcacf"
+        "delta_sig": "95fe33b992630984"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -10283,7 +10293,7 @@
       "date_added": "2026-11-08T18:45:41-08:00",
       "discogs_url": "https://www.discogs.com/release/21315247-Unearth-III-In-The-Eyes-Of-Fire",
       "estimated_value_usd": 50.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -10315,7 +10325,7 @@
           }
         ],
         "local_cover_image_url": "assets/releases/21315247/cover.jpg",
-        "delta_sig": "a85873d8a99e7b5c"
+        "delta_sig": "786c4006145a029b"
       },
       "wax_spec": {
         "pattern": "solid_color",
@@ -10467,7 +10477,7 @@
       "date_added": "2026-11-08T16:44:28-08:00",
       "discogs_url": "https://www.discogs.com/release/38337288-156Silence-From-A-Distance",
       "estimated_value_usd": 25.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -10840,7 +10850,7 @@
         "local_cover_image_url": "assets/releases/38337288/cover.jpg",
         "local_pressing_image_url": "assets/releases/38337288/pressing.jpg?v=10_268563cf",
         "remote_pressing_image_url": "https://i.discogs.com/VoxOSrla3ocmfZFBXrmFpLVK4-X9KKgBoEp6duxiIqU/rs:fit/g:sm/q:90/h:577/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM4MzM3/Mjg4LTE3ODg1Mzkz/NTAtNDA2Ni5qcGVn.jpeg",
-        "delta_sig": "5c981fe61d38c351"
+        "delta_sig": "be566e7c8edd6597"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -11003,7 +11013,7 @@
       "date_added": "2026-11-08T16:44:27-08:00",
       "discogs_url": "https://www.discogs.com/release/38267097-Circa-Survive-Juturna",
       "estimated_value_usd": 59.98,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -11294,7 +11304,7 @@
         "local_cover_image_url": "assets/releases/38267097/cover.jpg",
         "local_pressing_image_url": "assets/releases/38267097/pressing.jpg?v=2_08e8779f",
         "remote_pressing_image_url": "https://i.discogs.com/bc7UOWwBqnH6pREnSD9bKN6BsC0IgsfaiiUYdah7n9s/rs:fit/g:sm/q:90/h:556/w:552/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM4MjY3/MDk3LTE3ODc4NjAw/MTYtNTY2My5qcGVn.jpeg",
-        "delta_sig": "161a2e235a348846"
+        "delta_sig": "bb5bbb934b76e02b"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -11486,7 +11496,7 @@
       "date_added": "2026-11-08T10:08:27-08:00",
       "discogs_url": "https://www.discogs.com/release/22031968-Currents-3-The-Way-It-Ends",
       "estimated_value_usd": 59.99,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -11550,7 +11560,7 @@
         "local_cover_image_url": "assets/releases/22031968/cover.jpg",
         "local_pressing_image_url": "assets/releases/22031968/pressing.jpg?v=1_734cce1e",
         "remote_pressing_image_url": "https://i.discogs.com/IggQ6pRMulqQLBPryokV96MK-OiJ-W42WEagDhhY1KM/rs:fit/g:sm/q:90/h:539/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIyMDMx/OTY4LTE2NDQ1OTYz/NzYtMjM3NC5qcGVn.jpeg",
-        "delta_sig": "f8a89b89fdf89f0d"
+        "delta_sig": "e03c9a37900ea8f3"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -11692,7 +11702,7 @@
       "date_added": "2026-11-07T15:27:41-08:00",
       "discogs_url": "https://www.discogs.com/release/12988109-Animals-As-Leaders-Animals-As-Leaders",
       "estimated_value_usd": 35.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -11885,7 +11895,7 @@
         "local_cover_image_url": "assets/releases/12988109/cover.jpg",
         "local_pressing_image_url": "assets/releases/12988109/pressing.jpg?v=4_480ac616",
         "remote_pressing_image_url": "https://i.discogs.com/ta9HRu41FaQ7FSYPehweVBsyEgeFV0X-jdMCYbhiVK0/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/MTA5LTE1NDgzNjQy/OTgtODQ3NC5qcGVn.jpeg",
-        "delta_sig": "f0ccc4a1c172959a"
+        "delta_sig": "14c79fd78a66886a"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -12159,7 +12169,7 @@
       "date_added": "2026-11-07T12:44:30-08:00",
       "discogs_url": "https://www.discogs.com/release/13203006-Emarosa-Peach-Club",
       "estimated_value_usd": 78.88,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -12224,7 +12234,7 @@
         "local_cover_image_url": "assets/releases/13203006/cover.jpg",
         "local_pressing_image_url": "assets/releases/13203006/pressing.jpg?v=1_85eea353",
         "remote_pressing_image_url": "https://i.discogs.com/_hnOdX0jOw7k2ew-wPn3ob_eeSuFzke0oAhsHOOmWiI/rs:fit/g:sm/q:90/h:593/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMjAz/MDA2LTE1NDk4NTY4/MTQtNzc5MC5wbmc.jpeg",
-        "delta_sig": "0d84c89023c6666e"
+        "delta_sig": "5d89382dba34030f"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -12331,7 +12341,7 @@
       "date_added": "2026-11-07T11:01:08-08:00",
       "discogs_url": "https://www.discogs.com/release/36085903-As-I-Lay-Dying-Shadows-Are-Security",
       "estimated_value_usd": 49.99,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -12683,7 +12693,7 @@
         "local_cover_image_url": "assets/releases/36085903/cover.jpg",
         "local_pressing_image_url": "assets/releases/36085903/pressing.jpg?v=2_d550ccc7",
         "remote_pressing_image_url": "https://i.discogs.com/27D1eJMllSuGbs2LyVKz6yH5-yJ_rn_awitRZSwX5KU/rs:fit/g:sm/q:90/h:600/w:590/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2MDg1/OTAzLTE3Njg1OTMz/MzEtMzM3NS5qcGVn.jpeg",
-        "delta_sig": "b20056a0969db4d2"
+        "delta_sig": "2a0d879dcd9ae527"
       },
       "wax_spec": {
         "pattern": "solid_color",
@@ -12845,7 +12855,7 @@
       "date_added": "2026-11-07T10:58:49-08:00",
       "discogs_url": "https://www.discogs.com/release/36666961-Erra-2-Silence-Outlives-The-Earth",
       "estimated_value_usd": 24.24,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -13006,7 +13016,7 @@
         "local_cover_image_url": "assets/releases/36666961/cover.jpg",
         "local_pressing_image_url": "assets/releases/36666961/pressing.jpg?v=4_97082107",
         "remote_pressing_image_url": "https://i.discogs.com/bCwoPdvxUjIGEX9gCt-0BcQmcVyPGZjiyhHS3j-RQFM/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NjY2/OTYxLTE3NzI1NDAx/OTctMjM2OS5qcGVn.jpeg",
-        "delta_sig": "be7adf1250ca536f"
+        "delta_sig": "687fe9af8e760284"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -13096,7 +13106,7 @@
       "date_added": "2026-11-07T10:58:16-08:00",
       "discogs_url": "https://www.discogs.com/release/36282118-As-I-Lay-Dying-Frail-Words-Collapse",
       "estimated_value_usd": 32.99,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -13418,7 +13428,7 @@
         "local_cover_image_url": "assets/releases/36282118/cover.jpg",
         "local_pressing_image_url": "assets/releases/36282118/pressing.jpg?v=2_d2034e00",
         "remote_pressing_image_url": "https://i.discogs.com/QV_yzNAry3n4xRwEL0QDfFCQ7cRgp5QktI3zbi8VKJU/rs:fit/g:sm/q:90/h:600/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2Mjgy/MTE4LTE3NjkwNTc5/NzItMzQ0Ny5qcGVn.jpeg",
-        "delta_sig": "e542e425e37d7879"
+        "delta_sig": "af2187c46d575e62"
       },
       "wax_spec": {
         "pattern": "galaxy",
@@ -13643,7 +13653,7 @@
       "date_added": "2026-11-07T10:57:24-08:00",
       "discogs_url": "https://www.discogs.com/release/35336893-The-Devil-Wears-Prada-Zombie-EP",
       "estimated_value_usd": 29.99,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -13803,7 +13813,7 @@
         "local_cover_image_url": "assets/releases/35336893/cover.jpg",
         "local_pressing_image_url": "assets/releases/35336893/pressing.jpg?v=4_7703e705",
         "remote_pressing_image_url": "https://i.discogs.com/-yMHTVieg0s1W1kHuEACepOCSct28qxK1F3l27LOJ3A/rs:fit/g:sm/q:90/h:600/w:597/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MzM2/ODkzLTE3NjAzNjkx/MTItNzM0My5qcGVn.jpeg",
-        "delta_sig": "f8e496f90a70220b"
+        "delta_sig": "d549deed2d33afd7"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -14144,7 +14154,7 @@
         "local_cover_image_url": "assets/releases/25484485/cover.jpg",
         "local_pressing_image_url": "assets/releases/25484485/pressing.jpg?v=2_7668d497",
         "remote_pressing_image_url": "https://i.discogs.com/tCSsglBnpHGmPKqMPDL2fUCY_SlbgK0BG3d8KwSaaPQ/rs:fit/g:sm/q:90/h:598/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI1NDg0/NDg1LTE2NzEyMTg1/MjMtMjY3Mi5qcGVn.jpeg",
-        "delta_sig": "a7d16792deeb6eb8"
+        "delta_sig": "1709792988418c19"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -14314,7 +14324,7 @@
       "date_added": "2026-11-06T20:10:06-08:00",
       "discogs_url": "https://www.discogs.com/release/37227948-Emarosa-High-Horse-Heaven",
       "estimated_value_usd": 30.33,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock",
         "Pop"
@@ -14443,7 +14453,7 @@
         "local_cover_image_url": "assets/releases/37227948/cover.jpg",
         "local_pressing_image_url": "assets/releases/37227948/pressing.jpg?v=1_6ccea337",
         "remote_pressing_image_url": "https://i.discogs.com/wnMABq0U9YpejE5cfT90Y1dw0Tr0F5KcFXfzmEMnMT4/rs:fit/g:sm/q:90/h:571/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM3MjI3/OTQ4LTE3Nzc2Nzk5/NjktMjgwOS5qcGVn.jpeg",
-        "delta_sig": "ceaae6e0376833aa"
+        "delta_sig": "788969ed2d31bcd0"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -14539,7 +14549,7 @@
       "date_added": "2026-11-06T16:19:04-08:00",
       "discogs_url": "https://www.discogs.com/release/32367897-Make-Them-Suffer-Make-Them-Suffer",
       "estimated_value_usd": 43.72,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -14621,7 +14631,7 @@
         "local_cover_image_url": "assets/releases/32367897/cover.jpg",
         "local_pressing_image_url": "assets/releases/32367897/pressing.jpg?v=1_fe3bfeae",
         "remote_pressing_image_url": "https://i.discogs.com/Mh79AePOggzXAjg3I9lLcspG-sv0WNvKIA0VKrEgxgU/rs:fit/g:sm/q:90/h:600/w:564/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMyMzY3/ODk3LTE3MzIzMjM4/MTYtMjE1Ny5qcGVn.jpeg",
-        "delta_sig": "a21e97883c821c54"
+        "delta_sig": "c1700aee6abb51db"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -14791,7 +14801,7 @@
       "date_added": "2026-11-06T16:19:03-08:00",
       "discogs_url": "https://www.discogs.com/release/21929479-The-Plot-In-You-Swan-Song",
       "estimated_value_usd": 38.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Need to be done",
       "genres": [
         "Rock"
       ],
@@ -15529,7 +15539,7 @@
         "local_cover_image_url": "assets/releases/21929479/cover.jpg",
         "local_pressing_image_url": "assets/releases/21929479/pressing.jpg?v=6_109945f6",
         "remote_pressing_image_url": "https://i.discogs.com/5xbcAabptc5h5dZQm1hk_bHX5MtC5l1I1wqT1AOtyCQ/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIxOTI5/NDc5LTE2NDUzNDg5/NTAtMzYwMy5qcGVn.jpeg",
-        "delta_sig": "4efcaed55521e30c"
+        "delta_sig": "73d6a005f87f9f73"
       },
       "wax_spec": {
         "pattern": "marble",
@@ -15652,7 +15662,7 @@
       "date_added": "2026-11-06T15:28:36-08:00",
       "discogs_url": "https://www.discogs.com/release/9545877-Northlane-Singularity",
       "estimated_value_usd": 68.03,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -15846,7 +15856,7 @@
         "local_cover_image_url": "assets/releases/9545877/cover.jpg",
         "local_pressing_image_url": "assets/releases/9545877/pressing.jpg?v=2_ae5a193b",
         "remote_pressing_image_url": "https://i.discogs.com/mFeWuuoS9-AkA0M0uIxmfbtJQ_xRUSU4vq-wMv3K5-s/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTk1NDU4/NzctMTU4NjQ5MzM1/NC01ODE3LmpwZWc.jpeg",
-        "delta_sig": "a7a19436475a8e37"
+        "delta_sig": "fb2a374db080cd4e"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -16123,7 +16133,7 @@
         "local_cover_image_url": "assets/releases/22153450/cover.jpg",
         "local_pressing_image_url": "assets/releases/22153450/pressing.jpg?v=3_36dcdecf",
         "remote_pressing_image_url": "https://i.discogs.com/IjpfrPtiY1fnjWjLPiTYXyBZfUwIqE1QG83VfFKkRDc/rs:fit/g:sm/q:90/h:600/w:450/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIyMTUz/NDUwLTE2NDQ4NDA1/NzktMTg5Ny5qcGVn.jpeg",
-        "delta_sig": "1f80094c56f03aa7"
+        "delta_sig": "4d83cb7bb1663aea"
       },
       "wax_spec": {
         "pattern": "split",
@@ -16257,7 +16267,7 @@
       "date_added": "2026-11-06T15:28:34-08:00",
       "discogs_url": "https://www.discogs.com/release/23605157-Emery-The-Question-Live",
       "estimated_value_usd": 72.22,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -16450,7 +16460,7 @@
         "local_cover_image_url": "assets/releases/23605157/cover.jpg",
         "local_pressing_image_url": "assets/releases/23605157/pressing.jpg?v=5_afce9b94",
         "remote_pressing_image_url": "https://i.discogs.com/0kHTO2koAC1f9qUNtXm-EBza9jryAHVJjdsQfbmYA0c/rs:fit/g:sm/q:90/h:591/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzNjA1/MTU3LTE2NTU0Nzg4/NzItNjQyNS5wbmc.jpeg",
-        "delta_sig": "6df17e70b6d3a4e1"
+        "delta_sig": "913a26206d01db6b"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -16545,7 +16555,7 @@
       "date_added": "2026-11-06T15:28:34-08:00",
       "discogs_url": "https://www.discogs.com/release/28575079-Beartooth-The-Surface",
       "estimated_value_usd": 22.66,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -16852,7 +16862,7 @@
         "local_cover_image_url": "assets/releases/28575079/cover.jpg",
         "local_pressing_image_url": "assets/releases/28575079/pressing.jpg?v=5_79f3d71d",
         "remote_pressing_image_url": "https://i.discogs.com/q-ccUMZskUDHL6ogJ5dXdso7BUH596YpuwQyA1wONt4/rs:fit/g:sm/q:90/h:597/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4NTc1/MDc5LTE2OTc1MDgx/NTMtNTUwOS5qcGVn.jpeg",
-        "delta_sig": "29391866f014658f"
+        "delta_sig": "24cb470eb2b3bb47"
       },
       "wax_spec": {
         "pattern": "galaxy",
@@ -16973,7 +16983,7 @@
       "date_added": "2026-11-06T15:28:33-08:00",
       "discogs_url": "https://www.discogs.com/release/15043916-August-Burns-Red-Guardians",
       "estimated_value_usd": 19.88,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -17373,7 +17383,7 @@
           }
         ],
         "local_cover_image_url": "assets/releases/15043916/cover.jpg",
-        "delta_sig": "1871ba3fa356a5c6"
+        "delta_sig": "b0e9eb0e34f49b1c"
       },
       "wax_spec": {
         "pattern": "solid_color",
@@ -17543,7 +17553,7 @@
       "date_added": "2026-11-06T13:34:28-08:00",
       "discogs_url": "https://www.discogs.com/release/27611781-Erra-2-Drift",
       "estimated_value_usd": 45.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -17606,7 +17616,7 @@
           }
         ],
         "local_cover_image_url": "assets/releases/27611781/cover.jpg",
-        "delta_sig": "fff9bb162e41f753"
+        "delta_sig": "e29f75e036ba060d"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -17754,7 +17764,7 @@
       "date_added": "2026-11-06T09:42:51-08:00",
       "discogs_url": "https://www.discogs.com/release/11625165-The-Plot-In-You-Dispose",
       "estimated_value_usd": 46.67,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -17765,13 +17775,13 @@
       ],
       "images": {
         "cover_image_url": "https://i.discogs.com/pPw4s2TyAAt323Q6lnDFmF73rK89n8WQzIwPK_vFVmg/rs:fit/g:sm/q:90/h:600/w:591/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTExNjI1/MTY1LTE1MjEwMzAy/NDktODI4OC5qcGVn.jpeg",
-        "pressing_image_url": "",
+        "pressing_image_url": "assets/releases/11625165/pressing.jpg?v=8_49ed700d",
         "center_label_image_url": "https://i.discogs.com/OrQf5D4MZdWyS_YagYjG15uLw2Jk4JLYWk2hAYj03so/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTExNjI1/MTY1LTE1MjEwMzAy/NDktODI4OC5qcGVn.jpeg",
-        "display_thumbnail_url": "assets/releases/11625165/cover.jpg",
-        "has_pressing_photo": false,
-        "selected_index": -1,
-        "selected_score": 0.0,
-        "detection_method": "procedural_wax_from_discogs_format_codes",
+        "display_thumbnail_url": "assets/releases/11625165/pressing.jpg?v=8_49ed700d",
+        "has_pressing_photo": true,
+        "selected_index": 8,
+        "selected_score": 1.0,
+        "detection_method": "override_index",
         "classified_images": [
           {
             "index": 0,
@@ -18001,8 +18011,8 @@
             "width": 593,
             "height": 599,
             "aspect_ratio": 0.99,
-            "role": "insert_or_sleeve",
-            "deterministic_score": 0.4188,
+            "role": "pressing_disc",
+            "deterministic_score": 1.0,
             "local_uri": "assets/releases/11625165/img_8.jpg",
             "cv_metrics": {
               "is_pressing": false,
@@ -18060,7 +18070,9 @@
           }
         ],
         "local_cover_image_url": "assets/releases/11625165/cover.jpg",
-        "delta_sig": "68a6513ffbd47077"
+        "local_pressing_image_url": "assets/releases/11625165/pressing.jpg?v=8_49ed700d",
+        "remote_pressing_image_url": "https://i.discogs.com/Mf4ndhpznRr5nZUPmRLDgNyPoQAv3vh2G311xrf5vBk/rs:fit/g:sm/q:90/h:600/w:593/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTExNjI1/MTY1LTE1MjEwMzAy/NTMtNDUzNy5qcGVn.jpeg",
+        "delta_sig": "374f6287d8bbeb30"
       },
       "wax_spec": {
         "pattern": "galaxy",
@@ -18166,7 +18178,7 @@
       "date_added": "2026-11-06T00:50:12-08:00",
       "discogs_url": "https://www.discogs.com/release/21958303-Wage-War-Manic",
       "estimated_value_usd": 30.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -18518,7 +18530,7 @@
         "local_cover_image_url": "assets/releases/21958303/cover.jpg",
         "local_pressing_image_url": "assets/releases/21958303/pressing.jpg?v=5_abd6f03f",
         "remote_pressing_image_url": "https://i.discogs.com/rOTfp6KOfaDma2E4C7Gs18gGt5IaNb53j_6_VBDO30M/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIxOTU4/MzAzLTE3MDM3MjMw/NDctMTY1MC5qcGVn.jpeg",
-        "delta_sig": "34742226fe8f5f0b"
+        "delta_sig": "f63fc6065aceeeb4"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -18681,7 +18693,7 @@
       "date_added": "2026-11-06T00:50:11-08:00",
       "discogs_url": "https://www.discogs.com/release/5632601-Thursday-Full-Collapse",
       "estimated_value_usd": 45.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -18905,7 +18917,7 @@
         "local_cover_image_url": "assets/releases/5632601/cover.jpg",
         "local_pressing_image_url": "assets/releases/5632601/pressing.jpg?v=5_732bc304",
         "remote_pressing_image_url": "https://i.discogs.com/Oi19gjwL9e4S11LSak5Fejzcy0hxMUYJJ8xr2Gr1_S4/rs:fit/g:sm/q:90/h:450/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTU2MzI2/MDEtMTM5ODUwNjA2/MS0zNDIwLmpwZWc.jpeg",
-        "delta_sig": "9a221cc14659a9a2"
+        "delta_sig": "7ce89833877601aa"
       },
       "wax_spec": {
         "pattern": "marble",
@@ -19027,7 +19039,7 @@
       "date_added": "2026-11-06T00:50:10-08:00",
       "discogs_url": "https://www.discogs.com/release/11095447-Polaris-21-The-Mortal-Coil",
       "estimated_value_usd": 54.39,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -19220,7 +19232,7 @@
         "local_cover_image_url": "assets/releases/11095447/cover.jpg",
         "local_pressing_image_url": "assets/releases/11095447/pressing.jpg?v=3_fb6e5dd3",
         "remote_pressing_image_url": "https://i.discogs.com/4Z-XD_e_pXEf9FjXq8K04YLoTcb0baIdYdPWBGtP3aI/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTExMDk1/NDQ3LTE1MjAxMzA4/MDEtNjY5NS5qcGVn.jpeg",
-        "delta_sig": "85aeb7f7d6be5ee4"
+        "delta_sig": "651f5309f256be51"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -19430,7 +19442,7 @@
       "date_added": "2026-11-05T18:15:18-08:00",
       "discogs_url": "https://www.discogs.com/release/18670618-Invent-Animate-Everchanger",
       "estimated_value_usd": 35.89,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -19591,7 +19603,7 @@
         "local_cover_image_url": "assets/releases/18670618/cover.jpg",
         "local_pressing_image_url": "assets/releases/18670618/pressing.jpg?v=3_3bbfd095",
         "remote_pressing_image_url": "https://i.discogs.com/NUOg4CvQDREmOl9xOn6rmbmwsMomQwxwRTcBDPcpBN0/rs:fit/g:sm/q:90/h:600/w:595/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE4Njcw/NjE4LTE2MjIxNjk5/ODctOTc2NS5qcGVn.jpeg",
-        "delta_sig": "8deb1ea956b06460"
+        "delta_sig": "2ab22a2e07c047c4"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -19676,7 +19688,7 @@
       "date_added": "2026-11-05T17:16:49-08:00",
       "discogs_url": "https://www.discogs.com/release/15985411-Invent-Animate-Greyview",
       "estimated_value_usd": 199.99,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -19706,7 +19718,7 @@
           }
         ],
         "local_cover_image_url": "assets/releases/15985411/cover.jpg",
-        "delta_sig": "9c015aec939f7fd6"
+        "delta_sig": "2f8567664ae32964"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -19806,7 +19818,7 @@
       "date_added": "2026-11-05T17:12:20-08:00",
       "discogs_url": "https://www.discogs.com/release/11771142-Wage-War-Deadweight",
       "estimated_value_usd": 70.42,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -19996,7 +20008,7 @@
           }
         ],
         "local_cover_image_url": "assets/releases/11771142/cover.jpg",
-        "delta_sig": "02f8872319b6e900"
+        "delta_sig": "639181893d24c1d4"
       },
       "wax_spec": {
         "pattern": "split",
@@ -20183,7 +20195,7 @@
       "date_added": "2026-11-04T08:10:37-08:00",
       "discogs_url": "https://www.discogs.com/release/7685817-Coheed-And-Cambria-The-Color-Before-The-Sun",
       "estimated_value_usd": 12.05,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -20214,7 +20226,7 @@
           }
         ],
         "local_cover_image_url": "assets/releases/7685817/cover.jpg",
-        "delta_sig": "f962e7a5b3f05d52"
+        "delta_sig": "6c18c74c19f0a989"
       },
       "wax_spec": {
         "pattern": "black",
@@ -20341,7 +20353,7 @@
       "date_added": "2026-11-03T21:10:22-08:00",
       "discogs_url": "https://www.discogs.com/release/11812427-Underoath-Erase-Me",
       "estimated_value_usd": 14.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -20665,7 +20677,7 @@
         "local_cover_image_url": "assets/releases/11812427/cover.jpg",
         "local_pressing_image_url": "assets/releases/11812427/pressing.jpg?v=6_b7ed4428",
         "remote_pressing_image_url": "https://i.discogs.com/0SQMGu3TzYCngXtHGejslNISYQ0BBFH-EjcEijdfHBA/rs:fit/g:sm/q:90/h:582/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTExODEy/NDI3LTE2NzYyNTA1/OTktNDM1Ny5qcGVn.jpeg",
-        "delta_sig": "05a7dca42c941930"
+        "delta_sig": "201e4fb1de64af24"
       },
       "wax_spec": {
         "pattern": "marble",
@@ -21252,7 +21264,7 @@
         "local_cover_image_url": "assets/releases/25541158/cover.jpg",
         "local_pressing_image_url": "assets/releases/25541158/pressing.jpg?v=9_a94e82ce",
         "remote_pressing_image_url": "https://i.discogs.com/-0zn6qL_ogt4PkakaITHcP3y08OWZLKtgYjuggBweqs/rs:fit/g:sm/q:90/h:555/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI1NTQx/MTU4LTE2NzE3NDEw/MDgtODE3Mi5qcGVn.jpeg",
-        "delta_sig": "cc3fb5e8c365a6b5"
+        "delta_sig": "064ef697ea217ac3"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -21516,7 +21528,7 @@
         "local_cover_image_url": "assets/releases/20546863/cover.jpg",
         "local_pressing_image_url": "assets/releases/20546863/pressing.jpg?v=2_c6472a19",
         "remote_pressing_image_url": "https://i.discogs.com/ZqUtQwbbm61HATLMnDdD22S54EW2xQZ3pOmgnPp3Xko/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIwNTQ2/ODYzLTE2MzUwMTY3/NzYtNzc2Ny5qcGVn.jpeg",
-        "delta_sig": "dd1cc4ef134e58ed"
+        "delta_sig": "825ecdbcad0a541d"
       },
       "wax_spec": {
         "pattern": "split",
@@ -21675,7 +21687,7 @@
       "date_added": "2026-11-03T21:10:17-08:00",
       "discogs_url": "https://www.discogs.com/release/25418758-I-Prevail-True-Power",
       "estimated_value_usd": 19.99,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -21854,7 +21866,7 @@
         "local_cover_image_url": "assets/releases/25418758/cover.jpg",
         "local_pressing_image_url": "assets/releases/25418758/pressing.jpg?v=4_255ce0c1",
         "remote_pressing_image_url": "https://i.discogs.com/P0eJzBu_bdGY7Y050NB7lDQxUlpgDrjw1lyDNtFUx4M/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI1NDE4/NzU4LTE2Nzc4NTc4/MDctOTAzOC5qcGVn.jpeg",
-        "delta_sig": "54b1a045f6c07fac"
+        "delta_sig": "662d9e90a9d4730a"
       },
       "wax_spec": {
         "pattern": "marble",
@@ -22072,7 +22084,7 @@
       "date_added": "2026-11-03T21:10:16-08:00",
       "discogs_url": "https://www.discogs.com/release/19084276-Thrice-To-Be-Everywhere-Is-To-Be-Nowhere",
       "estimated_value_usd": 30.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -23034,7 +23046,7 @@
         "local_cover_image_url": "assets/releases/19084276/cover.jpg",
         "local_pressing_image_url": "assets/releases/19084276/pressing.jpg?v=2_7b679bfe",
         "remote_pressing_image_url": "https://i.discogs.com/bBBEcOHyxoiDs9SkpQUkDzTALw_A37ARS8aIoivpAvI/rs:fit/g:sm/q:90/h:598/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE5MDg0/Mjc2LTE2NDY1ODA1/NzktOTEzMi5qcGVn.jpeg",
-        "delta_sig": "196370555a3c8ed3"
+        "delta_sig": "bfcc52db8e4d6aba"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -23190,7 +23202,7 @@
       "date_added": "2026-11-03T19:52:25-08:00",
       "discogs_url": "https://www.discogs.com/release/36991890-Born-Of-Osiris-The-Discovery",
       "estimated_value_usd": 53.93,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Electronic",
         "Rock"
@@ -23485,7 +23497,7 @@
         "local_cover_image_url": "assets/releases/36991890/cover.jpg",
         "local_pressing_image_url": "assets/releases/36991890/pressing.jpg?v=7_6204d7af",
         "remote_pressing_image_url": "https://i.discogs.com/Z5_CyOwIYNhi6yBbwpiEf2dpt7k26GcL8GlkwaasgzE/rs:fit/g:sm/q:90/h:578/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2OTkx/ODkwLTE3NzU0ODg3/MTktODk2Mi5qcGVn.jpeg",
-        "delta_sig": "e476db0f2ae4d7ae"
+        "delta_sig": "6c83aa8259af78dc"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -23671,7 +23683,7 @@
       "date_added": "2026-11-03T10:17:40-08:00",
       "discogs_url": "https://www.discogs.com/release/16595574-Knocked-Loose-Laugh-Tracks",
       "estimated_value_usd": 178.65,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -23832,7 +23844,7 @@
         "local_cover_image_url": "assets/releases/16595574/cover.jpg",
         "local_pressing_image_url": "assets/releases/16595574/pressing.jpg?v=4_c1d1cdf9",
         "remote_pressing_image_url": "https://i.discogs.com/rG6n2mNRiTBzp9TK2fUW8fEwcP1Jh_IAWgDp-l04iko/rs:fit/g:sm/q:90/h:589/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2NTk1/NTc0LTE2MDg4Mzk5/OTMtODk1MC5qcGVn.jpeg",
-        "delta_sig": "fb5cce409f568c8f"
+        "delta_sig": "23122f0dfbd8aa66"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -23983,7 +23995,7 @@
       "date_added": "2026-11-03T10:17:30-08:00",
       "discogs_url": "https://www.discogs.com/release/12852715-Unearth-Extinctions",
       "estimated_value_usd": 18.99,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -24175,7 +24187,7 @@
         "local_cover_image_url": "assets/releases/12852715/cover.jpg",
         "local_pressing_image_url": "assets/releases/12852715/pressing.jpg?v=3_f0de4019",
         "remote_pressing_image_url": "https://i.discogs.com/qTvt9uAbLBWBwruf3MJt5vNtCHXUz2zkRn-84qqkp18/rs:fit/g:sm/q:90/h:598/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyODUy/NzE1LTE1NDM3ODIy/NDItNzEyMy5qcGVn.jpeg",
-        "delta_sig": "8e3bfb0484052585"
+        "delta_sig": "2a1d78d85824b9a9"
       },
       "wax_spec": {
         "pattern": "galaxy",
@@ -24298,7 +24310,7 @@
       "date_added": "2026-11-03T10:17:28-08:00",
       "discogs_url": "https://www.discogs.com/release/31699214-Ed-Sheeran---Tour-Collection",
       "estimated_value_usd": 25.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Electronic",
         "Hip Hop",
@@ -24800,7 +24812,7 @@
         "local_cover_image_url": "assets/releases/31699214/cover.jpg",
         "local_pressing_image_url": "assets/releases/31699214/pressing.jpg?v=8_b222354b",
         "remote_pressing_image_url": "https://i.discogs.com/6ccCInP-cbfmpfc3Cr6A9lcb5FbvnkeJnzE3V4QJSdk/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxNjk5/MjE0LTE3MzEwNTgx/MzEtMjc4Ni5qcGVn.jpeg",
-        "delta_sig": "99e087be9512b0ed"
+        "delta_sig": "a2bb79b81326fc37"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -24945,7 +24957,7 @@
       "date_added": "2026-11-02T16:45:12-08:00",
       "discogs_url": "https://www.discogs.com/release/19249243-Unearth-Watchers-Of-Rule",
       "estimated_value_usd": 24.65,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -25137,7 +25149,7 @@
         "local_cover_image_url": "assets/releases/19249243/cover.jpg",
         "local_pressing_image_url": "assets/releases/19249243/pressing.jpg?v=2_77c451fc",
         "remote_pressing_image_url": "https://i.discogs.com/GE1SUhTU3RDSE6zjnqG3MN8ldQKVbIv0aqsYb0p9h1A/rs:fit/g:sm/q:90/h:600/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE5MjQ5/MjQzLTE2MjQ2MDM5/MDMtMTIxNS5qcGVn.jpeg",
-        "delta_sig": "3547baf2246bccaf"
+        "delta_sig": "00a63f8839de7405"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -25360,7 +25372,7 @@
             "height": 588,
             "aspect_ratio": 1.019,
             "role": "center_label_closeup",
-            "deterministic_score": 0.0477,
+            "deterministic_score": 0.0457,
             "local_uri": "assets/releases/37058814/img_1.jpg",
             "cv_metrics": {
               "is_pressing": false,
@@ -25392,7 +25404,7 @@
             "height": 593,
             "aspect_ratio": 1.01,
             "role": "insert_or_sleeve",
-            "deterministic_score": 0.1376,
+            "deterministic_score": 0.1396,
             "local_uri": "assets/releases/37058814/img_2.jpg",
             "cv_metrics": {
               "is_pressing": false,
@@ -25418,7 +25430,7 @@
           }
         ],
         "local_cover_image_url": "assets/releases/37058814/cover.jpg",
-        "delta_sig": "0083f9f3a877231f"
+        "delta_sig": "8d5a02af7aa9476b"
       },
       "wax_spec": {
         "pattern": "solid_color",
@@ -25687,7 +25699,7 @@
           }
         ],
         "local_cover_image_url": "assets/releases/28269505/cover.jpg",
-        "delta_sig": "9e84fa888f316ae8"
+        "delta_sig": "dc95540df7d53064"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -25984,7 +25996,7 @@
         "local_cover_image_url": "assets/releases/35426350/cover.jpg",
         "local_pressing_image_url": "assets/releases/35426350/pressing.jpg?v=4_ee62bf94",
         "remote_pressing_image_url": "https://i.discogs.com/-IEvOTPAmpLZIocNP1nFHnQTVGJYZVKyH-JcIB83nsQ/rs:fit/g:sm/q:90/h:600/w:595/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NDI2/MzUwLTE3NjA5NTc1/MzYtNzI1MS5qcGVn.jpeg",
-        "delta_sig": "69f8e335cbcea3eb"
+        "delta_sig": "108413486cadc1c6"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -26389,7 +26401,7 @@
         "local_cover_image_url": "assets/releases/21390094/cover.jpg",
         "local_pressing_image_url": "assets/releases/21390094/pressing.jpg?v=6_af47ffbd",
         "remote_pressing_image_url": "https://i.discogs.com/9_RdKLSu7sYxnUDS3DBNbPfXM7xxH__tIRY3En1x6VM/rs:fit/g:sm/q:90/h:545/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIxMzkw/MDk0LTE3NDIxOTA4/OTEtMzQyNC5qcGVn.jpeg",
-        "delta_sig": "74bed1f24c453db1"
+        "delta_sig": "f15e4c6ee2d195f1"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -26577,7 +26589,7 @@
       "date_added": "2026-11-02T16:03:00-08:00",
       "discogs_url": "https://www.discogs.com/release/34889219-Minus-The-Bear-Menos-El-Oso",
       "estimated_value_usd": 27.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -26929,7 +26941,7 @@
         "local_cover_image_url": "assets/releases/34889219/cover.jpg",
         "local_pressing_image_url": "assets/releases/34889219/pressing.jpg?v=9_4455156f",
         "remote_pressing_image_url": "https://i.discogs.com/9ErU5ennQkldegLpU9gun_xAjZg2ttukT6piEA8jt6E/rs:fit/g:sm/q:90/h:567/w:568/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0ODg5/MjE5LTE3NjAxOTIx/NTktMTc1NS5qcGVn.jpeg",
-        "delta_sig": "85f69151b9a581c6"
+        "delta_sig": "3ecb5868cd08d07c"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -27132,7 +27144,7 @@
       "date_added": "2026-11-02T15:57:22-08:00",
       "discogs_url": "https://www.discogs.com/release/31200271-Underoath-Theyre-Only-Chasing-Safety",
       "estimated_value_usd": 26.5,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -27292,7 +27304,7 @@
         "local_cover_image_url": "assets/releases/31200271/cover.jpg",
         "local_pressing_image_url": "assets/releases/31200271/pressing.jpg?v=1_83d3896e",
         "remote_pressing_image_url": "https://i.discogs.com/3BW3gQPkwzyJMhRg00nbaviF8zilkufj1LjF5cOZIo4/rs:fit/g:sm/q:90/h:581/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxMjAw/MjcxLTE3MjA3Nzg3/MTAtOTQxNS5qcGVn.jpeg",
-        "delta_sig": "3c4f4e3ef70df2b0"
+        "delta_sig": "b6328d45079d05c2"
       },
       "wax_spec": {
         "pattern": "solid_color",
@@ -27706,7 +27718,7 @@
         "local_cover_image_url": "assets/releases/29075062/cover.jpg",
         "local_pressing_image_url": "assets/releases/29075062/pressing.jpg?v=2_73ae5abd",
         "remote_pressing_image_url": "https://i.discogs.com/sYMgRsXq_dKTU8OakAtacWbfbdB7_qrJPNZERmUEGKI/rs:fit/g:sm/q:90/h:600/w:587/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5MDc1/MDYyLTE3MTE1ODk3/MTUtODM3OC5qcGVn.jpeg",
-        "delta_sig": "f6fb3bee5fc4425d"
+        "delta_sig": "5c55e5d8bb977466"
       },
       "wax_spec": {
         "pattern": "solid_color",
@@ -28200,7 +28212,7 @@
         "local_cover_image_url": "assets/releases/3873517/cover.jpg",
         "local_pressing_image_url": "assets/releases/3873517/pressing.jpg?v=7_653eaa63",
         "remote_pressing_image_url": "https://i.discogs.com/bNzC6TE7EJPOueccaQWk2djgff6bljS6Y1Mcs4r-ulc/rs:fit/g:sm/q:90/h:583/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM4NzM1/MTctMTM1NTc5OTQ4/NC02MzU5LmpwZWc.jpeg",
-        "delta_sig": "d269fd16145131a3"
+        "delta_sig": "8972303a1fd0cfb1"
       },
       "wax_spec": {
         "pattern": "marble",
@@ -28416,7 +28428,7 @@
       "date_added": "2026-11-01T10:45:20-08:00",
       "discogs_url": "https://www.discogs.com/release/27717681-Erra-2-Neon",
       "estimated_value_usd": 25.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -28485,7 +28497,7 @@
             "height": 600,
             "aspect_ratio": 1.0,
             "role": "insert_or_sleeve",
-            "deterministic_score": 0.1383,
+            "deterministic_score": 0.1403,
             "local_uri": "assets/releases/27717681/img_2.jpg",
             "cv_metrics": {
               "is_pressing": false,
@@ -28513,7 +28525,7 @@
         "local_cover_image_url": "assets/releases/27717681/cover.jpg",
         "local_pressing_image_url": "assets/releases/27717681/pressing.jpg?v=1_e8910715",
         "remote_pressing_image_url": "https://i.discogs.com/_rQ7uDWnrFE97zqlQeO3k9xHni0Tcz-gGRVFAv85Y6s/rs:fit/g:sm/q:90/h:600/w:596/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3NzE3/NjgxLTE2ODk5OTU2/MDctNzcyOS5qcGVn.jpeg",
-        "delta_sig": "ae9cc51a53457478"
+        "delta_sig": "a66538ac15e98bb2"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -28654,7 +28666,7 @@
       "date_added": "2026-11-01T07:37:05-08:00",
       "discogs_url": "https://www.discogs.com/release/3780990-Periphery-3-Periphery-II-This-Time-Its-Personal",
       "estimated_value_usd": 120.99,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Electronic",
         "Rock"
@@ -28724,7 +28736,7 @@
             "height": 300,
             "aspect_ratio": 1.333,
             "role": "insert_or_sleeve",
-            "deterministic_score": 0.1235,
+            "deterministic_score": 0.1255,
             "local_uri": "assets/releases/3780990/img_2.jpg",
             "cv_metrics": {
               "is_pressing": false,
@@ -28750,7 +28762,7 @@
           }
         ],
         "local_cover_image_url": "assets/releases/3780990/cover.jpg",
-        "delta_sig": "59415aeba5a4d983"
+        "delta_sig": "f1a7dae3cf9a92fc"
       },
       "wax_spec": {
         "pattern": "split",
@@ -28923,7 +28935,7 @@
       "date_added": "2026-10-31T21:05:54-07:00",
       "discogs_url": "https://www.discogs.com/release/22568519-Imminence-Turn-The-Light-On",
       "estimated_value_usd": 40.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -29072,7 +29084,7 @@
         "local_cover_image_url": "assets/releases/22568519/cover.jpg",
         "local_pressing_image_url": "assets/releases/22568519/pressing.jpg?v=2_e96d0ced",
         "remote_pressing_image_url": "https://i.discogs.com/jGHDTD_N4TmzIQThasjd5Zbfuwqyq_xSeXGLc0XzqWg/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIyNTY4/NTE5LTE2NTcwODU3/MDItOTg2MC5qcGVn.jpeg",
-        "delta_sig": "e97916bf39a49981"
+        "delta_sig": "8914d7d51f8ad158"
       },
       "wax_spec": {
         "pattern": "solid_color",
@@ -29471,7 +29483,7 @@
         "local_cover_image_url": "assets/releases/13113361/cover.jpg",
         "local_pressing_image_url": "assets/releases/13113361/pressing.jpg?v=6_b9986ebe",
         "remote_pressing_image_url": "https://i.discogs.com/FRMhhMZhkAildof2Gm8yio_Lubk03DUfNOfIRRgnVcQ/rs:fit/g:sm/q:90/h:600/w:596/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMTEz/MzYxLTE2NTcwNzUy/MTItNzUzOC5qcGVn.jpeg",
-        "delta_sig": "b79223480dfb45f2"
+        "delta_sig": "25dcf081c1adfb40"
       },
       "wax_spec": {
         "pattern": "black",
@@ -29680,7 +29692,7 @@
       "date_added": "2026-10-31T14:38:19-07:00",
       "discogs_url": "https://www.discogs.com/release/8781739-Thrice-The-Artist-In-The-Ambulance",
       "estimated_value_usd": 69.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -29716,7 +29728,7 @@
             "height": 600,
             "aspect_ratio": 1.0,
             "role": "center_label_closeup",
-            "deterministic_score": 0.086,
+            "deterministic_score": 0.084,
             "local_uri": "assets/releases/8781739/img_1.jpg",
             "cv_metrics": {
               "is_pressing": false,
@@ -29776,7 +29788,7 @@
         "local_cover_image_url": "assets/releases/8781739/cover.jpg",
         "local_pressing_image_url": "assets/releases/8781739/pressing.jpg?v=2_132eb4c3",
         "remote_pressing_image_url": "https://i.discogs.com/bLdKLwUwWzhsYljfgnHfJW9GTTUnr9grCCS3usWFXtg/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTg3ODE3/MzktMTQ2ODcwMzcx/NC0xMDAwLmpwZWc.jpeg",
-        "delta_sig": "d47aafd4b02b285c"
+        "delta_sig": "e7de6d700a0eea8c"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -29958,7 +29970,7 @@
       "date_added": "2026-10-31T14:38:03-07:00",
       "discogs_url": "https://www.discogs.com/release/3093365-Thrice-Major-Minor",
       "estimated_value_usd": 29.99,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -30183,7 +30195,7 @@
         "local_cover_image_url": "assets/releases/3093365/cover.jpg",
         "local_pressing_image_url": "assets/releases/3093365/pressing.jpg?v=4_38f4bf24",
         "remote_pressing_image_url": "https://i.discogs.com/7oqe8H-P_ipjEarbszRD-XyYEhhF5oqFWsZ0tQd1fE8/rs:fit/g:sm/q:90/h:597/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMwOTMz/NjUtMTQwMDY5OTg5/Mi00NDkzLmpwZWc.jpeg",
-        "delta_sig": "40680aae9ad63e5d"
+        "delta_sig": "1599f44ccd1b5198"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -30522,7 +30534,7 @@
         "local_cover_image_url": "assets/releases/38854575/cover.jpg",
         "local_pressing_image_url": "assets/releases/38854575/pressing.jpg?v=4_bfc7da28",
         "remote_pressing_image_url": "https://i.discogs.com/dUS5mF0Idi-X2RqjE-YYRPD8RDvhG65mDrOPv6fxVzs/rs:fit/g:sm/q:90/h:588/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM4ODU0/NTc1LTE3OTMxMTk1/MzItMjU3Mi5qcGVn.jpeg",
-        "delta_sig": "348334b75f368f91"
+        "delta_sig": "c7ec81044efbb568"
       },
       "wax_spec": {
         "pattern": "color_in_color",
@@ -30785,7 +30797,7 @@
         "local_cover_image_url": "assets/releases/23657633/cover.jpg",
         "local_pressing_image_url": "assets/releases/23657633/pressing.jpg?v=2_a0f868b8",
         "remote_pressing_image_url": "https://i.discogs.com/nV7Mjf7b52o5kDmm0APHMwsoLfZLg6XESvPNg_NOyEY/rs:fit/g:sm/q:90/h:450/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzNjU3/NjMzLTE2NTU5MDM0/NzYtNzk1OS5qcGVn.jpeg",
-        "delta_sig": "005ec481a9aac5e7"
+        "delta_sig": "7a8f9116913aab0f"
       },
       "wax_spec": {
         "pattern": "black",
@@ -30962,7 +30974,7 @@
       "date_added": "2026-10-29T22:35:00-07:00",
       "discogs_url": "https://www.discogs.com/release/22879535-Monuments-5-In-Stasis",
       "estimated_value_usd": 44.94,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -30999,7 +31011,7 @@
             "height": 599,
             "aspect_ratio": 0.998,
             "role": "center_label_closeup",
-            "deterministic_score": 0.1147,
+            "deterministic_score": 0.1127,
             "local_uri": "assets/releases/22879535/img_1.jpg",
             "cv_metrics": {
               "is_pressing": false,
@@ -31059,7 +31071,7 @@
         "local_cover_image_url": "assets/releases/22879535/cover.jpg",
         "local_pressing_image_url": "assets/releases/22879535/pressing.jpg?v=2_4605c4ff",
         "remote_pressing_image_url": "https://i.discogs.com/gL20zMMYUUecHhK_9VCwzZOE5Qx35AVn12EqJcvMmfQ/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIyODc5/NTM1LTE2NDk5NTM2/OTMtMjU0MC5qcGVn.jpeg",
-        "delta_sig": "56efbeb401b5ba9f"
+        "delta_sig": "ca037ccc55bb8d66"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -31322,7 +31334,7 @@
       "date_added": "2026-10-29T19:53:06-07:00",
       "discogs_url": "https://www.discogs.com/release/26047519-Protest-The-Hero-Fortress",
       "estimated_value_usd": 55.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -31532,7 +31544,7 @@
         "local_cover_image_url": "assets/releases/26047519/cover.jpg",
         "local_pressing_image_url": "assets/releases/26047519/pressing.jpg?v=5_f07f1227",
         "remote_pressing_image_url": "https://i.discogs.com/7QYouvPbLj9mlNFXfQvn1urxrmPLcTST5wn1mnE59Qo/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2MDQ3/NTE5LTE2NzU5NzM5/OTctMTQxMC5qcGVn.jpeg",
-        "delta_sig": "b8bf7598e76b2354"
+        "delta_sig": "cb6fea314dbe4061"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -31686,7 +31698,7 @@
       "date_added": "2026-10-29T16:25:40-07:00",
       "discogs_url": "https://www.discogs.com/release/10142402-Coheed-And-Cambria-Good-Apollo-Im-Burning-Star-IV-Volume-One-From-Fear-Through-The-Eyes-Of-Madness",
       "estimated_value_usd": 179.76,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -31815,7 +31827,7 @@
         "local_cover_image_url": "assets/releases/10142402/cover.jpg",
         "local_pressing_image_url": "assets/releases/10142402/pressing.jpg?v=1_01b98d85",
         "remote_pressing_image_url": "https://i.discogs.com/Lowq-rC-ghxW0NU4184VHTJoahuCso6ZTlegWfLPHVg/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwMTQy/NDAyLTE0OTIzNjUz/OTktOTI4Ni5qcGVn.jpeg",
-        "delta_sig": "8c7996df0115003e"
+        "delta_sig": "e8e2678bb5cb46d9"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -32284,7 +32296,7 @@
           }
         ],
         "local_cover_image_url": "assets/releases/34756244/cover.jpg",
-        "delta_sig": "d4759a0bbf661d9c"
+        "delta_sig": "a2286cdfc0153c35"
       },
       "wax_spec": {
         "pattern": "galaxy",
@@ -33238,7 +33250,7 @@
         "local_cover_image_url": "assets/releases/35907826/cover.jpg",
         "local_pressing_image_url": "assets/releases/35907826/pressing.jpg?v=6_1adc0e0e",
         "remote_pressing_image_url": "https://i.discogs.com/R6NFMGEJrqk5N0jQU5KqCSqBlGe4w4uxJjX097hPpzQ/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1OTA3/ODI2LTE3NjU2OTc3/NTQtMjgzNi5qcGVn.jpeg",
-        "delta_sig": "4ff87e21afc66279"
+        "delta_sig": "e507a0de61957e1e"
       },
       "wax_spec": {
         "pattern": "marble",
@@ -33449,7 +33461,7 @@
       "date_added": "2026-10-27T11:25:51-07:00",
       "discogs_url": "https://www.discogs.com/release/26831573-Architects-2-Daybreaker",
       "estimated_value_usd": 23.31,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -33755,7 +33767,7 @@
         "local_cover_image_url": "assets/releases/26831573/cover.jpg",
         "local_pressing_image_url": "assets/releases/26831573/pressing.jpg?v=6_e6444740",
         "remote_pressing_image_url": "https://i.discogs.com/UOVnrcsVaVoAg3Kt43vp6qaX8OmjPZWPjAepAW40IfE/rs:fit/g:sm/q:90/h:600/w:594/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2ODMx/NTczLTE2ODIwNzg1/NTAtMjEwNS5qcGVn.jpeg",
-        "delta_sig": "76489b9d95a30c49"
+        "delta_sig": "0ccc560dd2f81110"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -34033,7 +34045,7 @@
         "local_cover_image_url": "assets/releases/23343893/cover.jpg",
         "local_pressing_image_url": "assets/releases/23343893/pressing.jpg?v=3_44ee10aa",
         "remote_pressing_image_url": "https://i.discogs.com/EvQYmhham06fSX-f0rjtoBToI7V9YEciEuxgf-vCmso/rs:fit/g:sm/q:90/h:572/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzMzQz/ODkzLTE2NTM0Mzgw/MTctODAyOS5qcGVn.jpeg",
-        "delta_sig": "0eca7e334a5b75ef"
+        "delta_sig": "4d5521d454a7608c"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -34293,7 +34305,7 @@
         "local_cover_image_url": "assets/releases/22544762/cover.jpg",
         "local_pressing_image_url": "assets/releases/22544762/pressing.jpg?v=1_16d16f13",
         "remote_pressing_image_url": "https://i.discogs.com/Wg0zsdVJFakQrEFAXMmI-MY0rjUY6WrIZ9jT3yp453s/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIyNTQ0/NzYyLTE2NDc1MzQz/MjMtNjIwOS5qcGVn.jpeg",
-        "delta_sig": "da17a77fcf24571e"
+        "delta_sig": "34ffa4b0c188809a"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -34393,7 +34405,7 @@
       "date_added": "2026-10-24T17:13:19-07:00",
       "discogs_url": "https://www.discogs.com/release/34007283-Nothing-More-2-Carnal-Deluxe",
       "estimated_value_usd": 25.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -34718,7 +34730,7 @@
           }
         ],
         "local_cover_image_url": "assets/releases/34007283/cover.jpg",
-        "delta_sig": "6b548c276abf430f"
+        "delta_sig": "6202f4cd0e6df1c6"
       },
       "wax_spec": {
         "pattern": "solid_color",
@@ -34853,7 +34865,7 @@
       "date_added": "2026-10-24T17:12:55-07:00",
       "discogs_url": "https://www.discogs.com/release/21047380-Nothing-More-2-The-Stories-We-Tell-Ourselves",
       "estimated_value_usd": 17.99,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -35238,7 +35250,7 @@
         "local_cover_image_url": "assets/releases/21047380/cover.jpg",
         "local_pressing_image_url": "assets/releases/21047380/pressing.jpg?v=8_f2efae45",
         "remote_pressing_image_url": "https://i.discogs.com/1rY8CPadTUm-xbebVEXM2Aaxfb-H0-c6QVAjFsUYvsI/rs:fit/g:sm/q:90/h:596/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIxMDQ3/MzgwLTE2MzgxMTI0/MjYtMTU0Ny5qcGVn.jpeg",
-        "delta_sig": "1bf53dd963a871e2"
+        "delta_sig": "1b26e612d45422e2"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -35420,7 +35432,7 @@
       "date_added": "2026-10-24T17:11:41-07:00",
       "discogs_url": "https://www.discogs.com/release/32282064-Nothing-More-2-Nothing-More",
       "estimated_value_usd": 25.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -35710,7 +35722,7 @@
         "local_cover_image_url": "assets/releases/32282064/cover.jpg",
         "local_pressing_image_url": "assets/releases/32282064/pressing.jpg?v=8_f7695063",
         "remote_pressing_image_url": "https://i.discogs.com/AhB6XzGPpKLGyg6fp4csU94xN3Trk-_YrQm_xP8NqXA/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMyMjgy/MDY0LTE3MzE1MzM3/ODUtMzIzMC5qcGVn.jpeg",
-        "delta_sig": "276ccbdd440d0047"
+        "delta_sig": "7ae467f3c14c3533"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -35889,7 +35901,7 @@
       "date_added": "2026-10-24T17:10:44-07:00",
       "discogs_url": "https://www.discogs.com/release/36224473-Bilmuri-American-Motor-Sports",
       "estimated_value_usd": 20.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -36072,7 +36084,7 @@
         "local_cover_image_url": "assets/releases/36224473/cover.jpg",
         "local_pressing_image_url": "assets/releases/36224473/pressing.jpg?v=6_b7bf2b41",
         "remote_pressing_image_url": "https://i.discogs.com/235lcFz4pvoh_mO6TuGghfmoHgHJ5xEhzO4nwefElNM/rs:fit/g:sm/q:90/h:590/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2MjI0/NDczLTE3ODg3MDI2/OTUtMzE2My5qcGVn.jpeg",
-        "delta_sig": "902c17f5d207f8a9"
+        "delta_sig": "c384f75b01500bc4"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -36439,7 +36451,7 @@
           }
         ],
         "local_cover_image_url": "assets/releases/27079776/cover.jpg",
-        "delta_sig": "1146f0e48c704931"
+        "delta_sig": "3059762e7f471c10"
       },
       "wax_spec": {
         "pattern": "color_in_color",
@@ -37024,7 +37036,7 @@
         "local_cover_image_url": "assets/releases/38268432/cover.jpg",
         "local_pressing_image_url": "assets/releases/38268432/pressing.jpg?v=11_99c531f4",
         "remote_pressing_image_url": "https://i.discogs.com/X0zsL5Ou-j2JoethcG42tVEzdg0GfcmMNEWdMjr2X1M/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM4MjY4/NDMyLTE3ODgwMTcy/MzctNTM4MS5qcGVn.jpeg",
-        "delta_sig": "4fed18c20f7c00ed"
+        "delta_sig": "2d858d30d261e74a"
       },
       "wax_spec": {
         "pattern": "color_in_color",
@@ -37294,7 +37306,7 @@
           }
         ],
         "local_cover_image_url": "assets/releases/9346527/cover.jpg",
-        "delta_sig": "5d9447096e74b3f1"
+        "delta_sig": "19b34346a1ecd9e5"
       },
       "wax_spec": {
         "pattern": "solid_color",
@@ -37436,7 +37448,7 @@
       "date_added": "2026-10-22T17:11:38-07:00",
       "discogs_url": "https://www.discogs.com/release/15594164-Periphery-3-Periphery-II-This-Time-Its-Personal",
       "estimated_value_usd": 150.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -37711,7 +37723,7 @@
         "local_cover_image_url": "assets/releases/15594164/cover.jpg",
         "local_pressing_image_url": "assets/releases/15594164/pressing.jpg?v=3_ac401b4c",
         "remote_pressing_image_url": "https://i.discogs.com/P1D0JrSe8x1597PHXQgtfQ5cZncK3bFt8rViNC5JZPg/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE1NTk0/MTY0LTE1OTQyNDI3/MDUtNDA2My5qcGVn.jpeg",
-        "delta_sig": "2b145b66302bebcd"
+        "delta_sig": "d6963011236315e5"
       },
       "wax_spec": {
         "pattern": "galaxy",
@@ -38319,7 +38331,7 @@
         "local_cover_image_url": "assets/releases/35844376/cover.jpg",
         "local_pressing_image_url": "assets/releases/35844376/pressing.jpg?v=4_f2b972c4",
         "remote_pressing_image_url": "https://i.discogs.com/P0Knnw8lg0kDqWmKPAwxXqCuixSMAqMG0p4-J94Ifyw/rs:fit/g:sm/q:90/h:569/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1ODQ0/Mzc2LTE3NjQ5NDMz/ODQtMTczMi5qcGVn.jpeg",
-        "delta_sig": "f1adede07fd59a83"
+        "delta_sig": "dee67e7ebaf8b788"
       },
       "wax_spec": {
         "pattern": "galaxy",
@@ -38424,7 +38436,7 @@
       "date_added": "2026-10-22T12:19:13-07:00",
       "discogs_url": "https://www.discogs.com/release/25089742-Architects-2-The-Classic-Symptoms-Of-A-Broken-Spirit",
       "estimated_value_usd": 20.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -38616,7 +38628,7 @@
         "local_cover_image_url": "assets/releases/25089742/cover.jpg",
         "local_pressing_image_url": "assets/releases/25089742/pressing.jpg?v=4_9d09215c",
         "remote_pressing_image_url": "https://i.discogs.com/ukgHxkU1rYnVqcGGIfq2JqJLpwd3L3fRAQIfTuULjAE/rs:fit/g:sm/q:90/h:594/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI1MDg5/NzQyLTE2NjgyNjU1/NTUtODcwNi5qcGVn.jpeg",
-        "delta_sig": "22e82b026f45e375"
+        "delta_sig": "d4a26770a3888264"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -38821,7 +38833,7 @@
       "date_added": "2026-10-21T15:03:42-07:00",
       "discogs_url": "https://www.discogs.com/release/33399134-Coheed-And-Cambria-Vaxis-III-The-Father-Of-Make-Believe",
       "estimated_value_usd": 22.98,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -39209,7 +39221,7 @@
         "local_cover_image_url": "assets/releases/33399134/cover.jpg",
         "local_pressing_image_url": "assets/releases/33399134/pressing.jpg?v=4_9674798c",
         "remote_pressing_image_url": "https://i.discogs.com/2_Z_6o26YB4IfnSU4ueDp7KsV1RHKMfHB8WRiNMDw4k/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMzk5/MTM0LTE3NDIxMzI0/ODEtODM4NS5qcGVn.jpeg",
-        "delta_sig": "e9cd735ef12e3bfe"
+        "delta_sig": "e0021b33c1fbff7f"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -39442,7 +39454,7 @@
       "date_added": "2026-10-18T20:27:05-07:00",
       "discogs_url": "https://www.discogs.com/release/20697637-Every-Time-I-Die-Radical",
       "estimated_value_usd": 25.79,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -39507,7 +39519,7 @@
         "local_cover_image_url": "assets/releases/20697637/cover.jpg",
         "local_pressing_image_url": "assets/releases/20697637/pressing.jpg?v=1_4c3d0113",
         "remote_pressing_image_url": "https://i.discogs.com/f0vh348NZGXVKBD0cBj6fdiDGVF6MxziJGKZzk2bW8g/rs:fit/g:sm/q:90/h:450/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIwNjk3/NjM3LTE2MzQ5ODEw/MjUtMjEyNC5qcGVn.jpeg",
-        "delta_sig": "d63208c2eae85db9"
+        "delta_sig": "03e4fe8e2702a0e0"
       },
       "wax_spec": {
         "pattern": "split",
@@ -39639,7 +39651,7 @@
       "date_added": "2026-10-15T15:46:11-07:00",
       "discogs_url": "https://www.discogs.com/release/25367083-Parkway-Drive-Deep-Blue-",
       "estimated_value_usd": 45.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -40010,7 +40022,7 @@
         "local_cover_image_url": "assets/releases/25367083/cover.jpg",
         "local_pressing_image_url": "assets/releases/25367083/pressing.jpg?v=6_f346e403",
         "remote_pressing_image_url": "https://i.discogs.com/POQJ-BNEOrScw1F_o4CcT5MTZ_RTX317FUZYubR_3gM/rs:fit/g:sm/q:90/h:600/w:590/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI1MzY3/MDgzLTE2Nzg3MTgx/ODItNDM5Mi5qcGVn.jpeg",
-        "delta_sig": "62036d51c290a6f8"
+        "delta_sig": "296401da6ce4d090"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -40413,7 +40425,7 @@
         "local_cover_image_url": "assets/releases/27927123/cover.jpg",
         "local_pressing_image_url": "assets/releases/27927123/pressing.jpg?v=4_d0a158b8",
         "remote_pressing_image_url": "https://i.discogs.com/49w9ecniZXI6zGNDVmTqBIUM71kMFDjU_-l8fJ34av4/rs:fit/g:sm/q:90/h:600/w:451/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3OTI3/MTIzLTE2OTE2MDcw/OTctOTYzOS5qcGVn.jpeg",
-        "delta_sig": "fd3836d513e7e424"
+        "delta_sig": "e015c05bfa8bf5bc"
       },
       "wax_spec": {
         "pattern": "galaxy",
@@ -40523,7 +40535,7 @@
       "date_added": "2026-10-14T16:36:13-07:00",
       "discogs_url": "https://www.discogs.com/release/36342703-Currents-3-All-That-Follows",
       "estimated_value_usd": 85.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -40587,7 +40599,7 @@
         "local_cover_image_url": "assets/releases/36342703/cover.jpg",
         "local_pressing_image_url": "assets/releases/36342703/pressing.jpg?v=1_2859a595",
         "remote_pressing_image_url": "https://i.discogs.com/LYSoZpc-2s43RBRbmcbl5LW0stwulYyvWtccZOub8nM/rs:fit/g:sm/q:90/h:600/w:594/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2MzQy/NzAzLTE3Njk2MjQ4/MzItMTU0NS5qcGVn.jpeg",
-        "delta_sig": "609e739f5966e634"
+        "delta_sig": "16b270ff54ba2a89"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -40705,7 +40717,7 @@
       "date_added": "2026-10-13T15:53:54-07:00",
       "discogs_url": "https://www.discogs.com/release/26847641-Greyhaven-2-Empty-Black",
       "estimated_value_usd": 68.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -40966,7 +40978,7 @@
         "local_cover_image_url": "assets/releases/26847641/cover.jpg",
         "local_pressing_image_url": "assets/releases/26847641/pressing.jpg?v=3_dbbbe5e1",
         "remote_pressing_image_url": "https://i.discogs.com/SxPyKVV8aZEgeUKiTZ8AXmQQQG2eyOY5zmpiUAYue9E/rs:fit/g:sm/q:90/h:450/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2ODQ3/NjQxLTE2ODIxOTA0/NDAtNzEyMi5qcGVn.jpeg",
-        "delta_sig": "f40a3e117d859349"
+        "delta_sig": "491ef5696fd79676"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -41127,7 +41139,7 @@
           }
         ],
         "local_cover_image_url": "assets/releases/14458307/cover.jpg",
-        "delta_sig": "1588403e96405c39"
+        "delta_sig": "2a605053a49e4d57"
       },
       "wax_spec": {
         "pattern": "black",
@@ -41455,7 +41467,7 @@
         "local_cover_image_url": "assets/releases/38600733/cover.jpg",
         "local_pressing_image_url": "assets/releases/38600733/pressing.jpg?v=3_1de0de92",
         "remote_pressing_image_url": "https://i.discogs.com/AjBjBtFeAfUBgygtaFBQouF-1XfYn2aEyNmRpguMPCs/rs:fit/g:sm/q:90/h:556/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM4NjAw/NzMzLTE3OTEwMDg5/NzgtNjM3MS5qcGVn.jpeg",
-        "delta_sig": "dce03236ec37d75d"
+        "delta_sig": "0466e5f8518cfab4"
       },
       "wax_spec": {
         "pattern": "solid_color",
@@ -41625,7 +41637,7 @@
       "date_added": "2026-10-13T15:49:47-07:00",
       "discogs_url": "https://www.discogs.com/release/29410576-Periphery-3-Icarus-EP",
       "estimated_value_usd": 27.99,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Electronic",
         "Rock"
@@ -41662,7 +41674,7 @@
             "height": 555,
             "aspect_ratio": 1.079,
             "role": "center_label_closeup",
-            "deterministic_score": 0.1285,
+            "deterministic_score": 0.1265,
             "local_uri": "assets/releases/29410576/img_1.jpg",
             "cv_metrics": {
               "is_pressing": false,
@@ -41722,7 +41734,7 @@
         "local_cover_image_url": "assets/releases/29410576/cover.jpg",
         "local_pressing_image_url": "assets/releases/29410576/pressing.jpg?v=2_b3e4449c",
         "remote_pressing_image_url": "https://i.discogs.com/nnJ2Uqjh3Ltg0HBDPGVPuvT6VQENaiolKJwD8FaANkI/rs:fit/g:sm/q:90/h:552/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NDEw/NTc2LTE3MDU0Njcw/MDctOTgzMC5qcGVn.jpeg",
-        "delta_sig": "a250d7413de53345"
+        "delta_sig": "ad5c8d2f644e109d"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -41868,7 +41880,7 @@
         "local_cover_image_url": "assets/releases/29237467/cover.jpg",
         "local_pressing_image_url": "assets/releases/29237467/pressing.jpg?v=1_6cf4d9e4",
         "remote_pressing_image_url": "https://i.discogs.com/AevR75Yqt2tWjiTPInM0-Dc_6cl0NjyvOUZ9l4PDd3k/rs:fit/g:sm/q:90/h:590/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5MjM3/NDY3LTE3MDMwMDk4/MDAtNDcyNC5qcGVn.jpeg",
-        "delta_sig": "ece0c50232916dd9"
+        "delta_sig": "711f79693322ade8"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -42010,7 +42022,7 @@
       "date_added": "2026-10-13T07:52:29-07:00",
       "discogs_url": "https://www.discogs.com/release/29410450-Periphery-3-Juggernaut-Alpha",
       "estimated_value_usd": 40.85,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -42316,7 +42328,7 @@
         "local_cover_image_url": "assets/releases/29410450/cover.jpg",
         "local_pressing_image_url": "assets/releases/29410450/pressing.jpg?v=4_e17864af",
         "remote_pressing_image_url": "https://i.discogs.com/Fg-oxbgn3Et_MyTI0gfowX7j9tJj-ZzKg4JKmY2ZOVc/rs:fit/g:sm/q:90/h:597/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NDEw/NDUwLTE3MDUwNjc5/NjgtMzY2NC5qcGVn.jpeg",
-        "delta_sig": "c109f41c4353c9ca"
+        "delta_sig": "c8574e91e06cb3ff"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -42735,7 +42747,7 @@
         "local_cover_image_url": "assets/releases/29410045/cover.jpg",
         "local_pressing_image_url": "assets/releases/29410045/pressing.jpg?v=7_2be6e23e",
         "remote_pressing_image_url": "https://i.discogs.com/Nqc9Vw9lUUuCccK_yK2KEZk8Q-pOyyJtLlH-gGTemoY/rs:fit/g:sm/q:90/h:600/w:598/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NDEw/MDQ1LTE3MDUwNjgx/MTItMjkxMy5qcGVn.jpeg",
-        "delta_sig": "10bb361bfc7d88a2"
+        "delta_sig": "d8c5fd92b8f71710"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -43095,7 +43107,7 @@
         "local_cover_image_url": "assets/releases/29410354/cover.jpg",
         "local_pressing_image_url": "assets/releases/29410354/pressing.jpg?v=4_1c78be94",
         "remote_pressing_image_url": "https://i.discogs.com/SC4uJNRKvZA3MuO34iYwsG9AhoBz-TODPfDtK-cBXPg/rs:fit/g:sm/q:90/h:600/w:598/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NDEw/MzU0LTE3MDUwNjc4/OTYtMTQ1Ny5qcGVn.jpeg",
-        "delta_sig": "82275673d24b67b5"
+        "delta_sig": "756abc0244bda062"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -43351,7 +43363,7 @@
         "local_cover_image_url": "assets/releases/37163709/cover.jpg",
         "local_pressing_image_url": "assets/releases/37163709/pressing.jpg?v=3_9b290ae2",
         "remote_pressing_image_url": "https://i.discogs.com/jcTUimYAbOpN2MMCS8Bf4nQRdYu1Pqe2scHGlWmxQFg/rs:fit/g:sm/q:90/h:600/w:450/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM3MTYz/NzA5LTE3NzczMzUz/MDctNTcyMi5qcGVn.jpeg",
-        "delta_sig": "2b68cf9779d1d847"
+        "delta_sig": "bd410c404d00f029"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -43533,7 +43545,7 @@
       "date_added": "2026-10-12T11:24:03-07:00",
       "discogs_url": "https://www.discogs.com/release/37838730-Bring-Me-The-Horizon-Count-Your-Blessings-Repented",
       "estimated_value_usd": 79.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -43542,13 +43554,13 @@
       ],
       "images": {
         "cover_image_url": "https://i.discogs.com/x1f2uUBj4fx37WEa0Xa_N9vkm09ypbDjQ9CJx4DU3pI/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM3ODM4/NzMwLTE3ODM3NzQ4/NTYtNTA1MC5qcGVn.jpeg",
-        "pressing_image_url": "assets/releases/37838730/pressing.jpg?v=20_d483bf13",
+        "pressing_image_url": "assets/releases/37838730/pressing.jpg?v=17_965e6c87",
         "center_label_image_url": "https://i.discogs.com/U7To6x10L4B2mcNbMiFd93Tl_mah4ulKg5CFt9JXzhA/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM3ODM4/NzMwLTE3ODM3NzQ4/NTYtNTA1MC5qcGVn.jpeg",
-        "display_thumbnail_url": "assets/releases/37838730/pressing.jpg?v=20_d483bf13",
+        "display_thumbnail_url": "assets/releases/37838730/pressing.jpg?v=17_965e6c87",
         "has_pressing_photo": true,
-        "selected_index": 20,
-        "selected_score": 0.8203,
-        "detection_method": "deterministic_annular_cv+guideline_13_8",
+        "selected_index": 17,
+        "selected_score": 1.0,
+        "detection_method": "override_index",
         "classified_images": [
           {
             "index": 0,
@@ -43954,8 +43966,8 @@
             "width": 600,
             "height": 600,
             "aspect_ratio": 1.0,
-            "role": "insert_or_sleeve",
-            "deterministic_score": 0.1786,
+            "role": "pressing_disc",
+            "deterministic_score": 1.0,
             "local_uri": "assets/releases/37838730/img_17.jpg",
             "cv_metrics": {
               "is_pressing": false,
@@ -44077,9 +44089,9 @@
           }
         ],
         "local_cover_image_url": "assets/releases/37838730/cover.jpg",
-        "local_pressing_image_url": "assets/releases/37838730/pressing.jpg?v=20_d483bf13",
-        "remote_pressing_image_url": "https://i.discogs.com/bdivBkT92BnSB9tOEIXNVMCychf9ARakcg7Y8SGZYD8/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM3ODM4/NzMwLTE3ODU4NTA4/NzctODE1MS5qcGVn.jpeg",
-        "delta_sig": "8f7f4b9eefd1ad43"
+        "local_pressing_image_url": "assets/releases/37838730/pressing.jpg?v=17_965e6c87",
+        "remote_pressing_image_url": "https://i.discogs.com/2Kby1YPUB4g_RPuEWnn4cir2PXwYl2-J3IAm4-GLBZI/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM3ODM4/NzMwLTE3ODU4NTA4/NzYtMzI3OC5qcGVn.jpeg",
+        "delta_sig": "42569bc99de33d0a"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -44284,7 +44296,7 @@
       "date_added": "2026-10-12T08:28:31-07:00",
       "discogs_url": "https://www.discogs.com/release/25599913-Parkway-Drive-Horizons-",
       "estimated_value_usd": 40.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Need to be done",
       "genres": [
         "Rock"
       ],
@@ -44476,7 +44488,7 @@
         "local_cover_image_url": "assets/releases/25599913/cover.jpg",
         "local_pressing_image_url": "assets/releases/25599913/pressing.jpg?v=2_e608eb6f",
         "remote_pressing_image_url": "https://i.discogs.com/ZSJOj_sKSjYYeOZGVTQSNIrY8r_xoXekDstXjiIctwg/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI1NTk5/OTEzLTE2NzQwNDIx/MjctNjE1NC5qcGVn.jpeg",
-        "delta_sig": "b12ef1ba47da55f7"
+        "delta_sig": "afeb509842ed62bc"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -44759,7 +44771,7 @@
         "local_cover_image_url": "assets/releases/35720014/cover.jpg",
         "local_pressing_image_url": "assets/releases/35720014/pressing.jpg?v=2_01cf8b49",
         "remote_pressing_image_url": "https://i.discogs.com/18H4szJOFG50ThyzK6t9kPRuecK_L64AvLLWKbDLfq0/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NzIw/MDE0LTE3NjY1NTUx/MTctMjkyNy5qcGVn.jpeg",
-        "delta_sig": "94b72d6d02dd28c1"
+        "delta_sig": "ed573e15e7dfd9e0"
       },
       "wax_spec": {
         "pattern": "color_in_color",
@@ -45173,7 +45185,7 @@
         "local_cover_image_url": "assets/releases/16251744/cover.jpg",
         "local_pressing_image_url": "assets/releases/16251744/pressing.jpg?v=1_b842a8c9",
         "remote_pressing_image_url": "https://i.discogs.com/qmFL7fDUh9xXpJcnoB5Cmlh2cLAsSTeBiWyNwtRp8hs/rs:fit/g:sm/q:90/h:450/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE2MjUx/NzQ0LTE2MDYwMDEy/NTktOTAwNC5qcGVn.jpeg",
-        "delta_sig": "8e3c7536994376cc"
+        "delta_sig": "31f4ee32f66002dc"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -45575,7 +45587,7 @@
           }
         ],
         "local_cover_image_url": "assets/releases/14043330/cover.jpg",
-        "delta_sig": "3dedc9a46253ebfd"
+        "delta_sig": "cb9364ef70a205ef"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -45679,7 +45691,7 @@
       "date_added": "2026-10-10T05:38:29-07:00",
       "discogs_url": "https://www.discogs.com/release/28895677-The-Prize-Fighter-Inferno-My-Brothers-Blood-Machine",
       "estimated_value_usd": 65.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Electronic",
         "Rock",
@@ -46055,7 +46067,7 @@
         "local_cover_image_url": "assets/releases/28895677/cover.jpg",
         "local_pressing_image_url": "assets/releases/28895677/pressing.jpg?v=7_196b7a0c",
         "remote_pressing_image_url": "https://i.discogs.com/X6R7WPIgzY_9Oy6bSt2GyjDSgP-pl5ImeAJOzvfih18/rs:fit/g:sm/q:90/h:598/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4ODk1/Njc3LTE3NTY0Mzc2/MTctNDU4NC5qcGVn.jpeg",
-        "delta_sig": "b2c0eb0b48eda714"
+        "delta_sig": "7ca95becb4a3a942"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -46242,7 +46254,7 @@
       "date_added": "2026-10-10T05:38:20-07:00",
       "discogs_url": "https://www.discogs.com/release/20154643-Minus-The-Bear-Omni",
       "estimated_value_usd": 38.2,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Need to be done",
       "genres": [
         "Rock"
       ],
@@ -46338,7 +46350,7 @@
         "local_cover_image_url": "assets/releases/20154643/cover.jpg",
         "local_pressing_image_url": "assets/releases/20154643/pressing.jpg?v=1_e0bab1d6",
         "remote_pressing_image_url": "https://i.discogs.com/3D1V-Ar48MLyLbKGky1-KMNleqCQZO1-OOwTyi3jhtA/rs:fit/g:sm/q:90/h:593/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIwMTU0/NjQzLTE2MzExMjk3/NzctMjE4MS5qcGVn.jpeg",
-        "delta_sig": "ae3e50bbcd529589"
+        "delta_sig": "d40e68105673dc9d"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -46496,7 +46508,7 @@
       "date_added": "2026-10-10T05:38:17-07:00",
       "discogs_url": "https://www.discogs.com/release/15985409-Knocked-Loose-A-Different-Shade-of-Blue",
       "estimated_value_usd": 30.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Need to be done",
       "genres": [
         "Rock"
       ],
@@ -46657,7 +46669,7 @@
         "local_cover_image_url": "assets/releases/15985409/cover.jpg",
         "local_pressing_image_url": "assets/releases/15985409/pressing.jpg?v=4_0a4370f7",
         "remote_pressing_image_url": "https://i.discogs.com/j0H0Wp7YHWGOMleaRpenWmJ0fNJ3cUPQNS_-Y2ZVC7g/rs:fit/g:sm/q:90/h:572/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE1OTg1/NDA5LTE2MDEzOTMx/MzMtODUwMS5qcGVn.jpeg",
-        "delta_sig": "a669819a3e898e02"
+        "delta_sig": "6b2330ae3efef344"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -46838,7 +46850,7 @@
       "date_added": "2026-10-10T05:38:07-07:00",
       "discogs_url": "https://www.discogs.com/release/37450368-Architects-2-All-Our-Gods-Have-Abandoned-Us-",
       "estimated_value_usd": 25.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -47066,7 +47078,7 @@
         "local_cover_image_url": "assets/releases/37450368/cover.jpg",
         "local_pressing_image_url": "assets/releases/37450368/pressing.jpg?v=5_c13086bb",
         "remote_pressing_image_url": "https://i.discogs.com/az12cSmJ1W7_SNZUa8EvuVCLSrdehWVM_6ghgPqoXtY/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM3NDUw/MzY4LTE3ODA2MTk4/NjAtMTM0Mi5qcGVn.jpeg",
-        "delta_sig": "b7a2594c91039562"
+        "delta_sig": "32e8700bc0202734"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -47244,7 +47256,7 @@
       "date_added": "2026-10-10T05:38:02-07:00",
       "discogs_url": "https://www.discogs.com/release/28518913-Coheed-And-Cambria-In-Keeping-Secrets-Of-Silent-Earth-3",
       "estimated_value_usd": 40.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -47455,7 +47467,7 @@
         "local_cover_image_url": "assets/releases/28518913/cover.jpg",
         "local_pressing_image_url": "assets/releases/28518913/pressing.jpg?v=6_5167423c",
         "remote_pressing_image_url": "https://i.discogs.com/lW-BqAS16_NxzES5Rc8mcjNXdCxlHmEZ2SiUtjurXIU/rs:fit/g:sm/q:90/h:536/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4NTE4/OTEzLTE2OTcxNjg2/NzQtNDk3NS5qcGVn.jpeg",
-        "delta_sig": "5f8c43ad9416c73a"
+        "delta_sig": "73d632bb7349a507"
       },
       "wax_spec": {
         "pattern": "black",
@@ -47901,7 +47913,7 @@
         "local_cover_image_url": "assets/releases/20518822/cover.jpg",
         "local_pressing_image_url": "assets/releases/20518822/pressing.jpg?v=7_820ad0e2",
         "remote_pressing_image_url": "https://i.discogs.com/_3IRl7TO0cMq6g7dRUgL8Jzn5ElBcjQcZrW5c2hFlX4/rs:fit/g:sm/q:90/h:600/w:597/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIwNTE4/ODIyLTE2MzM3MTI2/OTgtNzI5OS5qcGVn.jpeg",
-        "delta_sig": "9c35da7a46468a55"
+        "delta_sig": "bf6706583e46c4bf"
       },
       "wax_spec": {
         "pattern": "solid_color",
@@ -48089,7 +48101,7 @@
           }
         ],
         "local_cover_image_url": "assets/releases/23775551/cover.jpg",
-        "delta_sig": "c3c876073ab5b16b"
+        "delta_sig": "890006e8e866cc82"
       },
       "wax_spec": {
         "pattern": "solid_color",
@@ -48876,7 +48888,7 @@
         "local_cover_image_url": "assets/releases/12131049/cover.jpg",
         "local_pressing_image_url": "assets/releases/12131049/pressing.jpg?v=14_ae171f03",
         "remote_pressing_image_url": "https://i.discogs.com/aUJWrqe1DaN5IOJ57Qr7mcJSyHpbHtdSelGpFQylUCo/rs:fit/g:sm/q:90/h:589/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyMTMx/MDQ5LTE1OTA1NTY5/MjgtMzExMC5qcGVn.jpeg",
-        "delta_sig": "041f1d5eccd31c98"
+        "delta_sig": "e2e98cd24438e2f1"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -49033,7 +49045,7 @@
       "date_added": "2026-10-09T16:21:15-07:00",
       "discogs_url": "https://www.discogs.com/release/26411060-Thrice-The-Illusion-Of-Safety",
       "estimated_value_usd": 15.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -49290,7 +49302,7 @@
         "local_cover_image_url": "assets/releases/26411060/cover.jpg",
         "local_pressing_image_url": "assets/releases/26411060/pressing.jpg?v=2_244bb096",
         "remote_pressing_image_url": "https://i.discogs.com/CF4m0zPFYSG1cH9sCtXrxGTLfpD_-Re_iaoZY8l-K_Q/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2NDEx/MDYwLTE2Nzg3NDAz/NzUtMzM2NC5qcGVn.jpeg",
-        "delta_sig": "a2fda852385bb399"
+        "delta_sig": "31c7886c490bde85"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -49555,7 +49567,7 @@
             "height": 450,
             "aspect_ratio": 1.333,
             "role": "insert_or_sleeve",
-            "deterministic_score": 0.1457,
+            "deterministic_score": 0.1477,
             "local_uri": "assets/releases/26690690/img_2.jpg",
             "cv_metrics": {
               "is_pressing": false,
@@ -49583,7 +49595,7 @@
         "local_cover_image_url": "assets/releases/26690690/cover.jpg",
         "local_pressing_image_url": "assets/releases/26690690/pressing.jpg?v=1_c629bc7e",
         "remote_pressing_image_url": "https://i.discogs.com/9f8G35ucLRrohZc_0NavQmdjHZFEyS2DdcXr86STfDM/rs:fit/g:sm/q:90/h:600/w:450/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2Njkw/NjkwLTE2ODIwODQz/MjItNzY1My5qcGVn.jpeg",
-        "delta_sig": "b8b4a9367f6f9adc"
+        "delta_sig": "1975b3c312923e12"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -49839,7 +49851,7 @@
             "height": 550,
             "aspect_ratio": 1.0,
             "role": "center_label_closeup",
-            "deterministic_score": 0.0957,
+            "deterministic_score": 0.0977,
             "local_uri": "assets/releases/2343816/img_2.jpg",
             "cv_metrics": {
               "is_pressing": false,
@@ -49867,7 +49879,7 @@
         "local_cover_image_url": "assets/releases/2343816/cover.jpg",
         "local_pressing_image_url": "assets/releases/2343816/pressing.jpg?v=1_e56ca9c1",
         "remote_pressing_image_url": "https://i.discogs.com/S1teQyWeTGkhAqXF_umBuuhADYML0U4qwZJhnQ2yOD8/rs:fit/g:sm/q:90/h:485/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzNDM4/MTYtMTY1MDk0MDUx/My02MTYyLmpwZWc.jpeg",
-        "delta_sig": "f4e460b31b0fc1c4"
+        "delta_sig": "8c55d25608cb2703"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -50146,7 +50158,7 @@
         "local_cover_image_url": "assets/releases/23674760/cover.jpg",
         "local_pressing_image_url": "assets/releases/23674760/pressing.jpg?v=3_6833d360",
         "remote_pressing_image_url": "https://i.discogs.com/sL31hhpnmJL28TiAiRrattM1Deq40677_DYskQdawh0/rs:fit/g:sm/q:90/h:450/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzNjc0/NzYwLTE2NTg1OTYx/MTUtOTU4Mi5qcGVn.jpeg",
-        "delta_sig": "3d00be71082c057c"
+        "delta_sig": "f35c6cd8f2be7953"
       },
       "wax_spec": {
         "pattern": "marble",
@@ -50350,7 +50362,7 @@
       "date_added": "2026-10-09T10:01:49-07:00",
       "discogs_url": "https://www.discogs.com/release/36763201-Deftones-White-Pony",
       "estimated_value_usd": 30.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -50643,7 +50655,7 @@
         "local_cover_image_url": "assets/releases/36763201/cover.jpg",
         "local_pressing_image_url": "assets/releases/36763201/pressing.jpg?v=3_e6063830",
         "remote_pressing_image_url": "https://i.discogs.com/zlYcY2XUaKqAHwUYCI-bxYZVrdFfsTTfBHsyg5k1RHQ/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2NzYz/MjAxLTE3NzYxNzk0/MTctNzcxMS5qcGVn.jpeg",
-        "delta_sig": "85313400b9577aab"
+        "delta_sig": "24643e737497f604"
       },
       "wax_spec": {
         "pattern": "solid_color",
@@ -50804,7 +50816,7 @@
       "date_added": "2026-10-09T09:59:10-07:00",
       "discogs_url": "https://www.discogs.com/release/28129036-Polaris-21-Fatalism-",
       "estimated_value_usd": 35.21,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -50840,7 +50852,7 @@
             "height": 594,
             "aspect_ratio": 1.01,
             "role": "center_label_closeup",
-            "deterministic_score": 0.0542,
+            "deterministic_score": 0.0522,
             "local_uri": "assets/releases/28129036/img_1.jpg",
             "cv_metrics": {
               "is_pressing": false,
@@ -50872,7 +50884,7 @@
             "height": 600,
             "aspect_ratio": 0.75,
             "role": "center_label_closeup",
-            "deterministic_score": 0.1711,
+            "deterministic_score": 0.1731,
             "local_uri": "assets/releases/28129036/img_2.jpg",
             "cv_metrics": {
               "is_pressing": false,
@@ -50898,7 +50910,7 @@
           }
         ],
         "local_cover_image_url": "assets/releases/28129036/cover.jpg",
-        "delta_sig": "2b0658a923c11005"
+        "delta_sig": "50503842fec98ff0"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -51194,7 +51206,7 @@
         "local_cover_image_url": "assets/releases/34691910/cover.jpg",
         "local_pressing_image_url": "assets/releases/34691910/pressing.jpg?v=2_78120931",
         "remote_pressing_image_url": "https://i.discogs.com/LEZn5RXRQe7v3N2ILSEy6ldhGFAdpmiGpxwPY3AjXbY/rs:fit/g:sm/q:90/h:450/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0Njkx/OTEwLTE3NTM5NjA4/NjUtODgyNS5qcGVn.jpeg",
-        "delta_sig": "2ae1a40d8d510e4a"
+        "delta_sig": "324815fdfd1c9be8"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -51555,7 +51567,7 @@
         "local_cover_image_url": "assets/releases/30245600/cover.jpg",
         "local_pressing_image_url": "assets/releases/30245600/pressing.jpg?v=4_ece6a8ec",
         "remote_pressing_image_url": "https://i.discogs.com/Ohv6qvvKL0S-3kTOnwsJ5HBCmKNERKyxkLFHO5wBbbw/rs:fit/g:sm/q:90/h:600/w:592/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMwMjQ1/NjAwLTE3MTE3NDQx/NzgtNTg3Ny5qcGVn.jpeg",
-        "delta_sig": "44e49e5d70878166"
+        "delta_sig": "e6585f30eb92d2c5"
       },
       "wax_spec": {
         "pattern": "galaxy",
@@ -51728,7 +51740,7 @@
         "local_cover_image_url": "assets/releases/29592373/cover.jpg",
         "local_pressing_image_url": "assets/releases/29592373/pressing.jpg?v=1_f5cb4d4c",
         "remote_pressing_image_url": "https://i.discogs.com/ZmjwqeUp3fd8H4kClM35MTLPW31KMHrWVIO6xTupec8/rs:fit/g:sm/q:90/h:600/w:450/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI5NTky/MzczLTE3MDYxNjkx/NDAtMjAxOS5qcGVn.jpeg",
-        "delta_sig": "232298417290757d"
+        "delta_sig": "8b082d2a22c2adef"
       },
       "wax_spec": {
         "pattern": "galaxy",
@@ -52099,7 +52111,7 @@
         "local_cover_image_url": "assets/releases/26421509/cover.jpg",
         "local_pressing_image_url": "assets/releases/26421509/pressing.jpg?v=2_16223f65",
         "remote_pressing_image_url": "https://i.discogs.com/1_yWkyziYGvpN7D-0wTq2h8NHyKzzhFde41P1bUu2NM/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2NDIx/NTA5LTE2Nzg4MjA0/NzMtNTcwMi5qcGVn.jpeg",
-        "delta_sig": "b96ea873bcc40417"
+        "delta_sig": "d3da7ef41a85f0c3"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -52438,7 +52450,7 @@
         "local_cover_image_url": "assets/releases/30637357/cover.jpg",
         "local_pressing_image_url": "assets/releases/30637357/pressing.jpg?v=4_06a4a78b",
         "remote_pressing_image_url": "https://i.discogs.com/Xus43XnFOAfWdM9PFXpHMuPy9ce92clLcqjBlZDT_08/rs:fit/g:sm/q:90/h:600/w:598/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMwNjM3/MzU3LTE3MTU3OTA4/MzMtNDA2Ny5qcGVn.jpeg",
-        "delta_sig": "19d0f61862212745"
+        "delta_sig": "6809b8a824a64c8e"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -52586,7 +52598,7 @@
       "date_added": "2026-10-06T07:34:35-07:00",
       "discogs_url": "https://www.discogs.com/release/32219745-Minus-The-Bear-Planet-Of-Ice",
       "estimated_value_usd": 27.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -53052,7 +53064,7 @@
         "local_cover_image_url": "assets/releases/32219745/cover.jpg",
         "local_pressing_image_url": "assets/releases/32219745/pressing.jpg?v=8_4e1c270a",
         "remote_pressing_image_url": "https://i.discogs.com/J0Tohf7Sol5MWFW31Za2cyUoXXpgXCvU0zl2Z9kQfYo/rs:fit/g:sm/q:90/h:598/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMyMjE5/NzQ1LTE3MzIzMDI0/NTEtMjc3Mi5qcGVn.jpeg",
-        "delta_sig": "e8d4a97f5b00e1b7"
+        "delta_sig": "05cef48cbc744b03"
       },
       "wax_spec": {
         "pattern": "black",
@@ -53230,7 +53242,7 @@
       "date_added": "2026-10-06T07:32:34-07:00",
       "discogs_url": "https://www.discogs.com/release/35485618-Cursive-Domestica",
       "estimated_value_usd": 18.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -53359,7 +53371,7 @@
         "local_cover_image_url": "assets/releases/35485618/cover.jpg",
         "local_pressing_image_url": "assets/releases/35485618/pressing.jpg?v=3_77f5d28f",
         "remote_pressing_image_url": "https://i.discogs.com/x2VlFWK9TJyG-HdlDqTpkKoY6KNsHM-siBldEIXm9W8/rs:fit/g:sm/q:90/h:600/w:597/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1NDg1/NjE4LTE3NjE1MDc0/NTUtMjU3OS5qcGVn.jpeg",
-        "delta_sig": "9c0dcc49fbd5ccea"
+        "delta_sig": "2a335dc7edc058c9"
       },
       "wax_spec": {
         "pattern": "galaxy",
@@ -53505,7 +53517,7 @@
       "date_added": "2026-10-06T07:31:28-07:00",
       "discogs_url": "https://www.discogs.com/release/35331742-Cursive-The-Ugly-Organ",
       "estimated_value_usd": 24.64,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -53858,7 +53870,7 @@
         "local_cover_image_url": "assets/releases/35331742/cover.jpg",
         "local_pressing_image_url": "assets/releases/35331742/pressing.jpg?v=2_5db7552c",
         "remote_pressing_image_url": "https://i.discogs.com/48P9HzYOfcvMV56NnjJkVFQKYFKA_yhJQdyEC379GO4/rs:fit/g:sm/q:90/h:600/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM1MzMx/NzQyLTE3NjM0MTUx/OTQtNTM0Ny5qcGVn.jpeg",
-        "delta_sig": "659225fd38f0c85c"
+        "delta_sig": "6eb6c9acff3d4527"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -54029,7 +54041,7 @@
       "date_added": "2026-10-05T17:38:38-07:00",
       "discogs_url": "https://www.discogs.com/release/27066432-Veil-Of-Maya-Mother",
       "estimated_value_usd": 18.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -54381,7 +54393,7 @@
         "local_cover_image_url": "assets/releases/27066432/cover.jpg",
         "local_pressing_image_url": "assets/releases/27066432/pressing.jpg?v=6_2d14813e",
         "remote_pressing_image_url": "https://i.discogs.com/Pi7OP_IAsqC7hJVHN_eVJYeTdfnOdc1lTA0_XXtu2JE/rs:fit/g:sm/q:90/h:558/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3MDY2/NDMyLTE2ODM5OTI4/MDMtNzI1Mi5qcGVn.jpeg",
-        "delta_sig": "2394acb1e8e0d9e9"
+        "delta_sig": "3621e2e1239b15cc"
       },
       "wax_spec": {
         "pattern": "galaxy",
@@ -54490,7 +54502,7 @@
       "date_added": "2026-10-05T17:13:52-07:00",
       "discogs_url": "https://www.discogs.com/release/38113617-Thornhill-Bodies-Definitive",
       "estimated_value_usd": 27.12,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -54636,7 +54648,7 @@
           }
         ],
         "local_cover_image_url": "assets/releases/38113617/cover.jpg",
-        "delta_sig": "9f516a7e5de95649"
+        "delta_sig": "973d9aa74a4ce7c3"
       },
       "wax_spec": {
         "pattern": "galaxy",
@@ -54731,7 +54743,7 @@
       "date_added": "2026-10-05T17:08:43-07:00",
       "discogs_url": "https://www.discogs.com/release/10024143-Northlane-Mesmer",
       "estimated_value_usd": 21.51,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -54796,7 +54808,7 @@
         "local_cover_image_url": "assets/releases/10024143/cover.jpg",
         "local_pressing_image_url": "assets/releases/10024143/pressing.jpg?v=1_9a3f835a",
         "remote_pressing_image_url": "https://i.discogs.com/kt3qZpdxrE1Quk975nUwBUtpWTQHIFDAcXNKPWV5eHg/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwMDI0/MTQzLTE0OTA3NTEx/NzQtNDkxMC5qcGVn.jpeg",
-        "delta_sig": "97d718d1c1da9884"
+        "delta_sig": "532f684a163b93a3"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -55037,7 +55049,7 @@
           }
         ],
         "local_cover_image_url": "assets/releases/13990219/cover.jpg",
-        "delta_sig": "97cf7113e8fa71d4"
+        "delta_sig": "9f1d9fd79d9403ce"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -55591,7 +55603,7 @@
         "local_cover_image_url": "assets/releases/37848120/cover.jpg",
         "local_pressing_image_url": "assets/releases/37848120/pressing.jpg?v=6_2192bb87",
         "remote_pressing_image_url": "https://i.discogs.com/ud4Xkm0K7wct69x4Y8ERHflS472_C-V2PC5IsUOkPpw/rs:fit/g:sm/q:90/h:593/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM3ODQ4/MTIwLTE3ODM3MTU5/MTYtNjQ3MC5qcGVn.jpeg",
-        "delta_sig": "f6df2ef384f7bca7"
+        "delta_sig": "c6ca4fe50da3e877"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -55921,7 +55933,7 @@
         "local_cover_image_url": "assets/releases/36897417/cover.jpg",
         "local_pressing_image_url": "assets/releases/36897417/pressing.jpg?v=4_b6ebd186",
         "remote_pressing_image_url": "https://i.discogs.com/EiGPQN9oYhvXN3sReOupzqO6XXO1rP6VS5trpSTVDp4/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM2ODk3/NDE3LTE3NzQ2NDI2/NTctMjk4OC5qcGVn.jpeg",
-        "delta_sig": "1c7fa032fb3e43b1"
+        "delta_sig": "a312dceec55a18c6"
       },
       "wax_spec": {
         "pattern": "black",
@@ -56021,7 +56033,7 @@
       "date_added": "2026-10-05T16:56:48-07:00",
       "discogs_url": "https://www.discogs.com/release/29425159-Emarosa-131",
       "estimated_value_usd": 15.99,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -56052,7 +56064,7 @@
           }
         ],
         "local_cover_image_url": "assets/releases/29425159/cover.jpg",
-        "delta_sig": "58c83e9ab155990f"
+        "delta_sig": "4c25a7caaa447ffa"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -56180,7 +56192,7 @@
       "date_added": "2026-10-05T16:40:38-07:00",
       "discogs_url": "https://www.discogs.com/release/4902348-Incubus-2-SCIENCE",
       "estimated_value_usd": 33.71,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Need to be done",
       "genres": [
         "Rock"
       ],
@@ -56520,7 +56532,7 @@
         "local_cover_image_url": "assets/releases/4902348/cover.jpg",
         "local_pressing_image_url": "assets/releases/4902348/pressing.jpg?v=7_4477aa93",
         "remote_pressing_image_url": "https://i.discogs.com/j0eyd5zX66jrxU1aOZ5IgnPkZdE2PGPfkM0riiJj5sA/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQ5MDIz/NDgtMTU4MDg0ODU1/MS00OTMzLmpwZWc.jpeg",
-        "delta_sig": "c4e1df311771552e"
+        "delta_sig": "39d36fdc57251cd8"
       },
       "wax_spec": {
         "pattern": "black",
@@ -56729,7 +56741,7 @@
       "date_added": "2026-10-05T16:31:20-07:00",
       "discogs_url": "https://www.discogs.com/release/38345517-President-37-Blood-Of-Your-Empire",
       "estimated_value_usd": 86.66,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -56893,7 +56905,7 @@
         "local_cover_image_url": "assets/releases/38345517/cover.jpg",
         "local_pressing_image_url": "assets/releases/38345517/pressing.jpg?v=1_11231a54",
         "remote_pressing_image_url": "https://i.discogs.com/tgYMcUkU6WFmVduZuulbvpjMlxahFTG7E_WOxVEuHBo/rs:fit/g:sm/q:90/h:573/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM4MzQ1/NTE3LTE3ODg2MTgz/NDAtNzM0MS5qcGVn.jpeg",
-        "delta_sig": "61996f376092abd7"
+        "delta_sig": "7b75c6b5c0db72d4"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -57276,7 +57288,7 @@
         "local_cover_image_url": "assets/releases/31909216/cover.jpg",
         "local_pressing_image_url": "assets/releases/31909216/pressing.jpg?v=2_de4fe1e2",
         "remote_pressing_image_url": "https://i.discogs.com/iB_o8muai76K9ljOT_YFgumQXZ5pEe45NEQ_VH5bhLE/rs:fit/g:sm/q:90/h:600/w:588/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxOTA5/MjE2LTE3Mjg2NDk5/ODgtMjIzNS5qcGVn.jpeg",
-        "delta_sig": "229515e5152955e8"
+        "delta_sig": "d768a8d916ed9044"
       },
       "wax_spec": {
         "pattern": "black",
@@ -57401,7 +57413,7 @@
       "date_added": "2026-10-05T16:27:00-07:00",
       "discogs_url": "https://www.discogs.com/release/38020071-Allt-Ataraxia",
       "estimated_value_usd": 25.95,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -57850,7 +57862,7 @@
         "local_cover_image_url": "assets/releases/38020071/cover.jpg",
         "local_pressing_image_url": "assets/releases/38020071/pressing.jpg?v=12_0e2899f6",
         "remote_pressing_image_url": "https://i.discogs.com/bIc45jmzA4LzgCI43RTopwV1XaandUnqK3PuiMvPZ7E/rs:fit/g:sm/q:90/h:600/w:593/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM4MDIw/MDcxLTE3ODU0Mzc0/MDAtMjA3MS5qcGVn.jpeg",
-        "delta_sig": "f92255965beb6bae"
+        "delta_sig": "883cccb8ee3dbd6a"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -57960,7 +57972,7 @@
       "date_added": "2026-10-05T16:25:27-07:00",
       "discogs_url": "https://www.discogs.com/release/22968539-Northlane-Obsidian",
       "estimated_value_usd": 23.97,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Electronic",
         "Rock"
@@ -58174,7 +58186,7 @@
         "local_cover_image_url": "assets/releases/22968539/cover.jpg",
         "local_pressing_image_url": "assets/releases/22968539/pressing.jpg?v=5_76833549",
         "remote_pressing_image_url": "https://i.discogs.com/3o5ZlhFNzFG-DPUi1Vg3ZO7I__iERdMD1ZaU1m6Dbkk/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIyOTY4/NTM5LTE3MTA2Mjk0/OTgtNzI5NC5qcGVn.jpeg",
-        "delta_sig": "bb66899cd0c941d1"
+        "delta_sig": "e770ca58120070ff"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -58727,7 +58739,7 @@
         "local_cover_image_url": "assets/releases/33303678/cover.jpg",
         "local_pressing_image_url": "assets/releases/33303678/pressing.jpg?v=3_244c4e34",
         "remote_pressing_image_url": "https://i.discogs.com/EZPSkczMcyJBIq40-xQqEPAv2fLLsBqDC8jDEaQOhqw/rs:fit/g:sm/q:90/h:599/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMzMzAz/Njc4LTE3NDEzODU3/ODQtOTM0OC5qcGVn.jpeg",
-        "delta_sig": "a879263cbde5f47c"
+        "delta_sig": "4c4ace8b87bd93f7"
       },
       "wax_spec": {
         "pattern": "galaxy",
@@ -58902,7 +58914,7 @@
       "date_added": "2026-10-05T14:20:57-07:00",
       "discogs_url": "https://www.discogs.com/release/20247346-Spiritbox-Eternal-Blue",
       "estimated_value_usd": 60.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -59030,7 +59042,7 @@
         "local_cover_image_url": "assets/releases/20247346/cover.jpg",
         "local_pressing_image_url": "assets/releases/20247346/pressing.jpg?v=2_a66cddc4",
         "remote_pressing_image_url": "https://i.discogs.com/ORh4zGItX_0iSVEyLgipJ5mTfVI9eP_sIcG7x2DgUwI/rs:fit/g:sm/q:90/h:600/w:594/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIwMjQ3/MzQ2LTE2MzE3NDM4/NjItOTU5OS5qcGVn.jpeg",
-        "delta_sig": "c22d102af6ff576a"
+        "delta_sig": "7034d818fb0aee76"
       },
       "wax_spec": {
         "pattern": "color_in_color",
@@ -59212,7 +59224,7 @@
       "date_added": "2026-10-05T14:20:54-07:00",
       "discogs_url": "https://www.discogs.com/release/15847991-Chiodos-Alls-Well-That-Ends-Well",
       "estimated_value_usd": 59.99,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -59518,7 +59530,7 @@
         "local_cover_image_url": "assets/releases/15847991/cover.jpg",
         "local_pressing_image_url": "assets/releases/15847991/pressing.jpg?v=4_aa7f50ff",
         "remote_pressing_image_url": "https://i.discogs.com/b0S_J_YKMjWR9ctUi0DqWrlsexxyXzVJ6oB-pDxwi_0/rs:fit/g:sm/q:90/h:581/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE1ODQ3/OTkxLTE1OTkwODcx/MTAtMzc1NC5qcGVn.jpeg",
-        "delta_sig": "80b62dc45357469f"
+        "delta_sig": "f55ab9a1f085a75b"
       },
       "wax_spec": {
         "pattern": "translucent",
@@ -59705,7 +59717,7 @@
       "date_added": "2026-10-05T14:20:50-07:00",
       "discogs_url": "https://www.discogs.com/release/23753615-Veil-Of-Maya-Matriarch",
       "estimated_value_usd": 30.0,
-      "flattening_status": "Not Listed",
+      "flattening_status": "Done",
       "genres": [
         "Rock"
       ],
@@ -59947,7 +59959,7 @@
         "local_cover_image_url": "assets/releases/23753615/cover.jpg",
         "local_pressing_image_url": "assets/releases/23753615/pressing.jpg?v=3_0fefc68d",
         "remote_pressing_image_url": "https://i.discogs.com/kSwrbfgFomhb9xECRVK2KjFNVtJWZuf_PRd3hAbS6dc/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIzNzUz/NjE1LTE2NTY4NTgz/NjEtOTY3My5qcGVn.jpeg",
-        "delta_sig": "2341216aa4d909ef"
+        "delta_sig": "e5b28937efc27934"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -60397,7 +60409,7 @@
         "local_cover_image_url": "assets/releases/14188877/cover.jpg",
         "local_pressing_image_url": "assets/releases/14188877/pressing.jpg?v=7_4321582e",
         "remote_pressing_image_url": "https://i.discogs.com/9SD8rNP4qGqzTvsKDwpg5SAObzBTjQ3Gb2Nf8qjfzMQ/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0MTg4/ODc3LTE1NzMyNzQw/NjAtNDY4NS5qcGVn.jpeg",
-        "delta_sig": "14c67b78ab50d620"
+        "delta_sig": "ea9ae0aa24822696"
       },
       "wax_spec": {
         "pattern": "solid_color",
@@ -60766,7 +60778,7 @@
         "local_cover_image_url": "assets/releases/11368406/cover.jpg",
         "local_pressing_image_url": "assets/releases/11368406/pressing.jpg?v=3_832fb209",
         "remote_pressing_image_url": "https://i.discogs.com/zQB1A2M7_1bM2XgCF-Kvy6Z-N-GhA36mJtCBr7zce-g/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTExMzY4/NDA2LTE1MTg2MjY5/MTgtMTczNS5qcGVn.jpeg",
-        "delta_sig": "a66d6c7a38cf0e14"
+        "delta_sig": "1ee15a6aee6de947"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -61061,7 +61073,7 @@
         "local_cover_image_url": "assets/releases/37023150/cover.jpg",
         "local_pressing_image_url": "assets/releases/37023150/pressing.jpg?v=2_25e5c9f8",
         "remote_pressing_image_url": "https://i.discogs.com/KQEwAqmG5WRkkQPWFlDLzbTukan8oUD5TIU7ryqMi98/rs:fit/g:sm/q:90/h:600/w:594/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM3MDIz/MTUwLTE3NzU3NzY0/NzQtODI1Ny5qcGVn.jpeg",
-        "delta_sig": "55ea2291f00b0d99"
+        "delta_sig": "94ce6dfbf750314b"
       },
       "wax_spec": {
         "pattern": "splatter",
@@ -61251,61 +61263,168 @@
   "flattening_queue": {
     "schema_version": "5.0.0",
     "storage_mode": "portable_inline_html+json",
-    "updated_at_utc": "2026-11-19T04:14:50Z",
+    "updated_at_utc": "2026-11-19T20:43:56Z",
     "protocol": "Bag on 6 until 130°F then drop to 4 — 2.5 hours once at 130°F on the plate",
     "need_to_be_done_release_ids": [
+      2486041,
+      4902348,
+      13257813,
+      15985409,
+      17583742,
+      20154643,
+      21929479,
+      25599913,
+      26986229,
+      27945363,
       28844782,
+      29631781,
+      31082741,
+      34513906,
+      35668090,
       35907826
     ],
     "done_release_ids": [
       2343816,
+      3093365,
+      3780990,
       3873517,
+      5632601,
+      7685817,
+      8781739,
       9346527,
+      9545877,
+      10024143,
+      10142402,
+      11095447,
       11368406,
+      11625165,
+      11771142,
+      11812427,
       12131049,
+      12852715,
+      12988109,
       13113361,
+      13203006,
       13990219,
       14043330,
       14188877,
       14458307,
+      14816287,
+      14947161,
+      15043916,
+      15594164,
+      15847991,
+      15962864,
+      15985411,
       16251744,
+      16595574,
+      16610055,
+      17743813,
+      18670618,
+      18801928,
+      19084276,
+      19249243,
+      20247346,
       20518822,
       20546863,
+      20697637,
+      21047380,
+      21315247,
       21390094,
+      21958303,
+      22031968,
       22153450,
       22544762,
+      22568519,
+      22879535,
+      22968539,
       23343893,
+      23605157,
       23657633,
       23674760,
+      23753615,
       23775551,
+      25089742,
+      25367083,
+      25418758,
       25484485,
       25541158,
+      26047147,
+      26047519,
+      26411060,
       26421509,
       26690690,
+      26831573,
+      26847641,
+      26917130,
+      27066432,
       27079776,
+      27137034,
+      27611781,
+      27717681,
       27927123,
+      27938112,
+      28129036,
       28269505,
+      28518913,
+      28575079,
       28593982,
+      28895677,
       29075062,
       29237467,
       29410045,
       29410354,
+      29410450,
+      29410576,
+      29425159,
       29592373,
       30245600,
       30637357,
+      31200271,
+      31699214,
       31909216,
+      32219745,
+      32282064,
+      32367897,
+      33201711,
       33303678,
+      33399134,
+      34007283,
       34691910,
       34756244,
+      34889219,
+      35331742,
+      35336893,
       35426350,
+      35485618,
       35720014,
+      35844325,
       35844376,
+      35852386,
+      36085903,
+      36224473,
+      36282118,
+      36342703,
+      36666961,
+      36763201,
       36897417,
+      36991890,
       37023150,
       37058814,
+      37084122,
       37163709,
+      37227948,
+      37450368,
+      37838730,
       37848120,
+      38020071,
+      38113617,
+      38199639,
+      38267097,
       38268432,
+      38337288,
+      38345517,
+      38464542,
       38600733,
       38854575
     ],
@@ -61319,19 +61438,229 @@
         ]
       },
       {
+        "artist": "Born Of Osiris",
+        "album": "The Simulation",
+        "release_ids": [
+          13257813
+        ]
+      },
+      {
+        "artist": "Born Of Osiris",
+        "album": "Through Shadows",
+        "release_ids": [
+          34513906
+        ]
+      },
+      {
         "artist": "Bring Me The Horizon",
         "album": "That's The Spirit",
         "release_ids": [
           35907826
         ]
+      },
+      {
+        "artist": "Chromeo",
+        "album": "Business Casual",
+        "release_ids": [
+          2486041
+        ]
+      },
+      {
+        "artist": "Chromeo",
+        "album": "Fancy Footwork",
+        "release_ids": [
+          35668090
+        ]
+      },
+      {
+        "artist": "Circa Survive",
+        "album": "On Letting Go",
+        "release_ids": [
+          29631781
+        ]
+      },
+      {
+        "artist": "Currents",
+        "album": "The Way It Ends ",
+        "release_ids": [
+          31082741
+        ]
+      },
+      {
+        "artist": "Incubus",
+        "album": "S.C.I.E.N.C.E.",
+        "release_ids": [
+          4902348
+        ]
+      },
+      {
+        "artist": "Knocked Loose",
+        "album": "A Different Shade of Blue",
+        "release_ids": [
+          15985409
+        ]
+      },
+      {
+        "artist": "Mac Miller",
+        "album": "Swimming",
+        "release_ids": [
+          27945363
+        ]
+      },
+      {
+        "artist": "Minus The Bear",
+        "album": "Omni",
+        "release_ids": [
+          20154643
+        ]
+      },
+      {
+        "artist": "Parkway Drive",
+        "album": "Horizons ",
+        "release_ids": [
+          25599913
+        ]
+      },
+      {
+        "artist": "Rings Of Saturn",
+        "album": "Embryonic Anomaly (Remake)",
+        "release_ids": [
+          17583742
+        ]
+      },
+      {
+        "artist": "The Plot In You",
+        "album": "Swan Song",
+        "release_ids": [
+          21929479
+        ]
+      },
+      {
+        "artist": "Unearth",
+        "album": "The Wretched; The Ruinous",
+        "release_ids": [
+          26986229
+        ]
       }
     ],
     "done_entries": [
+      {
+        "artist": "156/Silence",
+        "album": "From A Distance",
+        "release_ids": [
+          38337288
+        ]
+      },
+      {
+        "artist": "A Day To Remember",
+        "album": "Big Ole Album Vol. 1",
+        "release_ids": [
+          33201711
+        ]
+      },
+      {
+        "artist": "Allt",
+        "album": "Ataraxia",
+        "release_ids": [
+          38020071
+        ]
+      },
       {
         "artist": "Allt",
         "album": "From The New World",
         "release_ids": [
           31909216
+        ]
+      },
+      {
+        "artist": "Animals As Leaders",
+        "album": "Animals As Leaders",
+        "release_ids": [
+          12988109
+        ]
+      },
+      {
+        "artist": "Animals As Leaders",
+        "album": "Weightless",
+        "release_ids": [
+          14816287
+        ]
+      },
+      {
+        "artist": "Architects",
+        "album": "All Our Gods Have Abandoned Us ",
+        "release_ids": [
+          37450368
+        ]
+      },
+      {
+        "artist": "Architects",
+        "album": "Daybreaker",
+        "release_ids": [
+          26831573
+        ]
+      },
+      {
+        "artist": "Architects",
+        "album": "For Those That Wish To Exist",
+        "release_ids": [
+          17743813
+        ]
+      },
+      {
+        "artist": "Architects",
+        "album": "The Classic Symptoms Of A Broken Spirit",
+        "release_ids": [
+          25089742
+        ]
+      },
+      {
+        "artist": "As I Lay Dying",
+        "album": "Frail Words Collapse",
+        "release_ids": [
+          36282118
+        ]
+      },
+      {
+        "artist": "As I Lay Dying",
+        "album": "Shadows Are Security",
+        "release_ids": [
+          36085903
+        ]
+      },
+      {
+        "artist": "August Burns Red",
+        "album": "Guardians",
+        "release_ids": [
+          15043916
+        ]
+      },
+      {
+        "artist": "Beartooth",
+        "album": "The Surface",
+        "release_ids": [
+          28575079
+        ]
+      },
+      {
+        "artist": "Bilmuri",
+        "album": "American Motor Sports",
+        "release_ids": [
+          36224473
+        ]
+      },
+      {
+        "artist": "Bilmuri",
+        "album": "Eggy Pocket",
+        "release_ids": [
+          38464542
+        ]
+      },
+      {
+        "artist": "Bilmuri",
+        "album": "Kinda Hard",
+        "release_ids": [
+          37084122
         ]
       },
       {
@@ -61350,6 +61679,13 @@
       },
       {
         "artist": "Born Of Osiris",
+        "album": "The Discovery",
+        "release_ids": [
+          36991890
+        ]
+      },
+      {
+        "artist": "Born Of Osiris",
         "album": "Tomorrow We Die ∆live",
         "release_ids": [
           25484485
@@ -61363,10 +61699,52 @@
         ]
       },
       {
+        "artist": "Bring Me The Horizon",
+        "album": "Count Your Blessings Repented.",
+        "release_ids": [
+          37838730
+        ]
+      },
+      {
+        "artist": "Chiodos",
+        "album": "All's Well That Ends Well",
+        "release_ids": [
+          15847991
+        ]
+      },
+      {
+        "artist": "Circa Survive",
+        "album": "Juturna",
+        "release_ids": [
+          38267097
+        ]
+      },
+      {
+        "artist": "Coheed And Cambria",
+        "album": "Good Apollo I'm Burning Star IV Volume One: From Fear Through The Eyes Of Madness",
+        "release_ids": [
+          10142402
+        ]
+      },
+      {
         "artist": "Coheed And Cambria",
         "album": "Good Apollo, I'm Burning Star IV, Volume Two: No World for Tomorrow",
         "release_ids": [
           16251744
+        ]
+      },
+      {
+        "artist": "Coheed And Cambria",
+        "album": "In Keeping Secrets Of Silent Earth: 3",
+        "release_ids": [
+          28518913
+        ]
+      },
+      {
+        "artist": "Coheed And Cambria",
+        "album": "The Color Before The Sun",
+        "release_ids": [
+          7685817
         ]
       },
       {
@@ -61384,10 +61762,52 @@
         ]
       },
       {
+        "artist": "Coheed And Cambria",
+        "album": "Vaxis III: The Father Of Make Believe",
+        "release_ids": [
+          33399134
+        ]
+      },
+      {
+        "artist": "Currents",
+        "album": "All That Follows",
+        "release_ids": [
+          36342703
+        ]
+      },
+      {
         "artist": "Currents",
         "album": "The Place I Feel Safest",
         "release_ids": [
           28593982
+        ]
+      },
+      {
+        "artist": "Currents",
+        "album": "The Way It Ends",
+        "release_ids": [
+          22031968
+        ]
+      },
+      {
+        "artist": "Cursive",
+        "album": "Domestica",
+        "release_ids": [
+          35485618
+        ]
+      },
+      {
+        "artist": "Cursive",
+        "album": "The Ugly Organ",
+        "release_ids": [
+          35331742
+        ]
+      },
+      {
+        "artist": "Deftones",
+        "album": "White Pony",
+        "release_ids": [
+          36763201
         ]
       },
       {
@@ -61419,6 +61839,62 @@
         ]
       },
       {
+        "artist": "Ed Sheeran",
+        "album": "+-=÷× (Tour Collection)",
+        "release_ids": [
+          31699214
+        ]
+      },
+      {
+        "artist": "Emarosa",
+        "album": "131",
+        "release_ids": [
+          29425159
+        ]
+      },
+      {
+        "artist": "Emarosa",
+        "album": "High Horse Heaven",
+        "release_ids": [
+          37227948
+        ]
+      },
+      {
+        "artist": "Emarosa",
+        "album": "Peach Club",
+        "release_ids": [
+          13203006
+        ]
+      },
+      {
+        "artist": "Emery",
+        "album": "The Question Live",
+        "release_ids": [
+          23605157
+        ]
+      },
+      {
+        "artist": "Erra",
+        "album": "Drift",
+        "release_ids": [
+          27611781
+        ]
+      },
+      {
+        "artist": "Erra",
+        "album": "Neon",
+        "release_ids": [
+          27717681
+        ]
+      },
+      {
+        "artist": "Erra",
+        "album": "Silence Outlives The Earth",
+        "release_ids": [
+          36666961
+        ]
+      },
+      {
         "artist": "Every Time I Die",
         "album": "Gutter Phenomenon",
         "release_ids": [
@@ -61434,9 +61910,30 @@
       },
       {
         "artist": "Every Time I Die",
+        "album": "Radical",
+        "release_ids": [
+          20697637
+        ]
+      },
+      {
+        "artist": "Every Time I Die",
         "album": "The Big Dirty",
         "release_ids": [
           2343816
+        ]
+      },
+      {
+        "artist": "Fit For A King",
+        "album": "The Path",
+        "release_ids": [
+          15962864
+        ]
+      },
+      {
+        "artist": "Greyhaven",
+        "album": "Empty Black",
+        "release_ids": [
+          26847641
         ]
       },
       {
@@ -61444,6 +61941,13 @@
         "album": "This Bright And Beautiful World",
         "release_ids": [
           27079776
+        ]
+      },
+      {
+        "artist": "I Prevail",
+        "album": "True Power",
+        "release_ids": [
+          25418758
         ]
       },
       {
@@ -61468,10 +61972,45 @@
         ]
       },
       {
+        "artist": "Imminence",
+        "album": "Turn The Light On",
+        "release_ids": [
+          22568519
+        ]
+      },
+      {
+        "artist": "Invent, Animate",
+        "album": "Everchanger",
+        "release_ids": [
+          18670618
+        ]
+      },
+      {
+        "artist": "Invent, Animate",
+        "album": "Greyview",
+        "release_ids": [
+          15985411
+        ]
+      },
+      {
         "artist": "Invent, Animate",
         "album": "Heavener",
         "release_ids": [
           35720014
+        ]
+      },
+      {
+        "artist": "Invent, Animate",
+        "album": "Stillworld",
+        "release_ids": [
+          27938112
+        ]
+      },
+      {
+        "artist": "Knocked Loose",
+        "album": "Laugh Tracks",
+        "release_ids": [
+          16595574
         ]
       },
       {
@@ -61482,10 +62021,38 @@
         ]
       },
       {
+        "artist": "Make Them Suffer",
+        "album": "Make Them Suffer",
+        "release_ids": [
+          32367897
+        ]
+      },
+      {
         "artist": "Minus The Bear",
         "album": "Infinity Overhead",
         "release_ids": [
           20518822
+        ]
+      },
+      {
+        "artist": "Minus The Bear",
+        "album": "Menos El Oso",
+        "release_ids": [
+          34889219
+        ]
+      },
+      {
+        "artist": "Minus The Bear",
+        "album": "Planet Of Ice",
+        "release_ids": [
+          32219745
+        ]
+      },
+      {
+        "artist": "Monuments",
+        "album": "In Stasis",
+        "release_ids": [
+          22879535
         ]
       },
       {
@@ -61504,9 +62071,44 @@
       },
       {
         "artist": "Northlane",
+        "album": "Mesmer",
+        "release_ids": [
+          10024143
+        ]
+      },
+      {
+        "artist": "Northlane",
         "album": "Node: Reloaded",
         "release_ids": [
           37023150
+        ]
+      },
+      {
+        "artist": "Northlane",
+        "album": "Obsidian",
+        "release_ids": [
+          22968539
+        ]
+      },
+      {
+        "artist": "Northlane",
+        "album": "Singularity",
+        "release_ids": [
+          9545877
+        ]
+      },
+      {
+        "artist": "Nothing More",
+        "album": "Carnal (Deluxe)",
+        "release_ids": [
+          34007283
+        ]
+      },
+      {
+        "artist": "Nothing More",
+        "album": "Nothing More",
+        "release_ids": [
+          32282064
         ]
       },
       {
@@ -61514,6 +62116,20 @@
         "album": "Spirits",
         "release_ids": [
           27927123
+        ]
+      },
+      {
+        "artist": "Nothing More",
+        "album": "The Stories We Tell Ourselves",
+        "release_ids": [
+          21047380
+        ]
+      },
+      {
+        "artist": "Parkway Drive",
+        "album": "Deep Blue ",
+        "release_ids": [
+          25367083
         ]
       },
       {
@@ -61532,6 +62148,20 @@
       },
       {
         "artist": "Periphery",
+        "album": "Icarus EP",
+        "release_ids": [
+          29410576
+        ]
+      },
+      {
+        "artist": "Periphery",
+        "album": "Juggernaut • Alpha",
+        "release_ids": [
+          29410450
+        ]
+      },
+      {
+        "artist": "Periphery",
         "album": "Juggernaut • Omega",
         "release_ids": [
           29410354
@@ -61542,6 +62172,20 @@
         "album": "Periphery",
         "release_ids": [
           29410045
+        ]
+      },
+      {
+        "artist": "Periphery",
+        "album": "Periphery II: This Time It's Personal",
+        "release_ids": [
+          3780990
+        ]
+      },
+      {
+        "artist": "Periphery",
+        "album": "Periphery II: This Time It's Personal",
+        "release_ids": [
+          15594164
         ]
       },
       {
@@ -61574,9 +62218,51 @@
       },
       {
         "artist": "Polaris",
+        "album": "Fatalism ",
+        "release_ids": [
+          28129036
+        ]
+      },
+      {
+        "artist": "Polaris",
         "album": "The Death Of Me",
         "release_ids": [
           34691910
+        ]
+      },
+      {
+        "artist": "Polaris",
+        "album": "The Mortal Coil",
+        "release_ids": [
+          11095447
+        ]
+      },
+      {
+        "artist": "President",
+        "album": "Blood Of Your Empire",
+        "release_ids": [
+          38345517
+        ]
+      },
+      {
+        "artist": "Protest The Hero",
+        "album": "Fortress",
+        "release_ids": [
+          26047519
+        ]
+      },
+      {
+        "artist": "Protest The Hero",
+        "album": "Kezia",
+        "release_ids": [
+          26047147
+        ]
+      },
+      {
+        "artist": "Silent Planet",
+        "album": "Everything Was Sound",
+        "release_ids": [
+          16610055
         ]
       },
       {
@@ -61598,6 +62284,13 @@
         "album": "Take Me Back To Eden",
         "release_ids": [
           37163709
+        ]
+      },
+      {
+        "artist": "Spiritbox",
+        "album": "Eternal Blue",
+        "release_ids": [
+          20247346
         ]
       },
       {
@@ -61636,6 +62329,41 @@
         ]
       },
       {
+        "artist": "The Devil Wears Prada",
+        "album": "Zombie EP",
+        "release_ids": [
+          35336893
+        ]
+      },
+      {
+        "artist": "The Plot In You",
+        "album": "Dispose",
+        "release_ids": [
+          11625165
+        ]
+      },
+      {
+        "artist": "The Plot In You",
+        "album": "Happiness In Self Destruction",
+        "release_ids": [
+          18801928
+        ]
+      },
+      {
+        "artist": "The Prize Fighter Inferno",
+        "album": "My Brother's Blood Machine",
+        "release_ids": [
+          28895677
+        ]
+      },
+      {
+        "artist": "Thornhill",
+        "album": "Bodies: Definitive",
+        "release_ids": [
+          38113617
+        ]
+      },
+      {
         "artist": "Thornhill",
         "album": "Heroine",
         "release_ids": [
@@ -61647,6 +62375,55 @@
         "album": "Identity Crisis",
         "release_ids": [
           35844376
+        ]
+      },
+      {
+        "artist": "Thrice",
+        "album": "Major / Minor",
+        "release_ids": [
+          3093365
+        ]
+      },
+      {
+        "artist": "Thrice",
+        "album": "The Alchemy Index Vols. I ● II (Fire & Water)",
+        "release_ids": [
+          35844325
+        ]
+      },
+      {
+        "artist": "Thrice",
+        "album": "The Alchemy Index Vols. III ● IV (Air & Earth)",
+        "release_ids": [
+          35852386
+        ]
+      },
+      {
+        "artist": "Thrice",
+        "album": "The Artist In The Ambulance",
+        "release_ids": [
+          8781739
+        ]
+      },
+      {
+        "artist": "Thrice",
+        "album": "The Illusion Of Safety",
+        "release_ids": [
+          26411060
+        ]
+      },
+      {
+        "artist": "Thrice",
+        "album": "To Be Everywhere Is To Be Nowhere",
+        "release_ids": [
+          19084276
+        ]
+      },
+      {
+        "artist": "Thursday",
+        "album": "Full Collapse",
+        "release_ids": [
+          5632601
         ]
       },
       {
@@ -61664,6 +62441,34 @@
         ]
       },
       {
+        "artist": "Underoath",
+        "album": "Erase Me",
+        "release_ids": [
+          11812427
+        ]
+      },
+      {
+        "artist": "Underoath",
+        "album": "They're Only Chasing Safety",
+        "release_ids": [
+          31200271
+        ]
+      },
+      {
+        "artist": "Unearth",
+        "album": "Extinction[s]",
+        "release_ids": [
+          12852715
+        ]
+      },
+      {
+        "artist": "Unearth",
+        "album": "III: In The Eyes Of Fire",
+        "release_ids": [
+          21315247
+        ]
+      },
+      {
         "artist": "Unearth",
         "album": "The Stings Of Conscience",
         "release_ids": [
@@ -61671,10 +62476,73 @@
         ]
       },
       {
+        "artist": "Unearth",
+        "album": "The Wretched; The Ruinous",
+        "release_ids": [
+          27137034
+        ]
+      },
+      {
+        "artist": "Unearth",
+        "album": "Watchers Of Rule",
+        "release_ids": [
+          19249243
+        ]
+      },
+      {
+        "artist": "Veil of Maya",
+        "album": "[Id]",
+        "release_ids": [
+          14947161
+        ]
+      },
+      {
+        "artist": "Veil of Maya",
+        "album": "[M]other",
+        "release_ids": [
+          27066432
+        ]
+      },
+      {
         "artist": "Veil of Maya",
         "album": "False Idol",
         "release_ids": [
           11368406
+        ]
+      },
+      {
+        "artist": "Veil of Maya",
+        "album": "Matriarch",
+        "release_ids": [
+          23753615
+        ]
+      },
+      {
+        "artist": "Veil of Maya",
+        "album": "The Common Man's Collapse",
+        "release_ids": [
+          26917130
+        ]
+      },
+      {
+        "artist": "Vianova",
+        "album": "Hit It!",
+        "release_ids": [
+          38199639
+        ]
+      },
+      {
+        "artist": "Wage War",
+        "album": "Deadweight",
+        "release_ids": [
+          11771142
+        ]
+      },
+      {
+        "artist": "Wage War",
+        "album": "Manic",
+        "release_ids": [
+          21958303
         ]
       }
     ]

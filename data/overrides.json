@@ -10,6 +10,11 @@
   "10142402": "assets/releases/10142402/pressing.jpg?v=1_01b98d85",
   "11095447": "assets/releases/11095447/pressing.jpg?v=3_fb6e5dd3",
   "11368406": "assets/releases/11368406/pressing.jpg?v=3_832fb209",
+  "11625165": {
+    "pressing_image_index": 8,
+    "user_locked": true,
+    "uri": "assets/releases/11625165/img_8.jpg"
+  },
   "11812427": "assets/releases/11812427/pressing.jpg?v=6_b7ed4428",
   "12131049": "assets/releases/12131049/pressing.jpg?v=14_ae171f03",
   "12852715": "assets/releases/12852715/pressing.jpg?v=3_f0de4019",
@@ -123,7 +128,11 @@
   "37163709": "assets/releases/37163709/pressing.jpg?v=3_9b290ae2",
   "37227948": "assets/releases/37227948/pressing.jpg?v=1_6ccea337",
   "37450368": "assets/releases/37450368/pressing.jpg?v=5_c13086bb",
-  "37838730": "assets/releases/37838730/pressing.jpg?v=20_d483bf13",
+  "37838730": {
+    "pressing_image_index": 17,
+    "user_locked": true,
+    "uri": "assets/releases/37838730/img_17.jpg"
+  },
   "37848120": "assets/releases/37848120/pressing.jpg?v=6_2192bb87",
   "38020071": "assets/releases/38020071/pressing.jpg?v=12_0e2899f6",
   "38199639": "assets/releases/38199639/pressing.jpg?v=1_ccc48da1",

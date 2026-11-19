@@ -1286,6 +1286,8 @@ def _norm_text(s: str) -> str:
     return re.sub(r"[^a-z0-9]+", " ", (s or "").lower()).strip()
 
 
+DEFAULT_FLATTENING_STATUS = "Need to be done"
+
 DEFAULT_FLATTENING_PROTOCOL = (
     "Bag on 6 until 130°F then drop to 4 — 2.5 hours once at 130°F on the plate"
 )
@@ -1297,9 +1299,15 @@ def resolve_flattening_status(
     release_id: int | str,
     queue_data: dict[str, Any] | None = None,
 ) -> str:
-    """Deterministically resolves a release's Vinyl Flattening status ('Need to be done', 'Done', or 'Not Listed')."""
+    """Deterministically resolves a release's Vinyl Flattening status ('Need to be done', 'Done', or 'Not Listed').
+
+    Auto-queue rule: any newly added or untracked album automatically defaults to
+    `Need to be done` so it awaits arrival inspection (and can then be flattened or
+    confirmed already flat and toggled to `Done`). Only releases explicitly recorded in
+    `done_release_ids` (`Done`) or `unlisted_release_ids` (`Not Listed`) bypass the queue.
+    """
     if not queue_data:
-        return "Not Listed"
+        return DEFAULT_FLATTENING_STATUS
 
     rid_int = int(release_id or 0)
     unlisted_ids = {int(x) for x in (queue_data.get("unlisted_release_ids") or []) if str(x).isdigit()}
@@ -1343,7 +1351,7 @@ def resolve_flattening_status(
         if ea and et and len(t_norm) >= 4 and (ea in a_norm or a_norm in ea) and (et == t_norm or (len(et) >= 5 and et in t_norm)):
             return "Done"
 
-    return "Not Listed"
+    return DEFAULT_FLATTENING_STATUS
 
 
 def _parse_csv_int_ids(raw: str | None) -> list[int]:
@@ -1404,7 +1412,7 @@ def extract_inline_flattening_from_html(html_path: pathlib.Path | None) -> dict[
     has_ts, updated_at = _extract_input_val("flatten-hidden-updated-at")
     has_proto, protocol_str = _extract_input_val("flatten-hidden-protocol")
 
-    if has_todo or has_done or has_ts:
+    if has_todo or has_done or has_unlisted or has_ts:
         if has_todo:
             result["need_to_be_done_release_ids"] = _parse_csv_int_ids(todo_csv)
         if has_done:
@@ -1427,14 +1435,16 @@ def extract_inline_flattening_from_html(html_path: pathlib.Path | None) -> dict[
             try:
                 col_obj = json.loads(m_col.group(1))
                 recs = col_obj.get("records") or []
-                todo_rids = sorted({int(r["release_id"]) for r in recs if r.get("flattening_status") == "Need to be done" and r.get("release_id")})
+                todo_rids = sorted({int(r["release_id"]) for r in recs if (r.get("flattening_status") or DEFAULT_FLATTENING_STATUS) == "Need to be done" and r.get("release_id")})
                 done_rids = sorted({int(r["release_id"]) for r in recs if r.get("flattening_status") == "Done" and r.get("release_id")})
+                unlisted_rids = sorted({int(r["release_id"]) for r in recs if r.get("flattening_status") == "Not Listed" and r.get("release_id")})
                 fq = col_obj.get("flattening_queue") or {}
                 result = {
                     "protocol": fq.get("protocol") or DEFAULT_FLATTENING_PROTOCOL,
                     "updated_at_utc": fq.get("updated_at_utc") or col_obj.get("synced_at_utc") or "",
                     "need_to_be_done_release_ids": todo_rids,
                     "done_release_ids": done_rids,
+                    "unlisted_release_ids": sorted(set(unlisted_rids) | {int(x) for x in (fq.get("unlisted_release_ids") or []) if str(x).isdigit()}),
                     "need_to_be_done_entries": fq.get("need_to_be_done_entries") or [],
                     "done_entries": fq.get("done_entries") or [],
                 }
@@ -1456,7 +1466,7 @@ def build_flattening_queue_payload(
         "130°F then drop to 4 — 2.5 hours once at 130°F",
     )
     todo_recs = sorted(
-        [r for r in records if r.get("flattening_status") == "Need to be done"],
+        [r for r in records if (r.get("flattening_status") or DEFAULT_FLATTENING_STATUS) == "Need to be done"],
         key=lambda x: (str(x.get("artist") or "").lower(), str(x.get("title") or "").lower()),
     )
     done_recs = sorted(
@@ -1465,13 +1475,18 @@ def build_flattening_queue_payload(
     )
     todo_ids = sorted({int(r["release_id"]) for r in todo_recs if int(r.get("release_id") or 0) > 0})
     done_ids = sorted({int(r["release_id"]) for r in done_recs if int(r.get("release_id") or 0) > 0})
-    unlisted_ids = sorted(
-        {
-            int(x)
-            for x in (base_queue.get("unlisted_release_ids") or [])
-            if str(x).isdigit() and int(x) not in todo_ids and int(x) not in done_ids
-        }
-    )
+    todo_id_set = set(todo_ids)
+    done_id_set = set(done_ids)
+    unlisted_id_set = {
+        int(x)
+        for x in (base_queue.get("unlisted_release_ids") or [])
+        if str(x).isdigit() and int(x) not in todo_id_set and int(x) not in done_id_set
+    }
+    for r in records:
+        rid_val = int(r.get("release_id") or 0)
+        if rid_val > 0 and r.get("flattening_status") == "Not Listed" and rid_val not in todo_id_set and rid_val not in done_id_set:
+            unlisted_id_set.add(rid_val)
+    unlisted_ids = sorted(unlisted_id_set)
 
     todo_entries = [
         {
@@ -1523,21 +1538,87 @@ def reconcile_flattening_state(
     file_ts = str(file_queue.get("updated_at_utc") or "")
     html_ts = str(html_queue.get("updated_at_utc") or "")
 
-    # Prefer inline HTML queue if it has a newer timestamp or if file_queue is missing/empty
+    # Prefer inline HTML queue if it has a newer timestamp or if file_queue is missing/empty.
+    # Avoid leaking stale `entries` or resurrecting intentionally emptied ID lists from the older source.
     if html_queue and (not file_queue or (html_ts and html_ts > file_ts)):
-        chosen = dict(file_queue)
-        chosen.update(html_queue)
-    elif file_queue:
         chosen = dict(html_queue)
-        chosen.update(file_queue)
-        if not chosen.get("need_to_be_done_release_ids") and html_queue.get("need_to_be_done_release_ids"):
+        if not chosen.get("protocol") and file_queue.get("protocol"):
+            chosen["protocol"] = file_queue["protocol"]
+    elif file_queue:
+        chosen = dict(file_queue)
+        if not chosen.get("protocol") and html_queue.get("protocol"):
+            chosen["protocol"] = html_queue["protocol"]
+        if "need_to_be_done_release_ids" not in file_queue and "need_to_be_done_release_ids" in html_queue:
             chosen["need_to_be_done_release_ids"] = html_queue["need_to_be_done_release_ids"]
-        if not chosen.get("done_release_ids") and html_queue.get("done_release_ids"):
+        if "done_release_ids" not in file_queue and "done_release_ids" in html_queue:
             chosen["done_release_ids"] = html_queue["done_release_ids"]
+        if "unlisted_release_ids" not in file_queue and "unlisted_release_ids" in html_queue:
+            chosen["unlisted_release_ids"] = html_queue["unlisted_release_ids"]
     else:
         chosen = {}
 
     return chosen
+
+
+def extract_inline_overrides_from_html(html_path: pathlib.Path | None) -> dict[str, Any]:
+    """Extracts `window.__DISCOGS_OVERRIDES__` embedded inside an existing `index.html`."""
+    if not html_path or not html_path.exists():
+        return {}
+    try:
+        html_text = html_path.read_text(encoding="utf-8", errors="ignore")
+    except Exception:
+        return {}
+
+    m_ov = re.search(
+        r"window\.__DISCOGS_OVERRIDES__\s*=\s*(\{.*?\});\s*window\.__DISCOGS_COLLECTION__",
+        html_text,
+        flags=re.DOTALL,
+    )
+    if not m_ov:
+        return {}
+    try:
+        parsed = json.loads(m_ov.group(1))
+        return parsed if isinstance(parsed, dict) else {}
+    except Exception:
+        return {}
+
+
+def reconcile_overrides_state(
+    overrides_path: pathlib.Path,
+    html_path: pathlib.Path | None = None,
+) -> tuple[dict[str, Any], bool]:
+    """Loads `data/overrides.json` and merges any `user_locked` browser pins baked into `index.html`."""
+    overrides: dict[str, Any] = {}
+    if overrides_path and overrides_path.exists():
+        try:
+            loaded = json.loads(overrides_path.read_text(encoding="utf-8"))
+            if isinstance(loaded, dict):
+                overrides = loaded
+        except Exception:
+            overrides = {}
+
+    html_overrides = extract_inline_overrides_from_html(html_path)
+    merged = False
+    if html_overrides:
+        html_newer = False
+        try:
+            if html_path and html_path.exists() and (
+                not overrides_path.exists() or html_path.stat().st_mtime > overrides_path.stat().st_mtime
+            ):
+                html_newer = True
+        except Exception:
+            html_newer = False
+
+        for rid_k, html_val in html_overrides.items():
+            if not (isinstance(html_val, dict) and html_val.get("user_locked") is True):
+                continue
+            cur_val = overrides.get(rid_k)
+            cur_locked = isinstance(cur_val, dict) and cur_val.get("user_locked") is True
+            if (not cur_locked) or (html_newer and cur_val != html_val):
+                overrides[rid_k] = html_val
+                merged = True
+
+    return overrides, merged
 
 
 # ==============================================================================
@@ -8278,8 +8359,10 @@ class VaultTerminalUI:
                     photo_tag = f"Photo: img_{sel_i}.jpg (CV {sc:.2f})"
                 else:
                     photo_tag = "Photo: Procedural Wax Seed"
+                flat_st = str(r.get("flattening_status") or DEFAULT_FLATTENING_STATUS)
+                flat_tag = "🔥 Auto-Queued" if flat_st == "Need to be done" else ("✓ Done" if flat_st == "Done" else flat_st)
                 row(f"  {idx}. + [#{rid}] {art} — {tit}{yr_s}", "1;38;5;120")
-                row(f"       └─ {badge} │ ${val_f:,.2f} │ {photo_tag}", "38;5;250")
+                row(f"       └─ {badge} │ ${val_f:,.2f} │ {photo_tag} │ {flat_tag}", "38;5;250")
         else:
             row("▸ NEWLY ADDED RECORDS (0 ADDED THIS RUN)", "1;38;5;81")
             row("  • No brand-new releases detected on this run (Vault is 100% synced).", "38;5;246")

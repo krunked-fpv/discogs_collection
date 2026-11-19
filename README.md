@@ -48,7 +48,7 @@ The Vault combines deterministic CLI state baking, portable in-browser synchroni
 * **3D Flip Deck (`#hero-flip-stage`):**
   * **Side A (Pressing Specs & Gallery Pinning Strip):** Inspect runout matrix codes, pressing plant telemetry, wax color shaders, and click any release gallery thumbnail to pin it as the canonical pressing photo (`overrides.json`).
   * **Side B (30s Studio Audio Previews & Streaming):** Zero-autoplay 30-second HTML5 `<audio id="vault-preview-audio">` track previews powered by the iTunes Search API with automatic Deezer JSONP fallback, plus side-by-side **YT Music ↗** (`OLAK5uy_...` official album playlists) and **Spotify ↗** (`open.spotify.com/album/...`) deep links.
-* **Portable Thermal Vinyl Flattening Queue (`#flattening-inline-form`):** Track records in the `Need to be done` queue vs. `Done (Flat Certified)` following the thermal flattening protocol (`Bag on 6 → 130°F → Drop to 4 for 2.5 hours`), backed by `data/flattening_queue.json`, `localStorage`, and shadow cookies.
+* **Portable Thermal Vinyl Flattening Queue (`#flattening-inline-form`):** Every newly added LP automatically enters `Need to be done` for arrival inspection (locked out of Roulette & Clash Arena to protect the AT-VMN95ML stylus) until you either flatten it (`Bag on 6 → 130°F → Drop to 4 for 2.5 hours`) or confirm it arrived flat and toggle it to `Done (Flat Verified)` (and toggle back anytime), backed by `data/flattening_queue.json`, `localStorage`, and shadow cookies.
 
 ## 🧠 Deterministic 12" Vinyl vs. 4" Label Computer Vision (`detect_pressing_image.py`)
 

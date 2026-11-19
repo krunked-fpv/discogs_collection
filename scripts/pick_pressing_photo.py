@@ -45,6 +45,7 @@ if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
 from detect_pressing_image import (
+    DEFAULT_FLATTENING_STATUS,
     VaultTerminalUI,
     build_flattening_queue_payload,
     compute_release_delta_signature,
@@ -53,6 +54,7 @@ from detect_pressing_image import (
     extract_release_tracklist_and_videos,
     parse_wax_variant,
     reconcile_flattening_state,
+    reconcile_overrides_state,
     resolve_flattening_status,
     select_release_images_deterministic,
 )
@@ -340,7 +342,7 @@ def inject_into_index_html(
     formatted_total = str(col_val.get("formatted_total") or median_str)
     range_str = f"Low {low_str} • High {high_str}"
 
-    todo_count = sum(1 for r in records if r.get("flattening_status") == "Need to be done")
+    todo_count = sum(1 for r in records if (r.get("flattening_status") or DEFAULT_FLATTENING_STATUS) == "Need to be done")
     done_count = sum(1 for r in records if r.get("flattening_status") == "Done")
     unlisted_count = max(0, total_lps - todo_count - done_count)
 
@@ -375,11 +377,14 @@ def inject_into_index_html(
         (r'(<button[^>]*id="chip-flatten-todo"[^>]*>)(.*?)(</button>)', f"\\g<1>🔥 Flattening Queue ({todo_count})\\g<3>"),
         (r'(<button[^>]*id="chip-flatten-done"[^>]*>)(.*?)(</button>)', f"\\g<1>✓ Flattened &amp; Verified ({done_count})\\g<3>"),
         (r'(<div id="pipe-kpi-cv"[^>]*>)(.*?)(</div>)', f"\\g<1>{pressing_count} / {total_lps} Physical Discs Verified ({pressing_pct})\\g<3>"),
-        (r'(<div id="pipe-kpi-flatten"[^>]*>)(.*?)(</div>)', f"\\g<1>{todo_count} Queued • {done_count} Flattened • {unlisted_count} Uninspected\\g<3>"),
+        (r'(<div id="pipe-kpi-flatten"[^>]*>)(.*?)(</div>)', f"\\g<1>{todo_count} Queued • {done_count} Flat / Done • {unlisted_count} Unlisted\\g<3>"),
         (r'(<div id="pipe-kpi-val"[^>]*>)(.*?)(</div>)', f"\\g<1>Med {median_str} • Low {low_str} • High {high_str}\\g<3>"),
         (r'(<span id="flatten-todo-count"[^>]*>)(.*?)(</span>)', f"\\g<1>{todo_count} Records\\g<3>"),
         (r'(<span id="flatten-done-count"[^>]*>)(.*?)(</span>)', f"\\g<1>{done_count} Records\\g<3>"),
-        (r'(<span id="flatten-unlisted-count"[^>]*>)(.*?)(</span>)', f"\\g<1>{unlisted_count} Records\\g<3>"),
+        (r'(<span id="flatten-unlisted-count"[^>]*>)(.*?)(</span>)', f"\\g<1>{unlisted_count} Unlisted\\g<3>"),
+        (r'(<div id="modal-stat-lps"[^>]*>)(.*?)(</div>)', f"\\g<1>{total_lps} LPs\\g<3>"),
+        (r'(<div id="modal-stat-photos"[^>]*>)(.*?)(</div>)', f"\\g<1>{pressing_count} Pressing Photos\\g<3>"),
+        (r'(<div id="modal-stat-flatten"[^>]*>)(.*?)(</div>)', f"\\g<1>{todo_count} Queued / {done_count} Done\\g<3>"),
         (
             r'(<div id="grid-status-label"[^>]*>\s*)(.*?)(\s*</div>)',
             f"\\g<1>Showing {total_lps} of {total_lps} releases in {prof.get('username') or collection_data.get('username') or 'krunked'}'s collection\\g<3>",
@@ -519,12 +524,7 @@ def run_pick_pressing_photos(
         except Exception:
             cache = {}
 
-    overrides: dict[str, Any] = {}
-    if overrides_path.exists():
-        try:
-            overrides = json.loads(overrides_path.read_text(encoding="utf-8"))
-        except Exception:
-            overrides = {}
+    overrides, _ = reconcile_overrides_state(overrides_path, html_path)
 
     flattening_queue: dict[str, Any] = reconcile_flattening_state(flattening_path, html_path)
 
@@ -608,7 +608,7 @@ def run_pick_pressing_photos(
             "date_added": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d"),
             "discogs_url": str(rel_detail.get("uri") or f"https://www.discogs.com/release/{folder_rid}"),
             "estimated_value_usd": float(rel_detail.get("lowest_price") or VERIFIED_PRICE_FALLBACKS.get(folder_rid, 35.0)),
-            "flattening_status": "Not Listed",
+            "flattening_status": DEFAULT_FLATTENING_STATUS,
             "genres": rel_detail.get("genres") or ["Rock"],
             "styles": rel_detail.get("styles") or ["Metalcore", "Progressive Metal"],
             "images": {},
@@ -889,6 +889,8 @@ def run_pick_pressing_photos(
                     release_id=rid,
                     queue_data=flattening_queue,
                 )
+            elif not rec.get("flattening_status"):
+                rec["flattening_status"] = DEFAULT_FLATTENING_STATUS
 
             if enrich_record_youtube_music(
                 rec,
@@ -929,7 +931,7 @@ def run_pick_pressing_photos(
         "formatted_total": f"${total_est_val:,.2f}",
     }
 
-    todo_count = sum(1 for r in records if r.get("flattening_status") == "Need to be done")
+    todo_count = sum(1 for r in records if (r.get("flattening_status") or DEFAULT_FLATTENING_STATUS) == "Need to be done")
     done_count = sum(1 for r in records if r.get("flattening_status") == "Done")
 
     collection_data["schema_version"] = "5.0.0"

@@ -147,7 +147,9 @@
         "comicDataUrl",
         "audioBlob",
         "rawReleases",
-        "releases"
+        "releases",
+        "need_to_be_done_entries",
+        "done_entries"
       ];
       for (var i = 0; i < heavyKeys.length; i++) {
         if (heavyKeys[i] in clone) {

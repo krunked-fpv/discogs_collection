@@ -211,7 +211,7 @@
                 <span id="spin-badge-all" class="text-[10px] font-mono-tech font-bold px-1.5 py-0.5 rounded bg-slate-950/80 text-cyan-300 border border-cyan-500/30">ALL SAFE (156)</span>
               </div>
               <p class="font-extrabold text-xs text-white mt-1.5">Full Vault Roulette</p>
-              <p class="text-[10px] text-slate-300 leading-tight mt-0.5">Spins any non-warped pressing in the crate</p>
+              <p class="text-[10px] text-slate-300 leading-tight mt-0.5">Excludes Flattening Queue LPs to protect stylus</p>
             </button>
 
             <button type="button" data-spin-mode="showroom" class="spin-mode-btn text-left p-2.5 rounded-2xl border transition-all bg-slate-950/80 border-white/15 text-slate-300 hover:border-purple-400/60 hover:text-white">
@@ -419,8 +419,8 @@
                   <div>
                     <span class="text-slate-400 block text-[10px] font-mono-tech uppercase font-semibold">Release &amp; Flattening</span>
                     <div class="flex items-center justify-between gap-1.5 mt-0.5">
-                      <span id="hero-flattening" class="font-mono-tech font-bold text-cyan-300 truncate">#13990219 • ✓ Flattened</span>
-                      <button type="button" id="btn-hero-flatten-cycle" class="shrink-0 px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-[10px] font-mono-tech font-bold text-slate-300 border border-white/10 transition" title="Cycle flattening status for this record (Unlisted → In Queue → Flattened)">↺ Unlist</button>
+                      <span id="hero-flattening" class="font-mono-tech font-bold text-cyan-300 truncate">#13990219 • ✓ Flat / Done</span>
+                      <button type="button" id="btn-hero-flatten-cycle" class="shrink-0 px-2 py-0.5 rounded bg-amber-500/15 hover:bg-amber-500/25 text-[10px] font-mono-tech font-bold text-amber-300 border border-amber-500/30 transition" title="Toggle flattening status for this record (Flattening Queue ↔ Flat / Done)">🔥 Re-Queue</button>
                     </div>
                   </div>
                 </div>
@@ -1011,7 +1011,7 @@
               v5.0 Interactive 4-Variant Knockout Bracket
             </span>
             <span class="text-[11px] font-mono-tech uppercase px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-400/30 font-bold">
-              🛡️ Warped LPs Auto-Excluded
+              🛡️ Flattening Queue Auto-Excluded
             </span>
           </div>
           <h2 class="text-xl sm:text-2xl font-black text-white mt-1.5">
@@ -1120,7 +1120,7 @@ python scripts/sync_discogs.py
 git add -A; git commit -m "chore(vault): sync discogs collection (v5.0)"; git push</pre>
           </div>
           <p class="text-xs text-slate-400 leading-relaxed">
-            Paginates Folder 0 (`per_page=100`), fast-paths unchanged releases via <code class="text-slate-200">delta_sig</code>, downloads gallery images and runs the 4-pass CV pressing picker only on new/updated LPs, reconciles the inline HTML flattening state, and compiles <code class="text-slate-200">index.html</code> in one pass.
+            Paginates Folder 0 (`per_page=100`), fast-paths unchanged releases via <code class="text-slate-200">delta_sig</code>, downloads gallery images and runs the 4-pass CV pressing picker only on new/updated LPs, auto-queues newly added albums into the Flattening Queue, reconciles inline HTML state, and compiles <code class="text-slate-200">index.html</code> in one pass.
           </p>
         </div>
 
@@ -1155,9 +1155,9 @@ python scripts/sync_discogs.py --full</pre>
         </div>
         <div class="bg-slate-950/90 border border-white/10 rounded-2xl p-4">
           <div class="text-xs font-mono-tech text-purple-400 font-extrabold">2 // PORTABLE INLINE FLATTENING STATE</div>
-          <div id="pipe-kpi-flatten" class="text-sm font-black text-white mt-1">2 Queued • 50 Flattened • 106 Uninspected</div>
+          <div id="pipe-kpi-flatten" class="text-sm font-black text-white mt-1">0 Queued • 0 Flat / Done • 0 Unlisted</div>
           <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">
-            Stores your owner inspection &amp; thermal pouch queue directly inside <code class="text-slate-200">index.html</code> (<code class="text-slate-200">#flattening-inline-form</code> hidden inputs + <code class="text-slate-200">data/flattening_queue.json</code>)—100% self-contained and portable with zero external cloud dependencies.
+            Every newly added LP automatically enters <strong class="text-amber-300">Need To Be Done</strong> for arrival inspection until you flatten it or confirm it flat (<code class="text-slate-200">#flattening-inline-form</code> + <code class="text-slate-200">data/flattening_queue.json</code>)—100% portable with zero cloud dependencies.
           </p>
         </div>
         <div class="bg-slate-950/90 border border-white/10 rounded-2xl p-4">
@@ -1302,10 +1302,10 @@ python scripts/sync_discogs.py --full</pre>
             Thermal Pouch Protocol • Bag on 6 until 130°F → Drop to 4 for 2.5 Hours (150 Min) → Cool Completely
           </span>
           <h2 class="text-xl sm:text-2xl font-black text-white mt-1.5">
-            🔥 Vinyl Flattening Queue &amp; Owner Inspection Regimen
+            🔥 Vinyl Flattening Queue &amp; Arrival Inspection Regimen
           </h2>
           <p class="text-xs text-slate-300 mt-1">
-            100% portable inline state stored inside hidden HTML form fields (<code class="text-cyan-300">#flattening-inline-form</code>) + <code class="text-cyan-300">data/flattening_queue.json</code>. Records in <strong class="text-amber-300">Need To Be Done</strong> are automatically locked out of Roulette &amp; Clash Arena spins to protect your AT-VMN95ML stylus!
+            100% portable inline state stored inside hidden HTML form fields (<code class="text-cyan-300">#flattening-inline-form</code>) + <code class="text-cyan-300">data/flattening_queue.json</code>. Every new album added to your collection automatically enters <strong class="text-amber-300">Need To Be Done</strong> for arrival inspection—flatten it or confirm it's already flat and toggle it either way (queued LPs stay locked out of Roulette &amp; Clash Arena to protect your AT-VMN95ML stylus).
           </p>
         </div>
 
@@ -1338,7 +1338,7 @@ python scripts/sync_discogs.py --full</pre>
         </div>
 
         <div class="flex flex-wrap items-center gap-2.5">
-          <select id="timer-record-select" class="bg-slate-900 border border-white/15 rounded-xl px-3 py-1.5 text-xs font-mono-tech text-slate-200 outline-none focus:border-amber-400 max-w-[230px]" aria-label="Select record in thermal pouch"><option value="">Select LP in Pouch (2 Queued)...</option><option value="28844782">A Day To Remember — For Those Who Have Heart</option><option value="35907826">Bring Me The Horizon — That's The Spirit</option></select>
+          <select id="timer-record-select" class="bg-slate-900 border border-white/15 rounded-xl px-3 py-1.5 text-xs font-mono-tech text-slate-200 outline-none focus:border-amber-400 max-w-[230px]" aria-label="Select record in thermal pouch"><option value="">Select LP in Pouch...</option></select>
           <div id="timer-readout" class="px-3.5 py-1.5 rounded-xl bg-[#06070b] border border-white/15 text-base sm:text-lg font-mono-tech font-black text-cyan-300 min-w-[108px] text-center">02:30:00</div>
           <button type="button" id="btn-timer-ramp" class="px-3 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 text-xs font-mono-tech font-bold transition">
             🔥 Ramp (Set 6 → 130°F)
@@ -1357,10 +1357,10 @@ python scripts/sync_discogs.py --full</pre>
         <div class="bg-slate-950/90 border border-amber-500/30 rounded-2xl p-4 space-y-3 flex flex-col">
           <div class="flex items-center justify-between">
             <div>
-              <h3 class="text-sm font-black text-amber-300 font-mono-tech uppercase">🔥 Need To Be Done (Warped Queue)</h3>
-              <p class="text-[11px] text-slate-400">Examined &amp; queued for the 130°F thermal pouch</p>
+              <h3 class="text-sm font-black text-amber-300 font-mono-tech uppercase">🔥 Need To Be Done (Arrival &amp; Flattening Queue)</h3>
+              <p class="text-[11px] text-slate-400">New LPs auto-queue here on arrival — flatten in the 130°F pouch or toggle Flat / Done if already flat</p>
             </div>
-            <span id="flatten-todo-count" class="px-2.5 py-0.5 rounded-full text-xs font-mono-tech font-bold bg-amber-500/20 text-amber-300">2 Records</span>
+            <span id="flatten-todo-count" class="px-2.5 py-0.5 rounded-full text-xs font-mono-tech font-bold bg-amber-500/20 text-amber-300">0 Records</span>
           </div>
           <div id="flatten-todo-list" class="space-y-2 max-h-[520px] overflow-y-auto custom-scrollbar pr-1"></div>
         </div>
@@ -1368,34 +1368,34 @@ python scripts/sync_discogs.py --full</pre>
         <div class="bg-slate-950/90 border border-emerald-500/30 rounded-2xl p-4 space-y-3 flex flex-col">
           <div class="flex items-center justify-between gap-2">
             <div>
-              <h3 class="text-sm font-black text-emerald-300 font-mono-tech uppercase">✓ Flattened &amp; Verified (Done)</h3>
-              <p class="text-[11px] text-slate-400">Completed 2.5-hour thermal plate cycle &amp; play-tested</p>
+              <h3 class="text-sm font-black text-emerald-300 font-mono-tech uppercase">✓ Flat &amp; Verified (Done)</h3>
+              <p class="text-[11px] text-slate-400">Flattened on the 130°F plate or confirmed already flat upon arrival — stylus-safe</p>
             </div>
-            <span id="flatten-done-count" class="px-2.5 py-0.5 rounded-full text-xs font-mono-tech font-bold bg-emerald-500/20 text-emerald-300">50 Records</span>
+            <span id="flatten-done-count" class="px-2.5 py-0.5 rounded-full text-xs font-mono-tech font-bold bg-emerald-500/20 text-emerald-300">0 Records</span>
           </div>
           <div>
-            <input type="text" id="flatten-done-search" placeholder="Filter flattened records by artist or album..." class="w-full bg-slate-900 border border-white/10 focus:border-emerald-400 rounded-xl px-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 outline-none">
+            <input type="text" id="flatten-done-search" placeholder="Filter flat &amp; verified records by artist or album..." class="w-full bg-slate-900 border border-white/10 focus:border-emerald-400 rounded-xl px-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 outline-none">
           </div>
           <div id="flatten-done-list" class="space-y-2 max-h-[475px] overflow-y-auto custom-scrollbar pr-1"></div>
         </div>
       </div>
 
-      <!-- Owner Inspection Bench: Search & Add Any Collection LP to Queue or Done -->
+      <!-- Unlisted / Excluded Bench: Only LPs Manually Excluded via ✕ -->
       <div class="bg-slate-950/90 border border-cyan-500/25 rounded-2xl p-4 space-y-3">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div>
             <div class="flex items-center gap-2">
-              <h3 class="text-sm font-black text-cyan-300 font-mono-tech uppercase">🔎 Owner Inspection Bench — Add Collection LPs to Queue or Done</h3>
-              <span id="flatten-unlisted-count" class="px-2 py-0.5 rounded-full text-[11px] font-mono-tech font-bold bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">106 Records</span>
+              <h3 class="text-sm font-black text-cyan-300 font-mono-tech uppercase">🔎 Unlisted / Excluded LPs</h3>
+              <span id="flatten-unlisted-count" class="px-2 py-0.5 rounded-full text-[11px] font-mono-tech font-bold bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">0 Unlisted</span>
             </div>
             <p class="text-xs text-slate-400 mt-0.5">
-              Inspecting a newly arrived LP on your turntable? Search your uninspected collection below to queue warped pressings or log completed bakes.
+              New Discogs additions automatically go straight into <strong class="text-amber-300">Need To Be Done</strong> above. Records you explicitly exclude (<code class="text-slate-200">✕</code>) appear here so you can re-queue or mark them flat anytime.
             </p>
           </div>
         </div>
 
         <div class="relative">
-          <input type="text" id="flatten-bench-search" placeholder="Search uninspected collection LPs by artist, album, variant, or release # to queue or mark flattened..." class="w-full bg-slate-900 border border-white/15 focus:border-cyan-400 rounded-xl pl-9 pr-4 py-2 text-xs text-white placeholder-slate-500 outline-none">
+          <input type="text" id="flatten-bench-search" placeholder="Search unlisted LPs by artist, album, variant, or release # to re-queue or mark flat..." class="w-full bg-slate-900 border border-white/15 focus:border-cyan-400 rounded-xl pl-9 pr-4 py-2 text-xs text-white placeholder-slate-500 outline-none">
           <span class="absolute left-3 top-2.5 text-slate-400 text-xs">🔎</span>
         </div>
 
