@@ -1,0 +1,174 @@
+/* KRUNKED // VINYL VAULT v6.0 — Split Sleeve-Peek Crate, 3D Record Store Bin Flipper & 3D Gatefold Inspector */
+
+/* 60FPS Locked Scrolling for 159+ LP Crate Cards */
+.card-record {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 344px;
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.22s ease, box-shadow 0.22s ease;
+}
+.card-record:hover {
+  transform: translateY(-3px);
+}
+body.uv-blacklight .card-record {
+  border-color: rgba(168, 85, 247, 0.34);
+  box-shadow: 0 10px 30px -10px rgba(139, 44, 245, 0.32);
+}
+
+/* Tactile Split Sleeve + Disc Peek Stage inside Crate Cards */
+.sleeve-peek-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 65% 50%, rgba(34, 211, 238, 0.08), transparent 60%),
+    linear-gradient(180deg, rgba(15, 20, 35, 0.92), #070910);
+}
+.sleeve-peek-jacket {
+  position: relative;
+  z-index: 20;
+  width: 132px;
+  height: 132px;
+  margin-left: -34px;
+  border-radius: 10px;
+  box-shadow:
+    8px 0 22px rgba(0, 0, 0, 0.75),
+    0 12px 24px rgba(0, 0, 0, 0.7);
+  transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.sleeve-peek-jacket::before {
+  /* Jacket spine crease highlight */
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0.06), rgba(255,255,255,0.18));
+  z-index: 30;
+  pointer-events: none;
+}
+.sleeve-peek-disc {
+  position: relative;
+  z-index: 10;
+  width: 128px;
+  height: 128px;
+  margin-left: -62px;
+  border-radius: 9999px;
+  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.card-record:hover .sleeve-peek-jacket {
+  transform: translateX(-6px) rotate(-1.5deg);
+}
+.card-record:hover .sleeve-peek-disc {
+  transform: translateX(20px) rotate(32deg);
+}
+
+/* Card hover action toolbar */
+.card-quick-actions {
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.card-record:hover .card-quick-actions,
+.card-record:focus-within .card-quick-actions {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (hover: none) {
+  .card-quick-actions {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 3D Record Store Bin Flipper */
+.bin-3d-viewport {
+  perspective: 1400px;
+  perspective-origin: 50% 24%;
+  position: relative;
+  height: 440px;
+  overflow: hidden;
+  user-select: none;
+  touch-action: pan-y;
+}
+@media (min-width: 640px) {
+  .bin-3d-viewport {
+    height: 480px;
+  }
+}
+.bin-3d-trough {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bin-3d-sleeve {
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  transform-style: preserve-3d;
+  transform-origin: 50% 100%;
+  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease, filter 0.35s ease;
+  will-change: transform, opacity;
+  cursor: pointer;
+}
+@media (min-width: 640px) {
+  .bin-3d-sleeve {
+    width: 278px;
+    height: 278px;
+  }
+}
+.bin-3d-wax-peek {
+  position: absolute;
+  top: -28px;
+  right: -28px;
+  width: 196px;
+  height: 196px;
+  z-index: -1;
+  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+.bin-3d-sleeve.is-front:hover .bin-3d-wax-peek {
+  transform: translate(18px, -22px) rotate(24deg);
+}
+
+/* 3D Jacket, Back-Cover & Gatefold Modal Inspector */
+.jacket-3d-scene {
+  perspective: 1700px;
+  user-select: none;
+}
+.jacket-3d-card {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+.jacket-3d-card.is-dragging {
+  transition: none !important;
+}
+.jacket-3d-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.jacket-3d-back {
+  transform: rotateY(180deg);
+}
+
+.gatefold-spread {
+  perspective: 1800px;
+}
+.gatefold-wing-left {
+  transform-origin: right center;
+  transform: rotateY(14deg);
+  box-shadow: inset -12px 0 24px rgba(0, 0, 0, 0.55);
+}
+.gatefold-wing-right {
+  transform-origin: left center;
+  transform: rotateY(-14deg);
+  box-shadow: inset 12px 0 24px rgba(0, 0, 0, 0.55);
+}

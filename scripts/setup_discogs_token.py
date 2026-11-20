@@ -127,12 +127,13 @@ def write_local_dotenv(repo_root: pathlib.Path, token: str, username: str = "kru
 
 
 def scrub_exposed_token_from_repo(repo_root: pathlib.Path) -> list[pathlib.Path]:
-    """Removes the old exposed token (matched by SHA-256 hash) from index.html, src/*, and scripts/*.py."""
+    """Removes the old exposed token (matched by SHA-256 hash) from index.html, src/*, js/*, css/*, and scripts/*.py."""
     scrubbed_files: list[pathlib.Path] = []
     candidate_paths = [repo_root / "index.html"]
-    src_dir = repo_root / "src"
-    if src_dir.exists():
-        candidate_paths.extend(sorted(p for p in src_dir.iterdir() if p.is_file()))
+    for sub in ("src", "js", "css"):
+        sub_dir = repo_root / sub
+        if sub_dir.exists():
+            candidate_paths.extend(sorted(p for p in sub_dir.iterdir() if p.is_file()))
     scripts_dir = repo_root / "scripts"
     if scripts_dir.exists():
         candidate_paths.extend(sorted(scripts_dir.glob("*.py")))

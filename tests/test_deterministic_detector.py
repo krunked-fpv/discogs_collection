@@ -721,6 +721,61 @@ class TestDeterministicDetector(unittest.TestCase):
                 with Image.open(icon_path) as im:
                     self.assertEqual(im.size, (w, h), icon["src"])
 
+    def test_esm_modules_and_zero_stock_vinyls(self) -> None:
+        import re
+
+        tpl = (REPO_ROOT / "src" / "template.html").read_text(encoding="utf-8")
+        self.assertIn('<script type="module" src="js/app.js"></script>', tpl)
+        self.assertIn("<!-- BEGIN KRUNKED_COOKIE_VAULT_V1 -->", tpl)
+        self.assertIn("<!-- END KRUNKED_COOKIE_VAULT_V1 -->", tpl)
+
+        js_dir = REPO_ROOT / "js"
+        css_dir = REPO_ROOT / "css"
+        self.assertTrue(js_dir.is_dir())
+        self.assertTrue(css_dir.is_dir())
+
+        import_re = re.compile(r"""from\s+['"](\./[^'"]+)['"]""")
+        tracked = [
+            *sorted(p for p in (REPO_ROOT / "src").iterdir() if p.is_file()),
+            *sorted(js_dir.glob("*.js")),
+            *sorted(css_dir.glob("*.css")),
+        ]
+        for fpath in tracked:
+            txt = fpath.read_text(encoding="utf-8")
+            # Zero fake stock vinyl image references
+            self.assertNotIn("assets/pressings/", txt, f"Stock vinyl reference in {fpath}")
+            # Zero hardcoded legacy tokens
+            for m in setup_discogs_token._CANDIDATE_TOKEN_RE.finditer(txt):
+                self.assertFalse(setup_discogs_token.is_old_exposed_token(m.group(0)), f"Token in {fpath}")
+            # Verify relative ESM imports resolve
+            if fpath.parent == js_dir:
+                for m in import_re.finditer(txt):
+                    target = (js_dir / m.group(1)).resolve()
+                    self.assertTrue(target.is_file(), f"Missing ESM import {m.group(1)} in {fpath.name}")
+
+        # Verify inject_into_index_html preserves ESM module script & Cookie Vault markers
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_html = pathlib.Path(tmpdir) / "index.html"
+            shutil.copy2(REPO_ROOT / "index.html", tmp_html)
+            synthetic = {
+                "schema_version": "5.0.0",
+                "username": "krunked",
+                "synced_at_utc": "2026-11-20T04:00:00Z",
+                "profile": {
+                    "username": "krunked",
+                    "num_collection": 1,
+                    "pressing_photos_detected": 1,
+                    "colored_or_special_variants": 1,
+                    "collection_value": {"minimum": "$10.00", "median": "$20.00", "maximum": "$30.00"},
+                },
+                "records": [{"release_id": 9001, "artist": "Band X", "title": "LP X", "flattening_status": "Done"}],
+            }
+            self.assertTrue(pick_pressing_photo.inject_into_index_html(tmp_html, synthetic, {}))
+            out = tmp_html.read_text(encoding="utf-8")
+            self.assertIn('<script type="module" src="js/app.js"></script>', out)
+            self.assertIn("<!-- BEGIN KRUNKED_COOKIE_VAULT_V1 -->", out)
+            self.assertIn('<div id="kpi-total-records" class="text-lg sm:text-xl font-black text-white mt-0.5">1 LPs</div>', out)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,141 @@
+/* KRUNKED // VINYL VAULT v6.0 — Twin-Deck Variant Clash Arena, DJ Crossfader & Grail Brackets */
+
+.arena-stage-shell {
+  --arena-color-a: rgba(6, 182, 212, 0.22);
+  --arena-color-b: rgba(217, 70, 239, 0.22);
+  background:
+    radial-gradient(circle at 20% 25%, var(--arena-color-a), transparent 48%),
+    radial-gradient(circle at 80% 25%, var(--arena-color-b), transparent 48%),
+    linear-gradient(180deg, rgba(12, 16, 28, 0.94), rgba(6, 8, 14, 0.98));
+  transition: background 0.5s ease;
+}
+
+.arena-deck-card {
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+}
+.arena-deck-card.is-winner {
+  transform: scale(1.025);
+  border-color: #fbbf24 !important;
+  box-shadow: 0 0 42px rgba(251, 191, 36, 0.45), 0 20px 50px rgba(0, 0, 0, 0.85) !important;
+}
+.arena-deck-card.is-loser {
+  transform: scale(0.96);
+  opacity: 0.45;
+  filter: saturate(0.45);
+}
+
+.arena-deck-platter-wrap {
+  position: relative;
+  width: 190px;
+  height: 190px;
+  flex-shrink: 0;
+}
+@media (min-width: 640px) {
+  .arena-deck-platter-wrap {
+    width: 214px;
+    height: 214px;
+  }
+}
+.arena-deck-platter-wrap canvas {
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  display: block;
+}
+
+/* DJ Crossfader Console */
+.dj-mixer-console {
+  background:
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.015) 0 1px, transparent 1px 3px),
+    linear-gradient(180deg, #131826, #090c14);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 12px 32px rgba(0, 0, 0, 0.7);
+}
+
+input[type="range"].dj-crossfader {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 14px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, rgba(6, 182, 212, 0.35), rgba(15, 23, 42, 0.95) 50%, rgba(217, 70, 239, 0.35));
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.85);
+  cursor: ew-resize;
+}
+input[type="range"].dj-crossfader::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 30px;
+  height: 24px;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #e2e8f0 0%, #94a3b8 46%, #475569 52%, #cbd5e1 100%);
+  border: 2px solid #090c14;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.8), 0 0 12px rgba(34, 211, 238, 0.35);
+}
+input[type="range"].dj-crossfader::-moz-range-thumb {
+  width: 30px;
+  height: 24px;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #e2e8f0 0%, #94a3b8 46%, #475569 52%, #cbd5e1 100%);
+  border: 2px solid #090c14;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.8), 0 0 12px rgba(34, 211, 238, 0.35);
+}
+
+/* Blind Wax Roulette Shroud */
+.blind-sleeve-shroud {
+  background:
+    repeating-linear-gradient(-45deg, rgba(255,255,255,0.03) 0 8px, rgba(0,0,0,0.2) 8px 16px),
+    linear-gradient(135deg, #0b0e18, #15192b);
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
+}
+.blind-sleeve-shroud.is-revealed {
+  transform: translateX(-110%) rotate(-8deg);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Visual Bracket Tree Columns */
+.bracket-tree-scroll {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+.bracket-round-col {
+  min-width: 215px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 10px;
+}
+.bracket-match-node {
+  border-radius: 12px;
+  background: rgba(9, 12, 21, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.bracket-match-node.is-active-match {
+  border-color: #22d3ee;
+  box-shadow: 0 0 22px rgba(34, 211, 238, 0.3);
+}
+.bracket-match-node.is-final-match {
+  border-color: rgba(251, 191, 36, 0.65);
+  box-shadow: 0 0 24px rgba(251, 191, 36, 0.22);
+}
+
+/* S / A / B / C Tier Badges */
+.tier-badge-S { background: linear-gradient(135deg, #f43f5e, #f59e0b); color: #05060b; }
+.tier-badge-A { background: linear-gradient(135deg, #a855f7, #ec4899); color: #ffffff; }
+.tier-badge-B { background: linear-gradient(135deg, #06b6d4, #2563eb); color: #ffffff; }
+.tier-badge-C { background: linear-gradient(135deg, #475569, #334155); color: #e2e8f0; }
+
+/* Floating ELO delta badge */
+@keyframes eloFloatUp {
+  0% { opacity: 0; transform: translateY(8px) scale(0.85); }
+  20% { opacity: 1; transform: translateY(0) scale(1.05); }
+  100% { opacity: 0; transform: translateY(-22px) scale(1); }
+}
+.elo-delta-pop {
+  animation: eloFloatUp 1.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}

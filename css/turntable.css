@@ -1,0 +1,227 @@
+/* KRUNKED // VINYL VAULT v6.0 — Direct-Drive Turntable Stage, VU Meters & 3D Flip Deck */
+
+#turntable-plinth-box {
+  background:
+    radial-gradient(circle at 50% 48%, rgba(30, 41, 59, 0.35), rgba(6, 8, 14, 0.98) 72%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.015) 0 1px, transparent 1px 3px),
+    #080b13;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 24px 60px rgba(0, 0, 0, 0.88),
+    0 0 40px var(--glow-primary);
+  touch-action: none;
+}
+
+body.uv-blacklight #turntable-plinth-box {
+  box-shadow:
+    0 0 48px rgba(168, 85, 247, 0.58),
+    0 0 90px rgba(6, 182, 212, 0.3),
+    inset 0 0 34px rgba(6, 182, 212, 0.35) !important;
+  border-color: rgba(168, 85, 247, 0.65) !important;
+}
+
+.plinth-edge-bracket-left,
+.plinth-edge-bracket-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 156px;
+  border-radius: 9999px;
+  background: linear-gradient(
+    180deg,
+    rgba(6, 182, 212, 0) 0%,
+    #22d3ee 20%,
+    #67e8f9 50%,
+    #22d3ee 80%,
+    rgba(6, 182, 212, 0) 100%
+  );
+  pointer-events: none;
+  z-index: 25;
+}
+.plinth-edge-bracket-left {
+  left: -3px;
+  box-shadow: -4px 0 22px rgba(6, 182, 212, 0.85), 0 0 12px rgba(103, 232, 249, 0.9);
+}
+.plinth-edge-bracket-right {
+  right: -3px;
+  box-shadow: 4px 0 22px rgba(6, 182, 212, 0.85), 0 0 12px rgba(103, 232, 249, 0.9);
+}
+
+/* Under-platter optical backlight ring */
+#platter-backlight-halo {
+  position: absolute;
+  inset: 22px;
+  border-radius: 9999px;
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  filter: blur(18px);
+  z-index: 5;
+}
+
+/* Live Radial Groove Spectrum Ring */
+.platter-spectrum-canvas {
+  position: absolute;
+  inset: -16px;
+  width: calc(100% + 32px);
+  height: calc(100% + 32px);
+  border-radius: 9999px;
+  pointer-events: none;
+  z-index: 20;
+}
+
+/* WebGL Platter Canvas */
+#hero-webgl-canvas {
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  display: block;
+  cursor: grab;
+  touch-action: none;
+}
+#hero-webgl-canvas:active {
+  cursor: grabbing;
+}
+
+/* Platter fallback CSS spin when WebGL falls back to SVG */
+@keyframes spinRecord33 {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.spin-33 { animation: spinRecord33 4.5s linear infinite; }
+.spin-45 { animation: spinRecord33 3.0s linear infinite; }
+.spin-paused { animation-play-state: paused !important; }
+.card-record:hover .hover-spin {
+  animation: spinRecord33 5.5s linear infinite;
+}
+
+/* Interactive Draggable S-Shaped Tonearm */
+.tonearm-pivot {
+  transform-origin: 78.33% 17.5%;
+  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+  touch-action: none;
+}
+.tonearm-pivot.is-dragging {
+  transition: none !important;
+}
+.tonearm-headshell-hit {
+  cursor: grab;
+  pointer-events: auto;
+}
+.tonearm-headshell-hit:active {
+  cursor: grabbing;
+}
+
+/* Crate Wing Cards */
+.crate-wing-card {
+  transition: transform 0.26s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.26s ease, border-color 0.26s ease;
+  will-change: transform, opacity;
+}
+.crate-wing-card.wing-tick-left {
+  transform: translateX(-10px) scale(0.95) rotateY(9deg);
+}
+.crate-wing-card.wing-tick-right {
+  transform: translateX(10px) scale(0.95) rotateY(-9deg);
+}
+
+/* Dual Illuminated Analog VU Meters */
+.vu-meter-box {
+  background: radial-gradient(ellipse at 50% 85%, rgba(245, 158, 11, 0.16), rgba(8, 11, 18, 0.96) 72%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.8), 0 4px 12px rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+.vu-meter-needle {
+  transform-origin: 50% 100%;
+  transition: transform 55ms linear;
+  will-change: transform;
+}
+.vu-scale-arc {
+  background: conic-gradient(
+    from -50deg at 50% 100%,
+    #22d3ee 0deg 65deg,
+    #f59e0b 65deg 82deg,
+    #f43f5e 82deg 100deg,
+    transparent 100deg
+  );
+  -webkit-mask: radial-gradient(circle at 50% 100%, transparent 56%, #000 58%, #000 66%, transparent 68%);
+  mask: radial-gradient(circle at 50% 100%, transparent 56%, #000 58%, #000 66%, transparent 68%);
+}
+
+/* 3D Flip Deck (Side A Specs <-> Side B Needle-Drop Player) */
+.hero-flip-perspective {
+  perspective: 1600px;
+}
+.hero-flip-inner {
+  display: grid;
+  grid-template-areas: "flipcard";
+  grid-template-rows: minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);
+  height: 520px;
+  min-height: 520px;
+  max-height: 520px;
+  transform-style: preserve-3d;
+  transition: transform 0.68s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+@media (min-width: 640px) {
+  .hero-flip-inner {
+    height: 544px;
+    min-height: 544px;
+    max-height: 544px;
+  }
+}
+.hero-flip-perspective.is-flipped .hero-flip-inner {
+  transform: rotateY(180deg);
+}
+.hero-flip-face {
+  grid-area: flipcard;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  max-height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+.hero-flip-front {
+  transform: rotateY(0deg);
+  z-index: 2;
+  opacity: 1;
+  transition: opacity 0.18s ease 0.14s;
+}
+.hero-flip-perspective.is-flipped .hero-flip-front {
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.14s ease;
+}
+.hero-flip-back {
+  transform: rotateY(180deg);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.14s ease;
+}
+.hero-flip-perspective.is-flipped .hero-flip-back {
+  pointer-events: auto;
+  z-index: 3;
+  opacity: 1;
+  transition: opacity 0.18s ease 0.14s;
+}
+#stream-tracklist-list {
+  min-height: 0;
+  overflow-y: auto;
+}
+
+@keyframes eqBar1 { 0%, 100% { height: 3px; } 50% { height: 13px; } }
+@keyframes eqBar2 { 0%, 100% { height: 12px; } 35% { height: 4px; } 70% { height: 14px; } }
+@keyframes eqBar3 { 0%, 100% { height: 5px; } 45% { height: 14px; } 80% { height: 6px; } }
+.eq-bar-1 { animation: eqBar1 0.65s ease-in-out infinite; }
+.eq-bar-2 { animation: eqBar2 0.55s ease-in-out infinite; }
+.eq-bar-3 { animation: eqBar3 0.72s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-flip-inner { transition: none !important; }
+}

@@ -1,14 +1,12 @@
     :root {
-      --bg-obsidian: #06070b;
-      --bg-panel: #0e121d;
-      --bg-card: #131726;
+      --bg-obsidian: #05060b;
+      --bg-panel: #0b0e16;
+      --bg-card: #111524;
       --glow-primary: rgba(139, 44, 245, 0.28);
       --glow-secondary: rgba(6, 182, 212, 0.24);
       --glow-accent: rgba(244, 63, 94, 0.18);
     }
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background-color: var(--bg-obsidian);
@@ -16,244 +14,36 @@
       overflow-x: hidden;
       letter-spacing: -0.01em;
     }
-    .font-mono-tech, .font-mono-code {
-      font-family: 'JetBrains Mono', monospace;
-    }
-    /* Command Deck Dynamic Ambient Stage Backdrop */
+    .font-mono-tech, .font-mono-code { font-family: 'JetBrains Mono', monospace; }
+    .font-display { font-family: 'Space Grotesk', 'Inter', sans-serif; }
     .ambient-stage-bg {
       background:
-        radial-gradient(circle at 20% 22%, var(--glow-primary, rgba(139, 44, 245, 0.28)) 0%, transparent 46%),
-        radial-gradient(circle at 80% 26%, var(--glow-secondary, rgba(6, 182, 212, 0.24)) 0%, transparent 48%),
-        radial-gradient(circle at 50% 84%, var(--glow-accent, rgba(244, 63, 94, 0.18)) 0%, transparent 55%),
-        linear-gradient(180deg, #06080f 0%, #0a0e18 52%, #05060a 100%);
+        radial-gradient(circle at 18% 18%, var(--glow-primary) 0%, transparent 46%),
+        radial-gradient(circle at 82% 24%, var(--glow-secondary) 0%, transparent 48%),
+        radial-gradient(circle at 50% 85%, var(--glow-accent) 0%, transparent 55%),
+        linear-gradient(180deg, #05070d 0%, #090c15 52%, #040509 100%);
       transition: background 0.65s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    /* UV Blacklight Mode */
     body.uv-blacklight {
       background-color: #030108 !important;
       background-image:
-        radial-gradient(circle at 22% 24%, rgba(168, 85, 247, 0.38) 0%, transparent 48%),
-        radial-gradient(circle at 78% 28%, rgba(6, 182, 212, 0.32) 0%, transparent 50%),
-        radial-gradient(circle at 50% 82%, rgba(236, 72, 153, 0.26) 0%, transparent 55%),
+        radial-gradient(circle at 22% 22%, rgba(168, 85, 247, 0.36) 0%, transparent 48%),
+        radial-gradient(circle at 78% 26%, rgba(6, 182, 212, 0.30) 0%, transparent 50%),
+        radial-gradient(circle at 50% 84%, rgba(236, 72, 153, 0.22) 0%, transparent 55%),
         linear-gradient(180deg, #020006 0%, #060212 52%, #020005 100%) !important;
     }
-    body.uv-blacklight .uv-reactive {
-      filter: saturate(1.7) contrast(1.18) drop-shadow(0 0 18px var(--glow-primary)) drop-shadow(0 0 32px var(--glow-secondary));
-      transition: filter 0.35s ease;
-    }
-    body.uv-blacklight #turntable-plinth-box {
-      box-shadow: 0 0 42px rgba(168, 85, 247, 0.65), 0 0 80px rgba(6, 182, 212, 0.35), inset 0 0 32px rgba(6, 182, 212, 0.45) !important;
-      border-color: rgba(168, 85, 247, 0.65) !important;
-    }
-    body.uv-blacklight .card-record {
-      border-color: rgba(168, 85, 247, 0.35);
-      box-shadow: 0 10px 30px -10px rgba(139, 44, 245, 0.35);
-    }
-    /* Holographic Sleeve Shimmer */
-    .holo-sleeve {
-      position: relative;
-      overflow: hidden;
-    }
-    .holo-sleeve::after {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.16) 46%, rgba(6, 182, 212, 0.24) 50%, rgba(236, 72, 153, 0.2) 54%, transparent 65%);
-      transform: translateX(-85%) rotate(12deg);
-      transition: transform 0.8s ease;
-      pointer-events: none;
-    }
-    .holo-sleeve:hover::after,
-    .holo-sleeve.spinning-flash::after {
-      transform: translateX(85%) rotate(12deg);
-    }
-    /* Platter Spin Keyframes */
-    @keyframes spinRecord33 {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    @keyframes spinRecord45 {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    @keyframes spinRouletteBlur {
-      0% { transform: rotate(0deg) scale(0.97); filter: saturate(1.4) brightness(1.12); }
-      50% { transform: rotate(180deg) scale(1.02); filter: saturate(1.8) brightness(1.22); }
-      100% { transform: rotate(360deg) scale(0.97); filter: saturate(1.4) brightness(1.12); }
-    }
-    .spin-33 {
-      animation: spinRecord33 4.5s linear infinite;
-    }
-    .spin-45 {
-      animation: spinRecord45 3.0s linear infinite;
-    }
-    .spin-roulette-fast {
-      animation: spinRouletteBlur 0.32s linear infinite !important;
-    }
-    .spin-paused {
-      animation-play-state: paused !important;
-    }
-    .strobe-dots {
-      background-image: radial-gradient(rgba(6, 182, 212, 0.85) 1.25px, transparent 1.25px);
-      background-size: 6px 6px;
-    }
-    .tonearm-pivot {
-      transform-origin: 78% 18%;
-      transition: transform 0.68s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    .tonearm-engaged {
-      transform: rotate(22deg);
-    }
-    .tonearm-parked {
-      transform: rotate(-6deg);
-    }
-    .card-record:hover .hover-spin {
-      animation: spinRecord33 5.5s linear infinite;
-    }
-    /* Center Plinth Cyan Edge Glow Brackets (matches user mockup image_b09c49.jpg) */
-    .plinth-edge-bracket-left {
-      position: absolute;
-      left: -3px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 6px;
-      height: 156px;
-      border-radius: 9999px;
-      background: linear-gradient(180deg, rgba(6,182,212,0) 0%, #22d3ee 20%, #67e8f9 50%, #22d3ee 80%, rgba(6,182,212,0) 100%);
-      box-shadow: -4px 0 22px rgba(6, 182, 212, 0.85), 0 0 12px rgba(103, 232, 249, 0.9);
-      pointer-events: none;
-      z-index: 25;
-    }
-    .plinth-edge-bracket-right {
-      position: absolute;
-      right: -3px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 6px;
-      height: 156px;
-      border-radius: 9999px;
-      background: linear-gradient(180deg, rgba(6,182,212,0) 0%, #22d3ee 20%, #67e8f9 50%, #22d3ee 80%, rgba(6,182,212,0) 100%);
-      box-shadow: 4px 0 22px rgba(6, 182, 212, 0.85), 0 0 12px rgba(103, 232, 249, 0.9);
-      pointer-events: none;
-      z-index: 25;
-    }
-    /* Crate Wing Cards (Left/Right of Turntable Plinth) */
-    .crate-wing-card {
-      transition: transform 0.26s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.26s ease, border-color 0.26s ease, box-shadow 0.26s ease;
-      will-change: transform, opacity;
-    }
-    .crate-wing-card.wing-tick-left {
-      transform: translateX(-8px) scale(0.95) rotateY(8deg);
-    }
-    .crate-wing-card.wing-tick-right {
-      transform: translateX(8px) scale(0.95) rotateY(-8deg);
-    }
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar, .custom-scrollbar::-webkit-scrollbar {
-      width: 7px;
-      height: 7px;
-    }
-    ::-webkit-scrollbar-track, .custom-scrollbar::-webkit-scrollbar-track {
-      background: #090d16;
-    }
-    ::-webkit-scrollbar-thumb, .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: #1e293b;
-      border-radius: 9999px;
-    }
-    ::-webkit-scrollbar-thumb:hover, .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-      background: #38bdf8;
-    }
-    .hidden { display: none !important; }
-    /* v5.0 3D Flip Streaming & Tracklist Stage — Locked Equal Height & Zero Backface Bleed */
-    .hero-flip-perspective {
-      perspective: 1600px;
-    }
-    .hero-flip-inner {
-      display: grid;
-      grid-template-areas: "flipcard";
-      grid-template-rows: minmax(0, 1fr);
-      grid-template-columns: minmax(0, 1fr);
-      height: 500px;
-      min-height: 500px;
-      max-height: 500px;
-      transform-style: preserve-3d;
-      transition: transform 0.68s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s ease;
-      will-change: transform;
-    }
-    @media (min-width: 640px) {
-      .hero-flip-inner {
-        height: 516px;
-        min-height: 516px;
-        max-height: 516px;
-      }
-    }
-    .hero-flip-perspective.is-flipped .hero-flip-inner {
-      transform: rotateY(180deg);
-    }
-    .hero-flip-face {
-      grid-area: flipcard;
-      width: 100%;
-      height: 100%;
-      min-height: 0;
-      max-height: 100%;
-      box-sizing: border-box;
-      overflow: hidden;
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-      transform-style: preserve-3d;
-    }
-    .hero-flip-front {
-      transform: rotateY(0deg);
-      z-index: 2;
-      opacity: 1;
-      transition: opacity 0.18s ease 0.14s;
-    }
-    .hero-flip-perspective.is-flipped .hero-flip-front {
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.14s ease;
-    }
-    .hero-flip-back {
-      transform: rotateY(180deg);
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.14s ease;
-    }
-    .hero-flip-perspective.is-flipped .hero-flip-back {
-      pointer-events: auto;
-      z-index: 3;
-      opacity: 1;
-      transition: opacity 0.18s ease 0.14s;
-    }
-    #stream-tracklist-list {
-      min-height: 0;
-      overflow-y: auto;
-    }
-    @keyframes eqBar1 {
-      0%, 100% { height: 3px; }
-      50% { height: 13px; }
-    }
-    @keyframes eqBar2 {
-      0%, 100% { height: 12px; }
-      35% { height: 4px; }
-      70% { height: 14px; }
-    }
-    @keyframes eqBar3 {
-      0%, 100% { height: 5px; }
-      45% { height: 14px; }
-      80% { height: 6px; }
-    }
-    @keyframes eqBar4 {
-      0%, 100% { height: 10px; }
-      25% { height: 14px; }
-      60% { height: 3px; }
-    }
-    .eq-bar-1 { animation: eqBar1 0.65s ease-in-out infinite; }
-    .eq-bar-2 { animation: eqBar2 0.55s ease-in-out infinite; }
-    .eq-bar-3 { animation: eqBar3 0.72s ease-in-out infinite; }
-    .eq-bar-4 { animation: eqBar4 0.60s ease-in-out infinite; }
-    @media (prefers-reduced-motion: reduce) {
-      .hero-flip-inner {
-        transition: none !important;
-      }
-    }
+    .hidden { display: none; }
+    #view-showcase.hidden,
+    #view-arena.hidden,
+    #view-analytics.hidden,
+    #view-pipeline.hidden,
+    #view-flattening.hidden,
+    #modal-backdrop.hidden,
+    #jacket-inspector-modal.hidden,
+    #cmd-palette-modal.hidden,
+    #toast-banner.hidden,
+    #arena-shroud-a.hidden,
+    #arena-shroud-b.hidden,
+    #arena-bracket-tree-wrap.hidden,
+    #crate-bin-3d-wrap.hidden,
+    #collection-grid.hidden { display: none !important; }
