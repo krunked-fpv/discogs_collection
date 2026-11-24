@@ -58,6 +58,7 @@ export const store = {
   showroomTickInterval: null,
   isSpinningRoulette: false,
   isCardFlipped: false,
+  stageCollapsed: false,
   // Audio / Tracklist State
   autoAdvanceTracks: true,
   streamCache: {},

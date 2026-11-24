@@ -116,6 +116,7 @@ let mainGainNode = null;
 let untaintedAudioMode = false;
 let freqDataBuf = null;
 const spectrumBars = new Float32Array(64);
+let spectrumHasEnergy = false;
 let lastScratchSoundMs = 0;
 
 function ensureAudioCtx() {
@@ -304,7 +305,6 @@ export function toggleVinylCrackle(forceState) {
       crackleNodes = null;
     }
     store.crackleOn = false;
-    updateCrackleBtnUI();
     return;
   }
 
@@ -347,23 +347,10 @@ export function toggleVinylCrackle(forceState) {
 
   crackleNodes = { src, gain, rumble, rumbleGain };
   store.crackleOn = true;
-  updateCrackleBtnUI();
-}
-
-function updateCrackleBtnUI() {
-  const btn = document.getElementById('btn-toggle-audio');
-  if (!btn) return;
-  if (store.crackleOn) {
-    btn.textContent = '🔊 Groove Crackle: ON';
-    btn.className = 'px-3 py-1.5 rounded-xl text-xs font-mono-tech font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 transition';
-  } else {
-    btn.textContent = '🔇 Groove Crackle: Off';
-    btn.className = 'px-3 py-1.5 rounded-xl text-xs font-mono-tech font-bold bg-slate-800/90 text-slate-300 border border-white/10 hover:text-white transition';
-  }
 }
 
 // =========================================================================
-// Pitch-Coupled Playback Rate + Dual Analog VU Meter Analyser
+// Pitch-Coupled Playback Rate + Radial Platter Spectrum Analyser
 // =========================================================================
 function ensureMainAudioPipeline() {
   const audioEl = document.getElementById('vault-preview-audio');
@@ -443,52 +430,54 @@ export function setPlatterVelocityRatio(ratio) {
 export function getVuLevels() {
   if (store.isPreviewPlaying && mainAnalyser && freqDataBuf && !untaintedAudioMode) {
     mainAnalyser.getByteFrequencyData(freqDataBuf);
-    let lowSum = 0;
-    let highSum = 0;
-    const half = Math.max(1, Math.floor(freqDataBuf.length / 2));
-    for (let i = 0; i < half; i++) lowSum += freqDataBuf[i];
-    for (let i = half; i < freqDataBuf.length; i++) highSum += freqDataBuf[i];
-    const l = Math.min(1, (lowSum / (half * 255)) * 1.35);
-    const r = Math.min(1, (highSum / ((freqDataBuf.length - half) * 255)) * 1.45);
-    if (l > 0.01 || r > 0.01) {
+    let sum = 0;
+    for (let i = 0; i < freqDataBuf.length; i++) sum += freqDataBuf[i];
+    const energy = Math.min(1, (sum / (freqDataBuf.length * 255)) * 1.45);
+    if (energy > 0.01) {
+      spectrumHasEnergy = true;
       const binLen = freqDataBuf.length;
       for (let i = 0; i < 64; i++) {
         const binVal = (freqDataBuf[i % binLen] || 0) / 255;
         spectrumBars[i] = spectrumBars[i] * 0.55 + binVal * 0.45;
       }
-      return { left: l, right: r, energy: Math.min(1, (l + r) * 0.6), bins: freqDataBuf, bars: spectrumBars };
+      return { energy, bars: spectrumBars, active: true };
     }
   }
   if (store.isPreviewPlaying) {
+    spectrumHasEnergy = true;
     const audioEl = document.getElementById('vault-preview-audio');
     const rate = audioEl ? Math.max(0.35, audioEl.playbackRate || 1) : 1;
     const t = performance.now() * 0.007 * rate;
-    const l = 0.42 + 0.28 * Math.abs(Math.sin(t * 1.7) * Math.cos(t * 0.8));
-    const r = 0.40 + 0.30 * Math.abs(Math.cos(t * 1.9) * Math.sin(t * 0.7));
+    const energy = 0.44 + 0.28 * Math.abs(Math.sin(t * 1.7) * Math.cos(t * 0.8));
     for (let i = 0; i < 64; i++) {
       const target = 0.22 + 0.68 * Math.abs(Math.sin(t * 1.15 + i * 0.37) * Math.cos(t * 0.65 - i * 0.19));
       spectrumBars[i] = spectrumBars[i] * 0.5 + target * 0.5;
     }
-    return { left: l, right: r, energy: Math.min(1, (l + r) * 0.58), bins: null, bars: spectrumBars };
+    return { energy, bars: spectrumBars, active: true };
   }
   if (store.crackleOn && store.isSpinning) {
+    spectrumHasEnergy = true;
     const t = performance.now() * 0.01;
     for (let i = 0; i < 64; i++) {
       const target = 0.05 + 0.11 * Math.abs(Math.sin(t * 1.9 + i * 0.91));
       spectrumBars[i] = spectrumBars[i] * 0.65 + target * 0.35;
     }
-    return {
-      left: 0.09 + 0.04 * Math.sin(t),
-      right: 0.08 + 0.04 * Math.cos(t * 1.3),
-      energy: 0.1,
-      bins: null,
-      bars: spectrumBars,
-    };
+    return { energy: 0.1, bars: spectrumBars, active: true };
   }
+  if (!spectrumHasEnergy) {
+    return { energy: 0, bars: spectrumBars, active: false };
+  }
+  let stillActive = false;
   for (let i = 0; i < 64; i++) {
-    spectrumBars[i] = spectrumBars[i] < 0.004 ? 0 : spectrumBars[i] * 0.82;
+    if (spectrumBars[i] < 0.004) {
+      spectrumBars[i] = 0;
+    } else {
+      spectrumBars[i] *= 0.82;
+      stillActive = true;
+    }
   }
-  return { left: 0.02, right: 0.02, energy: 0, bins: null, bars: spectrumBars };
+  spectrumHasEnergy = stillActive;
+  return { energy: 0, bars: spectrumBars, active: stillActive };
 }
 
 // =========================================================================
@@ -1213,8 +1202,6 @@ export function bindAudioEngineEvents() {
       }
     });
   }
-
-  document.getElementById('btn-toggle-audio')?.addEventListener('click', () => toggleVinylCrackle());
 
   document.getElementById('stream-artist-link')?.addEventListener('click', (e) => {
     e.preventDefault();

@@ -4,6 +4,7 @@ import { playCrateTickSound } from './audio-preview.js';
 import {
   applyFiltersAndSort,
   clearAllCrateFilters,
+  emit,
   getActiveRecord,
   getEloStats,
   saveUiPrefs,
@@ -20,6 +21,7 @@ import {
   getVerifiedPressingPhotoUrl,
   renderCrateWaxDiscHTML,
   renderJacketSleeveHTML,
+  safeCssColor,
 } from './utils.js';
 
 let binActiveIdx = 0;
@@ -101,27 +103,32 @@ export function renderCrateGrid() {
         ? `<span class="px-1.5 py-0.5 rounded text-[9px] font-mono-tech font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">ELO ${eloStats.elo}</span>`
         : '';
 
+      const waxGlow = safeCssColor(rec.wax_spec?.primary_color, '#22d3ee');
+      const nowSpinningBadge = `<span data-spinning-badge class="${isSelected ? 'flex' : 'hidden'} absolute bottom-2 left-2.5 px-2 py-0.5 rounded-full text-[9px] font-mono-tech font-bold bg-cyan-500/25 text-cyan-200 border border-cyan-400/50 backdrop-blur-sm z-30 items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-cyan-300 animate-pulse"></span>SPINNING</span>`;
+
       let visualHtml = '';
       if (store.thumbMode === 'pressing' && verifiedPressingUrl) {
         visualHtml = `
-          <div class="relative w-full h-52 bg-gradient-to-b from-slate-900/90 to-[#090b12] flex items-center justify-center p-4 overflow-hidden">
+          <div class="relative w-full h-56 bg-gradient-to-b from-slate-900/90 to-[#090b12] flex items-center justify-center p-4 overflow-hidden">
             ${flatPill}
-            <div class="uv-reactive w-40 h-40 rounded-full shadow-2xl hover-spin transition-transform duration-300 group-hover:scale-105">
-              ${renderCrateWaxDiscHTML(rec, 160, true, store.userOverrides)}
+            ${nowSpinningBadge}
+            <div class="uv-reactive w-44 h-44 rounded-full shadow-2xl hover-spin transition-transform duration-300 group-hover:scale-105">
+              ${renderCrateWaxDiscHTML(rec, 176, true, store.userOverrides)}
             </div>
-            <div class="absolute bottom-2.5 left-2.5 w-14 h-14 rounded-lg shadow-lg overflow-hidden border border-white/20 z-20">
+            <div class="absolute bottom-2.5 left-2.5 w-14 h-14 rounded-lg shadow-lg overflow-hidden border border-white/20 z-20 ${isSelected ? 'hidden' : ''}">
               ${renderJacketSleeveHTML(rec)}
             </div>
-            <span class="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-full text-[10px] font-mono-tech bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 z-30">
-              📸 Pressing Photo
+            <span class="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-full text-[10px] font-mono-tech bg-slate-950/75 backdrop-blur-sm text-emerald-300 border border-emerald-500/30 z-30">
+              📸 Pressing
             </span>
           </div>
         `;
       } else if (store.thumbMode === 'sleeve') {
         visualHtml = `
-          <div class="relative w-full h-52 bg-gradient-to-b from-slate-900/90 to-[#090b12] p-4 flex items-center justify-center overflow-hidden">
+          <div class="relative w-full h-56 bg-gradient-to-b from-slate-900/90 to-[#090b12] p-4 flex items-center justify-center overflow-hidden">
             ${flatPill}
-            <div class="w-40 h-40 shadow-2xl holo-sleeve rounded-xl overflow-hidden">
+            ${nowSpinningBadge}
+            <div class="w-44 h-44 shadow-2xl holo-sleeve rounded-xl overflow-hidden transition-transform duration-300 group-hover:scale-[1.03]">
               ${renderJacketSleeveHTML(rec)}
             </div>
             <div class="absolute bottom-2.5 right-2.5 uv-reactive w-16 h-16 rounded-full shadow-2xl hover-spin border border-white/20 z-20">
@@ -132,20 +139,21 @@ export function renderCrateGrid() {
       } else {
         // Default: 'split' (Sleeve + Disc tactile sleeve-peek)
         visualHtml = `
-          <div class="sleeve-peek-stage relative w-full h-52 px-4">
+          <div class="sleeve-peek-stage relative w-full h-56 px-4" style="--card-wax-glow: ${waxGlow}22;">
             ${flatPill}
+            ${nowSpinningBadge}
             <div class="sleeve-peek-jacket holo-sleeve">
               ${renderJacketSleeveHTML(rec)}
             </div>
             <div class="sleeve-peek-disc uv-reactive">
-              ${renderCrateWaxDiscHTML(rec, 130, true, store.userOverrides)}
+              ${renderCrateWaxDiscHTML(rec, 150, true, store.userOverrides)}
             </div>
-            <span class="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-full text-[10px] font-mono-tech ${
+            <span class="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-full text-[10px] font-mono-tech bg-slate-950/75 backdrop-blur-sm ${
               verifiedPressingUrl
-                ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
-                : 'bg-slate-900/90 text-cyan-300 border border-white/10'
+                ? 'text-emerald-300 border border-emerald-500/30'
+                : 'text-cyan-300 border border-white/10'
             } z-30">
-              ${verifiedPressingUrl ? '📸 Pressing Photo' : '⚙ Wax Shader'}
+              ${verifiedPressingUrl ? '📸 Pressing' : '⚙ Wax'}
             </span>
           </div>
         `;
@@ -169,6 +177,9 @@ export function renderCrateGrid() {
             <div class="relative">
               ${visualHtml}
               <div class="card-quick-actions absolute bottom-2 right-2 z-30 flex items-center gap-1" data-stop-prop="true">
+                <button type="button" data-card-view-stage="${idx}" class="px-2 py-1 rounded-lg bg-slate-950/90 hover:bg-fuchsia-500/25 text-[10px] font-mono-tech font-bold text-fuchsia-200 border border-white/15 hover:border-fuchsia-400/50 shadow" title="Load on full Turntable Stage">
+                  💿 Stage ↑
+                </button>
                 <button type="button" data-card-inspect="${escapeHtml(rec.release_id)}" class="px-2 py-1 rounded-lg bg-slate-950/90 hover:bg-cyan-500/25 text-[10px] font-mono-tech font-bold text-cyan-200 border border-white/15 hover:border-cyan-400/50 shadow" title="Open 3D Jacket, Gatefold &amp; Gallery Inspector">
                   🔍 3D Jacket
                 </button>
@@ -406,6 +417,14 @@ export function initCrateViews() {
   });
 
   document.getElementById('collection-grid')?.addEventListener('click', (e) => {
+    const viewStageBtn = e.target.closest('[data-card-view-stage]');
+    if (viewStageBtn) {
+      e.stopPropagation();
+      setActiveIndex(Number(viewStageBtn.getAttribute('data-card-view-stage') || 0));
+      playCrateTickSound(1.1);
+      emit('expandStageRequested');
+      return;
+    }
     const inspectBtn = e.target.closest('[data-card-inspect]');
     if (inspectBtn) {
       e.stopPropagation();
@@ -419,7 +438,7 @@ export function initCrateViews() {
     if (!card) return;
     setActiveIndex(Number(card.getAttribute('data-card-index') || 0));
     playCrateTickSound(1.05);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    emit('crateCardSelected');
   });
 
   // 3D Crate Bin interactions
@@ -474,7 +493,7 @@ export function initCrateViews() {
       if (idx === binActiveIdx) {
         const rec = store.filteredRecords[idx];
         if (rec) setActiveRecordById(rec.release_id);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        emit('expandStageRequested');
       } else {
         binActiveIdx = idx;
         playCrateTickSound(1.0);
@@ -485,7 +504,7 @@ export function initCrateViews() {
     const spinBtn = e.target.closest('[data-bin-spin]');
     if (spinBtn) {
       setActiveRecordById(Number(spinBtn.getAttribute('data-bin-spin')));
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      emit('expandStageRequested');
       return;
     }
     const inspBtn = e.target.closest('[data-bin-inspect]');
@@ -503,9 +522,31 @@ export function initCrateViews() {
     render3DCrateBinFlipper();
   });
 
+function syncSelectedCrateCard() {
+  const grid = document.getElementById('collection-grid');
+  if (!grid || store.thumbMode === 'bin3d') return;
+  const activeIdx = String(store.activeIndex);
+  grid.querySelectorAll('.card-record').forEach((card) => {
+    const isSel = card.getAttribute('data-card-index') === activeIdx;
+    card.classList.toggle('border-cyan-400', isSel);
+    card.classList.toggle('ring-2', isSel);
+    card.classList.toggle('ring-cyan-400/30', isSel);
+    card.classList.toggle('border-white/10', !isSel);
+    card.classList.toggle('hover:border-cyan-500/45', !isSel);
+    const badge = card.querySelector('[data-spinning-badge]');
+    if (badge) {
+      badge.classList.toggle('flex', isSel);
+      badge.classList.toggle('hidden', !isSel);
+    }
+  });
+}
+
   subscribe((topic) => {
-    if (topic === 'recordsChanged' || topic === 'activeRecordChanged' || topic === 'eloUpdated') {
+    if (topic === 'recordsChanged' || topic === 'eloUpdated') {
       renderCrateGrid();
+    } else if (topic === 'activeRecordChanged') {
+      if (store.thumbMode === 'bin3d') renderCrateGrid();
+      else syncSelectedCrateCard();
     }
   });
 

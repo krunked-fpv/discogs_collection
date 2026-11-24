@@ -1,4 +1,4 @@
-// KRUNKED // VINYL VAULT v6.0 — WebGL2 Direct-Drive Turntable Stage, Tonearm Physics & VU Meters
+// KRUNKED // VINYL VAULT v6.0 — WebGL2 Direct-Drive Turntable Stage, Tonearm Physics & Scroll-Collapse Mini-Bar
 
 import {
   playAlbumTrackAtIndex,
@@ -33,6 +33,7 @@ import {
   getPressingPhotoUrls,
   getVerifiedPressingPhotoUrl,
   renderCrateWaxDiscHTML,
+  renderJacketSleeveHTML,
   safeCssColor,
   safeImageSrc,
   showToast,
@@ -46,6 +47,15 @@ const OMEGA_45 = (45.0 / 60) * Math.PI * 2;
 let heroRenderer = null;
 let rafId = null;
 let lastFrameTime = performance.now();
+
+// Viewport visibility, scroll-collapse mini-bar & GPU rAF pause state
+let isHeroInViewport = true;
+let scrolledPastHero = false;
+let currentHeaderHeight = 58;
+let sentinelObserver = null;
+let heroVisObserver = null;
+let lastMiniBarThumbKey = '';
+let spectrumClearedIdle = false;
 
 // Real-time platter kinematics
 let platterAngle = 0;
@@ -109,10 +119,10 @@ export function updateSmartSpinModeBadges() {
   if (modePill) {
     if (store.spinMode === 'showroom') {
       modePill.textContent = `📺 Showroom Kiosk Active • Auto-Cycle (${store.showroomCountdown}s)`;
-      modePill.className = 'text-[10px] font-mono-tech uppercase px-2.5 py-0.5 rounded-full bg-purple-500/25 text-purple-200 border border-purple-400/50 font-bold animate-pulse';
+      modePill.className = 'hidden xl:inline-flex text-[10px] font-mono-tech uppercase px-2 py-0.5 rounded-full bg-purple-500/25 text-purple-200 border border-purple-400/50 font-bold animate-pulse';
     } else if (store.spinMode === 'eyecandy') {
       modePill.textContent = `🌈 Eye-Candy Variants • ${eyeCandyCount} Flex Wax LPs`;
-      modePill.className = 'text-[10px] font-mono-tech uppercase px-2.5 py-0.5 rounded-full bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-400/35 font-bold';
+      modePill.className = 'hidden xl:inline-flex text-[10px] font-mono-tech uppercase px-2 py-0.5 rounded-full bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-400/35 font-bold';
     } else if (store.spinMode !== 'all') {
       const pool = getSmartSpinPool();
       const labelMap = {
@@ -123,10 +133,10 @@ export function updateSmartSpinModeBadges() {
         todo: '🔥 Flattening Queue Sommelier',
       };
       modePill.textContent = `${labelMap[store.spinMode] || store.spinMode} • ${pool.length} LPs`;
-      modePill.className = 'text-[10px] font-mono-tech uppercase px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-200 border border-amber-400/40 font-bold';
+      modePill.className = 'hidden xl:inline-flex text-[10px] font-mono-tech uppercase px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-200 border border-amber-400/40 font-bold';
     } else {
       modePill.textContent = `🎲 Full Vault Roulette • ${base.length} LPs`;
-      modePill.className = 'text-[10px] font-mono-tech uppercase px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-400/35 font-bold';
+      modePill.className = 'hidden xl:inline-flex text-[10px] font-mono-tech uppercase px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-400/35 font-bold';
     }
   }
 }
@@ -300,15 +310,6 @@ export function renderHeroStage() {
     }
   }
 
-  const etchBtn = document.getElementById('btn-toggle-etched');
-  if (etchBtn) {
-    const activeEtch = Boolean(wax.etched || store.etchedPreviewOverride);
-    etchBtn.textContent = wax.etched ? '✨ Etched Relief: Native' : (store.etchedPreviewOverride ? '✨ Etched Relief: Preview' : '✨ Etched Relief');
-    etchBtn.className = activeEtch
-      ? 'px-2.5 py-1 rounded-xl text-[11px] font-mono-tech font-bold bg-amber-500/20 text-amber-200 border border-amber-400/40 transition'
-      : 'px-2.5 py-1 rounded-xl text-[11px] font-mono-tech font-semibold bg-slate-900 text-slate-400 border border-white/10 hover:text-white transition';
-  }
-
   const setText = (id, txt) => {
     const el = document.getElementById(id);
     if (el) el.textContent = txt;
@@ -350,6 +351,7 @@ export function renderHeroStage() {
   }
 
   updateSmartSpinModeBadges();
+  renderMiniBar(rec, false);
 
   if (!store.isSpinningRoulette) {
     renderHeroGalleryStrip(rec);
@@ -358,7 +360,173 @@ export function renderHeroStage() {
 }
 
 // =========================================================================
-// Toggles: UV Blacklight, Hold Up to the Light, Motor, RPM, Card Flip
+// Sticky "Now Spinning" Mini-Bar & Manual Stage Collapse
+// =========================================================================
+function isMiniBarVisible() {
+  return store.activeTab === 'showcase' && (store.stageCollapsed || scrolledPastHero);
+}
+
+export function renderMiniBar(rec, shouldPulse = false) {
+  if (!rec) return;
+  const bar = document.getElementById('now-spinning-minibar');
+  if (!bar) return;
+
+  const titleEl = document.getElementById('minibar-artist-title');
+  if (titleEl) titleEl.textContent = `${rec.artist} — ${rec.title}`;
+
+  const badgeEl = document.getElementById('minibar-variant-badge');
+  if (badgeEl) badgeEl.textContent = rec.wax_spec?.variant_badge || '12" LP';
+
+  const subEl = document.getElementById('minibar-meta-sub');
+  if (subEl) {
+    const yr = rec.year || 'LP';
+    const lbl = rec.label || 'Vinyl';
+    subEl.textContent = `${yr} • ${lbl} • ${formatUsdValue(rec)}`;
+  }
+
+  const pressUrl = getVerifiedPressingPhotoUrl(rec, store.userOverrides);
+  const thumbKey = `${rec.release_id}:${pressUrl}`;
+  if (lastMiniBarThumbKey !== thumbKey) {
+    lastMiniBarThumbKey = thumbKey;
+    const sleeveEl = document.getElementById('minibar-thumb-sleeve');
+    if (sleeveEl) sleeveEl.innerHTML = renderJacketSleeveHTML(rec);
+    const discEl = document.getElementById('minibar-thumb-disc');
+    if (discEl) discEl.innerHTML = renderCrateWaxDiscHTML(rec, 40, true, store.userOverrides);
+  }
+
+  const discEl = document.getElementById('minibar-thumb-disc');
+  if (discEl) {
+    const spinActive = store.isSpinning && isMiniBarVisible();
+    discEl.classList.toggle('spin-paused', !spinActive);
+  }
+
+  if (shouldPulse && isMiniBarVisible()) {
+    bar.classList.remove('minibar-pulse');
+    void bar.offsetWidth;
+    bar.classList.add('minibar-pulse');
+  }
+}
+
+export function syncMiniBarVisibility() {
+  const bar = document.getElementById('now-spinning-minibar');
+  if (!bar) return;
+  const show = isMiniBarVisible();
+  bar.classList.toggle('is-visible', show);
+  bar.setAttribute('aria-hidden', show ? 'false' : 'true');
+
+  const discEl = document.getElementById('minibar-thumb-disc');
+  if (discEl) {
+    discEl.classList.toggle('spin-paused', !(store.isSpinning && show));
+  }
+}
+
+export function setStageCollapsed(collapsed) {
+  store.stageCollapsed = Boolean(collapsed);
+  const heroEl = document.getElementById('hero-turntable-stage');
+  const spacerEl = document.getElementById('minibar-collapsed-spacer');
+  if (heroEl) heroEl.classList.toggle('hidden', store.stageCollapsed);
+  if (spacerEl) spacerEl.classList.toggle('hidden', !store.stageCollapsed);
+  if (!store.stageCollapsed && window.scrollY < 320) {
+    isHeroInViewport = true;
+    scrolledPastHero = false;
+  }
+  syncMiniBarVisibility();
+  syncStageLoopState();
+}
+
+export function expandHeroStage() {
+  if (store.stageCollapsed) {
+    setStageCollapsed(false);
+  }
+  if (store.activeTab !== 'showcase' && typeof window.__setMainVaultTab === 'function') {
+    window.__setMainVaultTab('showcase');
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  syncStageLoopState();
+}
+
+function setupScrollCollapseObservers() {
+  const headerEl = document.getElementById('vault-header');
+  const sentinelEl = document.getElementById('hero-stage-sentinel');
+  const heroEl = document.getElementById('hero-turntable-stage');
+
+  const evaluateSentinelBounds = (offset) => {
+    const targetEl = sentinelEl || heroEl;
+    if (!targetEl || store.stageCollapsed) return;
+    const rect = targetEl.getBoundingClientRect();
+    const nextPast = rect.bottom <= offset + 2;
+    if (nextPast !== scrolledPastHero) {
+      scrolledPastHero = nextPast;
+      syncMiniBarVisibility();
+    }
+  };
+
+  const rebuildSentinelObserver = (headerH) => {
+    if (typeof IntersectionObserver === 'undefined') return;
+    if (sentinelObserver) sentinelObserver.disconnect();
+    const offset = Math.max(40, Math.round(headerH));
+    // Observe BOTH the hero stage (immune to instant fast-scroll teleports on tall mobile layouts)
+    // and the bottom sentinel (exact pixel boundary under sticky header)
+    sentinelObserver = new IntersectionObserver(
+      () => {
+        evaluateSentinelBounds(offset);
+      },
+      {
+        root: null,
+        rootMargin: `-${offset}px 0px 0px 0px`,
+        threshold: 0,
+      }
+    );
+    if (heroEl) sentinelObserver.observe(heroEl);
+    if (sentinelEl) sentinelObserver.observe(sentinelEl);
+    evaluateSentinelBounds(offset);
+  };
+
+  if (headerEl) {
+    const syncHeaderMetrics = () => {
+      const h = Math.max(48, Math.round(headerEl.getBoundingClientRect().height || 58));
+      if (h !== currentHeaderHeight || !sentinelObserver) {
+        currentHeaderHeight = h;
+        document.documentElement.style.setProperty('--vault-header-h', `${h}px`);
+        rebuildSentinelObserver(h);
+      }
+    };
+    syncHeaderMetrics();
+    if (typeof ResizeObserver !== 'undefined') {
+      const ro = new ResizeObserver(syncHeaderMetrics);
+      ro.observe(headerEl);
+    } else {
+      window.addEventListener('resize', syncHeaderMetrics, { passive: true });
+    }
+  } else {
+    rebuildSentinelObserver(currentHeaderHeight);
+  }
+
+  // Pause heavy WebGL2 platter rendering whenever hero stage is completely scrolled out of view
+  if (heroEl && typeof IntersectionObserver !== 'undefined') {
+    if (heroVisObserver) heroVisObserver.disconnect();
+    heroVisObserver = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (!entry) return;
+        const nextVis = entry.isIntersecting;
+        if (nextVis !== isHeroInViewport) {
+          isHeroInViewport = nextVis;
+          syncStageLoopState();
+        }
+      },
+      {
+        root: null,
+        rootMargin: '80px 0px 80px 0px',
+        threshold: 0,
+      }
+    );
+    heroVisObserver.observe(heroEl);
+  }
+}
+
+// =========================================================================
+// Toggles: UV Blacklight, Hold Up to the Light, Motor, Card Flip
 // =========================================================================
 export function toggleUvBlacklight(forceState) {
   store.uvBlacklight = typeof forceState === 'boolean' ? forceState : !store.uvBlacklight;
@@ -367,8 +535,8 @@ export function toggleUvBlacklight(forceState) {
   if (uvBtn) {
     uvBtn.textContent = store.uvBlacklight ? '🟣 UV Blacklight: ON' : '🟣 UV Blacklight: Off';
     uvBtn.className = store.uvBlacklight
-      ? 'px-2.5 py-1.5 rounded-xl text-xs font-black border-2 border-fuchsia-400 bg-fuchsia-500/30 text-white shadow-[0_0_20px_rgba(217,70,239,0.5)] transition-all'
-      : 'px-2.5 py-1.5 rounded-xl text-xs font-bold border border-purple-400/40 bg-purple-500/15 text-purple-200 hover:bg-purple-500/25 transition-all';
+      ? 'w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-black border border-fuchsia-400/60 bg-fuchsia-500/20 text-white transition-all'
+      : 'w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold border border-white/10 bg-slate-950/75 text-slate-400 hover:text-white transition-all';
   }
   updateOpticsVisuals(getActiveRecord());
   saveUiPrefs();
@@ -379,15 +547,6 @@ export function toggleUvBlacklight(forceState) {
 
 export function toggleBacklight(forceState) {
   store.backlightOn = typeof forceState === 'boolean' ? forceState : !store.backlightOn;
-  const btn = document.getElementById('btn-toggle-backlight');
-  const sliderWrap = document.getElementById('backlight-slider-wrap');
-  if (btn) {
-    btn.textContent = store.backlightOn ? '☀️ Hold to Light: ON' : '☀️ Hold to Light (B)';
-    btn.className = store.backlightOn
-      ? 'px-3 py-1.5 rounded-xl text-xs font-mono-tech font-black bg-amber-400/25 text-amber-200 border border-amber-400/60 shadow-[0_0_20px_rgba(251,191,36,0.35)] transition'
-      : 'px-3 py-1.5 rounded-xl text-xs font-mono-tech font-bold bg-slate-900 text-slate-200 border border-white/15 hover:border-amber-400/50 transition';
-  }
-  if (sliderWrap) sliderWrap.classList.toggle('opacity-50', !store.backlightOn);
   updateOpticsVisuals(getActiveRecord());
   saveUiPrefs();
   playCrateTickSound(store.backlightOn ? 1.25 : 0.88);
@@ -405,9 +564,8 @@ export function togglePlatterMotor(forceState) {
   const next = typeof forceState === 'boolean' ? forceState : !store.isSpinning;
   store.isSpinning = next;
   store.motorOn = next;
-  const spinBtn = document.getElementById('btn-toggle-spin');
-  if (spinBtn) spinBtn.textContent = next ? '⏸ Cut Motor (Coast)' : '▶ Start Motor';
   setTonearmTargetDeg(next ? 18 : -8);
+  syncMiniBarVisibility();
   if (next) playNeedleDropSound();
   else playCrateTickSound(0.75);
 }
@@ -547,8 +705,8 @@ export function setSmartSpinMode(mode, autoTriggerSpin = true, persist = true) {
     const m = btn.getAttribute('data-spin-mode');
     const act = m === mode;
     btn.className = act
-      ? 'spin-mode-btn text-left p-2.5 rounded-2xl border-2 transition-all bg-cyan-500/15 border-cyan-400 text-white shadow-[0_0_20px_rgba(6,182,212,0.25)]'
-      : 'spin-mode-btn text-left p-2.5 rounded-2xl border transition-all bg-slate-950/80 border-white/15 text-slate-300 hover:border-cyan-400/50 hover:text-white';
+      ? 'spin-mode-btn inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl border transition-all bg-cyan-500/15 border-cyan-400 text-white text-[11px] font-bold shadow-[0_0_16px_rgba(6,182,212,0.2)]'
+      : 'spin-mode-btn inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl border transition-all bg-slate-950/80 border-white/15 text-slate-300 hover:border-cyan-400/50 hover:text-white text-[11px] font-bold';
   });
 
   document.querySelectorAll('[data-sommelier-mode]').forEach((btn) => {
@@ -679,81 +837,103 @@ function drawRadialSpectrumRing(bars, energy) {
   ctx.restore();
 }
 
-function updateVuMetersUI() {
-  const needleL = document.getElementById('vu-needle-left');
-  const needleR = document.getElementById('vu-needle-right');
-  const peakL = document.getElementById('vu-peak-left');
-  const peakR = document.getElementById('vu-peak-right');
-  const { left, right, energy = 0, bars } = getVuLevels();
-  if (needleL && needleR) {
-    const degL = -42 + Math.min(1, left) * 84;
-    const degR = -42 + Math.min(1, right) * 84;
-    needleL.style.transform = `rotate(${degL.toFixed(1)}deg)`;
-    needleR.style.transform = `rotate(${degR.toFixed(1)}deg)`;
-    if (peakL) peakL.classList.toggle('is-rose', left > 0.72);
-    if (peakR) peakR.classList.toggle('is-rose', right > 0.72);
-  }
+function updatePlatterAudioVisuals() {
+  const { energy = 0, bars, active = false } = getVuLevels();
   if (heroRenderer) {
     heroRenderer.setOptics({ audioEnergy: energy });
   }
+  if (!active) {
+    if (!spectrumClearedIdle) {
+      drawRadialSpectrumRing(bars, 0);
+      spectrumClearedIdle = true;
+    }
+    return;
+  }
+  spectrumClearedIdle = false;
   drawRadialSpectrumRing(bars, energy);
 }
 
+function shouldRenderStageLoop() {
+  return store.activeTab === 'showcase' && !store.stageCollapsed && isHeroInViewport && !document.hidden;
+}
+
+export function syncStageLoopState() {
+  const heroEl = document.getElementById('hero-turntable-stage');
+  if (shouldRenderStageLoop()) {
+    if (heroEl) heroEl.dataset.renderState = 'active';
+    if (!rafId) {
+      lastFrameTime = performance.now();
+      rafId = requestAnimationFrame(tickStageFrame);
+    }
+  } else {
+    if (heroEl) heroEl.dataset.renderState = 'paused';
+    if (rafId) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+  }
+}
+
 function tickStageFrame(now) {
+  if (!shouldRenderStageLoop()) {
+    rafId = null;
+    const heroEl = document.getElementById('hero-turntable-stage');
+    if (heroEl) heroEl.dataset.renderState = 'paused';
+    return;
+  }
+
   const dt = Math.min(0.05, Math.max(0.001, (now - lastFrameTime) / 1000));
   lastFrameTime = now;
 
-  if (store.activeTab === 'showcase') {
-    const targetOmega = store.isSpinning && store.motorOn ? (store.rpm === 45 ? OMEGA_45 : OMEGA_33) : 0;
+  const targetOmega = store.isSpinning && store.motorOn ? (store.rpm === 45 ? OMEGA_45 : OMEGA_33) : 0;
+  if (isScrubbingPlatter) {
+    currentOmega = scrubOmega;
+    // Exponential decay of scrub velocity if user pauses hand on platter
+    scrubOmega *= Math.exp(-dt * 12);
+  } else if (targetOmega > 0) {
+    // Direct-drive high torque ramp
+    currentOmega += (targetOmega - currentOmega) * Math.min(1, dt * 8.5);
+    platterAngle += currentOmega * dt;
+  } else {
+    // Authentic heavy aluminum platter coasting inertia
+    currentOmega *= Math.exp(-dt * 0.85);
+    if (Math.abs(currentOmega) < 0.02) currentOmega = 0;
+    platterAngle += currentOmega * dt;
+  }
+
+  strobeAngle += (currentOmega - targetOmega) * dt * 0.35;
+  setPlatterVelocityRatio(currentOmega / OMEGA_33);
+
+  const rpmVal = (currentOmega / (Math.PI * 2)) * 60;
+  const rpmReadout = document.getElementById('platter-rpm-readout');
+  if (rpmReadout) {
     if (isScrubbingPlatter) {
-      currentOmega = scrubOmega;
-      // Exponential decay of scrub velocity if user pauses hand on platter
-      scrubOmega *= Math.exp(-dt * 12);
-    } else if (targetOmega > 0) {
-      // Direct-drive high torque ramp
-      currentOmega += (targetOmega - currentOmega) * Math.min(1, dt * 8.5);
-      platterAngle += currentOmega * dt;
+      rpmReadout.textContent = `SCRUB ${rpmVal.toFixed(1)} RPM`;
+    } else if (!store.isSpinning) {
+      rpmReadout.textContent = rpmVal > 0.4 ? `COASTING ${rpmVal.toFixed(1)} RPM` : 'PLATTER PARKED • 0.0 RPM';
+    } else if (store.isPreviewPlaying && store.activeTrackIndex >= 0) {
+      const sData = resolveAlbumStreamingData(getActiveRecord());
+      const tr = sData.tracks?.[store.activeTrackIndex];
+      const ratioPct = ((currentOmega / (store.rpm === 45 ? OMEGA_45 : OMEGA_33) - 1) * 100).toFixed(1);
+      rpmReadout.textContent = tr
+        ? `♫ ${tr.title.slice(0, 15).toUpperCase()} • ${store.rpm === 45 ? '45' : '33.3'}`
+        : `${store.rpm === 45 ? '45.0' : '33.3'} RPM (${ratioPct}%)`;
     } else {
-      // Authentic heavy aluminum platter coasting inertia
-      currentOmega *= Math.exp(-dt * 0.85);
-      if (Math.abs(currentOmega) < 0.02) currentOmega = 0;
-      platterAngle += currentOmega * dt;
+      rpmReadout.textContent = store.rpm === 45 ? '45.0 RPM • QUARTZ LOCK' : '33.3 RPM • QUARTZ LOCK';
     }
+  }
 
-    strobeAngle += (currentOmega - targetOmega) * dt * 0.35;
-    setPlatterVelocityRatio(currentOmega / OMEGA_33);
+  const strobeLed = document.getElementById('platter-strobe-led');
+  if (strobeLed) {
+    strobeLed.className = store.isSpinning
+      ? 'w-2 h-2 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_#22d3ee]'
+      : 'w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_6px_#f59e0b]';
+  }
 
-    const rpmVal = (currentOmega / (Math.PI * 2)) * 60;
-    const rpmReadout = document.getElementById('platter-rpm-readout');
-    if (rpmReadout) {
-      if (isScrubbingPlatter) {
-        rpmReadout.textContent = `SCRUB ${rpmVal.toFixed(1)} RPM`;
-      } else if (!store.isSpinning) {
-        rpmReadout.textContent = rpmVal > 0.4 ? `COASTING ${rpmVal.toFixed(1)} RPM` : 'PLATTER PARKED • 0.0 RPM';
-      } else if (store.isPreviewPlaying && store.activeTrackIndex >= 0) {
-        const sData = resolveAlbumStreamingData(getActiveRecord());
-        const tr = sData.tracks?.[store.activeTrackIndex];
-        const ratioPct = ((currentOmega / (store.rpm === 45 ? OMEGA_45 : OMEGA_33) - 1) * 100).toFixed(1);
-        rpmReadout.textContent = tr
-          ? `♫ ${tr.title.slice(0, 15).toUpperCase()} • ${store.rpm === 45 ? '45' : '33.3'}`
-          : `${store.rpm === 45 ? '45.0' : '33.3'} RPM (${ratioPct}%)`;
-      } else {
-        rpmReadout.textContent = store.rpm === 45 ? '45.0 RPM • QUARTZ LOCK' : '33.3 RPM • QUARTZ LOCK';
-      }
-    }
-
-    const strobeLed = document.getElementById('platter-strobe-led');
-    if (strobeLed) {
-      strobeLed.className = store.isSpinning
-        ? 'w-2 h-2 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_#22d3ee]'
-        : 'w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_6px_#f59e0b]';
-    }
-
-    updateVuMetersUI();
-    if (heroRenderer) {
-      heroRenderer.setAngles(platterAngle, strobeAngle);
-      heroRenderer.render();
-    }
+  updatePlatterAudioVisuals();
+  if (heroRenderer) {
+    heroRenderer.setAngles(platterAngle, strobeAngle);
+    heroRenderer.render();
   }
 
   rafId = requestAnimationFrame(tickStageFrame);
@@ -896,61 +1076,12 @@ export function initTurntableStage() {
     armHit.addEventListener('pointercancel', releaseArm);
   }
 
-  // Stage Controls
-  document.getElementById('btn-toggle-spin')?.addEventListener('click', () => togglePlatterMotor());
-  document.getElementById('btn-toggle-rpm')?.addEventListener('click', () => {
-    store.rpm = store.rpm === 33 ? 45 : 33;
-    const btn = document.getElementById('btn-toggle-rpm');
-    if (btn) btn.textContent = store.rpm === 45 ? 'Speed: 45 RPM' : 'Speed: 33⅓ RPM';
-    saveUiPrefs();
-    playCrateTickSound(store.rpm === 45 ? 1.25 : 0.9);
-  });
-
-  document.getElementById('btn-quartz-pitch')?.addEventListener('click', () => {
-    store.quartzPitchLock = !store.quartzPitchLock;
-    const btn = document.getElementById('btn-quartz-pitch');
-    if (btn) {
-      btn.textContent = store.quartzPitchLock ? '🔒 Pitch Lock: ON' : '🎛 Pitch: Platter-Coupled';
-      btn.className = store.quartzPitchLock
-        ? 'px-3 py-1.5 rounded-xl text-xs font-mono-tech font-bold bg-cyan-500/20 text-cyan-200 border border-cyan-400/40 transition'
-        : 'px-3 py-1.5 rounded-xl text-xs font-mono-tech font-bold bg-slate-800/90 text-slate-300 border border-white/10 hover:text-white transition';
-    }
-    showToast(store.quartzPitchLock ? 'Pitch Lock ON — constant 1.0x pitch at 45 RPM.' : 'Platter-Coupled Pitch ON — hear speed ramp, coast & 45 RPM chipmunk shift!');
-  });
-
-  document.getElementById('btn-toggle-backlight')?.addEventListener('click', () => toggleBacklight());
-  document.getElementById('backlight-intensity-slider')?.addEventListener('input', (e) => {
-    store.backlightIntensity = Math.max(0.1, Math.min(1, Number(e.target.value || 75) / 100));
-    if (!store.backlightOn) toggleBacklight(true);
-    else updateOpticsVisuals(getActiveRecord());
-    saveUiPrefs();
-  });
-
-  document.getElementById('btn-toggle-etched')?.addEventListener('click', () => {
-    store.etchedPreviewOverride = !store.etchedPreviewOverride;
-    renderHeroStage();
-  });
-
-  const setStageMode = (m) => {
-    store.stageMode = m;
-    const map = [['auto', 'stage-view-auto'], ['sleeve', 'stage-view-sleeve']];
-    for (const [k, id] of map) {
-      const el = document.getElementById(id);
-      if (!el) continue;
-      el.className = k === m
-        ? 'px-3 py-1 rounded-lg font-bold bg-purple-500/25 text-purple-200 border border-purple-400/30'
-        : 'px-3 py-1 rounded-lg font-semibold text-slate-400 hover:text-white';
-    }
-    renderHeroStage();
-  };
-  document.getElementById('stage-view-auto')?.addEventListener('click', () => setStageMode('auto'));
-  document.getElementById('stage-view-sleeve')?.addEventListener('click', () => setStageMode('sleeve'));
-
-  // Carousel & Wing Cards
-  const stepRecord = (delta) => {
+  // Carousel, Wing Cards & Sticky Mini-Bar Controls
+  const stepRecord = (delta, pulseMiniBar = false) => {
     if (store.isSpinningRoulette) return;
     playCrateTickSound(delta > 0 ? 1.08 : 0.92);
     setActiveIndex(store.activeIndex + delta);
+    if (pulseMiniBar) renderMiniBar(getActiveRecord(), true);
   };
   document.getElementById('btn-carousel-prev')?.addEventListener('click', () => stepRecord(-1));
   document.getElementById('btn-carousel-next')?.addEventListener('click', () => stepRecord(1));
@@ -958,7 +1089,50 @@ export function initTurntableStage() {
   document.getElementById('stage-next-card')?.addEventListener('click', () => stepRecord(1));
   document.getElementById('btn-carousel-random')?.addEventListener('click', () => triggerKineticCrateSpin());
 
-  // Smart Spin Mode Cards & Sommelier Pills
+  // Manual Stage Collapse & Mini-Bar Transport
+  document.getElementById('btn-collapse-stage')?.addEventListener('click', () => {
+    playCrateTickSound(0.95);
+    setStageCollapsed(true);
+  });
+  document.getElementById('minibar-expand')?.addEventListener('click', () => {
+    playCrateTickSound(1.1);
+    expandHeroStage();
+  });
+  document.getElementById('minibar-expand-area')?.addEventListener('click', () => {
+    playCrateTickSound(1.1);
+    expandHeroStage();
+  });
+  document.getElementById('minibar-prev')?.addEventListener('click', () => stepRecord(-1, true));
+  document.getElementById('minibar-next')?.addEventListener('click', () => stepRecord(1, true));
+  document.getElementById('minibar-random')?.addEventListener('click', () => {
+    if (isMiniBarVisible()) {
+      const list = store.filteredRecords.length ? store.filteredRecords : store.records;
+      const pool = getSmartSpinPool();
+      const candidateSet = new Set(pool.map((r) => Number(r.release_id)));
+      let validIndices = [];
+      list.forEach((r, idx) => {
+        if (candidateSet.has(Number(r.release_id))) validIndices.push(idx);
+      });
+      if (!validIndices.length) validIndices = list.map((_, i) => i);
+      if (!validIndices.length) return;
+      let pickIdx = validIndices[Math.floor(Math.random() * validIndices.length)];
+      if (validIndices.length > 1 && pickIdx === store.activeIndex) {
+        const alt = validIndices.filter((i) => i !== store.activeIndex);
+        pickIdx = alt[Math.floor(Math.random() * alt.length)];
+      }
+      playCrateTickSound(1.22);
+      setActiveIndex(pickIdx);
+      const winner = getActiveRecord();
+      renderMiniBar(winner, true);
+      if (winner) {
+        showToast(`🎲 Now Spinning: ${winner.artist} — "${winner.title}" (${winner.wax_spec?.variant_badge || 'LP'})`);
+      }
+    } else {
+      triggerKineticCrateSpin();
+    }
+  });
+
+  // Smart Spin Mode Pills
   document.querySelectorAll('.spin-mode-btn').forEach((btn) => {
     btn.addEventListener('click', () => {
       const mode = btn.getAttribute('data-spin-mode') || 'all';
@@ -967,13 +1141,6 @@ export function initTurntableStage() {
         showToast('📺 Showroom Kiosk Paused.');
         return;
       }
-      setSmartSpinMode(mode, true);
-    });
-  });
-
-  document.querySelectorAll('[data-sommelier-mode]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const mode = btn.getAttribute('data-sommelier-mode') || 'all';
       setSmartSpinMode(mode, true);
     });
   });
@@ -1017,28 +1184,26 @@ export function initTurntableStage() {
     }
   });
 
-  // Card Flip & Action buttons
+  // Card Flip listeners
   document.getElementById('btn-flip-streaming')?.addEventListener('click', () => toggleHeroCardFlip());
   document.getElementById('btn-card-flip-top')?.addEventListener('click', () => toggleHeroCardFlip());
   document.getElementById('hero-face-back')?.addEventListener('click', (e) => e.stopPropagation());
 
-  document.getElementById('btn-hero-inspect-3d')?.addEventListener('click', () => {
-    const rec = getActiveRecord();
-    if (rec) emit('openJacketInspector', { record: rec, xRay: false });
-  });
-  document.getElementById('btn-hero-xray-hud')?.addEventListener('click', () => {
-    const rec = getActiveRecord();
-    if (rec) emit('openJacketInspector', { record: rec, xRay: true });
-  });
-  document.getElementById('btn-hero-export-card')?.addEventListener('click', () => {
-    const rec = getActiveRecord();
-    if (rec) emit('exportNowSpinningCard', rec);
-  });
-
   // Sync UI state on store events
   subscribe((topic) => {
     if (topic === 'activeRecordChanged' || topic === 'recordsChanged' || topic === 'overridesChanged') {
+      if (topic === 'overridesChanged') lastMiniBarThumbKey = '';
       renderHeroStage();
+    }
+    if (topic === 'crateCardSelected') {
+      renderMiniBar(getActiveRecord(), true);
+    }
+    if (topic === 'expandStageRequested') {
+      expandHeroStage();
+    }
+    if (topic === 'activeTabChanged') {
+      syncMiniBarVisibility();
+      syncStageLoopState();
     }
     if (topic === 'audioPlaybackChanged') {
       const rec = getActiveRecord();
@@ -1049,21 +1214,27 @@ export function initTurntableStage() {
     }
   });
 
-  // Apply persisted UV / Backlight / RPM UI states
+  document.addEventListener('visibilitychange', () => {
+    syncStageLoopState();
+  });
+
+  window.__expandHeroStage = expandHeroStage;
+
+  // Apply persisted UV & Spin Mode UI states
   document.body.classList.toggle('uv-blacklight', store.uvBlacklight);
   const uvBtn = document.getElementById('btn-uv-toggle');
-  if (uvBtn) uvBtn.textContent = store.uvBlacklight ? '🟣 UV Blacklight: ON' : '🟣 UV Blacklight: Off';
-  const rpmBtn = document.getElementById('btn-toggle-rpm');
-  if (rpmBtn) rpmBtn.textContent = store.rpm === 45 ? 'Speed: 45 RPM' : 'Speed: 33⅓ RPM';
-  const slider = document.getElementById('backlight-intensity-slider');
-  if (slider) slider.value = String(Math.round(store.backlightIntensity * 100));
+  if (uvBtn) {
+    uvBtn.textContent = store.uvBlacklight ? '🟣 UV Blacklight: ON' : '🟣 UV Blacklight: Off';
+    uvBtn.className = store.uvBlacklight
+      ? 'w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-black border border-fuchsia-400/60 bg-fuchsia-500/20 text-white transition-all'
+      : 'w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold border border-white/10 bg-slate-950/75 text-slate-400 hover:text-white transition-all';
+  }
   if (store.spinMode && store.spinMode !== 'all') {
     setSmartSpinMode(store.spinMode, false, false);
   }
 
+  setupScrollCollapseObservers();
   renderHeroStage();
-  if (!rafId) {
-    lastFrameTime = performance.now();
-    rafId = requestAnimationFrame(tickStageFrame);
-  }
+  syncMiniBarVisibility();
+  syncStageLoopState();
 }

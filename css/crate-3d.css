@@ -1,13 +1,20 @@
 /* KRUNKED // VINYL VAULT v6.0 — Split Sleeve-Peek Crate, 3D Record Store Bin Flipper & 3D Gatefold Inspector */
 
-/* 60FPS Locked Scrolling for 159+ LP Crate Cards */
+/* Sticky Header + Now Spinning Mini-Bar scroll collision protection */
+#crate-toolbar,
+#collection-grid,
+.card-record {
+  scroll-margin-top: calc(var(--vault-header-h, 58px) + 74px);
+}
+
+/* 60FPS Locked Scrolling for 160+ LP Crate Cards */
 .card-record {
   content-visibility: auto;
-  contain-intrinsic-size: 0 344px;
-  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.22s ease, box-shadow 0.22s ease;
+  contain-intrinsic-size: 0 368px;
+  transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.22s ease, box-shadow 0.22s ease;
 }
 .card-record:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
 }
 body.uv-blacklight .card-record {
   border-color: rgba(168, 85, 247, 0.34);
@@ -22,19 +29,19 @@ body.uv-blacklight .card-record {
   justify-content: center;
   overflow: hidden;
   background:
-    radial-gradient(circle at 65% 50%, rgba(34, 211, 238, 0.08), transparent 60%),
-    linear-gradient(180deg, rgba(15, 20, 35, 0.92), #070910);
+    radial-gradient(circle at 64% 50%, var(--card-wax-glow, rgba(34, 211, 238, 0.1)), transparent 62%),
+    linear-gradient(180deg, rgba(15, 20, 35, 0.94), #070910);
 }
 .sleeve-peek-jacket {
   position: relative;
   z-index: 20;
-  width: 132px;
-  height: 132px;
-  margin-left: -34px;
+  width: 152px;
+  height: 152px;
+  margin-left: -40px;
   border-radius: 10px;
   box-shadow:
-    8px 0 22px rgba(0, 0, 0, 0.75),
-    0 12px 24px rgba(0, 0, 0, 0.7);
+    10px 0 26px rgba(0, 0, 0, 0.8),
+    0 14px 28px rgba(0, 0, 0, 0.72);
   transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .sleeve-peek-jacket::before {
@@ -52,17 +59,17 @@ body.uv-blacklight .card-record {
 .sleeve-peek-disc {
   position: relative;
   z-index: 10;
-  width: 128px;
-  height: 128px;
-  margin-left: -62px;
+  width: 148px;
+  height: 148px;
+  margin-left: -70px;
   border-radius: 9999px;
   transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .card-record:hover .sleeve-peek-jacket {
-  transform: translateX(-6px) rotate(-1.5deg);
+  transform: translateX(-7px) rotate(-1.6deg);
 }
 .card-record:hover .sleeve-peek-disc {
-  transform: translateX(20px) rotate(32deg);
+  transform: translateX(26px) rotate(36deg);
 }
 
 /* Card hover action toolbar */

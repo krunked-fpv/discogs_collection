@@ -22,6 +22,7 @@ import { initFlatteningLab, renderFlatteningView } from './flattening-lab.js';
 import { closeJacketInspector, initJacketInspector } from './jacket-inspector.js';
 import { initPersistenceHub } from './persistence.js';
 import {
+  emit,
   getActiveRecord,
   hydrateVaultStore,
   refreshExternalJsonIfNewer,
@@ -56,8 +57,6 @@ import {
 export function updateKpiStrip() {
   const total = store.records.length;
   const verifiedCount = store.records.filter((r) => Boolean(getVerifiedPressingPhotoUrl(r, store.userOverrides))).length;
-  const coloredCount = store.records.filter((r) => r.wax_spec && r.wax_spec.pattern !== 'black').length;
-  const pct = total ? ((coloredCount / total) * 100).toFixed(1) : '0.0';
   const pressPct = total ? ((verifiedCount / total) * 100).toFixed(1) : '0.0';
 
   const setText = (id, val) => {
@@ -66,10 +65,7 @@ export function updateKpiStrip() {
   };
 
   setText('kpi-total-records', `${total} LPs`);
-  setText('kpi-pressing-photos', `${verifiedCount} / ${total}`);
-  setText('kpi-colored-wax', `${pct}%`);
   setText('bg-enrich-progress', `• ${total} LPs & ${verifiedCount} Pressing Photos Compiled`);
-  setText('hero-pressing-ratio', `${verifiedCount}/${total}`);
 
   const searchInput = document.getElementById('search-input');
   if (searchInput) {
@@ -89,14 +85,12 @@ export function updateKpiStrip() {
 
   setText('kpi-vault-value', medianStr);
   setText('kpi-vault-range', `Low ${lowStr} • High ${highStr}`);
-  setText('kpi-nm-ratio', highStr);
-  setText('kpi-gallery-sub', `High Est. • Low ${lowStr}`);
 
   const todoCount = store.records.filter((r) => (r.flattening_status || 'Need to be done') === 'Need to be done').length;
   const doneCount = store.records.filter((r) => r.flattening_status === 'Done').length;
   const unlistedCount = Math.max(0, total - todoCount - doneCount);
 
-  setText('kpi-flattening', `${todoCount} Queued / ${doneCount} Done`);
+  setText('vault-tools-flatten-badge', `${todoCount} Queued`);
   setText('chip-flatten-todo', `🔥 Flattening Queue (${todoCount})`);
   setText('chip-flatten-done', `✓ Flattened & Verified (${doneCount})`);
   setText('pipe-kpi-cv', `${verifiedCount} / ${total} Physical Discs Verified (${pressPct}%)`);
@@ -107,8 +101,26 @@ export function updateKpiStrip() {
   setText('modal-stat-flatten', `${todoCount} Queued / ${doneCount} Done`);
 }
 
+function closeVaultToolsPopover() {
+  const pop = document.getElementById('vault-tools-popover');
+  const btn = document.getElementById('btn-vault-tools');
+  if (pop) pop.classList.add('hidden');
+  if (btn) btn.setAttribute('aria-expanded', 'false');
+}
+
+function toggleVaultToolsPopover(forceState) {
+  const pop = document.getElementById('vault-tools-popover');
+  const btn = document.getElementById('btn-vault-tools');
+  if (!pop || !btn) return;
+  const nextOpen = typeof forceState === 'boolean' ? forceState : pop.classList.contains('hidden');
+  pop.classList.toggle('hidden', !nextOpen);
+  btn.setAttribute('aria-expanded', nextOpen ? 'true' : 'false');
+}
+
 function setMainVaultTab(tab) {
   const validTabs = ['showcase', 'arena', 'analytics', 'pipeline', 'flattening'];
+  const primaryTabs = new Set(['showcase', 'arena', 'analytics']);
+  const toolTabs = new Set(['pipeline', 'flattening']);
   const nextTab = validTabs.includes(tab) ? tab : 'showcase';
   if (store.activeTab === 'arena' && nextTab !== 'arena') {
     stopArenaAudio();
@@ -118,18 +130,34 @@ function setMainVaultTab(tab) {
   for (const t of validTabs) {
     document.getElementById(`view-${t}`)?.classList.toggle('hidden', t !== nextTab);
     const btn = document.getElementById(`tab-btn-${t}`);
-    if (btn) {
+    if (!btn) continue;
+    if (primaryTabs.has(t)) {
       btn.className = t === nextTab
-        ? 'px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap nav-tab-active'
-        : 'px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap nav-tab-idle';
+        ? 'flex-1 md:flex-none px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap nav-tab-active'
+        : 'flex-1 md:flex-none px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap nav-tab-idle';
+    } else if (toolTabs.has(t)) {
+      btn.className = t === nextTab
+        ? 'w-full flex items-center justify-between gap-2 px-3 py-2 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-fuchsia-600/35 to-cyan-600/35 border border-cyan-400/50 transition'
+        : 'w-full flex items-center justify-between gap-2 px-3 py-2 rounded-xl text-xs font-bold text-slate-200 hover:text-white bg-slate-950/75 hover:bg-slate-900 border border-white/10 transition';
     }
   }
+
+  const toolsBtn = document.getElementById('btn-vault-tools');
+  if (toolsBtn) {
+    const inToolTab = toolTabs.has(nextTab);
+    toolsBtn.className = inToolTab
+      ? 'px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-mono-tech font-bold bg-cyan-500/20 text-cyan-200 border border-cyan-400/50 flex items-center gap-1.5 transition'
+      : 'px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-mono-tech font-bold bg-slate-900 hover:bg-slate-800 text-slate-200 border border-white/15 hover:border-cyan-400/50 flex items-center gap-1.5 transition';
+  }
+
+  closeVaultToolsPopover();
 
   if (nextTab === 'arena') renderArenaView();
   else if (nextTab === 'analytics') renderAnalyticsView();
   else if (nextTab === 'pipeline') renderPipelineCvXrayPanel();
   else if (nextTab === 'flattening') renderFlatteningView();
 
+  emit('activeTabChanged', nextTab);
   syncUrlFromState();
 }
 
@@ -147,6 +175,12 @@ function bindGlobalHotkeys() {
     const modalInsp = document.getElementById('jacket-inspector-modal');
 
     if (e.key === 'Escape') {
+      const toolsPop = document.getElementById('vault-tools-popover');
+      if (toolsPop && !toolsPop.classList.contains('hidden')) {
+        e.preventDefault();
+        closeVaultToolsPopover();
+        return;
+      }
       if (isCommandPaletteOpen()) {
         e.preventDefault();
         closeCommandPalette();
@@ -250,21 +284,44 @@ async function bootApp() {
   // Navigation buttons
   document.getElementById('tab-btn-showcase')?.addEventListener('click', () => setMainVaultTab('showcase'));
   document.getElementById('tab-btn-arena')?.addEventListener('click', () => setMainVaultTab('arena'));
-  document.getElementById('btn-hero-open-arena')?.addEventListener('click', () => setMainVaultTab('arena'));
   document.getElementById('tab-btn-analytics')?.addEventListener('click', () => setMainVaultTab('analytics'));
   document.getElementById('tab-btn-pipeline')?.addEventListener('click', () => setMainVaultTab('pipeline'));
   document.getElementById('tab-btn-flattening')?.addEventListener('click', () => setMainVaultTab('flattening'));
-  document.getElementById('kpi-flattening-card')?.addEventListener('click', () => setMainVaultTab('flattening'));
 
-  // Header Hardware Controls
+  // Discreet Vault Tools Overflow Popover
+  document.getElementById('btn-vault-tools')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleVaultToolsPopover();
+  });
+  document.addEventListener('click', (e) => {
+    const wrap = document.getElementById('vault-tools-wrap');
+    if (wrap && !wrap.contains(e.target)) {
+      closeVaultToolsPopover();
+    }
+  });
+  document.getElementById('btn-live-sync-modal')?.addEventListener('click', () => {
+    closeVaultToolsPopover();
+  });
+  document.getElementById('btn-tools-inspect-3d')?.addEventListener('click', () => {
+    closeVaultToolsPopover();
+    const rec = getActiveRecord();
+    if (rec) emit('openJacketInspector', { record: rec, xRay: false });
+  });
+  document.getElementById('btn-tools-export-png')?.addEventListener('click', () => {
+    closeVaultToolsPopover();
+    const rec = getActiveRecord();
+    if (rec) emit('exportNowSpinningCard', rec);
+  });
+
+  // Vault Tools Atmosphere & Audio Toggles
   document.getElementById('btn-uv-toggle')?.addEventListener('click', () => toggleUvBlacklight());
   const sfxBtn = document.getElementById('btn-sfx-toggle');
   if (sfxBtn) {
     const syncSfxBtn = () => {
       sfxBtn.textContent = store.analogSfx ? '🔊 Analog SFX: On' : '🔇 Analog SFX: Off';
       sfxBtn.className = store.analogSfx
-        ? 'px-2.5 py-1.5 rounded-xl text-xs font-bold border border-cyan-400/40 bg-cyan-500/15 text-cyan-200 hover:bg-cyan-500/25 transition-all'
-        : 'px-2.5 py-1.5 rounded-xl text-xs font-bold border border-white/10 bg-slate-900 text-slate-400 hover:text-white transition-all';
+        ? 'w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold border border-cyan-400/40 bg-cyan-500/15 text-cyan-200 hover:bg-cyan-500/25 transition-all'
+        : 'w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold border border-white/10 bg-slate-950/75 text-slate-400 hover:text-white transition-all';
     };
     syncSfxBtn();
     sfxBtn.addEventListener('click', () => {
@@ -277,6 +334,7 @@ async function bootApp() {
   }
 
   document.getElementById('btn-copy-deeplink')?.addEventListener('click', () => {
+    closeVaultToolsPopover();
     syncUrlFromState();
     copyTextToClipboard(window.location.href, 'Copied direct link to this vinyl pressing!');
   });

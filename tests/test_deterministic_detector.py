@@ -206,8 +206,9 @@ class TestDeterministicDetector(unittest.TestCase):
             out = tmp_html.read_text(encoding="utf-8")
             self.assertIn("<!-- BEGIN KRUNKED_COOKIE_VAULT_V1 -->", out)
             self.assertIn("<!-- END KRUNKED_COOKIE_VAULT_V1 -->", out)
-            self.assertIn('<div id="kpi-total-records" class="text-lg sm:text-xl font-black text-white mt-0.5">2 LPs</div>', out)
-            self.assertIn('id="kpi-flattening" class="text-lg sm:text-xl font-black text-cyan-300 mt-0.5">1 Queued / 1 Done</div>', out)
+            self.assertIn('<div id="kpi-total-records" class="text-sm sm:text-base font-black text-white">2 LPs</div>', out)
+            self.assertIn('<div id="kpi-vault-value" class="text-sm sm:text-base font-black text-emerald-400 font-mono-tech">$25.00</div>', out)
+            self.assertIn('id="modal-stat-flatten" class="text-sm sm:text-base font-black text-amber-300 mt-0.5">1 Queued / 1 Done</div>', out)
             self.assertIn('id="flatten-hidden-todo-ids" name="need_to_be_done_release_ids" value="1001"', out)
             self.assertIn('id="flatten-hidden-done-ids" name="done_release_ids" value="1002"', out)
 
@@ -287,7 +288,7 @@ class TestDeterministicDetector(unittest.TestCase):
             compiled = out_html.read_text(encoding="utf-8")
             self.assertIn(".modular-test-selector { color: #00ffff; }", compiled)
             self.assertIn("window.__MODULAR_COMPILER_TEST__ = true;", compiled)
-            self.assertIn('<div id="kpi-total-records" class="text-lg sm:text-xl font-black text-white mt-0.5">1 LPs</div>', compiled)
+            self.assertIn('<div id="kpi-total-records" class="text-sm sm:text-base font-black text-white">1 LPs</div>', compiled)
             self.assertIn('id="flatten-hidden-done-ids" name="done_release_ids" value="2001"', compiled)
 
     def test_flattening_auto_queue_rule_for_new_albums(self) -> None:
@@ -464,7 +465,8 @@ class TestDeterministicDetector(unittest.TestCase):
             self.assertIn('id="flatten-hidden-todo-ids" name="need_to_be_done_release_ids" value="2003"', compiled)
             self.assertIn('id="flatten-hidden-done-ids" name="done_release_ids" value="2001"', compiled)
             self.assertIn('id="flatten-hidden-unlisted-ids" name="unlisted_release_ids" value="2002"', compiled)
-            self.assertIn('id="kpi-flattening" class="text-lg sm:text-xl font-black text-cyan-300 mt-0.5">1 Queued / 1 Done</div>', compiled)
+            self.assertIn('id="modal-stat-flatten" class="text-sm sm:text-base font-black text-amber-300 mt-0.5">1 Queued / 1 Done</div>', compiled)
+            self.assertIn('id="pipe-kpi-flatten" class="text-sm font-black text-white mt-1">1 Queued • 1 Flat / Done • 1 Unlisted</div>', compiled)
             self.assertIn('id="spin-badge-all" class="text-[10px] font-mono-tech font-bold px-1.5 py-0.5 rounded bg-slate-950/80 text-cyan-300 border border-cyan-500/30">ALL LPS (3)</span>', compiled)
             self.assertNotIn("r.flattening_status !== 'Need to be done'", compiled)
             self.assertNotIn("Stylus Guard Linked", compiled)
@@ -774,7 +776,11 @@ class TestDeterministicDetector(unittest.TestCase):
             out = tmp_html.read_text(encoding="utf-8")
             self.assertIn('<script type="module" src="js/app.js"></script>', out)
             self.assertIn("<!-- BEGIN KRUNKED_COOKIE_VAULT_V1 -->", out)
-            self.assertIn('<div id="kpi-total-records" class="text-lg sm:text-xl font-black text-white mt-0.5">1 LPs</div>', out)
+            self.assertIn('<div id="kpi-total-records" class="text-sm sm:text-base font-black text-white">1 LPs</div>', out)
+            self.assertIn('id="now-spinning-minibar"', out)
+            self.assertIn('id="vault-tools-popover"', out)
+            for purged_id in ("kpi-pressing-photos", "kpi-colored-wax", "kpi-nm-ratio", "kpi-flattening", "vu-needle-left", "btn-toggle-spin", "btn-toggle-backlight"):
+                self.assertNotIn(f'id="{purged_id}"', out)
 
 
 if __name__ == "__main__":

@@ -110,7 +110,8 @@ function executePaletteItem(idx, openInspector = false) {
     } else {
       setActiveRecordById(item.rec.release_id);
       window.__setMainVaultTab?.('showcase');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (typeof window.__expandHeroStage === 'function') window.__expandHeroStage();
+      else window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
 }

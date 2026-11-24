@@ -43,244 +43,278 @@
     <textarea id="flatten-hidden-json" name="flattening_queue_json" class="hidden" readonly="">{}</textarea>
   </form>
 
-  <!-- Top Telemetry & Command Deck Navigation Header (v6.0) -->
-  <header class="sticky top-0 z-40 border-b border-white/10 bg-slate-950/85 backdrop-blur-xl">
-    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+  <!-- Single-Row Top Navigation Header (Responsive cleanly on mobile) -->
+  <header id="vault-header" class="sticky top-0 z-40 border-b border-white/10 bg-slate-950/88 backdrop-blur-xl">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-2 flex flex-wrap md:flex-nowrap items-center justify-between gap-2">
       <!-- Brand Identity -->
-      <div class="flex items-center gap-3">
-        <div class="relative w-10 h-10 rounded-2xl bg-gradient-to-br from-fuchsia-600 via-purple-600 to-cyan-500 p-0.5 shadow-lg shadow-purple-500/25">
-          <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center font-black text-xs tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 to-cyan-300">
+      <div class="flex items-center gap-2.5 min-w-0 shrink-0 order-1">
+        <div class="relative w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-fuchsia-600 via-purple-600 to-cyan-500 p-0.5 shadow-lg shadow-purple-500/25 shrink-0">
+          <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center font-black text-[11px] tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 to-cyan-300">
             KV6
           </div>
-          <span class="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-emerald-400 ring-2 ring-slate-950 animate-ping"></span>
-          <span id="sync-status-dot" class="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-emerald-400 ring-2 ring-slate-950"></span>
+          <span id="sync-status-dot" class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400 ring-2 ring-slate-950"></span>
         </div>
-        <div>
-          <div class="flex items-center gap-2 flex-wrap">
-            <span class="font-black tracking-tight text-base sm:text-lg text-white">KRUNKED // VINYL VAULT</span>
-            <span id="sync-badge-pill" class="px-2.5 py-0.5 text-[10px] font-mono-tech uppercase tracking-wider bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-400/30 rounded-full font-semibold">
-              v6.0 WebGL2 Audiophile Deck
-            </span>
-          </div>
-          <div class="text-[11px] text-slate-400 flex items-center gap-2 flex-wrap mt-0.5">
-            <span class="font-medium text-slate-300">AT-LP70XBT + AT-VMN95ML</span>
-            <span class="text-slate-600">•</span>
-            <span>Source:</span>
-            <a href="https://www.discogs.com/user/krunked/collection" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 underline decoration-cyan-500/40 font-mono-tech">discogs.com/user/krunked/collection ↗</a>
-            <span id="bg-enrich-progress" class="text-[11px] font-mono-tech text-emerald-400 font-semibold">• 159 LPs &amp; 136 Pressing Photos Compiled</span>
-          </div>
+        <div class="min-w-0">
+          <span class="font-black tracking-tight text-base sm:text-lg text-white">KRUNKED // VINYL VAULT</span>
         </div>
       </div>
 
-      <!-- Primary View Switcher Tabs -->
-      <nav class="flex items-center gap-1 bg-slate-900/90 p-1 rounded-2xl border border-white/10 overflow-x-auto max-w-full" aria-label="Main views">
-        <button type="button" id="tab-btn-showcase" class="px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap nav-tab-active">
-          🎛️ Turntable &amp; Crate
+      <!-- Primary View Tabs (Vinyl-First) -->
+      <nav class="order-3 md:order-2 w-full md:w-auto flex items-center justify-center gap-1 bg-slate-900/90 p-1 rounded-xl border border-white/10 shrink-0" aria-label="Main views">
+        <button type="button" id="tab-btn-showcase" class="flex-1 md:flex-none px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap nav-tab-active">
+          Crate
         </button>
-        <button type="button" id="tab-btn-arena" class="px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap nav-tab-idle">
-          ⚔️ Variant Clash Arena
+        <button type="button" id="tab-btn-arena" class="flex-1 md:flex-none px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap nav-tab-idle">
+          Variant Clash
         </button>
-        <button type="button" id="tab-btn-analytics" class="px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap nav-tab-idle">
-          🌌 Constellation
-        </button>
-        <button type="button" id="tab-btn-pipeline" class="px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap nav-tab-idle">
-          🔬 CV X-Ray &amp; Sync
-        </button>
-        <button type="button" id="tab-btn-flattening" class="px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap nav-tab-idle">
-          🔥 Flattening Lab
+        <button type="button" id="tab-btn-analytics" class="flex-1 md:flex-none px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap nav-tab-idle">
+          Constellation
         </button>
       </nav>
 
-      <!-- Hardware Controls, Palette & Sync Hub -->
-      <div class="flex flex-wrap items-center gap-2">
-        <button id="btn-cmd-palette" type="button" class="px-2.5 py-1.5 rounded-xl text-xs font-mono-tech font-bold bg-slate-900 hover:bg-slate-800 text-slate-200 border border-white/15 hover:border-cyan-400/50 flex items-center gap-1.5 transition" title="Open Quick Command &amp; Vault Search Palette (Ctrl+K / Cmd+K)">
-          <span>⌘K</span>
-          <span class="hidden sm:inline text-slate-400">Jump</span>
-        </button>
-        <button id="btn-uv-toggle" type="button" class="px-2.5 py-1.5 rounded-xl text-xs font-black border-2 border-fuchsia-400 bg-fuchsia-500/30 text-white shadow-[0_0_20px_rgba(217,70,239,0.5)] transition-all" title="Toggle UV Blacklight Neon Reactive Shader (Shortcut: U)">
-          🟣 UV Blacklight: ON
-        </button>
-        <button id="btn-sfx-toggle" type="button" class="px-2.5 py-1.5 rounded-xl text-xs font-bold border border-cyan-400/40 bg-cyan-500/15 text-cyan-200 hover:bg-cyan-500/25 transition-all" title="Toggle Web Audio Mechanical Crate, Needle Drop &amp; Fanfare SFX">
-          🔊 Analog SFX: On
-        </button>
-        <div class="hidden md:flex items-center bg-slate-900/90 rounded-xl p-1 border border-white/10 text-xs">
-          <button type="button" id="mode-btn-pressing" aria-pressed="false" class="px-2.5 py-1 rounded-lg font-semibold text-slate-400 hover:text-white whitespace-nowrap" title="Show verified pressing photo when available">Pressing</button>
+      <!-- Crate View Switcher, Quick Jump & Vault Tools Popover -->
+      <div class="order-2 md:order-3 flex items-center gap-1.5 sm:gap-2 shrink-0">
+        <div class="hidden lg:flex items-center bg-slate-900/90 rounded-xl p-1 border border-white/10 text-xs" role="group" aria-label="Crate view mode">
           <button type="button" id="mode-btn-split" aria-pressed="true" class="px-2.5 py-1 rounded-lg font-semibold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 whitespace-nowrap" title="Default: Real Discogs jacket sleeve + peeking vinyl disc">Sleeve + Disc</button>
+          <button type="button" id="mode-btn-pressing" aria-pressed="false" class="px-2.5 py-1 rounded-lg font-semibold text-slate-400 hover:text-white whitespace-nowrap" title="Show verified pressing photo when available">Pressing</button>
           <button type="button" id="mode-btn-sleeve" aria-pressed="false" class="px-2.5 py-1 rounded-lg font-semibold text-slate-400 hover:text-white whitespace-nowrap" title="Show album cover with corner pressing badge">Sleeve</button>
           <button type="button" id="mode-btn-bin3d" aria-pressed="false" class="px-2.5 py-1 rounded-lg font-semibold text-slate-400 hover:text-white whitespace-nowrap" title="3D Record Store Bin Flipper">3D Bin</button>
         </div>
-        <button type="button" id="btn-live-sync-modal" class="px-3 py-1.5 rounded-xl text-xs font-mono-tech font-bold bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 flex items-center gap-1.5 transition-all" title="Open Local Sync CLI Builder, Inline HTML Baker, GitHub Commit &amp; JSON Exporter">
-          <span id="sync-btn-dot" class="w-2 h-2 rounded-full bg-emerald-400"></span>
-          <span id="sync-btn-label">Sync &amp; Export LP's</span>
+
+        <button id="btn-cmd-palette" type="button" class="px-2.5 py-1.5 rounded-xl text-xs font-mono-tech font-bold bg-slate-900 hover:bg-slate-800 text-slate-200 border border-white/15 hover:border-cyan-400/50 flex items-center gap-1 transition" title="Open Quick Command &amp; Vault Search Palette (Ctrl+K / Cmd+K)">
+          <span>⌘K</span>
         </button>
+
+        <!-- Discreet Vault Tools Overflow Popover -->
+        <div class="relative" id="vault-tools-wrap">
+          <button
+            type="button"
+            id="btn-vault-tools"
+            aria-expanded="false"
+            aria-haspopup="true"
+            aria-controls="vault-tools-popover"
+            class="px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-mono-tech font-bold bg-slate-900 hover:bg-slate-800 text-slate-200 border border-white/15 hover:border-cyan-400/50 flex items-center gap-1.5 transition"
+            title="Vault Tools: Labs, Visuals, Audio &amp; Sync"
+          >
+            <span id="vault-tools-dot" class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            <span>⚙</span>
+            <span class="hidden sm:inline">Vault Tools</span>
+          </button>
+
+          <div
+            id="vault-tools-popover"
+            role="menu"
+            class="hidden absolute right-0 top-full mt-2 w-72 sm:w-80 rounded-2xl bg-[#090c15] p-3 space-y-2.5 shadow-[0_24px_60px_rgba(0,0,0,0.92)] border border-white/15 z-50"
+          >
+            <div class="flex items-center justify-between px-1 pb-1.5 border-b border-white/10">
+              <span class="text-[10px] font-mono-tech uppercase tracking-wider text-slate-400 font-bold">Vault Tools &amp; Labs</span>
+              <span class="text-[10px] font-mono-tech text-slate-500">AT-LP70XBT + VMN95ML</span>
+            </div>
+
+            <!-- Lab & Diagnostic Views -->
+            <div class="space-y-1">
+              <div class="text-[9px] font-mono-tech uppercase tracking-wider text-slate-500 px-1 font-bold">Lab &amp; Diagnostics</div>
+              <button type="button" id="tab-btn-pipeline" role="menuitem" class="w-full flex items-center justify-between gap-2 px-3 py-2 rounded-xl text-xs font-bold text-slate-200 hover:text-white bg-slate-950/75 hover:bg-slate-900 border border-white/10 transition">
+                <span>🔬 CV X-Ray &amp; Sync</span>
+                <span class="text-[10px] font-mono-tech text-slate-400">Open →</span>
+              </button>
+              <button type="button" id="tab-btn-flattening" role="menuitem" class="w-full flex items-center justify-between gap-2 px-3 py-2 rounded-xl text-xs font-bold text-slate-200 hover:text-white bg-slate-950/75 hover:bg-slate-900 border border-white/10 transition">
+                <span>🔥 Flattening Lab</span>
+                <span id="vault-tools-flatten-badge" class="text-[10px] font-mono-tech text-amber-300">16 Queued</span>
+              </button>
+            </div>
+
+            <!-- Atmosphere & Audio Toggles -->
+            <div class="space-y-1 pt-1 border-t border-white/10">
+              <div class="text-[9px] font-mono-tech uppercase tracking-wider text-slate-500 px-1 font-bold">Atmosphere &amp; Audio</div>
+              <button id="btn-uv-toggle" type="button" role="menuitem" class="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-black border border-fuchsia-400/60 bg-fuchsia-500/20 text-white transition-all" title="Toggle UV Blacklight Neon Reactive Shader (Shortcut: U)">
+                🟣 UV Blacklight: ON
+              </button>
+              <button id="btn-sfx-toggle" type="button" role="menuitem" class="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold border border-cyan-400/40 bg-cyan-500/15 text-cyan-200 hover:bg-cyan-500/25 transition-all" title="Toggle Web Audio Mechanical Crate, Needle Drop &amp; Fanfare SFX">
+                🔊 Analog SFX: On
+              </button>
+            </div>
+
+            <!-- Sync, Export & Active LP Utilities -->
+            <div class="space-y-1.5 pt-1 border-t border-white/10">
+              <div class="text-[9px] font-mono-tech uppercase tracking-wider text-slate-500 px-1 font-bold">Sync &amp; Active Record</div>
+              <button type="button" id="btn-live-sync-modal" role="menuitem" class="w-full px-3 py-2 rounded-xl text-xs font-mono-tech font-bold bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 flex items-center justify-between gap-2 transition-all" title="Open Local Sync CLI Builder, Inline HTML Baker, GitHub Commit &amp; JSON Exporter">
+                <span class="flex items-center gap-2">
+                  <span id="sync-btn-dot" class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                  <span id="sync-btn-label">Sync &amp; Export LP's</span>
+                </span>
+                <span class="text-[10px] text-emerald-300/70">↗</span>
+              </button>
+              <div class="grid grid-cols-3 gap-1.5">
+                <button type="button" id="btn-tools-inspect-3d" role="menuitem" class="px-2 py-1.5 rounded-xl bg-slate-950/85 hover:bg-slate-900 text-[10px] font-mono-tech font-bold text-cyan-200 border border-white/10 hover:border-cyan-400/40 transition text-center" title="Open 3D Jacket &amp; Gatefold Inspector for active LP">🔍 3D Jacket</button>
+                <button type="button" id="btn-tools-export-png" role="menuitem" class="px-2 py-1.5 rounded-xl bg-slate-950/85 hover:bg-slate-900 text-[10px] font-mono-tech font-bold text-fuchsia-200 border border-white/10 hover:border-fuchsia-400/40 transition text-center" title="Export Now Spinning PNG Studio Card">📸 PNG</button>
+                <button type="button" id="btn-copy-deeplink" role="menuitem" class="px-2 py-1.5 rounded-xl bg-slate-950/85 hover:bg-slate-900 text-[10px] font-mono-tech font-bold text-slate-300 border border-white/10 hover:border-white/25 transition text-center" title="Copy direct link to active LP">🔗 Link</button>
+              </div>
+            </div>
+
+            <!-- Subtle Metadata Footer -->
+            <div class="pt-1.5 border-t border-white/10 px-1 flex flex-col gap-0.5 text-[10px] font-mono-tech text-slate-400">
+              <span id="bg-enrich-progress" class="text-emerald-400/90 font-semibold">• 159 LPs &amp; 136 Pressing Photos Compiled</span>
+              <a href="https://www.discogs.com/user/krunked/collection" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 underline decoration-cyan-500/40 truncate">discogs.com/user/krunked/collection ↗</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </header>
 
-  <!-- Command Deck Live Telemetry KPI Strip -->
-  <section class="border-b border-white/10 bg-slate-950/55">
-    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5">
-      <div class="machined-plinth rounded-2xl px-3.5 py-2.5">
-        <div class="text-[10px] font-mono-tech uppercase tracking-wider text-slate-400 font-semibold">Discogs Crate</div>
-        <div id="kpi-total-records" class="text-lg sm:text-xl font-black text-white mt-0.5">159 LPs</div>
-        <div id="kpi-sync-sub" class="text-[11px] font-semibold text-cyan-400 mt-0.5">Folder 0 • krunked</div>
+  <!-- Compact Collection Summary Strip (Crate Count + Consolidated Discogs Value) -->
+  <section id="vault-summary-strip" class="border-b border-white/10 bg-slate-950/50">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-2 flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5">
+      <div class="flex flex-wrap items-center gap-x-5 gap-y-1">
+        <div class="flex items-baseline gap-2">
+          <span class="text-[10px] font-mono-tech uppercase tracking-wider text-slate-400 font-semibold">Discogs Crate</span>
+          <div id="kpi-total-records" class="text-sm sm:text-base font-black text-white">159 LPs</div>
+          <div id="kpi-sync-sub" class="text-[11px] font-mono-tech font-semibold text-cyan-400/90">Folder 0 • krunked</div>
+        </div>
+        <span class="hidden sm:inline-block h-4 w-px bg-white/10" aria-hidden="true"></span>
+        <div class="flex flex-wrap items-baseline gap-2">
+          <span class="text-[10px] font-mono-tech uppercase tracking-wider text-emerald-300/80 font-semibold">Discogs Value</span>
+          <div id="kpi-vault-value" class="text-sm sm:text-base font-black text-emerald-400 font-mono-tech">$6,406.96</div>
+          <div id="kpi-vault-range" class="text-[11px] font-mono-tech text-slate-400">Low $3,921.14 • High $11,044.13</div>
+        </div>
       </div>
-      <div class="machined-plinth rounded-2xl px-3.5 py-2.5 border-purple-500/25">
-        <div class="text-[10px] font-mono-tech uppercase tracking-wider text-purple-300/80 font-semibold">Verified Pressing Photos</div>
-        <div id="kpi-pressing-photos" class="text-lg sm:text-xl font-black text-purple-300 mt-0.5">136 / 159</div>
-        <div class="text-[11px] text-slate-400 mt-0.5">4-Pass CV + Overrides</div>
-      </div>
-      <div class="machined-plinth rounded-2xl px-3.5 py-2.5 border-fuchsia-500/25">
-        <div class="text-[10px] font-mono-tech uppercase tracking-wider text-fuchsia-300/80 font-semibold">Colored / Special Wax</div>
-        <div id="kpi-colored-wax" class="text-lg sm:text-xl font-black text-fuchsia-400 mt-0.5">94.3%</div>
-        <div class="text-[11px] text-slate-400 mt-0.5">Parsed from Format Codes</div>
-      </div>
-      <div class="machined-plinth rounded-2xl px-3.5 py-2.5 border-emerald-500/25">
-        <div class="text-[10px] font-mono-tech uppercase tracking-wider text-emerald-300/80 font-semibold">Discogs Value (Med)</div>
-        <div id="kpi-vault-value" class="text-lg sm:text-xl font-black text-emerald-400 mt-0.5">$6,406.96</div>
-        <div id="kpi-vault-range" class="text-[11px] text-slate-400 mt-0.5">Low $3,921.14 • High $11,044.13</div>
-      </div>
-      <div class="machined-plinth rounded-2xl px-3.5 py-2.5 border-amber-500/25">
-        <div class="text-[10px] font-mono-tech uppercase tracking-wider text-amber-300/80 font-semibold">Discogs High / Low</div>
-        <div id="kpi-nm-ratio" class="text-lg sm:text-xl font-black text-amber-300 mt-0.5">$11,044.13</div>
-        <div id="kpi-gallery-sub" class="text-[11px] text-slate-400 mt-0.5">High Est. • Low $3,921.14</div>
-      </div>
-      <div class="machined-plinth rounded-2xl px-3.5 py-2.5 border-cyan-500/25 cursor-pointer hover:border-cyan-400/60 transition" id="kpi-flattening-card" title="Click to open Thermal Flattening Lab">
-        <div class="text-[10px] font-mono-tech uppercase tracking-wider text-cyan-300/80 font-semibold">130°F Flattening Plate</div>
-        <div id="kpi-flattening" class="text-lg sm:text-xl font-black text-cyan-300 mt-0.5">16 Queued / 143 Done</div>
-        <div id="kpi-flattening-sub" class="text-[11px] text-amber-300/85 mt-0.5">🔥 Arrival &amp; Thermal Tracker</div>
-      </div>
+      <a href="https://www.discogs.com/user/krunked/collection" target="_blank" rel="noopener noreferrer" class="hidden md:inline-flex items-center gap-1 text-[11px] font-mono-tech text-cyan-400/90 hover:text-cyan-300 transition">
+        <span>discogs.com/user/krunked/collection ↗</span>
+      </a>
     </div>
   </section>
 
-  <!-- ========================================================================= -->
-  <!-- MAIN VIEW 1: WEBGL2 DIRECT-DRIVE TURNTABLE STAGE + SPLIT / 3D BIN CRATE   -->
-  <!-- ========================================================================= -->
-  <main id="view-showcase" class="max-w-7xl mx-auto px-3 sm:px-6 py-5 space-y-6">
+  <!-- STICKY "NOW SPINNING" COMPACT MINI-BAR (Slides in smoothly on scroll past Hero Stage or manual collapse) -->
+  <div id="now-spinning-minibar" class="now-spinning-minibar" aria-hidden="true">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 h-full flex items-center justify-between gap-2.5 sm:gap-4">
+      <button type="button" id="minibar-expand-area" class="flex items-center gap-3 min-w-0 flex-1 text-left group focus:outline-none" title="Return to full Turntable Stage">
+        <div class="minibar-thumb-stack relative w-12 h-10 shrink-0 flex items-center">
+          <div id="minibar-thumb-sleeve" class="relative z-20 w-9 h-9 rounded-lg overflow-hidden border border-white/20 bg-slate-900 shadow-md shrink-0"></div>
+          <div id="minibar-thumb-disc" class="relative z-10 w-9 h-9 -ml-5 rounded-full spin-33 uv-reactive shrink-0"></div>
+        </div>
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center gap-2 min-w-0">
+            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee] shrink-0"></span>
+            <span id="minibar-artist-title" class="text-xs sm:text-sm font-black text-white group-hover:text-cyan-300 transition truncate">Loading Vault...</span>
+            <span id="minibar-variant-badge" class="hidden md:inline-flex shrink-0 px-2 py-0.5 rounded-full text-[10px] font-mono-tech font-bold bg-purple-500/20 text-purple-200 border border-purple-400/35 max-w-[220px] truncate">12" LP</span>
+          </div>
+          <div id="minibar-meta-sub" class="text-[10px] font-mono-tech text-slate-400 truncate mt-0.5">—</div>
+        </div>
+      </button>
 
-    <!-- HERO: Direct-Drive WebGL2 Turntable + Optical Backlight + 3D Flip Deck -->
-    <section class="relative rounded-3xl machined-plinth overflow-hidden p-4 sm:p-6 backdrop-blur-md">
-      <!-- Stage Header Banner -->
-      <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-white/10">
-        <div>
-          <div class="flex items-center gap-2 flex-wrap mb-1">
-            <span class="text-[10px] font-mono-tech uppercase px-2.5 py-0.5 rounded-full bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-400/30 font-bold">
-              v6.0 WebGL2 Direct-Drive &amp; Optical Wax Physics
-            </span>
-            <span id="active-spin-mode-pill" class="text-[10px] font-mono-tech uppercase px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-400/35 font-bold">🎲 Full Vault Roulette • 159 LPs</span>
-            <span id="reel-velocity-readout" class="text-[11px] font-mono-tech text-slate-400">
-              Drag platter to scrub • Drag tonearm to needle-drop
-            </span>
-          </div>
-          <div class="flex items-center gap-2.5">
-            <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee] animate-pulse"></span>
-            <h1 class="font-display text-base sm:text-xl font-bold uppercase tracking-wider text-white">
-              DIRECT-DRIVE PRESSING COMMAND STAGE
-            </h1>
-          </div>
-          <p class="text-xs text-slate-300 mt-1">
-            Renders verified Discogs pressing photos (<span id="hero-pressing-ratio" class="text-cyan-300 font-mono-tech font-bold">136/159</span> releases) and procedural <code class="text-fuchsia-300">wax_spec</code> shaders with real-time anisotropic grooves, UV &amp; Hold-to-Light transmission.
-          </p>
+      <div class="flex items-center gap-1 sm:gap-1.5 shrink-0">
+        <button type="button" id="minibar-prev" class="w-8 h-8 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 hover:text-white border border-white/15 flex items-center justify-center text-sm font-bold transition active:scale-95" title="Previous record (←)" aria-label="Previous record">‹</button>
+        <button type="button" id="minibar-random" class="w-8 h-8 rounded-xl bg-gradient-to-r from-fuchsia-600/80 to-cyan-600/80 hover:from-fuchsia-500 hover:to-cyan-500 text-white border border-white/20 flex items-center justify-center text-xs shadow transition active:scale-95" title="Spin random pressing (Space)" aria-label="Spin random pressing">🎲</button>
+        <button type="button" id="minibar-next" class="w-8 h-8 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 hover:text-white border border-white/15 flex items-center justify-center text-sm font-bold transition active:scale-95" title="Next record (→)" aria-label="Next record">›</button>
+        <button type="button" id="minibar-expand" class="ml-1 px-2.5 sm:px-3 h-8 rounded-xl bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-200 border border-cyan-400/35 text-[11px] font-mono-tech font-bold flex items-center gap-1 transition whitespace-nowrap" title="Expand Turntable Stage">
+          <span class="hidden sm:inline">Expand Stage</span>
+          <span>↑</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MAIN VIEW 1: VINYL-FIRST TURNTABLE STAGE + SPLIT / 3D BIN CRATE           -->
+  <!-- ========================================================================= -->
+  <main id="view-showcase" class="max-w-7xl mx-auto px-3 sm:px-6 py-3 space-y-3">
+
+    <!-- Spacer shown ONLY when user manually clicks Collapse Stage so Mini-Bar never overlaps toolbar -->
+    <div id="minibar-collapsed-spacer" class="hidden h-6" aria-hidden="true"></div>
+
+    <!-- HERO: Clean Uncluttered Direct-Drive Turntable Stage + 3D Flip Deck -->
+    <section id="hero-turntable-stage" class="relative rounded-3xl machined-plinth overflow-hidden p-3 sm:p-4 backdrop-blur-md">
+      <!-- Streamlined Stage Header Bar -->
+      <div class="flex flex-wrap items-center justify-between gap-2 pb-2.5 border-b border-white/10">
+        <div class="flex items-center gap-2 flex-wrap min-w-0">
+          <span class="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee] animate-pulse shrink-0"></span>
+          <h1 class="font-display text-sm sm:text-base font-bold uppercase tracking-wider text-white">
+            Now Spinning
+          </h1>
+          <span id="active-spin-mode-pill" class="hidden xl:inline-flex text-[10px] font-mono-tech uppercase px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-400/35 font-bold">🎲 Full Vault Roulette • 159 LPs</span>
+          <span id="reel-velocity-readout" class="hidden 2xl:inline text-[11px] font-mono-tech text-slate-400 truncate">
+            Drag platter to scrub • Drag tonearm to cue
+          </span>
         </div>
 
-        <div class="flex flex-wrap items-center gap-2">
-          <span id="carousel-counter" class="px-3 py-1.5 rounded-xl bg-slate-950/90 border border-white/10 text-xs font-mono-tech font-bold text-cyan-300">1 / 159</span>
-          <button type="button" id="btn-hero-open-arena" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-fuchsia-600/25 to-cyan-600/25 hover:from-fuchsia-600/40 hover:to-cyan-600/40 text-xs font-bold text-fuchsia-200 border border-fuchsia-400/35 transition flex items-center gap-1.5 shadow-md">
-            <span>⚔️ Variant Clash Arena</span>
+        <!-- Sleek Single-Line Spin Mode Pills -->
+        <div class="flex flex-wrap items-center gap-1.5" id="smart-spin-modes-bar">
+          <button type="button" data-spin-mode="all" class="spin-mode-btn inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl border transition-all bg-cyan-500/15 border-cyan-400 text-white text-[11px] font-bold">
+            <span>🎲 Full Vault</span>
+            <span id="spin-badge-all" class="text-[10px] font-mono-tech font-bold px-1.5 py-0.5 rounded bg-slate-950/80 text-cyan-300 border border-cyan-500/30">ALL LPS (159)</span>
+          </button>
+          <button type="button" data-spin-mode="showroom" class="spin-mode-btn inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl border transition-all bg-slate-950/80 border-white/15 text-slate-300 hover:border-purple-400/60 hover:text-white text-[11px] font-bold">
+            <span>📺 Kiosk</span>
+            <span id="spin-badge-showroom" class="text-[10px] font-mono-tech font-bold px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-400/30">AUTO 15s</span>
+          </button>
+          <button type="button" data-spin-mode="eyecandy" class="spin-mode-btn inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl border transition-all bg-slate-950/80 border-white/15 text-slate-300 hover:border-fuchsia-400/60 hover:text-white text-[11px] font-bold">
+            <span>🌈 Eye-Candy</span>
+            <span id="spin-badge-eyecandy" class="text-[10px] font-mono-tech font-bold px-1.5 py-0.5 rounded bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-400/30">FLEX WAX (93)</span>
+          </button>
+        </div>
+
+        <div class="flex items-center gap-2 shrink-0">
+          <span id="carousel-counter" class="px-2.5 py-1 rounded-xl bg-slate-950/90 border border-white/10 text-xs font-mono-tech font-bold text-cyan-300">1 / 159</span>
+          <button type="button" id="btn-collapse-stage" class="px-2.5 py-1 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-[11px] font-mono-tech font-bold text-slate-300 hover:text-cyan-200 border border-white/15 hover:border-cyan-400/40 transition flex items-center gap-1" title="Collapse Turntable Stage for full-screen crate browsing">
+            <span class="hidden sm:inline">Collapse Stage</span>
+            <span>⌃</span>
           </button>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-5 items-center">
-        <!-- Left 7 Cols: Roulette + Smart Spin Sommelier + 3D Wing Cards + WebGL2 Platter -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 pt-3 items-center">
+        <!-- Left 7 Cols: Compact Transport + Clean Uncluttered 12" Platter & Wing Cards -->
         <div class="lg:col-span-7 flex flex-col items-center justify-center">
 
-          <!-- Transport Bar -->
-          <div class="flex flex-wrap items-center justify-center gap-2.5 w-full mb-3">
-            <button type="button" id="btn-carousel-prev" class="px-4 py-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-xs sm:text-sm font-bold text-slate-100 border border-white/15 shadow transition active:scale-95">
+          <!-- Compact Transport Row -->
+          <div class="flex flex-wrap items-center justify-center gap-2 w-full mb-2.5">
+            <button type="button" id="btn-carousel-prev" class="px-3.5 py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-xs font-bold text-slate-100 border border-white/15 shadow transition active:scale-95">
               ← Prev
             </button>
-            <button type="button" id="btn-carousel-random" class="px-6 py-2.5 rounded-2xl font-black text-xs sm:text-sm tracking-wider uppercase bg-gradient-to-r from-fuchsia-600 via-purple-600 to-cyan-500 hover:from-fuchsia-500 hover:to-cyan-400 text-white shadow-[0_0_28px_rgba(217,70,239,0.45),0_0_15px_rgba(6,182,212,0.3)] border border-white/20 active:scale-95 transition-all flex items-center gap-2.5">
+            <button type="button" id="btn-carousel-random" class="px-5 py-1.5 rounded-2xl font-black text-xs sm:text-sm tracking-wider uppercase bg-gradient-to-r from-fuchsia-600 via-purple-600 to-cyan-500 hover:from-fuchsia-500 hover:to-cyan-400 text-white shadow-[0_0_24px_rgba(217,70,239,0.4),0_0_12px_rgba(6,182,212,0.28)] border border-white/20 active:scale-95 transition-all flex items-center gap-2">
               <span>🎰 SPIN THE CRATE</span>
-              <span class="text-[10px] font-mono-tech font-bold bg-slate-950/55 border border-white/15 px-2 py-0.5 rounded-md text-cyan-200">SPACE</span>
+              <span class="hidden sm:inline text-[10px] font-mono-tech font-bold bg-slate-950/55 border border-white/15 px-1.5 py-0.5 rounded-md text-cyan-200">SPACE</span>
             </button>
-            <button type="button" id="btn-carousel-next" class="px-4 py-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-xs sm:text-sm font-bold text-slate-100 border border-white/15 shadow transition active:scale-95">
+            <button type="button" id="btn-carousel-next" class="px-3.5 py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-xs font-bold text-slate-100 border border-white/15 shadow transition active:scale-95">
               Next →
             </button>
           </div>
 
-          <!-- Smart Spin Mode Selector Cards -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 w-full max-w-[580px] mb-2.5" id="smart-spin-modes-bar">
-            <button type="button" data-spin-mode="all" class="spin-mode-btn text-left p-2.5 rounded-2xl border-2 transition-all bg-cyan-500/15 border-cyan-400 text-white shadow-[0_0_20px_rgba(6,182,212,0.2)]">
-              <div class="flex items-center justify-between gap-1">
-                <span class="text-base">🎲</span>
-                <span id="spin-badge-all" class="text-[10px] font-mono-tech font-bold px-1.5 py-0.5 rounded bg-slate-950/80 text-cyan-300 border border-cyan-500/30">ALL LPS (159)</span>
-              </div>
-              <p class="font-extrabold text-xs text-white mt-1">Full Vault Roulette</p>
-              <p class="text-[10px] text-slate-300 leading-tight mt-0.5">Spins any pressing in your full crate</p>
-            </button>
-            <button type="button" data-spin-mode="showroom" class="spin-mode-btn text-left p-2.5 rounded-2xl border transition-all bg-slate-950/80 border-white/15 text-slate-300 hover:border-purple-400/60 hover:text-white">
-              <div class="flex items-center justify-between gap-1">
-                <span class="text-base">📺</span>
-                <span id="spin-badge-showroom" class="text-[10px] font-mono-tech font-bold px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-400/30">AUTO 15s</span>
-              </div>
-              <p class="font-extrabold text-xs text-white mt-1">Showroom Kiosk</p>
-              <p class="text-[10px] text-slate-400 leading-tight mt-0.5">Auto-cycles variants for TV / guests</p>
-            </button>
-            <button type="button" data-spin-mode="eyecandy" class="spin-mode-btn text-left p-2.5 rounded-2xl border transition-all bg-slate-950/80 border-white/15 text-slate-300 hover:border-fuchsia-400/60 hover:text-white">
-              <div class="flex items-center justify-between gap-1">
-                <span class="text-base">🌈</span>
-                <span id="spin-badge-eyecandy" class="text-[10px] font-mono-tech font-bold px-1.5 py-0.5 rounded bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-400/30">FLEX WAX (93)</span>
-              </div>
-              <p class="font-extrabold text-xs text-white mt-1">Eye-Candy Variants</p>
-              <p class="text-[10px] text-slate-400 leading-tight mt-0.5">Splatter, Galaxy, Marble &amp; Split only</p>
-            </button>
-          </div>
-
-          <!-- Smart Spin Sommelier Quick Pills -->
-          <div class="flex flex-wrap items-center justify-center gap-1.5 mb-3">
-            <span class="text-[10px] font-mono-tech uppercase text-slate-400 mr-1">Sommelier:</span>
-            <button type="button" data-sommelier-mode="splatter" class="px-2.5 py-1 rounded-full text-[11px] font-mono-tech font-semibold bg-slate-950/80 text-slate-400 border border-white/10 hover:text-white transition">🎨 Splatter</button>
-            <button type="button" data-sommelier-mode="translucent" class="px-2.5 py-1 rounded-full text-[11px] font-mono-tech font-semibold bg-slate-950/80 text-slate-400 border border-white/10 hover:text-white transition">💎 Translucent</button>
-            <button type="button" data-sommelier-mode="double_lp" class="px-2.5 py-1 rounded-full text-[11px] font-mono-tech font-semibold bg-slate-950/80 text-slate-400 border border-white/10 hover:text-white transition">💿 2xLP</button>
-            <button type="button" data-sommelier-mode="etched" class="px-2.5 py-1 rounded-full text-[11px] font-mono-tech font-semibold bg-slate-950/80 text-slate-400 border border-white/10 hover:text-white transition">✨ Etched</button>
-            <button type="button" data-sommelier-mode="todo" class="px-2.5 py-1 rounded-full text-[11px] font-mono-tech font-semibold bg-slate-950/80 text-slate-400 border border-white/10 hover:text-white transition">🔥 Unflattened</button>
-          </div>
-
-          <!-- Crate Wing Cards + Center WebGL2 Direct-Drive Plinth -->
+          <!-- Crate Wing Cards + Center WebGL2 Direct-Drive Plinth (Pure Breathing Room Below) -->
           <div class="relative w-full flex items-center justify-center py-1 select-none">
-            <button type="button" id="stage-prev-card" class="crate-wing-card hidden sm:flex flex-col justify-between w-40 md:w-44 h-40 md:h-44 rounded-2xl bg-[#0a0d16]/95 border border-white/15 hover:border-cyan-400/60 p-3 text-center shadow-2xl cursor-pointer -mr-7 z-10 opacity-85 hover:opacity-100 transition-all" title="Click to load previous record">
+            <button type="button" id="stage-prev-card" class="crate-wing-card hidden sm:flex flex-col justify-between w-36 md:w-40 h-36 md:h-40 rounded-2xl bg-[#0a0d16]/95 border border-white/15 hover:border-cyan-400/60 p-2.5 text-center shadow-2xl cursor-pointer -mr-6 z-10 opacity-85 hover:opacity-100 transition-all" title="Click to load previous record">
               <div class="flex items-center justify-between gap-1 w-full">
-                <span id="stage-prev-orb" class="w-4 h-4 rounded-full border border-white/30 shrink-0"></span>
+                <span id="stage-prev-orb" class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0"></span>
                 <span id="stage-prev-pill" class="px-1.5 py-0.5 rounded bg-white/10 text-slate-300 text-[9px] font-mono-tech font-bold">LP</span>
               </div>
               <div class="my-auto px-1">
                 <p id="stage-prev-artist" class="text-[10px] font-extrabold uppercase tracking-wider text-cyan-300 truncate">ARTIST</p>
                 <p id="stage-prev-title" class="text-xs font-black text-white line-clamp-2 leading-snug mt-0.5">Title</p>
               </div>
-              <div id="stage-prev-badge" class="text-[9px] font-mono-tech text-slate-300 truncate bg-white/[0.06] border border-white/5 px-2 py-1 rounded-lg text-center w-full">12" LP</div>
+              <div id="stage-prev-badge" class="text-[9px] font-mono-tech text-slate-300 truncate bg-white/[0.06] border border-white/5 px-2 py-0.5 rounded-lg text-center w-full">12" LP</div>
             </button>
 
             <!-- Center Direct-Drive Plinth -->
-            <div id="turntable-plinth-box" class="relative w-[328px] h-[328px] sm:w-[392px] sm:h-[392px] rounded-[30px] border border-white/20 flex items-center justify-center p-4 z-20 shrink-0">
+            <div id="turntable-plinth-box" class="relative w-[288px] h-[288px] sm:w-[348px] sm:h-[348px] rounded-[28px] border border-white/20 flex items-center justify-center p-3.5 z-20 shrink-0">
               <div class="plinth-edge-bracket-left"></div>
               <div class="plinth-edge-bracket-right"></div>
               <div id="platter-backlight-halo" style="opacity:0;"></div>
 
               <!-- WebGL2 Spinning Wax Canvas + Live Radial Groove Spectrum Ring -->
-              <div class="relative w-[290px] h-[290px] sm:w-[348px] sm:h-[348px] rounded-full z-10 shadow-2xl">
+              <div class="relative w-[254px] h-[254px] sm:w-[308px] sm:h-[308px] rounded-full z-10 shadow-2xl">
                 <canvas id="platter-spectrum-canvas" class="platter-spectrum-canvas" aria-hidden="true"></canvas>
-                <canvas id="hero-webgl-canvas" aria-label="Interactive WebGL2 vinyl platter"></canvas>
+                <canvas id="hero-webgl-canvas" aria-label="Interactive WebGL2 vinyl platter — click to start or stop, drag to scrub"></canvas>
               </div>
 
-              <!-- Status Strobe Lamp -->
-              <div class="absolute bottom-3 left-3 flex items-center gap-1.5 bg-slate-950/90 px-2.5 py-1 rounded-lg border border-white/15 z-30 shadow-md">
+              <!-- Subtle Quartz Strobe Lamp -->
+              <div class="absolute bottom-2.5 left-2.5 flex items-center gap-1.5 bg-slate-950/90 px-2 py-0.5 rounded-lg border border-white/15 z-30 shadow-md">
                 <span id="platter-strobe-led" class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_#22d3ee]"></span>
                 <span id="platter-rpm-readout" class="text-[10px] font-mono-tech font-bold text-cyan-300">33.3 RPM • QUARTZ LOCK</span>
               </div>
 
               <!-- Interactive Draggable S-Shaped Audiophile Tonearm -->
-              <div id="turntable-tonearm" class="tonearm-pivot absolute top-3.5 right-3.5 w-32 h-64 sm:w-[140px] sm:h-[280px] pointer-events-none z-30" style="transform: rotate(18deg);">
+              <div id="turntable-tonearm" class="tonearm-pivot absolute top-3 right-3 w-24 h-48 sm:w-[124px] sm:h-[248px] pointer-events-none z-30" style="transform: rotate(18deg);">
                 <svg viewBox="0 0 120 240" class="w-full h-full drop-shadow-2xl">
                   <circle cx="94" cy="42" r="20" fill="#1e293b" stroke="#64748b" stroke-width="2"></circle>
                   <circle cx="94" cy="42" r="9" fill="#94a3b8"></circle>
@@ -294,95 +328,23 @@
               </div>
             </div>
 
-            <button type="button" id="stage-next-card" class="crate-wing-card hidden sm:flex flex-col justify-between w-40 md:w-44 h-40 md:h-44 rounded-2xl bg-[#0a0d16]/95 border border-white/15 hover:border-cyan-400/60 p-3 text-center shadow-2xl cursor-pointer -ml-7 z-10 opacity-85 hover:opacity-100 transition-all" title="Click to load next record">
+            <button type="button" id="stage-next-card" class="crate-wing-card hidden sm:flex flex-col justify-between w-36 md:w-40 h-36 md:h-40 rounded-2xl bg-[#0a0d16]/95 border border-white/15 hover:border-cyan-400/60 p-2.5 text-center shadow-2xl cursor-pointer -ml-6 z-10 opacity-85 hover:opacity-100 transition-all" title="Click to load next record">
               <div class="flex items-center justify-between gap-1 w-full">
-                <span id="stage-next-orb" class="w-4 h-4 rounded-full border border-white/30 shrink-0"></span>
+                <span id="stage-next-orb" class="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0"></span>
                 <span id="stage-next-pill" class="px-1.5 py-0.5 rounded bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 text-[9px] font-mono-tech font-bold">LP</span>
               </div>
               <div class="my-auto px-1">
                 <p id="stage-next-artist" class="text-[10px] font-extrabold uppercase tracking-wider text-cyan-300 truncate">ARTIST</p>
                 <p id="stage-next-title" class="text-xs font-black text-white line-clamp-2 leading-snug mt-0.5">Title</p>
               </div>
-              <div id="stage-next-badge" class="text-[9px] font-mono-tech text-slate-300 truncate bg-white/[0.06] border border-white/5 px-2 py-1 rounded-lg text-center w-full">12" LP</div>
+              <div id="stage-next-badge" class="text-[9px] font-mono-tech text-slate-300 truncate bg-white/[0.06] border border-white/5 px-2 py-0.5 rounded-lg text-center w-full">12" LP</div>
             </button>
-          </div>
-
-          <!-- Platter Controls, Optical Backlight & Dual Analog VU Meters -->
-          <div class="w-full max-w-[600px] mt-4 space-y-2.5">
-            <div class="flex flex-wrap items-center justify-center gap-2">
-              <button type="button" id="btn-toggle-spin" class="px-3 py-1.5 rounded-xl text-xs font-mono-tech font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 hover:bg-cyan-500/30 transition">
-                ⏸ Cut Motor (Coast)
-              </button>
-              <button type="button" id="btn-toggle-rpm" class="px-3 py-1.5 rounded-xl text-xs font-mono-tech font-bold bg-slate-800/90 text-slate-200 border border-white/10 hover:text-white transition">
-                Speed: 33⅓ RPM
-              </button>
-              <button type="button" id="btn-quartz-pitch" class="px-3 py-1.5 rounded-xl text-xs font-mono-tech font-bold bg-slate-800/90 text-slate-300 border border-white/10 hover:text-white transition" title="Toggle whether 45 RPM &amp; coasting shift audio pitch like real vinyl">
-                🎛 Pitch: Platter-Coupled
-              </button>
-              <button type="button" id="btn-toggle-audio" class="px-3 py-1.5 rounded-xl text-xs font-mono-tech font-bold bg-slate-800/90 text-slate-300 border border-white/10 hover:text-white transition">
-                🔇 Groove Crackle: Off
-              </button>
-            </div>
-
-            <!-- Optical Backlight ("Hold Up to the Light") & Etched Relief Bar -->
-            <div class="anodized-panel rounded-2xl px-3.5 py-2.5 flex flex-wrap items-center justify-between gap-3">
-              <div class="flex items-center gap-2 flex-wrap">
-                <button type="button" id="btn-toggle-backlight" class="px-3 py-1.5 rounded-xl text-xs font-mono-tech font-bold bg-slate-900 text-slate-200 border border-white/15 hover:border-amber-400/50 transition" title="Shine optical backlight through translucent wax (Shortcut: B)">
-                  ☀️ Hold to Light (B)
-                </button>
-                <div id="backlight-slider-wrap" class="flex items-center gap-2 opacity-50 transition-opacity">
-                  <span class="text-[10px] font-mono-tech text-slate-400 uppercase">Intensity</span>
-                  <input type="range" id="backlight-intensity-slider" min="15" max="100" value="78" class="audiophile-slider w-24" aria-label="Backlight optical intensity">
-                </div>
-              </div>
-              <div class="flex items-center gap-2">
-                <button type="button" id="btn-toggle-etched" class="px-2.5 py-1 rounded-xl text-[11px] font-mono-tech font-semibold bg-slate-900 text-slate-400 border border-white/10 hover:text-white transition" title="Preview laser-etched D-side metallic relief shader">
-                  ✨ Etched Relief
-                </button>
-                <div class="flex items-center bg-slate-950/90 rounded-xl p-0.5 border border-white/10 text-[11px]">
-                  <button type="button" id="stage-view-auto" class="px-2.5 py-1 rounded-lg font-bold bg-purple-500/25 text-purple-200 border border-purple-400/30">Wax Disc</button>
-                  <button type="button" id="stage-view-sleeve" class="px-2.5 py-1 rounded-lg font-semibold text-slate-400 hover:text-white">Cover Art</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Dual Illuminated Analog VU Meters + Studio Action Row -->
-            <div class="grid grid-cols-1 sm:grid-cols-12 gap-2.5 items-center">
-              <div class="sm:col-span-5 grid grid-cols-2 gap-2">
-                <div class="vu-meter-box rounded-xl h-12 px-2.5 pt-1 flex flex-col justify-between">
-                  <div class="flex items-center justify-between text-[9px] font-mono-tech text-amber-200/80">
-                    <span>CH-L dB</span>
-                    <span id="vu-peak-left" class="hardware-led is-on"></span>
-                  </div>
-                  <div class="relative flex-1 overflow-hidden">
-                    <div class="vu-scale-arc absolute inset-x-2 bottom-0 h-14"></div>
-                    <div id="vu-needle-left" class="vu-meter-needle absolute left-1/2 bottom-0 w-0.5 h-8 bg-amber-300 shadow-[0_0_6px_#fbbf24]" style="transform: rotate(-40deg);"></div>
-                  </div>
-                </div>
-                <div class="vu-meter-box rounded-xl h-12 px-2.5 pt-1 flex flex-col justify-between">
-                  <div class="flex items-center justify-between text-[9px] font-mono-tech text-amber-200/80">
-                    <span>CH-R dB</span>
-                    <span id="vu-peak-right" class="hardware-led is-on"></span>
-                  </div>
-                  <div class="relative flex-1 overflow-hidden">
-                    <div class="vu-scale-arc absolute inset-x-2 bottom-0 h-14"></div>
-                    <div id="vu-needle-right" class="vu-meter-needle absolute left-1/2 bottom-0 w-0.5 h-8 bg-amber-300 shadow-[0_0_6px_#fbbf24]" style="transform: rotate(-40deg);"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="sm:col-span-7 flex flex-wrap sm:flex-nowrap items-center justify-end gap-1.5">
-                <button type="button" id="btn-hero-inspect-3d" class="px-2.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-[11px] font-mono-tech font-bold text-cyan-200 border border-white/15 hover:border-cyan-400/50 transition whitespace-nowrap" title="Open 3D Jacket, Back-Cover &amp; Gatefold Inspector">🔍 3D Jacket</button>
-                <button type="button" id="btn-hero-xray-hud" class="px-2.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-[11px] font-mono-tech font-bold text-emerald-300 border border-white/15 hover:border-emerald-400/50 transition whitespace-nowrap" title="Inspect Polar CV Rings &amp; Masks">🔬 CV X-Ray</button>
-                <button type="button" id="btn-hero-export-card" class="px-2.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-[11px] font-mono-tech font-bold text-fuchsia-200 border border-white/15 hover:border-fuchsia-400/50 transition whitespace-nowrap" title="Export Now Spinning PNG Studio Card">📸 PNG</button>
-                <button type="button" id="btn-copy-deeplink" class="px-2.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-[11px] font-mono-tech font-bold text-slate-300 border border-white/15 transition whitespace-nowrap" title="Copy direct link to this LP">🔗</button>
-              </div>
-            </div>
           </div>
         </div>
 
         <!-- Right 5 Cols: 3D Flip Deck (Side A: Specs & Gallery | Side B: Pitch-Coupled Tracklist) -->
-        <div class="lg:col-span-5 flex flex-col gap-3 relative pt-2">
-          <div class="flex justify-center -mb-5 z-30">
+        <div class="lg:col-span-5 flex flex-col gap-2 relative pt-1">
+          <div class="flex justify-center -mb-4 z-30">
             <button type="button" id="btn-card-flip-top" class="group px-3.5 py-1 rounded-full bg-slate-900 hover:bg-slate-800 border border-white/20 hover:border-cyan-400/60 shadow-lg flex items-center gap-1.5 text-[11px] font-mono-tech font-bold text-slate-200 hover:text-cyan-300 transition-all" title="Flip card between Pressing Specs and Album Tracklist (Shortcut: F)">
               <span id="top-flip-icon" class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-white/10 text-cyan-300 group-hover:rotate-180 transition-transform duration-500">↻</span>
               <span id="top-flip-label">Flip to Album Player</span>
@@ -392,7 +354,7 @@
           <div id="hero-flip-stage" class="hero-flip-perspective w-full">
             <div id="hero-flip-inner" class="hero-flip-inner w-full">
               <!-- SIDE A -->
-              <div id="hero-face-front" class="hero-flip-face hero-flip-front bg-[#0c101b] border border-white/15 rounded-3xl p-4 sm:p-5 flex flex-col justify-between shadow-2xl">
+              <div id="hero-face-front" class="hero-flip-face hero-flip-front bg-[#0c101b] border border-white/15 rounded-3xl p-3.5 sm:p-4 flex flex-col justify-between shadow-2xl">
                 <div class="flex items-start justify-between gap-3 pt-1">
                   <div class="min-w-0">
                     <div class="flex items-center gap-2 flex-wrap">
@@ -408,7 +370,7 @@
                   </div>
                 </div>
 
-                <div class="grid grid-cols-2 gap-2.5 text-xs bg-slate-950/80 p-3 rounded-2xl border border-white/10">
+                <div class="grid grid-cols-2 gap-2 text-xs bg-slate-950/80 p-2.5 rounded-2xl border border-white/10">
                   <div>
                     <span class="text-slate-400 block text-[10px] font-mono-tech uppercase font-semibold">Label &amp; Cat#</span>
                     <span id="hero-label-cat" class="font-bold text-slate-100 line-clamp-1">—</span>
@@ -430,13 +392,13 @@
                   </div>
                 </div>
 
-                <div class="bg-slate-950/90 border border-cyan-500/25 rounded-2xl p-3 space-y-2">
+                <div class="bg-slate-950/90 border border-cyan-500/25 rounded-2xl p-2.5 space-y-1.5">
                   <div class="flex items-center justify-between text-[11px] font-mono-tech">
                     <span class="text-cyan-300 font-bold uppercase">Discogs Gallery (Click to Pin Pressing)</span>
                     <button type="button" id="btn-fetch-this-release" class="text-[10px] px-2 py-0.5 rounded bg-cyan-500/20 font-bold text-cyan-300 hover:bg-cyan-500/30">↻ Refresh Gallery</button>
                   </div>
-                  <div id="hero-gallery-strip" class="flex items-center gap-2 overflow-x-auto custom-scrollbar py-1"></div>
-                  <p id="hero-cv-explanation" class="text-[11px] text-slate-400 leading-snug"></p>
+                  <div id="hero-gallery-strip" class="flex items-center gap-2 overflow-x-auto custom-scrollbar py-0.5"></div>
+                  <p id="hero-cv-explanation" class="text-[11px] text-slate-400 leading-snug line-clamp-2"></p>
                 </div>
               </div>
 
@@ -509,10 +471,10 @@
           <audio id="vault-preview-audio" preload="none" class="hidden"></audio>
 
           <div class="flex flex-wrap items-center gap-2 pt-0.5">
-            <a id="hero-discogs-link" href="https://www.discogs.com" target="_blank" rel="noopener noreferrer" class="flex-1 min-w-[165px] text-center px-3.5 py-2.5 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-black text-xs sm:text-sm transition shadow-lg shadow-cyan-500/20">
+            <a id="hero-discogs-link" href="https://www.discogs.com" target="_blank" rel="noopener noreferrer" class="flex-1 min-w-[165px] text-center px-3.5 py-2 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-black text-xs sm:text-sm transition shadow-lg shadow-cyan-500/20">
               Open Release on Discogs ↗
             </a>
-            <button type="button" id="btn-flip-streaming" class="px-4 py-2.5 rounded-2xl bg-gradient-to-r from-fuchsia-600/25 via-purple-600/25 to-cyan-500/25 hover:from-fuchsia-600/35 hover:via-purple-600/35 hover:to-cyan-500/35 text-white font-bold text-xs sm:text-sm border border-fuchsia-400/35 hover:border-cyan-400/60 transition flex items-center gap-2 shadow-lg">
+            <button type="button" id="btn-flip-streaming" class="px-4 py-2 rounded-2xl bg-gradient-to-r from-fuchsia-600/25 via-purple-600/25 to-cyan-500/25 hover:from-fuchsia-600/35 hover:via-purple-600/35 hover:to-cyan-500/35 text-white font-bold text-xs sm:text-sm border border-fuchsia-400/35 hover:border-cyan-400/60 transition flex items-center gap-2 shadow-lg">
               <span id="flip-btn-text">Stream &amp; Tracklist</span>
               <span id="flip-btn-arrow" class="text-[11px] font-mono-tech text-cyan-300">↻</span>
             </button>
@@ -521,17 +483,20 @@
       </div>
     </section>
 
+    <!-- IntersectionObserver Sentinel at bottom edge of Hero Stage (Zero-bounce trigger for Sticky Mini-Bar) -->
+    <div id="hero-stage-sentinel" class="h-px w-full pointer-events-none" aria-hidden="true"></div>
+
     <!-- FILTER, SEARCH & DISPLAY TOOLBAR -->
-    <section class="machined-plinth rounded-3xl p-4 sm:p-5 space-y-3 backdrop-blur-md">
-      <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+    <section id="crate-toolbar" class="machined-plinth rounded-3xl p-2.5 sm:p-3 space-y-2 backdrop-blur-md">
+      <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-2.5">
         <div class="relative flex-1">
-          <input type="text" id="search-input" placeholder="Search all 159 LPs by artist, album, label, catalog #, or pressing color..." class="w-full bg-slate-950/90 border border-white/15 focus:border-cyan-400 rounded-2xl pl-9 pr-20 py-2.5 text-xs sm:text-sm font-medium text-white placeholder-slate-500 outline-none transition">
-          <span class="absolute left-3 top-2.5 text-slate-400 text-xs">🔎</span>
-          <button type="button" id="btn-clear-search" class="hidden absolute right-2.5 top-2 px-2.5 py-0.5 rounded-lg bg-slate-800 text-[11px] font-bold text-slate-300 hover:text-white">Clear</button>
+          <input type="text" id="search-input" placeholder="Search all 159 LPs by artist, album, label, catalog #, or pressing color..." class="w-full bg-slate-950/90 border border-white/15 focus:border-cyan-400 rounded-2xl pl-9 pr-20 py-2 text-xs sm:text-sm font-medium text-white placeholder-slate-500 outline-none transition">
+          <span class="absolute left-3 top-2 text-slate-400 text-xs">🔎</span>
+          <button type="button" id="btn-clear-search" class="hidden absolute right-2.5 top-1.5 px-2.5 py-0.5 rounded-lg bg-slate-800 text-[11px] font-bold text-slate-300 hover:text-white">Clear</button>
         </div>
         <div class="flex flex-wrap items-center gap-2">
           <label for="sort-select" class="text-xs font-mono-tech font-bold text-slate-400 uppercase">Sort:</label>
-          <select id="sort-select" class="bg-slate-950/90 border border-white/15 rounded-2xl px-3 py-2 text-xs font-semibold text-slate-200 outline-none focus:border-cyan-400">
+          <select id="sort-select" class="bg-slate-950/90 border border-white/15 rounded-2xl px-3 py-1.5 text-xs font-semibold text-slate-200 outline-none focus:border-cyan-400">
             <option value="added_desc">Date Added (Newest First)</option>
             <option value="artist_asc">Artist (A → Z)</option>
             <option value="title_asc">Album Title (A → Z)</option>
@@ -539,7 +504,7 @@
             <option value="year_desc">Release Year (Newest)</option>
             <option value="elo_desc">Arena Elo Rating (High → Low)</option>
           </select>
-          <select id="mobile-mode-select" class="md:hidden bg-slate-950/90 border border-white/15 rounded-2xl px-3 py-2 text-xs font-bold text-cyan-300 outline-none" aria-label="Thumbnail display mode">
+          <select id="mobile-mode-select" class="lg:hidden bg-slate-950/90 border border-white/15 rounded-2xl px-3 py-1.5 text-xs font-bold text-cyan-300 outline-none" aria-label="Thumbnail display mode">
             <option value="split" selected="">View: Sleeve + Disc</option>
             <option value="pressing">View: Pressing First</option>
             <option value="sleeve">View: Sleeve Cover</option>

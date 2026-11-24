@@ -176,6 +176,15 @@ body.uv-blacklight .uv-reactive {
   animation: toastSlideUp 0.2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* Vault Tools Popover subtle drop entrance */
+@keyframes popoverDrop {
+  from { opacity: 0; transform: translateY(-6px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+#vault-tools-popover:not(.hidden) {
+  animation: popoverDrop 0.16s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 /* Backlight slider styling */
 input[type="range"].audiophile-slider {
   -webkit-appearance: none;

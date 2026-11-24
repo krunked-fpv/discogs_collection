@@ -29,6 +29,12 @@ export function updateSessionEditIndicators() {
       ? 'w-2 h-2 rounded-full bg-amber-400 animate-ping'
       : 'w-2 h-2 rounded-full bg-emerald-400';
   }
+  const toolsDot = document.getElementById('vault-tools-dot');
+  if (toolsDot) {
+    toolsDot.className = totalEdits > 0
+      ? 'w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping'
+      : 'w-1.5 h-1.5 rounded-full bg-emerald-400';
+  }
 
   const inlineBadge = document.getElementById('flatten-inline-status');
   if (inlineBadge) {
@@ -165,9 +171,16 @@ export function downloadSelfContainedIndexHtml() {
     if (el) el.removeAttribute('value');
   });
 
-  ['modal-backdrop', 'jacket-inspector-modal', 'cmd-palette-modal'].forEach((id) => {
+  ['modal-backdrop', 'jacket-inspector-modal', 'cmd-palette-modal', 'vault-tools-popover', 'minibar-collapsed-spacer'].forEach((id) => {
     docClone.querySelector(`#${id}`)?.classList.add('hidden');
   });
+  docClone.querySelector('#hero-turntable-stage')?.classList.remove('hidden');
+  const minibarClone = docClone.querySelector('#now-spinning-minibar');
+  if (minibarClone) {
+    minibarClone.classList.remove('is-visible', 'minibar-pulse');
+    minibarClone.setAttribute('aria-hidden', 'true');
+  }
+  docClone.querySelector('#btn-vault-tools')?.setAttribute('aria-expanded', 'false');
   const toastClone = docClone.querySelector('#toast-banner');
   if (toastClone) {
     toastClone.classList.add('hidden');
