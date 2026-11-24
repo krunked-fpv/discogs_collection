@@ -4325,6 +4325,307 @@
     ],
     "year": 2018
   },
+  "12988709": {
+    "_full_images_fetched": true,
+    "_ytm_resolved": {
+      "fullAlbumYtDuration": 2400,
+      "fullAlbumYtVideoId": "r6bvEY-AAfE",
+      "resolved": true,
+      "spotifyAlbumId": "",
+      "trackIds": {
+        "1": "i2Qge0y7en4",
+        "2": "VZ4N5NMyX30",
+        "3": "W5t0ch_u93k",
+        "6": "i2Qge0y7en4",
+        "7": "jtlLkLTEWZM",
+        "8": "MTwN9MghEFc"
+      },
+      "ytPlaylistId": "OLAK5uy_ngJZO811tyAEKQcl24AvydoiB2zIxN80M"
+    },
+    "artists": [
+      {
+        "anv": "",
+        "id": 5238860,
+        "join": "",
+        "name": "Currents (3)",
+        "resource_url": "https://api.discogs.com/artists/5238860",
+        "role": "",
+        "thumbnail_url": "https://i.discogs.com/l8Q1V3c2PANN5yNT48EgOYf8HT9-lR2iyzXrl8WwARY/rs:fit/g:sm/q:90/h:600/w:400/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9BLTUyMzg4/NjAtMTc5MTU2NDY2/OC03MTYzLmpwZWc.jpeg",
+        "tracks": ""
+      }
+    ],
+    "artists_sort": "Currents (3)",
+    "blocked_from_sale": false,
+    "community": {
+      "contributors": [
+        {
+          "resource_url": "https://api.discogs.com/users/loic-thirion",
+          "username": "loic-thirion"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/DancingEagleFeather",
+          "username": "DancingEagleFeather"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/Corpsegrind3r",
+          "username": "Corpsegrind3r"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/Obliterator",
+          "username": "Obliterator"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/chn74",
+          "username": "chn74"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/BabaYaga_Onlineshop",
+          "username": "BabaYaga_Onlineshop"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/mikkelhk",
+          "username": "mikkelhk"
+        },
+        {
+          "resource_url": "https://api.discogs.com/users/AVinylFever555",
+          "username": "AVinylFever555"
+        }
+      ],
+      "data_quality": "Needs Vote",
+      "have": 134,
+      "rating": {
+        "average": 4.52,
+        "count": 21
+      },
+      "status": "Accepted",
+      "submitter": {
+        "resource_url": "https://api.discogs.com/users/loic-thirion",
+        "username": "loic-thirion"
+      },
+      "want": 175
+    },
+    "companies": [
+      {
+        "catno": "",
+        "entity_type": "13",
+        "entity_type_name": "Phonographic Copyright (p)",
+        "id": 1178623,
+        "name": "SharpTone Records, INC",
+        "resource_url": "https://api.discogs.com/labels/1178623"
+      },
+      {
+        "catno": "",
+        "entity_type": "14",
+        "entity_type_name": "Copyright (c)",
+        "id": 1178623,
+        "name": "SharpTone Records, INC",
+        "resource_url": "https://api.discogs.com/labels/1178623"
+      },
+      {
+        "catno": "",
+        "entity_type": "42",
+        "entity_type_name": "Exclusive Retailer",
+        "id": 687720,
+        "name": "Impericon Records",
+        "resource_url": "https://api.discogs.com/labels/687720",
+        "thumbnail_url": "https://i.discogs.com/2aUDPa4c5WJWeN_nfAtmWcKT_ODdOj-e6Vw8XxURGxc/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTY4Nzcy/MC0xNTkwNDkxNDE0/LTQzNDYuanBlZw.jpeg"
+      }
+    ],
+    "country": "Europe",
+    "data_quality": "Needs Vote",
+    "date_added": "2018-12-28T01:56:44-08:00",
+    "date_changed": "2023-03-27T18:31:40-07:00",
+    "estimated_weight": 230,
+    "format_quantity": 1,
+    "formats": [
+      {
+        "descriptions": [
+          "12\"",
+          "EP",
+          "Limited Edition"
+        ],
+        "name": "Vinyl",
+        "qty": "1",
+        "text": "Green With Black Splatter"
+      }
+    ],
+    "genres": [
+      "Rock"
+    ],
+    "id": 12988709,
+    "identifiers": [
+      {
+        "type": "Barcode",
+        "value": "7 27361 47153 8"
+      }
+    ],
+    "images": [
+      {
+        "height": 595,
+        "resource_url": "https://i.discogs.com/aDwBjHUFRG2sbVGqhGaIjgWPVFn-cLlOlO6b9uUbKxo/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1ODc0MDQz/NzctMTgzMi5qcGVn.jpeg",
+        "type": "primary",
+        "uri": "https://i.discogs.com/aDwBjHUFRG2sbVGqhGaIjgWPVFn-cLlOlO6b9uUbKxo/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1ODc0MDQz/NzctMTgzMi5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/BtUfNJ5ITnxGKa88SPWvyTfEkPw12DTw0AuQG9K7v-Q/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1ODc0MDQz/NzctMTgzMi5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 595,
+        "resource_url": "https://i.discogs.com/TRLnZTxnC63Q5xu8NHWumfspjdZOfUDLzooxl0BKSXQ/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1ODc0MDQz/OTEtNTEzMC5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/TRLnZTxnC63Q5xu8NHWumfspjdZOfUDLzooxl0BKSXQ/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1ODc0MDQz/OTEtNTEzMC5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/7Uk64843UmeZZWZZ_T_x7sA5wOZRUw-ZyAaXM-intMo/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1ODc0MDQz/OTEtNTEzMC5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/iDQs4389AbKCcxVlzwemb4qX9yilztNi7yB3-HAgNB0/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1NDU5OTE4/MDMtMjQ3OC5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/iDQs4389AbKCcxVlzwemb4qX9yilztNi7yB3-HAgNB0/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1NDU5OTE4/MDMtMjQ3OC5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/RQ1u9H3AjvQhhiuPTqATnUybRISHrizl1lFISLPugwM/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1NDU5OTE4/MDMtMjQ3OC5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/RjSWgOErjjipWp7TEeSrKntN1GAHeTUw4e839WL-inM/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1NDU5OTE4/MDAtMTgyMy5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/RjSWgOErjjipWp7TEeSrKntN1GAHeTUw4e839WL-inM/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1NDU5OTE4/MDAtMTgyMy5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/lINExFKccoSFH0LspZkdq_knHnMLrgTX4FPqu5E4oHE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1NDU5OTE4/MDAtMTgyMy5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/-gxgjARtYiAjb_PTaJjwjnDulKsZ8EhW4YIdH8QzrWQ/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1NDU5OTE4/MDEtMjQ1NS5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/-gxgjARtYiAjb_PTaJjwjnDulKsZ8EhW4YIdH8QzrWQ/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1NDU5OTE4/MDEtMjQ1NS5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/FfabMm2juk1Pmkd2GYLobKl0OdR1qLD6jB9c5Nt8HW8/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1NDU5OTE4/MDEtMjQ1NS5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/UDcAOR3d7_bKgavmOSwrWO47Wzrad9pXvO-mbG96iAI/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1NDU5OTE4/MDMtNzk1Mi5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/UDcAOR3d7_bKgavmOSwrWO47Wzrad9pXvO-mbG96iAI/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1NDU5OTE4/MDMtNzk1Mi5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/B5HZCPgvUT2nL3PFW-1pvy97OdPV2KBSVyqZ6DV0M6o/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1NDU5OTE4/MDMtNzk1Mi5qcGVn.jpeg",
+        "width": 600
+      },
+      {
+        "height": 600,
+        "resource_url": "https://i.discogs.com/rr2z56HZfe8ahWzgB-QWSLxBJktKAqX22c9UCUXAv-w/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1NDU5OTE4/MDctOTk3OS5qcGVn.jpeg",
+        "type": "secondary",
+        "uri": "https://i.discogs.com/rr2z56HZfe8ahWzgB-QWSLxBJktKAqX22c9UCUXAv-w/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1NDU5OTE4/MDctOTk3OS5qcGVn.jpeg",
+        "uri150": "https://i.discogs.com/LxSjXvH16Jzb8-barWIQPA4P6kq4QQpFebs8Eb1u_yQ/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1NDU5OTE4/MDctOTk3OS5qcGVn.jpeg",
+        "width": 600
+      }
+    ],
+    "is_offensive": false,
+    "labels": [
+      {
+        "catno": "4715",
+        "entity_type": "1",
+        "entity_type_name": "Label",
+        "id": 1178624,
+        "name": "SharpTone",
+        "resource_url": "https://api.discogs.com/labels/1178624",
+        "thumbnail_url": "https://i.discogs.com/OwFJ4cezqGHVzda3icCej_lB-EIL_lexRChLwuDyMoo/rs:fit/g:sm/q:90/h:330/w:550/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTExNzg2/MjQtMTQ4ODU1MDYz/OS02NDQzLmpwZWc.jpeg"
+      }
+    ],
+    "lowest_price": 131.87,
+    "master_id": 1544020,
+    "master_url": "https://api.discogs.com/masters/1544020",
+    "notes": "Translucent green with black splatter vinyl in single sleeve, comes with inner lyrics sheet.\nImpericon exclusive variant, limited to 200 copies.",
+    "num_for_sale": 2,
+    "released": "2018-12-14",
+    "released_formatted": "14 Dec 2018",
+    "resource_url": "https://api.discogs.com/releases/12988709",
+    "series": [],
+    "status": "Accepted",
+    "styles": [
+      "Metalcore",
+      "Progressive Metal"
+    ],
+    "thumb": "https://i.discogs.com/BtUfNJ5ITnxGKa88SPWvyTfEkPw12DTw0AuQG9K7v-Q/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1ODc0MDQz/NzctMTgzMi5qcGVn.jpeg",
+    "title": "I Let the Devil In",
+    "tracklist": [
+      {
+        "duration": "3:52",
+        "position": "A1",
+        "title": "Into Despair",
+        "type_": "track"
+      },
+      {
+        "duration": "4:21",
+        "position": "A2",
+        "title": "My Disguise",
+        "type_": "track"
+      },
+      {
+        "duration": "3:38",
+        "position": "A3",
+        "title": "Feel The Same",
+        "type_": "track"
+      },
+      {
+        "duration": "3:38",
+        "position": "A4",
+        "title": "The Rope",
+        "type_": "track"
+      },
+      {
+        "duration": "3:51",
+        "position": "A5",
+        "title": "Forever Marked",
+        "type_": "track"
+      },
+      {
+        "duration": "3:52",
+        "position": "B1",
+        "title": "Into Despair (Instrumental)",
+        "type_": "track"
+      },
+      {
+        "duration": "4:21",
+        "position": "B2",
+        "title": "My Disguise (Instrumental)",
+        "type_": "track"
+      },
+      {
+        "duration": "3:38",
+        "position": "B3",
+        "title": "Feel The Same (Instrumental)",
+        "type_": "track"
+      },
+      {
+        "duration": "3:38",
+        "position": "B4",
+        "title": "The Rope (Instrumental)",
+        "type_": "track"
+      },
+      {
+        "duration": "3:51",
+        "position": "B5",
+        "title": "Forever Marked (Instrumental)",
+        "type_": "track"
+      }
+    ],
+    "uri": "https://www.discogs.com/release/12988709-Currents-3-I-Let-the-Devil-In",
+    "videos": [
+      {
+        "description": "Purchase, Stream \u201cI Let The Devil In\u201d here: http://fanlink.to/Currents\n\nProduced by: Ryan Leitru \nSubscribe: https://smarturl.it/SharpToneRecs\n\nI never said I could walk on water\nStuck in my head; wish the path made sense.\nI never said I could make yo",
+        "duration": 233,
+        "embed": true,
+        "title": "Currents - Into Despair (Official Music Video)",
+        "uri": "https://www.youtube.com/watch?v=Uv0F6RMCNdI"
+      },
+      {
+        "description": "Purchase, Stream \u201cI Let The Devil In\u201d here: http://fanlink.to/Currents\n\nProduced by: Ryan Leitru \nSubscribe: https://smarturl.it/SharpToneRecs\n\nCast into the flame.\nDark horizons bridge the gap between Life and Loss.\nThrough the windowpane,\nWe behold ",
+        "duration": 232,
+        "embed": true,
+        "title": "Currents - Forever Marked (Official Music Video)",
+        "uri": "https://www.youtube.com/watch?v=3AwiZranH2o"
+      }
+    ],
+    "year": 2018
+  },
   "13113361": {
     "artists": [
       {

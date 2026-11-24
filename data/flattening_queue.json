@@ -1,11 +1,12 @@
 {
   "schema_version": "5.0.0",
   "storage_mode": "portable_inline_html+json",
-  "updated_at_utc": "2026-11-20T03:34:52Z",
+  "updated_at_utc": "2026-11-24T00:13:03Z",
   "protocol": "Bag on 6 until 130°F then drop to 4 — 2.5 hours once at 130°F on the plate",
   "need_to_be_done_release_ids": [
     2486041,
     4902348,
+    12988709,
     13257813,
     15985409,
     17583742,
@@ -215,6 +216,13 @@
       "album": "On Letting Go",
       "release_ids": [
         29631781
+      ]
+    },
+    {
+      "artist": "Currents",
+      "album": "I Let the Devil In",
+      "release_ids": [
+        12988709
       ]
     },
     {

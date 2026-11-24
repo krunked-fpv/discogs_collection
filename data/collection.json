@@ -4,26 +4,394 @@
   "source_of_truth": "https://www.discogs.com/user/krunked/collection",
   "api_documentation": "https://www.discogs.com/developers",
   "username": "krunked",
-  "synced_at_utc": "2026-11-20T03:34:52Z",
+  "synced_at_utc": "2026-11-24T00:13:03Z",
   "profile": {
     "username": "krunked",
     "owner_name": "krunked",
     "discogs_url": "https://www.discogs.com/user/krunked/collection",
     "github_repo": "https://github.com/krunked-fpv/discogs_collection",
-    "num_collection": 159,
-    "pressing_photos_detected": 136,
-    "colored_or_special_variants": 150,
-    "flattening_need_to_be_done": 16,
+    "num_collection": 160,
+    "pressing_photos_detected": 137,
+    "colored_or_special_variants": 151,
+    "flattening_need_to_be_done": 17,
     "flattening_done": 143,
     "collection_value": {
-      "minimum": "$3,921.14",
-      "median": "$6,406.96",
-      "maximum": "$11,044.13",
-      "total_estimated_usd": 7611.28,
-      "formatted_total": "$7,611.28"
+      "minimum": "$3,938.06",
+      "median": "$6,460.67",
+      "maximum": "$11,164.92",
+      "total_estimated_usd": 7743.15,
+      "formatted_total": "$7,743.15"
     }
   },
   "records": [
+    {
+      "release_id": 12988709,
+      "instance_id": 2207759101,
+      "artist": "Currents",
+      "title": "I Let the Devil In",
+      "year": 2018,
+      "format_string": "Vinyl, 12\", EP, Limited Edition, Green With Black Splatter",
+      "label": "SharpTone",
+      "catno": "4715",
+      "media_condition": "Near Mint (NM or M-)",
+      "sleeve_condition": "Near Mint (NM or M-)",
+      "comments": "",
+      "date_added": "2026-11-23T16:12:17-08:00",
+      "discogs_url": "https://www.discogs.com/release/12988709-Currents-3-I-Let-the-Devil-In",
+      "estimated_value_usd": 131.87,
+      "flattening_status": "Need to be done",
+      "genres": [
+        "Rock"
+      ],
+      "styles": [
+        "Metalcore",
+        "Progressive Metal"
+      ],
+      "images": {
+        "cover_image_url": "https://i.discogs.com/aDwBjHUFRG2sbVGqhGaIjgWPVFn-cLlOlO6b9uUbKxo/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1ODc0MDQz/NzctMTgzMi5qcGVn.jpeg",
+        "pressing_image_url": "assets/releases/12988709/pressing.jpg?v=3_18dc92f7",
+        "center_label_image_url": "https://i.discogs.com/BtUfNJ5ITnxGKa88SPWvyTfEkPw12DTw0AuQG9K7v-Q/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1ODc0MDQz/NzctMTgzMi5qcGVn.jpeg",
+        "display_thumbnail_url": "assets/releases/12988709/pressing.jpg?v=3_18dc92f7",
+        "has_pressing_photo": true,
+        "selected_index": 3,
+        "selected_score": 0.9834,
+        "detection_method": "deterministic_annular_cv+guideline_13_8",
+        "classified_images": [
+          {
+            "index": 0,
+            "uri": "https://i.discogs.com/aDwBjHUFRG2sbVGqhGaIjgWPVFn-cLlOlO6b9uUbKxo/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1ODc0MDQz/NzctMTgzMi5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/BtUfNJ5ITnxGKa88SPWvyTfEkPw12DTw0AuQG9K7v-Q/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1ODc0MDQz/NzctMTgzMi5qcGVn.jpeg",
+            "width": 600,
+            "height": 595,
+            "aspect_ratio": 1.008,
+            "role": "front_cover",
+            "deterministic_score": 0.05,
+            "local_uri": "assets/releases/12988709/img_0.jpg"
+          },
+          {
+            "index": 1,
+            "uri": "https://i.discogs.com/TRLnZTxnC63Q5xu8NHWumfspjdZOfUDLzooxl0BKSXQ/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1ODc0MDQz/OTEtNTEzMC5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/7Uk64843UmeZZWZZ_T_x7sA5wOZRUw-ZyAaXM-intMo/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1ODc0MDQz/OTEtNTEzMC5qcGVn.jpeg",
+            "width": 600,
+            "height": 595,
+            "aspect_ratio": 1.008,
+            "role": "center_label_closeup",
+            "deterministic_score": 0.0187,
+            "local_uri": "assets/releases/12988709/img_1.jpg",
+            "cv_metrics": {
+              "is_pressing": false,
+              "is_zoomed_label_scan": true,
+              "is_hype_sticker_or_text_insert": false,
+              "is_square_insert_or_sleeve": true,
+              "detected_disc_radius": 0.81,
+              "active_diagonal_quadrants": 0,
+              "score": 0.0073,
+              "raw_annular_score": 0.0292,
+              "aspect_ratio": 1.008,
+              "corner_std": 0.0208,
+              "corner_wax_dist": 0.0097,
+              "circularity_ratio": 0.2795,
+              "label_wax_dist": 0.0026,
+              "octant_label_wax_q25": 0.0027,
+              "hv_wax_anisotropy": 0.0866,
+              "spindle_contrast": 0.0043,
+              "rim_step": 0.0022,
+              "label_step": 0.0013,
+              "reason": "rejected_diecut_inner_sleeve"
+            }
+          },
+          {
+            "index": 2,
+            "uri": "https://i.discogs.com/iDQs4389AbKCcxVlzwemb4qX9yilztNi7yB3-HAgNB0/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1NDU5OTE4/MDMtMjQ3OC5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/RQ1u9H3AjvQhhiuPTqATnUybRISHrizl1lFISLPugwM/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1NDU5OTE4/MDMtMjQ3OC5qcGVn.jpeg",
+            "width": 600,
+            "height": 600,
+            "aspect_ratio": 1.0,
+            "role": "pressing_disc",
+            "deterministic_score": 0.8789,
+            "local_uri": "assets/releases/12988709/img_2.jpg",
+            "cv_metrics": {
+              "is_pressing": true,
+              "is_zoomed_label_scan": false,
+              "is_hype_sticker_or_text_insert": false,
+              "is_square_insert_or_sleeve": false,
+              "detected_disc_radius": 0.99,
+              "active_diagonal_quadrants": 4,
+              "score": 0.8401,
+              "raw_annular_score": 0.8401,
+              "aspect_ratio": 1.0,
+              "corner_std": 0.0203,
+              "corner_wax_dist": 0.9558,
+              "circularity_ratio": 2.7855,
+              "label_wax_dist": 0.2621,
+              "octant_label_wax_q25": 0.2021,
+              "hv_wax_anisotropy": 0.0094,
+              "spindle_contrast": 0.0253,
+              "rim_step": 0.0411,
+              "label_step": 0.019,
+              "reason": "deterministic_annular_cv_match"
+            }
+          },
+          {
+            "index": 3,
+            "uri": "https://i.discogs.com/RjSWgOErjjipWp7TEeSrKntN1GAHeTUw4e839WL-inM/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1NDU5OTE4/MDAtMTgyMy5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/lINExFKccoSFH0LspZkdq_knHnMLrgTX4FPqu5E4oHE/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1NDU5OTE4/MDAtMTgyMy5qcGVn.jpeg",
+            "width": 600,
+            "height": 600,
+            "aspect_ratio": 1.0,
+            "role": "pressing_disc",
+            "deterministic_score": 0.9834,
+            "local_uri": "assets/releases/12988709/img_3.jpg",
+            "cv_metrics": {
+              "is_pressing": true,
+              "is_zoomed_label_scan": false,
+              "is_hype_sticker_or_text_insert": false,
+              "is_square_insert_or_sleeve": false,
+              "detected_disc_radius": 0.99,
+              "active_diagonal_quadrants": 4,
+              "score": 0.995,
+              "raw_annular_score": 0.995,
+              "aspect_ratio": 1.0,
+              "corner_std": 0.0184,
+              "corner_wax_dist": 1.1699,
+              "circularity_ratio": 5.0169,
+              "label_wax_dist": 0.3036,
+              "octant_label_wax_q25": 0.2647,
+              "hv_wax_anisotropy": 0.0417,
+              "spindle_contrast": 0.0956,
+              "rim_step": 0.0685,
+              "label_step": 0.0325,
+              "reason": "deterministic_annular_cv_match"
+            }
+          },
+          {
+            "index": 4,
+            "uri": "https://i.discogs.com/-gxgjARtYiAjb_PTaJjwjnDulKsZ8EhW4YIdH8QzrWQ/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1NDU5OTE4/MDEtMjQ1NS5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/FfabMm2juk1Pmkd2GYLobKl0OdR1qLD6jB9c5Nt8HW8/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1NDU5OTE4/MDEtMjQ1NS5qcGVn.jpeg",
+            "width": 600,
+            "height": 600,
+            "aspect_ratio": 1.0,
+            "role": "insert_or_sleeve",
+            "deterministic_score": 0.1084,
+            "local_uri": "assets/releases/12988709/img_4.jpg",
+            "cv_metrics": {
+              "is_pressing": false,
+              "is_zoomed_label_scan": false,
+              "is_hype_sticker_or_text_insert": true,
+              "is_square_insert_or_sleeve": true,
+              "detected_disc_radius": 0.8,
+              "active_diagonal_quadrants": 4,
+              "score": 0.0817,
+              "raw_annular_score": 0.3268,
+              "aspect_ratio": 1.0,
+              "corner_std": 0.1683,
+              "corner_wax_dist": 0.1902,
+              "circularity_ratio": 0.8524,
+              "label_wax_dist": 0.2905,
+              "octant_label_wax_q25": 0.1702,
+              "hv_wax_anisotropy": 0.5799,
+              "spindle_contrast": 0.0284,
+              "rim_step": 0.0082,
+              "label_step": 0.0107,
+              "reason": "rejected_hype_sticker_or_text_insert"
+            }
+          },
+          {
+            "index": 5,
+            "uri": "https://i.discogs.com/UDcAOR3d7_bKgavmOSwrWO47Wzrad9pXvO-mbG96iAI/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1NDU5OTE4/MDMtNzk1Mi5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/B5HZCPgvUT2nL3PFW-1pvy97OdPV2KBSVyqZ6DV0M6o/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1NDU5OTE4/MDMtNzk1Mi5qcGVn.jpeg",
+            "width": 600,
+            "height": 600,
+            "aspect_ratio": 1.0,
+            "role": "insert_or_sleeve",
+            "deterministic_score": 0.0633,
+            "local_uri": "assets/releases/12988709/img_5.jpg",
+            "cv_metrics": {
+              "is_pressing": false,
+              "is_zoomed_label_scan": false,
+              "is_hype_sticker_or_text_insert": true,
+              "is_square_insert_or_sleeve": true,
+              "detected_disc_radius": 0.8,
+              "active_diagonal_quadrants": 1,
+              "score": 0.0298,
+              "raw_annular_score": 0.1191,
+              "aspect_ratio": 1.0,
+              "corner_std": 0.0634,
+              "corner_wax_dist": 0.0309,
+              "circularity_ratio": 1.3296,
+              "label_wax_dist": 0.0256,
+              "octant_label_wax_q25": 0.0226,
+              "hv_wax_anisotropy": 1.2623,
+              "spindle_contrast": 0.0447,
+              "rim_step": 0.0071,
+              "label_step": 0.0518,
+              "reason": "rejected_hype_sticker_or_text_insert"
+            }
+          },
+          {
+            "index": 6,
+            "uri": "https://i.discogs.com/rr2z56HZfe8ahWzgB-QWSLxBJktKAqX22c9UCUXAv-w/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1NDU5OTE4/MDctOTk3OS5qcGVn.jpeg",
+            "uri150": "https://i.discogs.com/LxSjXvH16Jzb8-barWIQPA4P6kq4QQpFebs8Eb1u_yQ/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1NDU5OTE4/MDctOTk3OS5qcGVn.jpeg",
+            "width": 600,
+            "height": 600,
+            "aspect_ratio": 1.0,
+            "role": "insert_or_sleeve",
+            "deterministic_score": 0.1321,
+            "local_uri": "assets/releases/12988709/img_6.jpg",
+            "cv_metrics": {
+              "is_pressing": false,
+              "is_zoomed_label_scan": false,
+              "is_hype_sticker_or_text_insert": false,
+              "is_square_insert_or_sleeve": true,
+              "detected_disc_radius": 0.8,
+              "active_diagonal_quadrants": 4,
+              "score": 0.1113,
+              "raw_annular_score": 0.4454,
+              "aspect_ratio": 1.0,
+              "corner_std": 0.1134,
+              "corner_wax_dist": 0.1406,
+              "circularity_ratio": 1.5197,
+              "label_wax_dist": 0.4438,
+              "octant_label_wax_q25": 0.2933,
+              "hv_wax_anisotropy": 0.2401,
+              "spindle_contrast": 0.1501,
+              "rim_step": 0.0102,
+              "label_step": 0.038,
+              "reason": "rejected_square_insert_or_sleeve"
+            }
+          }
+        ],
+        "local_cover_image_url": "assets/releases/12988709/cover.jpg",
+        "local_pressing_image_url": "assets/releases/12988709/pressing.jpg?v=3_18dc92f7",
+        "remote_pressing_image_url": "https://i.discogs.com/RjSWgOErjjipWp7TEeSrKntN1GAHeTUw4e839WL-inM/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEyOTg4/NzA5LTE1NDU5OTE4/MDAtMTgyMy5qcGVn.jpeg",
+        "delta_sig": "5a6edb12b44ee150"
+      },
+      "wax_spec": {
+        "pattern": "splatter",
+        "primary_color": "#10b981",
+        "secondary_color": "#18181b",
+        "accent_color": "#f43f5e",
+        "color_name": "Emerald Green",
+        "translucent": true,
+        "etched": false,
+        "is_double_lp": false,
+        "is_limited": true,
+        "is_repress": true,
+        "variant_badge": "12\" LP • Emerald Green • Splatter • Ltd Ed",
+        "deterministic_seed": 500473567
+      },
+      "tracklist": [
+        {
+          "position": "A1",
+          "title": "Into Despair",
+          "duration": "3:52",
+          "ytVideoId": "Uv0F6RMCNdI",
+          "ytTitle": "Currents - Into Despair (Official Music Video)",
+          "albumYtVideoId": "r6bvEY-AAfE",
+          "albumYtDuration": 2400
+        },
+        {
+          "position": "A2",
+          "title": "My Disguise",
+          "duration": "4:21",
+          "ytVideoId": "i2Qge0y7en4",
+          "albumYtVideoId": "r6bvEY-AAfE",
+          "albumYtDuration": 2400,
+          "albumYtStart": 232
+        },
+        {
+          "position": "A3",
+          "title": "Feel The Same",
+          "duration": "3:38",
+          "ytVideoId": "VZ4N5NMyX30",
+          "albumYtVideoId": "r6bvEY-AAfE",
+          "albumYtDuration": 2400,
+          "albumYtStart": 493
+        },
+        {
+          "position": "A4",
+          "title": "The Rope",
+          "duration": "3:38",
+          "ytVideoId": "W5t0ch_u93k",
+          "albumYtVideoId": "r6bvEY-AAfE",
+          "albumYtDuration": 2400,
+          "albumYtStart": 711
+        },
+        {
+          "position": "A5",
+          "title": "Forever Marked",
+          "duration": "3:51",
+          "ytVideoId": "3AwiZranH2o",
+          "ytTitle": "Currents - Forever Marked (Official Music Video)",
+          "albumYtVideoId": "r6bvEY-AAfE",
+          "albumYtDuration": 2400,
+          "albumYtStart": 929
+        },
+        {
+          "position": "B1",
+          "title": "Into Despair (Instrumental)",
+          "duration": "3:52",
+          "ytVideoId": "Uv0F6RMCNdI",
+          "ytTitle": "Currents - Into Despair (Official Music Video)",
+          "albumYtVideoId": "r6bvEY-AAfE",
+          "albumYtDuration": 2400,
+          "albumYtStart": 1160
+        },
+        {
+          "position": "B2",
+          "title": "My Disguise (Instrumental)",
+          "duration": "4:21",
+          "ytVideoId": "i2Qge0y7en4",
+          "albumYtVideoId": "r6bvEY-AAfE",
+          "albumYtDuration": 2400,
+          "albumYtStart": 1392
+        },
+        {
+          "position": "B3",
+          "title": "Feel The Same (Instrumental)",
+          "duration": "3:38",
+          "ytVideoId": "jtlLkLTEWZM",
+          "albumYtVideoId": "r6bvEY-AAfE",
+          "albumYtDuration": 2400,
+          "albumYtStart": 1653
+        },
+        {
+          "position": "B4",
+          "title": "The Rope (Instrumental)",
+          "duration": "3:38",
+          "ytVideoId": "MTwN9MghEFc",
+          "albumYtVideoId": "r6bvEY-AAfE",
+          "albumYtDuration": 2400,
+          "albumYtStart": 1871
+        },
+        {
+          "position": "B5",
+          "title": "Forever Marked (Instrumental)",
+          "duration": "3:51",
+          "ytVideoId": "3AwiZranH2o",
+          "ytTitle": "Currents - Forever Marked (Official Music Video)",
+          "albumYtVideoId": "r6bvEY-AAfE",
+          "albumYtDuration": 2400,
+          "albumYtStart": 2089
+        }
+      ],
+      "youtube_videos": [
+        {
+          "uri": "https://www.youtube.com/watch?v=Uv0F6RMCNdI",
+          "title": "Currents - Into Despair (Official Music Video)",
+          "duration": 233
+        },
+        {
+          "uri": "https://www.youtube.com/watch?v=3AwiZranH2o",
+          "title": "Currents - Forever Marked (Official Music Video)",
+          "duration": 232
+        }
+      ],
+      "ytPlaylistId": "OLAK5uy_ngJZO811tyAEKQcl24AvydoiB2zIxN80M",
+      "fullAlbumYtVideoId": "r6bvEY-AAfE",
+      "fullAlbumYtDuration": 2400,
+      "defaultYtVideoId": "Uv0F6RMCNdI"
+    },
     {
       "release_id": 31082741,
       "instance_id": 2206080465,
@@ -61263,11 +61631,12 @@
   "flattening_queue": {
     "schema_version": "5.0.0",
     "storage_mode": "portable_inline_html+json",
-    "updated_at_utc": "2026-11-20T03:34:52Z",
+    "updated_at_utc": "2026-11-24T00:13:03Z",
     "protocol": "Bag on 6 until 130°F then drop to 4 — 2.5 hours once at 130°F on the plate",
     "need_to_be_done_release_ids": [
       2486041,
       4902348,
+      12988709,
       13257813,
       15985409,
       17583742,
@@ -61477,6 +61846,13 @@
         "album": "On Letting Go",
         "release_ids": [
           29631781
+        ]
+      },
+      {
+        "artist": "Currents",
+        "album": "I Let the Devil In",
+        "release_ids": [
+          12988709
         ]
       },
       {
