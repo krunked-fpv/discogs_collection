@@ -14,3 +14,4 @@ __pycache__/
 *.md
 !README.md
 dna/
+export-dna.ts
